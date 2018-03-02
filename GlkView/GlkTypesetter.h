@@ -50,8 +50,8 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 ///
 typedef struct GlkLineSection {
 	NSRect bounds;								// The bounds for this line section: 0,0 indicates the start of the line fragment, 0,0 indicates the far left of the current fragment, at the baseline
-	float advancement;							// The X-advancement for this line section
-	float offset;								// The X-offset for this line section
+	CGFloat advancement;						// The X-advancement for this line section
+	CGFloat offset;								// The X-offset for this line section
 	NSRange glyphRange;							// The glyph range for this line section
 	GlkSectionAlignment alignment;				// The alignment for this line section
 
@@ -69,7 +69,7 @@ typedef struct GlkLineSection {
 	NSArray* containers;						// The list of all of the text containers in the current [NOT RETAINED]
 	NSTextContainer* container;					// The text container that we're fitting text into [NOT RETAINED]
 	
-	float inset;								// The line fragment padding to use
+	CGFloat inset;								// The line fragment padding to use
 	int lastSetGlyph;							// The last glyph laid out
 	
 	// The glyph cache
@@ -82,10 +82,10 @@ typedef struct GlkLineSection {
 	BOOL* cacheElastic;							// The elastic bits for each glyph
 	unsigned char* cacheBidi;					// The bidirectional level for each glyph
 	
-	float* cacheAdvancements;					// The X-advancements for each glyph that we're laying out
-	float* cacheAscenders;						// The ascenders for each glyph that we're laying out
-	float* cacheDescenders;						// The descenders for each glyph that we're laying out
-	float* cacheLineHeight;						// The line heights for each glyph that we're laying out
+	CGFloat* cacheAdvancements;					// The X-advancements for each glyph that we're laying out
+	CGFloat* cacheAscenders;					// The ascenders for each glyph that we're laying out
+	CGFloat* cacheDescenders;					// The descenders for each glyph that we're laying out
+	CGFloat* cacheLineHeight;					// The line heights for each glyph that we're laying out
 	NSRect* cacheBounds;						// The bounds for each glyph that we're laying out
 	NSDictionary** cacheAttributes;				// The attributes for each glyph that we're laying out [RETAINED]
 	NSFont** cacheFonts;						// The font attribute for each glyph that we're laying out [NOT RETAINED]
@@ -97,8 +97,8 @@ typedef struct GlkLineSection {
 	GlkMarginSection* activeRightMargin;		// Right margin active before this line fragment started
 	
 	int lineFragmentInitialGlyph;				// First glyph on the current line fragment
-	float thisLeftMargin;						// Left margin added (so far) in this fragment
-	float thisRightMargin;						// Right margin added (so far) in this fragment
+	CGFloat thisLeftMargin;						// Left margin added (so far) in this fragment
+	CGFloat thisRightMargin;					// Right margin added (so far) in this fragment
 	CGFloat thisLeftMaxY;
 	CGFloat thisRightMaxY;
 	
@@ -111,7 +111,7 @@ typedef struct GlkLineSection {
 	NSSize size;								// The size of the current text container
 	int numLineSections;						// Number of line sections
 	GlkLineSection* sections;					// The line sections themselves
-	CGFloat customOffset;							// Offset to apply to the baseline due to custom alignment
+	CGFloat customOffset;						// Offset to apply to the baseline due to custom alignment
 	BOOL customBaseline;						// If YES, then the bounding box is not sufficient to calculate the baseline offset to use
 	
 	NSRect fragmentBounds;						// The overall line fragment bounds

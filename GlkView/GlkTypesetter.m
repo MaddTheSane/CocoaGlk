@@ -42,25 +42,25 @@
 // Internal classes
 @interface GlkMarginSection : NSObject {
 	int fragmentGlyph;
-	float width;
-	float maxY;
+	CGFloat width;
+	CGFloat maxY;
 }
 
 - (id) initWithFragmentGlyph: (int) glyph
-					   width: (float) width
-						maxY: (float) maxY;
+					   width: (CGFloat) width
+						maxY: (CGFloat) maxY;
 
-- (int) glyph;
-- (float) width;
-- (float) maxY;
+@property (readonly) int glyph;
+@property (readonly) CGFloat width;
+@property (readonly) CGFloat maxY;
 
 @end
 
 @implementation GlkMarginSection
 
 - (id) initWithFragmentGlyph: (int) glyph
-					   width: (float) newWidth
-						maxY: (float) newMaxY {
+					   width: (CGFloat) newWidth
+						maxY: (CGFloat) newMaxY {
 	self = [super init];
 	
 	if (self) {
@@ -72,17 +72,9 @@
 	return self;
 }
 
-- (int) glyph {
-	return fragmentGlyph;
-}
-
-- (float) width {
-	return width;
-}
-
-- (float) maxY {
-	return maxY;
-}
+@synthesize glyph=fragmentGlyph;
+@synthesize width;
+@synthesize maxY;
 
 @end
 
@@ -466,10 +458,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		cacheElastic = realloc(cacheElastic, sizeof(BOOL)*cacheLength);
 		cacheBidi = realloc(cacheBidi, sizeof(unsigned char)*cacheLength);
 		
-		cacheAdvancements = realloc(cacheAdvancements, sizeof(float)*cacheLength);
-		cacheAscenders = realloc(cacheAscenders, sizeof(float)*cacheLength);
-		cacheDescenders = realloc(cacheDescenders, sizeof(float)*cacheLength);
-		cacheLineHeight = realloc(cacheLineHeight, sizeof(float)*cacheLength);
+		cacheAdvancements = realloc(cacheAdvancements, sizeof(CGFloat)*cacheLength);
+		cacheAscenders = realloc(cacheAscenders, sizeof(CGFloat)*cacheLength);
+		cacheDescenders = realloc(cacheDescenders, sizeof(CGFloat)*cacheLength);
+		cacheLineHeight = realloc(cacheLineHeight, sizeof(CGFloat)*cacheLength);
 		cacheBounds = realloc(cacheBounds, sizeof(NSRect)*cacheLength);
 		cacheAttributes = realloc(cacheAttributes, sizeof(NSDictionary*)*cacheLength);
 		cacheFonts = realloc(cacheFonts, sizeof(NSFont*)*cacheLength);
@@ -482,10 +474,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	memcpy(cacheElastic + cacheIndex, elastic, cacheRange.length*sizeof(BOOL));
 	memcpy(cacheBidi + cacheIndex, bidi, cacheRange.length*sizeof(unsigned char));
 
-	memcpy(cacheAdvancements + cacheIndex, advancements, cacheRange.length*sizeof(float));
-	memcpy(cacheAscenders + cacheIndex, ascenders, cacheRange.length*sizeof(float));
-	memcpy(cacheDescenders + cacheIndex, descenders, cacheRange.length*sizeof(float));
-	memcpy(cacheLineHeight + cacheIndex, lineHeight, cacheRange.length*sizeof(float));
+	memcpy(cacheAdvancements + cacheIndex, advancements, cacheRange.length*sizeof(CGFloat));
+	memcpy(cacheAscenders + cacheIndex, ascenders, cacheRange.length*sizeof(CGFloat));
+	memcpy(cacheDescenders + cacheIndex, descenders, cacheRange.length*sizeof(CGFloat));
+	memcpy(cacheLineHeight + cacheIndex, lineHeight, cacheRange.length*sizeof(CGFloat));
 	memcpy(cacheBounds + cacheIndex, bounds, cacheRange.length*sizeof(NSRect));
 	memcpy(cacheAttributes + cacheIndex, attributes, cacheRange.length*sizeof(NSDictionary*));
 	memcpy(cacheFonts + cacheIndex, fonts, cacheRange.length*sizeof(NSFont*));
@@ -544,10 +536,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	memmove(cacheElastic, cacheElastic + glyphsToRemove, sizeof(BOOL)*numRemaining);
 	memmove(cacheBidi, cacheBidi + glyphsToRemove, sizeof(unsigned char)*numRemaining);
 
-	memmove(cacheAdvancements, cacheAdvancements + glyphsToRemove, sizeof(float)*numRemaining);
-	memmove(cacheAscenders, cacheAscenders + glyphsToRemove, sizeof(float)*numRemaining);
-	memmove(cacheDescenders, cacheDescenders + glyphsToRemove, sizeof(float)*numRemaining);
-	memmove(cacheLineHeight, cacheLineHeight + glyphsToRemove, sizeof(float)*numRemaining);
+	memmove(cacheAdvancements, cacheAdvancements + glyphsToRemove, sizeof(CGFloat)*numRemaining);
+	memmove(cacheAscenders, cacheAscenders + glyphsToRemove, sizeof(CGFloat)*numRemaining);
+	memmove(cacheDescenders, cacheDescenders + glyphsToRemove, sizeof(CGFloat)*numRemaining);
+	memmove(cacheLineHeight, cacheLineHeight + glyphsToRemove, sizeof(CGFloat)*numRemaining);
 	memmove(cacheBounds, cacheBounds + glyphsToRemove, sizeof(NSRect)*numRemaining);
 	memmove(cacheAttributes, cacheAttributes + glyphsToRemove, sizeof(NSDictionary*)*numRemaining);
 	memmove(cacheFonts, cacheFonts + glyphsToRemove, sizeof(NSFont*)*numRemaining);
@@ -804,7 +796,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	baselineOffset = floor(baselineOffset + CGF(0.5));
 	
 	// Position the glyphs within the line sections
-	float maxX = 0.0;
+	CGFloat maxX = 0.0;
 	for (x=0; x<numLineSections; x++) {
 		if (sections[x].glyphRange.length <= 0) continue;
 		
@@ -853,7 +845,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		}
 		
 #ifdef CheckForOverflow
-		float offset = sections[x].offset;
+		CGFloat offset = sections[x].offset;
 		for (y=sections[x].glyphRange.location; y < sections[x].glyphRange.location+sections[x].glyphRange.length; y++) {
 			offset += cacheAdvancements[y-cached.location];
 		}
@@ -979,11 +971,11 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 - (void) justifyCurrentLineFragment: (NSTextAlignment) alignment
 							 inRect: (NSRect) proposed
-						 leftIndent: (float) leftMargin
-						rightIndent: (float) rightMargin
+						 leftIndent: (CGFloat) leftMargin
+						rightIndent: (CGFloat) rightMargin
 							newline: (BOOL) newline {
 	// Work out the total width of this section
-	float totalWidth = 0;
+	CGFloat totalWidth = 0;
 	int x;
 	
 	for (x=0; x<numLineSections; x++) {
@@ -1002,7 +994,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			
 		case NSCenterTextAlignment:
 		{
-			float offset = (proposed.size.width - totalWidth - inset*2 - leftMargin - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0)) / 2;
+			CGFloat offset = (proposed.size.width - totalWidth - inset*2 - leftMargin - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0)) / 2;
 			offset += proposed.origin.x + inset + leftMargin + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
 			
 			for (x=0; x<numLineSections; x++) {
@@ -1014,7 +1006,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			
 		case NSRightTextAlignment:
 		{
-			float offset = (proposed.size.width - totalWidth - inset - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0));
+			CGFloat offset = (proposed.size.width - totalWidth - inset - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0));
 			offset += proposed.origin.x + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
 			
 			for (x=0; x<numLineSections; x++) {
@@ -1037,12 +1029,12 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			if (elasticCount <= 0) break;
 			
 			// Work out the additional advancement for each line section
-			float adjustment = (proposed.size.width - totalWidth - inset*2 - leftMargin - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0))/(float)elasticCount;
-			float offset = inset + leftMargin + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
+			CGFloat adjustment = (proposed.size.width - totalWidth - inset*2 - leftMargin - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0))/(CGFloat)elasticCount;
+			CGFloat offset = inset + leftMargin + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
 
 			// Adjust the size of each section appropriately
 			for (x=0; x<numLineSections; x++) {
-				sections[x].offset = floorf(offset);
+				sections[x].offset = floor(offset);
 				offset += sections[x].advancement;
 				
 				if (sections[x].elastic) {
@@ -1069,9 +1061,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	BOOL splitOnElastic = [paraStyle alignment]==NSJustifiedTextAlignment;
 	BOOL elastic = NO;
 	
-	float leftIndent = newParagraph?[paraStyle firstLineHeadIndent]:[paraStyle headIndent];
-	float rightIndent = [paraStyle tailIndent];
-	float offset = inset + leftIndent + (activeLeftMargin?[activeLeftMargin width]:0);
+	CGFloat leftIndent = newParagraph?[paraStyle firstLineHeadIndent]:[paraStyle headIndent];
+	CGFloat rightIndent = [paraStyle tailIndent];
+	CGFloat offset = inset + leftIndent + (activeLeftMargin?[activeLeftMargin width]:0);
 	
 	BOOL hitTheLastGlyph = NO;
 	int lastInvalidated = glyph;
@@ -1082,7 +1074,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		
 		NSRect sectionBounds = NSMakeRect(offset, -cacheAscenders[glyph], CGF(0.1), cacheLineHeight[glyph]);
 
-		float initialOffset = offset;
+		CGFloat initialOffset = offset;
 		int initialGlyph = glyph;
 		BOOL newsection = NO;
 		BOOL customSection = NO;
@@ -1181,8 +1173,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 	
 	// Secondary layout: remove characters as necessary to split this line properly
-	float topPadding = 0;
-	float bottomPadding = 0;
+	CGFloat topPadding = 0;
+	CGFloat bottomPadding = 0;
 	if (newParagraph && paraStyle) {
 		// This line is at the start of a new paragraph: add the paragraph spacing
 		topPadding += [paraStyle paragraphSpacingBefore];
@@ -1225,11 +1217,11 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	// Find the first glyph that is within the proposed rectangle
 	if (numLineSections > 0) {
 		// Find the character to split on, if we've overflowed the end of the box
-		int splitSection = numLineSections-1;
-		int splitGlyph = sections[splitSection].glyphRange.location+sections[splitSection].glyphRange.length;
+		NSInteger splitSection = numLineSections-1;
+		NSInteger splitGlyph = sections[splitSection].glyphRange.location+sections[splitSection].glyphRange.length;
 		
 		// Version that searches backwards for the first glyph within the proposed rectangle (borken?)
-		float splitPos = NSMaxX(sections[splitSection].bounds);
+		CGFloat splitPos = NSMaxX(sections[splitSection].bounds);
 
 		for (;;) {
 			// Move back a glyph
@@ -1246,7 +1238,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				splitPos = NSMaxX(sections[splitSection].bounds);
 			}
 			
-			float maxPos;
+			CGFloat maxPos;
 			
 			if (sections[splitSection].delegate != nil) {
 				// For delegated sections, just skip the whole thing
@@ -1315,9 +1307,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		{
 			// Correct the advancement (required for justification to work)
 			int advanceGlyph;
-			int firstInSection = sections[splitSection].glyphRange.location-cached.location;
-			int lastInSection = firstInSection + sections[splitSection].glyphRange.length;
-			float newAdvance = 0;
+			NSInteger firstInSection = sections[splitSection].glyphRange.location-cached.location;
+			NSInteger lastInSection = firstInSection + sections[splitSection].glyphRange.length;
+			CGFloat newAdvance = 0;
 			
 			for (advanceGlyph=firstInSection; advanceGlyph<lastInSection; advanceGlyph++) {
 				newAdvance += cacheAdvancements[advanceGlyph];

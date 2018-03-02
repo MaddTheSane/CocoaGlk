@@ -46,31 +46,12 @@
 
 // = Window metadata =
 
-- (void) setClosed: (BOOL) newClosed {
-	closed = newClosed;
-}
-
-- (BOOL) closed {
-	return closed;
-}
-
-- (void) setIdentifier: (unsigned) newWindowIdentifier {
-	windowIdentifier = newWindowIdentifier;
-}
-
-- (unsigned) identifier {
-	return windowIdentifier;
-}
+@synthesize closed;
+@synthesize identifier=windowIdentifier;
 
 // = The parent window =
 
-- (void) setParent: (GlkPairWindow*) newParent {
-	parentWindow = newParent;
-}
-
-- (GlkPairWindow*) parent {
-	return parentWindow;
-}
+@synthesize parent=parentWindow;
 
 // = Layout =
 
@@ -593,13 +574,7 @@
 
 // = The containing view =
 
-- (GlkView*) containingView {
-	return containingView;
-}
-
-- (void) setContainingView: (GlkView*) view {
-	containingView = view;
-}
+@synthesize containingView;
 
 // = Paging =
 

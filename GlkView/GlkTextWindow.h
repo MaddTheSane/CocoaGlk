@@ -19,7 +19,7 @@
 	NSLayoutManager* layoutManager;						// The layout manager
 	NSTextStorage* textStorage;							// The text storage
 	
-	int inputPos;										// The position in the text view that the game-supplied text ends, and the user-supplied text begins
+	NSInteger inputPos;									// The position in the text view that the game-supplied text ends, and the user-supplied text begins
 	CGFloat margin;										// The size of the margin for this window
 	
 	NSMutableString* inputBuffer;						// The input data
@@ -53,7 +53,7 @@
 
 - (void) setUsesMorePrompt: (BOOL) useMorePrompt;		// Sets whether or not a [ MORE ] prompt should be displayed for this window
 - (void) setInfiniteSize;								// Sets this window to be infinite size
-- (float) currentMoreState;								// The current [ MORE ] animation state (0 = hidden, 1 = shown)
+- (CGFloat) currentMoreState;							// The current [ MORE ] animation state (0 = hidden, 1 = shown)
 - (void) displayMorePromptIfNecessary;					// A request to display the [ MORE ] prompt if necessary
 - (void) setMoreShown: (BOOL) shown;					// Sets whether or not the [ MORE ] prompt is shown
 - (void) resetMorePrompt: (int) pos						// Resets the [ MORE ] prompt position from the specified character position

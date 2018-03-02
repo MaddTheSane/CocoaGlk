@@ -6,6 +6,7 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#import <tgmath.h>
 #import "GlkTextGridWindow.h"
 
 #import "GlkImage.h"
@@ -99,19 +100,19 @@
 
 // = Layout =
 
-- (float) charWidth {
+- (CGFloat) charWidth {
 	// FIXME: we should cache this
 	return [@"M" sizeWithAttributes: [self currentTextAttributes]].width;
 }
 
-- (float) widthForFixedSize: (unsigned) size {
+- (CGFloat) widthForFixedSize: (unsigned) size {
 	NSSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
 	
-	return floorf(size * baseSize.width) + [textView textContainerInset].width*2 + [[textView textContainer] lineFragmentPadding]*2;
+	return floor(size * baseSize.width) + [textView textContainerInset].width*2 + [[textView textContainer] lineFragmentPadding]*2;
 }
 
-- (float) heightForFixedSize: (unsigned) size {
-	return floorf(size * [self lineHeight]) + [textView textContainerInset].height*2;
+- (CGFloat) heightForFixedSize: (unsigned) size {
+	return floor(size * [self lineHeight]) + [textView textContainerInset].height*2;
 }
 
 - (GlkSize) glkSize {
@@ -124,7 +125,7 @@
 }
 
 - (void) layoutInRect: (NSRect) parentRect {
-	int x;
+	NSInteger x;
 	
 	// Set our frame
 	[super layoutInRect: parentRect];
@@ -182,7 +183,7 @@
 	if (width < 0 || height < 0) 
 		totalSize = 0;
 	
-	int numSpaces = totalSize - [textStorage length];
+	NSInteger numSpaces = totalSize - [textStorage length];
 	
 	if (numSpaces < 0) {
 		// Remove lines from the storage object
@@ -274,7 +275,7 @@
 		int bufPos = xpos + ypos*width;
 		
 		// Get the number of characters to draw
-		int amountToDraw = width - xpos;
+		NSInteger amountToDraw = width - xpos;
 		if (bufPos + amountToDraw > [textStorage length]) {
 			amountToDraw = [textStorage length] - bufPos;
 		}
@@ -306,9 +307,9 @@
 	NSPoint mousePos = [textView convertPoint: [event locationInWindow] 
 									 fromView: nil];
 		
-	int glyphPos = [[textView layoutManager] glyphIndexForPoint: mousePos
+	NSInteger glyphPos = [[textView layoutManager] glyphIndexForPoint: mousePos
 												inTextContainer: [textView textContainer]];
-	int clickPos = [[textView layoutManager] characterIndexForGlyphAtIndex: glyphPos];
+	NSInteger clickPos = [[textView layoutManager] characterIndexForGlyphAtIndex: glyphPos];
 	
 	int clickX = clickPos % width;
 	int clickY = clickPos / width;

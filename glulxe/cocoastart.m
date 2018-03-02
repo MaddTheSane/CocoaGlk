@@ -15,7 +15,7 @@
 
 #include <stdlib.h>
 
-#include <GlkClient/glk.h>
+#include <GlkView/glk.h>
 #include <GlkClient/cocoaglk.h>
 
 #include "glulxe.h"

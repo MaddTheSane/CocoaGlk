@@ -5,7 +5,7 @@
 // program. (This also demonstrates how to take your image resources from places other than blorb)
 //
 
-#include "GlkClient/glk.h"
+#include <GlkView/glk.h>
 #import "GlkClient/cocoaglk.h"
 
 #if defined(COCOAGLK_IPHONE)
@@ -14,7 +14,7 @@
 # import <Cocoa/Cocoa.h>
 #endif
 
-#import <GlkClient/GlkImageSourceProtocol.h>
+#import <GlkView/GlkImageSourceProtocol.h>
 
 @interface GlkImageTestSource : NSObject<GlkImageSource> {
 }

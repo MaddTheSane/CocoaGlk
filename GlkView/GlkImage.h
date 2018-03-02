@@ -24,8 +24,8 @@ extern NSString* GlkImageAttribute;
 	NSRect bounds;								// The bounds of this image in the text container
 	BOOL calculatedBounds;						// Whether or not the bounds for this image have been calculated yet
 
-	float marginOffset;							// If this is a margin image, the offset that it should be drawn at
-	float scaleFactor;							// Scale factor for margin objects
+	CGFloat marginOffset;						// If this is a margin image, the offset that it should be drawn at
+	CGFloat scaleFactor;						// Scale factor for margin objects
 }
 
 // Initialisation
@@ -35,14 +35,15 @@ extern NSString* GlkImageAttribute;
 			position: (unsigned) characterPosition;
 
 // Information
-- (NSImage*) image;								// The NSImage associated with this image
-- (NSSize) size;								// The size to draw this image with
-- (unsigned) alignment;							// The Glk alignment of this image
-- (unsigned) characterPosition;					// The character position of this image in the text stream
+@property (readonly, retain) NSImage *image;	// The NSImage associated with this image
+@property (readonly) NSSize size;				// The size to draw this image with
+@property (readonly) unsigned alignment;		// The Glk alignment of this image
+@property (readonly) unsigned characterPosition;// The character position of this image in the text stream
 
-- (void) setBounds: (NSRect) bounds;			// Sets the bounds of this image, marks it as calculated
-- (NSRect) bounds;								// Retrieves the bounds of this image
-- (BOOL) calculatedBounds;						// Returns YES if the bounds are calculated
+/** @brief The bounds of this image. Setting it marks it as calculated.
+ */
+@property (nonatomic) NSRect bounds;
+@property (readonly) BOOL calculatedBounds;		//!< Returns YES if the bounds are calculated
 - (void) markAsUncalculated;					// Marks this image as uncalculated
 
 @end

@@ -43,18 +43,18 @@
 	
 	// Work out where in the grid we are currently located
 	NSUInteger charIndex = cacheCharIndexes[glyph];
-	int x = charIndex % gridWidth;
-	int y = charIndex / gridWidth;
+	NSInteger x = charIndex % gridWidth;
+	NSInteger y = charIndex / gridWidth;
 	NSPoint gridPos = NSMakePoint(cellSize.width*x+inset, cellSize.height*y);
 	
 	CGFloat charPos = gridPos.x;
 	CGFloat initialCharPos = charPos;
 	
 	// Perform layout for as many characters as possible
-	int firstGlyph = glyph;
+	NSInteger firstGlyph = glyph;
 	NSUInteger lastChar = cacheCharIndexes[glyph];
-	float charWidth = 0;
-	int lastBoundaryGlyph = glyph;
+	CGFloat charWidth = 0;
+	NSInteger lastBoundaryGlyph = glyph;
 	BOOL hitTheLastGlyph = NO;
 	
 	NSRect sectionBounds =  NSMakeRect(charPos, -cacheAscenders[glyph], 

@@ -132,11 +132,7 @@
 
 // = Security =
 
-- (void) setHubCookie: (NSString*) newHubCookie {
-	if (cookie) [cookie release];
-	
-	cookie = [newHubCookie copy];
-}
+@synthesize hubCookie=cookie;
 
 - (void) setRandomHubCookie {
 	unichar randomCookie[16];
@@ -152,10 +148,6 @@
 
 - (void) setKeychainHubCookie {
 	[self setRandomHubCookie];
-}
-
-- (NSString*) hubCookie {
-	return cookie;
 }
 
 // = Setting up the session =
@@ -190,14 +182,7 @@
 
 // = The delegate =
 
-- (void) setDelegate: (id) hubDelegate {
-	if (delegate) [delegate release];
-	delegate = [hubDelegate retain];
-}
-
-- (id) delegate {
-	return delegate;
-}
+@synthesize delegate;
 
 - (NSObject<GlkSession>*) createAnonymousSession {
 	if (delegate && [delegate respondsToSelector: @selector(createAnonymousSession)]) {

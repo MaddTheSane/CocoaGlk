@@ -39,7 +39,7 @@
 			   val1: (unsigned) val1
 			   val2: (unsigned) val2;
 
-- (void) setLineInput: (NSString*) input;
+@property (copy) NSString *lineInput;
 
 @end
 

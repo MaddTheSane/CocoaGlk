@@ -58,13 +58,12 @@
 + (unsigned) keycodeForEvent: (NSEvent*) evt;					// Given a keyboard event, produces the associated Glk keycode
 
 // Closed windows can hang around
-- (void) setClosed: (BOOL) closed;
-- (BOOL) closed;
+@property BOOL closed;
 
 // Window metadata
-- (void) setIdentifier: (unsigned) windowIdentifier;			// Sometimes we need to know this
-
-- (unsigned) identifier;										// The unique window identifier, (shared with and assigned by the client)
+//! The unique window identifier, (shared with and assigned by the client)
+//! Sometimes we need to know this
+@property unsigned identifier;
 
 // Layout
 - (void) layoutInRect: (NSRect) parentRect;						// If the layout has changed, then update/redraw this window
@@ -137,7 +136,7 @@
 - (int) inputPos;												// The text position beyond which input is possible
 - (void) updateCaretPosition;									// Called on a key down event, to give this view a chance to set the caret position appropriately
 
-- (BOOL) needsPaging;											// If YES, then this view is showing a [ MORE ] prompt and may need paging
+@property (readonly) BOOL needsPaging;							//!< If YES, then this view is showing a [ MORE ] prompt and may need paging
 - (void) page;													// Perform paging
 
 - (void) fixInputStatus;										// Select has been called: make the cancelled/requested state 'fixed'
@@ -145,12 +144,12 @@
 - (void) taskFinished;											// The glk task has finished: tidy up time
 
 // The parent window
-- (void) setParent: (GlkPairWindow*) parent;					// Sets the parent window !NOT RETAINED!
-- (GlkPairWindow*) parent;
+//! Sets the parent window !NOT RETAINED!
+@property (nonatomic, assign) GlkPairWindow *parent;
 
 // The containing view
-- (GlkView*) containingView;									// The GlkView that contains this window
-- (void) setContainingView: (GlkView*) view;					// Sets the GlkView that contains this window !NOT RETAINED!
+//! The GlkView that contains this window !NOT RETAINED!
+@property (nonatomic, assign) GlkView *containingView;
 
 @end
 

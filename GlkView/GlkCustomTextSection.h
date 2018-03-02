@@ -21,7 +21,7 @@ extern NSString* GlkCustomSectionAttributeName;
 // Formatting
 
 // Note that this element is not typeset when this is called (wait for the placeBaselineAt: call)
-- (BOOL) formatSectionAtOffset: (float) offset						// Request from the typesetter that this object generate a suitable line section object. Returns YES to indicate that a line section has been created
+- (BOOL) formatSectionAtOffset: (CGFloat) offset						//!< Request from the typesetter that this object generate a suitable line section object. Returns \c YES to indicate that a line section has been created
 				  inTypesetter: (GlkTypesetter*) typesetter
 				 forGlyphRange: (NSRange) glyphs;
 

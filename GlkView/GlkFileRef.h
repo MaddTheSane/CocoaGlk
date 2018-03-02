@@ -19,6 +19,7 @@
 
 - (id) initWithPath: (NSURL*) pathname;                 // Designated initialiser
 
-- (void) setTemporary: (BOOL) isTemp;					// Temporary filerefs are deleted when deallocated
+//! Temporary filerefs are deleted when deallocated
+@property (getter=isTemporary) BOOL temporary;
 
 @end

@@ -38,25 +38,19 @@
 }
 
 // Setting the windows that make up this pair
-- (void) setKeyWindow: (GlkWindow*) newKey;
-- (void) setLeftWindow: (GlkWindow*) newLeft;
-- (void) setRightWindow: (GlkWindow*) newRight;
-
-- (GlkWindow*) keyWindow;
-- (GlkWindow*) nonKeyWindow;
-- (GlkWindow*) leftWindow;
-- (GlkWindow*) rightWindow;
+@property (nonatomic, retain) GlkWindow *keyWindow;
+@property (nonatomic, readonly, retain) GlkWindow *nonKeyWindow;
+@property (nonatomic, retain) GlkWindow *leftWindow;
+@property (nonatomic, retain) GlkWindow *rightWindow;
 
 // Size and arrangement
-- (void) setSize: (unsigned) newSize;
-- (void) setFixed: (BOOL) newFixed;								// Proportional arrangement if NO
-- (void) setHorizontal: (BOOL) newHorizontal;					// Vertical arrangement if NO
-- (void) setAbove: (BOOL) newAbove;								// NO if left is above/left of right, YES otherwise
-
-- (unsigned) size;
-- (BOOL) fixed;
-- (BOOL) horizontal;
-- (BOOL) above;
+@property (nonatomic) unsigned size;
+//! Proportional arrangement if \c NO
+@property (nonatomic) BOOL fixed;
+//! Vertical arrangement if \c NO
+@property (nonatomic) BOOL horizontal;
+//! \c NO if left is above/left of right, \c YES otherwise
+@property BOOL above;
 
 // Custom settings
 - (void) setBorderWidth: (float) borderWidth;					// Width of the divider between windows (not drawn if < 2)

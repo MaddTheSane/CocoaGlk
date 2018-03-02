@@ -38,12 +38,11 @@
 ///
 /// Possible alignments for a section within a line fragment
 ///
-typedef enum GlkSectionAlignment GlkSectionAlignment;
-enum GlkSectionAlignment {
-	GlkAlignBaseline,							// Line up this section with the baseline
-	GlkAlignTop,								// Line up this section with top of the line fragment (not including leading)
-	GlkAlignCenter,								// Line up this section with the center of the line fragment
-	GlkAlignBottom								// Line up this section with the bottom of the line fragment (not including leading)
+typedef NS_ENUM(int, GlkSectionAlignment) {
+	GlkAlignBaseline,							//!< Line up this section with the baseline
+	GlkAlignTop,								//!< Line up this section with top of the line fragment (not including leading)
+	GlkAlignCenter,								//!< Line up this section with the center of the line fragment
+	GlkAlignBottom								//!< Line up this section with the bottom of the line fragment (not including leading)
 };
 
 ///
@@ -100,8 +99,8 @@ typedef struct GlkLineSection {
 	int lineFragmentInitialGlyph;				// First glyph on the current line fragment
 	float thisLeftMargin;						// Left margin added (so far) in this fragment
 	float thisRightMargin;						// Right margin added (so far) in this fragment
-	float thisLeftMaxY;
-	float thisRightMaxY;
+	CGFloat thisLeftMaxY;
+	CGFloat thisRightMaxY;
 	
 	// The current paragraph
 	NSRange paragraph;							// The character range for the current paragraph

@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import <GlkView/GlkHubProtocol.h>
+@protocol GlkHubDelegate;
 
 //
 // The hub is the first point that a client connects to the Glk server application.
@@ -26,7 +27,7 @@
 	NSString* hubName;										// Name of the hub
 	NSString* cookie;										// Hub cookie (clients must know this to connect)
 	
-	id delegate;											// The delegate (used to create anonymous sessions)
+	id<GlkHubDelegate> delegate;							// The delegate (used to create anonymous sessions)
 	
 	NSMutableDictionary* waitingSessions;					// Sessions waiting for a connection (maps cookies to sessions)
 	
@@ -35,18 +36,23 @@
 }
 
 // The shared hub
-+ (GlkHub*) sharedGlkHub;									// Creating your own hub is liable to be hairy and unsupported. You only need one per task anyway.
+
+//! Creating your own hub is liable to be hairy and unsupported. You only need one per task anyway.
+@property (class, readonly, retain) GlkHub *sharedGlkHub;
 
 // Naming
-- (void) setHubName: (NSString*) hubName;					// The name of this GlkHub. Calls resetConnection.
-- (void) useProcessHubName;									// Auto-generates a name based on the process name
-- (NSString*) hubName;
+//! The name of this GlkHub. Setting calls resetConnection.
+@property (nonatomic, copy) NSString *hubName;
+//! Auto-generates a name based on the process name
+- (void) useProcessHubName;
 
 // Security
-- (void) setHubCookie: (NSString*) hubCookie;				// Clients must know this in order to connect to the hub. nil by default.
-- (void) setRandomHubCookie;								// Auto-generates a cookie. Not cryptographically secure (yet).
-- (void) setKeychainHubCookie;								// Auto-generates (if no cookie exists yet) and stores the hub cookie in the keychain.
-- (NSString*) hubCookie;
+//! Clients must know this in order to connect to the hub. \c nil by default.
+@property (copy) NSString *hubCookie;
+//! Auto-generates a cookie. Not cryptographically secure (yet).
+- (void) setRandomHubCookie;
+//! Auto-generates (if no cookie exists yet) and stores the hub cookie in the keychain.
+- (void) setKeychainHubCookie;
 
 // The connection
 - (void) resetConnection;									// Starts listening for connections if we're not already
@@ -57,13 +63,12 @@
 - (void) unregisterSession: (NSObject<GlkSession>*)session;	// Unregisters a session previously registered with registerSession
 
 // The delegate
-- (void) setDelegate: (id) hubDelegate;
-- (id)   delegate;
+@property (retain) id<GlkHubDelegate> delegate;
 
 @end
 
 // Hub delegate functions
-@interface NSObject(GlkHubDelegate)
+@protocol GlkHubDelegate <NSObject>
 
 - (NSObject<GlkSession>*) createAnonymousSession;			// Usually should return a GlkView. Called when a task starts with no session cookie
 

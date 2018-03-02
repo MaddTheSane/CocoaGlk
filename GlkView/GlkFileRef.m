@@ -58,9 +58,7 @@
 
 // = Temporaryness =
 
-- (void) setTemporary: (BOOL) isTemp {
-	temporary = isTemp;
-}
+@synthesize temporary;
 
 // = The fileref protocol =
 
@@ -90,12 +88,6 @@
 	return [[NSFileManager defaultManager] fileExistsAtPath: [pathname path]];
 }
 
-- (void) setAutoflush: (BOOL) newAutoflush {
-	autoflush = newAutoflush;
-}
-
-- (BOOL) autoflushStream {
-	return autoflush;
-}
+@synthesize autoflush;
 
 @end

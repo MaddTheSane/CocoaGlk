@@ -1003,7 +1003,7 @@
 	
 	// Get a temporary file name
 	char tempName[25];
-	int x;
+	size_t x;
 	
 	strcpy(tempName, "cocoaglk_");
    	for (x=strlen(tempName); x<25; x++) 

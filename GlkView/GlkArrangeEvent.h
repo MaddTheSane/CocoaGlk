@@ -11,10 +11,8 @@
 #import <GlkView/GlkEvent.h>
 #import <GlkView/GlkWindow.h>
 
-@interface GlkArrangeEvent : GlkEvent {
+@interface GlkArrangeEvent : GlkEvent
 
-}
-
-- (id) initWithGlkWindow: (GlkWindow*) window;
+- (instancetype) initWithGlkWindow: (GlkWindow*) window;
 
 @end

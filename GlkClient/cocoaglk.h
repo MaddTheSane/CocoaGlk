@@ -21,10 +21,10 @@
 #ifndef __cocoaglk_h
 #define __coocaglk_h
 
-#include "GlkClient/glk.h"
+#include <GlkView/glk.h>
 
 #if defined(__OBJC__) && __OBJC__
-#import "GlkClient/GlkImageSourceProtocol.h"
+#import "GlkView/GlkImageSourceProtocol.h"
 #endif
 
 // File that contains game executable data

@@ -12,7 +12,7 @@
 # import <Cocoa/Cocoa.h>
 #endif
 
-#import <GlkClient/GlkStreamProtocol.h>
+#import <GlkView/GlkStreamProtocol.h>
 
 ///
 /// Conversion stream that turns standard GlkStream objects into UCS-4 ones

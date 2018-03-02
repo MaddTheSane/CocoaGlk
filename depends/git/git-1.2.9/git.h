@@ -7,7 +7,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <GlkClient/glk.h>
+#include <GlkView/glk.h>
 
 #include "version.h"
 #include "config.h"

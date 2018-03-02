@@ -54,32 +54,14 @@
 	[super dealloc];
 }
 
-- (void) setLineInput: (NSString*) newLineInput {
-	[lineInput release];
-	lineInput = [newLineInput copy];
-}
+@synthesize lineInput;
 
 // = GlkEvent methods =
 
-- (glui32) type {
-	return type;
-}
-
-- (unsigned) windowIdentifier {
-	return windowId;
-}
-
-- (glui32) val1 {
-	return val1;
-}
-
-- (glui32) val2 {
-	return val2;
-}
-
-- (NSString*) lineInput {
-	return lineInput;
-}
+@synthesize type;
+@synthesize windowIdentifier=windowId;
+@synthesize val1;
+@synthesize val2;
 
 // = NSCoding methods =
 

@@ -51,7 +51,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	NSObject<GlkStream>* inputStream;							//!< The input stream
 	NSMutableDictionary* extraStreamDictionary;					//!< Maps keys to extra input streams
 	NSObject<GlkFilePrompt>* promptHandler;						//!< Used while prompting for a file
-	NSArray* allowedFiletypes;									//!< Types of files we can show in the panels
+	NSArray<NSString*>* allowedFiletypes;									//!< Types of files we can show in the panels
 	
 	BOOL alwaysPageOnMore;										//!< YES if windows in this view should automatically page through more prompts
 	

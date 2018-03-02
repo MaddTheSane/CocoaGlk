@@ -189,9 +189,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 }
 
 - (void) measureGlyphs: (NSGlyph*) glyphs
-				 count: (int) count
+				 count: (NSInteger) count
 				  font: (NSFont*) font
-		  advancements: (float*) advancements
+		  advancements: (CGFloat*) advancements
 				bounds: (NSRect*) bounds {
 #ifdef Debug
 	if (count <= 0) {
@@ -365,16 +365,16 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	// Get the attributes from the storage
 	NSDictionary* attributes[cacheRange.length];
 	NSFont* fonts[cacheRange.length];
-	float ascenders[cacheRange.length];
-	float descenders[cacheRange.length];
-	float lineHeight[cacheRange.length];
+	CGFloat ascenders[cacheRange.length];
+	CGFloat descenders[cacheRange.length];
+	CGFloat lineHeight[cacheRange.length];
 	
 	NSDictionary* currentAttributes = nil;
 	NSDictionary* lastAttributes = nil;
 	NSFont* currentFont = nil;
-	float currentAscender = 0;
-	float currentDescender = 0;
-	float currentHeight = 0;
+	CGFloat currentAscender = 0;
+	CGFloat currentDescender = 0;
+	CGFloat currentHeight = 0;
 	NSRange attributeRange = NSMakeRange(-1, 0);
 	
 	if (cached.length > 0)
@@ -405,7 +405,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Get the advancement and bounds information from the NSFont class
 	NSRect bounds[cacheRange.length];
-	float advancements[cacheRange.length];
+	CGFloat advancements[cacheRange.length];
 	
 	for (x=0; x<cacheRange.length;) {
 		// Work out the span of the current font
@@ -568,11 +568,11 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 - (int) marginNearest: (int) glyph
 		inMarginArray: (NSArray*) margin {
 	// Finds the index of the margin nearest the specified glyph
-	int top = [margin count] - 1;
-	int bottom = 0;
+	NSInteger top = [margin count] - 1;
+	NSInteger bottom = 0;
 	
 	while (top >= bottom) {
-		int middle = (top + bottom)>>1;
+		NSInteger middle = (top + bottom)>>1;
 		
 		GlkMarginSection* thisSection = [margin objectAtIndex: middle];
 		int thisGlyph = [thisSection glyph];
@@ -590,15 +590,15 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 						to: (int) finalGlyph
 				   inArray: (NSMutableArray*) margin {
 	// Finds the index of the margin nearest the lower glyph
-	int count = [margin count];
-	int top = count - 1;
-	int bottom = 0;
+	NSInteger count = [margin count];
+	NSInteger top = count - 1;
+	NSInteger bottom = 0;
 	
 	while (top >= bottom) {
-		int middle = (top + bottom)>>1;
+		NSInteger middle = (top + bottom)>>1;
 		
 		GlkMarginSection* thisSection = [margin objectAtIndex: middle];
-		int thisGlyph = [thisSection glyph];
+		NSInteger thisGlyph = [thisSection glyph];
 		
 		if (thisGlyph > glyph) top = middle - 1;
 		else if (thisGlyph < glyph) bottom = middle + 1;
@@ -625,42 +625,42 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 }
 
-- (void) addToLeftMargin: (float) width
-				  height: (float) height {
+- (void) addToLeftMargin: (CGFloat) width
+				  height: (CGFloat) height {
 	thisLeftMargin += width;
 	if (height + NSMaxY(usedRect) > thisLeftMaxY) {
 		thisLeftMaxY = height + NSMaxY(usedRect);
 	}
 }
 
-- (void) addToRightMargin: (float) width
-				   height: (float) height {
+- (void) addToRightMargin: (CGFloat) width
+				   height: (CGFloat) height {
 	thisRightMargin += width;
 	if (height + NSMaxY(usedRect) > thisRightMaxY) {
 		thisRightMaxY = height + NSMaxY(usedRect);
 	}
 }
 
-- (float) currentLeftMarginOffset {
+- (CGFloat) currentLeftMarginOffset {
 	return thisLeftMargin + inset + (activeLeftMargin?[activeLeftMargin width]:0);
 }
 
-- (float) currentRightMarginOffset {
+- (CGFloat) currentRightMarginOffset {
 	return thisRightMargin + inset + (activeRightMargin?[activeRightMargin width]:0);	
 }
 
-- (float) remainingMargin {
+- (CGFloat) remainingMargin {
 	return usedRect.size.width - (activeLeftMargin?[activeLeftMargin width]:0) - (activeRightMargin?[activeRightMargin width]:0) - thisLeftMargin - thisRightMargin - inset*2;
 }
 
-- (float) currentLeftMarginHeight {
-	float result = activeLeftMargin?[activeLeftMargin maxY]:0;
+- (CGFloat) currentLeftMarginHeight {
+	CGFloat result = activeLeftMargin?[activeLeftMargin maxY]:0;
 	if (thisLeftMaxY > result) result = thisLeftMaxY;
 	return result - NSMaxY(usedRect);
 }
 
-- (float) currentRightMarginHeight {
-	float result = activeRightMargin?[activeRightMargin maxY]:0;
+- (CGFloat) currentRightMarginHeight {
+	CGFloat result = activeRightMargin?[activeRightMargin maxY]:0;
 	if (thisRightMaxY > result) result = thisRightMaxY;
 	return result - NSMaxY(usedRect);
 }
@@ -895,8 +895,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 }
 
 - (void) addLineSection: (NSRect) bounds
-			advancement: (float) advancement
-				 offset: (float) offset
+			advancement: (CGFloat) advancement
+				 offset: (CGFloat) offset
 			 glyphRange: (NSRange) glyphRange
 			  alignment: (GlkSectionAlignment) alignment
 			   delegate: (id<GlkCustomLineSection>) sectionDelegate
@@ -1525,7 +1525,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 - (NSUInteger)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigi {
 	// Get the glyph range that we're laying out
 	NSRange glyphRange = [self paragraphGlyphRange];
-	int glyph = glyphRange.location;
+	NSInteger glyph = glyphRange.location;
 	
 	// Prepare for layout
 	[self prepareForLayoutInLayoutManager: [self layoutManager]					// Compiler warning is OK as layoutParagraphAtPoint: is only supported on 10.4 or later
@@ -1570,7 +1570,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 		// Lay out this line
 		[self beginLineWithGlyphAtIndex: glyph];
-		int nextGlyph = [self layoutLineFromGlyph: glyph];
+		NSInteger nextGlyph = [self layoutLineFromGlyph: glyph];
 		[self endLineWithGlyphRange: NSMakeRange(glyph, nextGlyph-glyph)];
 		
 		// Move on

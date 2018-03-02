@@ -176,15 +176,10 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 	[self preferencesHaveChanged];
 }
 
-- (NSFont*) proportionalFont {
-	return proportionalFont;
-}
+@synthesize proportionalFont;
+@synthesize fixedFont;
 
-- (NSFont*) fixedFont {
-	return fixedFont;
-}
-
-- (void) setFontSize: (float) fontSize {
+- (void) setFontSize: (CGFloat) fontSize {
 	NSFontManager* mgr = [NSFontManager sharedFontManager];
 	
 	NSFont* newProp = [mgr convertFont: proportionalFont
@@ -220,30 +215,17 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 
 // = Typography preferences =
 
-- (float) textMargin {
-	return textMargin;
-}
+@synthesize textMargin;
 
-- (void) setTextMargin: (float) margin {
+- (void) setTextMargin: (CGFloat) margin {
 	textMargin = margin;
 	[self preferencesHaveChanged];
 }
 
-- (BOOL) useScreenFonts {
-	return useScreenFonts;
-}
-
-- (BOOL) useHyphenation {
-	return useHyphenation;
-}
-
-- (BOOL) useLigatures {
-	return ligatures;
-}
-
-- (BOOL) useKerning {
-	return kerning;
-}
+@synthesize useScreenFonts;
+@synthesize useHyphenation;
+@synthesize useLigatures=ligatures;
+@synthesize useKerning=kerning;
 
 - (void) setUseScreenFonts: (BOOL) value {
 	useScreenFonts = value;

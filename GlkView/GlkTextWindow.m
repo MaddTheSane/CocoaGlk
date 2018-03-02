@@ -252,17 +252,17 @@
 	}
 }
 
-- (float) widthForFixedSize: (unsigned) size {
+- (CGFloat) widthForFixedSize: (unsigned) size {
 	NSSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
 	
-	return floorf(size * baseSize.width) + (margin*2);
+	return floor(size * baseSize.width) + (margin*CGF(2.0));
 }
 
-- (float) heightForFixedSize: (unsigned) size {
-	return floorf(size * [self lineHeight]) + (margin*2);
+- (CGFloat) heightForFixedSize: (unsigned) size {
+	return floor(size * [self lineHeight]) + (margin*CGF(2.0));
 }
 
-- (void) setScaleFactor: (float) newScaleFactor {
+- (void) setScaleFactor: (CGFloat) newScaleFactor {
 	if (scaleFactor == newScaleFactor) return;
 	
 	// First, do whatever GlkWindow wants to do with the scale factor
@@ -449,7 +449,7 @@
 	// Check for any newlines in the input, and generate an event if we find one
 	// We only process one line at a time
 	NSString* string = [[textView textStorage] string];
-	int pos;
+	NSInteger pos;
 	
 	for (pos = inputPos; pos < [string length]; pos++) {
 		unichar chr = [string characterAtIndex: pos];
@@ -657,7 +657,7 @@
 	NSAttributedString* atStr = [[NSAttributedString alloc] initWithString: string
 																attributes: [self currentTextAttributes]];
 	
-	int insertionPos = inputPos;
+	NSInteger insertionPos = inputPos;
 	inputPos += [atStr length];
 	[[textView textStorage] insertAttributedString: atStr
 										   atIndex: insertionPos];
@@ -667,8 +667,8 @@
 	float sb = [preferences scrollbackLength];
 	if (sb < 100.0) {
 		// Number of characters to preserve (4096 -> 1 million)
-		int len = [[textView textStorage] length];
-		float preserve = CGF(4096.0) + pow(sb * CGF(10.0), CGF(2.0));
+		NSInteger len = [[textView textStorage] length];
+		CGFloat preserve = CGF(4096.0) + pow(sb * CGF(10.0), CGF(2.0));
 
 		if (len > ((int)preserve + 2048)) {
 			// Need to truncate
@@ -704,7 +704,7 @@
 																				 attributes: [imageDict autorelease]] autorelease];
 	
 	// Append the image to the text storage object
-	int insertionPos = inputPos;
+	NSInteger insertionPos = inputPos;
 	inputPos += [imageAttributedString length];
 	[[textView textStorage] insertAttributedString: imageAttributedString
 										   atIndex: insertionPos];
@@ -725,13 +725,13 @@
 																				 attributes: clearDict] autorelease];
 	
 	// Append the clear margins object to the text storage object
-	int insertionPos = inputPos;
+	NSInteger insertionPos = inputPos;
 	inputPos += [clearAttributedString length];
 	[[textView textStorage] insertAttributedString: clearAttributedString
 										   atIndex: insertionPos];
 	
 	// Add a newline (GlkAlignTop will normally force the following line to the bottom of the current margn images)
-	// TODO: Put this in a very tiny font inc ase there's no flow to break
+	// TODO: Put this in a very tiny font in case there's no flow to break
 	[self putString: @"\n"];
 }
 
@@ -809,7 +809,7 @@
 	}
 }
 
-- (float) currentMoreState {
+- (CGFloat) currentMoreState {
 	CGFloat percent = 1.0;
 	
 	if (whenMoreShown != nil) {
@@ -833,7 +833,7 @@
 
 - (void) animateMore {
 	// Update the window alpha
-	float newMoreState = [self currentMoreState];
+	CGFloat newMoreState = [self currentMoreState];
 	[moreWindow setAlphaValue: newMoreState];
 	
 	// Stop the timer, if necessary
@@ -946,7 +946,7 @@
 	}
 	
 	// Default is just to scroll forever
-	float maxHeight = 1e8;
+	CGFloat maxHeight = 1e8;
 	
 	// Get the visible rect of the current window
 	NSRect visibleRect = [textView visibleRect];
@@ -1051,7 +1051,7 @@
 	
 	// Reset the more prompt using the first unlaid character
 	NSRange glyphRange = [[textView layoutManager] glyphRangeForTextContainer: [textView textContainer]];
-	int firstUnlaid = glyphRange.location + glyphRange.length;
+	NSInteger firstUnlaid = glyphRange.location + glyphRange.length;
 	firstUnlaid = [[textView layoutManager] characterRangeForGlyphRange: NSMakeRange(firstUnlaid-1, 1)
 													   actualGlyphRange: nil].location;
 	[self resetMorePrompt: firstUnlaid

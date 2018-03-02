@@ -30,8 +30,8 @@
 	int style;													// Active stream style
 	BOOL forceFixed;											// Whether or not we should always use fixed-pitch and size fonts
 	
-	float border;												// Border
-	float scaleFactor;											// The scale factor to use
+	CGFloat border;												// Border
+	CGFloat scaleFactor;										// The scale factor to use
 	
 	// Styles
 	GlkPreferences* preferences;								// Preferences defines things like fonts
@@ -71,25 +71,23 @@
 - (float) widthForFixedSize: (unsigned) size;					// Meaning depends on the window format. Returns the preferred size in pixels
 - (float) heightForFixedSize: (unsigned) size;					// Meaning depends on the window format. Returns the preferred size in pixels
 
-- (void) setBorder: (float) border;								// Sets the border around the window's contents
-- (float) border;												// Retrieves the border width
+@property CGFloat border;										//!< The border around the window's contents
 
-- (NSRect) contentRect;											// Size of the content, taking the border into account
-- (GlkSize) glkSize;											// Size in window units
+@property (readonly) NSRect contentRect;						//!< Size of the content, taking the border into account
+@property (readonly) GlkSize glkSize;							//!< Size in window units
 
-- (void) setScaleFactor: (float) scaleFactor;					// Sets the scale factor for this window
+@property CGFloat scaleFactor;									//!< Sets the scale factor for this window
 
 // Styles
-- (void) setForceFixed: (BOOL) forceFixed;						// Force use of fixed pitch fonts
-- (BOOL) forceFixed;											// Whether or not we're currently forcing fixed fonts
+@property BOOL forceFixed;										//!< Whether or not we're currently forcing fixed fonts
 
-- (void) setStyles: (NSDictionary*) styles;						// Maps style numbers to GlkStyles
-- (GlkStyle*) style: (unsigned) style;							// Retrieves a specific style
-- (NSDictionary*) attributes: (unsigned) style;					// Gets the attributes to use for a specific style
+- (void) setStyles: (NSDictionary<NSNumber*,GlkStyle*>*) styles;//!< Maps style numbers to GlkStyles
+- (GlkStyle*) style: (unsigned) style;							//!< Retrieves a specific style
+- (NSDictionary*) attributes: (unsigned) style;					//!< Gets the attributes to use for a specific style
 
-- (void) setImmediateStyleHint: (glui32) hint					// Sets a style hint with immediate effect (glk extension)
+- (void) setImmediateStyleHint: (glui32) hint					//!< Sets a style hint with immediate effect (glk extension)
 					   toValue: (glsi32) value;
-- (void) clearImmediateStyleHint: (glui32) hint;				// Clears a style hint with immediate effect (glk extension)
+- (void) clearImmediateStyleHint: (glui32) hint;				//!< Clears a style hint with immediate effect (glk extension)
 - (void) setCustomAttributes: (NSDictionary*) customAttributes;	// Sets some custom attributes to merge with those from the current style
 
 - (void) setPreferences: (GlkPreferences*) prefs;				// Sets the GlkPreferences object to use for fonts
@@ -100,8 +98,8 @@
 
 - (NSColor*) backgroundColour;									// The background colour for this window
 
-- (float) leading;												// The amount of leading to use
-- (float) lineHeight;											// Height of a line in the current font
+@property (readonly) CGFloat leading;							// The amount of leading to use
+@property (readonly) CGFloat lineHeight;						// Height of a line in the current font
 
 - (NSDictionary*) currentTextAttributes;						// The attributes for the currently active style
 
@@ -112,7 +110,7 @@
 // Window control
 - (void) clearWindow;											// Does whatever is appropriate for the window type
 
-- (void) setEventTarget: (NSObject<GlkEventReceiver>*) target;	// Sets the target for any events this window generates !NOT RETAINED!
+@property (assign) NSObject<GlkEventReceiver>* eventTarget;		// Sets the target for any events this window generates !NOT RETAINED!
 
 - (void) requestCharInput;
 - (void) requestLineInput;										// Request that the window generate the appropriate events

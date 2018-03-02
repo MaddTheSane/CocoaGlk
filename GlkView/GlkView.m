@@ -7,6 +7,7 @@
 //
 
 #include <unistd.h>
+#include <tgmath.h>
 
 #import "GlkView.h"
 #import "glk.h"
@@ -21,9 +22,9 @@
 #import "GlkHub.h"
 #import "GlkFileStream.h"
 
-@interface GlkView(Private)
+@interface GlkView()
 
-- (void) setFirstResponder;
+//- (void) setFirstResponder;
 
 @end
 
@@ -263,8 +264,8 @@
 }
 
 - (void) fadeLogo {
-	float timePassed = [[NSDate date] timeIntervalSinceDate: fadeStart];
-	float fadeAmount = timePassed/fadeTime;
+	NSTimeInterval timePassed = [[NSDate date] timeIntervalSinceDate: fadeStart];
+	NSTimeInterval fadeAmount = timePassed/fadeTime;
 	
 	if (fadeAmount < 0 || fadeAmount > 1) {
 		// Finished fading: get rid of the window + the timer
@@ -314,8 +315,8 @@
 		NSRect logoSource;
 	
 		logoPos.size = logoSize;
-		logoPos.origin = NSMakePoint(floorf(rect.origin.x + (rect.size.width - logoSize.width)/2.0),
-									 floorf(rect.origin.y + (rect.size.height - logoSize.height)/2.0));
+		logoPos.origin = NSMakePoint(floor(rect.origin.x + (rect.size.width - logoSize.width)/2.0),
+									 floor(rect.origin.y + (rect.size.height - logoSize.height)/2.0));
 	
 		logoSource.size = logoSize;
 		logoSource.origin = NSMakePoint(0,0);
@@ -342,10 +343,7 @@
 }
 
 // = The delegate =
-
-- (void) setDelegate: (id) newDelegate {
-	delegate = newDelegate;
-}
+@synthesize delegate;
 
 - (BOOL) disableLogo {
 	if (delegate && [delegate respondsToSelector: @selector(disableLogo)]) {
@@ -471,7 +469,7 @@
 				// Could look for the common ancestor, but this way is easier
 				GlkEvent* newEvent = [[GlkArrangeEvent alloc] initWithGlkWindow: rootWindow];
 				
-				unsigned evtIndex = [events indexOfObjectIdenticalTo: arrangeEvent];
+				NSInteger evtIndex = [events indexOfObjectIdenticalTo: arrangeEvent];
 				
 				if (evtIndex != NSNotFound) {
 					[events replaceObjectAtIndex: evtIndex
@@ -543,10 +541,7 @@
 	return [res autorelease];
 }
 
-- (void) setPreferences: (GlkPreferences*) newPrefs {
-	[prefs release];
-	prefs = [newPrefs retain];
-}
+@synthesize preferences=prefs;
 
 // = Setting up for launch =
 
@@ -1082,7 +1077,7 @@
 	}
 	
 	if (preferredDirectory == nil) {
-		preferredDirectory = [[NSUserDefaults standardUserDefaults] objectForKey: @"GlkSaveDirectory"];
+		preferredDirectory = [[[NSUserDefaults standardUserDefaults] URLForKey: @"GlkSaveDirectory"] path];
 	}
 	
 	// Defer to the delegate if it has the appropriate method implemented
@@ -1102,7 +1097,7 @@
 					   handler: handler];
 }
 
-- (void) promptForFilesOfType: (in bycopy NSArray*) filetypes
+- (void) promptForFilesOfType: (in bycopy NSArray<NSString*>*) filetypes
 				   forWriting: (BOOL) writing
 					  handler: (in byref NSObject<GlkFilePrompt>*) handler {
 	// If we don't have a window, we can't show a dialog, so we can't get a filename

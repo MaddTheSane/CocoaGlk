@@ -21,10 +21,10 @@ extern NSString* GlkStyleAttributeName;									// Styles store themselves in th
 
 @interface GlkStyle : NSObject<NSCopying> {
 	// Style attributes
-	float indentation;
-	float paraIndent;
+	CGFloat indentation;
+	CGFloat paraIndent;
 	NSTextAlignment alignment;
-	float size;
+	CGFloat size;
 	int weight;
 	BOOL oblique;
 	BOOL proportional;
@@ -33,37 +33,26 @@ extern NSString* GlkStyleAttributeName;									// Styles store themselves in th
 	BOOL reversed;
 	
 	// Caching the attributes
-	int prefChangeCount;												// Change count for the preferences last time we cached the style dictionary
+	NSInteger prefChangeCount;											// Change count for the preferences last time we cached the style dictionary
 	GlkPreferences*	lastPreferences;									// The last preference object this style was applied to
-	float lastScaleFactor;												// The scale factor the attributes were created at
+	CGFloat lastScaleFactor;											// The scale factor the attributes were created at
 	NSDictionary* lastAttributes;										// The attributes generated last time we needed to
 }
 
 // Creating a style
-+ (GlkStyle*) style;													// 'Normal' style
++ (GlkStyle*) style;													//!< 'Normal' style
 
 // The hints
-- (void) setIndentation: (float) indentation;							// Measured in points
-- (void) setParaIndentation: (float) paraIndent;						// Measured in points
-- (void) setJustification: (NSTextAlignment) alignment;					// Glk doesn't allow us to support 'Natural' alignment
-- (void) setSize: (float) size;											// Relative, in points
-- (void) setWeight: (int) weight;										// -1 = lighter, 1 = bolder
-- (void) setOblique: (BOOL) oblique;									// YES if an italic/oblique version of the font should be used (italics are used for preference)
-- (void) setProportional: (BOOL) proportional;							// NO if fixed-pitch
-- (void) setTextColour: (NSColor*) textColor;							// Foreground text colour
-- (void) setBackColour: (NSColor*) backColor;							// Background text colour
-- (void) setReversed: (BOOL) reversed;									// YES If text/back are reversed
-
-- (float)			indentation;
-- (float)			paraIndentation;
-- (NSTextAlignment)	justification;
-- (float)			size;
-- (int)				weight;
-- (BOOL)			oblique;
-- (BOOL)			proportional;
-- (NSColor*)		textColour;
-- (NSColor*)		backColour;
-- (BOOL)			reversed;
+@property (nonatomic) CGFloat indentation;								//!< Measured in points
+@property (nonatomic) CGFloat paraIndentation;							//!< Measured in points
+@property (nonatomic) NSTextAlignment justification;					//!< Glk doesn't allow us to support 'Natural' alignment
+@property (nonatomic) CGFloat size;										//!< Relative, in points
+@property (nonatomic) int weight;										//!< -1 = lighter, 1 = bolder
+@property (nonatomic) BOOL oblique;										//!< \c YES if an italic/oblique version of the font should be used (italics are used for preference)
+@property (nonatomic) BOOL proportional;								//!< \c NO if fixed-pitch
+@property (nonatomic, retain) NSColor* textColour;						//!< Foreground text colour
+@property (nonatomic, retain) NSColor* backColour;						//!< Background text colour
+@property (nonatomic) BOOL reversed;									//!< \c YES If text/back are reversed
 
 // Dealing with glk style hints
 - (void) setHint: (glui32) hint
@@ -72,12 +61,12 @@ extern NSString* GlkStyleAttributeName;									// Styles store themselves in th
 	toMatchStyle: (GlkStyle*) style;
 
 // Utility functions
-- (BOOL) canBeDistinguishedFrom: (GlkStyle*) style;						// Returns YES if this style will look different to the given style
+- (BOOL) canBeDistinguishedFrom: (GlkStyle*) style;						//!< Returns \c YES if this style will look different to the given style
 
 // Turning styles into dictionaries for attributed strings
 - (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs
-								scaleFactor: (float) scaleFactor;		// Attributes suitable to use with an attributed string while displaying
-- (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs;	// Attributes suitable to use with an attributed string while displaying
+								scaleFactor: (CGFloat) scaleFactor;		//!< Attributes suitable to use with an attributed string while displaying
+- (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs;	//!< Attributes suitable to use with an attributed string while displaying
 
 @end
 

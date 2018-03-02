@@ -92,13 +92,7 @@
 	return size;
 }
 
-- (void) setBorder: (float) newBorder {
-	border = newBorder;
-}
-
-- (float) border {
-	return border;
-}
+@synthesize border;
 
 - (NSRect) contentRect {
 	return NSInsetRect([self bounds], border, border);
@@ -114,21 +108,11 @@
 	return res;
 }
 
-- (void) setScaleFactor: (float) newScaleFactor {
-	scaleFactor = newScaleFactor;
-	
-	// Nothing to do in most windows
-}
+@synthesize scaleFactor;
 
 // = Styles =
 
-- (void) setForceFixed: (BOOL) newForceFixed {
-	forceFixed = newForceFixed;
-}
-
-- (BOOL) forceFixed {
-	return forceFixed;
-}
+@synthesize forceFixed;
 
 - (NSColor*) backgroundColour {
 	return [[self style: style_Normal] backColour];
@@ -161,11 +145,11 @@
 	return res;
 }
 
-- (float) leading {
+- (CGFloat) leading {
 	return 0;
 }
 
-- (float) lineHeight {
+- (CGFloat) lineHeight {
     NSLayoutManager* layoutManager = [[[NSLayoutManager alloc] init] autorelease];
     
 	return [layoutManager defaultLineHeightForFont: [[self currentTextAttributes] objectForKey: NSFontAttributeName]];
@@ -290,9 +274,7 @@
 	// We can't get any clearer
 }
 
-- (void) setEventTarget: (NSObject<GlkEventReceiver>*) newTarget {
-	target = newTarget;
-}
+@synthesize eventTarget=target;
 
 - (void) requestCharInput {
 	if (lineInput) {

@@ -62,41 +62,49 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 	[lastAttributes release]; lastAttributes = nil;
 }
 
-- (void) setIndentation: (float) newIndentation {
+@synthesize indentation;
+- (void) setIndentation: (CGFloat) newIndentation {
 	indentation = newIndentation;
 	[self styleChanged];
 }
 
-- (void) setParaIndentation: (float) newParaIndent {
+@synthesize paraIndentation=paraIndent;
+- (void) setParaIndentation: (CGFloat) newParaIndent {
 	paraIndent = newParaIndent;
 	[self styleChanged];
 }
 
+@synthesize justification=alignment;
 - (void) setJustification: (NSTextAlignment) newAlignment {
 	alignment = newAlignment;
 	[self styleChanged];
 }
 
-- (void) setSize: (float) newSize {
+@synthesize size;
+- (void) setSize: (CGFloat) newSize {
 	size = newSize;
 	[self styleChanged];
 }
 
+@synthesize weight;
 - (void) setWeight: (int) newWeight {
 	weight = newWeight;
 	[self styleChanged];	
 }
 
+@synthesize oblique;
 - (void) setOblique: (BOOL) newOblique {
 	oblique = newOblique;
 	[self styleChanged];
 }
 
+@synthesize proportional;
 - (void) setProportional: (BOOL) newProportional {
 	proportional = newProportional;
 	[self styleChanged];
 }
 
+@synthesize textColour;
 - (void) setTextColour: (NSColor*) newTextColour {
 	if (newTextColour == textColour) return;
 	
@@ -106,6 +114,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 	[self styleChanged];
 }
 
+@synthesize backColour;
 - (void) setBackColour: (NSColor*) newBackColour {
 	if (newBackColour == backColour) return;
 	
@@ -115,49 +124,10 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 	[self styleChanged];
 }
 
+@synthesize reversed;
 - (void) setReversed: (BOOL) newReversed {
 	reversed = newReversed;
 	[self styleChanged];
-}
-
-- (float) indentation {
-	return indentation;
-}
-
-- (float) paraIndentation {
-	return paraIndent;
-}
-
-- (NSTextAlignment)	justification {
-	return alignment;
-}
-
-- (float) size {
-	return size;
-}
-
-- (int)	weight {
-	return weight;
-}
-
-- (BOOL) oblique {
-	return oblique;
-}
-
-- (BOOL) proportional {
-	return proportional;
-}
-
-- (NSColor*) textColour {
-	return textColour;
-}
-
-- (NSColor*) backColour {
-	return backColour;
-}
-
-- (BOOL) reversed {
-	return reversed;
 }
 
 // = Utility functions =
@@ -195,7 +165,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 }
 
 - (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs
-								scaleFactor: (float) scaleFactor {
+								scaleFactor: (CGFloat) scaleFactor {
 	// Use the cached version of the attributes if they're around
 	if (lastAttributes && lastPreferences == prefs && lastScaleFactor == scaleFactor) {
 		if ([lastPreferences changeCount] == prefChangeCount) {
@@ -224,7 +194,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 	
 	// Adjust the font size
 	if (size != 0 || scaleFactor != 1.0f) {
-		float newSize = [font pointSize] + size;
+		CGFloat newSize = [font pointSize] + size;
 		if (newSize < 6) newSize = 6;
 		newSize *= scaleFactor;
  		font = [mgr convertFont: font

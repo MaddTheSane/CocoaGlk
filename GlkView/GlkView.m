@@ -379,6 +379,7 @@
 																 value: @"Cancel"
 																 table: nil],
 						  nil, nil, [self window], self, nil, nil, nil,
+						  @"%@",
 						  [[NSBundle mainBundle] localizedStringForKey: error
 																 value: error
 																 table: nil]);

@@ -42,7 +42,7 @@
 				 relativeTo: seekMode];
 }
 
-- (unsigned) getPosition {
+- (unsigned long long) getPosition {
 	return [dataStream getPosition];
 }
 

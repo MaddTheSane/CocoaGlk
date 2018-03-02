@@ -88,7 +88,7 @@
 	if (pointer > length) pointer = length;
 }
 
-- (unsigned) getPosition {
+- (unsigned long long) getPosition {
 	return pointer;
 }
 

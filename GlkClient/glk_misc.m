@@ -66,7 +66,7 @@ void gidispatch_set_object_registry(gidispatch_rock_t (*reg)(void *obj, glui32 o
 }
 
 gidispatch_rock_t gidispatch_get_objrock(void *obj, glui32 objclass) {
-	gidispatch_rock_t res;
+	gidispatch_rock_t res = {0};
 	
 	switch (objclass) {
 		case gidisp_Class_Window:

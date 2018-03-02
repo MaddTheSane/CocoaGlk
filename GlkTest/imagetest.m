@@ -25,7 +25,7 @@
 
 #if !defined(COCOAGLK_IPHONE)
 
-- (NSData*) dataForImageResource: (glui32) image {
+- (bycopy NSData*) dataForImageResource: (glui32) image {
 	static NSImage* ourImage = nil;
 	
 	if (!ourImage) {

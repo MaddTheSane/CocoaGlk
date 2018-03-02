@@ -121,7 +121,7 @@
 	[self fillBuffer];
 }
 
-- (unsigned) getPosition {
+- (unsigned long long) getPosition {
 	return [sourceStream getPosition] - (readAhead-bufferRemaining);
 }
 

@@ -806,7 +806,7 @@ glui32 glk_stream_get_position(strid_t str) {
 	cocoaglk_loadstream(str);
 	cocoaglk_flushstream(str, "Retrieving the position in the stream");
 	
-	glui32 res = [str->stream getPosition];
+	glui32 res = (glui32)[str->stream getPosition];
 	
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_stream_get_position(%p) = %u", str, res);

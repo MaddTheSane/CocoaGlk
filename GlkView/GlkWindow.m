@@ -84,11 +84,11 @@
 	lastSize = [self glkSize];
 }
 
-- (float) widthForFixedSize: (unsigned) size {
+- (CGFloat) widthForFixedSize: (unsigned) size {
 	return size;
 }
 
-- (float) heightForFixedSize: (unsigned) size {
+- (CGFloat) heightForFixedSize: (unsigned) size {
 	return size;
 }
 
@@ -102,8 +102,8 @@
 	NSRect contentRect = [self contentRect];
 	GlkSize res;
 	
-	res.width = contentRect.size.width;
-	res.height = contentRect.size.height;
+	res.width = (int)contentRect.size.width;
+	res.height = (int)contentRect.size.height;
 	
 	return res;
 }
@@ -514,7 +514,7 @@
 	// No effect
 }
 
-- (unsigned) getPosition {
+- (unsigned long long) getPosition {
 	// Spec isn't really clear on what do for window streams. We just say the position is always 0
 	return 0;
 }

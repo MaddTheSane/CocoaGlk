@@ -109,7 +109,7 @@ static NSString* stringFromOp(NSArray* op) {
 	NSString* opType = [op objectAtIndex: 0];
 	
 	if ([opType isEqualToString: s_PutCharToStream]) {
-		unichar ch = [[[op objectAtIndex: 1] objectAtIndex: 0] unsignedIntValue];
+		unichar ch = [[[op objectAtIndex: 1] objectAtIndex: 0] unsignedShortValue];
 		
 		if (ch < 32) return nil;
 		
@@ -148,9 +148,9 @@ static NSString* stringFromOp(NSArray* op) {
 		}
 #endif
 		
-		int 		opPos 		= [operations count] - 1;
-		NSArray* 	lastOp 		= [operations lastObject];
-		int 		stream, lastStream;
+		NSInteger	opPos 		= [operations count] - 1;
+		NSArray*	lastOp 		= [operations lastObject];
+		int			stream, lastStream;
 		
 		while (lastOp && ([[lastOp objectAtIndex: 0] isEqualToString: s_PutCharToStream] ||
 						  [[lastOp objectAtIndex: 0] isEqualToString: s_PutStringToStream] ||
@@ -598,7 +598,7 @@ static NSString* stringFromOp(NSArray* op) {
 			
 		// Buffering stream writes
 		if ([opType isEqualToString: s_PutCharToStream]) {
-			[target putChar: [[args objectAtIndex: 0] unsignedIntValue]
+			[target putChar: [[args objectAtIndex: 0] unsignedShortValue]
 				 toStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_PutStringToStream]) {
 			[target putString: [args objectAtIndex: 0]

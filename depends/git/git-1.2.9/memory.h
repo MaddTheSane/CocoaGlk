@@ -81,7 +81,7 @@ extern void initMemory (const git_uint8 * game, git_uint32 gameSize);
 
 // Verifies the gamefile based on its checksum. 0 on success, 1 on failure.
 
-extern int verifyMemory ();
+extern int verifyMemory (void);
 
 // Resizes the game's memory. Returns 0 on success, 1 on failure.
 
@@ -93,7 +93,7 @@ extern void resetMemory (git_uint32 protectPos, git_uint32 protectSize);
 
 // Disposes of all the data structures allocated in initMemory().
 
-extern void shutdownMemory ();
+extern void shutdownMemory (void);
 
 // Utility functions -- these just pass an appropriate
 // string to fatalError().

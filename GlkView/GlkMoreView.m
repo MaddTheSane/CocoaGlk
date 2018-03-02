@@ -12,7 +12,7 @@
 @implementation GlkMoreView
 
 + (NSImage*) image {
-	return [[[NSImage alloc] initWithContentsOfFile: [[NSBundle bundleForClass: [self class]] pathForImageResource: @"MorePrompt"]] autorelease];
+	return [[NSBundle bundleForClass: [self class]] imageForResource:@"MorePrompt"];
 }
 
 - (id) init {

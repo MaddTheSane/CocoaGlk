@@ -112,7 +112,7 @@ typedef struct GlkLineSection {
 	NSSize size;								// The size of the current text container
 	int numLineSections;						// Number of line sections
 	GlkLineSection* sections;					// The line sections themselves
-	float customOffset;							// Offset to apply to the baseline due to custom alignment
+	CGFloat customOffset;							// Offset to apply to the baseline due to custom alignment
 	BOOL customBaseline;						// If YES, then the bounding box is not sufficient to calculate the baseline offset to use
 	
 	NSRect fragmentBounds;						// The overall line fragment bounds
@@ -130,31 +130,31 @@ typedef struct GlkLineSection {
 				 newline: (BOOL) newline;
 
 - (void) addLineSection: (NSRect) bounds					// Adds a new line section
-			advancement: (float) advancement
-				 offset: (float) offset
+			advancement: (CGFloat) advancement
+				 offset: (CGFloat) offset
 			 glyphRange: (NSRange) glyphRange
 			  alignment: (GlkSectionAlignment) alignment
 			   delegate: (id<GlkCustomLineSection>) delegate
 				elastic: (BOOL) elastic;
 
 // Margins
-- (void) addToLeftMargin: (float) width						// Adds a certain width to the left margin on the current line
-				  height: (float) height;					// (for flowing images)
-- (void) addToRightMargin: (float) width					// Adds a certain width to the right margin on the current line
-				   height: (float) height;					// (for flowing images)
+- (void) addToLeftMargin: (CGFloat) width					//!< Adds a certain width to the left margin on the current line
+				  height: (CGFloat) height;					//!< (for flowing images)
+- (void) addToRightMargin: (CGFloat) width					//!< Adds a certain width to the right margin on the current line
+				   height: (CGFloat) height;				//!< (for flowing images)
 
-- (float) currentLeftMarginOffset;							// Get the current offset into the left margin
-- (float) currentRightMarginOffset;							// Get the current offset into the right margin
-- (float) remainingMargin;									// Remaining space for margin objects
+- (CGFloat) currentLeftMarginOffset;						// Get the current offset into the left margin
+- (CGFloat) currentRightMarginOffset;						// Get the current offset into the right margin
+- (CGFloat) remainingMargin;								// Remaining space for margin objects
 
-- (float) currentLeftMarginHeight;							// Amount required to clear the left margin
-- (float) currentRightMarginHeight;							// Amount required to clear the right margin
+- (CGFloat) currentLeftMarginHeight;						// Amount required to clear the left margin
+- (CGFloat) currentRightMarginHeight;						// Amount required to clear the right margin
 
 // Laying out glyphs
-- (NSUInteger) layoutLineFromGlyph: (NSUInteger) glyph;		// Lays out a single line fragment from the specified glyph
+- (NSInteger) layoutLineFromGlyph: (NSInteger) glyph;		//!< Lays out a single line fragment from the specified glyph
 
 // Setting the delegate
-- (void) setDelegate: (NSObject<GlkCustomTextLayout>*) delegate;	// Sets the delegate (the delegate is NOT RETAINED)
+@property (assign) NSObject<GlkCustomTextLayout>* delegate;	//!< Sets the delegate (the delegate is NOT RETAINED)
 
 // Clearing the cache
 - (void) flushCache;										// Forces any cached glyphs to be cleared (eg when a textstorage object changes)

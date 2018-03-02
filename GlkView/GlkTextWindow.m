@@ -6,16 +6,23 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#include <tgmath.h>
 #import "GlkTextWindow.h"
 
 #import "GlkImage.h"
 #import "GlkClearMargins.h"
 #import "GlkMoreView.h"
 
+#if CGFLOAT_IS_DOUBLE
+#define CGF(__x) __x
+#else
+#define CGF(__x) __x ## f
+#endif
+
 // Number of pixels to shorten the maximum length of text before a more prompt is shown
-#define MoreMargin 16.0
+#define MoreMargin CGF(16.0)
 // Height below which no more prompt will ever be shown
-#define MinimumMoreHeight 32.0
+#define MinimumMoreHeight CGF(32.0)
 // Time to show/hide the [ MORE ] prompt
 #define MoreAnimationTime 1
 
@@ -661,11 +668,11 @@
 	if (sb < 100.0) {
 		// Number of characters to preserve (4096 -> 1 million)
 		int len = [[textView textStorage] length];
-		float preserve = 4096.0 + powf(sb*10.0, 2);
+		float preserve = CGF(4096.0) + pow(sb * CGF(10.0), CGF(2.0));
 
 		if (len > ((int)preserve + 2048)) {
 			// Need to truncate
-			[[textView textStorage] deleteCharactersInRange: NSMakeRange(0, len - preserve)];
+			[[textView textStorage] deleteCharactersInRange: NSMakeRange(0, (NSInteger)(len - preserve))];
 			inputPos -= len-preserve;
 		}
 	}
@@ -803,10 +810,10 @@
 }
 
 - (float) currentMoreState {
-	float percent = 1.0;
+	CGFloat percent = 1.0;
 	
 	if (whenMoreShown != nil) {
-		percent = [[NSDate date] timeIntervalSinceDate: whenMoreShown]/MoreAnimationTime;
+		percent = (CGFloat)([[NSDate date] timeIntervalSinceDate: whenMoreShown]/MoreAnimationTime);
 	}
 	
 	if (percent < 0) percent = 0;

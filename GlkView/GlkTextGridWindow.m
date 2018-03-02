@@ -133,8 +133,8 @@
 	int lastWidth = width;
 	int lastHeight = height;
 	
-	width  = (parentRect.size.width - [textView textContainerInset].width*2 - [[textView textContainer] lineFragmentPadding]*2)  / [self charWidth];
-	height = (parentRect.size.height - [textView textContainerInset].height*2) / [self lineHeight];
+	width  = (int)((parentRect.size.width - [textView textContainerInset].width*2 - [[textView textContainer] lineFragmentPadding]*2)  / [self charWidth]);
+	height = (int)((parentRect.size.height - [textView textContainerInset].height*2) / [self lineHeight]);
 	
 	if (width < 0) width = 0;
 	if (height < 0) height = 0;

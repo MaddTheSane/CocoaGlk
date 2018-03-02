@@ -121,34 +121,21 @@
 	[handle seekToFileOffset: offset];
 }
 
-- (unsigned) getPosition {
+- (unsigned long long) getPosition {
 	return [handle offsetInFile];
 }
 
 // Writing
 
 - (void) putChar: (in unichar) ch {
-	unsigned char data = ch;
-	if (ch > 255) data = '?';
+	NSString *preData = [NSString stringWithFormat:@"%C", ch];
 	
-	[handle writeData: [NSData dataWithBytes: &data
-									  length: 1]];
+	[handle writeData: [preData dataUsingEncoding:NSISOLatin1StringEncoding allowLossyConversion:YES]];
 }
 
 - (void) putString: (in bycopy NSString*) string {
-	int len = [string length];
-	char* latin1 = malloc(sizeof(char)*[string length]);
 	
-	int x;
-	for (x=0; x<len; x++) {
-		unichar ch = [string characterAtIndex: x];
-		if (ch > 255) ch = '?';
-		latin1[x] = ch;
-	}
-	
-	NSData* latin1Data = [[NSData alloc] initWithBytesNoCopy: latin1
-													  length: len
-												freeWhenDone: YES];
+	NSData* latin1Data = [string dataUsingEncoding:NSISOLatin1StringEncoding allowLossyConversion:YES];
 
 	[handle writeData: latin1Data];
 }

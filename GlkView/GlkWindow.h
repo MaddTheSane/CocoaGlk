@@ -68,8 +68,8 @@
 
 // Layout
 - (void) layoutInRect: (NSRect) parentRect;						// If the layout has changed, then update/redraw this window
-- (float) widthForFixedSize: (unsigned) size;					// Meaning depends on the window format. Returns the preferred size in pixels
-- (float) heightForFixedSize: (unsigned) size;					// Meaning depends on the window format. Returns the preferred size in pixels
+- (CGFloat) widthForFixedSize: (unsigned) size;					// Meaning depends on the window format. Returns the preferred size in pixels
+- (CGFloat) heightForFixedSize: (unsigned) size;				// Meaning depends on the window format. Returns the preferred size in pixels
 
 @property CGFloat border;										//!< The border around the window's contents
 

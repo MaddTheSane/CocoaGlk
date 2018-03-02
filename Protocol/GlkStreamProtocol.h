@@ -19,7 +19,7 @@
 // This amounts to the same things overall, but makes it easy to update later.
 //
 
-enum GlkSeekMode {
+typedef NS_ENUM(int, GlkSeekMode) {
 	GlkSeekStart,
 	GlkSeekCurrent,
 	GlkSeekEnd
@@ -32,9 +32,9 @@ enum GlkSeekMode {
 // Control
 - (void) closeStream;
 - (void) setPosition: (in int) position
-		  relativeTo: (in enum GlkSeekMode) seekMode;
+		  relativeTo: (in GlkSeekMode) seekMode;
 
-- (unsigned) getPosition;
+- (unsigned long long) getPosition;
 
 // Writing
 - (void) putChar: (in unichar) ch;

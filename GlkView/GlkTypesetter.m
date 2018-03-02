@@ -26,11 +26,18 @@
 // TODO: crash if we shrink the view below the size of the left/right margin
 // TODO: Deal with images that occupy a margin and that are shorter than the image that's currently there better
 
+#include <tgmath.h>
 #import <GlkView/GlkImage.h>
 #import "glk.h"
 
 #import <GlkView/GlkTypesetter.h>
 #import <GlkView/GlkCustomTextSection.h>
+
+#if CGFLOAT_IS_DOUBLE
+#define CGF(__x) __x
+#else
+#define CGF(__x) __x ## f
+#endif
 
 // Internal classes
 @interface GlkMarginSection : NSObject {
@@ -680,7 +687,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	int x;
 	
 	// Work out the baseline offset and unaligned bounds for this line fragment
-	float baselineOffset = -fragmentBounds.origin.y;
+	CGFloat baselineOffset = -fragmentBounds.origin.y;
 	customOffset = 0;
 	
 	// Use only the items aligned to the baseline to work out the 'real' baseline.
@@ -761,7 +768,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	NSRange glyphRange = NSMakeRange(firstGlyph, lastGlyph-firstGlyph);
 	
 	// Work out the baseline offset for this line fragment
-	float baselineOffset = -fragmentBounds.origin.y;
+	CGFloat baselineOffset = -fragmentBounds.origin.y;
 	
 	if (customBaseline) {
 		// Use only the items aligned to the baseline to work out the 'real' baseline.
@@ -794,7 +801,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				  forGlyphRange: glyphRange
 					   usedRect: NSIntegralRect(used)];
 	
-	baselineOffset = floorf(baselineOffset + 0.5);
+	baselineOffset = floor(baselineOffset + CGF(0.5));
 	
 	// Position the glyphs within the line sections
 	float maxX = 0.0;
@@ -1048,7 +1055,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 }
 
-- (NSUInteger) layoutLineFromGlyph: (NSUInteger) glyph {
+- (NSInteger) layoutLineFromGlyph: (NSInteger) glyph {
 	// Lays out a single line fragment from the specified glyph
 	if (![self cacheGlyphsIncluding: glyph]) return glyph;
 	glyph -= cached.location;
@@ -1073,7 +1080,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		// Build up a line section for this set of glyphs
 		NSDictionary* attributes = cacheAttributes[glyph];
 		
-		NSRect sectionBounds = NSMakeRect(offset, -cacheAscenders[glyph], 0.1, cacheLineHeight[glyph]);
+		NSRect sectionBounds = NSMakeRect(offset, -cacheAscenders[glyph], CGF(0.1), cacheLineHeight[glyph]);
 
 		float initialOffset = offset;
 		int initialGlyph = glyph;
@@ -1583,8 +1590,6 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 // = Setting the delegate =
 
-- (void) setDelegate: (NSObject<GlkCustomTextLayout>*) newDelegate {
-	delegate = newDelegate;
-}
+@synthesize delegate;
 
 @end

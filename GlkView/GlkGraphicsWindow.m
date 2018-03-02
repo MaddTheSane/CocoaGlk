@@ -6,8 +6,14 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#include <tgmath.h>
 #import "GlkGraphicsWindow.h"
 
+#if CGFLOAT_IS_DOUBLE
+#define CGF(__x) __x
+#else
+#define CGF(__x) __x ## f
+#endif
 
 @implementation GlkGraphicsWindow
 
@@ -73,7 +79,7 @@
 	
 	if (oldSize.width < frame.size.width || oldSize.height < frame.size.height) {
 		// Resize and clear
-		[windowImage setSize: NSMakeSize(frame.size.width + 8.0, frame.size.height + 8.0)];
+		[windowImage setSize: NSMakeSize(frame.size.width + CGF(8.0), frame.size.height + CGF(8.0))];
 		[self clear];
 	}
 	
@@ -103,8 +109,8 @@
 	NSPoint mousePos = [self convertPoint: [event locationInWindow] 
 								 fromView: nil];
 	
-	int clickX = mousePos.x;
-	int clickY = NSMaxY(bounds)-mousePos.y;
+	int clickX = (int)mousePos.x;
+	int clickY = (int)(NSMaxY(bounds)-mousePos.y);
 	
 	if (mouseInput) {
 		// Generate the event
@@ -166,8 +172,8 @@
 	
 	GlkSize res;
 	
-	res.width = frame.size.width;
-	res.height = frame.size.height;
+	res.width = (int)frame.size.width;
+	res.height = (int)frame.size.height;
 	
 	return res;
 }

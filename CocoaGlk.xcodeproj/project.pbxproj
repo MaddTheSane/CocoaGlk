@@ -1545,6 +1545,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = USE_INLINE;
 				INSTALL_PATH = /usr/local/bin;
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1564,6 +1565,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = USE_INLINE;
 				INSTALL_PATH = /usr/local/bin;
 				OTHER_LDFLAGS = (
 					"-framework",

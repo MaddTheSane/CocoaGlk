@@ -6,7 +6,14 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#include <tgmath.h>
 #import "GlkStyle.h"
+
+#if CGFLOAT_IS_DOUBLE
+#define CGF(__x) __x
+#else
+#define CGF(__x) __x ## f
+#endif
 
 NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 
@@ -267,9 +274,9 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
-			[self setBackColour: [NSColor colorWithDeviceRed: ((float)red)/255.0
-													   green: ((float)green)/255.0
-														blue: ((float)blue)/255.0
+			[self setBackColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/CGF(255.0)
+													   green: ((CGFloat)green)/CGF(255.0)
+														blue: ((CGFloat)blue)/CGF(255.0)
 													   alpha: 1.0]];
 			break;
 		}
@@ -280,19 +287,19 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
-			[self setTextColour: [NSColor colorWithDeviceRed: ((float)red)/255.0
-													   green: ((float)green)/255.0
-														blue: ((float)blue)/255.0
+			[self setTextColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/CGF(255.0)
+													   green: ((CGFloat)green)/CGF(255.0)
+														blue: ((CGFloat)blue)/CGF(255.0)
 													   alpha: 1.0]];
 			break;
 		}
 			
 		case stylehint_Indentation:
-			[self setIndentation: value*4.0];
+			[self setIndentation: value*CGF(4.0)];
 			break;
 			
 		case stylehint_ParaIndentation:
-			[self setParaIndentation: value*4.0];
+			[self setParaIndentation: value*CGF(4.0)];
 			break;
 			
 		case stylehint_Justification:
@@ -331,7 +338,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 			break;
 			
 		case stylehint_Size:
-			[self setSize: value*2.0];
+			[self setSize: value*CGF(2.0)];
 			break;
 			
 		case stylehint_Weight:

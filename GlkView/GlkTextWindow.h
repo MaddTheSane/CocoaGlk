@@ -20,7 +20,7 @@
 	NSTextStorage* textStorage;							// The text storage
 	
 	int inputPos;										// The position in the text view that the game-supplied text ends, and the user-supplied text begins
-	float margin;										// The size of the margin for this window
+	CGFloat margin;										// The size of the margin for this window
 	
 	NSMutableString* inputBuffer;						// The input data
 	
@@ -31,13 +31,13 @@
 	
 	BOOL hasMorePrompt;									// YES if this window has a more prompt
 	int moreOffset;										// The character that should be the first on the current 'page'
-	float lastMorePos;									// The last y position a [ MORE ] prompt appeared
-	float nextMorePos;									// The y position that the next [ MORE ] prompt should appear at
+	CGFloat lastMorePos;								// The last y position a [ MORE ] prompt appeared
+	CGFloat nextMorePos;								// The y position that the next [ MORE ] prompt should appear at
 	
 	NSWindow* moreWindow;								// The window containing the [ MORE ] prompt
 	NSDate* whenMoreShown;								// The time that the [ MORE ] prompt was shown
-	float lastMoreState;								// Initial state of the [ MORE ] prompt
-	float finalMoreState;								// Final state fo the [ MORE ] prompt
+	CGFloat lastMoreState;								// Initial state of the [ MORE ] prompt
+	CGFloat finalMoreState;								// Final state fo the [ MORE ] prompt
 	NSTimer* moreAnimationTimer;						// Timer for the [ MORE ] animation
 }
 

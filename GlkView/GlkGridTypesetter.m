@@ -6,6 +6,7 @@
 //  Copyright 2006 Andrew Hunter. All rights reserved.
 //
 
+#include <tgmath.h>
 #import "GlkGridTypesetter.h"
 
 
@@ -33,7 +34,7 @@
 	
 // = Performing layout =
 
-- (int) layoutLineFromGlyph: (int) glyph {
+- (NSInteger) layoutLineFromGlyph: (NSInteger) glyph {
 	// Lays out a line fragment from the specified glyph
 	if (![self cacheGlyphsIncluding: glyph]) return glyph;
 	glyph -= cached.location;
@@ -41,17 +42,17 @@
 	[self beginLineFragment];
 	
 	// Work out where in the grid we are currently located
-	unsigned charIndex = cacheCharIndexes[glyph];
+	NSUInteger charIndex = cacheCharIndexes[glyph];
 	int x = charIndex % gridWidth;
 	int y = charIndex / gridWidth;
 	NSPoint gridPos = NSMakePoint(cellSize.width*x+inset, cellSize.height*y);
 	
-	float charPos = gridPos.x;
-	float initialCharPos = charPos;
+	CGFloat charPos = gridPos.x;
+	CGFloat initialCharPos = charPos;
 	
 	// Perform layout for as many characters as possible
 	int firstGlyph = glyph;
-	unsigned lastChar = cacheCharIndexes[glyph];
+	NSUInteger lastChar = cacheCharIndexes[glyph];
 	float charWidth = 0;
 	int lastBoundaryGlyph = glyph;
 	BOOL hitTheLastGlyph = NO;
@@ -60,7 +61,7 @@
 									   cacheAdvancements[glyph], cacheLineHeight[glyph]);
 	
 	while (x < gridWidth && glyph < cached.length) {
-		unsigned thisChar = cacheCharIndexes[glyph];
+		NSUInteger thisChar = cacheCharIndexes[glyph];
 		
 		if (thisChar != lastChar) {
 			// We're advancing to the next character
@@ -74,7 +75,7 @@
 		}
 		
 		// Correct for any inaccuracies in the width of the characters
-		if (floorf(charPos) != floorf(gridPos.x) && thisChar != lastChar) {
+		if (floor(charPos) != floor(gridPos.x) && thisChar != lastChar) {
 			// Put all the characters so far in one line section
 			[self addLineSection: sectionBounds
 					 advancement: gridPos.x-initialCharPos

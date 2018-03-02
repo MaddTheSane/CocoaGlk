@@ -22,6 +22,12 @@
 #import "GlkHub.h"
 #import "GlkFileStream.h"
 
+#if CGFLOAT_IS_DOUBLE
+#define CGF(__x) __x
+#else
+#define CGF(__x) __x ## f
+#endif
+
 @interface GlkView()
 
 //- (void) setFirstResponder;
@@ -157,7 +163,7 @@
 	static NSImage* defaultLogo = nil;
 	
 	if (!defaultLogo) {
-		defaultLogo = [[NSImage alloc] initWithContentsOfFile: [[NSBundle bundleForClass: [self class]] pathForImageResource: @"logo"]];
+		defaultLogo = [[[NSBundle bundleForClass: [self class]] imageForResource:@"logo"] retain];
 	}
 	
 	return defaultLogo;
@@ -284,7 +290,7 @@
 	} else {
 		fadeAmount = -2.0*fadeAmount*fadeAmount*fadeAmount + 3.0*fadeAmount*fadeAmount;
 		
-		[logoWindow setAlphaValue: 1.0 - fadeAmount];
+		[logoWindow setAlphaValue: (CGFloat)(1.0 - fadeAmount)];
 	}
 }
 
@@ -315,8 +321,8 @@
 		NSRect logoSource;
 	
 		logoPos.size = logoSize;
-		logoPos.origin = NSMakePoint(floor(rect.origin.x + (rect.size.width - logoSize.width)/2.0),
-									 floor(rect.origin.y + (rect.size.height - logoSize.height)/2.0));
+		logoPos.origin = NSMakePoint(floor(rect.origin.x + (rect.size.width - logoSize.width)/CGF(2.0)),
+									 floor(rect.origin.y + (rect.size.height - logoSize.height)/CGF(2.0)));
 	
 		logoSource.size = logoSize;
 		logoSource.origin = NSMakePoint(0,0);
@@ -783,7 +789,7 @@
 	if (newBorderWidth == borderWidth) return;
 	
 	// Update the border width, and the width of any existing windows
-	borderWidth = newBorderWidth;
+	borderWidth = (int)newBorderWidth;
 	[self updateBorderWidthFor: rootWindow];
 	
 	// Perform any layout that's necessary
@@ -841,15 +847,15 @@
 				col = [style textColour];
 			}
 			
-			int r = floorf(255.0 * [col redComponent]);
-			int g = floorf(255.0 * [col greenComponent]);
-			int b = floorf(255.0 * [col blueComponent]);
+			int r = (int)(floor(255.0 * [col redComponent]));
+			int g = (int)(floor(255.0 * [col greenComponent]));
+			int b = (int)(floor(255.0 * [col blueComponent]));
 			
 			return (r<<16)|(g<<8)|(b);
 		}
 			
 		case stylehint_Indentation:
-			return [style indentation];
+			return (int)[style indentation];
 			
 		case stylehint_Justification:
 			switch ([style justification]) {
@@ -870,7 +876,7 @@
 			return [style oblique]?1:0;
 			
 		case stylehint_ParaIndentation:
-			return [style paraIndentation];
+			return (int)[style paraIndentation];
 			
 		case stylehint_Proportional:
 			return [style proportional]?1:0;
@@ -881,7 +887,7 @@
 		case stylehint_Size:
 			// This is a bit pointless, as the units are 'platform-defined'. Therefore we measure our font size in football fields.
 			// (Well, FSVO football)
-			return [[style proportional]?[prefs proportionalFont]:[prefs fixedFont] pointSize] + [style size];
+			return (int)([[style proportional]?[prefs proportionalFont]:[prefs fixedFont] pointSize] + [style size]);
 			
 		case stylehint_Weight:
 			return [style weight];
@@ -1014,7 +1020,7 @@
 }
 
 - (void) panelDidEnd: (NSSavePanel*) panel
-		  returnCode: (int) returnCode
+		  returnCode: (NSInteger) returnCode
 		 contextInfo: (void*) willBeNil {
 	if (!promptHandler) return;
 	
@@ -1113,14 +1119,14 @@
 	}
 	
 	// Pick a preferred directory
-	NSString* preferredDirectory = nil;
+	NSURL* preferredDirectory = nil;
 	
 	if (delegate && [delegate respondsToSelector: @selector(preferredSaveDirectory)]) {
-		preferredDirectory = [delegate preferredSaveDirectory];
+		preferredDirectory = [NSURL fileURLWithPath:[delegate preferredSaveDirectory]];
 	}
 	
 	if (preferredDirectory == nil) {
-		preferredDirectory = [[NSUserDefaults standardUserDefaults] objectForKey: @"GlkSaveDirectory"];
+		preferredDirectory = [[NSUserDefaults standardUserDefaults] URLForKey: @"GlkSaveDirectory"];
 	}
 	
 	// Cache the handler
@@ -1143,19 +1149,20 @@
 		NSSavePanel* panel = [NSSavePanel savePanel];
 		
 		[panel setAllowedFileTypes: allowedFiletypes];
-		if (preferredDirectory != nil) [panel setDirectoryURL: [NSURL fileURLWithPath: preferredDirectory]];
+		if (preferredDirectory != nil) [panel setDirectoryURL: preferredDirectory];
 		
-		if ([panel respondsToSelector: @selector(setAllowedFileTypes:)]) {
-			// Only works on 10.3
-			[panel setAllowedFileTypes: allowedFiletypes];
+		[panel setAllowedFileTypes: allowedFiletypes];
+		
+		if (showAsSheet) {
+			[panel retain];
+			[panel beginSheetModalForWindow: window completionHandler: ^(NSModalResponse result) {
+				[self panelDidEnd: panel returnCode: result contextInfo: NULL];
+				[panel release];
+			}];
+		} else {
+			NSInteger result = [panel runModal];
+			[self panelDidEnd:panel returnCode:result contextInfo:NULL];
 		}
-		
-		[panel beginSheetForDirectory: preferredDirectory
-								 file: nil
-					   modalForWindow: showAsSheet?window:nil
-						modalDelegate: self
-					   didEndSelector: @selector(panelDidEnd:returnCode:contextInfo:)
-						  contextInfo: nil];
 		
 		[lastPanel release]; lastPanel = [panel retain];
 	} else {
@@ -1163,21 +1170,21 @@
 		NSOpenPanel* panel = [NSOpenPanel openPanel];
 
 		[panel setAllowedFileTypes: allowedFiletypes];
-		if (preferredDirectory != nil) [panel setDirectoryURL: [NSURL fileURLWithPath: preferredDirectory]];
+		if (preferredDirectory != nil) [panel setDirectoryURL: preferredDirectory];
 		
-		if ([panel respondsToSelector: @selector(setAllowedFileTypes:)]) {
-			// Only works on 10.3
-			[panel setAllowedFileTypes: allowedFiletypes];
+		[panel setAllowedFileTypes: allowedFiletypes];
+		
+		if (showAsSheet) {
+			[panel retain];
+			[panel beginSheetModalForWindow: window completionHandler: ^(NSModalResponse result) {
+				[self panelDidEnd: panel returnCode: result contextInfo: NULL];
+				[panel release];
+			}];
+		} else {
+			NSInteger result = [panel runModal];
+			[self panelDidEnd:panel returnCode:result contextInfo:NULL];
 		}
-		
-		[panel beginSheetForDirectory: preferredDirectory
-								 file: nil
-								types: allowedFiletypes
-					   modalForWindow: showAsSheet?window:nil
-						modalDelegate: self
-					   didEndSelector: @selector(panelDidEnd:returnCode:contextInfo:) 
-						  contextInfo: nil];
-		
+
 		[lastPanel release]; lastPanel = [panel retain];
 	}
 }
@@ -2039,8 +2046,8 @@
 	imageRect.origin = NSMakePoint(0,0);
 	imageRect.size = [image size];
 	
-	[flippedImage setFlipped: YES];
-	[flippedImage lockFocus];
+	//[flippedImage setFlipped: YES];
+	[flippedImage lockFocusFlipped:YES];
 	[image drawInRect: imageRect
 			 fromRect: imageRect
 			operation: NSCompositeSourceOver

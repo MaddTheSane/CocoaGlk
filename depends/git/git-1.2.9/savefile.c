@@ -146,13 +146,17 @@ git_sint32 restoreFromFile (git_sint32 * base, git_sint32 id,
                         gRam [i] = c;
             }
 
-            while (i < gExtStart)
-                if (i >= protectEnd || i < protectPos)
-                    gRam [i] = gRom [i], ++i;
+			while (i < gExtStart) {
+				if (i >= protectEnd || i < protectPos) {
+					gRam [i] = gRom [i]; ++i;
+				}
+			}
 
-            while (i < gEndMem)
-                if (i >= protectEnd || i < protectPos)
-                    gRam [i] = 0, ++i;
+			while (i < gEndMem) {
+				if (i >= protectEnd || i < protectPos) {
+					gRam [i] = 0; ++i;
+				}
+			}
 
             if (bytesRead != chunkSize)
                 return 1; // Too much data!

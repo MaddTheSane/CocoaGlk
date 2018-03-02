@@ -36,16 +36,16 @@ extern int gCacheRAM; // Keep RAM-based code in the JIT cache?
 extern const char* gLabelNames[];
 
 extern void initCompiler (size_t cacheSize);
-extern void shutdownCompiler ();
+extern void shutdownCompiler (void);
 
 extern void emitData (git_uint32);
 extern void emitFinalCode (Label);
 extern void emitConstBranch (Label op, git_uint32 address);
 
-extern void abortCompilation ();
+extern void abortCompilation (void);
 
-extern git_uint32 undoEmit();
-extern void nextInstructionIsReferenced ();
+extern git_uint32 undoEmit(void);
+extern void nextInstructionIsReferenced (void);
 
 extern Block peekAtEmittedStuff (int numOpcodes);
 
@@ -53,8 +53,8 @@ extern Block peekAtEmittedStuff (int numOpcodes);
 // Accessing compiled code
 
 extern void pruneCodeCache (git_uint32 start, git_uint32 size);
-extern void resetCodeCache ();
-extern void compressCodeCache ();
+extern void resetCodeCache (void);
+extern void compressCodeCache (void);
 
 extern Block compile (git_uint32 pc);
 

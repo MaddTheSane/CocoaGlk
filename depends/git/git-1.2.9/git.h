@@ -103,7 +103,7 @@ extern void parseCatchStub (git_uint32 * pc, int * modes);
 
 // peephole.c
 
-extern void resetPeepholeOptimiser();
+extern void resetPeepholeOptimiser(void);
 extern void emitCode (Label);
 
 // terp.c
@@ -121,7 +121,7 @@ extern void startProgram (size_t cacheSize, enum IOMode ioMode);
 
 // glkop.c
 
-extern int git_init_dispatch();
+extern int git_init_dispatch(void);
 extern glui32 git_perform_glk(glui32 funcnum, glui32 numargs, glui32 *arglist);
 extern strid_t git_find_stream_by_id(glui32 id);
 extern glui32 git_find_id_for_stream(strid_t str);
@@ -148,8 +148,8 @@ extern git_sint32 restoreFromFile (git_sint32* base, git_sint32 file,
 // saveundo.c
 
 extern void initUndo (git_uint32 size);
-extern void resetUndo ();
-extern void shutdownUndo ();
+extern void resetUndo (void);
+extern void shutdownUndo (void);
 
 extern int  saveUndo (git_sint32* base, git_sint32* sp);
 extern int  restoreUndo (git_sint32* base,
@@ -157,18 +157,18 @@ extern int  restoreUndo (git_sint32* base,
 
 // heap.c
 
-extern glui32 heap_get_start ();
+extern glui32 heap_get_start (void);
 extern glui32 heap_alloc (glui32 len);
 extern void heap_free (glui32 addr);
-extern int heap_is_active ();
-extern void heap_clear ();
+extern int heap_is_active (void);
+extern void heap_clear (void);
 extern int heap_get_summary (glui32 *valcount, glui32 **summary);
 extern int heap_apply_summary (glui32 valcount, glui32 *summary);
 
 // accel.c
 
 typedef glui32 (*acceleration_func)(glui32 argc, glui32 *argv);
-extern void init_accel ();
+extern void init_accel (void);
 extern acceleration_func accel_find_func (glui32 index);
 extern acceleration_func accel_get_func (glui32 addr);
 extern void accel_set_func (glui32 index, glui32 addr);

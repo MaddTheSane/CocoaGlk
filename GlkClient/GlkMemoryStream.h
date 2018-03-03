@@ -22,16 +22,16 @@
 @interface GlkMemoryStream : NSObject<GlkStream> {
 	unsigned char* memory;
 	char* type;
-	int length;
+	NSInteger length;
 
-	int pointer;
+	NSInteger pointer;
 	gidispatch_rock_t rock;
 }
 
 - (id) initWithMemory: (unsigned char*) mem					// Constructs this object with the given memory
-			   length: (int) length;
+			   length: (NSInteger) length;
 - (id) initWithMemory: (unsigned char*) mem					// Constructs this object with the given memory and registers the memory
-			   length: (int) length
+			   length: (NSInteger) length
 				 type: (char*) glkType;
 
 @end

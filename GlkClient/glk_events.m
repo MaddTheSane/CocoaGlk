@@ -148,7 +148,7 @@ void glk_select(event_t *event) {
 					NSData*   latin1Input = [lineInput dataUsingEncoding: NSISOLatin1StringEncoding
 													allowLossyConversion: YES];
 					
-					int length = [latin1Input length];
+					NSInteger length = [latin1Input length];
 					
 					if (event->win && event->win->inputBuf) {
 						if (length > event->win->bufLen) {
@@ -161,11 +161,11 @@ void glk_select(event_t *event) {
 						
 						// Echo the text
 						if (event->win->stream && event->win->stream->echo) {
-							glk_put_buffer_stream(event->win->stream->echo, event->win->inputBuf, length);
+							glk_put_buffer_stream(event->win->stream->echo, event->win->inputBuf, (int)length);
 							glk_put_char_stream_uni(event->win->stream->echo, '\n');
 						}
 						
-						event->val1 = length;
+						event->val1 = (int)length;
 					}
 
 					// Deregister the buffer
@@ -437,7 +437,7 @@ void glk_cancel_line_event(winid_t win, event_t *event) {
 		NSData*   latin1Input = [lineInput dataUsingEncoding: NSISOLatin1StringEncoding
 										allowLossyConversion: YES];
 		
-		int length = [latin1Input length];
+		NSInteger length = [latin1Input length];
 		
 		if (win && win->inputBuf) {
 			if (length > win->bufLen) {

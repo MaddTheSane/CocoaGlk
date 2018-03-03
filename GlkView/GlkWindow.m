@@ -535,11 +535,11 @@
 	return 0;
 }
 
-- (bycopy NSString*) getLineWithLength: (int) len {
+- (bycopy NSString*) getLineWithLength: (NSInteger) len {
 	return nil;
 }
 
-- (bycopy NSData*) getBufferWithLength: (unsigned) length {
+- (bycopy NSData*) getBufferWithLength: (NSUInteger) length {
 	return nil;
 }
 
@@ -554,9 +554,7 @@
 	}
 }
 
-- (int) style {
-	return style;
-}
+@synthesize style;
 
 // = Cursor rects =
 

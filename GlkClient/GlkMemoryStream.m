@@ -18,7 +18,7 @@
 // = Initialisation =
 
 - (id) initWithMemory: (unsigned char*) mem
-			   length: (int) len {
+			   length: (NSInteger) len {
 	self = [super init];
 	
 	if (self) {
@@ -32,7 +32,7 @@
 }
 
 - (id) initWithMemory: (unsigned char*) mem
-			   length: (int) len
+			   length: (NSInteger) len
 				 type: (char*) glkType {
 	self = [self initWithMemory: mem
 						 length: len];
@@ -40,7 +40,7 @@
 	if (self) {
 		if (cocoaglk_register_memory) {
 			type = glkType;
-			rock = cocoaglk_register_memory(memory, strcmp(glkType, "&+#!Iu")==0?length/4:length, type);
+			rock = cocoaglk_register_memory(memory, (int)(strcmp(glkType, "&+#!Iu")==0?length/4:length), type);
 		}
 	}
 	
@@ -62,7 +62,7 @@
 	}
 	
 	if (type && cocoaglk_unregister_memory) {
-		cocoaglk_unregister_memory(memory, strcmp(type, "&+#!Iu")==0?length/4:length, type, rock);
+		cocoaglk_unregister_memory(memory, (int)(strcmp(type, "&+#!Iu")==0?length/4:length), type, rock);
 	}
 	
 	memory = nil;
@@ -113,22 +113,9 @@
 		return;
 	}
 	
-	int len = [string length];
-	char* latin1 = malloc(sizeof(char)*[string length]);
-
-	int x;
-	for (x=0; x<len; x++) {
-		unichar ch = [string characterAtIndex: x];
-		if (ch > 255) ch = '?';
-		latin1[x] = ch;
-	}
-	
-	NSData* latin1Data = [[NSData alloc] initWithBytesNoCopy: latin1
-													  length: len
-												freeWhenDone: YES];
+	NSData* latin1Data = [string dataUsingEncoding:NSISOLatin1StringEncoding allowLossyConversion:YES];
 	
 	[self putBuffer: latin1Data];
-	[latin1Data release];
 }
 
 - (void) putBuffer: (in bycopy NSData*) buffer {
@@ -137,7 +124,7 @@
 		return;
 	}
 	
-	int bufLen = [buffer length];
+	NSInteger bufLen = [buffer length];
 	
 	if (pointer + bufLen > length) {
 		bufLen = length - pointer;
@@ -160,13 +147,13 @@
 	return memory[pointer++];
 }
 
-- (bycopy NSString*) getLineWithLength: (int) maxLen {
+- (bycopy NSString*) getLineWithLength: (NSInteger) maxLen {
 	if (memory == nil) {
 		NSLog(@"Warning: tried to read from a closed memory stream");
 		return nil;
 	}
 	
-	int start = pointer;
+	NSInteger start = pointer;
 	
 	if (pointer >= length) return nil;
 	
@@ -179,7 +166,7 @@
 	return [result autorelease];
 }
 
-- (bycopy NSData*) getBufferWithLength: (unsigned) bufLen {
+- (bycopy NSData*) getBufferWithLength: (NSUInteger) bufLen {
 	if (memory == nil) {
 		NSLog(@"Warning: tried to read from a closed memory stream");
 		return nil;

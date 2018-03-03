@@ -154,7 +154,7 @@
 	return ((unsigned char*)[data bytes])[0];
 }
 
-- (bycopy NSString*) getLineWithLength: (int) maxLen {
+- (bycopy NSString*) getLineWithLength: (NSInteger) maxLen {
 	NSMutableString* res = [NSMutableString string];
 	
 	unichar ch;
@@ -176,7 +176,7 @@
 	return res;
 }
 
-- (bycopy NSData*) getBufferWithLength: (unsigned) length {
+- (bycopy NSData*) getBufferWithLength: (NSUInteger) length {
 	NSData* data = [handle readDataOfLength: length];
 	
 	if (data == nil || [data length] <= 0) return nil;

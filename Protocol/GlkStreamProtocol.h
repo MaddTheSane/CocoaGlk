@@ -27,6 +27,8 @@ typedef NS_ENUM(int, GlkSeekMode) {
 
 #define GlkEOFChar 0xffff
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol GlkStream <NSObject>
 
 // Control
@@ -43,12 +45,11 @@ typedef NS_ENUM(int, GlkSeekMode) {
 
 // Reading
 - (unichar) getChar;
-- (bycopy NSString*) getLineWithLength: (int) maxLen;
-- (bycopy NSData*) getBufferWithLength: (unsigned) length;
+- (nullable bycopy NSString*) getLineWithLength: (NSInteger) maxLen;
+- (nullable bycopy NSData*) getBufferWithLength: (NSUInteger) length;
 
 // Styles
-- (void) setStyle: (int) styleId;
-- (int) style;
+@property (nonatomic) int style;
 
 - (void) setImmediateStyleHint: (unsigned) hint
 					   toValue: (int) value;
@@ -59,3 +60,5 @@ typedef NS_ENUM(int, GlkSeekMode) {
 - (void) clearHyperlink;
 
 @end
+
+NS_ASSUME_NONNULL_END

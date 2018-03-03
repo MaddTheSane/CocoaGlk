@@ -54,10 +54,10 @@
 }
 
 - (void) putString: (in bycopy NSString*) string {
-	int len = [string length]*2;
+	NSInteger len = [string length]*2;
 	glui32 buf[len];
 	
-	len = cocoaglk_copy_string_to_uni_buf(string, buf, len);
+	len = cocoaglk_copy_string_to_uni_buf(string, buf, (glui32)len);
 	
 	// Convert to a big-endian buffer
 	NSMutableData* data = [NSMutableData dataWithLength: len*4];
@@ -105,7 +105,7 @@
 		return '?';
 }
 
-- (bycopy NSString*) getLineWithLength: (int) maxLen {
+- (bycopy NSString*) getLineWithLength: (NSInteger) maxLen {
 	glui32* line = NULL;
 	int lineLength = 0;
 	int lineAllocated = 0;
@@ -137,7 +137,7 @@
 	return res;
 }
 
-- (bycopy NSData*) getBufferWithLength: (unsigned) length {
+- (bycopy NSData*) getBufferWithLength: (NSUInteger) length {
 	return [dataStream getBufferWithLength: length];
 }
 

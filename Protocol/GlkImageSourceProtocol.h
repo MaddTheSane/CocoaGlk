@@ -21,7 +21,7 @@
 // images from other sources by default.
 //
 
-@protocol GlkImageSource
+@protocol GlkImageSource <NSObject>
 
 - (bycopy NSData*) dataForImageResource: (glui32) image;	// Retrieve the image data for a specified resource
 

@@ -16,7 +16,7 @@
 // When executing glk_select() and co, we need this to get notifications of when events arrive
 //
 
-@protocol GlkEventListener
+@protocol GlkEventListener <NSObject>
 
 - (oneway void) eventReady: (int) syncCount;			// Called by the session object whenever an event arrives
 

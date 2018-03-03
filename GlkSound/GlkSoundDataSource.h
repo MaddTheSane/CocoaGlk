@@ -12,7 +12,7 @@
 ///
 /// Protocol implemented by classes that can act as a data source for a CocoaGlk sound module
 ///
-@protocol GlkSoundDataSource
+@protocol GlkSoundDataSource <NSObject>
 
 // An NSString indicating the format of the data contained in this source
 - (NSString*) soundFormat;

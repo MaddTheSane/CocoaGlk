@@ -1030,8 +1030,8 @@
 		[promptHandler promptedFileRef: promptRef];
 		[promptRef autorelease];
 		
-		[[NSUserDefaults standardUserDefaults] setObject: [[panel directoryURL] path]
-												  forKey: @"GlkSaveDirectory"];
+		[[NSUserDefaults standardUserDefaults] setURL: [panel directoryURL]
+											   forKey: @"GlkSaveDirectory"];
 		if (delegate && [delegate respondsToSelector: @selector(savePreferredDirectory:)]) {
 			[delegate savePreferredDirectory: [[panel directoryURL] path]];
 		}

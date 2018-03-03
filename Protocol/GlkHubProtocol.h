@@ -18,7 +18,7 @@
 // Method used to communicate with the hub object used by the main Glk server process
 //
 
-@protocol GlkHub
+@protocol GlkHub <NSObject>
 
 // Setting up the connection
 - (byref NSObject<GlkSession>*) createNewSession;

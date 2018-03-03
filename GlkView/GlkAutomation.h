@@ -19,7 +19,7 @@
 
 #import <GlkView/GlkView.h>
 
-@protocol GlkAutomation
+@protocol GlkAutomation <NSObject>
 
 // Notifications about events that have occured in the view (when using this automation object for output)
 

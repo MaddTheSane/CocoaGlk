@@ -35,7 +35,7 @@ struct GlkSize {
 	int height;
 };
 
-@protocol GlkSession
+@protocol GlkSession <NSObject>
 
 // Housekeeping
 - (void) clientHasStarted: (pid_t) processId;

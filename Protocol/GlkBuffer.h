@@ -30,7 +30,7 @@
 //
 // Buffer operations. These all must return void.
 //
-@protocol GlkBuffer
+@protocol GlkBuffer <NSObject>
 
 // Windows
 

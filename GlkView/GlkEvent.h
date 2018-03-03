@@ -47,7 +47,7 @@
 // Protocol used to send events from objects like windows to a target
 //
 
-@protocol GlkEventReceiver
+@protocol GlkEventReceiver <NSObject>
 
 - (void) queueEvent: (GlkEvent*) evt;							// Request that an event be processed
 

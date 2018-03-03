@@ -18,7 +18,7 @@
 // Protocol implemented by any class claiming to be a Glk event
 //
 
-@protocol GlkEvent
+@protocol GlkEvent <NSObject>
 
 @property (readonly) glui32 type;		//!< Type of event
 @property (readonly) unsigned windowIdentifier;	//!< Needs to be converted to a winid_t in the client

@@ -27,7 +27,7 @@ typedef NS_ENUM(int, GlkSeekMode) {
 
 #define GlkEOFChar 0xffff
 
-@protocol GlkStream
+@protocol GlkStream <NSObject>
 
 // Control
 - (void) closeStream;

@@ -11,7 +11,7 @@
 //
 // Describes a fileref (mainly used for communicating files between the process and the server)
 //
-@protocol GlkFileRef
+@protocol GlkFileRef <NSObject>
 
 - (byref NSObject<GlkStream>*) createReadOnlyStream;	// Creates a read only stream from this fileref
 - (byref NSObject<GlkStream>*) createWriteOnlyStream;	// Creates a write only stream from this fileref

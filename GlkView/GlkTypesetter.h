@@ -14,7 +14,7 @@
 ///
 /// Protocol that can be implemented by custom line sections (which want to know about their final typesetting information)
 ///
-@protocol GlkCustomLineSection
+@protocol GlkCustomLineSection <NSObject>
 
 - (void) placeBaselineAt: (NSPoint) point					// This object has been typeset at the specified position
 				forGlyph: (int) glyph;
@@ -27,7 +27,7 @@
 /// (This is by way of a hack to avoid having to implement a NSLayoutManager subclass that can draw the custom glyphs
 /// itself)
 ///
-@protocol GlkCustomTextLayout
+@protocol GlkCustomTextLayout <NSObject>
 
 - (void) invalidateCustomGlyphs: (NSRange) range;
 - (void) addCustomGlyph: (int) location

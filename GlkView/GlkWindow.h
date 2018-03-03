@@ -133,7 +133,7 @@
 - (void) bufferIsFlushing;										// Called just before the buffer flushes (mostly used to tell the text windows to wait before performing layout)
 - (void) bufferHasFlushed;										// Called once the buffer has finished flushing
 
-- (int) inputPos;												// The text position beyond which input is possible
+- (NSInteger) inputPos;											// The text position beyond which input is possible
 - (void) updateCaretPosition;									// Called on a key down event, to give this view a chance to set the caret position appropriately
 
 @property (readonly) BOOL needsPaging;							//!< If YES, then this view is showing a [ MORE ] prompt and may need paging

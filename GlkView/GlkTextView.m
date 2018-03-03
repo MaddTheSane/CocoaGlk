@@ -17,26 +17,24 @@
 /// Private class used to store information about a custom glyph
 ///
 @interface GlkTextViewGlyph : NSObject {
-	int glyph;
+	NSInteger glyph;
 	GlkCustomTextSection* textSection;
 	
 	NSRect bounds;
 }
 
-- (id) initWithGlyph: (int) glyph
+- (id) initWithGlyph: (NSInteger) glyph
 		 textSection: (GlkCustomTextSection*) container;
 
-- (void) setBounds: (NSRect) bounds;
-
-- (NSRect) bounds;
-- (int) glyph;
-- (GlkCustomTextSection*) textSection;
+@property NSRect bounds;
+@property (readonly) NSInteger glyph;
+@property (readonly, retain) GlkCustomTextSection *textSection;
 
 @end
 
 @implementation GlkTextViewGlyph
 
-- (id) initWithGlyph: (int) newGlyph
+- (id) initWithGlyph: (NSInteger) newGlyph
 		 textSection: (GlkCustomTextSection*) section {
 	self = [super init];
 	
@@ -55,22 +53,9 @@
 	[super dealloc];
 }
 
-- (void) setBounds: (NSRect) newBounds {
-	bounds = newBounds;
-}
-
-- (NSRect) bounds {
-	return bounds;
-}
-
-- (int) glyph {
-	return glyph;
-}
-
-- (GlkCustomTextSection*) textSection {
-	return textSection;
-}
-
+@synthesize bounds;
+@synthesize glyph;
+@synthesize textSection;
 
 @end
 
@@ -133,7 +118,7 @@
 		NSInteger middle = (top+bottom)>>1;
 		GlkTextViewGlyph* glyph = [customGlyphs objectAtIndex: middle];
 		
-		int thisGlyph = [glyph glyph];
+		NSInteger thisGlyph = [glyph glyph];
 		
 		if (thisGlyph < glyphRange.location) bottom = middle + 1;
 		else if (thisGlyph > glyphRange.location) top = middle - 1;
@@ -148,7 +133,7 @@
 	// Draw images until we reach the end of the glyph range
 	while (imageIndex < [customGlyphs count]) {
 		GlkTextViewGlyph* glyph = [customGlyphs objectAtIndex: imageIndex];
-		int glyphNum = [glyph glyph];
+		NSInteger glyphNum = [glyph glyph];
 		
 		if (glyphNum >= firstUnlaid || glyphNum >= glyphRange.location + glyphRange.length) {
 			break;
@@ -175,7 +160,7 @@
 	// Calculate the position of any so far unlaid margin images
 	while (firstUnlaidMarginGlyph < [marginGlyphs count]) {
 		GlkTextViewGlyph* glyph = [marginGlyphs objectAtIndex: firstUnlaidMarginGlyph];
-		int glyphNum = [glyph glyph];
+		NSInteger glyphNum = [glyph glyph];
 		if (glyphNum >= firstUnlaid) break;
 		
 		// Work out the bounding box for this glyph
@@ -234,7 +219,7 @@
 	
 	while (marginIndex >= 0) {
 		GlkTextViewGlyph* glyph = [marginGlyphs objectAtIndex: marginIndex];
-		int glyphNum = [glyph glyph];
+		NSInteger glyphNum = [glyph glyph];
 		NSRect bounds = [glyph bounds];
 		
 		if (NSMaxY(bounds) < NSMinY(rect)) break;
@@ -341,8 +326,8 @@
 
 // = Dealing with custom glyphs =
 
-- (int) invalidateCustomGlyphs: (NSRange) range
-					   inArray: (NSMutableArray*) glyphArray {
+- (NSInteger) invalidateCustomGlyphs: (NSRange) range
+							 inArray: (NSMutableArray*) glyphArray {
 	// Binary search for the first glyph
 	NSInteger top = [glyphArray count] - 1;
 	NSInteger bottom = 0;
@@ -351,7 +336,7 @@
 		NSInteger middle = (top + bottom)>>1;
 		
 		GlkTextViewGlyph* thisGlyph = [glyphArray objectAtIndex: middle];
-		int thisLoc = [thisGlyph glyph];
+		NSInteger thisLoc = [thisGlyph glyph];
 		
 		if (thisLoc > range.location) top = middle - 1;
 		else if (thisLoc < range.location) bottom = middle + 1;
@@ -372,7 +357,7 @@
 		NSInteger middle = (top + bottom)>>1;
 		
 		GlkTextViewGlyph* thisGlyph = [glyphArray objectAtIndex: middle];
-		int thisLoc = [thisGlyph glyph];
+		NSInteger thisLoc = [thisGlyph glyph];
 		
 		if (thisLoc > finalGlyph) top = middle - 1;
 		else if (thisLoc < finalGlyph) bottom = middle + 1;
@@ -390,9 +375,9 @@
 	return firstToRemove;
 }
 
-- (void) addCustomGlyph: (int) location
+- (void) addCustomGlyph: (NSInteger) location
 				section: (GlkCustomTextSection*) section
-				inArray: (NSMutableArray*) glyphArray {
+				inArray: (NSMutableArray<GlkTextViewGlyph*>*) glyphArray {
 	GlkTextViewGlyph* newGlyph = [[GlkTextViewGlyph alloc] initWithGlyph: location
 															 textSection: section];
 	
@@ -404,7 +389,7 @@
 		NSInteger middle = (top + bottom)>>1;
 		
 		GlkTextViewGlyph* thisGlyph = [glyphArray objectAtIndex: middle];
-		int thisLoc = [thisGlyph glyph];
+		NSInteger thisLoc = [thisGlyph glyph];
 		
 		if (thisLoc > location) top = middle - 1;
 		else if (thisLoc < location) bottom = middle + 1;
@@ -428,8 +413,8 @@
 	// Invalidate both the custom and the margin glyph arrays
 	[self invalidateCustomGlyphs: range
 						 inArray: customGlyphs];
-	int marginInvalid = [self invalidateCustomGlyphs: range
-											 inArray: marginGlyphs];
+	NSInteger marginInvalid = [self invalidateCustomGlyphs: range
+												   inArray: marginGlyphs];
 	
 	// Reset the first unlaid margin glyph
 	if (marginInvalid < firstUnlaidMarginGlyph) {
@@ -437,7 +422,7 @@
 	}
 }
 
-- (void) addCustomGlyph: (int) location
+- (void) addCustomGlyph: (NSInteger) location
 				section: (GlkCustomTextSection*) section {
 	if ([section isKindOfClass: [GlkImage class]]) {
 		GlkImage* image = (GlkImage*)section;

@@ -30,7 +30,7 @@
 	BOOL willMakeNonEditable;							// YES if a request to make the text non-editable is pending
 	
 	BOOL hasMorePrompt;									// YES if this window has a more prompt
-	int moreOffset;										// The character that should be the first on the current 'page'
+	NSInteger moreOffset;								// The character that should be the first on the current 'page'
 	CGFloat lastMorePos;								// The last y position a [ MORE ] prompt appeared
 	CGFloat nextMorePos;								// The y position that the next [ MORE ] prompt should appear at
 	
@@ -56,7 +56,7 @@
 - (CGFloat) currentMoreState;							// The current [ MORE ] animation state (0 = hidden, 1 = shown)
 - (void) displayMorePromptIfNecessary;					// A request to display the [ MORE ] prompt if necessary
 - (void) setMoreShown: (BOOL) shown;					// Sets whether or not the [ MORE ] prompt is shown
-- (void) resetMorePrompt: (int) pos						// Resets the [ MORE ] prompt position from the specified character position
+- (void) resetMorePrompt: (NSInteger) pos				//!< Resets the [ MORE ] prompt position from the specified character position
 				  paging: (BOOL) paging;
 - (void) resetMorePrompt;								// Resets the [ MORE ] prompt position from the current input position
 - (void) scrollToEnd;									// Scroll to the end of the text view

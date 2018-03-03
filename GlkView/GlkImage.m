@@ -19,7 +19,7 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 - (id) initWithImage: (NSImage*) img
 		   alignment: (unsigned) align
 				size: (NSSize) sz
-			position: (unsigned) charPos {
+			position: (NSUInteger) charPos {
 	self = [super init];
 	
 	if (self) {

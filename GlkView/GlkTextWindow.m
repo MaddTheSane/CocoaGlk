@@ -397,7 +397,7 @@
 									range: [[textView textStorage] editedRange]];
 }
 
-- (int) inputPos {
+- (NSInteger) inputPos {
 	return inputPos;
 }
 
@@ -418,7 +418,7 @@
 		// Generate the event
 		GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_LineInput
 									  windowIdentifier: [self identifier]
-												  val1: [forcedInput length]
+												  val1: (int)[forcedInput length]
 												  val2: 0];
 		[evt setLineInput: forcedInput];
 
@@ -461,7 +461,7 @@
 			// Generate the event, then...
 			GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_LineInput
 										  windowIdentifier: [self identifier]
-													  val1: [inputLine length]
+													  val1: (int)[inputLine length]
 													  val2: 0];
 			[evt setLineInput: inputLine];
 			
@@ -929,7 +929,7 @@
 				   paging: NO];
 }
 
-- (void) resetMorePrompt: (int) moreChar
+- (void) resetMorePrompt: (NSInteger) moreChar
 				  paging: (BOOL) paging {
 	// Do nothing if the more prompt is turned off for this window
 	if (!hasMorePrompt) return;

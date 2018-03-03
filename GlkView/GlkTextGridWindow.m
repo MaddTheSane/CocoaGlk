@@ -507,7 +507,7 @@
 	}
 }
 
-- (int) inputPos {
+- (NSInteger) inputPos {
 	return xpos + ypos*width;
 }
 
@@ -542,7 +542,7 @@
 					// Generate the event, then...
 					GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_LineInput
 												  windowIdentifier: [self identifier]
-															  val1: [inputLine length]
+															  val1: (int)[inputLine length]
 															  val2: 0];
 					[evt setLineInput: inputLine];
 					

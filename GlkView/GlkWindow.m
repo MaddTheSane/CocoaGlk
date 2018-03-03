@@ -469,7 +469,7 @@
 - (void) updateCaretPosition {
 }
 
-- (int) inputPos {
+- (NSInteger) inputPos {
 	// Default is 0 (not managing a text view)
 	return 0;
 }

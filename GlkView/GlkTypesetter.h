@@ -16,8 +16,8 @@
 ///
 @protocol GlkCustomLineSection <NSObject>
 
-- (void) placeBaselineAt: (NSPoint) point					// This object has been typeset at the specified position
-				forGlyph: (int) glyph;
+- (void) placeBaselineAt: (NSPoint) point					//!< This object has been typeset at the specified position
+				forGlyph: (NSInteger) glyph;
 
 @end
 
@@ -30,7 +30,7 @@
 @protocol GlkCustomTextLayout <NSObject>
 
 - (void) invalidateCustomGlyphs: (NSRange) range;
-- (void) addCustomGlyph: (int) location
+- (void) addCustomGlyph: (NSInteger) location
 				section: (GlkCustomTextSection*) section;
 
 @end
@@ -49,14 +49,14 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 /// Representation of a section of a line fragment
 ///
 typedef struct GlkLineSection {
-	NSRect bounds;								// The bounds for this line section: 0,0 indicates the start of the line fragment, 0,0 indicates the far left of the current fragment, at the baseline
-	CGFloat advancement;						// The X-advancement for this line section
-	CGFloat offset;								// The X-offset for this line section
-	NSRange glyphRange;							// The glyph range for this line section
-	GlkSectionAlignment alignment;				// The alignment for this line section
+	NSRect bounds;								//!< The bounds for this line section: 0,0 indicates the start of the line fragment, 0,0 indicates the far left of the current fragment, at the baseline
+	CGFloat advancement;						//!< The X-advancement for this line section
+	CGFloat offset;								//!< The X-offset for this line section
+	NSRange glyphRange;							//!< The glyph range for this line section
+	GlkSectionAlignment alignment;				//!< The alignment for this line section
 
-	id<GlkCustomLineSection> delegate;			// A line section delegate object
-	BOOL elastic;								// Whether or not this is an elastic line section (used in full-justification)
+	id<GlkCustomLineSection> delegate;			//!< A line section delegate object
+	BOOL elastic;								//!< Whether or not this is an elastic line section (used in full-justification)
 } GlkLineSection;
 
 ///
@@ -70,7 +70,7 @@ typedef struct GlkLineSection {
 	NSTextContainer* container;					// The text container that we're fitting text into [NOT RETAINED]
 	
 	CGFloat inset;								// The line fragment padding to use
-	int lastSetGlyph;							// The last glyph laid out
+	NSInteger lastSetGlyph;						// The last glyph laid out
 	
 	// The glyph cache
 	NSRange cached;								// The range of the cached glyphs
@@ -96,7 +96,7 @@ typedef struct GlkLineSection {
 	GlkMarginSection* activeLeftMargin;			// Left margin active before this line fragment started
 	GlkMarginSection* activeRightMargin;		// Right margin active before this line fragment started
 	
-	int lineFragmentInitialGlyph;				// First glyph on the current line fragment
+	NSInteger lineFragmentInitialGlyph;			// First glyph on the current line fragment
 	CGFloat thisLeftMargin;						// Left margin added (so far) in this fragment
 	CGFloat thisRightMargin;					// Right margin added (so far) in this fragment
 	CGFloat thisLeftMaxY;
@@ -109,7 +109,7 @@ typedef struct GlkLineSection {
 	// Line sections
 	NSRect usedRect;							// The used rect of the current text container
 	NSSize size;								// The size of the current text container
-	int numLineSections;						// Number of line sections
+	NSInteger numLineSections;					// Number of line sections
 	GlkLineSection* sections;					// The line sections themselves
 	CGFloat customOffset;						// Offset to apply to the baseline due to custom alignment
 	BOOL customBaseline;						// If YES, then the bounding box is not sufficient to calculate the baseline offset to use
@@ -123,7 +123,7 @@ typedef struct GlkLineSection {
 }
 
 // Laying out line sections
-- (BOOL) cacheGlyphsIncluding: (int) minGlyphIndex;			// Ensures that the specified range of glyphs are in the cache
+- (BOOL) cacheGlyphsIncluding: (NSInteger) minGlyphIndex;	// Ensures that the specified range of glyphs are in the cache
 - (void) beginLineFragment;									// Starts a new line fragment
 - (BOOL) endLineFragment: (BOOL) lastFragment				// Finishes the current line fragment and adds it to the layout manager
 				 newline: (BOOL) newline;

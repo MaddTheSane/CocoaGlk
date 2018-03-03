@@ -219,11 +219,11 @@ strid_t glk_stream_open_file(frefid_t fileref, glui32 fmode,
 	NSObject<GlkStream>* stream = nil;
 	
 	if (fmode == filemode_ReadWrite || fmode == filemode_WriteAppend) {
-		stream = [fileref->fileref createReadWriteStream];
+		stream = [fileref->fileref createReadWriteStreamWithOptions:0];
 	} else if (fmode == filemode_Write) {
-		stream = [fileref->fileref createWriteOnlyStream];
+		stream = [fileref->fileref createWriteOnlyStreamWithOptions:0];
 	} else if (fmode == filemode_Read) {
-		stream = [fileref->fileref createReadOnlyStream];
+		stream = [fileref->fileref createReadOnlyStreamWithOptions:0];
 		
 		if ((fileref->usage&fileusage_TextMode) == 0 && [stream isProxy]) {
 			stream = [[[GlkBufferedStream alloc] initWithStream: stream] autorelease];
@@ -291,20 +291,24 @@ strid_t glk_stream_open_file_uni(frefid_t fileref, glui32 fmode,
 		cocoaglk_error("glk_stream_open_file called with an invalid frefid");
 		return NULL;
 	}
+	GlkFileOption newOpts = 0;
+	if (fmode & fileusage_TextMode) {
+		newOpts |= GlkFileOptionTextMode;
+	}
 	
 	// Get the stream
 	NSObject<GlkStream>* stream = nil;
 	
-	if (fmode == filemode_ReadWrite || fmode == filemode_WriteAppend) {
-		stream = [fileref->fileref createReadWriteStream];
+	if ((fmode & (filemode_ReadWrite | filemode_WriteAppend)) == (filemode_ReadWrite | filemode_WriteAppend)) {
+		stream = [fileref->fileref createReadWriteStreamWithOptions:newOpts];
 
 		if ((fileref->usage&fileusage_TextMode) == 0 && [stream isProxy]) {
 			stream = [[[GlkBufferedStream alloc] initWithStream: stream] autorelease];
 		}
-	} else if (fmode == filemode_Write) {
-		stream = [fileref->fileref createWriteOnlyStream];
-	} else if (fmode == filemode_Read) {
-		stream = [fileref->fileref createReadOnlyStream];
+	} else if (fmode & filemode_Write) {
+		stream = [fileref->fileref createWriteOnlyStreamWithOptions:newOpts];
+	} else if (fmode & filemode_Read) {
+		stream = [fileref->fileref createReadOnlyStreamWithOptions:newOpts];
 	} else {
 		cocoaglk_error("glk_stream_open_file called with an unknown fmode");
 		return NULL;

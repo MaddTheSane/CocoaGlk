@@ -8,14 +8,18 @@
 
 #import "GlkStreamProtocol.h"
 
+typedef NS_OPTIONS(unsigned int, GlkFileOption) {
+	GlkFileOptionTextMode = 1 << 1
+};
+
 //
 // Describes a fileref (mainly used for communicating files between the process and the server)
 //
 @protocol GlkFileRef <NSObject>
 
-- (byref NSObject<GlkStream>*) createReadOnlyStream;	// Creates a read only stream from this fileref
-- (byref NSObject<GlkStream>*) createWriteOnlyStream;	// Creates a write only stream from this fileref
-- (byref NSObject<GlkStream>*) createReadWriteStream;	// Creates a read/write stream from this fileref
+- (byref NSObject<GlkStream>*) createReadOnlyStreamWithOptions:(in GlkFileOption)options;	// Creates a read only stream from this fileref
+- (byref NSObject<GlkStream>*) createWriteOnlyStreamWithOptions:(in GlkFileOption)options;	// Creates a write only stream from this fileref
+- (byref NSObject<GlkStream>*) createReadWriteStreamWithOptions:(in GlkFileOption)options;	// Creates a read/write stream from this fileref
 
 - (void) deleteFile;									// Deletes the file associated with this fileref
 @property (readonly) BOOL fileExists;					// Returns YES if the file associated with this fileref exists

@@ -62,19 +62,19 @@
 
 // = The fileref protocol =
 
-- (byref NSObject<GlkStream>*) createReadOnlyStream {
+- (byref NSObject<GlkStream>*) createReadOnlyStreamWithOptions:(in GlkFileOption)options {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadingWithFilename: pathname];
 	
 	return [stream autorelease];
 }
 
-- (byref NSObject<GlkStream>*) createWriteOnlyStream; {
+- (byref NSObject<GlkStream>*) createWriteOnlyStreamWithOptions:(in GlkFileOption)options {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForWritingWithFilename: pathname];
 	
 	return [stream autorelease];
 }
 
-- (byref NSObject<GlkStream>*) createReadWriteStream {
+- (byref NSObject<GlkStream>*) createReadWriteStreamWithOptions:(in GlkFileOption)options {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadWriteWithFilename: pathname];
 	
 	return [stream autorelease];

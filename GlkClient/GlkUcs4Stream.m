@@ -54,6 +54,18 @@
 }
 
 - (void) putString: (in bycopy NSString*) string {
+	NSStringEncoding encoding;
+	if (bigEndian) {
+		encoding = NSUTF32BigEndianStringEncoding;
+	} else {
+		encoding = NSUTF32LittleEndianStringEncoding;
+	}
+	NSData *strData = [string dataUsingEncoding:encoding];
+	if (strData) {
+		// TODO: test if this adds a BOM to the data. We might not want that...
+		[self putBuffer:strData];
+		return;
+	}
 	NSInteger len = [string length]*2;
 	glui32 buf[len];
 	
@@ -131,7 +143,12 @@
 	}
 	
 	// Convert to a NSString
-	NSString* res = cocoaglk_string_from_uni_buf(line, lineLength);
+	NSString* res = [[[NSString alloc] initWithBytes:line length:lineLength encoding:NSUTF32StringEncoding] autorelease];
+	
+	if (!res) {
+		// Convert to a NSString
+		res = cocoaglk_string_from_uni_buf(line, lineLength);
+	}
 	
 	free(line);
 	return res;

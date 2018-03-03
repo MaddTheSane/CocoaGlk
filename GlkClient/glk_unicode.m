@@ -21,6 +21,12 @@
 NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 	// Convert these character to UTF-16
 	
+	// Try using Cocoa's built-in UTF32 converter first.
+	NSString *theStr = [[NSString alloc] initWithBytes:buf length:len * 4 encoding:NSUTF32StringEncoding];
+	if (theStr) {
+		return [theStr autorelease];
+	}
+
 	// buf has a maximum length of twice as long as length
 	unichar uniBuf[len*2];
 	int uniLen = 0;
@@ -58,6 +64,17 @@ NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 }
 
 int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
+	// Try using Cocoa's built-in UTF32 converter first.
+	NSData *ucs4Data = [string dataUsingEncoding:NSUTF32StringEncoding];
+	if (ucs4Data) {
+		// TODO: test if this adds a BOM to the data. We might not want that...
+		NSInteger copyLen = ucs4Data.length;
+		if (copyLen > len * 4) {
+			copyLen = len * 4;
+		}
+		memcpy(buf, ucs4Data.bytes, copyLen);
+		return (int)(copyLen / 4);
+	}
 	// Fetch the string into a UTF-16 buffer
 	NSInteger stringLength = [string length];
 	unichar characters[stringLength];
@@ -155,52 +172,51 @@ glui32 glk_buffer_to_title_case_uni(glui32 *buf, glui32 len,
 		return cocoaglk_copy_string_to_uni_buf([cocoaglk_string_from_uni_buf(buf, numchars) capitalizedString],
 											   buf, len);
 	} else {
-		NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-		
-		// If the flag is off, then only capitalise characters that come after whitespace
-		NSCharacterSet* whitespace = [NSCharacterSet whitespaceCharacterSet];
-		NSScanner* stringScanner = [[NSScanner alloc] initWithString: cocoaglk_string_from_uni_buf(buf, numchars)];
-		NSMutableString* result = [NSMutableString string];
-		
-		[stringScanner setCharactersToBeSkipped: [NSCharacterSet characterSetWithCharactersInString: @""]];
-		
-		NSString* lastWord;
-		NSString* lastWhitespace;
-		
-		// Scan the string
-		while (![stringScanner isAtEnd]) {
-			// Scan any whitespace at the start of the string
-			[stringScanner scanCharactersFromSet: whitespace
-									  intoString: &lastWhitespace];
+		int finalLength;
+		@autoreleasepool {
+			// If the flag is off, then only capitalise characters that come after whitespace
+			NSCharacterSet* whitespace = [NSCharacterSet whitespaceCharacterSet];
+			NSScanner* stringScanner = [[NSScanner alloc] initWithString: cocoaglk_string_from_uni_buf(buf, numchars)];
+			NSMutableString* result = [NSMutableString string];
 			
-			[result appendString: lastWhitespace];
+			[stringScanner setCharactersToBeSkipped: [NSCharacterSet characterSetWithCharactersInString: @""]];
 			
-			// Give up if there's nothing following the whitespace
-			if ([stringScanner isAtEnd]) break;
+			NSString* lastWord;
+			NSString* lastWhitespace;
 			
-			// Get the next word
-			[stringScanner scanUpToCharactersFromSet: whitespace
-										  intoString: &lastWord];
-			
-			// Capitalize the last word
-			NSString* capitalized = [lastWord capitalizedString];
-			
-			// Join the capitalized letter from the last word with whatever was in the original word
-			if ([lastWord length] > 0 && [capitalized length] > 0) {
-				lastWord = [[capitalized substringToIndex: 1] stringByAppendingString: [lastWord substringFromIndex: 1]];
+			// Scan the string
+			while (![stringScanner isAtEnd]) {
+				// Scan any whitespace at the start of the string
+				[stringScanner scanCharactersFromSet: whitespace
+										  intoString: &lastWhitespace];
+				
+				[result appendString: lastWhitespace];
+				
+				// Give up if there's nothing following the whitespace
+				if ([stringScanner isAtEnd]) break;
+				
+				// Get the next word
+				[stringScanner scanUpToCharactersFromSet: whitespace
+											  intoString: &lastWord];
+				
+				// Capitalize the last word
+				NSString* capitalized = [lastWord capitalizedString];
+				
+				// Join the capitalized letter from the last word with whatever was in the original word
+				if ([lastWord length] > 0 && [capitalized length] > 0) {
+					lastWord = [[capitalized substringToIndex: 1] stringByAppendingString: [lastWord substringFromIndex: 1]];
+				}
+				
+				// Append to the result
+				[result appendString: lastWord];
 			}
 			
-			// Append to the result
-			[result appendString: lastWord];
+			// Copy the buffer
+			finalLength = cocoaglk_copy_string_to_uni_buf(result, buf, len);
+			
+			// Don't need the autorelease pool any more
+			[stringScanner release];
 		}
-		
-		// Copy the buffer
-		int finalLength = cocoaglk_copy_string_to_uni_buf(result, buf, len);
-		
-		// Don't need the autorelease pool any more
-		[stringScanner release];
-		[pool release];
-		
 		// Return
 		return finalLength;
 	}

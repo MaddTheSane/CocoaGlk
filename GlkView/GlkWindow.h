@@ -82,7 +82,7 @@
 
 - (void) setStyles: (NSDictionary<NSNumber*,GlkStyle*>*) styles;//!< Maps style numbers to GlkStyles
 - (GlkStyle*) style: (unsigned) style;							//!< Retrieves a specific style
-- (NSDictionary*) attributes: (unsigned) style;					//!< Gets the attributes to use for a specific style
+- (NSDictionary<NSAttributedStringKey, id>*) attributes: (unsigned) style;//!< Gets the attributes to use for a specific style
 
 - (void) setImmediateStyleHint: (glui32) hint					//!< Sets a style hint with immediate effect (glk extension)
 					   toValue: (glsi32) value;
@@ -100,7 +100,7 @@
 @property (readonly) CGFloat leading;							// The amount of leading to use
 @property (readonly) CGFloat lineHeight;						// Height of a line in the current font
 
-- (NSDictionary*) currentTextAttributes;						// The attributes for the currently active style
+- (NSDictionary<NSAttributedStringKey, id>*) currentTextAttributes;// The attributes for the currently active style
 
 // Cursor positioning
 - (void) moveCursorToXposition: (int) xpos						// Not supported for most window styles

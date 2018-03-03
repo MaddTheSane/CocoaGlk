@@ -12,7 +12,7 @@
 #import <GlkView/GlkTextWindow.h>
 
 @interface GlkTextGridWindow : GlkTextWindow<NSTextStorageDelegate, NSTextViewDelegate> {
-	int lineInputLength;							// The amount of line input that we have accepted so far
+	NSInteger lineInputLength;						// The amount of line input that we have accepted so far
 	
 	int width,height;								// Current character width/height
 	int xpos,ypos;									// Current cursor position. Top left is 0,0.

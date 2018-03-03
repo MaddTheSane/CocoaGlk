@@ -311,8 +311,8 @@
 												inTextContainer: [textView textContainer]];
 	NSInteger clickPos = [[textView layoutManager] characterIndexForGlyphAtIndex: glyphPos];
 	
-	int clickX = clickPos % width;
-	int clickY = clickPos / width;
+	int clickX = (int)(clickPos % width);
+	int clickY = (int)(clickPos / width);
 	
 	// TODO: do not report mouse dragged events (ie, things resulting in a selection)
 	
@@ -425,9 +425,9 @@
 	if (!lineInput) return NO;
 	
 	int startPos = xpos + ypos*width;
-	int endPos = startPos + lineInputLength;
+	NSInteger endPos = startPos + lineInputLength;
 	
-	int lengthChange = [replacementString length] - affectedCharRange.length;
+	NSInteger lengthChange = [replacementString length] - affectedCharRange.length;
 	
     if (affectedCharRange.location < startPos || affectedCharRange.location > endPos) {
         return NO;
@@ -445,8 +445,8 @@
 - (void)textStorageWillProcessEditing:(NSNotification*) aNotification {
 	if (!lineInput) return;
 	
-	int startPos = xpos + ypos*width;
-	int endPos = startPos + lineInputLength;
+	NSInteger startPos = xpos + ypos*width;
+	NSInteger endPos = startPos + lineInputLength;
 	
 	NSRange edited = [[textView textStorage] editedRange];
 
@@ -463,7 +463,7 @@
 									range: [[textView textStorage] editedRange]];
 	
 	// Text editing should replace any text outside of the editable range
-	int lenChange = [[textView textStorage] changeInLength];
+	NSInteger lenChange = [[textView textStorage] changeInLength];
 	
 	if (lenChange > 0) {
 		[[textView textStorage] deleteCharactersInRange: NSMakeRange(endPos+lenChange, lenChange)];
@@ -490,7 +490,7 @@
 										 target: self
 									   argument: [NSValue valueWithRange: NSMakeRange(edited.location+edited.length, 0)]
 										  order: 0
-										  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+										  modes: @[NSDefaultRunLoopMode]];
 }
 
 - (void) fixHorribleCaretBehaviour: (NSValue*) caretPos {
@@ -498,8 +498,8 @@
 }
 
 - (void) updateCaretPosition {
-	int startPos = xpos + ypos*width;
-	int endPos = startPos + lineInputLength;
+	NSInteger startPos = xpos + ypos*width;
+	NSInteger endPos = startPos + lineInputLength;
 
 	if (startPos > [textView selectedRange].location ||
 		endPos <= [textView selectedRange].location) {

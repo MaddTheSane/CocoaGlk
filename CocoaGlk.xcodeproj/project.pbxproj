@@ -1579,10 +1579,6 @@
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
 					"-seg1addr",
 					0xb0000000,
 				);
@@ -1590,11 +1586,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
 				PRODUCT_NAME = GlkView;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				ZERO_LINK = NO;
 			};
 			name = Debug;
@@ -1618,10 +1609,6 @@
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
 					"-seg1addr",
 					0xb0000000,
 				);
@@ -1629,11 +1616,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
 				PRODUCT_NAME = GlkView;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -1658,10 +1640,6 @@
 				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
 					"-seg1addr",
 					0x2d000000,
 				);
@@ -1696,10 +1674,6 @@
 				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
 					"-seg1addr",
 					0x2d000000,
 				);
@@ -2023,12 +1997,6 @@
 				INFOPLIST_FILE = "GlkSound-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
 				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.GlkSound;
 				PRODUCT_NAME = GlkSound;
 			};
@@ -2052,12 +2020,6 @@
 				INFOPLIST_FILE = "GlkSound-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
 				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.GlkSound;
 				PRODUCT_NAME = GlkSound;
 				ZERO_LINK = NO;

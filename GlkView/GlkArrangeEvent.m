@@ -16,7 +16,7 @@
 
 - (id) initWithGlkWindow: (GlkWindow*) window {
 	self = [super initWithType: evtype_Arrange
-			  windowIdentifier: [window identifier]];
+			  windowIdentifier: [window glkIdentifier]];
 	
 	if (self) {
 		// Nothing to do

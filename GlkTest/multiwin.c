@@ -1,4 +1,4 @@
-#include <GlkClient/glk.h>
+#include <GlkView/glk.h>
 
 /* multiwin.c: Sample program for Glk API, version 0.5.
     Designed by Andrew Plotkin <erkyrath@eblong.com>

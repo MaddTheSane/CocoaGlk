@@ -319,7 +319,7 @@
 	if (mouseInput) {
 		// Generate the event
 		GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_MouseInput
-									  windowIdentifier: [self identifier]
+									  windowIdentifier: [self glkIdentifier]
 												  val1: clickX
 												  val2: clickY];
 		
@@ -541,7 +541,7 @@
 					
 					// Generate the event, then...
 					GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_LineInput
-												  windowIdentifier: [self identifier]
+												  windowIdentifier: [self glkIdentifier]
 															  val1: (int)[inputLine length]
 															  val2: 0];
 					[evt setLineInput: inputLine];
@@ -552,7 +552,7 @@
 					// Add to the line history
 					[[self containingView] resetHistoryPosition];
 					[[self containingView] addHistoryItem: inputLine
-										  forWindowWithId: [self identifier]];
+										  forWindowWithId: [self glkIdentifier]];
 					
 					lineInput = NO;
 					[nextInputLine release]; nextInputLine = nil;

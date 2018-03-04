@@ -28,8 +28,8 @@
 }
 
 - (byref NSObject<GlkStream>*) createReadOnlyStream {
-	return [[GlkMemoryStream alloc] initWithMemory: (unsigned char*)[data bytes]
-											length: [data length]];
+	return [[[GlkMemoryStream alloc] initWithMemory: (unsigned char*)[data bytes]
+											length: [data length]] autorelease];
 }
 
 - (byref NSObject<GlkStream>*) createWriteOnlyStream {

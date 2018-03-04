@@ -47,7 +47,7 @@
 // = Window metadata =
 
 @synthesize closed;
-@synthesize identifier=windowIdentifier;
+@synthesize glkIdentifier=windowIdentifier;
 
 // = The parent window =
 
@@ -305,7 +305,7 @@
 	if (charInput) {
 		// Generate a character input event
 		GlkEvent* glkEvent = [[GlkEvent alloc] initWithType: evtype_CharInput
-										   windowIdentifier: [self identifier]
+										   windowIdentifier: [self glkIdentifier]
 													   val1: [[self class] keycodeForString: forcedInput]
 													   val2: 0];		
 		[self cancelCharInput];
@@ -457,7 +457,7 @@
 		//NSBeep();
 	} else if ([[evt characters] length] >= 1) {
 		GlkEvent* glkEvent = [[GlkEvent alloc] initWithType: evtype_CharInput
-										   windowIdentifier: [self identifier]
+										   windowIdentifier: [self glkIdentifier]
 													   val1: [[self class] keycodeForEvent: evt]
 													   val2: 0];
 		

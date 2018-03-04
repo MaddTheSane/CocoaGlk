@@ -47,7 +47,7 @@ void cocoaglk_set_image_source(id<GlkImageSource> imageSource) {
 // a particular image or not.
 //
 glui32 glk_image_draw(winid_t win, glui32 image, glsi32 val1, glsi32 val2) {
-	if (!imageSourceSet) cocoaglk_set_image_source([[GlkBlorbImageSource alloc] init]);
+	if (!imageSourceSet) cocoaglk_set_image_source([[[GlkBlorbImageSource alloc] init] autorelease]);
 	
 	glui32 res = 0;
 	

@@ -659,7 +659,7 @@
 		extraStreamDictionary = [[NSMutableDictionary alloc] init];
 	}
 	
-	[extraStreamDictionary setObject: [[GlkFileStream alloc] initForReadingWithFilename: [NSURL fileURLWithPath: filename]]
+	[extraStreamDictionary setObject: [[[GlkFileStream alloc] initForReadingWithFilename: [NSURL fileURLWithPath: filename]] autorelease]
 							  forKey: streamKey];
 	
 	[self logMessage: [NSString stringWithFormat: @"Creating stream to read data from '%@' with key '%@'", filename, streamKey]
@@ -1200,7 +1200,7 @@
 - (void) createBlankWindowWithIdentifier: (glui32) identifier {
 	GlkWindow* newWindow = [[GlkWindow alloc] init];
 	
-	[newWindow setIdentifier: identifier];
+	[newWindow setGlkIdentifier: identifier];
 	[newWindow setEventTarget: self];
 	[newWindow setPreferences: prefs];
 	[newWindow setContainingView: self];
@@ -1213,7 +1213,7 @@
 	GlkWindow* newWindow = [[GlkTextGridWindow alloc] init];
 	
 	if (scaleFactor != 1.0f) [newWindow setScaleFactor: scaleFactor];
-	[newWindow setIdentifier: identifier];
+	[newWindow setGlkIdentifier: identifier];
 	[newWindow setEventTarget: self];
 	[newWindow setStyles: [self stylesForWindowType: wintype_TextGrid]];
 	[newWindow setPreferences: prefs];
@@ -1227,7 +1227,7 @@
 	GlkWindow* newWindow = [[GlkTextWindow alloc] init];
 	
 	if (scaleFactor != 1.0f) [newWindow setScaleFactor: scaleFactor];
-	[newWindow setIdentifier: identifier];
+	[newWindow setGlkIdentifier: identifier];
 	[newWindow setEventTarget: self];
 	[newWindow setStyles: [self stylesForWindowType: wintype_TextBuffer]];
 	[newWindow setPreferences: prefs];
@@ -1241,7 +1241,7 @@
 	GlkWindow* newWindow = [[GlkGraphicsWindow alloc] init];
 	
 	if (scaleFactor != 1.0f) [newWindow setScaleFactor: scaleFactor];
-	[newWindow setIdentifier: identifier];
+	[newWindow setGlkIdentifier: identifier];
 	[newWindow setEventTarget: self];
 	[newWindow setStyles: [self stylesForWindowType: wintype_Graphics]];
 	[newWindow setPreferences: prefs];
@@ -1276,7 +1276,7 @@
 			
 			// Associate this window with its identifier
 			[windowPositionCache setObject: [NSNumber numberWithInt: position]
-									forKey: [NSNumber numberWithUnsignedInt: [currentWindow identifier]]];
+									forKey: [NSNumber numberWithUnsignedInt: [currentWindow glkIdentifier]]];
 			[windowIdCache setObject: currentWindow
 							  forKey: [NSNumber numberWithInt: position]];
 			
@@ -1379,7 +1379,7 @@
 	[newWin setSize: size];
 	[newWin setAbove: winDir==winmethod_Above||winDir==winmethod_Left];
 	[newWin setHorizontal: winDir==winmethod_Left||winDir==winmethod_Right];
-	[newWin setIdentifier: identifier];
+	[newWin setGlkIdentifier: identifier];
 	[newWin setEventTarget: self];
 	[newWin setPreferences: prefs];
 	[newWin setContainingView: self];
@@ -1619,8 +1619,8 @@
 
 	if ([win isKindOfClass: [GlkPairWindow class]]) {
 		// Remove the ID for the left and right windows
-		if ([win leftWindow]) [self removeIdentifier: [[win leftWindow] identifier]];
-		if ([win rightWindow]) [self removeIdentifier: [[win rightWindow] identifier]];
+		if ([win leftWindow]) [self removeIdentifier: [[win leftWindow] glkIdentifier]];
+		if ([win rightWindow]) [self removeIdentifier: [[win rightWindow] glkIdentifier]];
 	}
 	
 	// Remove from the list of known windows
@@ -1684,7 +1684,7 @@
 		[parent setClosed: YES];
 		
 		// Remove the parent window identifier
-		[self removeIdentifier: [parent identifier]];
+		[self removeIdentifier: [parent glkIdentifier]];
 	} else {
 		// We've closed the root window
 		[rootWindow release];
@@ -1757,7 +1757,7 @@
 		NSEnumerator* outputEnum = [outputReceivers objectEnumerator];
 		NSObject<GlkAutomation>* receiver;
 		
-		int windowId = [self automationIdForWindowId: [(GlkTextWindow*)stream identifier]];
+		int windowId = [self automationIdForWindowId: [(GlkTextWindow*)stream glkIdentifier]];
 		
 		while (receiver = [outputEnum nextObject]) {
 			[receiver receivedCharacters: string
@@ -2364,7 +2364,7 @@
 		[candidate forceLineInput: characters];
 	}
 	
-	return [self automationIdForWindowId: [candidate identifier]];
+	return [self automationIdForWindowId: [candidate glkIdentifier]];
 }
 
 - (int) sendClickAtX: (int) xpos

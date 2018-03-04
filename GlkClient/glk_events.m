@@ -57,6 +57,7 @@ void glk_select(event_t *event) {
 	// Sanity check
 	if (event == NULL) {
 		cocoaglk_error("glk_select called with a NULL argument");
+		return;
 	}
 
 #if COCOAGLK_TRACE
@@ -207,6 +208,7 @@ void glk_select_poll(event_t *event) {
 	// Sanity check
 	if (event == NULL) {
 		cocoaglk_error("glk_select_poll called with a NULL argument");
+		return;
 	}
 	
 	// Clear the event structure

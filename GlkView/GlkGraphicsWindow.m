@@ -68,7 +68,7 @@
 	
 	// Generate a redraw event for this window
 	GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_Redraw
-								  windowIdentifier: [self identifier]];
+								  windowIdentifier: [self glkIdentifier]];
 	
 	[target queueEvent: [evt autorelease]];
 }
@@ -115,7 +115,7 @@
 	if (mouseInput) {
 		// Generate the event
 		GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_MouseInput
-									  windowIdentifier: [self identifier]
+									  windowIdentifier: [self glkIdentifier]
 												  val1: clickX
 												  val2: clickY];
 		

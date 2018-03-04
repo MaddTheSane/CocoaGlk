@@ -192,6 +192,7 @@ void cocoaglk_warning(char* warningText) {
 													   length: strlen(warningText)
 													 encoding: NSISOLatin1StringEncoding];
 	[cocoaglk_session showWarning: warningString];
+	[warningString release];
 }
 
 // Reports an error to the server, then quits
@@ -238,6 +239,7 @@ void cocoaglk_log(char* logText) {
 												   length: strlen(logText)
 												 encoding: NSISOLatin1StringEncoding];
 	[cocoaglk_session logMessage: logString];
+	[logString release];
 }
 
 // Logs a message with priority to the server
@@ -253,6 +255,7 @@ void cocoaglk_log_ex(char* logText, int priority) {
 												 encoding: NSISOLatin1StringEncoding];
 	[cocoaglk_session logMessage: logString
 					withPriority: priority];
+	[logString release];
 }
 
 // Flushes the buffer

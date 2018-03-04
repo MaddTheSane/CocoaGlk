@@ -321,7 +321,7 @@
 		if (hyperlinkInput) {
 			// Generate the event for this hyperlink
 			GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_Hyperlink
-										  windowIdentifier: [self identifier]
+										  windowIdentifier: [self glkIdentifier]
 													  val1: [link unsignedIntValue]
 													  val2: 0];
 			[target queueEvent: [evt autorelease]];
@@ -417,7 +417,7 @@
 		
 		// Generate the event
 		GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_LineInput
-									  windowIdentifier: [self identifier]
+									  windowIdentifier: [self glkIdentifier]
 												  val1: (int)[forcedInput length]
 												  val2: 0];
 		[evt setLineInput: forcedInput];
@@ -425,7 +425,7 @@
 		// Add to the line history
 		[[self containingView] resetHistoryPosition];
 		[[self containingView] addHistoryItem: forcedInput
-							  forWindowWithId: [self identifier]];
+							  forWindowWithId: [self glkIdentifier]];
 		
 		// ... send it
 		[target queueEvent: [evt autorelease]];
@@ -460,7 +460,7 @@
 			
 			// Generate the event, then...
 			GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_LineInput
-										  windowIdentifier: [self identifier]
+										  windowIdentifier: [self glkIdentifier]
 													  val1: (int)[inputLine length]
 													  val2: 0];
 			[evt setLineInput: inputLine];
@@ -471,7 +471,7 @@
 			// Add to the line history
 			[[self containingView] resetHistoryPosition];
 			[[self containingView] addHistoryItem: inputLine
-								  forWindowWithId: [self identifier]];
+								  forWindowWithId: [self glkIdentifier]];
 			
 			// Move the input position
 			inputPos = pos+1;

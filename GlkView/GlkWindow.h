@@ -63,7 +63,7 @@
 // Window metadata
 //! The unique window identifier, (shared with and assigned by the client)
 //! Sometimes we need to know this
-@property unsigned identifier;
+@property unsigned glkIdentifier;
 
 // Layout
 - (void) layoutInRect: (NSRect) parentRect;						// If the layout has changed, then update/redraw this window

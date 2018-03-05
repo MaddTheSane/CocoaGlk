@@ -18,12 +18,13 @@
 // Method used to communicate with the hub object used by the main Glk server process
 //
 
+NS_SWIFT_NAME(GlkHubProtocol)
 @protocol GlkHub <NSObject>
 
 // Setting up the connection
-- (byref NSObject<GlkSession>*) createNewSession;
-- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie;
-- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie
-												sessionCookie: (in bycopy NSString*) sessionCookie;
+- (nullable byref NSObject<GlkSession>*) createNewSession;
+- (nullable byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (nullable in bycopy NSString*) hubCookie;
+- (nullable byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (nullable in bycopy NSString*) hubCookie
+														 sessionCookie: (nullable in bycopy NSString*) sessionCookie;
 
 @end

@@ -189,7 +189,6 @@
 		55C6BB39204DED96001AE7E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C6BB38204DED96001AE7E5 /* AppDelegate.swift */; };
 		55C6BB3B204DED96001AE7E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB3A204DED96001AE7E5 /* Assets.xcassets */; };
 		55C6BB3E204DED96001AE7E5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB3C204DED96001AE7E5 /* MainMenu.xib */; };
-		55C6BB44204DEDC1001AE7E5 /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55C6BB45204DEDC1001AE7E5 /* GlkView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55C6BB48204DEDC1001AE7E5 /* GlkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA5607E877C900576AB9 /* GlkClient.framework */; };
 		55C6BB49204DEDC1001AE7E5 /* GlkClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA5607E877C900576AB9 /* GlkClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -201,6 +200,7 @@
 		55C6BB59204DEFA2001AE7E5 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB5B204DEFA2001AE7E5 /* Credits.rtfd */; };
 		55C6BB63204DF016001AE7E5 /* SwiftWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C6BB62204DF016001AE7E5 /* SwiftWindowController.swift */; };
 		55C6BB64204DF03A001AE7E5 /* CocoaGlk.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB66204DF03A001AE7E5 /* CocoaGlk.xib */; };
+		55C6BB6B204DF65F001AE7E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB6D204DF65F001AE7E5 /* Localizable.strings */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -571,6 +571,7 @@
 		55C6BB62204DF016001AE7E5 /* SwiftWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWindowController.swift; sourceTree = "<group>"; };
 		55C6BB65204DF03A001AE7E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CocoaGlk.xib; sourceTree = "<group>"; };
 		55C6BB68204DF03D001AE7E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CocoaGlk.strings; sourceTree = "<group>"; };
+		55C6BB6C204DF65F001AE7E5 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* CocoaGlk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaGlk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -637,7 +638,6 @@
 			files = (
 				55C6BB48204DEDC1001AE7E5 /* GlkClient.framework in Frameworks */,
 				55C6BB4C204DEDC1001AE7E5 /* GlkSound.framework in Frameworks */,
-				55C6BB44204DEDC1001AE7E5 /* GlkView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1051,7 +1051,6 @@
 		55C6BB37204DED96001AE7E5 /* SwiftGlk */ = {
 			isa = PBXGroup;
 			children = (
-				55C6BB5B204DEFA2001AE7E5 /* Credits.rtfd */,
 				55C6BB38204DED96001AE7E5 /* AppDelegate.swift */,
 				55C6BB62204DF016001AE7E5 /* SwiftWindowController.swift */,
 				55C6BB3A204DED96001AE7E5 /* Assets.xcassets */,
@@ -1059,6 +1058,8 @@
 				55C6BB66204DF03A001AE7E5 /* CocoaGlk.xib */,
 				55C6BB3F204DED96001AE7E5 /* Info.plist */,
 				55C6BB40204DED96001AE7E5 /* SwiftGlk.entitlements */,
+				55C6BB5B204DEFA2001AE7E5 /* Credits.rtfd */,
+				55C6BB6D204DF65F001AE7E5 /* Localizable.strings */,
 			);
 			path = SwiftGlk;
 			sourceTree = "<group>";
@@ -1319,6 +1320,11 @@
 					55C6BB35204DED96001AE7E5 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -1383,6 +1389,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55C6BB6B204DF65F001AE7E5 /* Localizable.strings in Resources */,
 				55C6BB59204DEFA2001AE7E5 /* Credits.rtfd in Resources */,
 				55C6BB3B204DED96001AE7E5 /* Assets.xcassets in Resources */,
 				55C6BB3E204DED96001AE7E5 /* MainMenu.xib in Resources */,
@@ -1728,6 +1735,14 @@
 				55C6BB68204DF03D001AE7E5 /* en */,
 			);
 			name = CocoaGlk.xib;
+			sourceTree = "<group>";
+		};
+		55C6BB6D204DF65F001AE7E5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55C6BB6C204DF65F001AE7E5 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2213,6 +2228,7 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkSound-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.GlkSound;
 				PRODUCT_NAME = GlkSound;
@@ -2236,6 +2252,7 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkSound-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.GlkSound;
 				PRODUCT_NAME = GlkSound;
@@ -2256,7 +2273,6 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = SwiftGlk/SwiftGlk.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2273,7 +2289,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SwiftGlk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.SwiftGlk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2296,7 +2312,6 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = SwiftGlk/SwiftGlk.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2308,7 +2323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SwiftGlk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.SwiftGlk;
 				PRODUCT_NAME = "$(TARGET_NAME)";

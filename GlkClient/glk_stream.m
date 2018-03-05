@@ -558,8 +558,10 @@ strid_t glk_stream_open_memory_uni(glui32 *buf, glui32 buflen,
 #  error Could not determine endianness
 # endif
 #endif
-	GlkUcs4Stream* ucsStr = [[GlkUcs4Stream alloc] initWithStream: [str autorelease]
+	GlkUcs4Stream* ucsStr = [[GlkUcs4Stream alloc] initWithStream: str
 														bigEndian: isBigEndian];
+	
+	[str release];
 	
 	// Create the resulting stream
 	strid_t res = cocoaglk_stream();

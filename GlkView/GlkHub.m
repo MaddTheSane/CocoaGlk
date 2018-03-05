@@ -126,9 +126,7 @@
 	[self setHubName: [NSString stringWithFormat: @"GlkHub-%04x", getpid()]];
 }
 
-- (NSString*) hubName {
-	return hubName;
-}
+@synthesize hubName;
 
 // = Security =
 

@@ -6,21 +6,57 @@
 //
 
 import Cocoa
+import GlkView.GlkHub
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
-
-	@IBOutlet weak var window: NSWindow!
-
-
+class AppDelegate: NSObject, NSApplicationDelegate, GlkHubDelegate {
+	var winController: SwiftWindowController?
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		// Insert code here to initialize your application
+		// Set up the hub
+		GlkHub.shared.delegate = self
+		
+		GlkHub.shared.setKeychainHubCookie()
+		GlkHub.shared.hubName = "SwiftGlk"
+/*
+
+#if 0
+// Start the test application (eventually we'll have a better way to do this, but for now, we do things this way)
+NSTask* testTask = [[[NSTask alloc] init] autorelease];
+NSString* taskPath = [[NSBundle mainBundle] pathForResource: @"glulxe"
+ofType: nil];
+
+[testTask setLaunchPath: taskPath];
+[testTask setArguments: [NSArray arrayWithObjects: @"-hubname", [[GlkHub sharedGlkHub] hubName], @"-hubcookie", [[GlkHub sharedGlkHub] hubCookie], nil]];
+
+[testTask launch];
+#endif
+*/
+		// Start another task, this time using the launch facility
+		let control = SwiftWindowController()
+		control.showWindow(self)
+		winController = control
+		control.glkView.launchClientApplication(Bundle.main.path(forResource: "glulxe", ofType: nil)!, withArguments: nil)
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {
 		// Insert code here to tear down your application
 	}
 
+	func createAnonymousSession() -> GlkSession? {
+		return nil
+		
+		let control = SwiftWindowController()
+		control.showWindow(self)
+		winController = control
+		return control.glkView
+		/*
+GlkWindowController* control = [[GlkWindowController alloc] init];
+
+[control showWindow: self];
+
+return [control glkView];
+*/
+	}
 
 }
 

@@ -55,7 +55,7 @@ typedef struct GlkLineSection {
 	NSRange glyphRange;							//!< The glyph range for this line section
 	GlkSectionAlignment alignment;				//!< The alignment for this line section
 
-	id<GlkCustomLineSection> delegate;			//!< A line section delegate object
+	__unsafe_unretained id<GlkCustomLineSection> delegate;//!< A line section delegate object
 	BOOL elastic;								//!< Whether or not this is an elastic line section (used in full-justification)
 } GlkLineSection;
 
@@ -87,8 +87,8 @@ typedef struct GlkLineSection {
 	CGFloat* cacheDescenders;					// The descenders for each glyph that we're laying out
 	CGFloat* cacheLineHeight;					// The line heights for each glyph that we're laying out
 	NSRect* cacheBounds;						// The bounds for each glyph that we're laying out
-	NSDictionary** cacheAttributes;				// The attributes for each glyph that we're laying out [RETAINED]
-	NSFont** cacheFonts;						// The font attribute for each glyph that we're laying out [NOT RETAINED]
+	NSDictionary*__strong* cacheAttributes;				// The attributes for each glyph that we're laying out [RETAINED]
+	NSFont*__unsafe_unretained* cacheFonts;						// The font attribute for each glyph that we're laying out [NOT RETAINED]
 	
 	// Left and right margin sections
 	NSMutableArray* leftMargins;				// Left margin items (by line fragment initial glyph)

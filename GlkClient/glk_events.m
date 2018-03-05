@@ -449,7 +449,7 @@ void glk_cancel_line_event(winid_t win, event_t *event) {
 			[latin1Input getBytes: win->inputBuf
 						   length: length];
 			
-			if (event) event->val1 = length;
+			if (event) event->val1 = (glui32)length;
 		}
 	}
 	

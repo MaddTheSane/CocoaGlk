@@ -152,7 +152,7 @@ glui32 glk_image_get_info(glui32 image, glui32 *width, glui32 *height) {
 	}
 	
 #if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_image_get_info(%p, %u, %p=%u, %p=%u) = %i", image, width, width?*width:0, height?*height:0, res);
+	NSLog(@"TRACE: glk_image_get_info(%u, %p=%u, %p=%u) = %i", image, width, width?*width:0, height, height?*height:0, res);
 #endif
 	
 	return res;

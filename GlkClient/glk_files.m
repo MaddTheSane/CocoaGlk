@@ -219,7 +219,7 @@ frefid_t glk_fileref_create_by_name(glui32 usage, char *name,
 	}
 	
 #if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_fileref_create_by_name(%u, \"%s\", rock) = %p", usage, name, rock, res);
+	NSLog(@"TRACE: glk_fileref_create_by_name(%u, \"%s\", %u) = %p", usage, name, rock, res);
 #endif
 	
 	return res;
@@ -361,7 +361,7 @@ frefid_t glk_fileref_create_from_fileref(glui32 usage, frefid_t fref,
 //
 void glk_fileref_destroy(frefid_t fref) {
 #if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_fileref_destroy(%u)", fref);
+	NSLog(@"TRACE: glk_fileref_destroy(%p)", fref);
 #endif
 
 	if (!cocoaglk_frefid_sane(fref)) {

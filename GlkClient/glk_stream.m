@@ -1153,7 +1153,7 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 #endif
 
 #if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_get_line_stream(%p, %p=\"%s\", %u) = %u", str, buf, buf, len, length);
+	NSLog(@"TRACE: glk_get_line_stream(%p, %p=\"%s\", %u) = %ld", str, buf, buf, len, (long)length);
 #endif
 		
 	// Return the result
@@ -1197,7 +1197,7 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 	memcpy(buf, [data bytes], length);
 	
 #if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_get_buffer_stream(%p, %p, %i) = %u", str, buf, len, length);
+	NSLog(@"TRACE: glk_get_buffer_stream(%p, %p, %i) = %ld", str, buf, len, (long)length);
 #endif
 		
 	str->read += length;

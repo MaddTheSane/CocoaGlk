@@ -15,10 +15,10 @@
 @protocol GlkSoundDataSource <NSObject>
 
 // An NSString indicating the format of the data contained in this source
-- (NSString*) soundFormat;
+@property (readonly, copy) NSString *soundFormat;
 
 // The length of the data in this source
-- (int) length;
+@property (readonly) NSInteger length;
 
 // Retrieves data for the specified region of this source
 - (NSData*) dataForRegion: (NSRange) region;

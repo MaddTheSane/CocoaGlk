@@ -291,7 +291,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
@@ -377,13 +377,13 @@
 		4B51AA6B07E8785700576AB9 /* GlkClient.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = GlkClient.icns; path = Resources/GlkClient.icns; sourceTree = "<group>"; };
 		4B51AA8707E8795300576AB9 /* GlkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkView.h; sourceTree = "<group>"; };
 		4B51AA8807E8795300576AB9 /* GlkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkView.m; sourceTree = "<group>"; };
-		4B51AA9A07E87A2F00576AB9 /* glk.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = glk.h; sourceTree = "<group>"; };
+		4B51AA9A07E87A2F00576AB9 /* glk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glk.h; sourceTree = "<group>"; };
 		4B51AAB707E87B7B00576AB9 /* glk_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_main.m; sourceTree = "<group>"; };
-		4B51AAEC07E87CD300576AB9 /* glk_events.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = glk_events.m; sourceTree = "<group>"; };
-		4B51AAED07E87CD300576AB9 /* glk_image.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = glk_image.m; sourceTree = "<group>"; };
-		4B51AAEE07E87CD300576AB9 /* glk_stream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = glk_stream.m; sourceTree = "<group>"; };
-		4B51AAEF07E87CD300576AB9 /* glk_style.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = glk_style.m; sourceTree = "<group>"; };
-		4B51AAF007E87CD300576AB9 /* glk_windows.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = glk_windows.m; sourceTree = "<group>"; };
+		4B51AAEC07E87CD300576AB9 /* glk_events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_events.m; sourceTree = "<group>"; };
+		4B51AAED07E87CD300576AB9 /* glk_image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_image.m; sourceTree = "<group>"; };
+		4B51AAEE07E87CD300576AB9 /* glk_stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_stream.m; sourceTree = "<group>"; };
+		4B51AAEF07E87CD300576AB9 /* glk_style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_style.m; sourceTree = "<group>"; };
+		4B51AAF007E87CD300576AB9 /* glk_windows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_windows.m; sourceTree = "<group>"; };
 		4B51AAF707E87DCA00576AB9 /* glk_client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glk_client.h; sourceTree = "<group>"; };
 		4B51AB3A07E87EE300576AB9 /* cocoaglk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocoaglk.h; sourceTree = "<group>"; };
 		4B51ABF507E891B900576AB9 /* glk_files.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_files.m; sourceTree = "<group>"; };
@@ -471,8 +471,8 @@
 		4BF085B60E16791000DB5C6B /* it_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = it_defs.h; path = "../libmodplug-0.8.4/src/libmodplug/it_defs.h"; sourceTree = "<group>"; };
 		4BF085B70E16791000DB5C6B /* sndfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sndfile.h; path = "../libmodplug-0.8.4/src/libmodplug/sndfile.h"; sourceTree = "<group>"; };
 		4BF085B80E16791000DB5C6B /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdafx.h; path = "../libmodplug-0.8.4/src/libmodplug/stdafx.h"; sourceTree = "<group>"; };
-		4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GlkEventListenerProtocol.h; sourceTree = "<group>"; };
-		4BFA18A007F726D60068E16A /* GlkEventProtocol.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GlkEventProtocol.h; sourceTree = "<group>"; };
+		4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkEventListenerProtocol.h; sourceTree = "<group>"; };
+		4BFA18A007F726D60068E16A /* GlkEventProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkEventProtocol.h; sourceTree = "<group>"; };
 		4BFA19F907F77A820068E16A /* GlkFileRefProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkFileRefProtocol.h; sourceTree = "<group>"; };
 		4BFA19FC07F77C7B0068E16A /* GlkFileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkFileStream.h; sourceTree = "<group>"; };
 		4BFA19FD07F77C7B0068E16A /* GlkFileStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkFileStream.m; sourceTree = "<group>"; };
@@ -480,10 +480,10 @@
 		4BFA1A0307F77C850068E16A /* GlkFileRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkFileRef.m; sourceTree = "<group>"; };
 		4BFA1B3D07F879D70068E16A /* GlkFilePromptProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkFilePromptProtocol.h; sourceTree = "<group>"; };
 		4BFA1C9E07F8A10F0068E16A /* cocoastart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cocoastart.m; path = ../../glulxe/cocoastart.m; sourceTree = "<group>"; };
-		4BFA1CCE07F8A4040068E16A /* gi_dispa.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = gi_dispa.h; sourceTree = "<group>"; };
-		4BFA1CCF07F8A4040068E16A /* gi_blorb.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = gi_blorb.m; sourceTree = "<group>"; };
-		4BFA1CD007F8A4040068E16A /* gi_blorb.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = gi_blorb.h; sourceTree = "<group>"; };
-		4BFA1CD107F8A4040068E16A /* gi_dispa.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = gi_dispa.m; sourceTree = "<group>"; };
+		4BFA1CCE07F8A4040068E16A /* gi_dispa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gi_dispa.h; sourceTree = "<group>"; };
+		4BFA1CCF07F8A4040068E16A /* gi_blorb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gi_blorb.m; sourceTree = "<group>"; };
+		4BFA1CD007F8A4040068E16A /* gi_blorb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gi_blorb.h; sourceTree = "<group>"; };
+		4BFA1CD107F8A4040068E16A /* gi_dispa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gi_dispa.m; sourceTree = "<group>"; };
 		4BFA1D6707F8A8D00068E16A /* glk_misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_misc.m; sourceTree = "<group>"; };
 		552A03722049D5E200A4ECAA /* GlkView.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = GlkView.modulemap; sourceTree = "<group>"; };
 		552A03732049D64C00A4ECAA /* GlkClient.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = GlkClient.modulemap; sourceTree = "<group>"; };

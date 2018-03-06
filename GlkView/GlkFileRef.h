@@ -17,8 +17,8 @@
 	BOOL autoflush;
 }
 
-- (instancetype)init UNAVAILABLE_ATTRIBUTE;
-- (id) initWithPath: (NSURL*) pathname NS_DESIGNATED_INITIALIZER;                 // Designated initialiser
+- (instancetype) init UNAVAILABLE_ATTRIBUTE;
+- (instancetype) initWithPath: (NSURL*) pathname NS_DESIGNATED_INITIALIZER;
 
 /// Temporary filerefs are deleted when deallocated
 @property (getter=isTemporary) BOOL temporary;

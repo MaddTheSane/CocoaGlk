@@ -26,6 +26,6 @@
 }
 
 /// Initialise this fileref with the specified data
-- (id) initWithData: (NSData*) fileData;
+- (instancetype) initWithData: (NSData*) fileData;
 
 @end

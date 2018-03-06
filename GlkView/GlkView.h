@@ -31,13 +31,19 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 ///
 @interface GlkView : NSView<GlkSession, GlkBuffer, GlkEventReceiver> {
 	// Windows
-	NSMutableDictionary* glkWindows;							/// Maps identifiers to windows
-	NSSavePanel* lastPanel;										/// Most recent save panel
-	GlkWindow* rootWindow;										/// The root window
-	GlkWindow* lastRootWindow;									/// The last root window
+	/// Maps identifiers to windows
+	NSMutableDictionary* glkWindows;
+	/// Most recent save panel
+	NSSavePanel* lastPanel;
+	/// The root window
+	GlkWindow* rootWindow;
+	/// The last root window
+	GlkWindow* lastRootWindow;
 	
-	BOOL windowsNeedLayout;										/// Used when flushing the buffer
-	BOOL flushing;												/// A buffer is currently flushing if YES
+	/// Used when flushing the buffer
+	BOOL windowsNeedLayout;
+	/// A buffer is currently flushing if YES
+	BOOL flushing;
 	
 	// Styles
 	/// Active preferences
@@ -131,11 +137,11 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 
 // Some shared settings
 /// Image displayed while there is no root window
-+ (NSImage*) defaultLogo;
+@property (class, readonly, retain) NSImage *defaultLogo;
 
 // Setting up for launch
 /// If cookie is non-nil, a client application must know the cookie to connect to this view. If nil, this view is first-come, first-served.
-- (void) setViewCookie: (NSString*) cookie;
+@property (nonatomic, copy) NSString *viewCookie;
 /// As above, but sets a random cookie. Not guaranteed to be cryptographically secure.
 - (void) setRandomViewCookie;
 
@@ -188,9 +194,9 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 - (void) addHistoryItem: (NSString*) inputLine
 		forWindowWithId: (glui32) windowId;
 /// Retrieves the previous history item
-- (NSString*) previousHistoryItem;
+@property (readonly) NSString *previousHistoryItem;
 /// Retrieves the next history item
-- (NSString*) nextHistoryItem;
+@property (readonly) NSString *nextHistoryItem;
 /// Causes the history position to move to the end
 - (void) resetHistoryPosition;
 
@@ -198,15 +204,13 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 /// Forces a layout operation if it's required
 - (void) performLayoutIfNecessary;
 /// Sets the scale factor of this view and any subview (resizing fonts, etc)
-- (void) setScaleFactor: (float) scale;
+@property (nonatomic) CGFloat scaleFactor;
 /// Sets up the border width for new pair windows
-- (void) setBorderWidth: (float) borderWidth;
+- (void) setBorderWidth: (CGFloat) borderWidth;
 
 // Dealing with [ MORE ] prompts
 /// YES if this CocoaGlk window should always page on more
-- (void) setAlwaysPageOnMore: (BOOL) alwaysPage;
-// Ditto
-- (BOOL) alwaysPageOnMore;
+@property BOOL alwaysPageOnMore;
 /// True if any windows are waiting on a [ MORE ] prompts
 - (BOOL) morePromptsPending;
 /// Causes all windows that require it to page forwards (returns NO if no windows actually needed paging)

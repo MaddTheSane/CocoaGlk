@@ -550,6 +550,8 @@
 
 // = Setting up for launch =
 
+@synthesize viewCookie;
+
 - (void) setViewCookie: (NSString*) cookie {
 	[viewCookie release];
 	viewCookie = [cookie copy];
@@ -767,7 +769,9 @@
 	}	
 }
 
-- (void) setScaleFactor: (float) scale {
+@synthesize scaleFactor;
+
+- (void) setScaleFactor: (CGFloat) scale {
 	scaleFactor = scale;
 	[rootWindow setScaleFactor: scale];
 
@@ -2431,13 +2435,7 @@ static BOOL pageAllFrom(GlkWindow* win) {
 	return pageAllFrom(rootWindow);
 }
 
-- (void) setAlwaysPageOnMore: (BOOL) alwaysPage {
-	alwaysPageOnMore = alwaysPage;
-}
-
-- (BOOL) alwaysPageOnMore {
-	return alwaysPageOnMore;
-}
+@synthesize alwaysPageOnMore;
 
 // Various UI events
 

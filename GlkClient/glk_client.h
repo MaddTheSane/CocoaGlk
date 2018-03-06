@@ -145,16 +145,23 @@ struct glk_window_struct {
 	/// The length of the input buffer
 	int     bufLen;
 
-	BOOL registered;					// Set to true if this window has registered buffers
-	gidispatch_rock_t bufRock;			// The rock for the input buffer (if non-NULL)
-	gidispatch_rock_t bufUcs4Rock;		// The rock for the UCS-4 input buffer (if non-NULL)
+	/// Set to true if this window has registered buffers
+	BOOL registered;
+	/// The rock for the input buffer (if non-NULL)
+	gidispatch_rock_t bufRock;
+	/// The rock for the UCS-4 input buffer (if non-NULL)
+	gidispatch_rock_t bufUcs4Rock;
 	
-	int loopIteration;					// Iteration through the event loop (used to guard against using old values for sizes, etc)
+	/// Iteration through the event loop (used to guard against using old values for sizes, etc)
+	int loopIteration;
 	
-	int width;							// Most recent width (only valid while loopIteration is up to date)
-	int height;							// Most recent heighht (only valid while loopIteration is up to date)
+	/// Most recent width (only valid while loopIteration is up to date)
+	int width;
+	/// Most recent heighht (only valid while loopIteration is up to date)
+	int height;
 	
-	glui32 background;					// The window background colour
+	/// The window background colour
+	glui32 background;
 };
 
 /// Streams
@@ -233,10 +240,10 @@ struct glk_fileref_struct {
 	/// The usage specified for this fileref when it was created
 	glui32 usage;
 	
-	// The actual fileref object
+	/// The actual fileref object
 	NSObject<GlkFileRef>* fileref;
 	
-	// Annoying gi_dispa rock
+	/// Annoying gi_dispa rock
 	gidispatch_rock_t giRock;
 	
 	/// The next fref in the list

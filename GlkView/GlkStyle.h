@@ -47,6 +47,9 @@ extern NSString* GlkStyleAttributeName;									// Styles store themselves in th
 /// 'Normal' style
 + (GlkStyle*) style;
 
+/// 'Normal' style
+- (instancetype)init;
+
 // The hints
 /// Measured in points
 @property (nonatomic) CGFloat indentation;

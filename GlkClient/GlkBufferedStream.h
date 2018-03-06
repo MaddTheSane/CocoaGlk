@@ -41,7 +41,7 @@
 
 // Initialisation
 
-- (id) initWithStream: (NSObject<GlkStream>*) sourceStream;
+- (instancetype) initWithStream: (NSObject<GlkStream>*) sourceStream;
 
 // Dealing with the buffer
 

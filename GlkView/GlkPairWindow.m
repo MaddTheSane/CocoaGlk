@@ -119,12 +119,14 @@
 	
 	needsLayout = YES;
 }
+@synthesize borderWidth;
 
 - (void) setInputBorder: (BOOL) newInputBorder {
 	inputBorder = newInputBorder;
 	
 	needsLayout = YES;
 }
+@synthesize inputBorder;
 
 // = Layout =
 

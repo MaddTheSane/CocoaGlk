@@ -249,11 +249,9 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 
 // = Misc preferences =
 
-- (float) scrollbackLength {
-	return scrollbackLength;
-}
+@synthesize scrollbackLength;
 
-- (void) setScrollbackLength: (float) length {
+- (void) setScrollbackLength: (CGFloat) length {
 	scrollbackLength = length;
 	[self preferencesHaveChanged];
 }

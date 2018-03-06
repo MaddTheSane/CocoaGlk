@@ -29,11 +29,11 @@
 }
 
 /// Constructs this object with the given memory
-- (id) initWithMemory: (unsigned char*) mem
-			   length: (NSInteger) length;
+- (instancetype) initWithMemory: (unsigned char*) mem
+						 length: (NSInteger) length;
 /// Constructs this object with the given memory and registers the memory
-- (id) initWithMemory: (unsigned char*) mem
-			   length: (NSInteger) length
-				 type: (char*) glkType;
+- (instancetype) initWithMemory: (unsigned char*) mem
+						 length: (NSInteger) length
+						   type: (char*) glkType;
 
 @end

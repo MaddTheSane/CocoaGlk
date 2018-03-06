@@ -24,7 +24,7 @@
 	BOOL bigEndian;
 }
 
-- (id) initWithStream: (NSObject<GlkStream>*) dataStream
-			bigEndian: (BOOL) bigEndian;
+- (instancetype) initWithStream: (NSObject<GlkStream>*) dataStream
+					  bigEndian: (BOOL) bigEndian;
 
 @end

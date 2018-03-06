@@ -14,10 +14,9 @@
 
 #import "GlkSessionProtocol.h"
 
-//
-// Generic Glk event class
-//
-
+///
+/// Generic Glk event class
+///
 @interface GlkEvent : NSObject<NSCoding, GlkEvent> {
 	// Event parameters
 	unsigned type;
@@ -30,26 +29,26 @@
 	NSString* lineInput;
 }
 
-- (id) initWithType: (unsigned) type
-   windowIdentifier: (unsigned) windowId;
-- (id) initWithType: (unsigned) type
-   windowIdentifier: (unsigned) windowId
-			   val1: (unsigned) val1;
-- (id) initWithType: (unsigned) type
-   windowIdentifier: (unsigned) windowId
-			   val1: (unsigned) val1
-			   val2: (unsigned) val2;
+- (instancetype) initWithType: (unsigned) type
+			 windowIdentifier: (unsigned) windowId;
+- (instancetype) initWithType: (unsigned) type
+			 windowIdentifier: (unsigned) windowId
+						 val1: (unsigned) val1;
+- (instancetype) initWithType: (unsigned) type
+			 windowIdentifier: (unsigned) windowId
+						 val1: (unsigned) val1
+						 val2: (unsigned) val2;
 
 @property (copy) NSString *lineInput;
 
 @end
 
-//
-// Protocol used to send events from objects like windows to a target
-//
-
+///
+/// Protocol used to send events from objects like windows to a target
+///
 @protocol GlkEventReceiver <NSObject>
 
-- (void) queueEvent: (GlkEvent*) evt;							// Request that an event be processed
+/// Request that an event be processed
+- (void) queueEvent: (GlkEvent*) evt;
 
 @end

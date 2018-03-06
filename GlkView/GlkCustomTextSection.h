@@ -15,8 +15,7 @@ extern NSString* GlkCustomSectionAttributeName;
 ///
 /// Object that can be set against control glyphs to indicate that they have some custom formatting and drawing.
 ///
-@interface GlkCustomTextSection : NSObject<GlkCustomLineSection> {
-}
+@interface GlkCustomTextSection : NSObject<GlkCustomLineSection>
 
 // Formatting
 

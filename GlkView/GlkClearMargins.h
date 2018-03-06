@@ -9,8 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import <GlkView/GlkCustomTextSection.h>
 
-@interface GlkClearMargins : GlkCustomTextSection {
-
-}
+@interface GlkClearMargins : GlkCustomTextSection
 
 @end

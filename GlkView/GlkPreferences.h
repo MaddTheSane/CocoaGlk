@@ -33,7 +33,7 @@ extern NSNotificationName GlkPreferencesHaveChangedNotification;
 	BOOL ligatures;
 	
 	// Misc bits
-	float scrollbackLength;
+	CGFloat scrollbackLength;
 	
 	/// YES if the last change is being notified
 	BOOL changeNotified;
@@ -48,7 +48,7 @@ extern NSNotificationName GlkPreferencesHaveChangedNotification;
 /// Used to load the preferences from a defaults file
 - (void) setPreferencesFromDefaults: (NSDictionary<NSString*,id>*) defaults;
 /// These preferences in a format suitable for the user defaults file
-- (NSDictionary<NSString*,id>*) preferenceDefaults;
+@property (readonly, copy) NSDictionary<NSString*,id> *preferenceDefaults;
 
 // The preferences themselves
 
@@ -85,10 +85,7 @@ extern NSNotificationName GlkPreferencesHaveChangedNotification;
 
 // Misc preferences
 /// The amount of scrollback to support in text windows (0-100)
-- (float) scrollbackLength;
-
-/// Sets the amount of scrollback to retain
-- (void) setScrollbackLength: (float) length;
+@property (nonatomic) CGFloat scrollbackLength;
 
 // Changes
 /// Number of changes that have occured on this preference object

@@ -78,7 +78,7 @@ void glk_tick(void) {
 	if ((ticker++) > 512) {
 		ticker = 0;
 		if ([cocoaglk_buffer hasGotABitOnTheLargeSide]) {
-			cocoaglk_loopIteration = [cocoaglk_session synchronisationCount];
+			cocoaglk_loopIteration = (int)[cocoaglk_session synchronisationCount];
 
 			cocoaglk_flushbuffer("512 tick large buffer flush");
 		}

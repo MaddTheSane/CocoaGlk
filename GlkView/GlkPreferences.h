@@ -8,14 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
-//
-// General preferences used for a Glk view
-//
 
-extern NSNotificationName GlkPreferencesHaveChangedNotification;	// Notification sent whenever the preferences are changed (not necessarily sent immediately)
+/// Notification sent whenever the preferences are changed (not necessarily sent immediately)
+extern NSNotificationName GlkPreferencesHaveChangedNotification;
 
 @class GlkStyle;
 
+///
+/// General preferences used for a Glk view
+///
 @interface GlkPreferences : NSObject<NSCopying> {
 	// The fonts
 	NSFont* proportionalFont;
@@ -34,46 +35,64 @@ extern NSNotificationName GlkPreferencesHaveChangedNotification;	// Notification
 	// Misc bits
 	float scrollbackLength;
 	
-	BOOL changeNotified;											// YES if the last change is being notified
-	int  changeCount;												// Number of changes
+	/// YES if the last change is being notified
+	BOOL changeNotified;
+	/// Number of changes
+	int  changeCount;
 }
 
 //! The shared preferences object (these are automagically stored in the user defaults)
 @property (class, readonly, retain) GlkPreferences *sharedPreferences;
 
 // Preferences and the user defaults
-- (void) setPreferencesFromDefaults: (NSDictionary<NSString*,id>*) defaults;// Used to load the preferences from a defaults file
-- (NSDictionary<NSString*,id>*) preferenceDefaults;					// These preferences in a format suitable for the user defaults file
+/// Used to load the preferences from a defaults file
+- (void) setPreferencesFromDefaults: (NSDictionary<NSString*,id>*) defaults;
+/// These preferences in a format suitable for the user defaults file
+- (NSDictionary<NSString*,id>*) preferenceDefaults;
 
 // The preferences themselves
 
 // Font preferences
-@property (nonatomic, copy) NSFont *proportionalFont;				// The font used for proportional text
-@property (nonatomic, copy) NSFont *fixedFont;						// The font used for fixed-pitch text
+/// The font used for proportional text
+@property (nonatomic, copy) NSFont *proportionalFont;
+/// The font used for fixed-pitch text
+@property (nonatomic, copy) NSFont *fixedFont;
 
-- (void) setFontSize: (CGFloat) fontSize;							// Replaces the current fonts with ones of the given size
+/// Replaces the current fonts with ones of the given size
+- (void) setFontSize: (CGFloat) fontSize;
 
 // Typography preferences
-@property (nonatomic) CGFloat textMargin;							// The padding to use in text windows
-@property (nonatomic) BOOL useScreenFonts;							// Whether or not to use screen fonts
-@property (nonatomic) BOOL useHyphenation;							// Whether or not to use hyphenation
-@property (nonatomic) BOOL useLigatures;							// Whether or not to display ligatures
-@property (nonatomic) BOOL useKerning;								// Whether or not to use kerning
+/// The padding to use in text windows
+@property (nonatomic) CGFloat textMargin;
+/// Whether or not to use screen fonts
+@property (nonatomic) BOOL useScreenFonts;
+/// Whether or not to use hyphenation
+@property (nonatomic) BOOL useHyphenation;
+/// Whether or not to display ligatures
+@property (nonatomic) BOOL useLigatures;
+/// Whether or not to use kerning
+@property (nonatomic) BOOL useKerning;
 
 // Style preferences
-- (void) setStyles: (NSDictionary<NSNumber*,GlkStyle*>*) styles;	// Dictionary mapping NSNumbers with Glk styles to GlkStyle objects
-- (void) setStyle: (GlkStyle*) style								// Sets a style for a specific Glk hint
+/// Dictionary mapping NSNumbers with Glk styles to GlkStyle objects
+- (void) setStyles: (NSDictionary<NSNumber*,GlkStyle*>*) styles;
+/// Sets a style for a specific Glk hint
+- (void) setStyle: (GlkStyle*) style
 		  forHint: (unsigned) glkHint;
 
-@property (copy) NSDictionary<NSNumber*,GlkStyle*> *styles;			// The style dictionary
+/// The style dictionary
+@property (copy) NSDictionary<NSNumber*,GlkStyle*> *styles;
 
 // Misc preferences
-- (float) scrollbackLength;											// The amount of scrollback to support in text windows (0-100)
+/// The amount of scrollback to support in text windows (0-100)
+- (float) scrollbackLength;
 
-- (void) setScrollbackLength: (float) length;						// Sets the amount of scrollback to retain
+/// Sets the amount of scrollback to retain
+- (void) setScrollbackLength: (float) length;
 
 // Changes
-- (int) changeCount;												// Number of changes that have occured on this preference object
+/// Number of changes that have occured on this preference object
+- (int) changeCount;
 
 @end
 

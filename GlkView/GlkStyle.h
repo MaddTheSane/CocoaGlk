@@ -33,26 +33,41 @@ extern NSString* GlkStyleAttributeName;									// Styles store themselves in th
 	BOOL reversed;
 	
 	// Caching the attributes
-	NSInteger prefChangeCount;											// Change count for the preferences last time we cached the style dictionary
-	GlkPreferences*	lastPreferences;									// The last preference object this style was applied to
-	CGFloat lastScaleFactor;											// The scale factor the attributes were created at
-	NSDictionary* lastAttributes;										// The attributes generated last time we needed to
+	/// Change count for the preferences last time we cached the style dictionary
+	NSInteger prefChangeCount;
+	/// The last preference object this style was applied to
+	GlkPreferences*	lastPreferences;
+	/// The scale factor the attributes were created at
+	CGFloat lastScaleFactor;
+	/// The attributes generated last time we needed to
+	NSDictionary* lastAttributes;
 }
 
 // Creating a style
-+ (GlkStyle*) style;													//!< 'Normal' style
+/// 'Normal' style
++ (GlkStyle*) style;
 
 // The hints
-@property (nonatomic) CGFloat indentation;								//!< Measured in points
-@property (nonatomic) CGFloat paraIndentation;							//!< Measured in points
-@property (nonatomic) NSTextAlignment justification;					//!< Glk doesn't allow us to support 'Natural' alignment
-@property (nonatomic) CGFloat size;										//!< Relative, in points
-@property (nonatomic) int weight;										//!< -1 = lighter, 1 = bolder
-@property (nonatomic) BOOL oblique;										//!< \c YES if an italic/oblique version of the font should be used (italics are used for preference)
-@property (nonatomic) BOOL proportional;								//!< \c NO if fixed-pitch
-@property (nonatomic, retain) NSColor* textColour;						//!< Foreground text colour
-@property (nonatomic, retain) NSColor* backColour;						//!< Background text colour
-@property (nonatomic) BOOL reversed;									//!< \c YES If text/back are reversed
+/// Measured in points
+@property (nonatomic) CGFloat indentation;
+/// Measured in points
+@property (nonatomic) CGFloat paraIndentation;
+/// Glk doesn't allow us to support 'Natural' alignment
+@property (nonatomic) NSTextAlignment justification;
+/// Relative, in points
+@property (nonatomic) CGFloat size;
+/// -1 = lighter, 1 = bolder
+@property (nonatomic) int weight;
+/// \c YES if an italic/oblique version of the font should be used (italics are used for preference)
+@property (nonatomic) BOOL oblique;
+/// \c NO if fixed-pitch
+@property (nonatomic) BOOL proportional;
+/// Foreground text colour
+@property (nonatomic, retain) NSColor* textColour;
+/// Background text colour
+@property (nonatomic, retain) NSColor* backColour;
+/// \c YES If text/back are reversed
+@property (nonatomic) BOOL reversed;
 
 // Dealing with glk style hints
 - (void) setHint: (glui32) hint
@@ -61,12 +76,15 @@ extern NSString* GlkStyleAttributeName;									// Styles store themselves in th
 	toMatchStyle: (GlkStyle*) style;
 
 // Utility functions
-- (BOOL) canBeDistinguishedFrom: (GlkStyle*) style;						//!< Returns \c YES if this style will look different to the given style
+/// Returns \c YES if this style will look different to the given style
+- (BOOL) canBeDistinguishedFrom: (GlkStyle*) style;
 
 // Turning styles into dictionaries for attributed strings
+/// Attributes suitable to use with an attributed string while displaying
 - (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs
-								scaleFactor: (CGFloat) scaleFactor;		//!< Attributes suitable to use with an attributed string while displaying
-- (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs;	//!< Attributes suitable to use with an attributed string while displaying
+								scaleFactor: (CGFloat) scaleFactor;
+/// Attributes suitable to use with an attributed string while displaying
+- (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs;
 
 @end
 

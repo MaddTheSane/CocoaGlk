@@ -1054,12 +1054,12 @@
 				55C6BB38204DED96001AE7E5 /* AppDelegate.swift */,
 				55C6BB62204DF016001AE7E5 /* SwiftWindowController.swift */,
 				55C6BB3A204DED96001AE7E5 /* Assets.xcassets */,
-				55C6BB3C204DED96001AE7E5 /* MainMenu.xib */,
-				55C6BB66204DF03A001AE7E5 /* CocoaGlk.xib */,
-				55C6BB3F204DED96001AE7E5 /* Info.plist */,
 				55C6BB40204DED96001AE7E5 /* SwiftGlk.entitlements */,
 				55C6BB5B204DEFA2001AE7E5 /* Credits.rtfd */,
+				55C6BB3F204DED96001AE7E5 /* Info.plist */,
 				55C6BB6D204DF65F001AE7E5 /* Localizable.strings */,
+				55C6BB3C204DED96001AE7E5 /* MainMenu.xib */,
+				55C6BB66204DF03A001AE7E5 /* CocoaGlk.xib */,
 			);
 			path = SwiftGlk;
 			sourceTree = "<group>";

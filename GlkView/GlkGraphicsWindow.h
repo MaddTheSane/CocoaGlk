@@ -11,15 +11,20 @@
 #import <GlkView/GlkWindow.h>
 
 @interface GlkGraphicsWindow : GlkWindow {
-	NSImage* windowImage;							// The image buffer for this window
-	NSColor* backgroundColour;						// The background colour for this window
+	/// The image buffer for this window
+	NSImage* windowImage;
+	/// The background colour for this window
+	NSColor* backgroundColour;
 }
 
 // Drawing in the graphics window
-- (void) fillRect: (NSRect) rect					// Fills in an area in a solid colour
+/// Fills in an area in a solid colour
+- (void) fillRect: (NSRect) rect
 	   withColour: (NSColor*) col;
-- (void) setBackgroundColour: (NSColor*) col;		// Sets the background colour of the window to the specified colour
-- (void) drawImage: (NSImage*) img					// Draws an image, scaled to the given rectangle
+/// Sets the background colour of the window to the specified colour
+- (void) setBackgroundColour: (NSColor*) col;
+/// Draws an image, scaled to the given rectangle
+- (void) drawImage: (NSImage*) img
 			inRect: (NSRect) imgRect;
 
 @end

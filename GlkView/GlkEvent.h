@@ -26,7 +26,8 @@
 	unsigned val2;
 	
 	// 'Out-of-band' data
-	NSString* lineInput;							// When a line event is requested, this contains the string that eventually ends up in the buffer
+	/// When a line event is requested, this contains the string that eventually ends up in the buffer
+	NSString* lineInput;
 }
 
 - (id) initWithType: (unsigned) type

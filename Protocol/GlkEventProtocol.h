@@ -14,17 +14,22 @@
 
 #include "glk.h"
 
-//
-// Protocol implemented by any class claiming to be a Glk event
-//
-
+///
+/// Protocol implemented by any class claiming to be a Glk event
+///
+NS_SWIFT_NAME(GlkEventProtocol)
 @protocol GlkEvent <NSObject>
 
-@property (readonly) glui32 type;		//!< Type of event
-@property (readonly) unsigned windowIdentifier;	//!< Needs to be converted to a winid_t in the client
-@property (readonly) glui32 val1;		//!< Event data
-@property (readonly) glui32 val2;		//!< More event data
+/// Type of event
+@property (readonly) glui32 type;
+/// Needs to be converted to a winid_t in the client
+@property (readonly) unsigned windowIdentifier;
+/// Event data
+@property (readonly) glui32 val1;
+/// More event data
+@property (readonly) glui32 val2;
 
-@property (readonly, copy) NSString *lineInput;				//!< Line data for a line input event
+/// Line data for a line input event
+@property (readonly, copy) NSString *lineInput;
 
 @end

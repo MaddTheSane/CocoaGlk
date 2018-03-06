@@ -12,12 +12,12 @@
 # import <Cocoa/Cocoa.h>
 #endif
 
-//
-// When executing glk_select() and co, we need this to get notifications of when events arrive
-//
-
+///
+/// When executing \c glk_select() and co, we need this to get notifications of when events arrive
+///
 @protocol GlkEventListener <NSObject>
 
-- (oneway void) eventReady: (int) syncCount;			// Called by the session object whenever an event arrives
+/// Called by the session object whenever an event arrives
+- (oneway void) eventReady: (int) syncCount;
 
 @end

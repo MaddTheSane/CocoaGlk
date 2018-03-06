@@ -14,16 +14,22 @@
 ///
 @interface GlkTextView : NSTextView<GlkCustomTextLayout> {
 	// Character input
-	BOOL receivingCharacters;						// Set to true if we're waiting for single-character input
+	/// Set to true if we're waiting for single-character input
+	BOOL receivingCharacters;
 	
 	// Custom glyphs (ordered)
-	NSMutableArray* customGlyphs;					// Ordered list of custom inline glyphs (images, mostly)
-	NSMutableArray* marginGlyphs;					// Ordered list of custom margin images
-	NSInteger firstUnlaidMarginGlyph;				// The first unlaid margin glyph (index into marginGlyphs)
+	/// Ordered list of custom inline glyphs (images, mostly)
+	NSMutableArray* customGlyphs;
+	/// Ordered list of custom margin images
+	NSMutableArray* marginGlyphs;
+	/// The first unlaid margin glyph (index into marginGlyphs)
+	NSInteger firstUnlaidMarginGlyph;
 }
 
 // Character input
-- (void) requestCharacterInput;						//!< Any characters sent to this window that can be handled by Glk will be passed to the superview
-- (void) cancelCharacterInput;						//!< Cancels the previous
+/// Any characters sent to this window that can be handled by Glk will be passed to the superview
+- (void) requestCharacterInput;
+/// Cancels the previous
+- (void) cancelCharacterInput;
 
 @end

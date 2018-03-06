@@ -512,9 +512,7 @@
 	}
 }
 
-- (int) synchronisationCount {
-	return syncCount;
-}
+@synthesize synchronisationCount=syncCount;
 
 - (void) requestClientSync {
 	syncCount++;

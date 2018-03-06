@@ -12,12 +12,6 @@
 # import <Cocoa/Cocoa.h>
 #endif
 
-//
-// Streams can also be accessed through the buffer (and usually are for writing)
-//
-// Our streams use unichars and unicode strings rather than the Latin-1 specified by Glk.
-// This amounts to the same things overall, but makes it easy to update later.
-//
 
 typedef NS_ENUM(int, GlkSeekMode) {
 	GlkSeekStart,
@@ -29,6 +23,12 @@ typedef NS_ENUM(int, GlkSeekMode) {
 
 NS_ASSUME_NONNULL_BEGIN
 
+///
+/// Streams can also be accessed through the buffer (and usually are for writing)
+///
+/// Our streams use unichars and unicode strings rather than the Latin-1 specified by Glk.
+/// This amounts to the same things overall, but makes it easy to update later.
+///
 @protocol GlkStream <NSObject>
 
 // Control

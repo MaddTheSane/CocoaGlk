@@ -28,7 +28,7 @@
 #import "GlkBuffer.h"
 #import "GlkImageSourceProtocol.h"
 
-// Report an undefined function
+/// Report an undefined function
 #define UndefinedFunction() fprintf(stderr, "CocoaGlk: " __FILE__ " %i: Function not defined\n", __LINE__);
 
 // Log simple debug messages
@@ -40,31 +40,47 @@
 
 // = Functions =
 
-extern BOOL cocoaglk_winid_sane(winid_t win);			// True if winid_t is probably a real window identifier
-extern winid_t cocoaglk_winid_get(unsigned identifier);	// Turn an internal window identifier into a real winid
+/// True if winid_t is probably a real window identifier
+extern BOOL cocoaglk_winid_sane(winid_t win);
+/// Turn an internal window identifier into a real winid
+extern winid_t cocoaglk_winid_get(unsigned identifier);
 
-extern BOOL cocoaglk_strid_sane(strid_t stream);		// YES if strid_t is probably a real stream identifier, NO otherwise
-extern strid_t cocoaglk_stream(void);					// Creates a non-functioning, empty stream
+/// \c YES if \c strid_t is probably a real stream identifier, \c NO otherwise
+extern BOOL cocoaglk_strid_sane(strid_t stream);
+/// Creates a non-functioning, empty stream
+extern strid_t cocoaglk_stream(void);
 
-extern BOOL cocoaglk_frefid_sane(frefid_t ref);			// YES if frefid_t is probably a real fref
+/// \c YES if \c frefid_t is probably a real fref
+extern BOOL cocoaglk_frefid_sane(frefid_t ref);
 
-extern BOOL cocoaglk_strid_write(strid_t str);			// YES if the stream is writable
-extern BOOL cocoaglk_strid_read(strid_t str);			// YES if the stream is readable
-extern void cocoaglk_loadstream(strid_t stream);		// Ensures that the stream has a valid GlkStream object available
-extern void cocoaglk_flushstream(strid_t stream, const char* reason);		// Flushes the buffer for a stream
-extern void cocoaglk_maybeflushstream(strid_t stream, const char* reason);	// Flushes the buffer for a stream, but only if necessary
+/// \c YES if the stream is writable
+extern BOOL cocoaglk_strid_write(strid_t str);
+/// \c YES if the stream is readable
+extern BOOL cocoaglk_strid_read(strid_t str);
+/// Ensures that the stream has a valid GlkStream object available
+extern void cocoaglk_loadstream(strid_t stream);
+/// Flushes the buffer for a stream
+extern void cocoaglk_flushstream(strid_t stream, const char* reason);
+/// Flushes the buffer for a stream, but only if necessary
+extern void cocoaglk_maybeflushstream(strid_t stream, const char* reason);
 
-extern void cocoaglk_unregister_line_buffers(winid_t win);	// Unregisters any line input buffers associated with the window
+/// Unregisters any line input buffers associated with the window
+extern void cocoaglk_unregister_line_buffers(winid_t win);
 
 // = Variables =
 
-extern NSObject<GlkSession>*	cocoaglk_session;		// The running session
-extern NSObject<GlkHub>*		cocoaglk_hub;			// The hub session dispatcher object
+/// The running session
+extern NSObject<GlkSession>*	cocoaglk_session;
+/// The hub session dispatcher object
+extern NSObject<GlkHub>*		cocoaglk_hub;
 
-extern GlkBuffer*				cocoaglk_buffer;		// The shared buffer object
-extern NSAutoreleasePool*		cocoaglk_pool;			// The interpreter thread autorelease pool
+/// The shared buffer object
+extern GlkBuffer*				cocoaglk_buffer;
+/// The interpreter thread autorelease pool
+extern NSAutoreleasePool*		cocoaglk_pool;
 
-extern strid_t					cocoaglk_firststream;	// The 'first stream' (typically containing the game to run)
+/// The 'first stream' (typically containing the game to run)
+extern strid_t					cocoaglk_firststream;
 
 extern gidispatch_rock_t (*cocoaglk_register)(void *obj, glui32 objclass);
 extern void (*cocoaglk_unregister)(void *obj, glui32 objclass, gidispatch_rock_t objrock);
@@ -82,36 +98,52 @@ extern void (*cocoaglk_unregister_memory)(void *array, glui32 len, char *typecod
 
 // = The structures =
 
-// Windows
-//
-// We cache the window details locally so we can avoid going to the server every time (maximising the use of the buffer)
-
-#define GlkWindowKey 'WIND'
+/// Windows
+///
+/// We cache the window details locally so we can avoid going to the server every time (maximising the use of the buffer)
 struct glk_window_struct {
-	unsigned int key;					// Used while sanity checking
+#define GlkWindowKey 'WIND'
+	/// Used while sanity checking
+	unsigned int key;
 	
-	unsigned int identifier;			// The unique window identifier (used to identify this window to the server and in the buffer)
-	glui32 rock;						// The window rock
+	/// The unique window identifier (used to identify this window to the server and in the buffer)
+	unsigned int identifier;
+	/// The window rock
+	glui32 rock;
 	
-	strid_t stream;						// The stream for this window
+	/// The stream for this window
+	strid_t stream;
 	
-	glui32 method;						// The method by which this window is split
-	glui32 size;						// The size of this window
-	glui32 wintype;						// The type of this window
+	/// The method by which this window is split
+	glui32 method;
+	/// The size of this window
+	glui32 size;
+	/// The type of this window
+	glui32 wintype;
 	
-	winid_t parent;						// The parent for this window (NULL if this is the root window)
-	winid_t keyId;						// The 'key' window (if this is a pair window)
-	winid_t left;						// The 'left' child window (if this is a pair window)
-	winid_t right;						// The 'right' child window (if this is a pair window)
+	/// The parent for this window (NULL if this is the root window)
+	winid_t parent;
+	/// The 'key' window (if this is a pair window)
+	winid_t keyId;
+	/// The 'left' child window (if this is a pair window)
+	winid_t left;
+	/// The 'right' child window (if this is a pair window)
+	winid_t right;
 	
-	BOOL closing;						// YES only if the window is closing
+	/// YES only if the window is closing
+	BOOL closing;
 	
-	gidispatch_rock_t giRock;			// Annoying gi_dispa rock
+	/// Annoying \c gi_dispa rock
+	gidispatch_rock_t giRock;
 	
-	BOOL    ucs4;						// True if the last input buffer request was for UCS-4 data
-	char*   inputBuf;					// The input buffer for line input events
-	glui32* inputBufUcs4;				// The input buffer for UCS-4 line input events
-	int     bufLen;						// The length of the input buffer
+	/// True if the last input buffer request was for UCS-4 data
+	BOOL    ucs4;
+	/// The input buffer for line input events
+	char*   inputBuf;
+	/// The input buffer for UCS-4 line input events
+	glui32* inputBufUcs4;
+	/// The length of the input buffer
+	int     bufLen;
 
 	BOOL registered;					// Set to true if this window has registered buffers
 	gidispatch_rock_t bufRock;			// The rock for the input buffer (if non-NULL)
@@ -125,75 +157,97 @@ struct glk_window_struct {
 	glui32 background;					// The window background colour
 };
 
-// Streams
-//
-// Streams are a pain in the neck, as we have server-side streams (windows and sometimes files) and client-side streams
-// (memory streams and sometimes files again).
-//
-// Streams may have their own buffer, use the shared buffer or be unbuffered. Streams that are on the server should
-// pretty much always be buffered, as communications are often slow.
-//
-// Window streams might not immediately have a GlkStream object available (as this won't get created until the window
-// is actually created later on).
-
+/// Streams
+///
+/// Streams are a pain in the neck, as we have server-side streams (windows and sometimes files) and client-side streams
+/// (memory streams and sometimes files again).
+///
+/// Streams may have their own buffer, use the shared buffer or be unbuffered. Streams that are on the server should
+/// pretty much always be buffered, as communications are often slow.
+///
+/// Window streams might not immediately have a GlkStream object available (as this won't get created until the window
+/// is actually created later on).
+struct glk_stream_struct {
 #define GlkStreamKey 'STRM'
 #define GlkStreamNullIdentifier 0xffffffff
-struct glk_stream_struct {
-	unsigned int key;					// Used while sanity checking
+	/// Used while sanity checking
+	unsigned int key;
 	
-	unsigned int identifier;			// The unique stream identifier (used to identify this stream in the buffer)
-	glui32 rock;						// The stream rock
+	/// The unique stream identifier (used to identify this stream in the buffer)
+	unsigned int identifier;
+	/// The stream rock
+	glui32 rock;
 	
-	glui32 fmode;						// The mode to open the stream in
+	/// The mode to open the stream in
+	glui32 fmode;
 	
-	BOOL buffered;						// Whether or not to buffer output to this stream
-	BOOL lazyFlush;						// Whether or not to flush this stream's buffer 'lazily'
-	GlkBuffer* streamBuffer;			// The stream buffer to use (nil to use the standard buffer)
-	int bufferedAmount;					// Amount of stuff buffered (flushes when this gets too large)
+	/// Whether or not to buffer output to this stream
+	BOOL buffered;
+	/// Whether or not to flush this stream's buffer 'lazily'
+	BOOL lazyFlush;
+	/// The stream buffer to use (nil to use the standard buffer)
+	GlkBuffer* streamBuffer;
+	/// Amount of stuff buffered (flushes when this gets too large)
+	int bufferedAmount;
 	
-	NSObject<GlkStream>* stream;		// The actual stream object
-	unsigned written;					// The amount written to the stream object (not necessarily accurate, depending on how the stream object really responds to writes)
-	unsigned read;						// The amount read from the stream object
+	/// The actual stream object
+	NSObject<GlkStream>* stream;
+	/// The amount written to the stream object (not necessarily accurate, depending on how the stream object really responds to writes)
+	unsigned written;
+	/// The amount read from the stream object
+	unsigned read;
 	
-	BOOL windowStream;					// YES if this stream belongs to a window
-	unsigned int windowIdentifier;		// The identifier of the window this stream belongs to
-		
-	glui32 style;						// The active style for this stream
+	/// YES if this stream belongs to a window
+	BOOL windowStream;
+	/// The identifier of the window this stream belongs to
+	unsigned int windowIdentifier;
 	
-	strid_t echo;						// The echo stream for this stream
-	NSMutableArray* echoesTo;			// The list of streams that this stream is echoing to
+	/// The active style for this stream
+	glui32 style;
 	
-	gidispatch_rock_t giRock;			// Annoying gi_dispa rock
+	/// The echo stream for this stream
+	strid_t echo;
+	/// The list of streams that this stream is echoing to
+	NSMutableArray* echoesTo;
 	
-	strid_t next;						// The next stream in the list
-	strid_t last;						// The previous stream in the list
+	/// Annoying gi_dispa rock
+	gidispatch_rock_t giRock;
+	
+	/// The next stream in the list
+	strid_t next;
+	/// The previous stream in the list
+	strid_t last;
 };
 
-// Filerefs
-//
-// The user interface task is the ultimate arbiter of what a fileref can and cannot be.
-// 'Named' filerefs are probably a bad idea in general, and 'temp' filerefs are just annoying.
-
-#define GlkFileRefKey 'FIRF'
-
+/// Filerefs
+///
+/// The user interface task is the ultimate arbiter of what a fileref can and cannot be.
+/// 'Named' filerefs are probably a bad idea in general, and 'temp' filerefs are just annoying.
 struct glk_fileref_struct {
-	unsigned int key;					// Used while sanity fleeble blurgle blorp
+#define GlkFileRefKey 'FIRF'
+	/// Used while sanity fleeble blurgle blorp
+	unsigned int key;
 	
-	glui32 rock;						// The fileref rock
-	glui32 usage;						// The usage specified for this fileref when it was created
+	/// The fileref rock
+	glui32 rock;
+	/// The usage specified for this fileref when it was created
+	glui32 usage;
 	
-	NSObject<GlkFileRef>* fileref;		// The actual fileref object
+	// The actual fileref object
+	NSObject<GlkFileRef>* fileref;
 	
-	gidispatch_rock_t giRock;			// Annoying gi_dispa rock
+	// Annoying gi_dispa rock
+	gidispatch_rock_t giRock;
 	
-	frefid_t next;						// The next fref in the list
-	frefid_t last;						// The last fref in the list
+	/// The next fref in the list
+	frefid_t next;
+	/// The last fref in the list
+	frefid_t last;
 };
 
-// Images
-//
-// This class is used for passing Blorb image information to the server process
-
+/// Images
+///
+/// This class is used for passing Blorb image information to the server process
 @interface GlkBlorbImageSource : NSObject<GlkImageSource> {
 }
 

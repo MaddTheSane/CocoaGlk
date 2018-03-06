@@ -41,24 +41,37 @@
 	NSTimer* moreAnimationTimer;						// Timer for the [ MORE ] animation
 }
 
-- (void) setupTextview;									// Initialise the text view and typesetters
+/// Initialise the text view and typesetters
+- (void) setupTextview;
 
-- (void) addImage: (NSImage*) image						// Adds an image at the end of this view
+/// Adds an image at the end of this view
+- (void) addImage: (NSImage*) image
 	withAlignment: (unsigned) alignment
 			 size: (NSSize) sz;
-- (void) addFlowBreak;									// Adds a flow break at the end of this view
+/// Adds a flow break at the end of this view
+- (void) addFlowBreak;
 
-- (void) makeTextEditable;								// Requests that the text buffer view be made editable (ie, ready for command input), takes account of buffering issues
-- (void) makeTextNonEditable;							// Requests that the text buffer view be made non-editable, takes account of buffering issues
+/// Requests that the text buffer view be made editable (ie, ready for command input), takes account of buffering issues
+- (void) makeTextEditable;
+/// Requests that the text buffer view be made non-editable, takes account of buffering issues
+- (void) makeTextNonEditable;
 
-- (void) setUsesMorePrompt: (BOOL) useMorePrompt;		// Sets whether or not a [ MORE ] prompt should be displayed for this window
-- (void) setInfiniteSize;								// Sets this window to be infinite size
-- (CGFloat) currentMoreState;							// The current [ MORE ] animation state (0 = hidden, 1 = shown)
-- (void) displayMorePromptIfNecessary;					// A request to display the [ MORE ] prompt if necessary
-- (void) setMoreShown: (BOOL) shown;					// Sets whether or not the [ MORE ] prompt is shown
-- (void) resetMorePrompt: (NSInteger) pos				//!< Resets the [ MORE ] prompt position from the specified character position
+/// Sets whether or not a [ MORE ] prompt should be displayed for this window
+- (void) setUsesMorePrompt: (BOOL) useMorePrompt;
+/// Sets this window to be infinite size
+- (void) setInfiniteSize;
+/// The current [ MORE ] animation state (0 = hidden, 1 = shown)
+- (CGFloat) currentMoreState;
+/// A request to display the [ MORE ] prompt if necessary
+- (void) displayMorePromptIfNecessary;
+/// Sets whether or not the [ MORE ] prompt is shown
+- (void) setMoreShown: (BOOL) shown;
+/// Resets the [ MORE ] prompt position from the specified character position
+- (void) resetMorePrompt: (NSInteger) pos
 				  paging: (BOOL) paging;
-- (void) resetMorePrompt;								// Resets the [ MORE ] prompt position from the current input position
-- (void) scrollToEnd;									// Scroll to the end of the text view
+/// Resets the [ MORE ] prompt position from the current input position
+- (void) resetMorePrompt;
+/// Scroll to the end of the text view
+- (void) scrollToEnd;
 
 @end

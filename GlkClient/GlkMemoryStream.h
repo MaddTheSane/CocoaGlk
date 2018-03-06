@@ -16,9 +16,9 @@
 #include "glk.h"
 #include "gi_dispa.h"
 
-//
-// A stream that sends it output to memory
-//
+///
+/// A stream that sends it output to memory
+///
 @interface GlkMemoryStream : NSObject<GlkStream> {
 	unsigned char* memory;
 	char* type;
@@ -28,9 +28,11 @@
 	gidispatch_rock_t rock;
 }
 
-- (id) initWithMemory: (unsigned char*) mem					// Constructs this object with the given memory
+/// Constructs this object with the given memory
+- (id) initWithMemory: (unsigned char*) mem
 			   length: (NSInteger) length;
-- (id) initWithMemory: (unsigned char*) mem					// Constructs this object with the given memory and registers the memory
+/// Constructs this object with the given memory and registers the memory
+- (id) initWithMemory: (unsigned char*) mem
 			   length: (NSInteger) length
 				 type: (char*) glkType;
 

@@ -25,6 +25,7 @@
 	BOOL autoflush;
 }
 
-- (id) initWithData: (NSData*) fileData;					// Initialise this fileref with the specified data
+/// Initialise this fileref with the specified data
+- (id) initWithData: (NSData*) fileData;
 
 @end

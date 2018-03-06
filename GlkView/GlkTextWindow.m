@@ -438,6 +438,10 @@
 }
 
 - (void)textStorageDidProcessEditing:(NSNotification *)aNotification {
+	[self textStorage:[textView textStorage] didProcessEditing:0 range:NSMakeRange(0, 0) changeInLength:0];
+}
+
+- (void)textStorage:(NSTextStorage *)textStorage didProcessEditing:(NSTextStorageEditActions)editedMask range:(NSRange)editedRange changeInLength:(NSInteger)delta {
 	if (!lineInput) {
 		return;
 	}
@@ -448,7 +452,7 @@
 
 	// Check for any newlines in the input, and generate an event if we find one
 	// We only process one line at a time
-	NSString* string = [[textView textStorage] string];
+	NSString* string = [textStorage string];
 	NSInteger pos;
 	
 	for (pos = inputPos; pos < [string length]; pos++) {

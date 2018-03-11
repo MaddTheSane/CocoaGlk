@@ -1820,6 +1820,7 @@
 					"$(inherited)",
 				);
 				INSTALL_PATH = /usr/local/bin;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../../Frameworks @executable_path/../../../../Frameworks";
 				PRODUCT_NAME = git;
 			};
 			name = Debug;
@@ -1836,6 +1837,7 @@
 					"$(inherited)",
 				);
 				INSTALL_PATH = /usr/local/bin;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../../Frameworks @executable_path/../../../../Frameworks";
 				PRODUCT_NAME = git;
 			};
 			name = Release;
@@ -1850,6 +1852,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -1858,7 +1861,7 @@
 				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "GlkView-Info.plist";
-				INSTALL_PATH = "@executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
@@ -1883,12 +1886,13 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "GlkView-Info.plist";
-				INSTALL_PATH = "@executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
@@ -1912,6 +1916,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -1919,7 +1924,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "GlkClient-Info.plist";
-				INSTALL_PATH = "@executable_path/../../../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
@@ -1949,11 +1954,12 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "GlkClient-Info.plist";
-				INSTALL_PATH = "@executable_path/../../../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
@@ -2044,6 +2050,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INSTALL_PATH = /usr/local/bin;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../../Frameworks @executable_path/../../../../Frameworks";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2071,6 +2078,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INSTALL_PATH = /usr/local/bin;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../../Frameworks @executable_path/../../../../Frameworks";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2103,6 +2111,7 @@
 				GCC_PREFIX_HEADER = CocoaGlk_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk;
 				PRODUCT_NAME = CocoaGlk;
 				WRAPPER_EXTENSION = app;
@@ -2120,6 +2129,7 @@
 				GCC_PREFIX_HEADER = CocoaGlk_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk;
 				PRODUCT_NAME = CocoaGlk;
 				WRAPPER_EXTENSION = app;
@@ -2274,6 +2284,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -2281,7 +2292,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkSound-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.GlkSound;
@@ -2300,12 +2311,13 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkSound-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.GlkSound;

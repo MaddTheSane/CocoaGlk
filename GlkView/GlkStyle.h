@@ -70,7 +70,7 @@ extern NSString* GlkStyleAttributeName;									// Styles store themselves in th
 /// Background text colour
 @property (nonatomic, retain) NSColor* backColour;
 /// \c YES If text/back are reversed
-@property (nonatomic) BOOL reversed;
+@property (nonatomic, getter=isReversed) BOOL reversed;
 
 // Dealing with glk style hints
 - (void) setHint: (glui32) hint

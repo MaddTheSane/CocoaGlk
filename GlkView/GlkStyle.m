@@ -382,7 +382,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 			break;
 			
 		case stylehint_ReverseColor:
-			[self setReversed: [defaultStyle reversed]];
+			[self setReversed: defaultStyle.reversed];
 			break;
 			
 		case stylehint_Size:

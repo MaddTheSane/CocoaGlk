@@ -110,6 +110,14 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 @implementation GlkTypesetter
 
+- (instancetype)init
+{
+	if (self = [super init]) {
+		sections = [[NSMutableArray alloc] init];
+	}
+	return self;
+}
+
 - (void) dealloc {
 	// Release any attributes that we still have cached
 	NSDictionary* lastAttribute = nil;
@@ -136,7 +144,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	if (cacheAttributes) free(cacheAttributes);
 	if (cacheFonts) free(cacheFonts);
 	
-	if (sections) free(sections);
+	[sections release];
 	delegate = nil;
 	
 	[super dealloc];
@@ -661,7 +669,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 - (void) beginLineFragment {
 	// Starts a new line fragment
-	numLineSections = 0;
+	[sections removeAllObjects];
 	
 	usedRect = [layout usedRectForTextContainer: container];
 	customBaseline = NO;
@@ -674,10 +682,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	thisLeftMargin = thisRightMargin = thisLeftMaxY = thisRightMaxY = 0;
 }
 
+/// Fixes the bounds of the current set of line fragments according to the various alignments that are present
 - (void) fixBounds {
-	// Fixes the bounds of the current set of line fragments according to the various alignments that are present
-	int x;
-	
 	// Work out the baseline offset and unaligned bounds for this line fragment
 	CGFloat baselineOffset = -fragmentBounds.origin.y;
 	customOffset = 0;
@@ -685,13 +691,13 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	// Use only the items aligned to the baseline to work out the 'real' baseline.
 	baselineOffset = 0;
 	fragmentBounds = NSMakeRect(0,0,0,0);
-	for (x=0; x<numLineSections; x++) {
-		if (sections[x].alignment == GlkAlignBaseline) {
-			if (sections[x].bounds.origin.y < baselineOffset) {
-				baselineOffset = sections[x].bounds.origin.y;
+	for (GlkLineSection *section in sections) {
+		if (section.alignment == GlkAlignBaseline) {
+			if (section.bounds.origin.y < baselineOffset) {
+				baselineOffset = section.bounds.origin.y;
 			}
 			
-			fragmentBounds = NSUnionRect(fragmentBounds, sections[x].bounds);
+			fragmentBounds = NSUnionRect(fragmentBounds, section.bounds);
 		}
 	}
 	
@@ -699,14 +705,14 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Now work out the effect of the custom aligned sections on the bounds and the baseline
 	if (customBaseline) {
-		for (x=0; x<numLineSections; x++) {
-			switch (sections[x].alignment) {
+		for (GlkLineSection *section in sections) {
+			switch (section.alignment) {
 				case GlkAlignBaseline:
 					break;
 				
 				case GlkAlignTop:
 				{
-					NSRect bounds = sections[x].bounds;
+					NSRect bounds = section.bounds;
 					bounds.origin.y -= NSMaxY(bounds);
 
 					if (-bounds.origin.y-baselineOffset > customOffset) customOffset = -bounds.origin.y-baselineOffset;
@@ -717,7 +723,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 					
 				case GlkAlignBottom:
 				{
-					NSRect bounds = sections[x].bounds;
+					NSRect bounds = section.bounds;
 					bounds.origin.y = -baselineOffset;
 
 					fragmentBounds = NSUnionRect(fragmentBounds, bounds);
@@ -726,7 +732,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 					
 				case GlkAlignCenter:
 				{
-					NSRect bounds = sections[x].bounds;
+					NSRect bounds = section.bounds;
 					bounds.origin.y = -(baselineOffset + bounds.size.height)/2;
 					
 					if (-bounds.origin.y-baselineOffset > customOffset) customOffset = -bounds.origin.y-baselineOffset;
@@ -739,12 +745,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 }
 
+/// Finishes the current line fragment and adds it to the layout manager
 - (BOOL) endLineFragment: (BOOL) hitTheLastGlyph
 				 newline: (BOOL) newline {
-	if (numLineSections <= 0) return YES;
-	
-	// Finishes the current line fragment and adds it to the layout manager
-	int x;
+	if (sections.count <= 0) return YES;
 	
 	// Get the bounds of the line fragment, and adjust it for its final position
 	NSRect bounds = proposedRect;
@@ -755,8 +759,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	NSRect used = bounds;
 	
 	// Work out the glyph range for this line fragment
-	NSUInteger firstGlyph = sections[0].glyphRange.location;
-	NSUInteger lastGlyph = sections[numLineSections-1].glyphRange.location + sections[numLineSections-1].glyphRange.length;
+	NSUInteger firstGlyph = sections.firstObject.glyphRange.location;
+	NSUInteger lastGlyph = sections.lastObject.glyphRange.location + sections.lastObject.glyphRange.length;
 	NSRange glyphRange = NSMakeRange(firstGlyph, lastGlyph-firstGlyph);
 	
 	// Work out the baseline offset for this line fragment
@@ -765,10 +769,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	if (customBaseline) {
 		// Use only the items aligned to the baseline to work out the 'real' baseline.
 		baselineOffset = 0;
-		for (x=0; x<numLineSections; x++) {
-			if (sections[x].alignment == GlkAlignBaseline) {
-				if (sections[x].bounds.origin.y < baselineOffset) {
-					baselineOffset = sections[x].bounds.origin.y;
+		for (GlkLineSection *section in sections) {
+			if (section.alignment == GlkAlignBaseline) {
+				if (section.bounds.origin.y < baselineOffset) {
+					baselineOffset = section.bounds.origin.y;
 				}
 			}
 		}
@@ -797,46 +801,46 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Position the glyphs within the line sections
 	CGFloat maxX = 0.0;
-	for (x=0; x<numLineSections; x++) {
-		if (sections[x].glyphRange.length <= 0) continue;
+	for (GlkLineSection *section in sections) {
+		if (section.glyphRange.length <= 0) continue;
 		
 		NSPoint loc;
-		loc.x = sections[x].offset;
+		loc.x = section.offset;
 		
-		maxX = loc.x + sections[x].advancement;
+		maxX = loc.x + section.advancement;
 		
-		switch (sections[x].alignment) {
+		switch (section.alignment) {
 			case GlkAlignBaseline:
 			default:
 				loc.y = baselineOffset + customOffset;
 				break;
 				
 			case GlkAlignTop:
-				loc.y = baselineOffset+customOffset - sections[x].bounds.size.height + NSMaxY(sections[x].bounds);
+				loc.y = baselineOffset+customOffset - section.bounds.size.height + NSMaxY(section.bounds);
 				break;
 				
 			case GlkAlignBottom:
-				loc.y = customOffset - NSMaxY(sections[x].bounds);
+				loc.y = customOffset - NSMaxY(section.bounds);
 				break;
 				
 			case GlkAlignCenter:
-				loc.y = customOffset - (-baselineOffset + sections[x].bounds.size.height)/2 - NSMaxY(sections[x].bounds);
+				loc.y = customOffset - (-baselineOffset + section.bounds.size.height)/2 - NSMaxY(section.bounds);
 				break;
 		}
 		
 		// Call the delegate
-		if (sections[x].delegate) {
-			[sections[x].delegate placeBaselineAt: loc
-										 forGlyph: sections[x].glyphRange.location];
+		if (section.delegate) {
+			[section.delegate placeBaselineAt: loc
+									 forGlyph: section.glyphRange.location];
 		}
 		
 		// Set the location for this range of glyphs
 		[layout setLocation: loc
-	   forStartOfGlyphRange: sections[x].glyphRange];
+	   forStartOfGlyphRange: section.glyphRange];
 		
 		// Set any NSControlGlyphs to invisible
-		NSInteger lastGlyph = sections[x].glyphRange.location + sections[x].glyphRange.length - cached.location;
-		for (NSInteger y=sections[x].glyphRange.location-cached.location; y<lastGlyph; y++) {
+		NSInteger lastGlyph = section.glyphRange.location + section.glyphRange.length - cached.location;
+		for (NSInteger y=section.glyphRange.location-cached.location; y<lastGlyph; y++) {
 			if (cacheGlyphs[y] == NSControlGlyph || cacheGlyphs[y] == NSNullGlyph) {
 				[layout setNotShownAttribute: YES
 							 forGlyphAtIndex: y+cached.location];
@@ -899,22 +903,20 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #endif
 	
 	// Adds a new line section
-	NSInteger newSec = numLineSections;
-	
-	numLineSections++;
-	sections = realloc(sections, sizeof(GlkLineSection)*numLineSections);
-	
-	sections[newSec].bounds = bounds;
-	sections[newSec].advancement = advancement;
-	sections[newSec].offset = offset;
-	sections[newSec].glyphRange = glyphRange;
-	sections[newSec].alignment = alignment;
-	sections[newSec].delegate = sectionDelegate;
-	sections[newSec].elastic = elastic;
+	GlkLineSection *newSec = [[GlkLineSection alloc] init];
+	newSec.bounds = bounds;
+	newSec.advancement = advancement;
+	newSec.offset = offset;
+	newSec.glyphRange = glyphRange;
+	newSec.alignment = alignment;
+	newSec.delegate = sectionDelegate;
+	newSec.elastic = elastic;
+
+	[sections addObject:newSec];
 	
 	if (alignment != GlkAlignBaseline) customBaseline = YES;
 	
-	if (newSec == 0) {
+	if (sections.count == 1) {
 		fragmentBounds = bounds;
 	} else {
 		fragmentBounds = NSUnionRect(fragmentBounds, bounds);
@@ -975,10 +977,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 							newline: (BOOL) newline {
 	// Work out the total width of this section
 	CGFloat totalWidth = 0;
-	int x;
 	
-	for (x=0; x<numLineSections; x++) {
-		totalWidth += sections[x].advancement;
+	for (GlkLineSection *section in sections) {
+		totalWidth += section.advancement;
 	}
 	
 	if (newline && alignment == NSJustifiedTextAlignment) {
@@ -996,9 +997,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			CGFloat offset = (proposed.size.width - totalWidth - inset*2 - leftMargin - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0)) / 2;
 			offset += proposed.origin.x + inset + leftMargin + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
 			
-			for (x=0; x<numLineSections; x++) {
-				sections[x].offset = offset;
-				offset += sections[x].advancement;
+			for (GlkLineSection *section in sections) {
+				section.offset = offset;
+				offset += section.advancement;
 			}
 			break;
 		}
@@ -1008,9 +1009,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			CGFloat offset = (proposed.size.width - totalWidth - inset - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0));
 			offset += proposed.origin.x + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
 			
-			for (x=0; x<numLineSections; x++) {
-				sections[x].offset = offset;
-				offset += sections[x].advancement;
+			for (GlkLineSection *section in sections) {
+				section.offset = offset;
+				offset += section.advancement;
 			}
 			break;
 		}
@@ -1020,8 +1021,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			int elasticCount = 0;
 			
 			// Count the number of elastic sections
-			for (x=0; x<numLineSections-1; x++) {
-				if (sections[x].elastic) elasticCount++;
+			for (GlkLineSection *section in sections) {
+				if (section.elastic) elasticCount++;
 			}
 			
 			// Give up if there are no elastic sections (TODO: fully-justify all characters?)
@@ -1032,11 +1033,11 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			CGFloat offset = inset + leftMargin + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
 
 			// Adjust the size of each section appropriately
-			for (x=0; x<numLineSections; x++) {
-				sections[x].offset = floor(offset);
-				offset += sections[x].advancement;
+			for (GlkLineSection *section in sections) {
+				section.offset = floor(offset);
+				offset += section.advancement;
 				
-				if (sections[x].elastic) {
+				if (section.elastic) {
 					offset += adjustment;
 				}
 			}
@@ -1097,7 +1098,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 													  inTypesetter: self
 													 forGlyphRange: glyphRange];
 					if (addOffset) {
-						offset = sections[numLineSections-1].offset + sections[numLineSections-1].advancement;
+						offset = sections.lastObject.offset + sections.lastObject.advancement;
 						newsection = YES;
 						customSection = YES;
 					}
@@ -1186,10 +1187,11 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// If we've got a left margin for this section, then offset everything appropriately
 	if (thisLeftMargin > 0) {
-		int x;
-		for (x=0; x<numLineSections; x++) {
-			sections[x].offset += thisLeftMargin;
-			sections[x].bounds.origin.x += thisLeftMargin;
+		for (GlkLineSection *section in sections) {
+			section.offset += thisLeftMargin;
+			NSRect preBounds = section.bounds;
+			preBounds.origin.x += thisLeftMargin;
+			section.bounds = preBounds;
 		}
 	}
 	
@@ -1208,15 +1210,15 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 											movementDirection: NSLineMovesDown
 												remainingRect: &remaining];
 	
-	if (proposedRect.size.height == 0 && numLineSections > 0) {
+	if (proposedRect.size.height == 0 && sections.count > 0) {
 		// If the proposed rect is 0-height, then do no further layout
 		return sections[0].glyphRange.location;
 	}
 	
 	// Find the first glyph that is within the proposed rectangle
-	if (numLineSections > 0) {
+	if (sections.count > 0) {
 		// Find the character to split on, if we've overflowed the end of the box
-		NSInteger splitSection = numLineSections-1;
+		NSInteger splitSection = sections.count-1;
 		NSInteger splitGlyph = sections[splitSection].glyphRange.location+sections[splitSection].glyphRange.length;
 		
 		// Version that searches backwards for the first glyph within the proposed rectangle (borken?)
@@ -1269,7 +1271,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				
 		// Move backwards from the split character to find a 'proper' character to split at
 		if (splitSection>=0 
-			&& (splitSection+1 < numLineSections 
+			&& (splitSection+1 < sections.count
 				|| sections[splitSection].glyphRange.location+sections[splitSection].glyphRange.length > splitGlyph+1)) {
 			// Basic method: search backwards in the string for a whitespace character
 			NSRange lineRange = NSMakeRange(cacheCharIndexes[sections[0].glyphRange.location-cached.location],
@@ -1297,10 +1299,16 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			splitSection = 0;
 			splitGlyph = sections[0].glyphRange.location;
 		}
-		BOOL boundsChanged = numLineSections != splitSection+1 || splitGlyph <= sections[splitSection].glyphRange.location;
+		BOOL boundsChanged = sections.count != splitSection+1 || splitGlyph <= sections[splitSection].glyphRange.location;
 
-		numLineSections = splitSection+1;
-		sections[splitSection].glyphRange.length = (splitGlyph+1)-sections[splitSection].glyphRange.location;
+		while (sections.count > splitSection+1) {
+			[sections removeLastObject];
+		}
+		{
+			NSRange preRange = sections[splitSection].glyphRange;
+			preRange.length = (splitGlyph+1)-sections[splitSection].glyphRange.location;
+			sections[splitSection].glyphRange = preRange;
+		}
 		
 		if (boundsChanged || YES)
 		{
@@ -1344,7 +1352,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	fragmentBounds.size.height += topPadding+bottomPadding;
 	if (![self endLineFragment: hitTheLastGlyph
 					   newline: newline]
-		&& numLineSections > 0) {
+		&& sections.count > 0) {
 		// Failed to lay anything out!
 		return sections[0].glyphRange.location;
 	}
@@ -1582,4 +1590,14 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 @synthesize delegate;
 
+@end
+
+@implementation GlkLineSection
+@synthesize advancement;
+@synthesize alignment;
+@synthesize bounds;
+@synthesize delegate;
+@synthesize offset;
+@synthesize glyphRange;
+@synthesize elastic;
 @end

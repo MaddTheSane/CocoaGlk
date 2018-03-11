@@ -147,7 +147,7 @@
 											movementDirection: NSLineMovesDown
 												remainingRect: &remaining];
 	
-	if (proposedRect.size.height == 0 && numLineSections > 0) {
+	if (proposedRect.size.height == 0 && sections.count > 0) {
 		// If the proposed rect is 0-height, then do no further layout
 		return sections[0].glyphRange.location;
 	}	
@@ -155,7 +155,7 @@
 	// Finish this line fragment
 	if (![self endLineFragment: hitTheLastGlyph
 					   newline: x == gridWidth]
-		&& numLineSections > 0) {
+		&& sections.count > 0) {
 		// Failed to lay anything out!
 		return sections[0].glyphRange.location;
 	}

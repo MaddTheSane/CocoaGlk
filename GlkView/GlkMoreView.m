@@ -51,7 +51,7 @@
 	
 	[moreImage drawInRect: [self bounds]
 				 fromRect: imageRect
-				operation: NSCompositeSourceOver
+				operation: NSCompositingOperationSourceOver
 				 fraction: 1.0];
 }
 

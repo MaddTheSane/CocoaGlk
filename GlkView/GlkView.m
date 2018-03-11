@@ -454,11 +454,11 @@
 		}
 		
 		// Full path becomes ~/Desktop/<name>.glk
-		NSString* fullPath = [@"~" stringByAppendingPathComponent: [res stringByAppendingPathExtension: @"glkdata"]];
+		NSString* fullPath = [[@"~" stringByExpandingTildeInPath] stringByAppendingPathComponent: [res stringByAppendingPathExtension: @"glkdata"]];
 		
 		[res release]; res = nil;
 		
-		return fullPath;
+		return [fullPath stringByStandardizingPath];
 	}
 }
 

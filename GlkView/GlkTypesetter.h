@@ -49,7 +49,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 ///
 /// Representation of a section of a line fragment
 ///
-typedef struct GlkLineSection {
+@interface GlkLineSection: NSObject {
 	/// The bounds for this line section: 0,0 indicates the start of the line fragment, 0,0 indicates the far left of the current fragment, at the baseline
 	NSRect bounds;
 	/// The X-advancement for this line section
@@ -65,7 +65,25 @@ typedef struct GlkLineSection {
 	__unsafe_unretained id<GlkCustomLineSection> delegate;
 	/// Whether or not this is an elastic line section (used in full-justification)
 	BOOL elastic;
-} GlkLineSection;
+}
+
+/// The bounds for this line section: 0,0 indicates the start of the line fragment, 0,0 indicates the far left of the current fragment, at the baseline
+@property NSRect bounds;
+/// The X-advancement for this line section
+@property CGFloat advancement;
+/// The X-offset for this line section
+@property CGFloat offset;
+/// The glyph range for this line section
+@property NSRange glyphRange;
+/// The alignment for this line section
+@property GlkSectionAlignment alignment;
+
+/// A line section delegate object
+@property (assign) id<GlkCustomLineSection> delegate;
+/// Whether or not this is an elastic line section (used in full-justification)
+@property (getter=isElastic) BOOL elastic;
+
+@end
 
 ///
 /// NSTypesetter subclass that can do all the funky things that Glk requires to support images
@@ -148,10 +166,8 @@ typedef struct GlkLineSection {
 	NSRect usedRect;
 	/// The size of the current text container
 	NSSize size;
-	/// Number of line sections
-	NSInteger numLineSections;
 	/// The line sections themselves
-	GlkLineSection* sections;
+	NSMutableArray<GlkLineSection*> *sections;
 	/// Offset to apply to the baseline due to custom alignment
 	CGFloat customOffset;
 	/// If YES, then the bounding box is not sufficient to calculate the baseline offset to use
@@ -166,7 +182,7 @@ typedef struct GlkLineSection {
 
 	// The delegate
 	/// The delegate [NOT RETAINED]
-	NSObject<GlkCustomTextLayout>* delegate;
+	id<GlkCustomTextLayout> delegate;
 }
 
 // Laying out line sections
@@ -215,7 +231,7 @@ typedef struct GlkLineSection {
 
 // Setting the delegate
 /// Sets the delegate (the delegate is NOT RETAINED)
-@property (assign) NSObject<GlkCustomTextLayout>* delegate;
+@property (assign) id<GlkCustomTextLayout> delegate;
 
 // Clearing the cache
 /// Forces any cached glyphs to be cleared (eg when a textstorage object changes)

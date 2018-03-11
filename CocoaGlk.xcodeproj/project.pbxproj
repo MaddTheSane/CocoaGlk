@@ -364,10 +364,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C165DFE840E0CC02AAC07 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* CocoaGlk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaGlk_Prefix.pch; sourceTree = SOURCE_ROOT; };
@@ -397,7 +397,7 @@
 		4B16B77908A0E0A8001E4C40 /* glk_sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_sound.m; sourceTree = "<group>"; };
 		4B16B77D08A0E0C7001E4C40 /* glk_hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_hyperlink.m; sourceTree = "<group>"; };
 		4B16B9A708A3B88A001E4C40 /* GlkImageSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkImageSourceProtocol.h; sourceTree = "<group>"; };
-		4B16BB5D08A4E65F001E4C40 /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = Credits.rtfd; path = English.lproj/Credits.rtfd; sourceTree = "<group>"; };
+		4B16BB5D08A4E65F001E4C40 /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = Credits.rtfd; path = en.lproj/Credits.rtfd; sourceTree = "<group>"; };
 		4B1758301274352300383C8D /* float.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = float.c; sourceTree = "<group>"; };
 		4B2D3B570AB462C90038255E /* GlkTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkTypesetter.h; sourceTree = "<group>"; };
 		4B2D3B580AB462C90038255E /* GlkTypesetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkTypesetter.m; sourceTree = "<group>"; };
@@ -471,7 +471,7 @@
 		4B8BDE7C07EB400E008AE26D /* glk_cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_cocoa.m; sourceTree = "<group>"; };
 		4B8BDEB907EB47B5008AE26D /* GlkAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkAppDelegate.h; sourceTree = "<group>"; };
 		4B8BDEBA07EB47B5008AE26D /* GlkAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkAppDelegate.m; sourceTree = "<group>"; };
-		4B8BDF7A07EB5FE8008AE26D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CocoaGlk.nib; sourceTree = "<group>"; };
+		4B8BDF7A07EB5FE8008AE26D /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/CocoaGlk.nib; sourceTree = "<group>"; };
 		4B8BDF7E07EB6027008AE26D /* GlkWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkWindowController.h; sourceTree = "<group>"; };
 		4B8BDF7F07EB6027008AE26D /* GlkWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkWindowController.m; sourceTree = "<group>"; };
 		4B8BE03607EB6ABA008AE26D /* GlkBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkBuffer.h; sourceTree = "<group>"; };
@@ -1330,15 +1330,14 @@
 			};
 			buildConfigurationList = 4B6A86F5086DB1EA00BFAE69 /* Build configuration list for PBXProject "CocoaGlk" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
-				Base,
 				en,
+				ja,
+				fr,
+				de,
+				Base,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CocoaGlk */;
 			projectDirPath = "";
@@ -1683,7 +1682,7 @@
 		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
+				089C165DFE840E0CC02AAC07 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1691,7 +1690,7 @@
 		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				29B97319FDCFA39411CA2CEA /* English */,
+				29B97319FDCFA39411CA2CEA /* en */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -1707,7 +1706,7 @@
 		4B8BDF7907EB5FE8008AE26D /* CocoaGlk.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4B8BDF7A07EB5FE8008AE26D /* English */,
+				4B8BDF7A07EB5FE8008AE26D /* en */,
 			);
 			name = CocoaGlk.nib;
 			sourceTree = "<group>";

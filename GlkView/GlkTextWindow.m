@@ -668,7 +668,7 @@
 
 	[atStr release];
 
-	float sb = [preferences scrollbackLength];
+	CGFloat sb = [preferences scrollbackLength];
 	if (sb < 100.0) {
 		// Number of characters to preserve (4096 -> 1 million)
 		NSInteger len = [[textView textStorage] length];

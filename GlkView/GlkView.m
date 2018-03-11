@@ -787,7 +787,7 @@
 	}
 }
 
-- (void) setBorderWidth: (float) newBorderWidth {
+- (void) setBorderWidth: (CGFloat) newBorderWidth {
 	// Do nothing if the border is already the right size
 	if (newBorderWidth == borderWidth) return;
 	

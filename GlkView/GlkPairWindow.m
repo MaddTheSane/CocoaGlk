@@ -114,7 +114,7 @@
 
 // = Custom settings =
 
-- (void) setBorderWidth: (float) newBorderWidth {
+- (void) setBorderWidth: (CGFloat) newBorderWidth {
 	borderWidth = newBorderWidth;
 	
 	needsLayout = YES;
@@ -170,7 +170,7 @@
 		
 		NSRect leftRect;
 		NSRect rightRect;
-		float realBorderWidth = borderWidth;
+		CGFloat realBorderWidth = borderWidth;
 		if (inputBorder) realBorderWidth = 0;
 		
 		if (horizontal) {

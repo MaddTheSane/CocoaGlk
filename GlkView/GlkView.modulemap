@@ -78,7 +78,7 @@ framework module GlkView {
 	}
 	
 	explicit module GlkGridTypesetter {
-		requires objc, !objc_arc
+		requires objc
 		header "GlkGridTypesetter.h"
 		export *
 	}

@@ -20,6 +20,8 @@
 
 #include <sys/types.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Strings for the predefined glk file types
 #define GlkFileUsageData		(@"GlkFileUsageData"		)
 #define GlkFileUsageSavedGame	(@"GlkFileUsageSavedGame"	)
@@ -48,11 +50,11 @@ struct GlkSize {
 - (GlkSize) sizeForWindowIdentifier: (unsigned) windowId;
 
 // Streams
-- (byref NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId;
+- (nullable byref NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId;
 /// Stream created before the task was initialised (used, for example, for specifying which file was double-clicked on)
 - (byref NSObject<GlkStream>*) inputStream;
 /// Stream created before the task was initialised (used, for example, for specifying which file was double-clicked on)
-- (byref NSObject<GlkStream>*) streamForKey: (in bycopy NSString*) key;
+- (nullable byref NSObject<GlkStream>*) streamForKey: (in bycopy NSString*) key;
 
 // Styles
 - (glui32) measureStyle: (glui32) styl
@@ -64,9 +66,9 @@ struct GlkSize {
 - (bycopy NSString*) cancelLineEventsForWindowIdentifier: (unsigned) windowIdentifier;
 
 /// Request for the next event on the queue
-- (bycopy NSObject<GlkEvent>*) nextEvent;
+- (nullable bycopy NSObject<GlkEvent>*) nextEvent;
 /// Listener can be nil to indicate that no listener is required
-- (void) setEventListener: (in byref NSObject<GlkEventListener>*) listener;
+- (void) setEventListener: (nullable in byref NSObject<GlkEventListener>*) listener;
 /// Called to indicating that we're starting a glk_select call
 - (void) willSelect;
 
@@ -86,12 +88,12 @@ struct GlkSize {
 
 // Filerefs
 /// Returns \c NULL if the name is invalid (or if we're not supporting named files for some reason)
-- (NSObject<GlkFileRef>*) fileRefWithName: (in bycopy NSString*) name;
+- (nullable NSObject<GlkFileRef>*) fileRefWithName: (in bycopy NSString*) name;
 /// Temp files are automagically deleted when the session goes away
-- (NSObject<GlkFileRef>*) tempFileRef;
+- (nullable NSObject<GlkFileRef>*) tempFileRef;
 
 /// Returns the list of the preferred filetypes for the specified usage
-- (bycopy NSArray<NSString*>*) fileTypesForUsage: (in bycopy NSString*) usage;
+- (nullable bycopy NSArray<NSString*>*) fileTypesForUsage: (in bycopy NSString*) usage;
 /// Specifies the extensions that are valid for a particular type of file
 - (void) setFileTypes: (in bycopy NSArray<NSString*>*) extensions
 			 forUsage: (in bycopy NSString*) usage;
@@ -115,3 +117,5 @@ struct GlkSize {
 /// The active image source.
 @property (nonatomic, retain) id<GlkImageSource> imageSource;
 @end
+
+NS_ASSUME_NONNULL_END

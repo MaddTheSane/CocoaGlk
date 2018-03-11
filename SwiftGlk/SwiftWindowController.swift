@@ -39,7 +39,7 @@ class SwiftWindowController: NSWindowController, GlkViewDelegate {
 		showStatusText("Finished")
 	}
 
-	func showStatusText(_ status: String!) {
+	func showStatusText(_ status: String) {
 		self.status.stringValue = status
 	}
 }

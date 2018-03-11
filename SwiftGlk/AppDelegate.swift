@@ -49,13 +49,6 @@ ofType: nil];
 		control.showWindow(self)
 		winController = control
 		return control.glkView
-		/*
-GlkWindowController* control = [[GlkWindowController alloc] init];
-
-[control showWindow: self];
-
-return [control glkView];
-*/
 	}
 
 }

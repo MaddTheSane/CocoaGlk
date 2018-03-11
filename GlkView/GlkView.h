@@ -14,6 +14,8 @@
 #import <GlkView/GlkPreferences.h>
 #import <GlkView/GlkStyle.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol GlkAutomation;
 @protocol GlkViewDelegate;
 
@@ -141,14 +143,14 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 
 // Setting up for launch
 /// If cookie is non-nil, a client application must know the cookie to connect to this view. If nil, this view is first-come, first-served.
-@property (nonatomic, copy) NSString *viewCookie;
+@property (nonatomic, copy, nullable) NSString *viewCookie;
 /// As above, but sets a random cookie. Not guaranteed to be cryptographically secure.
 - (void) setRandomViewCookie;
 
 // Launching a client application
 /// Launches and controls a Glk client application
 - (void) launchClientApplication: (NSString*) launchPath
-				   withArguments: (NSArray<NSString*>*) appArgs;
+				   withArguments: (nullable NSArray<NSString*>*) appArgs;
 /// Terminates the client application
 - (void) terminateClient;
 /// Sets the input stream
@@ -169,7 +171,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 
 // The delegate
 /// The delegate for this view. Delegates are not retained.
-@property (assign) id<GlkViewDelegate> delegate;
+@property (assign, nullable) id<GlkViewDelegate> delegate;
 
 // Events
 /// Note that Arrange events are merged if not yet claimed
@@ -185,25 +187,25 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 
 // Managing images
 /// Retrieves the image with the given identifier, asking the client process if necessary
-- (NSImage*) imageWithIdentifier: (unsigned) imageId;
+- (nullable NSImage*) imageWithIdentifier: (unsigned) imageId;
 /// Retrieves a flipped variant of an image with the given identifier (works around a really annoying Cocoa design flaw, at the expense of storing the image twice)
-- (NSImage*) flippedImageWithIdentifier: (unsigned) imageId;
+- (nullable NSImage*) flippedImageWithIdentifier: (unsigned) imageId;
 
 // Dealing with line history
 /// Adds a line history event to this view
 - (void) addHistoryItem: (NSString*) inputLine
 		forWindowWithId: (glui32) windowId;
 /// Retrieves the previous history item
-@property (readonly) NSString *previousHistoryItem;
+@property (nullable, readonly) NSString *previousHistoryItem;
 /// Retrieves the next history item
-@property (readonly) NSString *nextHistoryItem;
+@property (nullable, readonly) NSString *nextHistoryItem;
 /// Causes the history position to move to the end
 - (void) resetHistoryPosition;
 
 // Layout
 /// Forces a layout operation if it's required
 - (void) performLayoutIfNecessary;
-/// Sets the scale factor of this view and any subview (resizing fonts, etc)
+/// The scale factor of this view and any subview (resizing fonts, etc)
 @property (nonatomic) CGFloat scaleFactor;
 /// Sets up the border width for new pair windows
 - (void) setBorderWidth: (CGFloat) borderWidth;
@@ -256,9 +258,9 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 /// Set to return YES to get rid of the CocoaGlk logo
 - (BOOL) disableLogo;
 /// If non-nil, then this will be the logo displayed instead of 'CocoaGlk'
-- (NSImage*) logo;
+- (nullable NSImage*) logo;
 /// A description of what is running in this window (or nil)
-- (NSString*) taskDescription;
+- (nullable NSString*) taskDescription;
 
 /// Called to show warnings, etc
 - (void) showStatusText: (NSString*) status;
@@ -276,18 +278,20 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 - (void) taskHasCrashed;
 
 /// This works out the 'real' path for a file requested by name (default is to remove control characters and stick it on the Desktop)
-- (NSString*) pathForNamedFile: (NSString*) name;
+- (nullable NSString*) pathForNamedFile: (NSString*) name;
 /// This works out the 'preferred' directory for save files. CocoaGlk will use it's own judgement if this returns nil
-- (NSString*) preferredSaveDirectory;
+- (nullable NSString*) preferredSaveDirectory;
 /// Called to give the delegate a chance to store the final directory chosen for a save in the preferences.
-- (void) savePreferredDirectory: (NSString*) finalDir;
+- (void) savePreferredDirectory: (nullable NSString*) finalDir;
 
 /// The delegate can override this to provide custom saving behaviour for its files. This should return \c YES if the delegate is going to handle the event or \c NO otherwise
 - (BOOL) promptForFilesForUsage: (NSString*) usage
 					 forWriting: (BOOL) writing
 						handler: (NSObject<GlkFilePrompt>*) handler
-			 preferredDirectory: (NSString*) preferredDirectory;
+			 preferredDirectory: (nullable NSString*) preferredDirectory;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #import <GlkView/GlkAutomation.h>

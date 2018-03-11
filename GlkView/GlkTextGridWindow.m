@@ -71,6 +71,7 @@
 	[scrollView setHasHorizontalScroller: NO];
 	[scrollView setHasVerticalScroller: NO];
 	[scrollView setAutohidesScrollers: NO];
+	[newContainer autorelease];
 }
 
 - (id)initWithFrame:(NSRect)frame {

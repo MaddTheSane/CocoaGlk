@@ -495,3 +495,13 @@ void glk_cancel_mouse_event(winid_t win) {
 	// Buffer up the request
 	[cocoaglk_buffer cancelMouseEventsForWindowIdentifier: win->identifier];
 }
+
+#ifdef GIDISPATCH_AUTORESTORE_REGISTRY
+void gidispatch_set_autorestore_registry(long (*locatearr)(void *array, glui32 len, char *typecode,
+														   gidispatch_rock_t objrock, int *elemsizeref),
+										 gidispatch_rock_t (*restorearr)(long bufkey, glui32 len,
+																		 char *typecode, void **arrayref))
+{
+	
+}
+#endif

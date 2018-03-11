@@ -186,6 +186,7 @@
 		55BC63392055C42B001F8CFB /* accel.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC630D2055C42B001F8CFB /* accel.c */; };
 		55BC633A2055C42B001F8CFB /* git.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC630E2055C42B001F8CFB /* git.c */; };
 		55BC633C2055C481001F8CFB /* cocoastart.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BC633B2055C481001F8CFB /* cocoastart.m */; };
+		55BC63482055EE7F001F8CFB /* glk_datetime.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BC63472055EE7F001F8CFB /* glk_datetime.m */; };
 		55C6BB39204DED96001AE7E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C6BB38204DED96001AE7E5 /* AppDelegate.swift */; };
 		55C6BB3B204DED96001AE7E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB3A204DED96001AE7E5 /* Assets.xcassets */; };
 		55C6BB3E204DED96001AE7E5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB3C204DED96001AE7E5 /* MainMenu.xib */; };
@@ -586,6 +587,7 @@
 		55BC630D2055C42B001F8CFB /* accel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = accel.c; sourceTree = "<group>"; };
 		55BC630E2055C42B001F8CFB /* git.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = git.c; sourceTree = "<group>"; };
 		55BC633B2055C481001F8CFB /* cocoastart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cocoastart.m; path = "git-1.3.5/cocoastart.m"; sourceTree = SOURCE_ROOT; };
+		55BC63472055EE7F001F8CFB /* glk_datetime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_datetime.m; sourceTree = "<group>"; };
 		55C6BB36204DED96001AE7E5 /* SwiftGlk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGlk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C6BB38204DED96001AE7E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55C6BB3A204DED96001AE7E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -908,6 +910,7 @@
 				4B51AB3A07E87EE300576AB9 /* cocoaglk.h */,
 				4B51AAF707E87DCA00576AB9 /* glk_client.h */,
 				4B51AA9A07E87A2F00576AB9 /* glk.h */,
+				55BC63472055EE7F001F8CFB /* glk_datetime.m */,
 				4B51AAB707E87B7B00576AB9 /* glk_main.m */,
 				4B51AAEF07E87CD300576AB9 /* glk_style.m */,
 				4B51AAF007E87CD300576AB9 /* glk_windows.m */,
@@ -1577,6 +1580,7 @@
 				4B16B78908A0E14C001E4C40 /* glk_sound.m in Sources */,
 				4B16B78A08A0E14C001E4C40 /* glk_hyperlink.m in Sources */,
 				4B4D36450A9738580007FD80 /* glk_unicode.m in Sources */,
+				55BC63482055EE7F001F8CFB /* glk_datetime.m in Sources */,
 				4B4D379F0A97B53E0007FD80 /* GlkUcs4Stream.m in Sources */,
 				4B3CBD090B07DB0C0073216F /* GlkMemoryFileRef.m in Sources */,
 				4BBFE3990C4EC253007DEE18 /* GlkBufferedStream.m in Sources */,

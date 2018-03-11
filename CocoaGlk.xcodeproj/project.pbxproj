@@ -48,20 +48,6 @@
 		4B3A1DDA08A7EC0500DEB0B9 /* GlkImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3A1DD208A7EBDE00DEB0B9 /* GlkImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B3A1DDB08A7EC0500DEB0B9 /* GlkImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A1DD308A7EBDE00DEB0B9 /* GlkImage.m */; };
 		4B3C3B990F3DABD40066A760 /* GlkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA5607E877C900576AB9 /* GlkClient.framework */; };
-		4B3C3B9A0F3DABDC0066A760 /* terp.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B5C0F3DAB4C0066A760 /* terp.c */; };
-		4B3C3B9E0F3DABDC0066A760 /* search.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B5B0F3DAB4C0066A760 /* search.c */; };
-		4B3C3B9F0F3DABDD0066A760 /* saveundo.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B5A0F3DAB4C0066A760 /* saveundo.c */; };
-		4B3C3BA00F3DABDD0066A760 /* savefile.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B590F3DAB4C0066A760 /* savefile.c */; };
-		4B3C3BA10F3DABDE0066A760 /* peephole.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B580F3DAB4C0066A760 /* peephole.c */; };
-		4B3C3BA20F3DABDE0066A760 /* operands.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B570F3DAB4C0066A760 /* operands.c */; };
-		4B3C3BA30F3DABDF0066A760 /* opcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B550F3DAB4C0066A760 /* opcodes.c */; };
-		4B3C3BA40F3DABE00066A760 /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B530F3DAB4C0066A760 /* memory.c */; };
-		4B3C3BA50F3DABE00066A760 /* heap.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B520F3DAB4C0066A760 /* heap.c */; };
-		4B3C3BA60F3DABE10066A760 /* glkop.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B510F3DAB4C0066A760 /* glkop.c */; };
-		4B3C3BA70F3DABE10066A760 /* git.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B4F0F3DAB4C0066A760 /* git.c */; };
-		4B3C3BA80F3DABE20066A760 /* gestalt.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B4E0F3DAB4C0066A760 /* gestalt.c */; };
-		4B3C3BA90F3DABE30066A760 /* compiler.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B4C0F3DAB4C0066A760 /* compiler.c */; };
-		4B3C3BAA0F3DABE40066A760 /* cocoastart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C3B4B0F3DAB4C0066A760 /* cocoastart.m */; };
 		4B3CBD080B07DB0C0073216F /* GlkMemoryFileRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3CBD040B07DABD0073216F /* GlkMemoryFileRef.h */; };
 		4B3CBD090B07DB0C0073216F /* GlkMemoryFileRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3CBD050B07DABD0073216F /* GlkMemoryFileRef.m */; };
 		4B4D36450A9738580007FD80 /* glk_unicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D36440A9738570007FD80 /* glk_unicode.m */; };
@@ -116,7 +102,6 @@
 		4B95C599C5B03AD500FD9F27 /* GlkGridTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B95C53BC5B03AD500FD9F27 /* GlkGridTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B997F2A0F72FF1100EBE7BE /* accel.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B997F290F72FF1100EBE7BE /* accel.c */; };
 		4B997F2D0F72FF3900EBE7BE /* profile.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B997F2C0F72FF3900EBE7BE /* profile.c */; };
-		4B997FD10F88FD6200EBE7BE /* accel.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B997FD00F88FD6200EBE7BE /* accel.c */; };
 		4BBC410B08A7AAF900B790B5 /* GlkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA5607E877C900576AB9 /* GlkClient.framework */; };
 		4BBC414008A7AB1500B790B5 /* imagetest in Resources */ = {isa = PBXBuildFile; fileRef = 4BBC40F808A7AABD00B790B5 /* imagetest */; };
 		4BBC414308A7AB2600B790B5 /* glkmain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8BDE5707EB3EF6008AE26D /* glkmain.m */; };
@@ -186,6 +171,21 @@
 		4BFA1CD407F8A4040068E16A /* gi_blorb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1CD007F8A4040068E16A /* gi_blorb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA1CD507F8A4040068E16A /* gi_dispa.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1CD107F8A4040068E16A /* gi_dispa.m */; };
 		4BFA1D6907F8A8D00068E16A /* glk_misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1D6707F8A8D00068E16A /* glk_misc.m */; };
+		55BC63282055C42B001F8CFB /* savefile.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62ED2055C42B001F8CFB /* savefile.c */; };
+		55BC63292055C42B001F8CFB /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62EF2055C42B001F8CFB /* memory.c */; };
+		55BC632A2055C42B001F8CFB /* heap.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62F02055C42B001F8CFB /* heap.c */; };
+		55BC632C2055C42B001F8CFB /* search.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62FD2055C42B001F8CFB /* search.c */; };
+		55BC632D2055C42B001F8CFB /* glkop.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62FE2055C42B001F8CFB /* glkop.c */; };
+		55BC632F2055C42B001F8CFB /* operands.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC63002055C42B001F8CFB /* operands.c */; };
+		55BC63312055C42B001F8CFB /* peephole.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC63022055C42B001F8CFB /* peephole.c */; };
+		55BC63332055C42B001F8CFB /* compiler.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC63042055C42B001F8CFB /* compiler.c */; };
+		55BC63342055C42B001F8CFB /* gestalt.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC63072055C42B001F8CFB /* gestalt.c */; };
+		55BC63362055C42B001F8CFB /* saveundo.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC63092055C42B001F8CFB /* saveundo.c */; };
+		55BC63372055C42B001F8CFB /* terp.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC630A2055C42B001F8CFB /* terp.c */; };
+		55BC63382055C42B001F8CFB /* opcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC630C2055C42B001F8CFB /* opcodes.c */; };
+		55BC63392055C42B001F8CFB /* accel.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC630D2055C42B001F8CFB /* accel.c */; };
+		55BC633A2055C42B001F8CFB /* git.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC630E2055C42B001F8CFB /* git.c */; };
+		55BC633C2055C481001F8CFB /* cocoastart.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BC633B2055C481001F8CFB /* cocoastart.m */; };
 		55C6BB39204DED96001AE7E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C6BB38204DED96001AE7E5 /* AppDelegate.swift */; };
 		55C6BB3B204DED96001AE7E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB3A204DED96001AE7E5 /* Assets.xcassets */; };
 		55C6BB3E204DED96001AE7E5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB3C204DED96001AE7E5 /* MainMenu.xib */; };
@@ -561,6 +561,31 @@
 		552A03722049D5E200A4ECAA /* GlkView.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = GlkView.modulemap; sourceTree = "<group>"; };
 		552A03732049D64C00A4ECAA /* GlkClient.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = GlkClient.modulemap; sourceTree = "<group>"; };
 		552A03742049D67900A4ECAA /* GlkSound.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = GlkSound.modulemap; sourceTree = "<group>"; };
+		55BC62ED2055C42B001F8CFB /* savefile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = savefile.c; sourceTree = "<group>"; };
+		55BC62EE2055C42B001F8CFB /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		55BC62EF2055C42B001F8CFB /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memory.c; sourceTree = "<group>"; };
+		55BC62F02055C42B001F8CFB /* heap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = heap.c; sourceTree = "<group>"; };
+		55BC62F12055C42B001F8CFB /* compiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compiler.h; sourceTree = "<group>"; };
+		55BC62F22055C42B001F8CFB /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		55BC62FB2055C42B001F8CFB /* git.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = git.h; sourceTree = "<group>"; };
+		55BC62FC2055C42B001F8CFB /* opcodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opcodes.h; sourceTree = "<group>"; };
+		55BC62FD2055C42B001F8CFB /* search.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = search.c; sourceTree = "<group>"; };
+		55BC62FE2055C42B001F8CFB /* glkop.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glkop.c; sourceTree = "<group>"; };
+		55BC62FF2055C42B001F8CFB /* git_mac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = git_mac.c; sourceTree = "<group>"; };
+		55BC63002055C42B001F8CFB /* operands.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = operands.c; sourceTree = "<group>"; };
+		55BC63012055C42B001F8CFB /* git_windows.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = git_windows.c; sourceTree = "<group>"; };
+		55BC63022055C42B001F8CFB /* peephole.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = peephole.c; sourceTree = "<group>"; };
+		55BC63032055C42B001F8CFB /* labels.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = labels.inc; sourceTree = "<group>"; };
+		55BC63042055C42B001F8CFB /* compiler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compiler.c; sourceTree = "<group>"; };
+		55BC63052055C42B001F8CFB /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = "<group>"; };
+		55BC63072055C42B001F8CFB /* gestalt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gestalt.c; sourceTree = "<group>"; };
+		55BC63082055C42B001F8CFB /* git_unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = git_unix.c; sourceTree = "<group>"; };
+		55BC63092055C42B001F8CFB /* saveundo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = saveundo.c; sourceTree = "<group>"; };
+		55BC630A2055C42B001F8CFB /* terp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = terp.c; sourceTree = "<group>"; };
+		55BC630C2055C42B001F8CFB /* opcodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opcodes.c; sourceTree = "<group>"; };
+		55BC630D2055C42B001F8CFB /* accel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = accel.c; sourceTree = "<group>"; };
+		55BC630E2055C42B001F8CFB /* git.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = git.c; sourceTree = "<group>"; };
+		55BC633B2055C481001F8CFB /* cocoastart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cocoastart.m; path = "git-1.3.5/cocoastart.m"; sourceTree = SOURCE_ROOT; };
 		55C6BB36204DED96001AE7E5 /* SwiftGlk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGlk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C6BB38204DED96001AE7E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55C6BB3A204DED96001AE7E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -736,6 +761,7 @@
 			isa = PBXGroup;
 			children = (
 				4B3C3B460F3DAB070066A760 /* git-1.2.9 */,
+				55BC62EC2055C42B001F8CFB /* git-1.3.5 */,
 				4B0459EB07EA2090002D7C88 /* GlkTest */,
 				4B0459EA07EA2087002D7C88 /* glulxe */,
 			);
@@ -1047,6 +1073,40 @@
 			);
 			name = Extras;
 			sourceTree = "<group>";
+		};
+		55BC62EC2055C42B001F8CFB /* git-1.3.5 */ = {
+			isa = PBXGroup;
+			children = (
+				55BC633B2055C481001F8CFB /* cocoastart.m */,
+				55BC62ED2055C42B001F8CFB /* savefile.c */,
+				55BC62EE2055C42B001F8CFB /* version.h */,
+				55BC62EF2055C42B001F8CFB /* memory.c */,
+				55BC62F02055C42B001F8CFB /* heap.c */,
+				55BC62F12055C42B001F8CFB /* compiler.h */,
+				55BC62F22055C42B001F8CFB /* config.h */,
+				55BC62FB2055C42B001F8CFB /* git.h */,
+				55BC62FC2055C42B001F8CFB /* opcodes.h */,
+				55BC62FD2055C42B001F8CFB /* search.c */,
+				55BC62FE2055C42B001F8CFB /* glkop.c */,
+				55BC62FF2055C42B001F8CFB /* git_mac.c */,
+				55BC63002055C42B001F8CFB /* operands.c */,
+				55BC63012055C42B001F8CFB /* git_windows.c */,
+				55BC63022055C42B001F8CFB /* peephole.c */,
+				55BC63032055C42B001F8CFB /* labels.inc */,
+				55BC63042055C42B001F8CFB /* compiler.c */,
+				55BC63052055C42B001F8CFB /* memory.h */,
+				55BC63072055C42B001F8CFB /* gestalt.c */,
+				55BC63082055C42B001F8CFB /* git_unix.c */,
+				55BC63092055C42B001F8CFB /* saveundo.c */,
+				55BC630A2055C42B001F8CFB /* terp.c */,
+				55BC630C2055C42B001F8CFB /* opcodes.c */,
+				55BC630D2055C42B001F8CFB /* accel.c */,
+				55BC630E2055C42B001F8CFB /* git.c */,
+			);
+			name = "git-1.3.5";
+			path = "depends/git/git-1.3.5";
+			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		55C6BB37204DED96001AE7E5 /* SwiftGlk */ = {
 			isa = PBXGroup;
@@ -1452,21 +1512,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B3C3B9A0F3DABDC0066A760 /* terp.c in Sources */,
-				4B3C3B9E0F3DABDC0066A760 /* search.c in Sources */,
-				4B3C3B9F0F3DABDD0066A760 /* saveundo.c in Sources */,
-				4B3C3BA00F3DABDD0066A760 /* savefile.c in Sources */,
-				4B3C3BA10F3DABDE0066A760 /* peephole.c in Sources */,
-				4B3C3BA20F3DABDE0066A760 /* operands.c in Sources */,
-				4B3C3BA30F3DABDF0066A760 /* opcodes.c in Sources */,
-				4B3C3BA40F3DABE00066A760 /* memory.c in Sources */,
-				4B3C3BA50F3DABE00066A760 /* heap.c in Sources */,
-				4B3C3BA60F3DABE10066A760 /* glkop.c in Sources */,
-				4B3C3BA70F3DABE10066A760 /* git.c in Sources */,
-				4B3C3BA80F3DABE20066A760 /* gestalt.c in Sources */,
-				4B3C3BA90F3DABE30066A760 /* compiler.c in Sources */,
-				4B3C3BAA0F3DABE40066A760 /* cocoastart.m in Sources */,
-				4B997FD10F88FD6200EBE7BE /* accel.c in Sources */,
+				55BC633C2055C481001F8CFB /* cocoastart.m in Sources */,
+				55BC63392055C42B001F8CFB /* accel.c in Sources */,
+				55BC632F2055C42B001F8CFB /* operands.c in Sources */,
+				55BC63342055C42B001F8CFB /* gestalt.c in Sources */,
+				55BC63382055C42B001F8CFB /* opcodes.c in Sources */,
+				55BC632A2055C42B001F8CFB /* heap.c in Sources */,
+				55BC632C2055C42B001F8CFB /* search.c in Sources */,
+				55BC63282055C42B001F8CFB /* savefile.c in Sources */,
+				55BC632D2055C42B001F8CFB /* glkop.c in Sources */,
+				55BC633A2055C42B001F8CFB /* git.c in Sources */,
+				55BC63292055C42B001F8CFB /* memory.c in Sources */,
+				55BC63332055C42B001F8CFB /* compiler.c in Sources */,
+				55BC63372055C42B001F8CFB /* terp.c in Sources */,
+				55BC63312055C42B001F8CFB /* peephole.c in Sources */,
+				55BC63362055C42B001F8CFB /* saveundo.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1754,19 +1814,12 @@
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_INLINE,
 					"$(inherited)",
 				);
 				INSTALL_PATH = /usr/local/bin;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				PRODUCT_NAME = git;
 			};
 			name = Debug;
@@ -1777,19 +1830,12 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_INLINE,
 					"$(inherited)",
 				);
 				INSTALL_PATH = /usr/local/bin;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				PRODUCT_NAME = git;
 			};
 			name = Release;
@@ -2104,9 +2150,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2143,6 +2191,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

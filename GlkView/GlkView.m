@@ -885,7 +885,7 @@
 			return [style proportional]?1:0;
 			
 		case stylehint_ReverseColor:
-			return [style reversed]?1:0;
+			return style.reversed?1:0;
 			
 		case stylehint_Size:
 			// This is a bit pointless, as the units are 'platform-defined'. Therefore we measure our font size in football fields.
@@ -2273,7 +2273,7 @@
 	if ([outputReceivers count] > 0) {
 		int ident = [self automationIdForWindowId: windowId];
 		
-		for (id<GlkAutomation> in outputReceivers) {
+		for (id<GlkAutomation> receiver in outputReceivers) {
 			[receiver userTyped: inputLine
 						 window: ident
 					  lineInput: YES

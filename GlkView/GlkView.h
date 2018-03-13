@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	
 	// Automation
 	/// The automation output receivers attached to this view
-	NSMutableArray* outputReceivers;
+	NSMutableArray<id<GlkAutomation>>* outputReceivers;
 	/// The automation input receiver attached to this view
 	NSMutableArray* inputReceivers;
 	

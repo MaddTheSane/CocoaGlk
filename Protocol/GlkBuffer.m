@@ -267,28 +267,28 @@ static NSString* stringFromOp(NSArray* op) {
 // Creating the various types of window
 - (void) createBlankWindowWithIdentifier: (glui32) identifier {
 	[self addOperation: s_CreateBlankWindowWithIdentifier
-			 arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: identifier]]];
+			 arguments: @[@(identifier)]];
 }
 
 - (void) createTextGridWindowWithIdentifier: (glui32) identifier {
 	[self addOperation: s_CreateTextGridWindowWithIdentifier
-			 arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: identifier]]];
+			 arguments: @[@(identifier)]];
 }
 
 - (void) createTextWindowWithIdentifier: (glui32) identifier {
 	[self addOperation: s_CreateTextWindowWithIdentifier
-			 arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: identifier]]];
+			 arguments: @[@(identifier)]];
 }
 
 - (void) createGraphicsWindowWithIdentifier: (glui32) identifier {
 	[self addOperation: s_CreateGraphicsWindowWithIdentifier
-			 arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: identifier]]];
+			 arguments: @[@(identifier)]];
 }
 
 // Placing windows in the tree
 - (void) setRootWindow: (glui32) identifier {
 	[self addOperation: s_SetRootWindow
-			 arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: identifier]]];
+			 arguments: @[@(identifier)]];
 }
 
 - (void) createPairWindowWithIdentifier: (glui32) identifier
@@ -298,19 +298,18 @@ static NSString* stringFromOp(NSArray* op) {
 								 method: (glui32) method
 								   size: (glui32) size {
 	[self addOperation: s_CreatePairWindowWithIdentifier
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: identifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: keyIdentifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: leftIdentifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: rightIdentifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: method]
-			 		  							 , [NSNumber numberWithUnsignedInt: size]
-			 		  							 , nil]];
+			 arguments: @[@(identifier),
+						  @(keyIdentifier),
+						  @(leftIdentifier),
+						  @(rightIdentifier),
+						  @(method),
+						  @(size)]];
 }
 
 // Closing windows
 - (void) closeWindowIdentifier: (glui32) identifier {
 	[self addOperation: s_CloseWindowIdentifier
-			 arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: identifier]]];
+			 arguments: @[@(identifier)]];
 }
 
 // Manipulating windows
@@ -318,31 +317,28 @@ static NSString* stringFromOp(NSArray* op) {
 				toXposition: (int) xpos
 				  yPosition: (int) ypos {
 	[self addOperation: s_MoveCursorInWindow
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: identifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: xpos]
-			 		  							 , [NSNumber numberWithUnsignedInt: ypos]
-			 		  							 , nil]];
+			 arguments: @[@(identifier),
+						  @(xpos),
+						  @(ypos)]];
 }
 
 - (void) clearWindowIdentifier: (glui32) identifier {
 	[self addOperation: s_ClearWindowIdentifier
-			 arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: identifier]]];
+			 arguments: @[@(identifier)]];
 }
 
 - (void) clearWindowIdentifier: (glui32) identifier
 		  withBackgroundColour: (in bycopy NSColor*) bgColour {
 	[self addOperation: s_ClearWindowIdentifierWithBackground
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: identifier]
-			 		  							 , bgColour
-			 		  							 , nil]];
+			 arguments: @[@(identifier),
+						  bgColour]];
 }
 
 - (void) setInputLine: (in bycopy NSString*) inputLine
   forWindowIdentifier: (unsigned) windowIdentifier {
 	[self addOperation: s_SetInputLine
-			 arguments: [NSArray arrayWithObjects: inputLine
-			 		  							 , [NSNumber numberWithUnsignedInt: windowIdentifier]
-			 		  							 , nil]];
+			 arguments: @[inputLine,
+						  @(windowIdentifier)]];
 }
 
 - (void) arrangeWindow: (glui32) identifier
@@ -350,11 +346,10 @@ static NSString* stringFromOp(NSArray* op) {
 				  size: (glui32) size
 			 keyWindow: (glui32) keyIdentifier {
 	[self addOperation: s_ArrangeWindow
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: identifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: method]
-			 		  							 , [NSNumber numberWithUnsignedInt: size]
-			 		  							 , [NSNumber numberWithUnsignedInt: keyIdentifier]
-			 		  							 , nil]];
+			 arguments: @[@(identifier),
+						  @(method),
+						  @(size),
+						  @(keyIdentifier)]];
 }
 
 // Styles
@@ -363,47 +358,42 @@ static NSString* stringFromOp(NSArray* op) {
 			  toValue: (glsi32) value
 		   windowType: (glui32) wintype {
 	[self addOperation: s_SetStyleHint
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: hint]
-			 		  							 , [NSNumber numberWithUnsignedInt: style]
-			 		  							 , [NSNumber numberWithUnsignedInt: value]
-			 		  							 , [NSNumber numberWithUnsignedInt: wintype]
-			 		  							 , nil]];
+			 arguments: @[@(hint),
+						  @(style),
+						  @(value),
+						  @(wintype)]];
 }
 
 - (void) clearStyleHint: (glui32) hint
 			   forStyle: (glui32) style
 			 windowType: (glui32) wintype {
 	[self addOperation: s_ClearStyleHint
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: hint]
-			 		  							 , [NSNumber numberWithUnsignedInt: style]
-			 		  							 , [NSNumber numberWithUnsignedInt: wintype]
-			 		  							 , nil]];
+			 arguments: @[@(hint),
+						  @(style),
+						  @(wintype)]];
 }
 
 - (void) setStyleHint: (glui32) hint
 			  toValue: (glsi32) value
 			 inStream: (glui32) streamIdentifier {
 	[self addOperation: s_SetStyleHintStream
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: hint]
-			 		  							 , [NSNumber numberWithUnsignedInt: value]
-			 		  							 , [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[@(hint),
+						  @(value),
+						  @(streamIdentifier)]];
 }
 
 - (void) clearStyleHint: (glui32) hint
 			   inStream: (glui32) streamIdentifier {
 	[self addOperation: s_ClearStyleHintStream
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: hint]
-			 		  							 , [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[@(hint),
+						  @(streamIdentifier)]];
 }
 
 - (void) setCustomAttributes: (NSDictionary*) attributes
 					inStream: (glui32) streamIdentifier {
 	[self addOperation: s_SetCustomAttributesStream
-			 arguments: [NSArray arrayWithObjects: attributes
-			 		  							 , [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[attributes,
+						  @(streamIdentifier)]];
 }
 
 // Graphics
@@ -411,40 +401,36 @@ static NSString* stringFromOp(NSArray* op) {
 							 withColour: (in bycopy NSColor*) color
 							  rectangle: (NSRect) windowArea {
 	[self addOperation: s_FillAreaInWindowWithIdentifier
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: identifier]
-			 		  							 , color
-			 		  							 , [NSValue valueWithRect: windowArea]
-			 		  							 , nil]];
+			 arguments: @[@(identifier),
+						  color,
+						  [NSValue valueWithRect: windowArea]]];
 }
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					  atPosition: (NSPoint) position {
 	[self addOperation: s_DrawImageWithIdentifier
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: imageIdentifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: windowIdentifier]
-			 		  							 , [NSValue valueWithPoint: position]
-			 		  							 , nil]];
+			 arguments: @[@(imageIdentifier),
+						  @(windowIdentifier),
+						  [NSValue valueWithPoint: position]]];
 }
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 						  inRect: (NSRect) imageRect {
 	[self addOperation: s_DrawImageWithIdentifierInRect
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: imageIdentifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: windowIdentifier]
-			 		  							 , [NSValue valueWithRect: imageRect]
-			 		  							 , nil]];
+			 arguments: @[@(imageIdentifier),
+						  @(windowIdentifier),
+						  [NSValue valueWithRect: imageRect]]];
 }
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					   alignment: (unsigned) alignment {
 	[self addOperation: s_DrawImageWithIdentifierAlign
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: imageIdentifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: windowIdentifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: alignment]
-			 		  							 , nil]];
+			 arguments: @[@(imageIdentifier),
+						  @(windowIdentifier),
+						  @(alignment)]];
 }
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
@@ -452,17 +438,15 @@ static NSString* stringFromOp(NSArray* op) {
 					   alignment: (unsigned) alignment
 							size: (NSSize) imageSize {
 	[self addOperation: s_DrawImageWithIdentifierAlignSize
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: imageIdentifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: windowIdentifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: alignment]
-			 		  							 , [NSValue valueWithSize: imageSize]
-			 		  							 , nil]];
+			 arguments: @[@(imageIdentifier),
+						  @(windowIdentifier),
+						  @(alignment),
+						  [NSValue valueWithSize: imageSize]]];
 }
 
 - (void) breakFlowInWindowWithIdentifier: (unsigned) identifier {
 	[self addOperation: s_BreakFlowInWindowWithIdentifier
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: identifier]
-			 		  							 , nil]];
+			 arguments: @[@(identifier)]];
 }
 
 // Streams
@@ -471,62 +455,54 @@ static NSString* stringFromOp(NSArray* op) {
 - (void) registerStream: (in byref NSObject<GlkStream>*) stream
 		  forIdentifier: (unsigned) streamIdentifier  {
 	[self addOperation: s_RegisterStream
-			 arguments: [NSArray arrayWithObjects: stream
-			 		  							 , [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[stream,
+						  @(streamIdentifier)]];
 }
 
 - (void) registerStreamForWindow: (unsigned) windowIdentifier
 				   forIdentifier: (unsigned) streamIdentifier {
 	[self addOperation: s_RegisterStreamForWindow
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: windowIdentifier]
-			 		  							 , [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[@(windowIdentifier),
+						  @(streamIdentifier)]];
 }
 
 - (void) closeStreamIdentifier: (unsigned) streamIdentifier {
 	[self addOperation: s_CloseStreamIdentifier
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[@(streamIdentifier)]];
 }
 
 - (void) unregisterStreamIdentifier: (unsigned) streamIdentifier {
 	[self addOperation: s_UnregisterStreamIdentifier
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[@(streamIdentifier)]];
 }
 
 // Buffering stream writes
 - (void) putChar: (unichar) ch
 		toStream: (unsigned) streamIdentifier {
 	[self addOperation: s_PutCharToStream
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: ch]
-			 		  							 , [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[[NSNumber numberWithUnsignedShort: ch],
+						  @(streamIdentifier)]];
 }
 
 - (void) putString: (in bycopy NSString*) string
 		  toStream: (unsigned) streamIdentifier  {
 	[self addOperation: s_PutStringToStream
-			 arguments: [NSArray arrayWithObjects: string
-												 , [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[string,
+						  @(streamIdentifier)]];
 }
 
 - (void) putData: (in bycopy NSData*) data							// Note: do not pass in mutable data here, as the contents may change unexpectedly
 		toStream: (unsigned) streamIdentifier {
 	[self addOperation: s_PutDataToStream
-			 arguments: [NSArray arrayWithObjects: data
-			 		  							 , [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[data,
+						  @(streamIdentifier)]];
 }
 
 - (void) setStyle: (unsigned) style
 		 onStream: (unsigned) streamIdentifier {
 	[self addOperation: s_SetStyle
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: style]
-			 		  							 , [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[@(style),
+						  @(streamIdentifier)]];
 }
 
 
@@ -534,15 +510,13 @@ static NSString* stringFromOp(NSArray* op) {
 - (void) setHyperlink: (unsigned int) value
 			 onStream: (unsigned) streamIdentifier {
 	[self addOperation: s_SetHyperlink
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: value]
-			 		  							 , [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[@(value),
+						  @(streamIdentifier)]];
 }
 
 - (void) clearHyperlinkOnStream: (unsigned) streamIdentifier {
 	[self addOperation: s_ClearHyperlinkOnStream
-			 arguments: [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: streamIdentifier]
-			 		  							 , nil]];
+			 arguments: @[@(streamIdentifier)]];
 }
 
 // Events
@@ -550,37 +524,37 @@ static NSString* stringFromOp(NSArray* op) {
 // Requesting events
 - (void) requestLineEventsForWindowIdentifier:      (unsigned) windowIdentifier {
 	[self addOperation: s_RequestLineEventsForWindowIdentifier
-		     arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: windowIdentifier]]];
+		     arguments: @[@(windowIdentifier)]];
 }
 
 - (void) requestCharEventsForWindowIdentifier:      (unsigned) windowIdentifier {
 	[self addOperation: s_RequestCharEventsForWindowIdentifier
-		     arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: windowIdentifier]]];
+		     arguments: @[@(windowIdentifier)]];
 }
 
 - (void) requestMouseEventsForWindowIdentifier:     (unsigned) windowIdentifier {
 	[self addOperation: s_RequestMouseEventsForWindowIdentifier
-		     arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: windowIdentifier]]];
+		     arguments: @[@(windowIdentifier)]];
 }
 
 - (void) requestHyperlinkEventsForWindowIdentifier: (unsigned) windowIdentifier {
 	[self addOperation: s_RequestHyperlinkEventsForWindowIdentifier
-		     arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: windowIdentifier]]];
+		     arguments: @[@(windowIdentifier)]];
 }
 
 - (void) cancelCharEventsForWindowIdentifier:      (unsigned) windowIdentifier {
 	[self addOperation: s_CancelCharEventsForWindowIdentifier
-		     arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: windowIdentifier]]];
+		     arguments: @[@(windowIdentifier)]];
 }
 
 - (void) cancelMouseEventsForWindowIdentifier:     (unsigned) windowIdentifier {
 	[self addOperation: s_CancelMouseEventsForWindowIdentifier
-		     arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: windowIdentifier]]];
+		     arguments: @[@(windowIdentifier)]];
 }
 
 - (void) cancelHyperlinkEventsForWindowIdentifier: (unsigned) windowIdentifier {
 	[self addOperation: s_CancelHyperlinkEventsForWindowIdentifier
-		     arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: windowIdentifier]]];
+		     arguments: @[@(windowIdentifier)]];
 }
 
 /// = Buffer flushing =

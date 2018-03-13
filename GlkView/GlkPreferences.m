@@ -204,7 +204,7 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 - (void) setStyle: (GlkStyle*) style
 		  forHint: (unsigned) glkHint {
 	[styles setObject: [[style copy] autorelease]
-			   forKey: [NSNumber numberWithUnsignedInt: glkHint]];
+			   forKey: @(glkHint)];
 	
 	[self preferencesHaveChanged];
 }

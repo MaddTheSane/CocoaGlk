@@ -150,7 +150,7 @@
 	}
 	
 	// Get the result from the styles object (use a default if we can't find a suitable style)
-	GlkStyle* res = [styles objectForKey: [NSNumber numberWithUnsignedInt: glkStyle]];	
+	GlkStyle* res = [styles objectForKey: @(glkStyle)];	
 	if (!res) res = [GlkStyle style];
 	
 	if (forceFixed && [res proportional]) [res setProportional: NO];

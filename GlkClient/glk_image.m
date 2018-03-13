@@ -117,7 +117,7 @@ glui32 glk_image_get_info(glui32 image, glui32 *width, glui32 *height) {
 	if (!imageSourceSet) cocoaglk_set_image_source([[[GlkBlorbImageSource alloc] init] autorelease]);
 	
 	// This caches the image sizes, to avoid repeatedly calling the server process
-	static NSMutableDictionary* imageSizeDictionary = nil;	
+	static NSMutableDictionary<NSNumber*, NSValue*>* imageSizeDictionary = nil;	
 	if (!imageSizeDictionary) {
 		imageSizeDictionary = [[NSMutableDictionary alloc] init];
 	}
@@ -125,7 +125,7 @@ glui32 glk_image_get_info(glui32 image, glui32 *width, glui32 *height) {
 	glui32 res = 0;
 	
 	// Use the cache for preference
-	NSNumber* imageKey = [NSNumber numberWithUnsignedInt: image];
+	NSNumber* imageKey = @(image);
 	NSValue* imageSizeValue = [imageSizeDictionary objectForKey: imageKey];
 	NSSize imageSize;
 	

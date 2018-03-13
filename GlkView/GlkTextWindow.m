@@ -108,7 +108,7 @@
 		
 		// Set the hyperlink style
 		NSDictionary* hyperStyle = [NSDictionary dictionaryWithObjectsAndKeys:
-			[NSNumber numberWithInt: NSSingleUnderlineStyle], NSUnderlineStyleAttributeName,
+			@(NSSingleUnderlineStyle), NSUnderlineStyleAttributeName,
 			[NSCursor pointingHandCursor], NSCursorAttributeName,
 			nil];
 		if ([textView respondsToSelector: @selector(setLinkTextAttributes:)]) {

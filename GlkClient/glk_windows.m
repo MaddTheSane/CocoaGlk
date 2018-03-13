@@ -109,12 +109,12 @@ void cocoaglk_winid_identify(winid_t win) {
 	
 	// Add this identifier to the dictionary
 	[cocoaglk_windows setObject: [NSValue valueWithPointer: win]
-						 forKey: [NSNumber numberWithUnsignedInt: win->identifier]];
+						 forKey: @(win->identifier)];
 }
 
 // Get a winid from an identifier
 winid_t cocoaglk_winid_get(unsigned identifier) {
-	NSValue* res = [cocoaglk_windows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
+	NSValue* res = [cocoaglk_windows objectForKey: @(identifier)];
 	
 	if (res == nil) return NULL;
 	
@@ -422,7 +422,7 @@ void cocoaglk_window_discard(winid_t win) {
 	}
 	
 	// Finish off this window
-	[cocoaglk_windows removeObjectForKey: [NSNumber numberWithUnsignedInt: win->identifier]];
+	[cocoaglk_windows removeObjectForKey: @(win->identifier)];
 	
 	// Finally kill the window
 	win->key = 0;

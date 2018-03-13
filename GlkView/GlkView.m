@@ -468,8 +468,8 @@
 	if ([event type] == evtype_Arrange) {
 		if (arrangeEvent) {
 			// Merge with the previous arrange event
-			GlkWindow* origWin = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: [arrangeEvent windowIdentifier]]];
-			GlkWindow* newWin = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: [event windowIdentifier]]];
+			GlkWindow* origWin = [glkWindows objectForKey: @([arrangeEvent windowIdentifier])];
+			GlkWindow* newWin = [glkWindows objectForKey: @([event windowIdentifier])];
 			
 			if (origWin != rootWindow && origWin != newWin && [origWin identifier] != [newWin identifier]) {
 				// Create a new arrangement event using the root window
@@ -531,14 +531,14 @@
 		styles = [[NSMutableDictionary alloc] init];
 	}
 	
-	NSMutableDictionary* res = [styles objectForKey: [NSNumber numberWithUnsignedInt: type]];
+	NSMutableDictionary* res = [styles objectForKey: @(type)];
 	if (!res) {
 		// Create the dictionary for this wintype if necessary
 		res = [[NSMutableDictionary alloc] initWithDictionary: [prefs styles]
 													copyItems: YES];
 		
 		[styles setObject: res
-				   forKey: [NSNumber numberWithUnsignedInt: type]];
+				   forKey: @(type)];
 	} else {
 		[res retain];
 	}
@@ -803,7 +803,7 @@
 // Streams
 
 - (byref NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId {
-	GlkWindow* window = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowId]];
+	GlkWindow* window = [glkWindows objectForKey: @(windowId)];
 	
 	if (window) {
 		return window;
@@ -826,7 +826,7 @@
 				   hint: (glui32) hint
 			   inWindow: (glui32) windowId {
 	// Get the window
-	GlkWindow* window = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowId]];
+	GlkWindow* window = [glkWindows objectForKey: @(windowId)];
 	
 	if (!window) {
 		NSLog(@"measureStyle:hint:inWindow: called with an invalid window ID");
@@ -903,7 +903,7 @@
 // Windows
 
 - (GlkSize) sizeForWindowIdentifier: (unsigned) windowId {
-	GlkWindow* window = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowId]];
+	GlkWindow* window = [glkWindows objectForKey: @(windowId)];
 	
 	if (window == nil) {
 		NSLog(@"Warning: attempt to get size for nonexistent window");
@@ -1207,8 +1207,10 @@
 	[newWindow setPreferences: prefs];
 	[newWindow setContainingView: self];
 	
-	[glkWindows setObject: [newWindow autorelease]
-				   forKey: [NSNumber numberWithUnsignedInt: identifier]];
+	[glkWindows setObject: newWindow
+				   forKey: @(identifier)];
+	
+	[newWindow release];
 }
 
 - (void) createTextGridWindowWithIdentifier: (glui32) identifier {
@@ -1221,8 +1223,10 @@
 	[newWindow setPreferences: prefs];
 	[newWindow setContainingView: self];
 	
-	[glkWindows setObject: [newWindow autorelease]
-				   forKey: [NSNumber numberWithUnsignedInt: identifier]];
+	[glkWindows setObject: newWindow
+				   forKey: @(identifier)];
+	
+	[newWindow release];
 }
 
 - (void) createTextWindowWithIdentifier: (glui32) identifier {
@@ -1235,8 +1239,10 @@
 	[newWindow setPreferences: prefs];
 	[newWindow setContainingView: self];
 	
-	[glkWindows setObject: [newWindow autorelease]
-				   forKey: [NSNumber numberWithUnsignedInt: identifier]];
+	[glkWindows setObject: newWindow
+				   forKey: @(identifier)];
+	
+	[newWindow release];
 }
 
 - (void) createGraphicsWindowWithIdentifier: (glui32) identifier {
@@ -1249,8 +1255,10 @@
 	[newWindow setPreferences: prefs];
 	[newWindow setContainingView: self];
 	
-	[glkWindows setObject: [newWindow autorelease]
-				   forKey: [NSNumber numberWithUnsignedInt: identifier]];
+	[glkWindows setObject: newWindow
+				   forKey: @(identifier)];
+	
+	[newWindow release];
 }
 
 // Placing windows in the tree
@@ -1277,10 +1285,11 @@
 			}
 			
 			// Associate this window with its identifier
-			[windowPositionCache setObject: [NSNumber numberWithInt: position]
-									forKey: [NSNumber numberWithUnsignedInt: [currentWindow glkIdentifier]]];
+			NSNumber *posNum = @(position);
+			[windowPositionCache setObject: posNum
+									forKey: @([currentWindow glkIdentifier])];
 			[windowIdCache setObject: currentWindow
-							  forKey: [NSNumber numberWithInt: position]];
+							  forKey: posNum];
 			
 			// Move to the next window
 			GlkWindow* left = nil;
@@ -1299,7 +1308,7 @@
 	}
 	
 	// Get the cached position
-	NSNumber* position = [windowPositionCache objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
+	NSNumber* position = [windowPositionCache objectForKey: @(identifier)];
 	
 	// Return the result
 	if (position == nil) return -1;
@@ -1312,7 +1321,7 @@
 		[self automationIdForWindowId: 0];
 	}
 	
-	return [windowIdCache objectForKey: [NSNumber numberWithInt: autoId]];
+	return [windowIdCache objectForKey: @(autoId)];
 }
 
 - (void) setRootWindow: (glui32) identifier {
@@ -1324,7 +1333,7 @@
 		return;
 	}
 	
-	GlkWindow* newRootWindow = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
+	GlkWindow* newRootWindow = [glkWindows objectForKey: @(identifier)];
 	
 	[windowPositionCache release];
 	[windowIdCache release];
@@ -1351,9 +1360,9 @@
 							rightWindow: (glui32) rightId
 								 method: (glui32) method
 								   size: (glui32) size {
-	GlkWindow* key = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: keyId]];
-	GlkWindow* left = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: leftId]];
-	GlkWindow* right = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: rightId]];
+	GlkWindow* key = [glkWindows objectForKey: @(keyId)];
+	GlkWindow* left = [glkWindows objectForKey: @(leftId)];
+	GlkWindow* right = [glkWindows objectForKey: @(rightId)];
 	
 	// Sanity check
 	if (key == nil || left == nil || right == nil) {
@@ -1406,9 +1415,11 @@
 	[left setParent: newWin];
 	
 	// Add to the window structure
-	[glkWindows setObject: [newWin autorelease]
-				   forKey: [NSNumber numberWithUnsignedInt: identifier]];
+	[glkWindows setObject: newWin
+				   forKey: @(identifier)];
 	windowsNeedLayout = YES;
+	
+	[newWin release];
 }
 
 // Manipulating windows
@@ -1416,7 +1427,7 @@
 - (void) moveCursorInWindow: (glui32) identifier
 				toXposition: (int) xpos
 				  yPosition: (int) ypos {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(identifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: attempt to move cursor in nonexistent window");
@@ -1428,7 +1439,7 @@
 }
 
 - (void) clearWindowIdentifier: (glui32) identifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(identifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: attempt to clear nonexistent window");
@@ -1440,7 +1451,7 @@
 
 - (void) clearWindowIdentifier: (glui32) identifier 
 		  withBackgroundColour: (in bycopy NSColor*) bgCol {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(identifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: attempt to clear nonexistent window");
@@ -1456,7 +1467,7 @@
 
 - (void) setInputLine: (in bycopy NSString*) inputLine
   forWindowIdentifier: (unsigned) identifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(identifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: attempt to set input line for nonexistent window");
@@ -1470,8 +1481,8 @@
 				method: (glui32) method
 				  size: (glui32) size
 			 keyWindow: (glui32) keyIdentifier {
-	GlkPairWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
-	GlkWindow* keyWin = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: keyIdentifier]];
+	GlkPairWindow* win = [glkWindows objectForKey: @(identifier)];
+	GlkWindow* keyWin = [glkWindows objectForKey: @(keyIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: attempt to arrange a nonexistent window");
@@ -1524,7 +1535,7 @@
 	
 	// Get the information for this style
 	NSMutableDictionary* winStyles = [self stylesForWindowType: wintype];
-	NSNumber* styleNumber = [NSNumber numberWithUnsignedInt: styl];
+	NSNumber* styleNumber = @(styl);
 	GlkStyle* style = [winStyles objectForKey: styleNumber];
 	
 	if (style == nil) {
@@ -1559,7 +1570,7 @@
 	
 	// Get the information for this style
 	NSMutableDictionary* winStyles = [self stylesForWindowType: wintype];
-	NSNumber* styleNumber = [NSNumber numberWithUnsignedInt: styl];
+	NSNumber* styleNumber = @(styl);
 	GlkStyle* style = [winStyles objectForKey: styleNumber];
 	
 	if (style == nil) {
@@ -1579,7 +1590,7 @@
 - (void) setStyleHint: (glui32) hint
 			  toValue: (glsi32) value
 			 inStream: (glui32) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to set an immediate style hint in an undefined stream");
@@ -1592,7 +1603,7 @@
 
 - (void) clearStyleHint: (glui32) hint
 			   inStream: (glui32) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to clear an immediate style hint in an undefined stream");
@@ -1604,7 +1615,7 @@
 
 - (void) setCustomAttributes: (NSDictionary*) attributes
 					inStream: (glui32) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to set custom attributes in an undefined stream");
@@ -1617,7 +1628,7 @@
 // Closing windows
 
 - (void) removeIdentifier: (glui32) identifier {
-	GlkPairWindow* win = [[glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]] retain];
+	GlkPairWindow* win = [[glkWindows objectForKey: @(identifier)] retain];
 
 	if ([win isKindOfClass: [GlkPairWindow class]]) {
 		// Remove the ID for the left and right windows
@@ -1626,7 +1637,7 @@
 	}
 	
 	// Remove from the list of known windows
-	[glkWindows removeObjectForKey: [NSNumber numberWithUnsignedInt: identifier]];
+	[glkWindows removeObjectForKey: @(identifier)];
 	
 	// Remove from the superview
 	[win removeFromSuperviewWithoutNeedingDisplay];
@@ -1638,7 +1649,7 @@
 }
 
 - (void) closeWindowIdentifier: (glui32) identifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(identifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: attempt to close a nonexistent window");
@@ -1710,12 +1721,12 @@
 - (void) registerStream: (in byref NSObject<GlkStream>*) stream
 		  forIdentifier: (unsigned) streamIdentifier {
 	[glkStreams setObject: stream
-				   forKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+				   forKey: @(streamIdentifier)];
 }
 
 - (void) registerStreamForWindow: (unsigned) windowIdentifier
 				   forIdentifier: (unsigned) streamIdentifier {
-	GlkWindow* window = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* window = [glkWindows objectForKey: @(windowIdentifier)];
 
 	if (window == nil) {
 		NSLog(@"Warning: attempt to register stream for nonexistent window");
@@ -1727,7 +1738,7 @@
 }
 
 - (void) closeStreamIdentifier: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to close nonexistent stream");
@@ -1735,18 +1746,18 @@
 	}
 	
 	[stream closeStream];
-	[glkStreams removeObjectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	[glkStreams removeObjectForKey: @(streamIdentifier)];
 }
 
 - (void) unregisterStreamIdentifier: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (!stream) {
 		// Stream might not have been registered to begin with: we consider this OK
 		return;
 	}
 	
-	[glkStreams removeObjectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	[glkStreams removeObjectForKey: @(streamIdentifier)];
 }
 
 // Buffering stream writes
@@ -1756,12 +1767,9 @@
 	// If this is a text window stream, then send the output to the appropriate automation objects
 	if ([stream isKindOfClass: [GlkTextWindow class]] &&
 		![stream isKindOfClass: [GlkTextGridWindow class]]) {
-		NSEnumerator* outputEnum = [outputReceivers objectEnumerator];
-		NSObject<GlkAutomation>* receiver;
-		
 		int windowId = [self automationIdForWindowId: [(GlkTextWindow*)stream glkIdentifier]];
 		
-		while (receiver = [outputEnum nextObject]) {
+		for (id<GlkAutomation> receiver in outputReceivers) {
 			[receiver receivedCharacters: string
 								  window: windowId
 								fromView: self];
@@ -1771,7 +1779,7 @@
 
 - (void) putChar: (unichar) ch
 		toStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to write to nonexistent stream");
@@ -1790,7 +1798,7 @@
 
 - (void) putString: (in bycopy NSString*) string
 		  toStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to write to nonexistent stream");
@@ -1807,7 +1815,7 @@
 
 - (void) putData: (in bycopy NSData*) data
 		toStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to write to nonexistent stream");
@@ -1819,7 +1827,7 @@
 
 - (void) setStyle: (unsigned) style
 		 onStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to set style on a nonexistent stream");
@@ -1834,7 +1842,7 @@
 
 - (void) setHyperlink: (unsigned int) value
 			 onStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to set style on a nonexistent stream");
@@ -1845,7 +1853,7 @@
 }
 
 - (void) clearHyperlinkOnStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to set style on a nonexistent stream");
@@ -1918,7 +1926,7 @@
 }
 
 - (void) requestLineEventsForWindowIdentifier: (unsigned) windowIdentifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: events requested for a window that does not exist");
@@ -1929,7 +1937,7 @@
 }
 
 - (void) requestCharEventsForWindowIdentifier: (unsigned) windowIdentifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: events requested for a window that does not exist");
@@ -1940,7 +1948,7 @@
 }
 
 - (void) requestMouseEventsForWindowIdentifier: (unsigned) windowIdentifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: events requested for a window that does not exist");
@@ -1951,7 +1959,7 @@
 }
 
 - (void) requestHyperlinkEventsForWindowIdentifier: (unsigned) windowIdentifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: events requested for a window that does not exist");
@@ -1962,7 +1970,7 @@
 }
 
 - (bycopy NSString*) cancelLineEventsForWindowIdentifier: (unsigned) windowIdentifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: events cancelled for a window that does not exist");
@@ -1973,7 +1981,7 @@
 }
 
 - (void) cancelCharEventsForWindowIdentifier: (unsigned) windowIdentifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: events cancelled for a window that does not exist");
@@ -1984,7 +1992,7 @@
 }
 
 - (void) cancelMouseEventsForWindowIdentifier: (unsigned) windowIdentifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: events cancelled for a window that does not exist");
@@ -1995,7 +2003,7 @@
 }
 
 - (void) cancelHyperlinkEventsForWindowIdentifier: (unsigned) windowIdentifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: events requested for a window that does not exist");
@@ -2034,7 +2042,7 @@
 	if (!flippedImageDictionary) flippedImageDictionary = [[NSMutableDictionary alloc] init];
 	
 	// First, try to retrieve the image from the cache to save us a round-trip
-	NSNumber* imageKey = [NSNumber numberWithUnsignedInt: imageId];
+	NSNumber* imageKey = @(imageId);
 	NSImage* image = [flippedImageDictionary objectForKey: imageKey];
 	
 	if (image) return image;
@@ -2043,7 +2051,7 @@
 	image = [self imageWithIdentifier: imageId];
 	if (!image) return nil;
 	
-	NSImage* flippedImage = [[[NSImage alloc] initWithSize: [image size]] autorelease];
+	NSImage* flippedImage = [[NSImage alloc] initWithSize: [image size]];
 	NSRect imageRect;
 	
 	imageRect.origin = NSMakePoint(0,0);
@@ -2060,12 +2068,12 @@
 	[flippedImageDictionary setObject: flippedImage
 							   forKey: imageKey];
 	
-	return flippedImage;
+	return [flippedImage autorelease];
 }
 
 - (NSImage*) imageWithIdentifier: (unsigned) imageId {
 	// First, try to retrieve the image from the cache to save us a round-trip
-	NSNumber* imageKey = [NSNumber numberWithUnsignedInt: imageId];
+	NSNumber* imageKey = @(imageId);
 	NSImage* image = [imageDictionary objectForKey: imageKey];
 	
 	if (image) return image;
@@ -2082,7 +2090,7 @@
 	// Store the result in the dictionary
 	if (imageData) {
 		// Get the source image
-		NSImage* sourceImage = [[[NSImage alloc] initWithData: imageData] autorelease];
+		NSImage* sourceImage = [[NSImage alloc] initWithData: imageData];
 		
 		// Turn off caching for this image to stop Cocoa doing something 'clever' which actually turns out to be stupid (pixelates the logo in Narcolepsy)
 		[sourceImage setCacheMode: NSImageCacheNever];
@@ -2104,6 +2112,7 @@
 					  operation: NSCompositeSourceOver
 					   fraction: 1.0];
 		[image unlockFocus];
+		[sourceImage release];
 
 		// Store in the dictionary
 		[imageDictionary setObject: [image autorelease]
@@ -2127,7 +2136,7 @@
 - (void) fillAreaInWindowWithIdentifier: (unsigned) windowIdentifier
 							 withColour: (in bycopy NSColor*) col
 							  rectangle: (NSRect) rect {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: fillAreaInWindowWithIdentifier: called for a window that does not exist");
@@ -2146,7 +2155,7 @@
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					  atPosition: (NSPoint) position {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: drawImageInWindowWithIdentifier:atPosition: called for a window that does not exist");
@@ -2177,7 +2186,7 @@
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 						  inRect: (NSRect) imageRect {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 
 	if (!win) {
 		NSLog(@"Warning: drawImageInWindowWithIdentifier:inRect: called for a window that does not exist");
@@ -2214,7 +2223,7 @@
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					   alignment: (unsigned) alignment
 							size: (NSSize) imageSize {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: drawImageInWindowWithIdentifier: called for a window that does not exist");
@@ -2239,7 +2248,7 @@
 }
 
 - (void) breakFlowInWindowWithIdentifier: (unsigned) windowIdentifier {
-	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
 		NSLog(@"Warning: breakFlowInWindowWithIdentifier: called for a window that does not exist");
@@ -2262,11 +2271,9 @@
 	[inputHistory addObject: inputLine];
 	
 	if ([outputReceivers count] > 0) {
-		NSEnumerator* outputReceiverEnum = [outputReceivers objectEnumerator];
-		NSObject<GlkAutomation>* receiver;
 		int ident = [self automationIdForWindowId: windowId];
 		
-		while (receiver = [outputReceiverEnum nextObject]) {
+		for (id<GlkAutomation> in outputReceivers) {
 			[receiver userTyped: inputLine
 						 window: ident
 					  lineInput: YES

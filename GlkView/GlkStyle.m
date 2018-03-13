@@ -246,7 +246,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 		font, NSFontAttributeName,
 		foreCol, NSForegroundColorAttributeName,
 		backCol, NSBackgroundColorAttributeName,
-		[NSNumber numberWithInt: [prefs useLigatures]], NSLigatureAttributeName,
+		@([prefs useLigatures]), NSLigatureAttributeName,
 		nil];
 		
 	// Finish up

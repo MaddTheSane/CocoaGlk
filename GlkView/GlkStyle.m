@@ -15,7 +15,7 @@
 #define CGF(__x) __x ## f
 #endif
 
-NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
+NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 
 @implementation GlkStyle
 

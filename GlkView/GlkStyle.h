@@ -9,16 +9,15 @@
 #import <Cocoa/Cocoa.h>
 #import <GlkView/glk.h>
 
-extern NSString* GlkStyleAttributeName;									// Styles store themselves in the attributes to facilitate reformating after a change to a preference object
-
-//
-// Description of a Glk style, and functions for turning a Glk style into a cocoa style
-//
-// (Maybe I should split this into a Mutable/Immutable pair)
-//
+extern NSAttributedStringKey const GlkStyleAttributeName;									//!< Styles store themselves in the attributes to facilitate reformating after a change to a preference object
 
 @class GlkPreferences;
 
+//!
+//! Description of a Glk style, and functions for turning a Glk style into a cocoa style
+//!
+//! (Maybe I should split this into a Mutable/Immutable pair)
+//!
 @interface GlkStyle : NSObject<NSCopying> {
 	// Style attributes
 	CGFloat indentation;

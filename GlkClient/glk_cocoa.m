@@ -181,7 +181,7 @@ void cocoaglk_start(int argv, const char** argc) {
 #endif
 
 // Reports a warning to the server
-void cocoaglk_warning(char* warningText) {
+void cocoaglk_warning(const char* warningText) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: cocoaglk_warning(\"%s\")", warningText);
 #endif
@@ -196,7 +196,7 @@ void cocoaglk_warning(char* warningText) {
 }
 
 // Reports an error to the server, then quits
-void cocoaglk_error(char* errorText) {
+void cocoaglk_error(const char* errorText) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: cocoaglk_error(\"%s\")", errorText);
 #endif

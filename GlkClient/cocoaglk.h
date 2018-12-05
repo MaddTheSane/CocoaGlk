@@ -40,10 +40,10 @@ extern void cocoaglk_start(int argv, const char** argc);
 extern void cocoaglk_flushbuffer(const char* reason);
 
 /// Reports a warning to the server
-extern void cocoaglk_warning(char* warningText);
+extern void cocoaglk_warning(const char* warningText);
 
 /// Reports an error to the server, then quits
-extern void cocoaglk_error(char* errorText);
+extern void cocoaglk_error(const char* errorText);
 
 /// Request to send a message to the game's log (if the runner supports it)
 extern void cocoaglk_log(char* logText);

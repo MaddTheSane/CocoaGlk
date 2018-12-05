@@ -28,7 +28,7 @@ NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 	}
 
 	// buf has a maximum length of twice as long as length
-	unichar uniBuf[len*2];
+	unichar uniBuf[len*2+1];
 	int uniLen = 0;
 	
 	// Run through the string...

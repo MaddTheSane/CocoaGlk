@@ -247,8 +247,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #endif
 	
 	// Measure each glyph in the glyph array
-	NSSize advance[numGlyphs];
-	NSRect bounding[numGlyphs];
+	NSSize advance[numGlyphs+1];
+	NSRect bounding[numGlyphs+1];
 	
 #ifndef MeasureMultiGlyphs
 	// Compatible mode: measure one glyph at a time

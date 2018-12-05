@@ -15,6 +15,10 @@
 #include "glk.h"
 #import "glk_client.h"
 
+struct glk_schannel_struct {
+	
+};
+
 schanid_t glk_schannel_create(glui32 rock) {
 	UndefinedFunction();
 	return NULL;

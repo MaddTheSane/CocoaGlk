@@ -62,6 +62,7 @@
 	[typesetter setDelegate: textView];
 	[textView setTextContainer: newContainer];
 	[newContainer setTextView: textView];
+	[newContainer release];
 				
 	// [[textView textContainer] setWidthTracksTextView: YES];
 	//[[textView textContainer] setContainerSize: NSMakeSize(1e8, 1e8)];

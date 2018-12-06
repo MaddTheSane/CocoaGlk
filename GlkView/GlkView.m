@@ -659,7 +659,7 @@
 		extraStreamDictionary = [[NSMutableDictionary alloc] init];
 	}
 	
-	[extraStreamDictionary setObject: [[[GlkFileStream alloc] initForReadingWithFilename: [NSURL fileURLWithPath: filename]] autorelease]
+	[extraStreamDictionary setObject: [[[GlkFileStream alloc] initForReadingWithFileURL: [NSURL fileURLWithPath: filename]] autorelease]
 							  forKey: streamKey];
 	
 	[self logMessage: [NSString stringWithFormat: @"Creating stream to read data from '%@' with key '%@'", filename, streamKey]
@@ -676,7 +676,7 @@
 
 - (void) setInputFilename: (NSString*) filename {
 	[inputStream release]; inputStream = nil;
-	inputStream = [[GlkFileStream alloc] initForReadingWithFilename: [NSURL fileURLWithPath: filename]];
+	inputStream = [[GlkFileStream alloc] initForReadingWithFileURL: [NSURL fileURLWithPath: filename]];
 	
 	[self logMessage: [NSString stringWithFormat: @"Will read data from: %@", filename]
 		  withStatus: GlkLogRoutine];

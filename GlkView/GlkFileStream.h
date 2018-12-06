@@ -16,8 +16,12 @@
 }
 
 // Initialisation
-- (instancetype) initForReadWriteWithFilename: (NSURL*) filename;
-- (instancetype) initForWritingWithFilename: (NSURL*) filename;
-- (instancetype) initForReadingWithFilename: (NSURL*) filename;
+- (instancetype) initForReadWriteWithFilename: (NSString*) filename;
+- (instancetype) initForWritingWithFilename: (NSString*) filename;
+- (instancetype) initForReadingWithFilename: (NSString*) filename;
+
+- (instancetype) initForReadWriteWithFileURL: (NSURL*) filename;
+- (instancetype) initForWritingWithFileURL: (NSURL*) filename;
+- (instancetype) initForReadingWithFileURL: (NSURL*) filename;
 
 @end

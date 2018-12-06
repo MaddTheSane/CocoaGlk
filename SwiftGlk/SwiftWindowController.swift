@@ -31,6 +31,8 @@ class SwiftWindowController: NSWindowController, GlkViewDelegate {
 		glkView.delegate = self
 	}
 	
+	// = GlkView delegate methods =
+	
 	func taskHasStarted() {
 		showStatusText("Running...")
 	}

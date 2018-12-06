@@ -171,6 +171,8 @@
 		4BFA1CD407F8A4040068E16A /* gi_blorb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1CD007F8A4040068E16A /* gi_blorb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA1CD507F8A4040068E16A /* gi_dispa.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1CD107F8A4040068E16A /* gi_dispa.m */; };
 		4BFA1D6907F8A8D00068E16A /* glk_misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1D6707F8A8D00068E16A /* glk_misc.m */; };
+		559219ED21B90663002F7F9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		559219EE21B90894002F7F9E /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55BC63282055C42B001F8CFB /* savefile.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62ED2055C42B001F8CFB /* savefile.c */; };
 		55BC63292055C42B001F8CFB /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62EF2055C42B001F8CFB /* memory.c */; };
 		55BC632A2055C42B001F8CFB /* heap.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62F02055C42B001F8CFB /* heap.c */; };
@@ -540,6 +542,7 @@
 		552A03722049D5E200A4ECAA /* GlkView.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkView.modulemap; sourceTree = "<group>"; };
 		552A03732049D64C00A4ECAA /* GlkClient.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkClient.modulemap; sourceTree = "<group>"; };
 		552A03742049D67900A4ECAA /* GlkSound.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkSound.modulemap; sourceTree = "<group>"; };
+		559219F321B908EA002F7F9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		55BC62ED2055C42B001F8CFB /* savefile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = savefile.c; sourceTree = "<group>"; };
 		55BC62EE2055C42B001F8CFB /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		55BC62EF2055C42B001F8CFB /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memory.c; sourceTree = "<group>"; };
@@ -643,6 +646,8 @@
 			files = (
 				55C6BB48204DEDC1001AE7E5 /* GlkClient.framework in Frameworks */,
 				55C6BB4C204DEDC1001AE7E5 /* GlkSound.framework in Frameworks */,
+				559219EE21B90894002F7F9E /* GlkView.framework in Frameworks */,
+				559219ED21B90663002F7F9E /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1718,6 +1723,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55C6BB3D204DED96001AE7E5 /* Base */,
+				559219F321B908EA002F7F9E /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

@@ -2267,7 +2267,7 @@
 - (void)putChar:(uint32_t)ch toStream:(unsigned int)streamIdentifier latin1:(BOOL)encode {
 	if (encode) {
 		char isoStr[] = {(unsigned char)ch, 0};
-		NSString *str = [NSString stringWithCString:isoStr encoding:NSWindowsCP1252StringEncoding];
+		NSString *str = [NSString stringWithCString:isoStr encoding:NSISOLatin1StringEncoding];
 		[self putString:str toStream:streamIdentifier];
 	} else {
 		NSData *datStr = [NSData dataWithBytes:&ch length:sizeof(uint32_t)];

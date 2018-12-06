@@ -114,7 +114,7 @@ static NSString* stringFromOp(NSArray* op) {
 			uint32_t ch = [[[op objectAtIndex: 1] objectAtIndex: 0] unsignedIntValue];
 			if (isLatin.boolValue) {
 				char isoVal[] = {(unsigned char)ch, 0};
-				return [NSString stringWithCString:isoVal encoding:NSWindowsCP1252StringEncoding];
+				return [NSString stringWithCString:isoVal encoding:NSISOLatin1StringEncoding];
 			} else {
 				NSData *strData = [NSData dataWithBytes:&ch length:sizeof(ch)];
 				return [[[NSString alloc] initWithData:strData encoding:NSUTF32StringEncoding] autorelease];

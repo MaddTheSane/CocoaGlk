@@ -2264,6 +2264,19 @@
 	[(GlkTextWindow*)win addFlowBreak];
 }
 
+- (void)putChar:(uint32_t)ch toStream:(unsigned int)streamIdentifier latin1:(BOOL)encode {
+	if (encode) {
+		char isoStr[] = {(unsigned char)ch, 0};
+		NSString *str = [NSString stringWithCString:isoStr encoding:NSWindowsCP1252StringEncoding];
+		[self putString:str toStream:streamIdentifier];
+	} else {
+		NSData *datStr = [NSData dataWithBytes:&ch length:sizeof(uint32_t)];
+		NSString *str = [[NSString alloc] initWithData:datStr encoding:NSUTF32StringEncoding];
+		[self putString:str toStream:streamIdentifier];
+		[str release];
+	}
+}
+
 // = Dealing with line history =
 
 - (void) addHistoryItem: (NSString*) inputLine 

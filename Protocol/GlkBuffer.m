@@ -109,6 +109,17 @@ static NSString* stringFromOp(NSArray* op) {
 	NSString* opType = [op objectAtIndex: 0];
 	
 	if ([opType isEqualToString: s_PutCharToStream]) {
+		if ([[op objectAtIndex: 1] count] == 2) {
+			NSNumber *isLatin = [[op objectAtIndex: 1] objectAtIndex:1];
+			uint32_t ch = [[[op objectAtIndex: 1] objectAtIndex: 0] unsignedIntValue];
+			if (isLatin.boolValue) {
+				char isoVal[] = {(unsigned char)ch, 0};
+				return [NSString stringWithCString:isoVal encoding:NSWindowsCP1252StringEncoding];
+			} else {
+				NSData *strData = [NSData dataWithBytes:&ch length:sizeof(ch)];
+				return [[[NSString alloc] initWithData:strData encoding:NSUTF32StringEncoding] autorelease];
+			}
+		}
 		unichar ch = [[[op objectAtIndex: 1] objectAtIndex: 0] unsignedShortValue];
 		
 		if (ch < 32) return nil;
@@ -482,6 +493,17 @@ static NSString* stringFromOp(NSArray* op) {
 	[self addOperation: s_PutCharToStream
 			 arguments: @[[NSNumber numberWithUnsignedShort: ch],
 						  @(streamIdentifier)]];
+}
+
+- (void) putChar: (uint32_t) ch
+		toStream: (unsigned) streamIdentifier
+		  latin1: (BOOL) encode
+{
+	[self addOperation: s_PutCharToStream
+			 arguments: @[[NSNumber numberWithUnsignedInt: ch],
+						  @(streamIdentifier),
+						  @(encode)]];
+
 }
 
 - (void) putString: (in bycopy NSString*) string

@@ -900,8 +900,7 @@ void glk_put_char_stream(strid_t str, unsigned char ch) {
 	if (buf) {
 		// Write using the buffer
 		[buf putChar: ch
-			toStream: str->identifier
-			  latin1: YES];
+			toStream: str->identifier];
 
 		str->bufferedAmount++;
 	} else {

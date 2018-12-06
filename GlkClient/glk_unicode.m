@@ -264,8 +264,7 @@ void glk_put_char_stream_uni(strid_t str, glui32 ch) {
 	if (buf) {
 		// Write using the buffer
 		[buf putChar: ch
-			toStream: str->identifier
-			  latin1: NO];
+			toStream: str->identifier];
 		
 		str->bufferedAmount++;
 	} else {

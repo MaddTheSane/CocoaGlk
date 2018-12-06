@@ -125,9 +125,6 @@
 // Buffering stream writes
 - (void) putChar: (unichar) ch
 		toStream: (unsigned) streamIdentifier;
-- (void) putChar: (uint32_t) ch
-		toStream: (unsigned) streamIdentifier
-		  latin1: (BOOL) encode;
 - (void) putString: (in bycopy NSString*) string
 		  toStream: (unsigned) streamIdentifier;
 - (void) putData: (in bycopy NSData*) data							// Note: do not pass in mutable data here, as the contents may change unexpectedly

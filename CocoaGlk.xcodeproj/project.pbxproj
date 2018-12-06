@@ -171,6 +171,8 @@
 		4BFA1CD407F8A4040068E16A /* gi_blorb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1CD007F8A4040068E16A /* gi_blorb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA1CD507F8A4040068E16A /* gi_dispa.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1CD107F8A4040068E16A /* gi_dispa.m */; };
 		4BFA1D6907F8A8D00068E16A /* glk_misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1D6707F8A8D00068E16A /* glk_misc.m */; };
+		5524CDFC21B9A4220007F659 /* MorePrompt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5524CDFA21B9A4210007F659 /* MorePrompt@2x.png */; };
+		5524CDFD21B9A4220007F659 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5524CDFB21B9A4220007F659 /* logo@2x.png */; };
 		559219ED21B90663002F7F9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		559219EE21B90894002F7F9E /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55BC63282055C42B001F8CFB /* savefile.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62ED2055C42B001F8CFB /* savefile.c */; };
@@ -539,6 +541,8 @@
 		4BFA1CD007F8A4040068E16A /* gi_blorb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gi_blorb.h; sourceTree = "<group>"; };
 		4BFA1CD107F8A4040068E16A /* gi_dispa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gi_dispa.m; sourceTree = "<group>"; };
 		4BFA1D6707F8A8D00068E16A /* glk_misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_misc.m; sourceTree = "<group>"; };
+		5524CDFA21B9A4210007F659 /* MorePrompt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MorePrompt@2x.png"; path = "Resources/MorePrompt@2x.png"; sourceTree = "<group>"; };
+		5524CDFB21B9A4220007F659 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "Resources/logo@2x.png"; sourceTree = "<group>"; };
 		552A03722049D5E200A4ECAA /* GlkView.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkView.modulemap; sourceTree = "<group>"; };
 		552A03732049D64C00A4ECAA /* GlkClient.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkClient.modulemap; sourceTree = "<group>"; };
 		552A03742049D67900A4ECAA /* GlkSound.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkSound.modulemap; sourceTree = "<group>"; };
@@ -715,7 +719,9 @@
 				4B51AA6A07E8785700576AB9 /* CocoaGlk.icns */,
 				4B51AA6B07E8785700576AB9 /* GlkClient.icns */,
 				4B664B4A07EC780A0079317A /* logo.png */,
+				5524CDFB21B9A4220007F659 /* logo@2x.png */,
 				4B8CE84D0ADAD373008235D2 /* MorePrompt.png */,
+				5524CDFA21B9A4210007F659 /* MorePrompt@2x.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.xib */,
@@ -1368,6 +1374,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5524CDFC21B9A4220007F659 /* MorePrompt@2x.png in Resources */,
+				5524CDFD21B9A4220007F659 /* logo@2x.png in Resources */,
 				4B51AA7407E878E600576AB9 /* GlkClient.icns in Resources */,
 				4B664B4B07EC780A0079317A /* logo.png in Resources */,
 				4B16BBDB08A50F67001E4C40 /* Credits.rtfd in Resources */,

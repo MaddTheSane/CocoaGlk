@@ -44,7 +44,7 @@ extern NSAttributedStringKey const GlkStyleAttributeName;									//!< Styles st
 
 // Creating a style
 /// 'Normal' style
-+ (GlkStyle*) style;
++ (instancetype) style;
 
 /// 'Normal' style
 - (instancetype)init;
@@ -83,10 +83,10 @@ extern NSAttributedStringKey const GlkStyleAttributeName;									//!< Styles st
 
 // Turning styles into dictionaries for attributed strings
 /// Attributes suitable to use with an attributed string while displaying
-- (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs
-								scaleFactor: (CGFloat) scaleFactor;
+- (NSDictionary<NSAttributedStringKey,id>*) attributesWithPreferences: (GlkPreferences*) prefs
+														  scaleFactor: (CGFloat) scaleFactor;
 /// Attributes suitable to use with an attributed string while displaying
-- (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs;
+- (NSDictionary<NSAttributedStringKey,id>*) attributesWithPreferences: (GlkPreferences*) prefs;
 
 @end
 

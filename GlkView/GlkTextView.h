@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import <GlkView/GlkTypesetter.h>
 
+@class GlkTextViewGlyph;
+
 ///
 /// Class that implements our custom extensions to the text view (mainly character input and image drawing)
 ///
@@ -19,9 +21,9 @@
 	
 	// Custom glyphs (ordered)
 	/// Ordered list of custom inline glyphs (images, mostly)
-	NSMutableArray* customGlyphs;
+	NSMutableArray<GlkTextViewGlyph*>* customGlyphs;
 	/// Ordered list of custom margin images
-	NSMutableArray* marginGlyphs;
+	NSMutableArray<GlkTextViewGlyph*>* marginGlyphs;
 	/// The first unlaid margin glyph (index into marginGlyphs)
 	NSInteger firstUnlaidMarginGlyph;
 }

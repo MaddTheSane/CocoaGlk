@@ -38,7 +38,7 @@ NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 		
 		if (chr >= 0xd800 && chr <= 0xdfff) {
 			// These UCS-4 characters have no valid Unicode equivalent
-			chr = '?';
+			chr = 0xfffd;
 		}
 		
 		if (chr <= 0xffff) {
@@ -54,7 +54,7 @@ NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 			uniBuf[uniLen++] = 0xdc00|(x&0x3ff);
 		} else {
 			// This is a UCS-4 character outside the range of allowed unicode values
-			uniBuf[uniLen++] = '?';
+			uniBuf[uniLen++] = 0xfffd;
 		}
 	}
 	
@@ -100,7 +100,7 @@ int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 			chr = (u<<16)|x;
 		} else if (chr >= 0xd800 && chr <= 0xdfff) {
 			// This is a lone surrogate character (can't be translated)
-			chr = '?';
+			chr = 0xfffd;
 		}
 		
 		// Add this character to the result
@@ -263,15 +263,49 @@ void glk_put_char_stream_uni(strid_t str, glui32 ch) {
 	
 	if (buf) {
 		// Write using the buffer
-		[buf putChar: ch
-			toStream: str->identifier];
+		if (ch < 0x10000) {
+			[buf putChar: ch
+				toStream: str->identifier];
+		} else if (ch <= 0x10ffff) {
+			// This is a character that can be represented by a surrogate pair
+			// 000uuuuuxxxxxxxxxxxxxxxx -> 110110wwwwxxxxxx 110111xxxxxxxxxx (wwww = uuuuu-1)
+			int w = (ch>>16)-1;
+			int x = (ch&0xffff);
+			
+			unichar chr = 0xd800|(w<<6)|(x>>10);
+			[buf putChar: chr
+				toStream: str->identifier];
+			str->bufferedAmount++;
+			chr = 0xdc00|(x&0x3ff);
+			[buf putChar: chr
+				toStream: str->identifier];
+		} else {
+			// *shrug*
+			[buf putChar: ch
+				toStream: str->identifier];
+		}
 		
 		str->bufferedAmount++;
 	} else {
 		// Write direct
 		cocoaglk_loadstream(str);
 		
-		[str->stream putChar: ch];
+		if (ch < 0x10000) {
+			[str->stream putChar: ch];
+		} else if (ch <= 0x10ffff) {
+			// This is a character that can be represented by a surrogate pair
+			// 000uuuuuxxxxxxxxxxxxxxxx -> 110110wwwwxxxxxx 110111xxxxxxxxxx (wwww = uuuuu-1)
+			int w = (ch>>16)-1;
+			int x = (ch&0xffff);
+			
+			unichar chr = 0xd800|(w<<6)|(x>>10);
+			[str->stream putChar: chr];
+			chr = 0xdc00|(x&0x3ff);
+			[str->stream putChar: chr];
+		} else {
+			// *shrug*
+			[str->stream putChar: ch];
+		}
 	}
 	
 	str->written++;

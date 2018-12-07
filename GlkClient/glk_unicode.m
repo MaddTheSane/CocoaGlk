@@ -73,7 +73,7 @@ int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 			copyLen = len * 4;
 		}
 		memcpy(buf, ucs4Data.bytes, copyLen);
-		return (int)(copyLen / 4);
+		return (int)(ucs4Data.length / 4);
 	}
 	// Fetch the string into a UTF-16 buffer
 	NSInteger stringLength = [string length];

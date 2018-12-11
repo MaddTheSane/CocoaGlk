@@ -703,10 +703,12 @@
 	
 	// Construct the attributes that describe this image
 	NSMutableDictionary* imageDict = [[self currentTextAttributes] mutableCopy];
-	[imageDict setObject: [newImage autorelease]
+	[imageDict setObject: newImage
 				  forKey: GlkCustomSectionAttributeName];
+	[newImage release];
 	NSAttributedString* imageAttributedString = [[[NSAttributedString alloc] initWithString: imageString
-																				 attributes: [imageDict autorelease]] autorelease];
+																				 attributes: imageDict] autorelease];
+	[imageDict release];
 	
 	// Append the image to the text storage object
 	NSInteger insertionPos = inputPos;
@@ -724,8 +726,9 @@
 	
 	// Construct the attributes that describe this clear margins character
 	NSDictionary* clearDict = [NSDictionary dictionaryWithObjectsAndKeys:
-		[clear autorelease], GlkCustomSectionAttributeName,
+		clear, GlkCustomSectionAttributeName,
 		nil];
+	[clear release];
 	NSAttributedString* clearAttributedString = [[[NSAttributedString alloc] initWithString: clearString
 																				 attributes: clearDict] autorelease];
 	

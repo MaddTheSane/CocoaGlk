@@ -8,7 +8,7 @@
 
 #import <GlkView/GlkCustomTextSection.h>
 
-NSString* GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName";
+NSString*const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName";
 
 @implementation GlkCustomTextSection
 

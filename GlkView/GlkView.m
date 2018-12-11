@@ -61,8 +61,8 @@
 		
 		extensionsForUsage = [[NSMutableDictionary alloc] init];
 		
-		scaleFactor = 1.0f;
-		borderWidth = 2.0f;
+		scaleFactor = CGF(1.0);
+		borderWidth = CGF(2.0);
     }
     
 	return self;
@@ -2057,7 +2057,6 @@
 	imageRect.origin = NSMakePoint(0,0);
 	imageRect.size = [image size];
 	
-	//[flippedImage setFlipped: YES];
 	[flippedImage lockFocusFlipped:YES];
 	[image drawInRect: imageRect
 			 fromRect: imageRect

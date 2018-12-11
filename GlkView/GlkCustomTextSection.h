@@ -10,7 +10,7 @@
 #import <GlkView/GlkTypesetter.h>
 
 /// Attribute indicating that a section of text should use custom attribute formatting. Value should be a GlkCustomTextSection object.
-extern NSString* GlkCustomSectionAttributeName;
+extern NSAttributedStringKey const GlkCustomSectionAttributeName;
 
 ///
 /// Object that can be set against control glyphs to indicate that they have some custom formatting and drawing.

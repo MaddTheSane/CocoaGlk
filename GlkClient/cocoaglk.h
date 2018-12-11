@@ -11,11 +11,7 @@
 //
 
 #if defined(__OBJC__) && __OBJC__
-# if defined(COCOAGLK_IPHONE)
-#  include <UIKit/UIKit.h>
-# else
-#  import <Cocoa/Cocoa.h>
-# endif
+# import <Foundation/Foundation.h>
 #endif
 
 #ifndef __cocoaglk_h

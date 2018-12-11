@@ -6,11 +6,7 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#if defined(COCOAGLK_IPHONE)
-# include <UIKit/UIKit.h>
-#else
-# import <Cocoa/Cocoa.h>
-#endif
+#import <Foundation/Foundation.h>
 
 ///
 /// When executing \c glk_select() and co, we need this to get notifications of when events arrive

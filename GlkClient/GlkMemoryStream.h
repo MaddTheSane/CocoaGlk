@@ -6,11 +6,7 @@
 //  Copyright 2005 __MyCompanyName__. All rights reserved.
 //
 
-#if defined(COCOAGLK_IPHONE)
-# include <UIKit/UIKit.h>
-#else
-# import <Cocoa/Cocoa.h>
-#endif
+#import <Foundation/Foundation.h>
 
 #import "GlkStreamProtocol.h"
 #include "glk.h"

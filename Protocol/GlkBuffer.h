@@ -7,7 +7,7 @@
 //
 
 #if defined(COCOAGLK_IPHONE)
-# include <UIKit/UIKit.h>
+# import <UIKit/UIKit.h>
 #else
 # import <Cocoa/Cocoa.h>
 #endif

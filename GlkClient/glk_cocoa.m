@@ -10,7 +10,7 @@
 #include <unistd.h>
 
 #if defined(COCOAGLK_IPHONE)
-# include <UIKit/UIKit.h>
+# import <UIKit/UIKit.h>
 #else
 # import <Cocoa/Cocoa.h>
 #endif
@@ -18,7 +18,7 @@
 #import "GlkSessionProtocol.h"
 
 #include "glk.h"
-#include "cocoaglk.h"
+#import "cocoaglk.h"
 #import "glk_client.h"
 
 @class GlkCocoa;

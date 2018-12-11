@@ -9,7 +9,7 @@
 #import "GlkUcs4Stream.h"
 
 #include "glk.h"
-#include "cocoaglk.h"
+#import "cocoaglk.h"
 #import "glk_client.h"
 
 @implementation GlkUcs4Stream

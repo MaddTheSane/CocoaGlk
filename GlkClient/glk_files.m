@@ -6,16 +6,12 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#if defined(COCOAGLK_IPHONE)
-# include <UIKit/UIKit.h>
-#else
-# import <Cocoa/Cocoa.h>
-#endif
+#import <Foundation/Foundation.h>
 
 #import "GlkMemoryFileRef.h"
 
 #include "glk.h"
-#include "cocoaglk.h"
+#import "cocoaglk.h"
 #import "glk_client.h"
 
 frefid_t cocoaglk_firstfref = NULL;

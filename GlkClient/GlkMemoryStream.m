@@ -9,7 +9,7 @@
 #import "GlkMemoryStream.h"
 
 #include "glk.h"
-#include "cocoaglk.h"
+#import "cocoaglk.h"
 #include "glk_client.h"
 
 

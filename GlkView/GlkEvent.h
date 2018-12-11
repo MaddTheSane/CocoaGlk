@@ -6,11 +6,7 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#if !defined(COCOAGLK_IPHONE)
-# import <Cocoa/Cocoa.h>
-#else
-# import <UIKit/UIKit.h>
-#endif
+#import <Foundation/Foundation.h>
 
 #import "GlkSessionProtocol.h"
 

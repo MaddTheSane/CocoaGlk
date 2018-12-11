@@ -24,7 +24,7 @@
 #include <GlkView/glk.h>
 
 #if defined(__OBJC__) && __OBJC__
-#import "GlkView/GlkImageSourceProtocol.h"
+#import <GlkView/GlkImageSourceProtocol.h>
 #endif
 
 /// File that contains game executable data
@@ -53,7 +53,10 @@ extern void cocoaglk_log_ex(char* logText, int priority);
 
 #if defined(__OBJC__) && __OBJC__
 /// Sets the extensions to use for a specific file usage
-extern void cocoaglk_set_types_for_usage(glui32 usage, NSArray* extensions);
+extern void cocoaglk_set_types_for_usage(glui32 usage, NSArray<NSString*>* extensions);
+
+//! Retrieves a list of valid file types for a given usage
+extern NSArray<NSString*>* cocoaglk_types_for_usage(glui32 usage);
 #endif
 
 /// Gets the input stream provided by the server (or NULL if none was provided)

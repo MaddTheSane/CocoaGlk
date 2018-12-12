@@ -211,16 +211,14 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 	
 	UIFontDescriptorSymbolicTraits symbolicTraits = descriptor.symbolicTraits;
 	// Clear the traits to change
-	symbolicTraits &= ~(UIFontDescriptorTraitItalic|UIFontDescriptorTraitBold);
+	symbolicTraits &= ~(UIFontDescriptorTraitItalic);
 	// Adjust the font weight
 	if (weight < 0) {
-		font = [mgr convertWeight: NO
-						   ofFont: font];
+		symbolicTraits &= ~(UIFontDescriptorTraitBold);
 	}
 	
 	if (weight > 0) {
-		font = [mgr convertWeight: YES
-						   ofFont: font];
+		symbolicTraits |= UIFontDescriptorTraitBold;
 	}
 	
 	// Italic/oblique

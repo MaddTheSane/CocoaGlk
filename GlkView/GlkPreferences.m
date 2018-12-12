@@ -33,14 +33,18 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 		textMargin = 10.0;
 		useScreenFonts = YES;
 		scrollbackLength = 100.0;
-
-		NSFontManager* fontManager = [NSFontManager sharedFontManager];
 		
 		// Default typography settings
 		kerning = YES;
 		ligatures = YES;
 		
 		// Default fonts are Gill Sans 12 and Courier 12
+#if defined(COCOAGLK_IPHONE)
+		proportionalFont = [[UIFont fontWithName:@"Gill Sans" size:12] retain];
+		fixedFont = [[UIFont fontWithName:@"Courier" size:12] retain];
+#else
+		NSFontManager* fontManager = [NSFontManager sharedFontManager];
+		
 		proportionalFont = [[fontManager fontWithFamily: @"Gill Sans"
                                                 traits: NSUnboldFontMask
                                                 weight: 5
@@ -49,12 +53,13 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
                                          traits: NSUnboldFontMask
                                          weight: 5
                                            size: 12] copy];
+#endif
 		
 		// Choose alternative fonts if our defaults are not available
-		if (proportionalFont == nil) proportionalFont = [GlkFont systemFontOfSize: 12];
-		if (fixedFont == nil) fixedFont = [GlkFont fontWithName: @"Monaco"
-														  size: 12];
-		if (fixedFont == nil) fixedFont = [GlkFont systemFontOfSize: 12];
+		if (proportionalFont == nil) proportionalFont = [[GlkFont systemFontOfSize: 12] retain];
+		if (fixedFont == nil) fixedFont = [[GlkFont fontWithName: @"Monaco"
+														  size: 12] retain];
+		if (fixedFont == nil) fixedFont = [[GlkFont systemFontOfSize: 12] retain];
 		
 		// Default styles
 		styles = [[NSMutableDictionary alloc] init];
@@ -180,12 +185,21 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 @synthesize fixedFont;
 
 - (void) setFontSize: (CGFloat) fontSize {
+#if defined(COCOAGLK_IPHONE)
+	UIFont* newProp;
+	UIFont* newFixed;
+	UIFontDescriptor *propDes = [proportionalFont.fontDescriptor fontDescriptorWithSize:fontSize];
+	UIFontDescriptor *fixedDes = [fixedFont.fontDescriptor fontDescriptorWithSize:fontSize];
+	newProp = [UIFont fontWithDescriptor:propDes size:fontSize];
+	newFixed = [UIFont fontWithDescriptor:fixedDes size:fontSize];
+#else
 	NSFontManager* mgr = [NSFontManager sharedFontManager];
 	
 	NSFont* newProp = [mgr convertFont: proportionalFont
 								toSize: fontSize];
 	NSFont* newFixed = [mgr convertFont: fixedFont
 								 toSize: fontSize];
+#endif
 	
 	[self setProportionalFont: newProp];
 	[self setFixedFont: newFixed];

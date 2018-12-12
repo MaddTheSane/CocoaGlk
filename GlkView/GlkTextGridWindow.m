@@ -19,6 +19,8 @@
 // = Initialisation =
 
 - (void) setupTextview {
+#if defined(COCOAGLK_IPHONE)
+#else
 	// Text grid windows never have a more prompt
 	[self setUsesMorePrompt: NO];
 	
@@ -72,9 +74,10 @@
 	[scrollView setHasVerticalScroller: NO];
 	[scrollView setAutohidesScrollers: NO];
 	[newContainer autorelease];
+#endif
 }
 
-- (id)initWithFrame:(NSRect)frame {
+- (id)initWithFrame:(GlkRect)frame {
     self = [super initWithFrame:frame];
     
 	if (self) {
@@ -95,7 +98,7 @@
 
 // = Drawing =
 
-- (void)drawRect:(NSRect)rect {
+- (void)drawRect:(GlkRect)rect {
 	[super drawRect: rect];
 }
 
@@ -107,7 +110,7 @@
 }
 
 - (CGFloat) widthForFixedSize: (unsigned) size {
-	NSSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
+	GlkCocoaSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
 	
 	return floor(size * baseSize.width) + [textView textContainerInset].width*2 + [[textView textContainer] lineFragmentPadding]*2;
 }
@@ -125,7 +128,7 @@
 	return res;
 }
 
-- (void) layoutInRect: (NSRect) parentRect {
+- (void) layoutInRect: (GlkRect) parentRect {
 	NSInteger x;
 	
 	// Set our frame
@@ -142,10 +145,14 @@
 	if (height < 0) height = 0;
 	
 	// Adjust the text container size
+#if defined(COCOAGLK_IPHONE)
+	[[textView textContainer] setSize: CGSizeMake(width * [self charWidth], height * [self lineHeight])];
+#else
 	[[textView textContainer] setContainerSize: NSMakeSize(width * [self charWidth], height * [self lineHeight])];
+#endif
 	
 	// Adjust the typesetter
-	[(GlkGridTypesetter*)typesetter setCellSize: NSMakeSize([self charWidth], [self lineHeight])];
+	[(GlkGridTypesetter*)typesetter setCellSize: GlkMakeSize([self charWidth], [self lineHeight])];
 	[(GlkGridTypesetter*)typesetter setGridWidth: width
 										  height: height];
 	[layoutManager invalidateLayoutForCharacterRange: NSMakeRange(0, [textStorage length])
@@ -302,6 +309,7 @@
 	}
 }
 
+#if defined(COCOAGLK_IPHONE)
 // = Mouse input =
 
 - (void) mouseDown: (NSEvent*) event {
@@ -330,6 +338,7 @@
 		[super mouseUp: event];
 	}
 }
+#endif
 
 // = MORE prompt =
 
@@ -420,7 +429,12 @@
 	nextInputLine = [inputLine copy];
 }
 
-- (BOOL)    	textView:(NSTextView *)aTextView
+- (BOOL)
+#if defined(COCOAGLK_IPHONE)
+textView:(UITextView *)aTextView
+#else
+textView:(NSTextView *)aTextView
+#endif
  shouldChangeTextInRange:(NSRange)affectedCharRange
 	   replacementString:(NSString *)replacementString {
 	if (!lineInput) return NO;
@@ -512,6 +526,7 @@
 	return xpos + ypos*width;
 }
 
+#if !defined(COCOAGLK_IPHONE)
 - (void) keyDown: (NSEvent*) evt {
 	int startPos = xpos + ypos*width;
 
@@ -573,6 +588,7 @@
 		[super keyDown: evt];
 	}
 }
+#endif
 
 // = NSAccessibility =
 

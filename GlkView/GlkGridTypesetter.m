@@ -57,8 +57,8 @@
 	NSInteger lastBoundaryGlyph = glyph;
 	BOOL hitTheLastGlyph = NO;
 	
-	NSRect sectionBounds =  NSMakeRect(charPos, -cacheAscenders[glyph], 
-									   cacheAdvancements[glyph], cacheLineHeight[glyph]);
+	GlkRect sectionBounds =  GlkMakeRect(charPos, -cacheAscenders[glyph],
+										 cacheAdvancements[glyph], cacheLineHeight[glyph]);
 	
 	while (x < gridWidth && glyph < cached.length) {
 		NSUInteger thisChar = cacheCharIndexes[glyph];
@@ -87,7 +87,7 @@
 			
 			// Start the next section
 			initialCharPos = charPos = gridPos.x;
-			sectionBounds =  NSMakeRect(charPos, -cacheAscenders[glyph], 
+			sectionBounds =  GlkMakeRect(charPos, -cacheAscenders[glyph],
 										cacheAdvancements[glyph], cacheLineHeight[glyph]);
 			firstGlyph = glyph;
 		}
@@ -96,7 +96,7 @@
 		lastChar = thisChar;
 		
 		// Measure this glyph
-		NSRect glyphBounds = NSMakeRect(charPos + charWidth, floor(-cacheAscenders[glyph]), 
+		GlkRect glyphBounds = GlkMakeRect(charPos + charWidth, floor(-cacheAscenders[glyph]),
 										cacheAdvancements[glyph], cacheLineHeight[glyph]);
 		charWidth += cacheAdvancements[glyph];
 		sectionBounds = NSUnionRect(sectionBounds, glyphBounds);

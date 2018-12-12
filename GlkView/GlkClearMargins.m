@@ -24,7 +24,7 @@
 	
 	CGFloat clearHeight = height1>height2?height1:height2;
 	
-	[typesetter addLineSection: NSMakeRect(offset, -clearHeight, CGF(0.1), clearHeight)
+	[typesetter addLineSection: GlkMakeRect(offset, -clearHeight, CGF(0.1), clearHeight)
 				   advancement: 0
 						offset: offset
 					glyphRange: glyphs

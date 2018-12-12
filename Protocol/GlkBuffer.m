@@ -150,7 +150,7 @@ static NSString* stringFromOp(NSArray* op) {
 		
 		NSInteger	opPos 		= [operations count] - 1;
 		NSArray*	lastOp 		= [operations lastObject];
-		int			stream, lastStream;
+		int			stream=0, lastStream=0;
 		
 		while (lastOp && ([[lastOp objectAtIndex: 0] isEqualToString: s_PutCharToStream] ||
 						  [[lastOp objectAtIndex: 0] isEqualToString: s_PutStringToStream] ||

@@ -97,7 +97,7 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 			marginOffset = [typesetter currentLeftMarginOffset];
 			[typesetter addToLeftMargin: (size.width*scaleFactor)+8
 								 height: size.height*scaleFactor];
-			[typesetter addLineSection: NSMakeRect(offset, -1, size.width, 1)
+			[typesetter addLineSection: GlkMakeRect(offset, -1, size.width, 1)
 						   advancement: 0
 								offset: offset
 							glyphRange: glyphs

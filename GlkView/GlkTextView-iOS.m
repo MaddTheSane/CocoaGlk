@@ -5,7 +5,7 @@
 //  Created by C.W. Betts on 12/11/18.
 //
 
-#import "GlkTextView-iOS.h"
+#import "GlkTextView.h"
 
 @implementation GlkTextView
 

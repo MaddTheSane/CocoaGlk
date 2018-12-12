@@ -6,6 +6,7 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#import <GLKView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
 #else
@@ -66,7 +67,7 @@ glui32 glk_image_draw(winid_t win, glui32 image, glsi32 val1, glsi32 val2) {
 		
 		[cocoaglk_buffer drawImageWithIdentifier: image
 						  inWindowWithIdentifier: win->identifier
-									  atPosition: NSMakePoint(val1, val2)];
+									  atPosition: GlkMakePoint(val1, val2)];
 	} else {
 		[cocoaglk_buffer drawImageWithIdentifier: image
 						  inWindowWithIdentifier: win->identifier
@@ -101,7 +102,7 @@ glui32 glk_image_draw_scaled(winid_t win, glui32 image,
 		
 		[cocoaglk_buffer drawImageWithIdentifier: image
 						  inWindowWithIdentifier: win->identifier
-										  inRect: NSMakeRect(val1, val2, width, height)];
+										  inRect: GlkMakeRect(val1, val2, width, height)];
 	} else {
 		NSLog(@"TRACE: glk_image_draw_scaled(%p, %u, %i, %i, %u, %u) = %i", win, image, val1, val2, width, height, res);		
 	}
@@ -127,16 +128,27 @@ glui32 glk_image_get_info(glui32 image, glui32 *width, glui32 *height) {
 	// Use the cache for preference
 	NSNumber* imageKey = @(image);
 	NSValue* imageSizeValue = [imageSizeDictionary objectForKey: imageKey];
-	NSSize imageSize;
+	GlkCocoaSize imageSize;
 	
 	if (imageSizeValue != nil) {
 		// Use the cached version of the size
+#ifdef COCOAGLK_IPHONE
+		imageSize = [imageSizeValue CGSizeValue];
+#else
 		imageSize = [imageSizeValue sizeValue];
+#endif
 	} else {
 		// Retrieve the size of the image from the server
 		imageSize = [cocoaglk_session sizeForImageResource: image];
 		
-		[imageSizeDictionary setObject: [NSValue valueWithSize: imageSize]
+		NSValue *sizeVal;
+#ifdef COCOAGLK_IPHONE
+		sizeVal = [NSValue valueWithCGSize: imageSize];
+#else
+		sizeVal = [NSValue valueWithSize: imageSize];
+#endif
+		
+		[imageSizeDictionary setObject: sizeVal
 								forKey: imageKey];
 	}
 	
@@ -232,7 +244,7 @@ void glk_window_fill_rect(winid_t win, glui32 color,
 	// Tell the buffer to erase this window eventually
 	[cocoaglk_buffer fillAreaInWindowWithIdentifier: win->identifier
 										 withColour: fillColour
-										  rectangle: NSMakeRect(left, top, width, height)];
+										  rectangle: GlkMakeRect(left, top, width, height)];
 }
 
 //

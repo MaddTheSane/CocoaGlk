@@ -9,7 +9,7 @@
 #define GlkViewUmbrella_h
 
 #include <GlkView/glk.h>
-#if defined(__OBJC__) && __OBJC__
+#if defined(__OBJC__)
 #import <GlkView/GlkViewDefinitions.h>
 #import <GlkView/GlkView.h>
 #import <GlkView/GlkTextView.h>

@@ -58,7 +58,6 @@
 		4B51AA6D07E8785700576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
 		4B51AA7407E878E600576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
 		4B51AA7507E878E900576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
-		4B51AA8907E8795300576AB9 /* GlkView-Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B51AA8707E8795300576AB9 /* GlkView-Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B51AA8A07E8795300576AB9 /* GlkView-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AA8807E8795300576AB9 /* GlkView-Mac.m */; };
 		4B51AAB807E87B7B00576AB9 /* glk_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAB707E87B7B00576AB9 /* glk_main.m */; };
 		4B51AAF107E87CD300576AB9 /* glk_events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAEC07E87CD300576AB9 /* glk_events.m */; };
@@ -110,10 +109,8 @@
 		4BBFE3980C4EC253007DEE18 /* GlkBufferedStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBFE3960C4EC253007DEE18 /* GlkBufferedStream.h */; };
 		4BBFE3990C4EC253007DEE18 /* GlkBufferedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */; };
 		4BCB8AA10CD7E3310041731F /* GlkView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		4BEE1D3B07FCC1D900296CD2 /* GlkTextView-Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BEE1D3907FCC1D900296CD2 /* GlkTextView-Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BEE1D3C07FCC1D900296CD2 /* GlkTextView-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEE1D3A07FCC1D900296CD2 /* GlkTextView-Mac.m */; };
 		4BEF18CD0AB4643600131910 /* GlkTypesetter-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D3B580AB462C90038255E /* GlkTypesetter-Mac.m */; };
-		4BEF18CE0AB4643A00131910 /* GlkTypesetter-Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B2D3B570AB462C90038255E /* GlkTypesetter-Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BF0854A0E1675D500DB5C6B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF085490E1675D500DB5C6B /* CoreAudio.framework */; };
 		4BF0855C0E16768400DB5C6B /* GlkSoundDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF0855A0E16768400DB5C6B /* GlkSoundDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BF085870E16787900DB5C6B /* fastmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085620E16787900DB5C6B /* fastmix.cpp */; };
@@ -287,7 +284,6 @@
 		5560FA0D21C0687300E711F5 /* sndmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085850E16787900DB5C6B /* sndmix.cpp */; };
 		5560FA0E21C0687300E711F5 /* tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085860E16787900DB5C6B /* tables.cpp */; };
 		5560FA1021C0687300E711F5 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF085490E1675D500DB5C6B /* CoreAudio.framework */; };
-		5560FA1E21C06B9800E711F5 /* GlkView-Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B51AA8707E8795300576AB9 /* GlkView-Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA2221C06B9800E711F5 /* GlkImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3A1DD208A7EBDE00DEB0B9 /* GlkImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA2321C06B9800E711F5 /* GlkImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A1DD308A7EBDE00DEB0B9 /* GlkImage.m */; };
 		5560FA2421C06B9800E711F5 /* GlkClearMargins.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B90801E0AC11EFF00C61EF9 /* GlkClearMargins.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -298,17 +294,14 @@
 		5560FA2A21C06BF500E711F5 /* GlkViewDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA2C21C07EC200E711F5 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2B21C07EC200E711F5 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA2D21C07EC200E711F5 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2B21C07EC200E711F5 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5560FA3021C07FB800E711F5 /* GlkView-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2E21C07FB800E711F5 /* GlkView-iOS.h */; };
 		5560FA3121C07FB800E711F5 /* GlkView-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA2F21C07FB800E711F5 /* GlkView-iOS.m */; };
 		5560FA3321C084E500E711F5 /* GlkTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3221C084E500E711F5 /* GlkTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA3421C084E500E711F5 /* GlkTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3221C084E500E711F5 /* GlkTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5560FA3721C0855200E711F5 /* GlkTextView-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3521C0855200E711F5 /* GlkTextView-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA3821C0855200E711F5 /* GlkTextView-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA3621C0855200E711F5 /* GlkTextView-iOS.m */; };
 		5560FA3A21C08B1400E711F5 /* GlkTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3921C08B1300E711F5 /* GlkTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA3B21C08B1400E711F5 /* GlkTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3921C08B1300E711F5 /* GlkTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA3D21C08BB300E711F5 /* GlkTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */; };
 		5560FA3E21C08BB300E711F5 /* GlkTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */; };
-		5560FA4121C08C5A00E711F5 /* GlkTypesetter-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3F21C08C5A00E711F5 /* GlkTypesetter-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA4221C08C5A00E711F5 /* GlkTypesetter-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA4021C08C5A00E711F5 /* GlkTypesetter-iOS.m */; };
 		5560FA4421C0920600E711F5 /* GlkViewUmbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA4321C0920600E711F5 /* GlkViewUmbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA4521C0920600E711F5 /* GlkViewUmbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA4321C0920600E711F5 /* GlkViewUmbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -550,7 +543,6 @@
 		4B16B9A708A3B88A001E4C40 /* GlkImageSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkImageSourceProtocol.h; sourceTree = "<group>"; };
 		4B16BB5D08A4E65F001E4C40 /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = Credits.rtfd; path = en.lproj/Credits.rtfd; sourceTree = "<group>"; };
 		4B1758301274352300383C8D /* float.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = float.c; sourceTree = "<group>"; };
-		4B2D3B570AB462C90038255E /* GlkTypesetter-Mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GlkTypesetter-Mac.h"; sourceTree = "<group>"; };
 		4B2D3B580AB462C90038255E /* GlkTypesetter-Mac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GlkTypesetter-Mac.m"; sourceTree = "<group>"; };
 		4B30F3CA07F0B2CA006ED0BF /* GlkEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkEvent.h; sourceTree = "<group>"; };
 		4B30F3CB07F0B2CA006ED0BF /* GlkEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkEvent.m; sourceTree = "<group>"; };
@@ -578,7 +570,6 @@
 		4B51AA5707E877C900576AB9 /* GlkClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GlkClient-Info.plist"; sourceTree = "<group>"; };
 		4B51AA6A07E8785700576AB9 /* CocoaGlk.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CocoaGlk.icns; path = Resources/CocoaGlk.icns; sourceTree = "<group>"; };
 		4B51AA6B07E8785700576AB9 /* GlkClient.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = GlkClient.icns; path = Resources/GlkClient.icns; sourceTree = "<group>"; };
-		4B51AA8707E8795300576AB9 /* GlkView-Mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GlkView-Mac.h"; sourceTree = "<group>"; };
 		4B51AA8807E8795300576AB9 /* GlkView-Mac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GlkView-Mac.m"; sourceTree = "<group>"; };
 		4B51AA9A07E87A2F00576AB9 /* glk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glk.h; sourceTree = "<group>"; };
 		4B51AAB707E87B7B00576AB9 /* glk_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_main.m; sourceTree = "<group>"; };
@@ -627,7 +618,6 @@
 		4BBC414408A7AB3B00B790B5 /* imagetest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imagetest.m; sourceTree = "<group>"; };
 		4BBFE3960C4EC253007DEE18 /* GlkBufferedStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkBufferedStream.h; sourceTree = "<group>"; };
 		4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkBufferedStream.m; sourceTree = "<group>"; };
-		4BEE1D3907FCC1D900296CD2 /* GlkTextView-Mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GlkTextView-Mac.h"; sourceTree = "<group>"; };
 		4BEE1D3A07FCC1D900296CD2 /* GlkTextView-Mac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GlkTextView-Mac.m"; sourceTree = "<group>"; };
 		4BF0852A0E166E8300DB5C6B /* GlkSound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GlkSound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF0852B0E166E8300DB5C6B /* GlkSound-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GlkSound-Info.plist"; sourceTree = "<group>"; };
@@ -692,22 +682,19 @@
 		552A03722049D5E200A4ECAA /* GlkView.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkView.modulemap; sourceTree = "<group>"; };
 		552A03732049D64C00A4ECAA /* GlkClient.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkClient.modulemap; sourceTree = "<group>"; };
 		552A03742049D67900A4ECAA /* GlkSound.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkSound.modulemap; sourceTree = "<group>"; };
-		5560F9B721C0686B00E711F5 /* GlkView-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "GlkView-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5560F9B721C0686B00E711F5 /* GlkView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GlkView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5560F9B821C0686B00E711F5 /* GlkView copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GlkView copy-Info.plist"; path = "/Users/cwbetts/makestuff/zoom/depends/CocoaGlk/GlkView copy-Info.plist"; sourceTree = "<absolute>"; };
-		5560F9E021C0686F00E711F5 /* GlkClient-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "GlkClient-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5560F9E021C0686F00E711F5 /* GlkClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GlkClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5560F9E121C0687000E711F5 /* GlkClient copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GlkClient copy-Info.plist"; path = "/Users/cwbetts/makestuff/zoom/depends/CocoaGlk/GlkClient copy-Info.plist"; sourceTree = "<absolute>"; };
 		5560FA1421C0687300E711F5 /* GlkSound-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "GlkSound-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5560FA1521C0687400E711F5 /* GlkSound copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GlkSound copy-Info.plist"; path = "/Users/cwbetts/makestuff/zoom/depends/CocoaGlk/GlkSound copy-Info.plist"; sourceTree = "<absolute>"; };
 		5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkViewDefinitions.h; sourceTree = "<group>"; };
 		5560FA2B21C07EC200E711F5 /* GlkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkView.h; sourceTree = "<group>"; };
-		5560FA2E21C07FB800E711F5 /* GlkView-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlkView-iOS.h"; sourceTree = "<group>"; };
 		5560FA2F21C07FB800E711F5 /* GlkView-iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GlkView-iOS.m"; sourceTree = "<group>"; };
 		5560FA3221C084E500E711F5 /* GlkTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkTextView.h; sourceTree = "<group>"; };
-		5560FA3521C0855200E711F5 /* GlkTextView-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlkTextView-iOS.h"; sourceTree = "<group>"; };
 		5560FA3621C0855200E711F5 /* GlkTextView-iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GlkTextView-iOS.m"; sourceTree = "<group>"; };
 		5560FA3921C08B1300E711F5 /* GlkTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkTypesetter.h; sourceTree = "<group>"; };
 		5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkTypesetter.m; sourceTree = "<group>"; };
-		5560FA3F21C08C5A00E711F5 /* GlkTypesetter-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlkTypesetter-iOS.h"; sourceTree = "<group>"; };
 		5560FA4021C08C5A00E711F5 /* GlkTypesetter-iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GlkTypesetter-iOS.m"; sourceTree = "<group>"; };
 		5560FA4321C0920600E711F5 /* GlkViewUmbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkViewUmbrella.h; sourceTree = "<group>"; };
 		559219F321B908EA002F7F9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -874,8 +861,8 @@
 				4BF0852A0E166E8300DB5C6B /* GlkSound.framework */,
 				4B3C3B790F3DAB850066A760 /* git */,
 				55C6BB36204DED96001AE7E5 /* SwiftGlk.app */,
-				5560F9B721C0686B00E711F5 /* GlkView-iOS.framework */,
-				5560F9E021C0686F00E711F5 /* GlkClient-iOS.framework */,
+				5560F9B721C0686B00E711F5 /* GlkView.framework */,
+				5560F9E021C0686F00E711F5 /* GlkClient.framework */,
 				5560FA1421C0687300E711F5 /* GlkSound-iOS.framework */,
 			);
 			name = Products;
@@ -1101,14 +1088,10 @@
 			isa = PBXGroup;
 			children = (
 				5560FA2B21C07EC200E711F5 /* GlkView.h */,
-				5560FA2E21C07FB800E711F5 /* GlkView-iOS.h */,
 				5560FA2F21C07FB800E711F5 /* GlkView-iOS.m */,
-				4B51AA8707E8795300576AB9 /* GlkView-Mac.h */,
 				4B51AA8807E8795300576AB9 /* GlkView-Mac.m */,
 				5560FA3221C084E500E711F5 /* GlkTextView.h */,
-				4BEE1D3907FCC1D900296CD2 /* GlkTextView-Mac.h */,
 				4BEE1D3A07FCC1D900296CD2 /* GlkTextView-Mac.m */,
-				5560FA3521C0855200E711F5 /* GlkTextView-iOS.h */,
 				5560FA3621C0855200E711F5 /* GlkTextView-iOS.m */,
 				4B3A1DD208A7EBDE00DEB0B9 /* GlkImage.h */,
 				4B3A1DD308A7EBDE00DEB0B9 /* GlkImage.m */,
@@ -1125,9 +1108,7 @@
 			children = (
 				5560FA3921C08B1300E711F5 /* GlkTypesetter.h */,
 				5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */,
-				4B2D3B570AB462C90038255E /* GlkTypesetter-Mac.h */,
 				4B2D3B580AB462C90038255E /* GlkTypesetter-Mac.m */,
-				5560FA3F21C08C5A00E711F5 /* GlkTypesetter-iOS.h */,
 				5560FA4021C08C5A00E711F5 /* GlkTypesetter-iOS.m */,
 				4B9079DA0ABDBFF300C61EF9 /* GlkCustomTextSection.h */,
 				4B9079DB0ABDBFF300C61EF9 /* GlkCustomTextSection.m */,
@@ -1288,7 +1269,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B51AA8907E8795300576AB9 /* GlkView-Mac.h in Headers */,
 				4B51ABFB07E8927100576AB9 /* GlkHub.h in Headers */,
 				4B04598A07EA18DB002D7C88 /* GlkHubProtocol.h in Headers */,
 				4B0459AD07EA1B44002D7C88 /* GlkSessionProtocol.h in Headers */,
@@ -1313,12 +1293,10 @@
 				4BFA1B3F07F879D70068E16A /* GlkFilePromptProtocol.h in Headers */,
 				4B93F81407F9BA7900BAA4EE /* GlkStyle.h in Headers */,
 				4B93F85907F9BF9100BAA4EE /* GlkPreferences.h in Headers */,
-				4BEE1D3B07FCC1D900296CD2 /* GlkTextView-Mac.h in Headers */,
 				4B16B9A808A3B88A001E4C40 /* GlkImageSourceProtocol.h in Headers */,
 				4B3A1DDA08A7EC0500DEB0B9 /* GlkImage.h in Headers */,
 				5560FA4421C0920600E711F5 /* GlkViewUmbrella.h in Headers */,
 				4B32AB240A5471080069A026 /* GlkAutomation.h in Headers */,
-				4BEF18CE0AB4643A00131910 /* GlkTypesetter-Mac.h in Headers */,
 				4B9079DC0ABDBFF300C61EF9 /* GlkCustomTextSection.h in Headers */,
 				4B9080200AC11EFF00C61EF9 /* GlkClearMargins.h in Headers */,
 				4B8CE8510ADAD38B008235D2 /* GlkMoreView.h in Headers */,
@@ -1360,10 +1338,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5560F97821C0686B00E711F5 /* GlkHub.h in Headers */,
-				5560FA1E21C06B9800E711F5 /* GlkView-Mac.h in Headers */,
 				5560F97921C0686B00E711F5 /* GlkHubProtocol.h in Headers */,
 				5560F97A21C0686B00E711F5 /* GlkSessionProtocol.h in Headers */,
-				5560FA4121C08C5A00E711F5 /* GlkTypesetter-iOS.h in Headers */,
 				5560F97B21C0686B00E711F5 /* GlkBuffer.h in Headers */,
 				5560F97C21C0686B00E711F5 /* GlkWindow.h in Headers */,
 				5560F97D21C0686B00E711F5 /* GlkPairWindow.h in Headers */,
@@ -1384,12 +1360,10 @@
 				5560F98621C0686B00E711F5 /* GlkEventProtocol.h in Headers */,
 				5560F98721C0686B00E711F5 /* GlkFileRefProtocol.h in Headers */,
 				5560F98821C0686B00E711F5 /* GlkFileStream.h in Headers */,
-				5560FA3021C07FB800E711F5 /* GlkView-iOS.h in Headers */,
 				5560F98921C0686B00E711F5 /* GlkFileRef.h in Headers */,
 				5560F98A21C0686B00E711F5 /* GlkFilePromptProtocol.h in Headers */,
 				5560F98B21C0686B00E711F5 /* GlkStyle.h in Headers */,
 				5560FA2221C06B9800E711F5 /* GlkImage.h in Headers */,
-				5560FA3721C0855200E711F5 /* GlkTextView-iOS.h in Headers */,
 				5560F98C21C0686B00E711F5 /* GlkPreferences.h in Headers */,
 				5560F98E21C0686B00E711F5 /* GlkImageSourceProtocol.h in Headers */,
 				5560F99021C0686B00E711F5 /* GlkAutomation.h in Headers */,
@@ -1568,7 +1542,7 @@
 			);
 			name = "GlkView-iOS";
 			productName = GlkView;
-			productReference = 5560F9B721C0686B00E711F5 /* GlkView-iOS.framework */;
+			productReference = 5560F9B721C0686B00E711F5 /* GlkView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		5560F9B921C0686F00E711F5 /* GlkClient-iOS */ = {
@@ -1587,7 +1561,7 @@
 			);
 			name = "GlkClient-iOS";
 			productName = GlkClient;
-			productReference = 5560F9E021C0686F00E711F5 /* GlkClient-iOS.framework */;
+			productReference = 5560F9E021C0686F00E711F5 /* GlkClient.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		5560F9E221C0687300E711F5 /* GlkSound-iOS */ = {
@@ -2771,17 +2745,10 @@
 				INFOPLIST_FILE = "GlkView copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-seg1addr",
-					0xb0000000,
-				);
-				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GlkView;
 				SDKROOT = iphoneos;
 				SECTORDER_FLAGS = "";
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -2803,17 +2770,10 @@
 				INFOPLIST_FILE = "GlkView copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-seg1addr",
-					0xb0000000,
-				);
-				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GlkView;
 				SDKROOT = iphoneos;
 				SECTORDER_FLAGS = "";
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2831,26 +2791,15 @@
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = COCOAGLK_IPHONE;
 				INFOPLIST_FILE = "GlkClient copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-seg1addr",
-					0x2d000000,
-				);
-				OTHER_REZFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkClient;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GlkClient;
 				SDKROOT = iphoneos;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -2866,26 +2815,15 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = COCOAGLK_IPHONE;
 				INFOPLIST_FILE = "GlkClient copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-seg1addr",
-					0x2d000000,
-				);
-				OTHER_REZFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkClient;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GlkClient;
 				SDKROOT = iphoneos;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};

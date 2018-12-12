@@ -42,10 +42,10 @@ extern void cocoaglk_warning(const char* warningText);
 extern void cocoaglk_error(const char* errorText);
 
 /// Request to send a message to the game's log (if the runner supports it)
-extern void cocoaglk_log(char* logText);
+extern void cocoaglk_log(const char* logText);
 
 /// Request to send a message to the game's log with a priority (0, 1 or 2)
-extern void cocoaglk_log_ex(char* logText, int priority);
+extern void cocoaglk_log_ex(const char* logText, int priority);
 
 #if defined(__OBJC__) && __OBJC__
 /// Sets the extensions to use for a specific file usage

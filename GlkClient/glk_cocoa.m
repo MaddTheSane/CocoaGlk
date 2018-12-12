@@ -228,7 +228,7 @@ void cocoaglk_error(const char* errorText) {
 }
 
 // Logs a message to the server
-void cocoaglk_log(char* logText) {
+void cocoaglk_log(const char* logText) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: cocoaglk_log(\"%s\")", logText);
 #endif
@@ -243,7 +243,7 @@ void cocoaglk_log(char* logText) {
 }
 
 // Logs a message with priority to the server
-void cocoaglk_log_ex(char* logText, int priority) {
+void cocoaglk_log_ex(const char* logText, int priority) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: cocoaglk_log_ex(\"%s\", %i)", logText, priority);
 #endif

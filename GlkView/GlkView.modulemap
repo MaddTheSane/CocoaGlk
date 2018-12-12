@@ -6,6 +6,12 @@ framework module GlkView {
 		export *
 	}
 	
+	module GlkViewDefinitions {
+		requires objc
+		header "GlkViewDefinitions.h"
+		export *
+	}
+	
 	module GlkTextView {
 		requires objc
 		header "GlkTextView.h"
@@ -186,12 +192,6 @@ framework module GlkView {
 	explicit module GlkWindow {
 		requires objc
 		header "GlkWindow.h"
-		export *
-	}
-	
-	explicit module GlkViewDefinitions {
-		requires objc
-		header "GlkViewDefinitions.h"
 		export *
 	}
 }

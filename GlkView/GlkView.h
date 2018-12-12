@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 #import "GlkView-Mac.h"
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
 /// Functions that a view delegate can provide
 ///
@@ -81,6 +83,8 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 			 preferredDirectory: (nullable NSString*) preferredDirectory;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #import <GlkView/GlkAutomation.h>
 

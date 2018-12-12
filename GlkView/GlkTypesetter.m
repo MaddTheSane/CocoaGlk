@@ -33,42 +33,6 @@
 #import <GlkView/GlkTypesetter.h>
 #import <GlkView/GlkCustomTextSection.h>
 
-#if CGFLOAT_IS_DOUBLE
-#define CGF(__x) __x
-#else
-#define CGF(__x) __x ## f
-#endif
-
-// Behaviour #defines
-
-#define GlyphLookahead 512								// Number of glyphs to 'look ahead' when working out character positioning, etc
-#define GlyphMinRemoval 256								// Minimum number of glyphs to remove from the cache all at once
-#undef  Debug											// Define to put this in debugging mode
-#undef  MoreDebug										// More debugging information
-#undef  EvenMoreDebug									// Even more debugging information
-#undef  CheckForOverflow								// Check for overflow when laying out the lines
-
-// OS X version #defines
-
-#undef MeasureMultiGlyphs								// Use the 10.4 routines in NSFont to measure multiple glyphs at once
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-# define MeasureMultiGlyphs
-#endif
-
-#undef MeasureMultiGlyphs
-
-// Static variables
-
-static NSCharacterSet* newlineSet = nil;
-static NSCharacterSet* whitespaceSet = nil;
-
-static NSParagraphStyle* defaultParaStyle = nil;
-
-#ifdef Debug
-static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
-#endif
-
 @implementation GlkLineSection
 @synthesize advancement;
 @synthesize alignment;

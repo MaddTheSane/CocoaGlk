@@ -1,13 +1,41 @@
 framework module GlkView {
-	explicit module GlkArrangeEvent {
-		requires objc
-		header "GlkArrangeEvent.h"
+	umbrella header "GlkViewUmbrella.h"
+	
+	module glk {
+		header "glk.h"
 		export *
 	}
 	
-	explicit module GlkAutomation {
+	module GlkTextView {
+		requires objc
+		header "GlkTextView.h"
+		export *
+	}
+
+	module GlkTypesetter {
+		requires objc
+		header "GlkTypesetter.h"
+		export *
+	}
+	
+	module GlkView {
+		requires objc
+		header "GlkView.h"
+		export *
+	}
+	
+	module GlkAutomation {
 		requires objc
 		header "GlkAutomation.h"
+		export *
+	}
+	
+	export *
+	module * { export * }
+
+	explicit module GlkArrangeEvent {
+		requires objc
+		header "GlkArrangeEvent.h"
 		export *
 	}
 	
@@ -149,27 +177,9 @@ framework module GlkView {
 		export *
 	}
 	
-	explicit module GlkTextView {
-		requires objc
-		header "GlkTextView.h"
-		export *
-	}
-	
 	explicit module GlkTextWindow {
 		requires objc
 		header "GlkTextWindow.h"
-		export *
-	}
-	
-	explicit module GlkTypesetter {
-		requires objc
-		header "GlkTypesetter.h"
-		export *
-	}
-	
-	explicit module GlkView {
-		requires objc
-		header "GlkView.h"
 		export *
 	}
 	
@@ -184,12 +194,5 @@ framework module GlkView {
 		header "GlkViewDefinitions.h"
 		export *
 	}
-	
-	explicit module glk {
-		header "glk.h"
-		export *
-	}
-
-	export *
 }
 

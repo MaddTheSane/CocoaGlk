@@ -308,8 +308,10 @@
 		5560FA3B21C08B1400E711F5 /* GlkTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3921C08B1300E711F5 /* GlkTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA3D21C08BB300E711F5 /* GlkTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */; };
 		5560FA3E21C08BB300E711F5 /* GlkTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */; };
-		5560FA4121C08C5A00E711F5 /* GlkTypesetter-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3F21C08C5A00E711F5 /* GlkTypesetter-iOS.h */; };
+		5560FA4121C08C5A00E711F5 /* GlkTypesetter-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3F21C08C5A00E711F5 /* GlkTypesetter-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA4221C08C5A00E711F5 /* GlkTypesetter-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA4021C08C5A00E711F5 /* GlkTypesetter-iOS.m */; };
+		5560FA4421C0920600E711F5 /* GlkViewUmbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA4321C0920600E711F5 /* GlkViewUmbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA4521C0920600E711F5 /* GlkViewUmbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA4321C0920600E711F5 /* GlkViewUmbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		559219ED21B90663002F7F9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		559219EE21B90894002F7F9E /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55BC63282055C42B001F8CFB /* savefile.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62ED2055C42B001F8CFB /* savefile.c */; };
@@ -707,6 +709,7 @@
 		5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkTypesetter.m; sourceTree = "<group>"; };
 		5560FA3F21C08C5A00E711F5 /* GlkTypesetter-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlkTypesetter-iOS.h"; sourceTree = "<group>"; };
 		5560FA4021C08C5A00E711F5 /* GlkTypesetter-iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GlkTypesetter-iOS.m"; sourceTree = "<group>"; };
+		5560FA4321C0920600E711F5 /* GlkViewUmbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkViewUmbrella.h; sourceTree = "<group>"; };
 		559219F321B908EA002F7F9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		55BC62ED2055C42B001F8CFB /* savefile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = savefile.c; sourceTree = "<group>"; };
 		55BC62EE2055C42B001F8CFB /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
@@ -1029,6 +1032,7 @@
 			isa = PBXGroup;
 			children = (
 				552A03722049D5E200A4ECAA /* GlkView.modulemap */,
+				5560FA4321C0920600E711F5 /* GlkViewUmbrella.h */,
 				5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */,
 				4B51ABF907E8927100576AB9 /* GlkHub.h */,
 				4B51ABFA07E8927100576AB9 /* GlkHub.m */,
@@ -1312,6 +1316,7 @@
 				4BEE1D3B07FCC1D900296CD2 /* GlkTextView-Mac.h in Headers */,
 				4B16B9A808A3B88A001E4C40 /* GlkImageSourceProtocol.h in Headers */,
 				4B3A1DDA08A7EC0500DEB0B9 /* GlkImage.h in Headers */,
+				5560FA4421C0920600E711F5 /* GlkViewUmbrella.h in Headers */,
 				4B32AB240A5471080069A026 /* GlkAutomation.h in Headers */,
 				4BEF18CE0AB4643A00131910 /* GlkTypesetter-Mac.h in Headers */,
 				4B9079DC0ABDBFF300C61EF9 /* GlkCustomTextSection.h in Headers */,
@@ -1362,6 +1367,7 @@
 				5560F97B21C0686B00E711F5 /* GlkBuffer.h in Headers */,
 				5560F97C21C0686B00E711F5 /* GlkWindow.h in Headers */,
 				5560F97D21C0686B00E711F5 /* GlkPairWindow.h in Headers */,
+				5560FA4521C0920600E711F5 /* GlkViewUmbrella.h in Headers */,
 				5560FA3B21C08B1400E711F5 /* GlkTypesetter.h in Headers */,
 				5560FA3421C084E500E711F5 /* GlkTextView.h in Headers */,
 				5560F97E21C0686B00E711F5 /* GlkTextWindow.h in Headers */,

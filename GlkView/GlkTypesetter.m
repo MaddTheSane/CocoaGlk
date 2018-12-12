@@ -39,45 +39,6 @@
 #define CGF(__x) __x ## f
 #endif
 
-// Internal classes
-@interface GlkMarginSection : NSObject {
-	NSInteger fragmentGlyph;
-	CGFloat width;
-	CGFloat maxY;
-}
-
-- (id) initWithFragmentGlyph: (NSInteger) glyph
-					   width: (CGFloat) width
-						maxY: (CGFloat) maxY;
-
-@property (readonly) NSInteger glyph;
-@property (readonly) CGFloat width;
-@property (readonly) CGFloat maxY;
-
-@end
-
-@implementation GlkMarginSection
-
-- (id) initWithFragmentGlyph: (NSInteger) glyph
-					   width: (CGFloat) newWidth
-						maxY: (CGFloat) newMaxY {
-	self = [super init];
-	
-	if (self) {
-		fragmentGlyph = glyph;
-		width = newWidth;
-		maxY = newMaxY;
-	}
-	
-	return self;
-}
-
-@synthesize glyph=fragmentGlyph;
-@synthesize width;
-@synthesize maxY;
-
-@end
-
 // Behaviour #defines
 
 #define GlyphLookahead 512								// Number of glyphs to 'look ahead' when working out character positioning, etc

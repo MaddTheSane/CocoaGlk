@@ -9,10 +9,8 @@
 #define GlkViewDefinitions_h
 
 #include <TargetConditionals.h>
-#ifndef COCOAGLK_IPHONE
 #if TARGET_OS_IPHONE
 #define COCOAGLK_IPHONE 1
-#endif
 #endif
 
 #import <Foundation/Foundation.h>

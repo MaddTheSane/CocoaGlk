@@ -10,6 +10,7 @@
 // Communications with an individual client session
 //
 
+#import "GlkViewDefinitions.h"
 #import "GlkBuffer.h"
 #import "GlkStreamProtocol.h"
 #import "GlkEventProtocol.h"
@@ -110,7 +111,7 @@ struct GlkSize {
 /// Sets where we get our image data from
 - (void) setImageSource: (in byref id<GlkImageSource>) newSource;
 /// Retrieves the size of an image
-- (NSSize) sizeForImageResource: (glui32) imageId;
+- (GlkCocoaSize) sizeForImageResource: (glui32) imageId;
 /// Retrieves the active image source
 - (out byref id<GlkImageSource>) imageSource;
 

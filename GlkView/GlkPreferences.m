@@ -51,10 +51,10 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
                                            size: 12] copy];
 		
 		// Choose alternative fonts if our defaults are not available
-		if (proportionalFont == nil) proportionalFont = [NSFont systemFontOfSize: 12];
-		if (fixedFont == nil) fixedFont = [NSFont fontWithName: @"Monaco"
+		if (proportionalFont == nil) proportionalFont = [GlkFont systemFontOfSize: 12];
+		if (fixedFont == nil) fixedFont = [GlkFont fontWithName: @"Monaco"
 														  size: 12];
-		if (fixedFont == nil) fixedFont = [NSFont systemFontOfSize: 12];
+		if (fixedFont == nil) fixedFont = [GlkFont systemFontOfSize: 12];
 		
 		// Default styles
 		styles = [[NSMutableDictionary alloc] init];
@@ -84,7 +84,7 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 		[header setSize: 4];
 		[subheader setSize: 1];
 		
-		[header setJustification: NSCenterTextAlignment];
+		[header setJustification: NSTextAlignmentCenter];
 		
 		[preformatted setProportional: NO];
 		

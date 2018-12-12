@@ -6,7 +6,12 @@
 //  Copyright 2006 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "GlkViewDefinitions.h"
+#if defined(COCOAGLK_IPHONE)
+# import <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 #import <GlkView/GlkTypesetter.h>
 
 /// Attribute indicating that a section of text should use custom attribute formatting. Value should be a GlkCustomTextSection object.
@@ -27,7 +32,7 @@ extern NSAttributedStringKey const GlkCustomSectionAttributeName;
 
 // Drawing
 
-- (void) drawAtPoint: (NSPoint) point
-			  inView: (NSView*) view;
+- (void) drawAtPoint: (GlkPoint) point
+			  inView: (GlkSuperView*) view;
 
 @end

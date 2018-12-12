@@ -241,12 +241,14 @@ static NSString* stringFromOp(NSArray* op) {
 	[coder encodeObject: operations];
 }
 
+#ifndef COCOAGLK_IPHONE
 - (id)replacementObjectForPortCoder:(NSPortCoder *)encoder {
 	// This ensures that when we're passed in a bycopy way, we get passed as an actual copy and not a NSDistantObject
 	// (which would kind of defeat the whole purpose of the buffer in the first place)
 	if ([encoder isBycopy]) return self;
     return [super replacementObjectForPortCoder:encoder];	
 }
+#endif
 
 // = NSCopying =
 
@@ -328,7 +330,7 @@ static NSString* stringFromOp(NSArray* op) {
 }
 
 - (void) clearWindowIdentifier: (glui32) identifier
-		  withBackgroundColour: (in bycopy NSColor*) bgColour {
+		  withBackgroundColour: (in bycopy GlkColor*) bgColour {
 	[self addOperation: s_ClearWindowIdentifierWithBackground
 			 arguments: @[@(identifier),
 						  bgColour]];
@@ -398,30 +400,48 @@ static NSString* stringFromOp(NSArray* op) {
 
 // Graphics
 - (void) fillAreaInWindowWithIdentifier: (unsigned) identifier
-							 withColour: (in bycopy NSColor*) color
-							  rectangle: (NSRect) windowArea {
+							 withColour: (in bycopy GlkColor*) color
+							  rectangle: (GlkRect) windowArea {
+	NSValue *rectValue;
+#ifdef COCOAGLK_IPHONE
+	rectValue = [NSValue valueWithCGRect: windowArea];
+#else
+	rectValue = [NSValue valueWithRect: windowArea];
+#endif
 	[self addOperation: s_FillAreaInWindowWithIdentifier
 			 arguments: @[@(identifier),
 						  color,
-						  [NSValue valueWithRect: windowArea]]];
+						  rectValue]];
 }
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
-					  atPosition: (NSPoint) position {
+					  atPosition: (GlkPoint) position {
+	NSValue *pointValue;
+#ifdef COCOAGLK_IPHONE
+	pointValue = [NSValue valueWithCGPoint: position];
+#else
+	pointValue = [NSValue valueWithPoint: position];
+#endif
 	[self addOperation: s_DrawImageWithIdentifier
 			 arguments: @[@(imageIdentifier),
 						  @(windowIdentifier),
-						  [NSValue valueWithPoint: position]]];
+						  pointValue]];
 }
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
-						  inRect: (NSRect) imageRect {
+						  inRect: (GlkRect) imageRect {
+	NSValue *rectValue;
+#ifdef COCOAGLK_IPHONE
+	rectValue = [NSValue valueWithCGRect: imageRect];
+#else
+	rectValue = [NSValue valueWithRect: imageRect];
+#endif
 	[self addOperation: s_DrawImageWithIdentifierInRect
 			 arguments: @[@(imageIdentifier),
 						  @(windowIdentifier),
-						  [NSValue valueWithRect: imageRect]]];
+						  rectValue]];
 }
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
@@ -436,12 +456,18 @@ static NSString* stringFromOp(NSArray* op) {
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					   alignment: (unsigned) alignment
-							size: (NSSize) imageSize {
+							size: (GlkCocoaSize) imageSize {
+	NSValue *sizeValue;
+#ifdef COCOAGLK_IPHONE
+	sizeValue = [NSValue valueWithCGSize: imageSize];
+#else
+	sizeValue = [NSValue valueWithSize: imageSize];
+#endif
 	[self addOperation: s_DrawImageWithIdentifierAlignSize
 			 arguments: @[@(imageIdentifier),
 						  @(windowIdentifier),
 						  @(alignment),
-						  [NSValue valueWithSize: imageSize]]];
+						  sizeValue]];
 }
 
 - (void) breakFlowInWindowWithIdentifier: (unsigned) identifier {
@@ -586,27 +612,51 @@ static NSString* stringFromOp(NSArray* op) {
 
 		// Graphics
 		} else if ([opType isEqualToString: s_FillAreaInWindowWithIdentifier]) {
+			GlkRect aRect;
+#ifdef COCOAGLK_IPHONE
+			aRect = [[args objectAtIndex: 2] CGRectValue];
+#else
+			aRect = [[args objectAtIndex: 2] rectValue];
+#endif
 			[target fillAreaInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 				   			          withColour: [args objectAtIndex: 1]
-			                           rectangle: [[args objectAtIndex: 2] rectValue]];
+			                           rectangle: aRect];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifier]) {
+			GlkPoint aPoint;
+#ifdef COCOAGLK_IPHONE
+			aPoint = [[args objectAtIndex: 2] CGPointValue];
+#else
+			aPoint = [[args objectAtIndex: 2] pointValue];
+#endif
 			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 			       inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
-			                   atPosition: [[args objectAtIndex: 2] pointValue]];
+			                   atPosition: aPoint];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierInRect]) {
+			GlkRect aRect;
+#ifdef COCOAGLK_IPHONE
+			aRect = [[args objectAtIndex: 2] CGRectValue];
+#else
+			aRect = [[args objectAtIndex: 2] rectValue];
+#endif
 			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
-								   inRect: [[args objectAtIndex: 2] rectValue]];
+								   inRect: aRect];
 		
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierAlign]) {
 			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue] 
 								alignment: [[args objectAtIndex: 2] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierAlignSize]) {
+			GlkCocoaSize aSize;
+#ifdef COCOAGLK_IPHONE
+			aSize = [[args objectAtIndex: 3] CGSizeValue];
+#else
+			aSize = [[args objectAtIndex: 3] sizeValue];
+#endif
 			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue] 
 								alignment: [[args objectAtIndex: 2] unsignedIntValue]
-									 size: [[args objectAtIndex: 3] sizeValue]];
+									 size: aSize];
 		
 		} else if ([opType isEqualToString: s_BreakFlowInWindowWithIdentifier]) {
 			[target breakFlowInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];

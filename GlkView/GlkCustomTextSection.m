@@ -23,7 +23,7 @@ NSString*const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName";
 
 // = Typesetting =
 
-- (void) placeBaselineAt: (NSPoint) point
+- (void) placeBaselineAt: (GlkPoint) point
 				forGlyph: (NSInteger) glyph {
 	// Do nothing...
 }
@@ -31,8 +31,8 @@ NSString*const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName";
 
 // = Drawing =
 
-- (void) drawAtPoint: (NSPoint) point
-			  inView: (NSView*) view {
+- (void) drawAtPoint: (GlkPoint) point
+			  inView: (GlkSuperView*) view {
 }
 
 @end

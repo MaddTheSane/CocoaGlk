@@ -6,7 +6,12 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "GlkViewDefinitions.h"
+#if defined(COCOAGLK_IPHONE)
+# import <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 #import <GlkView/GlkCustomTextSection.h>
 
 // Attribute that can be applied to control glyphs to indicate that they should cause formatting of a specific Glk image
@@ -17,16 +22,16 @@ extern NSString* GlkImageAttribute;
 //
 @interface GlkImage : GlkCustomTextSection {
 	/// The NSImage associated with this image
-	NSImage* image;
+	GlkSuperImage* image;
 	/// The size to draw this image with
-	NSSize size;
+	GlkCocoaSize size;
 	/// The Glk alignment of this image
 	unsigned alignment;
 	/// The character position of this image in the text stream
 	NSUInteger characterPosition;
 	
 	/// The bounds of this image in the text container
-	NSRect bounds;
+	GlkRect bounds;
 	/// Whether or not the bounds for this image have been calculated yet
 	BOOL calculatedBounds;
 
@@ -37,23 +42,23 @@ extern NSString* GlkImageAttribute;
 }
 
 // Initialisation
-- (id) initWithImage: (NSImage*) image
+- (id) initWithImage: (GlkSuperImage*) image
 		   alignment: (unsigned) alignment
-				size: (NSSize) size
+				size: (GlkCocoaSize) size
 			position: (NSUInteger) characterPosition;
 
 // Information
 /// The NSImage associated with this image
-@property (readonly, retain) NSImage *image;
+@property (readonly, retain) GlkSuperImage *image;
 /// The size to draw this image with
-@property (readonly) NSSize size;
+@property (readonly) GlkCocoaSize size;
 /// The Glk alignment of this image
 @property (readonly) unsigned alignment;
 /// The character position of this image in the text stream
 @property (readonly) NSUInteger characterPosition;
 
 /// The bounds of this image. Setting it marks it as calculated.
-@property (nonatomic) NSRect bounds;
+@property (nonatomic) GlkRect bounds;
 /// Returns YES if the bounds are calculated
 @property (readonly) BOOL calculatedBounds;
 /// Marks this image as uncalculated

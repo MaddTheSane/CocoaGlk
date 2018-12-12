@@ -179,6 +179,12 @@ framework module GlkView {
 		export *
 	}
 	
+	explicit module GlkViewDefinitions {
+		requires objc
+		header "GlkViewDefinitions.h"
+		export *
+	}
+	
 	explicit module glk {
 		header "glk.h"
 		export *

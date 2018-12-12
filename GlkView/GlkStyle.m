@@ -8,6 +8,7 @@
 
 #include <tgmath.h>
 #import "GlkStyle.h"
+#include <CoreText/CoreText.h>
 
 #if CGFLOAT_IS_DOUBLE
 #define CGF(__x) __x
@@ -28,13 +29,13 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 		// Default attributes
 		indentation = 0;
 		paraIndent = 0;
-		alignment = NSLeftTextAlignment;
+		alignment = NSTextAlignmentLeft;
 		size = 0;
 		weight = 0;
 		oblique = NO;
 		proportional = YES;
-		textColour = [[NSColor blackColor] retain];
-		backColour = [[NSColor whiteColor] retain];
+		textColour = [[GlkColor blackColor] retain];
+		backColour = [[GlkColor whiteColor] retain];
 		reversed = NO;
 		
 		// The cache
@@ -112,7 +113,7 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 }
 
 @synthesize textColour;
-- (void) setTextColour: (NSColor*) newTextColour {
+- (void) setTextColour: (GlkColor*) newTextColour {
 	if (newTextColour == textColour) return;
 	
 	[textColour autorelease]; textColour = nil;
@@ -122,7 +123,7 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 }
 
 @synthesize backColour;
-- (void) setBackColour: (NSColor*) newBackColour {
+- (void) setBackColour: (GlkColor*) newBackColour {
 	if (newBackColour == backColour) return;
 	
 	[backColour release]; backColour = nil;
@@ -173,6 +174,104 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 
 - (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs
 								scaleFactor: (CGFloat) scaleFactor {
+#if defined(COCOAGLK_IPHONE)
+	// Use the cached version of the attributes if they're around
+	if (lastAttributes && lastPreferences == prefs && lastScaleFactor == scaleFactor) {
+		if ([lastPreferences changeCount] == prefChangeCount) {
+			return [self addSelfToAttributes: lastAttributes];
+		}
+		
+		[lastAttributes release]; lastAttributes = nil;
+	}
+	
+	// Various bits of the style
+	NSDictionary* res = nil;
+	
+	UIFont* font;
+	GlkColor* foreCol;
+	GlkColor* backCol;
+	NSMutableParagraphStyle* paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	
+	// Select the appropriate font
+	if (proportional) {
+		font = [prefs proportionalFont];
+	} else {
+		font = [prefs fixedFont];
+	}
+	UIFontDescriptor *descriptor = font.fontDescriptor;
+	
+	// Adjust the font size
+	if (size != 0 || scaleFactor != 1.0f) {
+		CGFloat newSize = [font pointSize] + size;
+		if (newSize < 6) newSize = 6;
+		newSize *= scaleFactor;
+		
+		descriptor = [descriptor fontDescriptorByAddingAttributes:@{UIFontDescriptorSizeAttribute: @(newSize)}];
+	}
+	
+	UIFontDescriptorSymbolicTraits symbolicTraits = descriptor.symbolicTraits;
+	// Clear the traits to change
+	symbolicTraits &= ~(UIFontDescriptorTraitItalic|UIFontDescriptorTraitBold);
+	// Adjust the font weight
+	if (weight < 0) {
+		font = [mgr convertWeight: NO
+						   ofFont: font];
+	}
+	
+	if (weight > 0) {
+		font = [mgr convertWeight: YES
+						   ofFont: font];
+	}
+	
+	// Italic/oblique
+	if (oblique) {
+		symbolicTraits |= UIFontDescriptorTraitItalic;
+	}
+	UIFontDescriptor *descriptor1 = [descriptor fontDescriptorWithSymbolicTraits:symbolicTraits];
+	if (descriptor1) {
+		descriptor = descriptor1;
+	}
+	font = [UIFont fontWithDescriptor:descriptor size:0];
+
+	
+	// Colours
+	foreCol = textColour;
+	backCol = backColour;
+	
+	if (reversed) {
+		foreCol = backColour;
+		backCol = textColour;
+	}
+	
+	// Paragraph style
+	[paraStyle setAlignment: alignment];
+	[paraStyle setFirstLineHeadIndent: indentation + paraIndent];
+	[paraStyle setHeadIndent: indentation];
+	[paraStyle setTailIndent: indentation];
+	
+	// Create the style dictionary
+	res = [NSDictionary dictionaryWithObjectsAndKeys:
+		   [[paraStyle copy] autorelease], NSParagraphStyleAttributeName,
+		   font, NSFontAttributeName,
+		   foreCol, NSForegroundColorAttributeName,
+		   backCol, NSBackgroundColorAttributeName,
+		   @([prefs useLigatures]), NSLigatureAttributeName,
+		   nil];
+	
+	// Finish up
+	[paraStyle release];
+	
+	if (res) {
+		// Cache this style
+		[lastAttributes release];
+		lastAttributes = [res copy];
+		prefChangeCount = [prefs changeCount];
+		lastPreferences = prefs;
+	}
+	
+	// Return the result
+	return [self addSelfToAttributes: res];
+#else
 	// Use the cached version of the attributes if they're around
 	if (lastAttributes && lastPreferences == prefs && lastScaleFactor == scaleFactor) {
 		if ([lastPreferences changeCount] == prefChangeCount) {
@@ -188,8 +287,8 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 	NSDictionary* res = nil;
 	
 	NSFont* font;
-	NSColor* foreCol;
-	NSColor* backCol;
+	GlkColor* foreCol;
+	GlkColor* backCol;
 	NSMutableParagraphStyle* paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	
 	// Select the appropriate font
@@ -255,13 +354,14 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 	if (res) {
 		// Cache this style
 		[lastAttributes release];
-		lastAttributes = [res retain];
+		lastAttributes = [res copy];
 		prefChangeCount = [prefs changeCount];
 		lastPreferences = prefs;
 	}
 	
 	// Return the result
 	return [self addSelfToAttributes: res];
+#endif
 }
 
 // = Dealing with glk style hints =
@@ -274,10 +374,17 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
+#if defined(COCOAGLK_IPHONE)
+			[self setBackColour: [UIColor colorWithRed: ((CGFloat)red)/CGF(255.0)
+												 green: ((CGFloat)green)/CGF(255.0)
+												  blue: ((CGFloat)blue)/CGF(255.0)
+												 alpha: 1.0]];
+#else
 			[self setBackColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/CGF(255.0)
 													   green: ((CGFloat)green)/CGF(255.0)
 														blue: ((CGFloat)blue)/CGF(255.0)
 													   alpha: 1.0]];
+#endif
 			break;
 		}
 			
@@ -287,10 +394,17 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
+#if defined(COCOAGLK_IPHONE)
+			[self setTextColour: [UIColor colorWithRed: ((CGFloat)red)/CGF(255.0)
+												 green: ((CGFloat)green)/CGF(255.0)
+												  blue: ((CGFloat)blue)/CGF(255.0)
+												 alpha: 1.0]];
+#else
 			[self setTextColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/CGF(255.0)
 													   green: ((CGFloat)green)/CGF(255.0)
 														blue: ((CGFloat)blue)/CGF(255.0)
 													   alpha: 1.0]];
+#endif
 			break;
 		}
 			
@@ -304,20 +418,20 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 			
 		case stylehint_Justification:
 		{
-			NSTextAlignment align = NSLeftTextAlignment;
+			NSTextAlignment align = NSTextAlignmentLeft;
 			
 			switch (value) {
 				case stylehint_just_LeftFlush:
-					align = NSLeftTextAlignment;
+					align = NSTextAlignmentLeft;
 					break;
 				case stylehint_just_RightFlush:
-					align = NSRightTextAlignment;
+					align = NSTextAlignmentRight;
 					break;
 				case stylehint_just_Centered:
-					align = NSCenterTextAlignment;
+					align = NSTextAlignmentCenter;
 					break;
 				case stylehint_just_LeftRight:
-					align = NSJustifiedTextAlignment;
+					align = NSTextAlignmentJustified;
 					break;
 			}
 			

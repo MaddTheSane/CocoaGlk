@@ -2124,7 +2124,7 @@
 
 // = Graphics functions =
 
-- (NSSize) sizeForImageResource: (glui32) imageId {
+- (GlkCocoaSize) sizeForImageResource: (glui32) imageId {
 	NSImage* img = [self imageWithIdentifier: imageId];
 	
 	if (img == nil) return NSMakeSize(-1, -1);

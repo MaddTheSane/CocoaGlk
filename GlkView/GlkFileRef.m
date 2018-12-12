@@ -21,10 +21,17 @@
 		pathname = [[path URLByStandardizingPath] copy];
 		temporary = NO;
 		
+#if defined(COCOAGLK_IPHONE)
+		[[NSNotificationCenter defaultCenter] addObserver: self
+												 selector: @selector(applicationWillTerminate:)
+													 name: UIApplicationWillTerminateNotification
+												   object: [UIApplication sharedApplication]];
+#else
 		[[NSNotificationCenter defaultCenter] addObserver: self
 												 selector: @selector(applicationWillTerminate:)
 													 name: NSApplicationWillTerminateNotification
 												   object: NSApp];
+#endif
 	}
 	
 	return self;

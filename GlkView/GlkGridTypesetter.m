@@ -26,7 +26,7 @@
 	[self invalidateAllLayout];
 }
 
-- (void) setCellSize: (NSSize) newSize {
+- (void) setCellSize: (GlkCocoaSize) newSize {
 	cellSize = newSize;
 	
 	[self invalidateAllLayout];
@@ -45,7 +45,7 @@
 	NSUInteger charIndex = cacheCharIndexes[glyph];
 	NSInteger x = charIndex % gridWidth;
 	NSInteger y = charIndex / gridWidth;
-	NSPoint gridPos = NSMakePoint(cellSize.width*x+inset, cellSize.height*y);
+	GlkPoint gridPos = GlkMakePoint(cellSize.width*x+inset, cellSize.height*y);
 	
 	CGFloat charPos = gridPos.x;
 	CGFloat initialCharPos = charPos;

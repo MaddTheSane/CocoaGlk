@@ -6,7 +6,12 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "GlkViewDefinitions.h"
+#if defined(COCOAGLK_IPHONE)
+# import <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 #import <GlkView/glk.h>
 
 extern NSAttributedStringKey const GlkStyleAttributeName;									//!< Styles store themselves in the attributes to facilitate reformating after a change to a preference object
@@ -27,8 +32,8 @@ extern NSAttributedStringKey const GlkStyleAttributeName;									//!< Styles st
 	int weight;
 	BOOL oblique;
 	BOOL proportional;
-	NSColor* textColour;
-	NSColor* backColour;
+	GlkColor* textColour;
+	GlkColor* backColour;
 	BOOL reversed;
 	
 	// Caching the attributes
@@ -65,9 +70,9 @@ extern NSAttributedStringKey const GlkStyleAttributeName;									//!< Styles st
 /// \c NO if fixed-pitch
 @property (nonatomic) BOOL proportional;
 /// Foreground text colour
-@property (nonatomic, retain) NSColor* textColour;
+@property (nonatomic, retain) GlkColor* textColour;
 /// Background text colour
-@property (nonatomic, retain) NSColor* backColour;
+@property (nonatomic, retain) GlkColor* backColour;
 /// \c YES If text/back are reversed
 @property (nonatomic, getter=isReversed) BOOL reversed;
 

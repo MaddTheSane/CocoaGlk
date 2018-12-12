@@ -17,27 +17,27 @@
 
 @implementation GlkGraphicsWindow
 
-- (id)initWithFrame:(NSRect)frame {
+- (id)initWithFrame:(GlkRect)frame {
     self = [super initWithFrame:frame];
 
     if (self) {
-		NSSize imgSize = frame.size;
+		GlkCocoaSize imgSize = frame.size;
 		
 		if (imgSize.width <= 0) imgSize.width = 1;
 		if (imgSize.height <= 0) imgSize.height = 1;
 		
 		// Construct a buffer image for this window
-		windowImage = [[NSImage alloc] initWithSize: imgSize];
+		windowImage = [[GlkSuperImage alloc] initWithSize: imgSize];
 		
 		// Fill it in white
 		[windowImage lockFocus];
 		
-		[[NSColor whiteColor] set];
-		NSRectFill(NSMakeRect(0,0, frame.size.width, frame.size.height));
+		[[GlkColor whiteColor] set];
+		GlkRectFill(GlkMakeRect(0,0, frame.size.width, frame.size.height));
 		
 		[windowImage unlockFocus];		
 		
-		backgroundColour = [[NSColor whiteColor] retain];
+		backgroundColour = [[GlkColor whiteColor] retain];
     }
 
     return self;
@@ -51,13 +51,13 @@
 }
 
 - (void) clearWindow {
-	NSSize imgSize = [windowImage size];
+	GlkCocoaSize imgSize = [windowImage size];
 	
 	// Fill in the background colour
 	[windowImage lockFocus];
 	
 	[backgroundColour set];
-	NSRectFill(NSMakeRect(0,0, imgSize.width, imgSize.height));
+	GlkRectFill(GlkMakeRect(0,0, imgSize.width, imgSize.height));
 	
 	[windowImage unlockFocus];
 }
@@ -73,13 +73,13 @@
 	[target queueEvent: [evt autorelease]];
 }
 
-- (void) setFrame: (NSRect) frame {	
+- (void) setFrame: (GlkRect) frame {
 	// Resize the buffer image (if the new size is bigger than the old size)
-	NSSize oldSize = [windowImage size];
+	GlkCocoaSize oldSize = [windowImage size];
 	
 	if (oldSize.width < frame.size.width || oldSize.height < frame.size.height) {
 		// Resize and clear
-		[windowImage setSize: NSMakeSize(frame.size.width + CGF(8.0), frame.size.height + CGF(8.0))];
+		[windowImage setSize: GlkMakeSize(frame.size.width + CGF(8.0), frame.size.height + CGF(8.0))];
 		[self clear];
 	}
 	
@@ -87,23 +87,27 @@
 	[super setFrame: frame];
 }
 
-- (NSRect) convertGlkToImageCoords: (NSRect) r {
-	NSRect res = r;
-	NSSize size = [windowImage size];
+- (GlkRect) convertGlkToImageCoords: (GlkRect) r {
+	GlkRect res = r;
+	GlkCocoaSize size = [windowImage size];
 	
 	res.origin.y = size.height - res.origin.y - res.size.height;
 	
 	return res;
 }
 
-- (void)drawRect:(NSRect)rect {
+- (void)drawRect:(GlkRect)rect {
 	// Draw the buffer image
+#if defined(COCOAGLK_IPHONE)
+#else
 	[windowImage drawInRect: rect
 				   fromRect: [self convertGlkToImageCoords: rect]
 				  operation: NSCompositeSourceOver
 				   fraction: 1.0];
+#endif
 }
 
+#if !defined(COCOAGLK_IPHONE)
 - (void) mouseDown: (NSEvent*) event {
 	NSRect bounds = [self bounds];
 	NSPoint mousePos = [self convertPoint: [event locationInWindow] 
@@ -125,6 +129,7 @@
 		[super mouseDown: event];
 	}
 }
+#endif
 
 // = Styles =
 
@@ -144,7 +149,7 @@
 
 // = Layout =
 
-- (void) layoutInRect: (NSRect) parentRect {
+- (void) layoutInRect: (GlkRect) parentRect {
 	// Set the frame
 	[self setFrame: parentRect];
 	
@@ -168,7 +173,7 @@
 
 - (GlkSize) glkSize {
 	// The GlkSize of this window is the same as the 'actual' size in pixels
-	NSRect frame = [self frame];
+	GlkRect frame = [self frame];
 	
 	GlkSize res;
 	
@@ -180,8 +185,23 @@
 
 // = Drawing in the graphics window =
 
-- (void) fillRect: (NSRect) rect
-	   withColour: (NSColor*) col {
+- (void) fillRect: (GlkRect) rect
+	   withColour: (GlkColor*) col {
+#if defined(COCOAGLK_IPHONE)
+	UIGraphicsBeginImageContext(windowImage.size);
+	[windowImage drawInRect:CGRectMake(0, 0, windowImage.size.width, windowImage.size.height)];
+
+	rect = [self convertGlkToImageCoords: rect];
+	
+	[col set];
+	UIRectFill(rect);
+
+	[windowImage release];
+	windowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	UIGraphicsEndImageContext();
+	
+	[self setNeedsDisplay];
+#else
 	[windowImage lockFocus];
 	
 	rect = [self convertGlkToImageCoords: rect];
@@ -192,15 +212,26 @@
 	[windowImage unlockFocus];
 	
 	[self setNeedsDisplay: YES];
+#endif
 }
 
-- (void) setBackgroundColour: (NSColor*) col {
-	[backgroundColour release];
-	backgroundColour = [col copy];
-}
+@synthesize backgroundColour;
 
-- (void) drawImage: (NSImage*) img
-			inRect: (NSRect) imgRect {
+- (void) drawImage: (GlkSuperImage*) img
+			inRect: (GlkRect) imgRect {
+#if defined(COCOAGLK_IPHONE)
+	imgRect = [self convertGlkToImageCoords: imgRect];
+	
+	//UIGraphicsImageRenderer *render = [[UIGraphicsImageRenderer alloc] initWithSize:imgSize];
+	UIGraphicsBeginImageContext(windowImage.size);
+	[windowImage drawInRect:CGRectMake(0, 0, windowImage.size.width, windowImage.size.height)];
+	[img drawInRect:imgRect];
+	[windowImage release];
+	windowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	UIGraphicsEndImageContext();
+	
+	[self setNeedsDisplay];
+#else
 	NSSize imgSize = [img size];
 	
 	imgRect = [self convertGlkToImageCoords: imgRect];
@@ -214,6 +245,7 @@
 	[windowImage unlockFocus];
 	
 	[self setNeedsDisplay: YES];
+#endif
 }
 
 // = NSAccessibility =

@@ -16,9 +16,9 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 
 // = Initialisation =
 
-- (id) initWithImage: (NSImage*) img
+- (id) initWithImage: (GlkSuperImage*) img
 		   alignment: (unsigned) align
-				size: (NSSize) sz
+				size: (GlkCocoaSize) sz
 			position: (NSUInteger) charPos {
 	self = [super init];
 	
@@ -48,7 +48,7 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 // = Cached information =
 
 @synthesize bounds;
-- (void) setBounds: (NSRect) newBounds {
+- (void) setBounds: (GlkRect) newBounds {
 	calculatedBounds = YES;
 	bounds = newBounds;
 }
@@ -80,7 +80,7 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 			else if (alignment == imagealign_InlineDown)
 				secAlign = GlkAlignBottom;
 		
-			[typesetter addLineSection: NSMakeRect(offset, -size.height, size.width, size.height)
+			[typesetter addLineSection: GlkMakeRect(offset, -size.height, size.width, size.height)
 						   advancement: size.width
 								offset: offset
 							glyphRange: glyphs
@@ -112,7 +112,7 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 			
 			[typesetter addToRightMargin: (size.width*scaleFactor)+8
 								  height: size.height*scaleFactor];
-			[typesetter addLineSection: NSMakeRect(offset, -1, size.width, 1)
+			[typesetter addLineSection: GlkMakeRect(offset, -1, size.width, 1)
 						   advancement: 0
 								offset: offset
 							glyphRange: glyphs
@@ -128,10 +128,10 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 
 // = Drawing =
 
-- (void) drawAtPoint: (NSPoint) point
-			  inView: (NSView*) view {
-	NSRect drawRect;
-	NSRect imageRect;
+- (void) drawAtPoint: (GlkPoint) point
+			  inView: (GlkSuperView*) view {
+	GlkRect drawRect;
+	GlkRect imageRect;
 	
 	if (alignment == imagealign_MarginLeft) {
 		NSSize inset = [(NSTextView*)view textContainerInset];
@@ -146,7 +146,7 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 		if (maxWidth < size.width) scaleFactor = maxWidth/size.width;
 	}
 	
-	drawRect.origin = NSMakePoint(floor(point.x), floor(point.y));
+	drawRect.origin = GlkMakePoint(floor(point.x), floor(point.y));
 	drawRect.size = size;
 	drawRect.size.width *= scaleFactor;
 	drawRect.size.height *= scaleFactor;

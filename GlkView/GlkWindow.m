@@ -12,7 +12,7 @@
 
 // = Initialisation =
 
-- (id)initWithFrame:(NSRect)frame {
+- (id)initWithFrame:(GlkRect)frame {
     self = [super initWithFrame:frame];
     
 	if (self) {
@@ -35,9 +35,9 @@
 
 // = Drawing =
 
-- (void)drawRect:(NSRect)rect {
+- (void)drawRect:(GlkRect)rect {
 	[[self backgroundColour] set];
-	NSRectFill(rect);
+	GlkRectFill(rect);
 }
 
 - (BOOL) isOpaque {
@@ -55,7 +55,7 @@
 
 // = Layout =
 
-- (void) layoutInRect: (NSRect) parentRect {
+- (void) layoutInRect: (GlkRect) parentRect {
 	[self setFrame: parentRect];
 	
 	GlkSize newSize = [self glkSize];
@@ -75,12 +75,12 @@
 
 @synthesize border;
 
-- (NSRect) contentRect {
-	return NSInsetRect([self bounds], border, border);
+- (GlkRect) contentRect {
+	return GlkInsetRect([self bounds], border, border);
 }
 
 - (GlkSize) glkSize {
-	NSRect contentRect = [self contentRect];
+	GlkRect contentRect = [self contentRect];
 	GlkSize res;
 	
 	res.width = (int)contentRect.size.width;
@@ -95,11 +95,11 @@
 
 @synthesize forceFixed;
 
-- (NSColor*) backgroundColour {
+- (GlkColor*) backgroundColour {
 	return [[self style: style_Normal] backColour];
 }
 
-- (NSFont*) proportionalFont {
+- (GlkFont*) proportionalFont {
 	if (forceFixed) {
 		return [self fixedFont];
 	} else {
@@ -107,7 +107,7 @@
 	}
 }
 
-- (NSFont*) fixedFont {
+- (GlkFont*) fixedFont {
 	return [[self attributes: style_Preformatted] objectForKey: NSFontAttributeName];
 }
 
@@ -131,9 +131,12 @@
 }
 
 - (CGFloat) lineHeight {
+#if defined(COCOAGLK_IPHONE)
+#else
     NSLayoutManager* layoutManager = [[[NSLayoutManager alloc] init] autorelease];
     
 	return [layoutManager defaultLineHeightForFont: [[self currentTextAttributes] objectForKey: NSFontAttributeName]];
+#endif
 }
 
 - (void) setStyles: (NSDictionary*) newStyles {
@@ -292,9 +295,11 @@
 	return charInput || lineInput;
 }
 
+#if !defined(COCOAGLK_IPHONE)
 - (NSResponder*) windowResponder {
 	return self;
 }
+#endif
 
 - (void) setInputLine: (NSString*) inputLine {
 	// As we don't support line input, there's nothing to do here
@@ -386,6 +391,21 @@
 	return NO;
 }
 
+#if defined(COCOAGLK_IPHONE)
+NS_ENUM(unichar) {
+	NSUpArrowFunctionKey = 0xF700,
+	NSDownArrowFunctionKey,
+	NSLeftArrowFunctionKey,
+	NSRightArrowFunctionKey,
+	
+	NSHomeFunctionKey = 0xF729,
+	NSEndFunctionKey = 0xF72B,
+	NSPageUpFunctionKey,
+	NSPageDownFunctionKey,
+};
+
+#endif
+
 + (unsigned) keycodeForString: (NSString*) string {
 	glui32 chr = keycode_Unknown;						// The Glk character
 	
@@ -446,6 +466,7 @@
 	return chr;
 }
 
+#if !defined(COCOAGLK_IPHONE)
 + (unsigned) keycodeForEvent: (NSEvent*) evt {
 	return [[self class] keycodeForString: [evt characters]];
 }
@@ -465,6 +486,7 @@
 		[target queueEvent: [glkEvent autorelease]];
 	}
 }
+#endif
 
 - (void) updateCaretPosition {
 }
@@ -558,6 +580,7 @@
 
 // = Cursor rects =
 
+#if !defined(COCOAGLK_IPHONE)
 - (void)resetCursorRects {
 	if (lineInput || charInput) {
 		[self addCursorRect: [self bounds]
@@ -568,6 +591,7 @@
 	} else {
 	}
 }
+#endif
 
 
 // = The containing view =
@@ -599,6 +623,9 @@
 
 // = Accessibility =
 
+#if defined(COCOAGLK_IPHONE)
+#warning Update accessibility!
+#else
 - (NSArray*) accessibilityAttributeNames {
     // Attribtues that we support
     static NSArray* attributes = NULL;
@@ -635,5 +662,6 @@
     // Otherwise, use the standard behaviour for a view
     return [super accessibilityAttributeValue: attribute];
 }
+#endif
 
 @end

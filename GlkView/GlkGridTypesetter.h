@@ -6,7 +6,12 @@
 //  Copyright 2006 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "GlkViewDefinitions.h"
+#if defined(COCOAGLK_IPHONE)
+# import <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 #import <GlkView/GlkTypesetter.h>
 
@@ -24,7 +29,7 @@
 	/// Height of the grid, in characters
 	int gridHeight;
 	/// Size of a grid cell
-	NSSize cellSize;
+	GlkCocoaSize cellSize;
 }
 
 // Setting up the grid
@@ -32,6 +37,6 @@
 - (void) setGridWidth: (int) gridWidth
 			   height: (int) gridHeight;
 /// Sets the size of an individual cell in the grid
-- (void) setCellSize: (NSSize) cellSize;
+- (void) setCellSize: (GlkCocoaSize) cellSize;
 
 @end

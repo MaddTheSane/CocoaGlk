@@ -6,14 +6,27 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "GlkViewDefinitions.h"
+#if defined(COCOAGLK_IPHONE)
+# import <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 #import <GlkView/GlkWindow.h>
 #import <GlkView/GlkTextView.h>
 #import <GlkView/GlkTypesetter.h>
 
-@interface GlkTextWindow : GlkWindow<NSTextStorageDelegate, NSTextViewDelegate> {
+@interface GlkTextWindow : GlkWindow<NSTextStorageDelegate,
+#if defined(COCOAGLK_IPHONE)
+UITextViewDelegate
+#else
+NSTextViewDelegate
+#endif
+> {
+#if !defined(COCOAGLK_IPHONE)
 	NSScrollView* scrollView;							// The scroller for the text view
+#endif
 	GlkTextView* textView;								// The inner text view
 	GlkTypesetter* typesetter;							// The typesetter we should use for laying out images and other Glk-specific things
 	NSLayoutManager* layoutManager;						// The layout manager
@@ -34,7 +47,11 @@
 	CGFloat lastMorePos;								// The last y position a [ MORE ] prompt appeared
 	CGFloat nextMorePos;								// The y position that the next [ MORE ] prompt should appear at
 	
+#if defined(COCOAGLK_IPHONE)
+	UIWindow* moreWindow;								// The window containing the [ MORE ] prompt
+#else
 	NSWindow* moreWindow;								// The window containing the [ MORE ] prompt
+#endif
 	NSDate* whenMoreShown;								// The time that the [ MORE ] prompt was shown
 	CGFloat lastMoreState;								// Initial state of the [ MORE ] prompt
 	CGFloat finalMoreState;								// Final state fo the [ MORE ] prompt
@@ -45,9 +62,9 @@
 - (void) setupTextview;
 
 /// Adds an image at the end of this view
-- (void) addImage: (NSImage*) image
+- (void) addImage: (GlkSuperImage*) image
 	withAlignment: (unsigned) alignment
-			 size: (NSSize) sz;
+			 size: (GlkCocoaSize) sz;
 /// Adds a flow break at the end of this view
 - (void) addFlowBreak;
 

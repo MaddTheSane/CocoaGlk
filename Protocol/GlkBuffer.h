@@ -6,6 +6,7 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#import "GlkViewDefinitions.h"
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
 #else
@@ -58,7 +59,7 @@
 				  yPosition: (int) ypos;
 - (void) clearWindowIdentifier: (glui32) identifier;
 - (void) clearWindowIdentifier: (glui32) identifier
-		  withBackgroundColour: (in bycopy NSColor*) bgColour;
+		  withBackgroundColour: (in bycopy GlkColor*) bgColour;
 - (void) setInputLine: (in bycopy NSString*) inputLine
   forWindowIdentifier: (unsigned) windowIdentifier;
 - (void) arrangeWindow: (glui32) identifier
@@ -84,21 +85,15 @@
 					inStream: (glui32) streamIdentifier;
 
 // Graphics
-#if !defined(COCOAGLK_IPHONE)
 - (void) fillAreaInWindowWithIdentifier: (unsigned) identifier
-							 withColour: (in bycopy NSColor*) color
-							  rectangle: (NSRect) windowArea;
-#else
-- (void) fillAreaInWindowWithIdentifier: (unsigned) identifier
-							 withColour: (in bycopy UIColor*) color
-							  rectangle: (NSRect) windowArea;
-#endif
+							 withColour: (in bycopy GlkColor*) color
+							  rectangle: (GlkRect) windowArea;
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
-					  atPosition: (NSPoint) position;
+					  atPosition: (GlkPoint) position;
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
-						  inRect: (NSRect) imageRect;
+						  inRect: (GlkRect) imageRect;
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
@@ -106,7 +101,7 @@
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					   alignment: (unsigned) alignment
-							size: (NSSize) imageSize;
+							size: (GlkCocoaSize) imageSize;
 
 - (void) breakFlowInWindowWithIdentifier: (unsigned) identifier;
 

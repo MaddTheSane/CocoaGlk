@@ -6,7 +6,12 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "GlkViewDefinitions.h"
+#if defined(COCOAGLK_IPHONE)
+# import <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 #import "GlkStreamProtocol.h"
 #import "GlkSessionProtocol.h"
@@ -21,7 +26,7 @@
 ///
 /// Class that represents a Glk window
 ///
-@interface GlkWindow : NSView<GlkStream> {
+@interface GlkWindow : GlkSuperView<GlkStream> {
 	/// The pair window that contains this window (or NULL for the root window) !NOT RETAINED!
 	GlkPairWindow* parentWindow;
 	
@@ -70,8 +75,10 @@
 
 /// Given a string from a keyboard event, returns the associated Glk keycode
 + (unsigned) keycodeForString: (NSString*) string;
+#if !defined(COCOAGLK_IPHONE)
 /// Given a keyboard event, produces the associated Glk keycode
 + (unsigned) keycodeForEvent: (NSEvent*) evt;
+#endif
 
 // Closed windows can hang around
 @property BOOL closed;
@@ -83,7 +90,7 @@
 
 // Layout
 /// If the layout has changed, then update/redraw this window
-- (void) layoutInRect: (NSRect) parentRect;
+- (void) layoutInRect: (GlkRect) parentRect;
 /// Meaning depends on the window format. Returns the preferred size in pixels
 - (CGFloat) widthForFixedSize: (unsigned) size;
 /// Meaning depends on the window format. Returns the preferred size in pixels
@@ -93,7 +100,7 @@
 @property CGFloat border;
 
 /// Size of the content, taking the border into account
-@property (readonly) NSRect contentRect;
+@property (readonly) GlkRect contentRect;
 /// Size in window units
 @property (readonly) GlkSize glkSize;
 
@@ -125,12 +132,12 @@
 - (void) reformat;
 
 /// The base proportional font we're using
-- (NSFont*) proportionalFont;
+- (GlkFont*) proportionalFont;
 /// The base fixed-pitch font we're using
-- (NSFont*) fixedFont;
+- (GlkFont*) fixedFont;
 
 /// The background colour for this window
-- (NSColor*) backgroundColour;
+- (GlkColor*) backgroundColour;
 
 /// The amount of leading to use
 @property (readonly) CGFloat leading;
@@ -177,8 +184,10 @@
 - (BOOL) waitingForKeyboardInput;
 /// Returns YES if this window is waiting for keyboard input for user interaction with the running story
 - (BOOL) waitingForUserKeyboardInput;
+#if !defined(COCOAGLK_IPHONE)
 /// The control that responds to events for this window
 - (NSResponder*) windowResponder;
+#endif
 
 /// Called just before the buffer flushes (mostly used to tell the text windows to wait before performing layout)
 - (void) bufferIsFlushing;

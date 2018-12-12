@@ -58,8 +58,8 @@
 		4B51AA6D07E8785700576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
 		4B51AA7407E878E600576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
 		4B51AA7507E878E900576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
-		4B51AA8907E8795300576AB9 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B51AA8707E8795300576AB9 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4B51AA8A07E8795300576AB9 /* GlkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AA8807E8795300576AB9 /* GlkView.m */; };
+		4B51AA8907E8795300576AB9 /* GlkView-Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B51AA8707E8795300576AB9 /* GlkView-Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4B51AA8A07E8795300576AB9 /* GlkView-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AA8807E8795300576AB9 /* GlkView-Mac.m */; };
 		4B51AAB807E87B7B00576AB9 /* glk_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAB707E87B7B00576AB9 /* glk_main.m */; };
 		4B51AAF107E87CD300576AB9 /* glk_events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAEC07E87CD300576AB9 /* glk_events.m */; };
 		4B51AAF207E87CD300576AB9 /* glk_image.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAED07E87CD300576AB9 /* glk_image.m */; };
@@ -110,10 +110,10 @@
 		4BBFE3980C4EC253007DEE18 /* GlkBufferedStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBFE3960C4EC253007DEE18 /* GlkBufferedStream.h */; };
 		4BBFE3990C4EC253007DEE18 /* GlkBufferedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */; };
 		4BCB8AA10CD7E3310041731F /* GlkView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		4BEE1D3B07FCC1D900296CD2 /* GlkTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BEE1D3907FCC1D900296CD2 /* GlkTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4BEE1D3C07FCC1D900296CD2 /* GlkTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEE1D3A07FCC1D900296CD2 /* GlkTextView.m */; };
-		4BEF18CD0AB4643600131910 /* GlkTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D3B580AB462C90038255E /* GlkTypesetter.m */; };
-		4BEF18CE0AB4643A00131910 /* GlkTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B2D3B570AB462C90038255E /* GlkTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4BEE1D3B07FCC1D900296CD2 /* GlkTextView-Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BEE1D3907FCC1D900296CD2 /* GlkTextView-Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4BEE1D3C07FCC1D900296CD2 /* GlkTextView-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEE1D3A07FCC1D900296CD2 /* GlkTextView-Mac.m */; };
+		4BEF18CD0AB4643600131910 /* GlkTypesetter-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D3B580AB462C90038255E /* GlkTypesetter-Mac.m */; };
+		4BEF18CE0AB4643A00131910 /* GlkTypesetter-Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B2D3B570AB462C90038255E /* GlkTypesetter-Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BF0854A0E1675D500DB5C6B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF085490E1675D500DB5C6B /* CoreAudio.framework */; };
 		4BF0855C0E16768400DB5C6B /* GlkSoundDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF0855A0E16768400DB5C6B /* GlkSoundDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BF085870E16787900DB5C6B /* fastmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085620E16787900DB5C6B /* fastmix.cpp */; };
@@ -173,6 +173,143 @@
 		4BFA1D6907F8A8D00068E16A /* glk_misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1D6707F8A8D00068E16A /* glk_misc.m */; };
 		5524CDFC21B9A4220007F659 /* MorePrompt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5524CDFA21B9A4210007F659 /* MorePrompt@2x.png */; };
 		5524CDFD21B9A4220007F659 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5524CDFB21B9A4220007F659 /* logo@2x.png */; };
+		5560F97821C0686B00E711F5 /* GlkHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B51ABF907E8927100576AB9 /* GlkHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F97921C0686B00E711F5 /* GlkHubProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B04598807EA18DB002D7C88 /* GlkHubProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F97A21C0686B00E711F5 /* GlkSessionProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B0459AB07EA1B44002D7C88 /* GlkSessionProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F97B21C0686B00E711F5 /* GlkBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B8BE03607EB6ABA008AE26D /* GlkBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F97C21C0686B00E711F5 /* GlkWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B664B8307EC8B150079317A /* GlkWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F97D21C0686B00E711F5 /* GlkPairWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B664C4007ECAC540079317A /* GlkPairWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F97E21C0686B00E711F5 /* GlkTextWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B34753A07ED9CA0001C5415 /* GlkTextWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F97F21C0686B00E711F5 /* GlkTextGridWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B34753E07ED9CAE001C5415 /* GlkTextGridWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98021C0686B00E711F5 /* GlkGraphicsWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B34754207ED9CBE001C5415 /* GlkGraphicsWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98121C0686B00E711F5 /* GlkStreamProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B34758C07EDB439001C5415 /* GlkStreamProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98221C0686B00E711F5 /* GlkEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B30F3CA07F0B2CA006ED0BF /* GlkEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98321C0686B00E711F5 /* glk.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B51AA9A07E87A2F00576AB9 /* glk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98421C0686B00E711F5 /* GlkArrangeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B30F4A007F0CAA1006ED0BF /* GlkArrangeEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98521C0686B00E711F5 /* GlkEventListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98621C0686B00E711F5 /* GlkEventProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA18A007F726D60068E16A /* GlkEventProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98721C0686B00E711F5 /* GlkFileRefProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA19F907F77A820068E16A /* GlkFileRefProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98821C0686B00E711F5 /* GlkFileStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA19FC07F77C7B0068E16A /* GlkFileStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98921C0686B00E711F5 /* GlkFileRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1A0207F77C850068E16A /* GlkFileRef.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98A21C0686B00E711F5 /* GlkFilePromptProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1B3D07F879D70068E16A /* GlkFilePromptProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98B21C0686B00E711F5 /* GlkStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B93F81207F9BA7900BAA4EE /* GlkStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98C21C0686B00E711F5 /* GlkPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B93F85707F9BF9100BAA4EE /* GlkPreferences.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F98E21C0686B00E711F5 /* GlkImageSourceProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B16B9A708A3B88A001E4C40 /* GlkImageSourceProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F99021C0686B00E711F5 /* GlkAutomation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B32AB220A5470FE0069A026 /* GlkAutomation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F99221C0686B00E711F5 /* GlkCustomTextSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B9079DA0ABDBFF300C61EF9 /* GlkCustomTextSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F99521C0686B00E711F5 /* GlkGridTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B95C53BC5B03AD500FD9F27 /* GlkGridTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F99721C0686B00E711F5 /* MorePrompt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5524CDFA21B9A4210007F659 /* MorePrompt@2x.png */; };
+		5560F99821C0686B00E711F5 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5524CDFB21B9A4220007F659 /* logo@2x.png */; };
+		5560F99A21C0686B00E711F5 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B664B4A07EC780A0079317A /* logo.png */; };
+		5560F99B21C0686B00E711F5 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 4B16BB5F08A4E66B001E4C40 /* Credits.rtfd */; };
+		5560F99C21C0686B00E711F5 /* MorePrompt.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B8CE84D0ADAD373008235D2 /* MorePrompt.png */; };
+		5560F99F21C0686B00E711F5 /* GlkHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51ABFA07E8927100576AB9 /* GlkHub.m */; };
+		5560F9A021C0686B00E711F5 /* GlkBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8BE03707EB6ABA008AE26D /* GlkBuffer.m */; };
+		5560F9A121C0686B00E711F5 /* GlkWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B664B8407EC8B150079317A /* GlkWindow.m */; };
+		5560F9A321C0686B00E711F5 /* GlkTextWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B34753B07ED9CA0001C5415 /* GlkTextWindow.m */; };
+		5560F9A421C0686B00E711F5 /* GlkTextGridWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B34753F07ED9CAE001C5415 /* GlkTextGridWindow.m */; };
+		5560F9A521C0686B00E711F5 /* GlkGraphicsWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B34754307ED9CBE001C5415 /* GlkGraphicsWindow.m */; };
+		5560F9A621C0686B00E711F5 /* GlkEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B30F3CB07F0B2CA006ED0BF /* GlkEvent.m */; };
+		5560F9A721C0686B00E711F5 /* GlkArrangeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B30F4A107F0CAA1006ED0BF /* GlkArrangeEvent.m */; };
+		5560F9A821C0686B00E711F5 /* GlkFileStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA19FD07F77C7B0068E16A /* GlkFileStream.m */; };
+		5560F9A921C0686B00E711F5 /* GlkFileRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1A0307F77C850068E16A /* GlkFileRef.m */; };
+		5560F9AA21C0686B00E711F5 /* GlkStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B93F81307F9BA7900BAA4EE /* GlkStyle.m */; };
+		5560F9AB21C0686B00E711F5 /* GlkPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B93F85807F9BF9100BAA4EE /* GlkPreferences.m */; };
+		5560F9AF21C0686B00E711F5 /* GlkCustomTextSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9079DB0ABDBFF300C61EF9 /* GlkCustomTextSection.m */; };
+		5560F9B221C0686B00E711F5 /* GlkGridTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B95C53CC5B03AD500FD9F27 /* GlkGridTypesetter.m */; };
+		5560F9BD21C0686F00E711F5 /* glk_client.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B51AAF707E87DCA00576AB9 /* glk_client.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		5560F9BE21C0686F00E711F5 /* cocoaglk.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B51AB3A07E87EE300576AB9 /* cocoaglk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F9BF21C0686F00E711F5 /* GlkMemoryStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B8C7D8007F7041100502054 /* GlkMemoryStream.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		5560F9C021C0686F00E711F5 /* gi_dispa.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1CCE07F8A4040068E16A /* gi_dispa.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F9C121C0686F00E711F5 /* gi_blorb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1CD007F8A4040068E16A /* gi_blorb.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F9C221C0686F00E711F5 /* GlkUcs4Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B4D379C0A97B53E0007FD80 /* GlkUcs4Stream.h */; };
+		5560F9C321C0686F00E711F5 /* GlkMemoryFileRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3CBD040B07DABD0073216F /* GlkMemoryFileRef.h */; };
+		5560F9C421C0686F00E711F5 /* GlkBufferedStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBFE3960C4EC253007DEE18 /* GlkBufferedStream.h */; };
+		5560F9C721C0686F00E711F5 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 4B16BB5F08A4E66B001E4C40 /* Credits.rtfd */; };
+		5560F9C921C0686F00E711F5 /* glk_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAB707E87B7B00576AB9 /* glk_main.m */; };
+		5560F9CA21C0686F00E711F5 /* glk_events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAEC07E87CD300576AB9 /* glk_events.m */; };
+		5560F9CB21C0686F00E711F5 /* glk_image.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAED07E87CD300576AB9 /* glk_image.m */; };
+		5560F9CC21C0686F00E711F5 /* glk_stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAEE07E87CD300576AB9 /* glk_stream.m */; };
+		5560F9CD21C0686F00E711F5 /* glk_style.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAEF07E87CD300576AB9 /* glk_style.m */; };
+		5560F9CE21C0686F00E711F5 /* glk_windows.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAF007E87CD300576AB9 /* glk_windows.m */; };
+		5560F9CF21C0686F00E711F5 /* glk_cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8BDE7C07EB400E008AE26D /* glk_cocoa.m */; };
+		5560F9D021C0686F00E711F5 /* glk_files.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51ABF507E891B900576AB9 /* glk_files.m */; };
+		5560F9D121C0686F00E711F5 /* GlkMemoryStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8C7D8107F7041100502054 /* GlkMemoryStream.m */; };
+		5560F9D221C0686F00E711F5 /* gi_blorb.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1CCF07F8A4040068E16A /* gi_blorb.m */; };
+		5560F9D321C0686F00E711F5 /* gi_dispa.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1CD107F8A4040068E16A /* gi_dispa.m */; };
+		5560F9D421C0686F00E711F5 /* glk_misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1D6707F8A8D00068E16A /* glk_misc.m */; };
+		5560F9D521C0686F00E711F5 /* glk_sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B16B77908A0E0A8001E4C40 /* glk_sound.m */; };
+		5560F9D621C0686F00E711F5 /* glk_hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B16B77D08A0E0C7001E4C40 /* glk_hyperlink.m */; };
+		5560F9D721C0686F00E711F5 /* glk_unicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D36440A9738570007FD80 /* glk_unicode.m */; };
+		5560F9D821C0686F00E711F5 /* glk_datetime.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BC63472055EE7F001F8CFB /* glk_datetime.m */; };
+		5560F9D921C0686F00E711F5 /* GlkUcs4Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D379D0A97B53E0007FD80 /* GlkUcs4Stream.m */; };
+		5560F9DA21C0686F00E711F5 /* GlkMemoryFileRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3CBD050B07DABD0073216F /* GlkMemoryFileRef.m */; };
+		5560F9DB21C0686F00E711F5 /* GlkBufferedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */; };
+		5560F9E421C0687300E711F5 /* GlkSoundDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF0855A0E16768400DB5C6B /* GlkSoundDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560F9E521C0687300E711F5 /* load_pat.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF085750E16787900DB5C6B /* load_pat.h */; };
+		5560F9E621C0687300E711F5 /* modplug.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF085800E16787900DB5C6B /* modplug.h */; };
+		5560F9E721C0687300E711F5 /* it_defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF085B60E16791000DB5C6B /* it_defs.h */; };
+		5560F9E821C0687300E711F5 /* sndfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF085B70E16791000DB5C6B /* sndfile.h */; };
+		5560F9E921C0687300E711F5 /* stdafx.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF085B80E16791000DB5C6B /* stdafx.h */; };
+		5560F9EC21C0687300E711F5 /* fastmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085620E16787900DB5C6B /* fastmix.cpp */; };
+		5560F9ED21C0687300E711F5 /* load_669.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085630E16787900DB5C6B /* load_669.cpp */; };
+		5560F9EE21C0687300E711F5 /* load_abc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085640E16787900DB5C6B /* load_abc.cpp */; };
+		5560F9EF21C0687300E711F5 /* load_amf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085650E16787900DB5C6B /* load_amf.cpp */; };
+		5560F9F021C0687300E711F5 /* load_ams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085660E16787900DB5C6B /* load_ams.cpp */; };
+		5560F9F121C0687300E711F5 /* load_dbm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085670E16787900DB5C6B /* load_dbm.cpp */; };
+		5560F9F221C0687300E711F5 /* load_dmf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085680E16787900DB5C6B /* load_dmf.cpp */; };
+		5560F9F321C0687300E711F5 /* load_dsm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085690E16787900DB5C6B /* load_dsm.cpp */; };
+		5560F9F421C0687300E711F5 /* load_far.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856A0E16787900DB5C6B /* load_far.cpp */; };
+		5560F9F521C0687300E711F5 /* load_it.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856B0E16787900DB5C6B /* load_it.cpp */; };
+		5560F9F621C0687300E711F5 /* load_j2b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856C0E16787900DB5C6B /* load_j2b.cpp */; };
+		5560F9F721C0687300E711F5 /* load_mdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856D0E16787900DB5C6B /* load_mdl.cpp */; };
+		5560F9F821C0687300E711F5 /* load_med.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856E0E16787900DB5C6B /* load_med.cpp */; };
+		5560F9F921C0687300E711F5 /* load_mid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856F0E16787900DB5C6B /* load_mid.cpp */; };
+		5560F9FA21C0687300E711F5 /* load_mod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085700E16787900DB5C6B /* load_mod.cpp */; };
+		5560F9FB21C0687300E711F5 /* load_mt2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085710E16787900DB5C6B /* load_mt2.cpp */; };
+		5560F9FC21C0687300E711F5 /* load_mtm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085720E16787900DB5C6B /* load_mtm.cpp */; };
+		5560F9FD21C0687300E711F5 /* load_okt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085730E16787900DB5C6B /* load_okt.cpp */; };
+		5560F9FE21C0687300E711F5 /* load_pat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085740E16787900DB5C6B /* load_pat.cpp */; };
+		5560F9FF21C0687300E711F5 /* load_psm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085760E16787900DB5C6B /* load_psm.cpp */; };
+		5560FA0021C0687300E711F5 /* load_ptm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085770E16787900DB5C6B /* load_ptm.cpp */; };
+		5560FA0121C0687300E711F5 /* load_s3m.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085780E16787900DB5C6B /* load_s3m.cpp */; };
+		5560FA0221C0687300E711F5 /* load_stm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085790E16787900DB5C6B /* load_stm.cpp */; };
+		5560FA0321C0687300E711F5 /* load_ult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857A0E16787900DB5C6B /* load_ult.cpp */; };
+		5560FA0421C0687300E711F5 /* load_umx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857B0E16787900DB5C6B /* load_umx.cpp */; };
+		5560FA0521C0687300E711F5 /* load_wav.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857C0E16787900DB5C6B /* load_wav.cpp */; };
+		5560FA0621C0687300E711F5 /* load_xm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857D0E16787900DB5C6B /* load_xm.cpp */; };
+		5560FA0721C0687300E711F5 /* mmcmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857E0E16787900DB5C6B /* mmcmp.cpp */; };
+		5560FA0821C0687300E711F5 /* modplug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857F0E16787900DB5C6B /* modplug.cpp */; };
+		5560FA0921C0687300E711F5 /* snd_dsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085810E16787900DB5C6B /* snd_dsp.cpp */; };
+		5560FA0A21C0687300E711F5 /* snd_flt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085820E16787900DB5C6B /* snd_flt.cpp */; };
+		5560FA0B21C0687300E711F5 /* snd_fx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085830E16787900DB5C6B /* snd_fx.cpp */; };
+		5560FA0C21C0687300E711F5 /* sndfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085840E16787900DB5C6B /* sndfile.cpp */; };
+		5560FA0D21C0687300E711F5 /* sndmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085850E16787900DB5C6B /* sndmix.cpp */; };
+		5560FA0E21C0687300E711F5 /* tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085860E16787900DB5C6B /* tables.cpp */; };
+		5560FA1021C0687300E711F5 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF085490E1675D500DB5C6B /* CoreAudio.framework */; };
+		5560FA1E21C06B9800E711F5 /* GlkView-Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B51AA8707E8795300576AB9 /* GlkView-Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA2221C06B9800E711F5 /* GlkImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3A1DD208A7EBDE00DEB0B9 /* GlkImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA2321C06B9800E711F5 /* GlkImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A1DD308A7EBDE00DEB0B9 /* GlkImage.m */; };
+		5560FA2421C06B9800E711F5 /* GlkClearMargins.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B90801E0AC11EFF00C61EF9 /* GlkClearMargins.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA2521C06B9800E711F5 /* GlkClearMargins.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B90801F0AC11EFF00C61EF9 /* GlkClearMargins.m */; };
+		5560FA2621C06B9800E711F5 /* GlkMoreView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B8CE84F0ADAD38B008235D2 /* GlkMoreView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA2721C06B9800E711F5 /* GlkMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8CE8500ADAD38B008235D2 /* GlkMoreView.m */; };
+		5560FA2921C06BF500E711F5 /* GlkViewDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA2A21C06BF500E711F5 /* GlkViewDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA2C21C07EC200E711F5 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2B21C07EC200E711F5 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA2D21C07EC200E711F5 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2B21C07EC200E711F5 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA3021C07FB800E711F5 /* GlkView-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2E21C07FB800E711F5 /* GlkView-iOS.h */; };
+		5560FA3121C07FB800E711F5 /* GlkView-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA2F21C07FB800E711F5 /* GlkView-iOS.m */; };
+		5560FA3321C084E500E711F5 /* GlkTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3221C084E500E711F5 /* GlkTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA3421C084E500E711F5 /* GlkTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3221C084E500E711F5 /* GlkTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA3721C0855200E711F5 /* GlkTextView-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3521C0855200E711F5 /* GlkTextView-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA3821C0855200E711F5 /* GlkTextView-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA3621C0855200E711F5 /* GlkTextView-iOS.m */; };
+		5560FA3A21C08B1400E711F5 /* GlkTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3921C08B1300E711F5 /* GlkTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA3B21C08B1400E711F5 /* GlkTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3921C08B1300E711F5 /* GlkTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5560FA3D21C08BB300E711F5 /* GlkTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */; };
+		5560FA3E21C08BB300E711F5 /* GlkTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */; };
+		5560FA4121C08C5A00E711F5 /* GlkTypesetter-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3F21C08C5A00E711F5 /* GlkTypesetter-iOS.h */; };
+		5560FA4221C08C5A00E711F5 /* GlkTypesetter-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 5560FA4021C08C5A00E711F5 /* GlkTypesetter-iOS.m */; };
 		559219ED21B90663002F7F9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		559219EE21B90894002F7F9E /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55BC63282055C42B001F8CFB /* savefile.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62ED2055C42B001F8CFB /* savefile.c */; };
@@ -282,6 +419,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4B51AA5507E877C900576AB9;
 			remoteInfo = GlkClient;
+		};
+		5560FA1621C0692100E711F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5560F97521C0686B00E711F5;
+			remoteInfo = "GlkView-iOS";
 		};
 		55C6BB46204DEDC1001AE7E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -404,8 +548,8 @@
 		4B16B9A708A3B88A001E4C40 /* GlkImageSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkImageSourceProtocol.h; sourceTree = "<group>"; };
 		4B16BB5D08A4E65F001E4C40 /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = Credits.rtfd; path = en.lproj/Credits.rtfd; sourceTree = "<group>"; };
 		4B1758301274352300383C8D /* float.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = float.c; sourceTree = "<group>"; };
-		4B2D3B570AB462C90038255E /* GlkTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkTypesetter.h; sourceTree = "<group>"; };
-		4B2D3B580AB462C90038255E /* GlkTypesetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkTypesetter.m; sourceTree = "<group>"; };
+		4B2D3B570AB462C90038255E /* GlkTypesetter-Mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GlkTypesetter-Mac.h"; sourceTree = "<group>"; };
+		4B2D3B580AB462C90038255E /* GlkTypesetter-Mac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GlkTypesetter-Mac.m"; sourceTree = "<group>"; };
 		4B30F3CA07F0B2CA006ED0BF /* GlkEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkEvent.h; sourceTree = "<group>"; };
 		4B30F3CB07F0B2CA006ED0BF /* GlkEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkEvent.m; sourceTree = "<group>"; };
 		4B30F4A007F0CAA1006ED0BF /* GlkArrangeEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkArrangeEvent.h; sourceTree = "<group>"; };
@@ -432,8 +576,8 @@
 		4B51AA5707E877C900576AB9 /* GlkClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GlkClient-Info.plist"; sourceTree = "<group>"; };
 		4B51AA6A07E8785700576AB9 /* CocoaGlk.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CocoaGlk.icns; path = Resources/CocoaGlk.icns; sourceTree = "<group>"; };
 		4B51AA6B07E8785700576AB9 /* GlkClient.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = GlkClient.icns; path = Resources/GlkClient.icns; sourceTree = "<group>"; };
-		4B51AA8707E8795300576AB9 /* GlkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkView.h; sourceTree = "<group>"; };
-		4B51AA8807E8795300576AB9 /* GlkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkView.m; sourceTree = "<group>"; };
+		4B51AA8707E8795300576AB9 /* GlkView-Mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GlkView-Mac.h"; sourceTree = "<group>"; };
+		4B51AA8807E8795300576AB9 /* GlkView-Mac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GlkView-Mac.m"; sourceTree = "<group>"; };
 		4B51AA9A07E87A2F00576AB9 /* glk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glk.h; sourceTree = "<group>"; };
 		4B51AAB707E87B7B00576AB9 /* glk_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_main.m; sourceTree = "<group>"; };
 		4B51AAEC07E87CD300576AB9 /* glk_events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_events.m; sourceTree = "<group>"; };
@@ -481,8 +625,8 @@
 		4BBC414408A7AB3B00B790B5 /* imagetest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imagetest.m; sourceTree = "<group>"; };
 		4BBFE3960C4EC253007DEE18 /* GlkBufferedStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkBufferedStream.h; sourceTree = "<group>"; };
 		4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkBufferedStream.m; sourceTree = "<group>"; };
-		4BEE1D3907FCC1D900296CD2 /* GlkTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkTextView.h; sourceTree = "<group>"; };
-		4BEE1D3A07FCC1D900296CD2 /* GlkTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkTextView.m; sourceTree = "<group>"; };
+		4BEE1D3907FCC1D900296CD2 /* GlkTextView-Mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GlkTextView-Mac.h"; sourceTree = "<group>"; };
+		4BEE1D3A07FCC1D900296CD2 /* GlkTextView-Mac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GlkTextView-Mac.m"; sourceTree = "<group>"; };
 		4BF0852A0E166E8300DB5C6B /* GlkSound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GlkSound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF0852B0E166E8300DB5C6B /* GlkSound-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GlkSound-Info.plist"; sourceTree = "<group>"; };
 		4BF085490E1675D500DB5C6B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -546,6 +690,23 @@
 		552A03722049D5E200A4ECAA /* GlkView.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkView.modulemap; sourceTree = "<group>"; };
 		552A03732049D64C00A4ECAA /* GlkClient.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkClient.modulemap; sourceTree = "<group>"; };
 		552A03742049D67900A4ECAA /* GlkSound.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkSound.modulemap; sourceTree = "<group>"; };
+		5560F9B721C0686B00E711F5 /* GlkView-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "GlkView-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5560F9B821C0686B00E711F5 /* GlkView copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GlkView copy-Info.plist"; path = "/Users/cwbetts/makestuff/zoom/depends/CocoaGlk/GlkView copy-Info.plist"; sourceTree = "<absolute>"; };
+		5560F9E021C0686F00E711F5 /* GlkClient-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "GlkClient-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5560F9E121C0687000E711F5 /* GlkClient copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GlkClient copy-Info.plist"; path = "/Users/cwbetts/makestuff/zoom/depends/CocoaGlk/GlkClient copy-Info.plist"; sourceTree = "<absolute>"; };
+		5560FA1421C0687300E711F5 /* GlkSound-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "GlkSound-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5560FA1521C0687400E711F5 /* GlkSound copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GlkSound copy-Info.plist"; path = "/Users/cwbetts/makestuff/zoom/depends/CocoaGlk/GlkSound copy-Info.plist"; sourceTree = "<absolute>"; };
+		5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkViewDefinitions.h; sourceTree = "<group>"; };
+		5560FA2B21C07EC200E711F5 /* GlkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkView.h; sourceTree = "<group>"; };
+		5560FA2E21C07FB800E711F5 /* GlkView-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlkView-iOS.h"; sourceTree = "<group>"; };
+		5560FA2F21C07FB800E711F5 /* GlkView-iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GlkView-iOS.m"; sourceTree = "<group>"; };
+		5560FA3221C084E500E711F5 /* GlkTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkTextView.h; sourceTree = "<group>"; };
+		5560FA3521C0855200E711F5 /* GlkTextView-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlkTextView-iOS.h"; sourceTree = "<group>"; };
+		5560FA3621C0855200E711F5 /* GlkTextView-iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GlkTextView-iOS.m"; sourceTree = "<group>"; };
+		5560FA3921C08B1300E711F5 /* GlkTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkTypesetter.h; sourceTree = "<group>"; };
+		5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkTypesetter.m; sourceTree = "<group>"; };
+		5560FA3F21C08C5A00E711F5 /* GlkTypesetter-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlkTypesetter-iOS.h"; sourceTree = "<group>"; };
+		5560FA4021C08C5A00E711F5 /* GlkTypesetter-iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GlkTypesetter-iOS.m"; sourceTree = "<group>"; };
 		559219F321B908EA002F7F9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		55BC62ED2055C42B001F8CFB /* savefile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = savefile.c; sourceTree = "<group>"; };
 		55BC62EE2055C42B001F8CFB /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
@@ -644,6 +805,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5560F9B321C0686B00E711F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5560F9DC21C0686F00E711F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5560FA0F21C0687300E711F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5560FA1021C0687300E711F5 /* CoreAudio.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C6BB33204DED96001AE7E5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -688,6 +871,9 @@
 				4BF0852A0E166E8300DB5C6B /* GlkSound.framework */,
 				4B3C3B790F3DAB850066A760 /* git */,
 				55C6BB36204DED96001AE7E5 /* SwiftGlk.app */,
+				5560F9B721C0686B00E711F5 /* GlkView-iOS.framework */,
+				5560F9E021C0686F00E711F5 /* GlkClient-iOS.framework */,
+				5560FA1421C0687300E711F5 /* GlkSound-iOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -708,6 +894,9 @@
 				4B51AA4807E8770600576AB9 /* GlkView-Info.plist */,
 				4B51AA5707E877C900576AB9 /* GlkClient-Info.plist */,
 				4BF0852B0E166E8300DB5C6B /* GlkSound-Info.plist */,
+				5560F9B821C0686B00E711F5 /* GlkView copy-Info.plist */,
+				5560F9E121C0687000E711F5 /* GlkClient copy-Info.plist */,
+				5560FA1521C0687400E711F5 /* GlkSound copy-Info.plist */,
 			);
 			name = CocoaGlk;
 			sourceTree = "<group>";
@@ -840,6 +1029,7 @@
 			isa = PBXGroup;
 			children = (
 				552A03722049D5E200A4ECAA /* GlkView.modulemap */,
+				5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */,
 				4B51ABF907E8927100576AB9 /* GlkHub.h */,
 				4B51ABFA07E8927100576AB9 /* GlkHub.m */,
 				4B32AB220A5470FE0069A026 /* GlkAutomation.h */,
@@ -906,10 +1096,16 @@
 		4B51AB3C07E87F6400576AB9 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				4B51AA8707E8795300576AB9 /* GlkView.h */,
-				4B51AA8807E8795300576AB9 /* GlkView.m */,
-				4BEE1D3907FCC1D900296CD2 /* GlkTextView.h */,
-				4BEE1D3A07FCC1D900296CD2 /* GlkTextView.m */,
+				5560FA2B21C07EC200E711F5 /* GlkView.h */,
+				5560FA2E21C07FB800E711F5 /* GlkView-iOS.h */,
+				5560FA2F21C07FB800E711F5 /* GlkView-iOS.m */,
+				4B51AA8707E8795300576AB9 /* GlkView-Mac.h */,
+				4B51AA8807E8795300576AB9 /* GlkView-Mac.m */,
+				5560FA3221C084E500E711F5 /* GlkTextView.h */,
+				4BEE1D3907FCC1D900296CD2 /* GlkTextView-Mac.h */,
+				4BEE1D3A07FCC1D900296CD2 /* GlkTextView-Mac.m */,
+				5560FA3521C0855200E711F5 /* GlkTextView-iOS.h */,
+				5560FA3621C0855200E711F5 /* GlkTextView-iOS.m */,
 				4B3A1DD208A7EBDE00DEB0B9 /* GlkImage.h */,
 				4B3A1DD308A7EBDE00DEB0B9 /* GlkImage.m */,
 				4B90801E0AC11EFF00C61EF9 /* GlkClearMargins.h */,
@@ -923,8 +1119,12 @@
 		4B6033F90ABB47CF00DF6C16 /* Typesetter */ = {
 			isa = PBXGroup;
 			children = (
-				4B2D3B570AB462C90038255E /* GlkTypesetter.h */,
-				4B2D3B580AB462C90038255E /* GlkTypesetter.m */,
+				5560FA3921C08B1300E711F5 /* GlkTypesetter.h */,
+				5560FA3C21C08BB300E711F5 /* GlkTypesetter.m */,
+				4B2D3B570AB462C90038255E /* GlkTypesetter-Mac.h */,
+				4B2D3B580AB462C90038255E /* GlkTypesetter-Mac.m */,
+				5560FA3F21C08C5A00E711F5 /* GlkTypesetter-iOS.h */,
+				5560FA4021C08C5A00E711F5 /* GlkTypesetter-iOS.m */,
 				4B9079DA0ABDBFF300C61EF9 /* GlkCustomTextSection.h */,
 				4B9079DB0ABDBFF300C61EF9 /* GlkCustomTextSection.m */,
 				4B95C53BC5B03AD500FD9F27 /* GlkGridTypesetter.h */,
@@ -1084,19 +1284,22 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B51AA8907E8795300576AB9 /* GlkView.h in Headers */,
+				4B51AA8907E8795300576AB9 /* GlkView-Mac.h in Headers */,
 				4B51ABFB07E8927100576AB9 /* GlkHub.h in Headers */,
 				4B04598A07EA18DB002D7C88 /* GlkHubProtocol.h in Headers */,
 				4B0459AD07EA1B44002D7C88 /* GlkSessionProtocol.h in Headers */,
 				4B8BE03807EB6ABA008AE26D /* GlkBuffer.h in Headers */,
 				4B664B8507EC8B150079317A /* GlkWindow.h in Headers */,
 				4B664C4207ECAC540079317A /* GlkPairWindow.h in Headers */,
+				5560FA3A21C08B1400E711F5 /* GlkTypesetter.h in Headers */,
+				5560FA3321C084E500E711F5 /* GlkTextView.h in Headers */,
 				4B34753C07ED9CA0001C5415 /* GlkTextWindow.h in Headers */,
 				4B34754007ED9CAE001C5415 /* GlkTextGridWindow.h in Headers */,
 				4B34754407ED9CBE001C5415 /* GlkGraphicsWindow.h in Headers */,
 				4B34758E07EDB439001C5415 /* GlkStreamProtocol.h in Headers */,
 				4B30F3CC07F0B2CA006ED0BF /* GlkEvent.h in Headers */,
 				4B30F3EB07F0B46F006ED0BF /* glk.h in Headers */,
+				5560FA2C21C07EC200E711F5 /* GlkView.h in Headers */,
 				4B30F4A207F0CAA1006ED0BF /* GlkArrangeEvent.h in Headers */,
 				4BFA18A107F726D60068E16A /* GlkEventListenerProtocol.h in Headers */,
 				4BFA18A207F726D60068E16A /* GlkEventProtocol.h in Headers */,
@@ -1106,15 +1309,16 @@
 				4BFA1B3F07F879D70068E16A /* GlkFilePromptProtocol.h in Headers */,
 				4B93F81407F9BA7900BAA4EE /* GlkStyle.h in Headers */,
 				4B93F85907F9BF9100BAA4EE /* GlkPreferences.h in Headers */,
-				4BEE1D3B07FCC1D900296CD2 /* GlkTextView.h in Headers */,
+				4BEE1D3B07FCC1D900296CD2 /* GlkTextView-Mac.h in Headers */,
 				4B16B9A808A3B88A001E4C40 /* GlkImageSourceProtocol.h in Headers */,
 				4B3A1DDA08A7EC0500DEB0B9 /* GlkImage.h in Headers */,
 				4B32AB240A5471080069A026 /* GlkAutomation.h in Headers */,
-				4BEF18CE0AB4643A00131910 /* GlkTypesetter.h in Headers */,
+				4BEF18CE0AB4643A00131910 /* GlkTypesetter-Mac.h in Headers */,
 				4B9079DC0ABDBFF300C61EF9 /* GlkCustomTextSection.h in Headers */,
 				4B9080200AC11EFF00C61EF9 /* GlkClearMargins.h in Headers */,
 				4B8CE8510ADAD38B008235D2 /* GlkMoreView.h in Headers */,
 				4B95C599C5B03AD500FD9F27 /* GlkGridTypesetter.h in Headers */,
+				5560FA2921C06BF500E711F5 /* GlkViewDefinitions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1143,6 +1347,77 @@
 				4BF085B90E16791000DB5C6B /* it_defs.h in Headers */,
 				4BF085BA0E16791000DB5C6B /* sndfile.h in Headers */,
 				4BF085BB0E16791000DB5C6B /* stdafx.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5560F97621C0686B00E711F5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5560F97821C0686B00E711F5 /* GlkHub.h in Headers */,
+				5560FA1E21C06B9800E711F5 /* GlkView-Mac.h in Headers */,
+				5560F97921C0686B00E711F5 /* GlkHubProtocol.h in Headers */,
+				5560F97A21C0686B00E711F5 /* GlkSessionProtocol.h in Headers */,
+				5560FA4121C08C5A00E711F5 /* GlkTypesetter-iOS.h in Headers */,
+				5560F97B21C0686B00E711F5 /* GlkBuffer.h in Headers */,
+				5560F97C21C0686B00E711F5 /* GlkWindow.h in Headers */,
+				5560F97D21C0686B00E711F5 /* GlkPairWindow.h in Headers */,
+				5560FA3B21C08B1400E711F5 /* GlkTypesetter.h in Headers */,
+				5560FA3421C084E500E711F5 /* GlkTextView.h in Headers */,
+				5560F97E21C0686B00E711F5 /* GlkTextWindow.h in Headers */,
+				5560F97F21C0686B00E711F5 /* GlkTextGridWindow.h in Headers */,
+				5560FA2621C06B9800E711F5 /* GlkMoreView.h in Headers */,
+				5560F98021C0686B00E711F5 /* GlkGraphicsWindow.h in Headers */,
+				5560FA2421C06B9800E711F5 /* GlkClearMargins.h in Headers */,
+				5560FA2D21C07EC200E711F5 /* GlkView.h in Headers */,
+				5560F98121C0686B00E711F5 /* GlkStreamProtocol.h in Headers */,
+				5560F98221C0686B00E711F5 /* GlkEvent.h in Headers */,
+				5560F98321C0686B00E711F5 /* glk.h in Headers */,
+				5560F98421C0686B00E711F5 /* GlkArrangeEvent.h in Headers */,
+				5560F98521C0686B00E711F5 /* GlkEventListenerProtocol.h in Headers */,
+				5560F98621C0686B00E711F5 /* GlkEventProtocol.h in Headers */,
+				5560F98721C0686B00E711F5 /* GlkFileRefProtocol.h in Headers */,
+				5560F98821C0686B00E711F5 /* GlkFileStream.h in Headers */,
+				5560FA3021C07FB800E711F5 /* GlkView-iOS.h in Headers */,
+				5560F98921C0686B00E711F5 /* GlkFileRef.h in Headers */,
+				5560F98A21C0686B00E711F5 /* GlkFilePromptProtocol.h in Headers */,
+				5560F98B21C0686B00E711F5 /* GlkStyle.h in Headers */,
+				5560FA2221C06B9800E711F5 /* GlkImage.h in Headers */,
+				5560FA3721C0855200E711F5 /* GlkTextView-iOS.h in Headers */,
+				5560F98C21C0686B00E711F5 /* GlkPreferences.h in Headers */,
+				5560F98E21C0686B00E711F5 /* GlkImageSourceProtocol.h in Headers */,
+				5560F99021C0686B00E711F5 /* GlkAutomation.h in Headers */,
+				5560F99221C0686B00E711F5 /* GlkCustomTextSection.h in Headers */,
+				5560F99521C0686B00E711F5 /* GlkGridTypesetter.h in Headers */,
+				5560FA2A21C06BF500E711F5 /* GlkViewDefinitions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5560F9BC21C0686F00E711F5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5560F9BD21C0686F00E711F5 /* glk_client.h in Headers */,
+				5560F9BE21C0686F00E711F5 /* cocoaglk.h in Headers */,
+				5560F9BF21C0686F00E711F5 /* GlkMemoryStream.h in Headers */,
+				5560F9C021C0686F00E711F5 /* gi_dispa.h in Headers */,
+				5560F9C121C0686F00E711F5 /* gi_blorb.h in Headers */,
+				5560F9C221C0686F00E711F5 /* GlkUcs4Stream.h in Headers */,
+				5560F9C321C0686F00E711F5 /* GlkMemoryFileRef.h in Headers */,
+				5560F9C421C0686F00E711F5 /* GlkBufferedStream.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5560F9E321C0687300E711F5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5560F9E421C0687300E711F5 /* GlkSoundDataSource.h in Headers */,
+				5560F9E521C0687300E711F5 /* load_pat.h in Headers */,
+				5560F9E621C0687300E711F5 /* modplug.h in Headers */,
+				5560F9E721C0687300E711F5 /* it_defs.h in Headers */,
+				5560F9E821C0687300E711F5 /* sndfile.h in Headers */,
+				5560F9E921C0687300E711F5 /* stdafx.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1272,6 +1547,61 @@
 			productReference = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		5560F97521C0686B00E711F5 /* GlkView-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5560F9B421C0686B00E711F5 /* Build configuration list for PBXNativeTarget "GlkView-iOS" */;
+			buildPhases = (
+				5560F97621C0686B00E711F5 /* Headers */,
+				5560F99621C0686B00E711F5 /* Resources */,
+				5560F99D21C0686B00E711F5 /* Sources */,
+				5560F9B321C0686B00E711F5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GlkView-iOS";
+			productName = GlkView;
+			productReference = 5560F9B721C0686B00E711F5 /* GlkView-iOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5560F9B921C0686F00E711F5 /* GlkClient-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5560F9DD21C0686F00E711F5 /* Build configuration list for PBXNativeTarget "GlkClient-iOS" */;
+			buildPhases = (
+				5560F9BC21C0686F00E711F5 /* Headers */,
+				5560F9C521C0686F00E711F5 /* Resources */,
+				5560F9C821C0686F00E711F5 /* Sources */,
+				5560F9DC21C0686F00E711F5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5560FA1721C0692100E711F5 /* PBXTargetDependency */,
+			);
+			name = "GlkClient-iOS";
+			productName = GlkClient;
+			productReference = 5560F9E021C0686F00E711F5 /* GlkClient-iOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5560F9E221C0687300E711F5 /* GlkSound-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5560FA1121C0687300E711F5 /* Build configuration list for PBXNativeTarget "GlkSound-iOS" */;
+			buildPhases = (
+				5560F9E321C0687300E711F5 /* Headers */,
+				5560F9EA21C0687300E711F5 /* Resources */,
+				5560F9EB21C0687300E711F5 /* Sources */,
+				5560FA0F21C0687300E711F5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GlkSound-iOS";
+			productName = GlkSound;
+			productReference = 5560FA1421C0687300E711F5 /* GlkSound-iOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		55C6BB35204DED96001AE7E5 /* SwiftGlk */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55C6BB41204DED96001AE7E5 /* Build configuration list for PBXNativeTarget "SwiftGlk" */;
@@ -1365,6 +1695,9 @@
 				4BBC40F708A7AABD00B790B5 /* imagetest */,
 				4B3C3B780F3DAB850066A760 /* git */,
 				55C6BB35204DED96001AE7E5 /* SwiftGlk */,
+				5560F97521C0686B00E711F5 /* GlkView-iOS */,
+				5560F9B921C0686F00E711F5 /* GlkClient-iOS */,
+				5560F9E221C0687300E711F5 /* GlkSound-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -1393,6 +1726,33 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4BF085260E166E8300DB5C6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5560F99621C0686B00E711F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5560F99721C0686B00E711F5 /* MorePrompt@2x.png in Resources */,
+				5560F99821C0686B00E711F5 /* logo@2x.png in Resources */,
+				5560F99A21C0686B00E711F5 /* logo.png in Resources */,
+				5560F99B21C0686B00E711F5 /* Credits.rtfd in Resources */,
+				5560F99C21C0686B00E711F5 /* MorePrompt.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5560F9C521C0686F00E711F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5560F9C721C0686F00E711F5 /* Credits.rtfd in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5560F9EA21C0687300E711F5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1489,13 +1849,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B51AA8A07E8795300576AB9 /* GlkView.m in Sources */,
+				4B51AA8A07E8795300576AB9 /* GlkView-Mac.m in Sources */,
 				4B51ABFC07E8927100576AB9 /* GlkHub.m in Sources */,
 				4B8BE03907EB6ABA008AE26D /* GlkBuffer.m in Sources */,
 				4B664B8607EC8B150079317A /* GlkWindow.m in Sources */,
 				4B664C4307ECAC540079317A /* GlkPairWindow.m in Sources */,
 				4B34753D07ED9CA0001C5415 /* GlkTextWindow.m in Sources */,
 				4B34754107ED9CAE001C5415 /* GlkTextGridWindow.m in Sources */,
+				5560FA3D21C08BB300E711F5 /* GlkTypesetter.m in Sources */,
 				4B34754507ED9CBE001C5415 /* GlkGraphicsWindow.m in Sources */,
 				4B30F3CD07F0B2CA006ED0BF /* GlkEvent.m in Sources */,
 				4B30F4A307F0CAA1006ED0BF /* GlkArrangeEvent.m in Sources */,
@@ -1503,9 +1864,9 @@
 				4BFA1A0707F77C850068E16A /* GlkFileRef.m in Sources */,
 				4B93F81507F9BA7900BAA4EE /* GlkStyle.m in Sources */,
 				4B93F85A07F9BF9100BAA4EE /* GlkPreferences.m in Sources */,
-				4BEE1D3C07FCC1D900296CD2 /* GlkTextView.m in Sources */,
+				4BEE1D3C07FCC1D900296CD2 /* GlkTextView-Mac.m in Sources */,
 				4B3A1DDB08A7EC0500DEB0B9 /* GlkImage.m in Sources */,
-				4BEF18CD0AB4643600131910 /* GlkTypesetter.m in Sources */,
+				4BEF18CD0AB4643600131910 /* GlkTypesetter-Mac.m in Sources */,
 				4B9079DD0ABDBFF300C61EF9 /* GlkCustomTextSection.m in Sources */,
 				4B9080210AC11EFF00C61EF9 /* GlkClearMargins.m in Sources */,
 				4B8CE8520ADAD38B008235D2 /* GlkMoreView.m in Sources */,
@@ -1590,6 +1951,102 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5560F99D21C0686B00E711F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5560FA2721C06B9800E711F5 /* GlkMoreView.m in Sources */,
+				5560F99F21C0686B00E711F5 /* GlkHub.m in Sources */,
+				5560FA3821C0855200E711F5 /* GlkTextView-iOS.m in Sources */,
+				5560F9A021C0686B00E711F5 /* GlkBuffer.m in Sources */,
+				5560F9A121C0686B00E711F5 /* GlkWindow.m in Sources */,
+				5560FA3121C07FB800E711F5 /* GlkView-iOS.m in Sources */,
+				5560F9A321C0686B00E711F5 /* GlkTextWindow.m in Sources */,
+				5560F9A421C0686B00E711F5 /* GlkTextGridWindow.m in Sources */,
+				5560F9A521C0686B00E711F5 /* GlkGraphicsWindow.m in Sources */,
+				5560FA2521C06B9800E711F5 /* GlkClearMargins.m in Sources */,
+				5560F9A621C0686B00E711F5 /* GlkEvent.m in Sources */,
+				5560F9A721C0686B00E711F5 /* GlkArrangeEvent.m in Sources */,
+				5560F9A821C0686B00E711F5 /* GlkFileStream.m in Sources */,
+				5560F9A921C0686B00E711F5 /* GlkFileRef.m in Sources */,
+				5560F9AA21C0686B00E711F5 /* GlkStyle.m in Sources */,
+				5560FA2321C06B9800E711F5 /* GlkImage.m in Sources */,
+				5560FA4221C08C5A00E711F5 /* GlkTypesetter-iOS.m in Sources */,
+				5560F9AB21C0686B00E711F5 /* GlkPreferences.m in Sources */,
+				5560FA3E21C08BB300E711F5 /* GlkTypesetter.m in Sources */,
+				5560F9AF21C0686B00E711F5 /* GlkCustomTextSection.m in Sources */,
+				5560F9B221C0686B00E711F5 /* GlkGridTypesetter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5560F9C821C0686F00E711F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5560F9C921C0686F00E711F5 /* glk_main.m in Sources */,
+				5560F9CA21C0686F00E711F5 /* glk_events.m in Sources */,
+				5560F9CB21C0686F00E711F5 /* glk_image.m in Sources */,
+				5560F9CC21C0686F00E711F5 /* glk_stream.m in Sources */,
+				5560F9CD21C0686F00E711F5 /* glk_style.m in Sources */,
+				5560F9CE21C0686F00E711F5 /* glk_windows.m in Sources */,
+				5560F9CF21C0686F00E711F5 /* glk_cocoa.m in Sources */,
+				5560F9D021C0686F00E711F5 /* glk_files.m in Sources */,
+				5560F9D121C0686F00E711F5 /* GlkMemoryStream.m in Sources */,
+				5560F9D221C0686F00E711F5 /* gi_blorb.m in Sources */,
+				5560F9D321C0686F00E711F5 /* gi_dispa.m in Sources */,
+				5560F9D421C0686F00E711F5 /* glk_misc.m in Sources */,
+				5560F9D521C0686F00E711F5 /* glk_sound.m in Sources */,
+				5560F9D621C0686F00E711F5 /* glk_hyperlink.m in Sources */,
+				5560F9D721C0686F00E711F5 /* glk_unicode.m in Sources */,
+				5560F9D821C0686F00E711F5 /* glk_datetime.m in Sources */,
+				5560F9D921C0686F00E711F5 /* GlkUcs4Stream.m in Sources */,
+				5560F9DA21C0686F00E711F5 /* GlkMemoryFileRef.m in Sources */,
+				5560F9DB21C0686F00E711F5 /* GlkBufferedStream.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5560F9EB21C0687300E711F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5560F9EC21C0687300E711F5 /* fastmix.cpp in Sources */,
+				5560F9ED21C0687300E711F5 /* load_669.cpp in Sources */,
+				5560F9EE21C0687300E711F5 /* load_abc.cpp in Sources */,
+				5560F9EF21C0687300E711F5 /* load_amf.cpp in Sources */,
+				5560F9F021C0687300E711F5 /* load_ams.cpp in Sources */,
+				5560F9F121C0687300E711F5 /* load_dbm.cpp in Sources */,
+				5560F9F221C0687300E711F5 /* load_dmf.cpp in Sources */,
+				5560F9F321C0687300E711F5 /* load_dsm.cpp in Sources */,
+				5560F9F421C0687300E711F5 /* load_far.cpp in Sources */,
+				5560F9F521C0687300E711F5 /* load_it.cpp in Sources */,
+				5560F9F621C0687300E711F5 /* load_j2b.cpp in Sources */,
+				5560F9F721C0687300E711F5 /* load_mdl.cpp in Sources */,
+				5560F9F821C0687300E711F5 /* load_med.cpp in Sources */,
+				5560F9F921C0687300E711F5 /* load_mid.cpp in Sources */,
+				5560F9FA21C0687300E711F5 /* load_mod.cpp in Sources */,
+				5560F9FB21C0687300E711F5 /* load_mt2.cpp in Sources */,
+				5560F9FC21C0687300E711F5 /* load_mtm.cpp in Sources */,
+				5560F9FD21C0687300E711F5 /* load_okt.cpp in Sources */,
+				5560F9FE21C0687300E711F5 /* load_pat.cpp in Sources */,
+				5560F9FF21C0687300E711F5 /* load_psm.cpp in Sources */,
+				5560FA0021C0687300E711F5 /* load_ptm.cpp in Sources */,
+				5560FA0121C0687300E711F5 /* load_s3m.cpp in Sources */,
+				5560FA0221C0687300E711F5 /* load_stm.cpp in Sources */,
+				5560FA0321C0687300E711F5 /* load_ult.cpp in Sources */,
+				5560FA0421C0687300E711F5 /* load_umx.cpp in Sources */,
+				5560FA0521C0687300E711F5 /* load_wav.cpp in Sources */,
+				5560FA0621C0687300E711F5 /* load_xm.cpp in Sources */,
+				5560FA0721C0687300E711F5 /* mmcmp.cpp in Sources */,
+				5560FA0821C0687300E711F5 /* modplug.cpp in Sources */,
+				5560FA0921C0687300E711F5 /* snd_dsp.cpp in Sources */,
+				5560FA0A21C0687300E711F5 /* snd_flt.cpp in Sources */,
+				5560FA0B21C0687300E711F5 /* snd_fx.cpp in Sources */,
+				5560FA0C21C0687300E711F5 /* sndfile.cpp in Sources */,
+				5560FA0D21C0687300E711F5 /* sndmix.cpp in Sources */,
+				5560FA0E21C0687300E711F5 /* tables.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C6BB32204DED96001AE7E5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1661,6 +2118,11 @@
 			isa = PBXTargetDependency;
 			target = 4B51AA5507E877C900576AB9 /* GlkClient */;
 			targetProxy = 4BFA1CA707F8A3120068E16A /* PBXContainerItemProxy */;
+		};
+		5560FA1721C0692100E711F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5560F97521C0686B00E711F5 /* GlkView-iOS */;
+			targetProxy = 5560FA1621C0692100E711F5 /* PBXContainerItemProxy */;
 		};
 		55C6BB47204DEDC1001AE7E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1879,12 +2341,11 @@
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "GlkClient-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-seg1addr",
 					0x2d000000,
@@ -1894,11 +2355,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkClient;
 				PRODUCT_NAME = GlkClient;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				ZERO_LINK = NO;
 			};
 			name = Debug;
@@ -1915,12 +2371,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "GlkClient-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-seg1addr",
 					0x2d000000,
@@ -1930,11 +2385,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkClient;
 				PRODUCT_NAME = GlkClient;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -2295,6 +2745,192 @@
 			};
 			name = Release;
 		};
+		5560F9B521C0686B00E711F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = COCOAGLK_IPHONE;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "GlkView copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				MODULEMAP_FILE = GlkView/GlkView.modulemap;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-seg1addr",
+					0xb0000000,
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SECTORDER_FLAGS = "";
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		5560F9B621C0686B00E711F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = COCOAGLK_IPHONE;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "GlkView copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				MODULEMAP_FILE = GlkView/GlkView.modulemap;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-seg1addr",
+					0xb0000000,
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SECTORDER_FLAGS = "";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		5560F9DE21C0686F00E711F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				INFOPLIST_FILE = "GlkClient copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-seg1addr",
+					0x2d000000,
+				);
+				OTHER_REZFLAGS = "";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkClient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		5560F9DF21C0686F00E711F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "GlkClient copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-seg1addr",
+					0x2d000000,
+				);
+				OTHER_REZFLAGS = "";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkClient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		5560FA1221C0687300E711F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = "GlkSound copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.GlkSound;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5560FA1321C0687300E711F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = "GlkSound copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.GlkSound;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		55C6BB42204DED96001AE7E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2447,6 +3083,33 @@
 			buildConfigurations = (
 				4BF0852C0E166E8400DB5C6B /* Debug */,
 				4BF0852D0E166E8400DB5C6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5560F9B421C0686B00E711F5 /* Build configuration list for PBXNativeTarget "GlkView-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5560F9B521C0686B00E711F5 /* Debug */,
+				5560F9B621C0686B00E711F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5560F9DD21C0686F00E711F5 /* Build configuration list for PBXNativeTarget "GlkClient-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5560F9DE21C0686F00E711F5 /* Debug */,
+				5560F9DF21C0686F00E711F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5560FA1121C0687300E711F5 /* Build configuration list for PBXNativeTarget "GlkSound-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5560FA1221C0687300E711F5 /* Debug */,
+				5560FA1321C0687300E711F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

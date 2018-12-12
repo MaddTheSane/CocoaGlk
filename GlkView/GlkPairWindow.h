@@ -6,7 +6,12 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "GlkViewDefinitions.h"
+#if defined(COCOAGLK_IPHONE)
+# import <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 #import <GlkView/GlkWindow.h>
 
@@ -44,7 +49,7 @@
 	/// True if something has changed to require the windows to be layed out again
 	BOOL needsLayout;
 	/// The border sliver
-	NSRect borderSliver;
+	GlkRect borderSliver;
 }
 
 // Setting the windows that make up this pair

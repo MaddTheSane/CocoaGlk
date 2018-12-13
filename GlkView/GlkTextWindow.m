@@ -875,7 +875,7 @@
 
 	// Set the current/final state of the prompt appropriately
 	lastMoreState = [self currentMoreState];
-	float newState = isShown?1.0:0.0;
+	CGFloat newState = isShown?1.0:0.0;
 	
 	if (newState == finalMoreState) {
 		// Nothing to do

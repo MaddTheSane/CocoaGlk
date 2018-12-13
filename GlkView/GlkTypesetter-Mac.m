@@ -243,7 +243,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 	
 #ifdef Debug
-	NSLog(@"Glyph measurement badness %.2f (%i varieties)", (float)numGlyphs/(float)count, numGlyphs);
+	NSLog(@"Glyph measurement badness %.2f (%i varieties)", (CGFloat)numGlyphs/(CGFloat)count, numGlyphs);
 #endif
 	
 	// Measure each glyph in the glyph array

@@ -244,7 +244,7 @@ void glk_request_timer_events(glui32 millisecs) {
 	
 	if (cocoaglk_timerlength > 0) {
 		// Create the timer object
-		cocoaglk_nextTimerEvent = [[NSDate dateWithTimeIntervalSinceNow: ((float)millisecs)/1000.0] retain];
+		cocoaglk_nextTimerEvent = [[NSDate dateWithTimeIntervalSinceNow: ((NSTimeInterval)millisecs)/1000.0] retain];
 	}
 }
 

@@ -160,7 +160,7 @@
 		4BFA1A0707F77C850068E16A /* GlkFileRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1A0307F77C850068E16A /* GlkFileRef.m */; };
 		4BFA1B3F07F879D70068E16A /* GlkFilePromptProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1B3D07F879D70068E16A /* GlkFilePromptProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA1CA107F8A1110068E16A /* cocoastart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1C9E07F8A10F0068E16A /* cocoastart.m */; };
-		4BFA1CA407F8A2F50068E16A /* glulxe in Resources */ = {isa = PBXBuildFile; fileRef = 4B0459F607EA20FE002D7C88 /* glulxe */; };
+		4BFA1CA407F8A2F50068E16A /* glulxe-client in Resources */ = {isa = PBXBuildFile; fileRef = 4B0459F607EA20FE002D7C88 /* glulxe-client */; };
 		4BFA1CD207F8A4040068E16A /* gi_dispa.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1CCE07F8A4040068E16A /* gi_dispa.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA1CD307F8A4040068E16A /* gi_blorb.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1CCF07F8A4040068E16A /* gi_blorb.m */; };
 		4BFA1CD407F8A4040068E16A /* gi_blorb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1CD007F8A4040068E16A /* gi_blorb.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -324,7 +324,7 @@
 		55C6BB4C204DEDC1001AE7E5 /* GlkSound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; };
 		55C6BB4D204DEDC1001AE7E5 /* GlkSound.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55C6BB52204DEE55001AE7E5 /* multiwin in Embed Binaries */ = {isa = PBXBuildFile; fileRef = 4B0459F107EA20F1002D7C88 /* multiwin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		55C6BB53204DEE55001AE7E5 /* glulxe in Embed Binaries */ = {isa = PBXBuildFile; fileRef = 4B0459F607EA20FE002D7C88 /* glulxe */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55C6BB53204DEE55001AE7E5 /* glulxe-client in Embed Binaries */ = {isa = PBXBuildFile; fileRef = 4B0459F607EA20FE002D7C88 /* glulxe-client */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55C6BB54204DEE55001AE7E5 /* imagetest in Embed Binaries */ = {isa = PBXBuildFile; fileRef = 4BBC40F808A7AABD00B790B5 /* imagetest */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55C6BB59204DEFA2001AE7E5 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB5B204DEFA2001AE7E5 /* Credits.rtfd */; };
 		55C6BB63204DF016001AE7E5 /* SwiftWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C6BB62204DF016001AE7E5 /* SwiftWindowController.swift */; };
@@ -493,7 +493,7 @@
 			dstSubfolderSpec = 7;
 			files = (
 				55C6BB52204DEE55001AE7E5 /* multiwin in Embed Binaries */,
-				55C6BB53204DEE55001AE7E5 /* glulxe in Embed Binaries */,
+				55C6BB53204DEE55001AE7E5 /* glulxe-client in Embed Binaries */,
 				55C6BB54204DEE55001AE7E5 /* imagetest in Embed Binaries */,
 			);
 			name = "Embed Binaries";
@@ -512,7 +512,7 @@
 		4B04598807EA18DB002D7C88 /* GlkHubProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkHubProtocol.h; sourceTree = "<group>"; };
 		4B0459AB07EA1B44002D7C88 /* GlkSessionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkSessionProtocol.h; sourceTree = "<group>"; };
 		4B0459F107EA20F1002D7C88 /* multiwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = multiwin; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B0459F607EA20FE002D7C88 /* glulxe */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = glulxe; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B0459F607EA20FE002D7C88 /* glulxe-client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "glulxe-client"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B0459FA07EA2147002D7C88 /* multiwin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = multiwin.c; sourceTree = "<group>"; };
 		4B045A0307EA2171002D7C88 /* exec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = exec.c; sourceTree = "<group>"; };
 		4B045A0407EA2171002D7C88 /* files.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = files.c; sourceTree = "<group>"; };
@@ -552,7 +552,7 @@
 		4B34758C07EDB439001C5415 /* GlkStreamProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkStreamProtocol.h; sourceTree = "<group>"; };
 		4B3A1DD208A7EBDE00DEB0B9 /* GlkImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkImage.h; sourceTree = "<group>"; };
 		4B3A1DD308A7EBDE00DEB0B9 /* GlkImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkImage.m; sourceTree = "<group>"; };
-		4B3C3B790F3DAB850066A760 /* git */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = git; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B3C3B790F3DAB850066A760 /* git-client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "git-client"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B3CBD040B07DABD0073216F /* GlkMemoryFileRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkMemoryFileRef.h; sourceTree = "<group>"; };
 		4B3CBD050B07DABD0073216F /* GlkMemoryFileRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkMemoryFileRef.m; sourceTree = "<group>"; };
 		4B4D36440A9738570007FD80 /* glk_unicode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_unicode.m; sourceTree = "<group>"; };
@@ -847,10 +847,10 @@
 				4B51AA4707E8770600576AB9 /* GlkView.framework */,
 				4B51AA5607E877C900576AB9 /* GlkClient.framework */,
 				4B0459F107EA20F1002D7C88 /* multiwin */,
-				4B0459F607EA20FE002D7C88 /* glulxe */,
+				4B0459F607EA20FE002D7C88 /* glulxe-client */,
 				4BBC40F808A7AABD00B790B5 /* imagetest */,
 				4BF0852A0E166E8300DB5C6B /* GlkSound.framework */,
-				4B3C3B790F3DAB850066A760 /* git */,
+				4B3C3B790F3DAB850066A760 /* git-client */,
 				55C6BB36204DED96001AE7E5 /* SwiftGlk.app */,
 				5560F9B721C0686B00E711F5 /* GlkView.framework */,
 				5560F9E021C0686F00E711F5 /* GlkClient.framework */,
@@ -1423,7 +1423,7 @@
 			);
 			name = glulxe;
 			productName = glulxe;
-			productReference = 4B0459F607EA20FE002D7C88 /* glulxe */;
+			productReference = 4B0459F607EA20FE002D7C88 /* glulxe-client */;
 			productType = "com.apple.product-type.tool";
 		};
 		4B3C3B780F3DAB850066A760 /* git */ = {
@@ -1440,7 +1440,7 @@
 			);
 			name = git;
 			productName = git;
-			productReference = 4B3C3B790F3DAB850066A760 /* git */;
+			productReference = 4B3C3B790F3DAB850066A760 /* git-client */;
 			productType = "com.apple.product-type.tool";
 		};
 		4B51AA4607E8770600576AB9 /* GlkView */ = {
@@ -1739,7 +1739,7 @@
 			files = (
 				8D11072A0486CEB800E47090 /* MainMenu.xib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				4BFA1CA407F8A2F50068E16A /* glulxe in Resources */,
+				4BFA1CA407F8A2F50068E16A /* glulxe-client in Resources */,
 				4B51AA6C07E8785700576AB9 /* CocoaGlk.icns in Resources */,
 				4B51AA6D07E8785700576AB9 /* GlkClient.icns in Resources */,
 				4B8BDEE207EB4BCA008AE26D /* multiwin in Resources */,
@@ -2202,7 +2202,7 @@
 				);
 				INSTALL_PATH = /usr/local/bin;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../../Frameworks @executable_path/../../../../Frameworks";
-				PRODUCT_NAME = git;
+				PRODUCT_NAME = "git-client";
 			};
 			name = Debug;
 		};
@@ -2219,7 +2219,7 @@
 				);
 				INSTALL_PATH = /usr/local/bin;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../../Frameworks @executable_path/../../../../Frameworks";
-				PRODUCT_NAME = git;
+				PRODUCT_NAME = "git-client";
 			};
 			name = Release;
 		};
@@ -2433,7 +2433,7 @@
 					AppKit,
 				);
 				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = glulxe;
+				PRODUCT_NAME = "glulxe-client";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -2462,7 +2462,7 @@
 					AppKit,
 				);
 				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = glulxe;
+				PRODUCT_NAME = "glulxe-client";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",

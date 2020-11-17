@@ -688,6 +688,8 @@
 		5560FA4021C08C5A00E711F5 /* GlkTypesetter-iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GlkTypesetter-iOS.m"; sourceTree = "<group>"; };
 		5560FA4321C0920600E711F5 /* GlkViewUmbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkViewUmbrella.h; sourceTree = "<group>"; };
 		559219F321B908EA002F7F9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		5598A18D2563C2ED00BEBD14 /* unixautosave.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unixautosave.c; sourceTree = "<group>"; };
+		5598A18E2563C2ED00BEBD14 /* unixstrt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unixstrt.h; sourceTree = "<group>"; };
 		55BC62ED2055C42B001F8CFB /* savefile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = savefile.c; sourceTree = "<group>"; };
 		55BC62EE2055C42B001F8CFB /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		55BC62EF2055C42B001F8CFB /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memory.c; sourceTree = "<group>"; };
@@ -940,7 +942,9 @@
 				4B045A0F07EA2171002D7C88 /* search.c */,
 				4B045A1007EA2171002D7C88 /* serial.c */,
 				4B045A1107EA2171002D7C88 /* string.c */,
+				5598A18D2563C2ED00BEBD14 /* unixautosave.c */,
 				4B045A1207EA2171002D7C88 /* unixstrt.c */,
+				5598A18E2563C2ED00BEBD14 /* unixstrt.h */,
 				4B045A1307EA2171002D7C88 /* vm.c */,
 			);
 			name = glulxe;

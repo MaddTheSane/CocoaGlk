@@ -102,7 +102,7 @@
 #else
 	[windowImage drawInRect: rect
 				   fromRect: [self convertGlkToImageCoords: rect]
-				  operation: NSCompositeSourceOver
+				  operation: NSCompositingOperationSourceOver
 				   fraction: 1.0];
 #endif
 }
@@ -240,7 +240,7 @@
 	[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
 	[img drawInRect: imgRect
 		   fromRect: NSMakeRect(0,0, imgSize.width, imgSize.height)
-		  operation: NSCompositeSourceOver
+		  operation: NSCompositingOperationSourceOver
 		   fraction: 1.0];
 	[windowImage unlockFocus];
 	

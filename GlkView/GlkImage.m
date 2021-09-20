@@ -156,7 +156,7 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 	
 	[image drawInRect: drawRect
 			 fromRect: imageRect
-			operation: NSCompositeSourceOver
+			operation: NSCompositingOperationSourceOver
 			 fraction: 1.0];
 }
 

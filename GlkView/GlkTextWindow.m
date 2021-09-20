@@ -119,7 +119,7 @@
 		// Construct the window that shows the [ MORE ] prompt
 		NSView* moreView = [[GlkMoreView alloc] init];
 		moreWindow = [[NSWindow alloc] initWithContentRect: [moreView bounds]
-												 styleMask: NSBorderlessWindowMask
+												 styleMask: NSWindowStyleMaskBorderless
 												   backing: NSBackingStoreBuffered
 													 defer: YES];
 

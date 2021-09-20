@@ -218,7 +218,7 @@
 	
 	// Create the window
 	logoWindow = [[NSWindow alloc] initWithContentRect: [self frame]				// Gets the size, we position later
-											 styleMask: NSBorderlessWindowMask
+											 styleMask: NSWindowStyleMaskBorderless
 											   backing: NSBackingStoreBuffered
 												 defer: YES];
 	[logoWindow setOpaque: NO];
@@ -330,7 +330,7 @@
 		[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
 		[logo drawInRect: logoPos
 				fromRect: logoSource
-			   operation: NSCompositeSourceOver
+			   operation: NSCompositingOperationSourceOver
 				fraction: 1.0];
 	}
 }
@@ -863,13 +863,13 @@
 		case stylehint_Justification:
 			switch ([style justification]) {
 				default:
-				case NSLeftTextAlignment:
+				case NSTextAlignmentLeft:
 					return stylehint_just_LeftFlush;
-				case NSRightTextAlignment:
+				case NSTextAlignmentRight:
 					return stylehint_just_RightFlush;
-				case NSCenterTextAlignment:
+				case NSTextAlignmentCenter:
 					return stylehint_just_Centered;
-				case NSJustifiedTextAlignment:
+				case NSTextAlignmentJustified:
 					return stylehint_just_LeftRight;
 			}
 			
@@ -1027,7 +1027,7 @@
 		 contextInfo: (void*) willBeNil {
 	if (!promptHandler) return;
 	
-	if (returnCode == NSOKButton) {
+	if (returnCode == NSModalResponseOK) {
 		GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [panel URL]];
 		[promptHandler promptedFileRef: promptRef];
 		[promptRef autorelease];
@@ -1144,7 +1144,7 @@
 	NSWindow* window = [self window];
 	
 	BOOL showAsSheet = YES;
-	if (([window styleMask]) == NSBorderlessWindowMask) showAsSheet = NO;
+	if (([window styleMask]) == NSWindowStyleMaskBorderless) showAsSheet = NO;
 	
 	// Create the prompt
 	if (writing) {
@@ -2060,7 +2060,7 @@
 	[flippedImage lockFocusFlipped:YES];
 	[image drawInRect: imageRect
 			 fromRect: imageRect
-			operation: NSCompositeSourceOver
+			operation: NSCompositingOperationSourceOver
 			 fraction: 1.0];
 	[flippedImage unlockFocus];
 	
@@ -2108,7 +2108,7 @@
 		[image lockFocus];
 		[sourceImage drawInRect: NSMakeRect(0,0, pixelSize.width, pixelSize.height)
 					   fromRect: srcRect
-					  operation: NSCompositeSourceOver
+					  operation: NSCompositingOperationSourceOver
 					   fraction: 1.0];
 		[image unlockFocus];
 		[sourceImage release];

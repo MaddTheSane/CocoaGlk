@@ -286,7 +286,7 @@
 	} else if (receivingCharacters && [GlkWindow keycodeForEvent: evt] != keycode_Unknown) {
 		// Send character input events directly to the GlkWindow object
 		[sview keyDown: evt];
-	} else if (![win waitingForLineInput] && ([evt modifierFlags]&NSFunctionKeyMask) == 0) {
+	} else if (![win waitingForLineInput] && ([evt modifierFlags]&NSEventModifierFlagFunction) == 0) {
 		// If not waiting for line input, then try changing the first responder to a view that
 		// is actually waiting for input
 		BOOL foundNewResponder = [[win containingView] setFirstResponder];

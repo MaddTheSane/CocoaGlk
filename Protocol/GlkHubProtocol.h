@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "GlkSessionProtocol.h"
+#import <GlkView/GlkSessionProtocol.h>
 
 ///
 /// Methods used to communicate with the hub object used by the main Glk server process.

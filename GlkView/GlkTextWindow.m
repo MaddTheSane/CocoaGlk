@@ -109,7 +109,7 @@
 		
 		// Set the hyperlink style
 		NSDictionary* hyperStyle = [NSDictionary dictionaryWithObjectsAndKeys:
-			@(NSSingleUnderlineStyle), NSUnderlineStyleAttributeName,
+			@(NSUnderlineStyleSingle), NSUnderlineStyleAttributeName,
 			[NSCursor pointingHandCursor], NSCursorAttributeName,
 			nil];
 		if ([textView respondsToSelector: @selector(setLinkTextAttributes:)]) {
@@ -678,7 +678,7 @@
 		if (len > ((int)preserve + 2048)) {
 			// Need to truncate
 			[[textView textStorage] deleteCharactersInRange: NSMakeRange(0, (NSInteger)(len - preserve))];
-			inputPos -= len-preserve;
+			inputPos -= (NSInteger)(len-preserve);
 		}
 	}
 	

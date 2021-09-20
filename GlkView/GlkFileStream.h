@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "GlkStreamProtocol.h"
+#import <GlkView/GlkStreamProtocol.h>
 
 @interface GlkFileStream : NSObject<GlkStream> {
 	/// The filehandle we're using to read/write from

@@ -6,16 +6,16 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import "GlkViewDefinitions.h"
+#import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
 #else
 # import <Cocoa/Cocoa.h>
 #endif
 
-#import "GlkStreamProtocol.h"
+#import <GlkView/GlkStreamProtocol.h>
 
-#include "glk.h"
+#include <GlkView/glk.h>
 
 #define GlkNoWindow 0xffffffff
 

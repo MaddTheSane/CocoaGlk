@@ -28,10 +28,10 @@ NSDate* cocoaglk_nextTimerEvent = nil;
 
 @end
 
-//
-// Advance the time that the next timer event should occur at
-//
-void cocoaglk_next_time() {
+//!
+//! Advance the time that the next timer event should occur at
+//!
+void cocoaglk_next_time(void) {
 	if (!cocoaglk_nextTimerEvent) return;
 	float interval = ((float)cocoaglk_timerlength)/1000.0;
 	

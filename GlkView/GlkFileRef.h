@@ -6,14 +6,14 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import "GlkViewDefinitions.h"
+#import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
 #else
 # import <Cocoa/Cocoa.h>
 #endif
 
-#import "GlkFileRefProtocol.h"
+#import <GlkView/GlkFileRefProtocol.h>
 
 @interface GlkFileRef : NSObject<GlkFileRef> {
 	NSURL* pathname;

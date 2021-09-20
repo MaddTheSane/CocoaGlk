@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "GlkSessionProtocol.h"
+#import <GlkView/GlkSessionProtocol.h>
 
 ///
 /// Generic Glk event class

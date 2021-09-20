@@ -6,7 +6,7 @@
 //  Copyright 2006 Andrew Hunter. All rights reserved.
 //
 
-#import "GlkViewDefinitions.h"
+#import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
 #else

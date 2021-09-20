@@ -10,14 +10,14 @@
 // Communications with an individual client session
 //
 
-#import "GlkViewDefinitions.h"
-#import "GlkBuffer.h"
-#import "GlkStreamProtocol.h"
-#import "GlkEventProtocol.h"
-#import "GlkEventListenerProtocol.h"
-#import "GlkFileRefProtocol.h"
-#import "GlkFilePromptProtocol.h"
-#import "GlkImageSourceProtocol.h"
+#import <GlkView/GlkViewDefinitions.h>
+#import <GlkView/GlkBuffer.h>
+#import <GlkView/GlkStreamProtocol.h>
+#import <GlkView/GlkEventProtocol.h>
+#import <GlkView/GlkEventListenerProtocol.h>
+#import <GlkView/GlkFileRefProtocol.h>
+#import <GlkView/GlkFilePromptProtocol.h>
+#import <GlkView/GlkImageSourceProtocol.h>
 
 #include <sys/types.h>
 

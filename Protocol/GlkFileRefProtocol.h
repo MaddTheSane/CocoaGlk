@@ -6,7 +6,7 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import "GlkStreamProtocol.h"
+#import <GlkView/GlkStreamProtocol.h>
 
 ///
 /// Describes a fileref (mainly used for communicating files between the process and the server)

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#include "glk.h"
+#include <GlkView/glk.h>
 
 ///
 /// Protocol implemented by any class claiming to be a Glk event

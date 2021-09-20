@@ -6,15 +6,15 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import "GlkViewDefinitions.h"
+#import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
 #else
 # import <Cocoa/Cocoa.h>
 #endif
 
-#import "GlkStreamProtocol.h"
-#import "GlkSessionProtocol.h"
+#import <GlkView/GlkStreamProtocol.h>
+#import <GlkView/GlkSessionProtocol.h>
 
 #import <GlkView/GlkEvent.h>
 #import <GlkView/GlkPreferences.h>

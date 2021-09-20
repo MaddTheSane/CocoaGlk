@@ -131,12 +131,10 @@
 }
 
 - (CGFloat) lineHeight {
-#if defined(COCOAGLK_IPHONE)
-#else
+    NSFont* font = [[self currentTextAttributes] objectForKey: NSFontAttributeName];
     NSLayoutManager* layoutManager = [[[NSLayoutManager alloc] init] autorelease];
     
-	return [layoutManager defaultLineHeightForFont: [[self currentTextAttributes] objectForKey: NSFontAttributeName]];
-#endif
+    return [layoutManager defaultLineHeightForFont: font];
 }
 
 - (void) setStyles: (NSDictionary*) newStyles {

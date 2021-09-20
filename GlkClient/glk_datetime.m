@@ -13,6 +13,7 @@
 #import <Foundation/Foundation.h>
 #import "cocoaglk.h"
 
+#ifdef GLK_MODULE_DATETIME
 NSCalendar *getUTCCalendar(void)
 {
 	static NSCalendar *utccalendar;
@@ -256,3 +257,4 @@ glsi32 glk_date_to_simple_time_local(glkdate_t *date, glui32 factor)
 	return gli_simplify_time((int64_t)timestamp, factor);
 }
 
+#endif

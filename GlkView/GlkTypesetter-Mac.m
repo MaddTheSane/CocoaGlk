@@ -389,7 +389,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				[currentAttributes retain];
 			lastAttributes = currentAttributes;
 			
-			currentFont = [layout substituteFontForFont: [currentAttributes objectForKey: NSFontAttributeName]];
+			currentFont = [layout substituteFontForFont: (NSFont*) [currentAttributes objectForKey: NSFontAttributeName]];
 			currentAscender = [currentFont ascender];
 			currentDescender = [currentFont descender];
 			currentHeight = [[self layoutManager] defaultLineHeightForFont: currentFont];
@@ -428,7 +428,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			NSLog(@"%g", advancements[y]);
 		}
 		if (start > 0) {
-			NSLog(@"Previous: %g", advancements[start-1]);			
+			NSLog(@"Previous: %g", advancements[start-1]);
 		}
 #endif
 	}
@@ -1058,7 +1058,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	NSRect totalBounds = NSMakeRect(0,0,0,0);
 	BOOL newline = NO;
 	BOOL newParagraph = [self updateParagraphFromGlyph: glyph+cached.location];
-	BOOL splitOnElastic = [paraStyle alignment]==NSJustifiedTextAlignment;
+	BOOL splitOnElastic = [paraStyle alignment]==NSTextAlignmentJustified;
 	BOOL elastic = NO;
 	
 	CGFloat leftIndent = newParagraph?[paraStyle firstLineHeadIndent]:[paraStyle headIndent];
@@ -1115,7 +1115,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				// Ignore null glyphs
 			} else {
 				// Include this glyph in the set of glyphs
-				NSRect bounds = NSMakeRect(offset, -cacheAscenders[glyph], 
+				NSRect bounds = NSMakeRect(offset, -cacheAscenders[glyph],
 										   cacheAdvancements[glyph], cacheLineHeight[glyph]);
 				
 				sectionBounds = NSUnionRect(sectionBounds, bounds);
@@ -1247,7 +1247,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				maxPos = splitPos + sections[splitSection].advancement;
 				
 				splitGlyph = sections[splitSection].glyphRange.location;
-			} else if (cacheGlyphs[splitGlyph-cached.location] == NSNullGlyph 
+			} else if (cacheGlyphs[splitGlyph-cached.location] == NSNullGlyph
 					   || cacheGlyphs[splitGlyph-cached.location] == NSControlGlyph
 					   || cacheElastic[splitGlyph-cached.location]) {
 				// Other control and null glyphs have no real meaning (treat them as 0 width for the purposes of splitting)
@@ -1270,7 +1270,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		}
 				
 		// Move backwards from the split character to find a 'proper' character to split at
-		if (splitSection>=0 
+		if (splitSection>=0
 			&& (splitSection+1 < sections.count
 				|| sections[splitSection].glyphRange.location+sections[splitSection].glyphRange.length > splitGlyph+1)) {
 			// Basic method: search backwards in the string for a whitespace character
@@ -1433,7 +1433,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		container	= [containers objectAtIndex: 0];
 		inset		= [container lineFragmentPadding];
 		
-		size		= [container containerSize];	
+		size		= [container containerSize];
 	} else {
 		// Lay out in a fake container
 		container	= nil;
@@ -1443,9 +1443,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 }
 
-- (void) layoutGlyphsInLayoutManager: (NSLayoutManager*) layoutMgr 
-				startingAtGlyphIndex: (NSUInteger) startGlyphIndex 
-			maxNumberOfLineFragments: (NSUInteger) maxNumLines 
+- (void) layoutGlyphsInLayoutManager: (NSLayoutManager*) layoutMgr
+				startingAtGlyphIndex: (NSUInteger) startGlyphIndex
+			maxNumberOfLineFragments: (NSUInteger) maxNumLines
 					  nextGlyphIndex: (NSUInteger*) nextGlyph {
 	// Deal with the case where there are no text containers to perform layout in
 #if 0

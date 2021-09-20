@@ -122,7 +122,7 @@
 		toStream: (unsigned) streamIdentifier;
 - (void) putString: (in bycopy NSString*) string
 		  toStream: (unsigned) streamIdentifier;
-- (void) putData: (in bycopy NSData*) data							// Note: do not pass in mutable data here, as the contents may change unexpectedly
+- (void) putData: (in bycopy NSData*) data							//!< Note: do not pass in mutable data here, as the contents may change unexpectedly
 		toStream: (unsigned) streamIdentifier;
 - (void) setStyle: (unsigned) style
 		 onStream: (unsigned) streamIdentifier;
@@ -149,11 +149,11 @@
 ///
 /// Class used to temporarily store bufferable operations before sending them to the server
 ///
-@interface GlkBuffer : NSObject<NSCopying, NSCoding, GlkBuffer> {
+@interface GlkBuffer : NSObject<NSCopying, NSSecureCoding, GlkBuffer> {
 	NSMutableArray* operations;
 }
 
-// Adding a generic bufferred operation
+/// Adding a generic bufferred operation
 - (void) addOperation: (NSString*) name
 			arguments: (NSArray*) arguments;
 
@@ -161,7 +161,7 @@
 @property (readonly) BOOL shouldBeFlushed;
 - (BOOL) hasGotABitOnTheLargeSide;
 
-// Flushing a buffer with a target
+/// Flushing a buffer with a target
 - (void) flushToTarget: (id) target;
 
 @end

@@ -15,73 +15,73 @@
 // Windows
 
 // Creating the various types of window
-static NSString* s_CreateBlankWindowWithIdentifier				= @"CBWI";
-static NSString* s_CreateTextGridWindowWithIdentifier			= @"CTGW";
-static NSString* s_CreateTextWindowWithIdentifier 				= @"CTWI";
-static NSString* s_CreateGraphicsWindowWithIdentifier 			= @"CGWI";
+static NSString* const s_CreateBlankWindowWithIdentifier			= @"CBWI";
+static NSString* const s_CreateTextGridWindowWithIdentifier			= @"CTGW";
+static NSString* const s_CreateTextWindowWithIdentifier 			= @"CTWI";
+static NSString* const s_CreateGraphicsWindowWithIdentifier 		= @"CGWI";
 
 // Placing windows in the tree
-static NSString* s_SetRootWindow								= @"WSRW";
-static NSString* s_CreatePairWindowWithIdentifier				= @"CPWI";
+static NSString* const s_SetRootWindow								= @"WSRW";
+static NSString* const s_CreatePairWindowWithIdentifier				= @"CPWI";
 
 // Closing windows
-static NSString* s_CloseWindowIdentifier 						= @"CLWI";
+static NSString* const s_CloseWindowIdentifier 						= @"CLWI";
 
 // Manipulating windows
-static NSString* s_MoveCursorInWindow 							= @"MCIW";
-static NSString* s_ClearWindowIdentifier 						= @"WINC";
-static NSString* s_ClearWindowIdentifierWithBackground 			= @"WIBC";
-static NSString* s_SetInputLine 								= @"WSIL";
-static NSString* s_ArrangeWindow 								= @"WARR";
+static NSString* const s_MoveCursorInWindow 						= @"MCIW";
+static NSString* const s_ClearWindowIdentifier 						= @"WINC";
+static NSString* const s_ClearWindowIdentifierWithBackground 		= @"WIBC";
+static NSString* const s_SetInputLine 								= @"WSIL";
+static NSString* const s_ArrangeWindow 								= @"WARR";
 
 // Styles
-static NSString* s_SetStyleHint 								= @"ISSH";
-static NSString* s_ClearStyleHint 								= @"ICSH";
+static NSString* const s_SetStyleHint 								= @"ISSH";
+static NSString* const s_ClearStyleHint 							= @"ICSH";
 
-static NSString* s_SetStyleHintStream 							= @"SSSH";
-static NSString* s_ClearStyleHintStream 						= @"SCSH";
-static NSString* s_SetCustomAttributesStream 					= @"SSCA";
+static NSString* const s_SetStyleHintStream 						= @"SSSH";
+static NSString* const s_ClearStyleHintStream 						= @"SCSH";
+static NSString* const s_SetCustomAttributesStream 					= @"SSCA";
 
 // Graphics
-static NSString* s_FillAreaInWindowWithIdentifier 				= @"GFAW";
-static NSString* s_DrawImageWithIdentifier 						= @"GDIP";
-static NSString* s_DrawImageWithIdentifierInRect 				= @"GDIR";
+static NSString* const s_FillAreaInWindowWithIdentifier 			= @"GFAW";
+static NSString* const s_DrawImageWithIdentifier 					= @"GDIP";
+static NSString* const s_DrawImageWithIdentifierInRect 				= @"GDIR";
 
-static NSString* s_DrawImageWithIdentifierAlign 				= @"GDIA";
-static NSString* s_DrawImageWithIdentifierAlignSize 			= @"GDIS";
+static NSString* const s_DrawImageWithIdentifierAlign 				= @"GDIA";
+static NSString* const s_DrawImageWithIdentifierAlignSize 			= @"GDIS";
 
-static NSString* s_BreakFlowInWindowWithIdentifier 				= @"GBFW";
+static NSString* const s_BreakFlowInWindowWithIdentifier 			= @"GBFW";
 
 // Streams
 
 // Registering streams
-static NSString* s_RegisterStream 								= @"SRSS";
-static NSString* s_RegisterStreamForWindow 						= @"SRSW";
+static NSString* const s_RegisterStream 							= @"SRSS";
+static NSString* const s_RegisterStreamForWindow 					= @"SRSW";
 
-static NSString* s_CloseStreamIdentifier 						= @"SCSI";
-static NSString* s_UnregisterStreamIdentifier 					= @"SUSI";	// If the stream is closed immediately
+static NSString* const s_CloseStreamIdentifier 						= @"SCSI";
+static NSString* const s_UnregisterStreamIdentifier 				= @"SUSI";	// If the stream is closed immediately
 
 // Buffering stream writes
-static NSString* s_PutCharToStream 								= @"SPCH";
-static NSString* s_PutStringToStream 							= @"SPST";
-static NSString* s_PutDataToStream 								= @"SPDA";
-static NSString* s_SetStyle 									= @"SSSS";
+static NSString* const s_PutCharToStream 							= @"SPCH";
+static NSString* const s_PutStringToStream 							= @"SPST";
+static NSString* const s_PutDataToStream 							= @"SPDA";
+static NSString* const s_SetStyle 									= @"SSSS";
 
 // Hyperlinks on streams
-static NSString* s_SetHyperlink 								= @"SHYS";
-static NSString* s_ClearHyperlinkOnStream 						= @"SCLH";
+static NSString* const s_SetHyperlink 								= @"SHYS";
+static NSString* const s_ClearHyperlinkOnStream 					= @"SCLH";
 
 // Events
 
 // Requesting events
-static NSString* s_RequestLineEventsForWindowIdentifier 		= @"ERLE";
-static NSString* s_RequestCharEventsForWindowIdentifier			= @"ERCE";
-static NSString* s_RequestMouseEventsForWindowIdentifier		= @"ERME";
-static NSString* s_RequestHyperlinkEventsForWindowIdentifier	= @"ERHE";
+static NSString* const s_RequestLineEventsForWindowIdentifier 		= @"ERLE";
+static NSString* const s_RequestCharEventsForWindowIdentifier		= @"ERCE";
+static NSString* const s_RequestMouseEventsForWindowIdentifier		= @"ERME";
+static NSString* const s_RequestHyperlinkEventsForWindowIdentifier	= @"ERHE";
 
-static NSString* s_CancelCharEventsForWindowIdentifier 			= @"ECCE";
-static NSString* s_CancelMouseEventsForWindowIdentifier 		= @"ECME";
-static NSString* s_CancelHyperlinkEventsForWindowIdentifier 	= @"ECHE";
+static NSString* const s_CancelCharEventsForWindowIdentifier 		= @"ECCE";
+static NSString* const s_CancelMouseEventsForWindowIdentifier 		= @"ECME";
+static NSString* const s_CancelHyperlinkEventsForWindowIdentifier 	= @"ECHE";
 
 @implementation GlkBuffer
 
@@ -230,7 +230,13 @@ static NSString* stringFromOp(NSArray* op) {
 	self = [super init];
 	
 	if (self) {
-		operations = [[NSMutableArray alloc] initWithArray: [coder decodeObject]
+		id decoded;
+		if (coder.allowsKeyedCoding) {
+			decoded = [coder decodeObjectOfClasses: [NSSet setWithObjects: [NSArray class], [NSNumber class], [NSString class], [GlkColor class], [NSValue class], [NSData class], nil] forKey: @"Operations"];
+		} else {
+			decoded = [coder decodeObject];
+		}
+		operations = [[NSMutableArray alloc] initWithArray: decoded
 												 copyItems: NO];
 	}
 	
@@ -238,7 +244,16 @@ static NSString* stringFromOp(NSArray* op) {
 }
 
 - (void) encodeWithCoder: (NSCoder*) coder {
-	[coder encodeObject: operations];
+	if (coder.allowsKeyedCoding) {
+		[coder encodeObject: operations forKey: @"Operations"];
+	} else {
+		[coder encodeObject: operations];
+	}
+}
+
++ (BOOL)supportsSecureCoding
+{
+	return YES;
 }
 
 #ifndef COCOAGLK_IPHONE

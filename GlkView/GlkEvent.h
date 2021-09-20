@@ -13,7 +13,7 @@
 ///
 /// Generic Glk event class
 ///
-@interface GlkEvent : NSObject<NSCoding, GlkEvent> {
+@interface GlkEvent : NSObject<NSSecureCoding, GlkEvent> {
 	// Event parameters
 	unsigned type;
 	unsigned windowId;
@@ -25,6 +25,7 @@
 	NSString* lineInput;
 }
 
+- (instancetype)init UNAVAILABLE_ATTRIBUTE;
 - (instancetype) initWithType: (unsigned) type
 			 windowIdentifier: (unsigned) windowId;
 - (instancetype) initWithType: (unsigned) type
@@ -33,8 +34,12 @@
 - (instancetype) initWithType: (unsigned) type
 			 windowIdentifier: (unsigned) windowId
 						 val1: (unsigned) val1
-						 val2: (unsigned) val2;
+						 val2: (unsigned) val2 NS_DESIGNATED_INITIALIZER;
 
+- (instancetype) initWithCoder: (NSCoder*) coder NS_DESIGNATED_INITIALIZER;
+
+
+/// When a line event is requested, this contains the string that eventually ends up in the buffer
 @property (copy) NSString *lineInput;
 
 @end

@@ -273,11 +273,11 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 @optional
 
 /// Set to return YES to get rid of the CocoaGlk logo
-- (BOOL) disableLogo;
+@property (readonly) BOOL disableLogo;
 /// If non-nil, then this will be the logo displayed instead of 'CocoaGlk'
-- (nullable GlkSuperImage*) logo;
+@property (readonly, nullable) GlkSuperImage *logo;
 /// A description of what is running in this window (or nil)
-- (nullable NSString*) taskDescription;
+@property (readonly, copy, nullable) NSString *taskDescription;
 
 /// Called to show warnings, etc
 - (void) showStatusText: (NSString*) status;

@@ -38,13 +38,14 @@ struct GlkSize {
 	int height;
 };
 
+//! Communications with an individual client session
 @protocol GlkSession <NSObject>
 
 // Housekeeping
 - (void) clientHasStarted: (pid_t) processId;
 - (void) clientHasFinished;
  
-// Receiving data from the buffer
+//! Receiving data from the buffer
 - (void) performOperationsFromBuffer: (in bycopy GlkBuffer*) buffer;
 
 // Windows

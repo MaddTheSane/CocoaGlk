@@ -275,7 +275,7 @@
 	
 	if ([[evt characters] isEqualToString: @"\t"]) {
 		[[(GlkWindow*)sview containingView] performTabFrom: (GlkWindow*)sview
-												   forward: ([evt modifierFlags]&NSShiftKeyMask)==0];
+												   forward: ([evt modifierFlags]&NSEventModifierFlagShift)==0];
 		return;
 	}
 	

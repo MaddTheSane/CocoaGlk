@@ -32,11 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 #define GlkFileUsageGameFile	(@"GlkFileUsageGameFile"	)
 
 /// Structure representing a size in pixels or characters
-typedef struct GlkSize GlkSize;
-struct GlkSize {
+typedef struct GlkSize {
 	int width;
 	int height;
-};
+} GlkSize;
 
 //! Communications with an individual client session
 @protocol GlkSession <NSObject>

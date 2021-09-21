@@ -372,17 +372,20 @@
 	if (delegate && [delegate respondsToSelector: @selector(showError:)]) {
 		[delegate showError: error];
 	} else if ([self window]) {
-		NSBeginAlertSheet([[NSBundle mainBundle] localizedStringForKey: @"Glk Error"
-																 value: @"Glk Error"
-																 table: nil],
-						  [[NSBundle mainBundle] localizedStringForKey: @"Cancel"
-																 value: @"Cancel"
-																 table: nil],
-						  nil, nil, [self window], self, nil, nil, nil,
-						  @"%@",
-						  [[NSBundle mainBundle] localizedStringForKey: error
-																 value: error
-																 table: nil]);
+		NSAlert *alert = [[NSAlert alloc] init];
+		alert.messageText = [[NSBundle mainBundle] localizedStringForKey: @"Glk Error"
+																   value: @"Glk Error"
+																   table: nil];
+		alert.informativeText = [[NSBundle mainBundle] localizedStringForKey: error
+																	   value: error
+																	table: nil];
+		[alert addButtonWithTitle:[[NSBundle mainBundle] localizedStringForKey: @"Cancel"
+																		 value: @"Cancel"
+																		 table: nil]];
+		[alert beginSheetModalForWindow:[self window] completionHandler:^(NSModalResponse returnCode) {
+			//do nothing
+		}];
+		[alert release];
 	} else {
 		NSLog(@"Glk error: %@", error);
 	}

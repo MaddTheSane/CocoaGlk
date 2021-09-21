@@ -35,7 +35,7 @@ ofType: nil];
 		let control = SwiftWindowController()
 		control.showWindow(self)
 		winController = control
-		control.glkView.launchClientApplication(Bundle.main.path(forResource: "glulxe", ofType: nil)!, withArguments: nil)
+		control.glkView.launchClientApplication(Bundle.main.path(forResource: "glulxe-client", ofType: nil)!, withArguments: nil)
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {
@@ -48,6 +48,4 @@ ofType: nil];
 		winController = control
 		return control.glkView
 	}
-
 }
-

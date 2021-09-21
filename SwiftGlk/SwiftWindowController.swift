@@ -22,7 +22,7 @@ class SwiftWindowController: NSWindowController, GlkViewDelegate {
 	override func windowDidLoad() {
 		super.windowDidLoad()
 		
-		self.windowFrameAutosaveName = NSWindow.FrameAutosaveName(rawValue: "SwiftGlkWindow")
+		self.windowFrameAutosaveName = NSWindow.FrameAutosaveName("SwiftGlkWindow")
 		
 		// Set the status
 		status.stringValue = NSLocalizedString("Waiting for game...", comment: "Waiting for game...")

@@ -156,7 +156,6 @@
 	[(GlkGridTypesetter*)typesetter setGridWidth: width
 										  height: height];
 	[layoutManager invalidateLayoutForCharacterRange: NSMakeRange(0, [textStorage length])
-											  isSoft: NO
 								actualCharacterRange: nil];
 	
 	// Adjust the text storage object
@@ -457,28 +456,29 @@ textView:(NSTextView *)aTextView
     }
 }
 
-- (void)textStorageWillProcessEditing:(NSNotification*) aNotification {
+- (void)textStorage:(NSTextStorage *)textStorage
+ willProcessEditing:(NSTextStorageEditActions)editedMask
+			  range:(NSRange)edited
+	 changeInLength:(NSInteger)delta {
 	if (!lineInput) return;
 	
 	NSInteger startPos = xpos + ypos*width;
 	NSInteger endPos = startPos + lineInputLength;
 	
-	NSRange edited = [[textView textStorage] editedRange];
-
 	if (edited.location < startPos || edited.location > endPos) {
 		return;
 	}
 	
-	if (edited.location == endPos && edited.length != [[textView textStorage] changeInLength]) {
+	if (edited.location == endPos && edited.length != delta) {
 		return;
 	}
 	
 	// Anything newly added should be in the input style
 	[[textView textStorage] setAttributes: [self attributes: style_Input]
-									range: [[textView textStorage] editedRange]];
+									range: edited];
 	
 	// Text editing should replace any text outside of the editable range
-	NSInteger lenChange = [[textView textStorage] changeInLength];
+	NSInteger lenChange = delta;
 	
 	if (lenChange > 0) {
 		[[textView textStorage] deleteCharactersInRange: NSMakeRange(endPos+lenChange, lenChange)];

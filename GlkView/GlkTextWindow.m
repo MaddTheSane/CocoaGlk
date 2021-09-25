@@ -384,18 +384,21 @@
     }
 }
 
-- (void)textStorageWillProcessEditing:(NSNotification*) aNotification {
+- (void)textStorage:(NSTextStorage *)textStorage
+ willProcessEditing:(NSTextStorageEditActions)editedMask
+			  range:(NSRange)editedRange
+	 changeInLength:(NSInteger)delta {
 	// Force the typesetter to reset so that it doesn't try to lay out new glyphs with out-of-date metrics
 	[(GlkTypesetter*)[[textView layoutManager] typesetter] flushCache];
 	
 	// Perform no other action on edits that aren't in the input range
-	if ([[textView textStorage] editedRange].location < inputPos) {
+	if (editedRange.location < inputPos) {
 		return;
 	}
 	
 	// Anything newly added should be in the input style
 	[[textView textStorage] setAttributes: [self attributes: style_Input]
-									range: [[textView textStorage] editedRange]];
+									range: editedRange];
 }
 
 - (NSInteger) inputPos {

@@ -195,7 +195,7 @@
 - (void) bufferHasFlushed;
 
 /// The text position beyond which input is possible
-- (NSInteger) inputPos;
+@property (nonatomic, readonly) NSInteger inputPos;
 /// Called on a key down event, to give this view a chance to set the caret position appropriately
 - (void) updateCaretPosition;
 

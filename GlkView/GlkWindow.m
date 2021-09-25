@@ -537,9 +537,8 @@ NS_ENUM(unichar) {
 
 - (void) putBuffer: (in bycopy NSData*) buffer {
 	// Assume that buffers are in ISO Latin-1 format
-	NSString* string = [[[NSString alloc] initWithBytes: [buffer bytes]
-												 length: [buffer length]
-											   encoding: NSISOLatin1StringEncoding] autorelease];
+	NSString* string = [[[NSString alloc] initWithData: buffer
+											  encoding: NSISOLatin1StringEncoding] autorelease];
 
 	// The view won't automate data events automatically
 	[containingView automateStream: self

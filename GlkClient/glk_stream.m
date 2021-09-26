@@ -653,10 +653,7 @@ void glk_stream_close(strid_t str, stream_result_t *result) {
 	}
 	
 	// If we're echoing anywhere, then stop it
-	NSEnumerator* echoEnum = [str->echoesTo objectEnumerator];
-	NSValue* echoingTo;
-	
-	while (echoingTo = [echoEnum nextObject]) {
+	for (NSValue* echoingTo in str->echoesTo) {
 		strid_t eStr = [echoingTo pointerValue];
 		
 		if (!cocoaglk_strid_sane(eStr)) {

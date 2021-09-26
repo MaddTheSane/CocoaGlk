@@ -950,16 +950,11 @@
 	if (newListener != nil) {
 		listener = [newListener retain];
 
-		NSEnumerator* inputReceiverEnum = [inputReceivers objectEnumerator];
-		NSObject<GlkAutomation>* receiver;
-		
-		while (receiver = [inputReceiverEnum nextObject]) {
+		for (id<GlkAutomation> receiver in inputReceivers) {
 			[receiver viewIsWaitingForInput: self];
 		}
 
-		NSEnumerator* outputReceiverEnum = [outputReceivers objectEnumerator];
-		
-		while (receiver = [outputReceiverEnum nextObject]) {
+		for (id<GlkAutomation> receiver in outputReceivers) {
 			[receiver viewWaiting: self];
 		}
 	}

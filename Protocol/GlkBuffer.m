@@ -604,10 +604,9 @@ static NSString* stringFromOp(NSArray* op) {
 - (void) flushToTarget: (id) target {
 	// Iterate through the operations
 	NSEnumerator* bufferEnum = [operations objectEnumerator];
-	NSArray* op;
 	
 	// Decode each operation in turn using a giant if statements of death
-	while (op = [bufferEnum nextObject]) {
+	for (NSArray* op in bufferEnum) {
 		NSString*	opType 	= [op objectAtIndex: 0];
 		NSArray* 	args 	= [op objectAtIndex: 1];
 			

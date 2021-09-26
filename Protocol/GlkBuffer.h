@@ -159,7 +159,7 @@
 
 /// Returns true if the buffer has anything to flush
 @property (readonly) BOOL shouldBeFlushed;
-- (BOOL) hasGotABitOnTheLargeSide;
+@property (readonly) BOOL hasGotABitOnTheLargeSide;
 
 /// Flushing a buffer with a target
 - (void) flushToTarget: (id) target;

@@ -96,12 +96,8 @@
 
 - (void) unregisterSession: (NSObject<GlkSession>*)session {
 	// Iterate through the sessions until we find the one that we're supposed to be removing
-	NSEnumerator* sesEnum = [waitingSessions keyEnumerator];
-	NSString* sessionCookie;
-	NSObject<GlkSession>* ses;
-	
-	while (sessionCookie = [sesEnum nextObject]) {
-		ses = [waitingSessions objectForKey: sessionCookie];
+	for (NSString* sessionCookie in waitingSessions) {
+		NSObject<GlkSession>* ses = [waitingSessions objectForKey: sessionCookie];
 
 		if (ses == session) {
 			// This is the session to remove

@@ -32,12 +32,12 @@ typedef int32_t glsi32;
 //#define GLK_MODULE_LINE_ECHO
 //#define GLK_MODULE_LINE_TERMINATORS
 #define GLK_MODULE_UNICODE
-//#define GLK_MODULE_UNICODE_NORM
+#define GLK_MODULE_UNICODE_NORM
 #define GLK_MODULE_IMAGE
 #define GLK_MODULE_SOUND
 //#define GLK_MODULE_SOUND2
 #define GLK_MODULE_HYPERLINKS
-//#define GLK_MODULE_DATETIME
+#define GLK_MODULE_DATETIME
 //#define GLK_MODULE_RESOURCE_STREAM
 
 /* Define a macro for a function attribute that indicates a function that

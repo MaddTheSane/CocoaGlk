@@ -124,7 +124,7 @@ void glk_main(void) {
 	glui32 imageWidth, imageHeight;
 
 	// Register our image provider
-	cocoaglk_set_image_source([[[GlkImageTestSource alloc] init] autorelease]);
+	cocoaglk_set_image_source([[GlkImageTestSource alloc] init]);
 	
 	// Open a graphics window
 	glk_stylehint_set(wintype_TextBuffer, style_Normal, stylehint_BackColor, 0xddffff);

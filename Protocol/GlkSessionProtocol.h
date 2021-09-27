@@ -10,6 +10,7 @@
 // Communications with an individual client session
 //
 
+#import <Foundation/Foundation.h>
 #import <GlkView/GlkViewDefinitions.h>
 #import <GlkView/GlkBuffer.h>
 #import <GlkView/GlkStreamProtocol.h>

@@ -6,6 +6,7 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -14,7 +15,8 @@
 #endif
 #import <GlkView/glk.h>
 
-extern NSAttributedStringKey const GlkStyleAttributeName;									//!< Styles store themselves in the attributes to facilitate reformating after a change to a preference object
+//! Styles store themselves in the attributes to facilitate reformating after a change to a preference object
+extern NSAttributedStringKey const GlkStyleAttributeName;
 
 @class GlkPreferences;
 

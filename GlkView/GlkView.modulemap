@@ -36,9 +36,6 @@ framework module GlkView {
 		export *
 	}
 	
-	export *
-	module * { export * }
-
 	explicit module GlkArrangeEvent {
 		requires objc
 		header "GlkArrangeEvent.h"
@@ -194,5 +191,8 @@ framework module GlkView {
 		header "GlkWindow.h"
 		export *
 	}
+	
+	export *
+	module * { export * }
 }
 

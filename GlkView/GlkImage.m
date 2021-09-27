@@ -10,7 +10,7 @@
 #import "GlkImage.h"
 #import "glk.h"
 
-NSString* GlkImageAttribute = @"GlkImageAttribute";
+NSString*const GlkImageAttribute = @"GlkImageAttribute";
 
 @implementation GlkImage
 

@@ -14,12 +14,12 @@
 #endif
 #import <GlkView/GlkCustomTextSection.h>
 
-// Attribute that can be applied to control glyphs to indicate that they should cause formatting of a specific Glk image
-extern NSString* GlkImageAttribute;
+//! Attribute that can be applied to control glyphs to indicate that they should cause formatting of a specific Glk image
+extern NSString*const GlkImageAttribute;
 
-//
-// Representation of an image in a text container
-//
+//!
+//! Representation of an image in a text container
+//!
 @interface GlkImage : GlkCustomTextSection {
 	/// The NSImage associated with this image
 	GlkSuperImage* image;
@@ -48,7 +48,7 @@ extern NSString* GlkImageAttribute;
 			position: (NSUInteger) characterPosition;
 
 // Information
-/// The NSImage associated with this image
+/// The \c NSImage associated with this image
 @property (readonly, retain) GlkSuperImage *image;
 /// The size to draw this image with
 @property (readonly) GlkCocoaSize size;
@@ -59,7 +59,7 @@ extern NSString* GlkImageAttribute;
 
 /// The bounds of this image. Setting it marks it as calculated.
 @property (nonatomic) GlkRect bounds;
-/// Returns YES if the bounds are calculated
+/// Returns \c YES if the bounds are calculated
 @property (readonly) BOOL calculatedBounds;
 /// Marks this image as uncalculated
 - (void) markAsUncalculated;

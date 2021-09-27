@@ -15,6 +15,12 @@
 #import <GlkView/GlkTextView.h>
 #import <GlkView/GlkTypesetter.h>
 #import <GlkView/GlkAutomation.h>
+#import <GlkView/GlkEventProtocol.h>
+#import <GlkView/GlkWindow.h>
+#import <GlkView/GlkPairWindow.h>
+#import <GlkView/GlkTextView.h>
+#import <GlkView/GlkTypesetter.h>
+#import <GlkView/GlkTextWindow.h>
 #endif
 
 #endif /* GlkViewUmbrella_h */

@@ -17,6 +17,7 @@
 // window #0, and moving to the left first.
 //
 
+#import <Foundation/Foundation.h>
 #import <GlkView/GlkView.h>
 
 @protocol GlkAutomation <NSObject>

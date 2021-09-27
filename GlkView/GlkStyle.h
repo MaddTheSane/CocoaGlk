@@ -40,7 +40,7 @@ extern NSAttributedStringKey const GlkStyleAttributeName;									//!< Styles st
 	/// Change count for the preferences last time we cached the style dictionary
 	NSInteger prefChangeCount;
 	/// The last preference object this style was applied to
-	GlkPreferences*	lastPreferences;
+	__weak GlkPreferences*	lastPreferences;
 	/// The scale factor the attributes were created at
 	CGFloat lastScaleFactor;
 	/// The attributes generated last time we needed to

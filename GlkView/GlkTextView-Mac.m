@@ -40,17 +40,11 @@
 	
 	if (self) {
 		glyph = newGlyph;
-		textSection = [section retain];
+		textSection = section;
 		bounds = NSMakeRect(0,0,0,0);
 	}
 	
 	return self;
-}
-
-- (void) dealloc {
-	[textSection release];
-	
-	[super dealloc];
 }
 
 @synthesize bounds;
@@ -72,12 +66,6 @@
 		firstUnlaidMarginGlyph = 0;
     }
     return self;
-}
-
-- (void) dealloc {
-	[customGlyphs release];
-	[marginGlyphs release];
-	[super dealloc];
 }
 
 // = Drawing =
@@ -396,7 +384,6 @@
 		else {
 			[glyphArray replaceObjectAtIndex: middle
 									withObject: newGlyph];
-			[newGlyph release];
 			return;
 		}
 	}
@@ -406,7 +393,6 @@
 					   atIndex: bottom];
 	
 	// We're done
-	[newGlyph release];
 }
 
 - (void) invalidateCustomGlyphs: (NSRange) range {

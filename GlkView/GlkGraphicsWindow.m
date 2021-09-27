@@ -37,17 +37,10 @@
 		
 		[windowImage unlockFocus];		
 		
-		backgroundColour = [[GlkColor whiteColor] retain];
+		backgroundColour = [GlkColor whiteColor];
     }
 
     return self;
-}
-
-- (void) dealloc {
-	[windowImage release]; windowImage = nil;
-	[backgroundColour release]; backgroundColour = nil;
-	
-	[super dealloc];
 }
 
 - (void) clearWindow {
@@ -70,7 +63,7 @@
 	GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_Redraw
 								  windowIdentifier: [self glkIdentifier]];
 	
-	[target queueEvent: [evt autorelease]];
+	[target queueEvent: evt];
 }
 
 - (void) setFrame: (GlkRect) frame {
@@ -124,7 +117,7 @@
 												  val2: clickY];
 		
 		// ... send it
-		[target queueEvent: [evt autorelease]];
+		[target queueEvent: evt];
 	} else {
 		[super mouseDown: event];
 	}
@@ -140,7 +133,6 @@
 	// Set the background colour according to the style hints
 	GlkStyle* mainStyle = [self style: style_Normal];
 	
-	[backgroundColour release];
 	backgroundColour = [[mainStyle backColour] copy];
 	
 	// Clear the window

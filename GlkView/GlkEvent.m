@@ -48,12 +48,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	[lineInput release]; lineInput = nil;
-	
-	[super dealloc];
-}
-
 @synthesize lineInput;
 
 // = GlkEvent methods =

@@ -23,19 +23,13 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 	self = [super init];
 	
 	if (self) {
-		image = [img retain];
+		image = img;
 		alignment = align;
 		size = sz;
 		characterPosition = charPos;
 	}
 	
 	return self;
-}
-
-- (void) dealloc {
-	[image release];
-	
-	[super dealloc];
 }
 
 // = Information =

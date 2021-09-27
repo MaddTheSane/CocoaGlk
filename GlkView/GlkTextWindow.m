@@ -62,7 +62,6 @@
 	[typesetter setDelegate: textView];
 	[textView setTextContainer: newContainer];
 	[newContainer setTextView: textView];
-	[newContainer release];
 				
 	// [[textView textContainer] setWidthTracksTextView: YES];
 	//[[textView textContainer] setContainerSize: NSMakeSize(1e8, 1e8)];
@@ -126,7 +125,6 @@
 		[moreWindow setBackgroundColor: [NSColor clearColor]];
 		[moreWindow setOpaque: NO];
 		[moreWindow setContentView: moreView];
-		[moreView release];
     }
     
 	return self;
@@ -136,19 +134,8 @@
 	[textView setDelegate: nil];
 	[[textView textStorage] setDelegate: nil];
 	
-	[scrollView release]; scrollView = nil;
-	[typesetter setDelegate: nil];
-	[textView release];  textView = nil;
-	
-	[textStorage release]; textStorage = nil;
-	[layoutManager release]; layoutManager = nil;
-	[typesetter release]; typesetter = nil;
-	
 	[[moreWindow parentWindow] removeChildWindow: moreWindow];
 	[moreWindow orderOut: self];
-	[moreWindow release]; moreWindow = nil;
-	
-	[super dealloc];
 }
 
 - (void) updateWithPrefs: (GlkPreferences*) prefs {
@@ -279,22 +266,17 @@
 	// Iterate through all of the attribute runs in this view...
 	if ([textStorage length] > 0) {
 		NSRange attributeRange;
-		NSDictionary* oldAttributes = [[[textStorage attributesAtIndex: 0
-														effectiveRange: &attributeRange] retain] autorelease];
+		NSDictionary* oldAttributes = [textStorage attributesAtIndex: 0
+													  effectiveRange: &attributeRange];
 		while (attributeRange.location < [textStorage length]) {
 			GlkStyle* oldStyle = [oldAttributes objectForKey: GlkStyleAttributeName];
 			
 			if (oldStyle) {
-				[oldStyle retain];
-				
 				// Generate the new attributes for the old style
-				NSDictionary* newAttributes = [[oldStyle attributesWithPreferences: preferences
-																	   scaleFactor: newScaleFactor] retain];
+				NSDictionary* newAttributes = [oldStyle attributesWithPreferences: preferences
+																	  scaleFactor: newScaleFactor];
 				[textStorage setAttributes: newAttributes
 									 range: attributeRange];
-				[newAttributes release];
-				
-				[oldStyle release];
 			}
 			
 			// Move on
@@ -302,8 +284,8 @@
 				attributeRange.length = 1;
 			}
 			if (attributeRange.location + attributeRange.length >= [textStorage length]) break;
-			oldAttributes = [[[textStorage attributesAtIndex: attributeRange.location + attributeRange.length
-											  effectiveRange: &attributeRange] retain] autorelease];
+			oldAttributes = [textStorage attributesAtIndex: attributeRange.location + attributeRange.length
+											effectiveRange: &attributeRange];
 		}
 	}
 	
@@ -325,7 +307,7 @@
 										  windowIdentifier: [self glkIdentifier]
 													  val1: [link unsignedIntValue]
 													  val2: 0];
-			[target queueEvent: [evt autorelease]];
+			[target queueEvent: evt];
 
 			hyperlinkInput = NO;
 		}
@@ -432,7 +414,7 @@
 							  forWindowWithId: [self glkIdentifier]];
 		
 		// ... send it
-		[target queueEvent: [evt autorelease]];
+		[target queueEvent: evt];
 		
 		// We're no longer editable
 		[self makeTextNonEditable];
@@ -441,11 +423,10 @@
 	}
 }
 
-- (void)textStorageDidProcessEditing:(NSNotification *)aNotification {
-	[self textStorage:[textView textStorage] didProcessEditing:0 range:NSMakeRange(0, 0) changeInLength:0];
-}
-
-- (void)textStorage:(NSTextStorage *)textStorage didProcessEditing:(NSTextStorageEditActions)editedMask range:(NSRange)editedRange changeInLength:(NSInteger)delta {
+- (void)textStorage:(NSTextStorage *)textStorage
+  didProcessEditing:(NSTextStorageEditActions)editedMask
+			  range:(NSRange)editedRange
+	 changeInLength:(NSInteger)delta {
 	if (!lineInput) {
 		return;
 	}
@@ -474,7 +455,7 @@
 			[evt setLineInput: inputLine];
 			
 			// ... send it
-			[target queueEvent: [evt autorelease]];
+			[target queueEvent: evt];
 			
 			// Add to the line history
 			[[self containingView] resetHistoryPosition];
@@ -670,8 +651,6 @@
 	[[textView textStorage] insertAttributedString: atStr
 										   atIndex: insertionPos];
 
-	[atStr release];
-
 	CGFloat sb = [preferences scrollbackLength];
 	if (sb < 100.0) {
 		// Number of characters to preserve (4096 -> 1 million)
@@ -708,10 +687,8 @@
 	NSMutableDictionary* imageDict = [[self currentTextAttributes] mutableCopy];
 	[imageDict setObject: newImage
 				  forKey: GlkCustomSectionAttributeName];
-	[newImage release];
-	NSAttributedString* imageAttributedString = [[[NSAttributedString alloc] initWithString: imageString
-																				 attributes: imageDict] autorelease];
-	[imageDict release];
+	NSAttributedString* imageAttributedString = [[NSAttributedString alloc] initWithString: imageString
+																				attributes: imageDict];
 	
 	// Append the image to the text storage object
 	NSInteger insertionPos = inputPos;
@@ -731,9 +708,8 @@
 	NSDictionary* clearDict = [NSDictionary dictionaryWithObjectsAndKeys:
 		clear, GlkCustomSectionAttributeName,
 		nil];
-	[clear release];
-	NSAttributedString* clearAttributedString = [[[NSAttributedString alloc] initWithString: clearString
-																				 attributes: clearDict] autorelease];
+	NSAttributedString* clearAttributedString = [[NSAttributedString alloc] initWithString: clearString
+																				attributes: clearDict];
 	
 	// Append the clear margins object to the text storage object
 	NSInteger insertionPos = inputPos;
@@ -850,7 +826,6 @@
 	// Stop the timer, if necessary
 	if (newMoreState == finalMoreState || newMoreState < 0 || newMoreState > 1) {
 		[moreAnimationTimer invalidate];
-		[moreAnimationTimer release];
 		moreAnimationTimer = nil;
 	}
 }
@@ -903,8 +878,7 @@
 	}
 	
 	// Set the time that we started animating
-	[whenMoreShown release];
-	whenMoreShown = [[NSDate date] retain];
+	whenMoreShown = [NSDate date];
 	
 	// Reposition the more window
 	[self positionMoreWindow];
@@ -912,13 +886,12 @@
 	
 	// Reset the timer
 	[moreAnimationTimer invalidate];
-	[moreAnimationTimer release];
 	
-	moreAnimationTimer = [[NSTimer scheduledTimerWithTimeInterval: 0.01
-														   target: self
-														 selector: @selector(animateMore)
-														 userInfo: nil
-														  repeats: YES] retain];
+	moreAnimationTimer = [NSTimer scheduledTimerWithTimeInterval: 0.01
+														  target: self
+														selector: @selector(animateMore)
+														userInfo: nil
+														 repeats: YES];
 	
 	if (wasFlushing) {
 		flushing = YES;

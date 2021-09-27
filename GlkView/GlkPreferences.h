@@ -94,7 +94,7 @@ extern NSNotificationName GlkPreferencesHaveChangedNotification;
 
 // Changes
 /// Number of changes that have occured on this preference object
-- (int) changeCount;
+@property (readonly) int changeCount;
 
 @end
 

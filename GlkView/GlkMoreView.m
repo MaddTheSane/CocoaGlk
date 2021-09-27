@@ -44,18 +44,12 @@
 - (id)initWithFrame:(GlkRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-		moreImage = [[GlkMoreView image] retain];
+		moreImage = [GlkMoreView image];
 #if !defined(COCOAGLK_IPHONE)
 		[moreImage setCacheMode: NSImageCacheNever];
 #endif
     }
     return self;
-}
-
-- (void) dealloc {
-	[moreImage release];
-	
-	[super dealloc];
 }
 
 - (void)drawRect:(GlkRect)rect {

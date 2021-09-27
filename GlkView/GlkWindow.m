@@ -23,16 +23,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	[styles release]; styles = nil;
-	[preferences release]; preferences = nil;
-	
-	[immediateStyle release]; immediateStyle = nil;
-	[customAttributes release]; customAttributes = nil;
-	
-	[super dealloc];
-}
-
 // = Drawing =
 
 - (void)drawRect:(GlkRect)rect {
@@ -120,7 +110,7 @@
 		[linkRes setObject: linkObject
 					forKey: NSLinkAttributeName];
 		
-		return [linkRes autorelease];
+		return linkRes;
 	}
 	
 	return res;
@@ -132,13 +122,12 @@
 
 - (CGFloat) lineHeight {
     NSFont* font = [[self currentTextAttributes] objectForKey: NSFontAttributeName];
-    NSLayoutManager* layoutManager = [[[NSLayoutManager alloc] init] autorelease];
+    NSLayoutManager* layoutManager = [[NSLayoutManager alloc] init];
     
     return [layoutManager defaultLineHeightForFont: font];
 }
 
 - (void) setStyles: (NSDictionary*) newStyles {
-	[styles release];
 	styles = [[NSDictionary alloc] initWithDictionary: newStyles
 											copyItems: YES];
 }
@@ -146,7 +135,7 @@
 - (GlkStyle*) style: (unsigned) glkStyle {
 	// If there aren't any styles yet, get the default styles from the preferences
 	if (!styles) {
-		if (!preferences) preferences = [[GlkPreferences sharedPreferences] retain];
+		if (!preferences) preferences = [GlkPreferences sharedPreferences];
 		[self setStyles: [preferences styles]];
 	}
 	
@@ -161,7 +150,7 @@
 }
 
 - (NSDictionary*) attributes: (unsigned) glkStyle {
-	if (!preferences) preferences = [[GlkPreferences sharedPreferences] retain];
+	if (!preferences) preferences = [GlkPreferences sharedPreferences];
 	
 	GlkStyle* sty;
 	if (!immediateStyle) {
@@ -174,8 +163,8 @@
 	
 	if (customAttributes) {
 		// Merge in the custom attributes if they're set
-		NSMutableDictionary* res = [[[sty attributesWithPreferences: preferences
-														scaleFactor: scaleFactor] mutableCopy] autorelease];
+		NSMutableDictionary* res = [[sty attributesWithPreferences: preferences
+													   scaleFactor: scaleFactor] mutableCopy];
 		[res addEntriesFromDictionary: customAttributes];
 		
 		return res;
@@ -187,8 +176,7 @@
 }
 
 - (void) setPreferences: (GlkPreferences*) prefs {
-	[preferences release];
-	preferences = [prefs retain];
+	preferences = prefs;
 }
 
 - (void) reformat {
@@ -203,7 +191,7 @@
 		immediateStyle = [[self style: style] copy];
 		if (!immediateStyle) immediateStyle = [[GlkStyle style] copy];
 	} else {
-		immediateStyle = [[immediateStyle autorelease] copy];
+		immediateStyle = [immediateStyle copy];
 	}
 	
 	// Set the style hint in the immediate style
@@ -217,7 +205,7 @@
 		immediateStyle = [[self style: style] copy];
 		if (!immediateStyle) immediateStyle = [[GlkStyle style] copy];
 	} else {
-		immediateStyle = [[immediateStyle autorelease] copy];
+		immediateStyle = [immediateStyle copy];
 	}
 	
 	// Get the default style
@@ -230,9 +218,6 @@
 }
 
 - (void) setCustomAttributes: (NSDictionary*) newCustomAttributes {
-	// Dispose of the old custom attributes
-	[customAttributes release];
-	
 	// Set the new attribtues from the dictionary
 	customAttributes = [[NSDictionary alloc] initWithDictionary: newCustomAttributes
 													  copyItems: YES];
@@ -312,7 +297,7 @@
 													   val1: [[self class] keycodeForString: forcedInput]
 													   val2: 0];		
 		[self cancelCharInput];
-		[target queueEvent: [glkEvent autorelease]];
+		[target queueEvent: glkEvent];
 	}
 }
 
@@ -481,7 +466,7 @@ NS_ENUM(unichar) {
 													   val2: 0];
 		
 		[self cancelCharInput];
-		[target queueEvent: [glkEvent autorelease]];
+		[target queueEvent: glkEvent];
 	}
 }
 #endif
@@ -537,8 +522,8 @@ NS_ENUM(unichar) {
 
 - (void) putBuffer: (in bycopy NSData*) buffer {
 	// Assume that buffers are in ISO Latin-1 format
-	NSString* string = [[[NSString alloc] initWithData: buffer
-											  encoding: NSISOLatin1StringEncoding] autorelease];
+	NSString* string = [[NSString alloc] initWithData: buffer
+											 encoding: NSISOLatin1StringEncoding];
 
 	// The view won't automate data events automatically
 	[containingView automateStream: self
@@ -568,7 +553,6 @@ NS_ENUM(unichar) {
 	style = styleId;
 
 	if (immediateStyle) {
-		[immediateStyle release];
 		immediateStyle = nil;
 	}
 }
@@ -609,12 +593,10 @@ NS_ENUM(unichar) {
 // = Hyperlinks =
 
 - (void) setHyperlink: (unsigned int) value {
-	[linkObject release];
 	linkObject = [[NSNumber alloc] initWithUnsignedInt: value];
 }
 
 - (void) clearHyperlink {
-	[linkObject release];
 	linkObject = nil;
 }
 
@@ -638,7 +620,6 @@ NS_ENUM(unichar) {
         
         // Finalise the attributes
         attributes = [newAttributes copy];
-        [newAttributes release];
     }
     
     // Return the attributes

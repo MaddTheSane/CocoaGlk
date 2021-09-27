@@ -34,8 +34,8 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 		weight = 0;
 		oblique = NO;
 		proportional = YES;
-		textColour = [[GlkColor blackColor] retain];
-		backColour = [[GlkColor whiteColor] retain];
+		textColour = [GlkColor blackColor];
+		backColour = [GlkColor whiteColor];
 		reversed = NO;
 		
 		// The cache
@@ -47,27 +47,17 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 	return self;
 }
 
-- (void) dealloc {
-	[textColour release]; textColour = nil;
-	[backColour release]; backColour = nil;
-	[lastAttributes release]; lastAttributes = nil;
-	
-	// lastPreferences is not retained, so we don't need to release it
-	
-	[super dealloc];
-}
-
 // = Creating a style =
 
 + (GlkStyle*) style {
-	return [[[[self class] alloc] init] autorelease];
+	return [[[self class] alloc] init];
 }
 
 // = The hints =
 
 - (void) styleChanged {
 	lastPreferences = nil;
-	[lastAttributes release]; lastAttributes = nil;
+	lastAttributes = nil;
 }
 
 @synthesize indentation;
@@ -116,7 +106,6 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 - (void) setTextColour: (GlkColor*) newTextColour {
 	if (newTextColour == textColour) return;
 	
-	[textColour autorelease]; textColour = nil;
 	textColour = [newTextColour copy];
 	
 	[self styleChanged];
@@ -126,7 +115,6 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 - (void) setBackColour: (GlkColor*) newBackColour {
 	if (newBackColour == backColour) return;
 	
-	[backColour release]; backColour = nil;
 	backColour = [newBackColour copy];
 	
 	[self styleChanged];
@@ -164,7 +152,7 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 	[mutDict setObject: self
 				forKey: GlkStyleAttributeName];
 	
-	return [mutDict autorelease];
+	return mutDict;
 }
 
 - (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs {
@@ -276,7 +264,7 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 			return [self addSelfToAttributes: lastAttributes];
 		}
 		
-		[lastAttributes release]; lastAttributes = nil;
+		lastAttributes = nil;
 	}
 	
 	NSFontManager* mgr = [NSFontManager sharedFontManager];
@@ -347,11 +335,9 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 		nil];
 		
 	// Finish up
-	[paraStyle release];
 	
 	if (res) {
 		// Cache this style
-		[lastAttributes release];
 		lastAttributes = [res copy];
 		prefChangeCount = [prefs changeCount];
 		lastPreferences = prefs;
@@ -523,8 +509,6 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 	copy->weight = weight;
 	copy->oblique = oblique;
 	copy->proportional = proportional;
-	[copy->textColour release];
-	[copy->backColour release];
 	copy->textColour = [textColour copyWithZone: zone];
 	copy->backColour = [backColour copyWithZone: zone];
 	copy->reversed = reversed;

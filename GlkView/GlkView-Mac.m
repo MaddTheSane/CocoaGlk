@@ -80,7 +80,7 @@
 	[glkWindows release]; glkWindows = nil;
 	[lastPanel release]; lastPanel = nil;
 	
-	[glkStreams release]; glkStreams = nil;	
+	[glkStreams release]; glkStreams = nil;
 	[inputStream release]; inputStream = nil;
 	[extraStreamDictionary release]; extraStreamDictionary = nil;
 	

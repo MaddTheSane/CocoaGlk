@@ -51,10 +51,10 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
                                            size: 12] copy];
 		
 		// Choose alternative fonts if our defaults are not available
-		if (proportionalFont == nil) proportionalFont = [[GlkFont systemFontOfSize: 12] retain];
-		if (fixedFont == nil) fixedFont = [[GlkFont fontWithName: @"Monaco"
-														  size: 12] retain];
-		if (fixedFont == nil) fixedFont = [[GlkFont systemFontOfSize: 12] retain];
+		if (proportionalFont == nil) proportionalFont = [GlkFont systemFontOfSize: 12];
+		if (fixedFont == nil) fixedFont = [GlkFont fontWithName: @"Monaco"
+														   size: 12];
+		if (fixedFont == nil) fixedFont = [GlkFont systemFontOfSize: 12];
 		
 		// Default styles
 		styles = [[NSMutableDictionary alloc] init];
@@ -118,19 +118,9 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 	return self;
 }
 
-- (void) dealloc {
-	[styles release];
-	[proportionalFont release];
-	[fixedFont release];
-	
-	[super dealloc];
-}
-
 // = Changes =
 
-- (int) changeCount {
-	return changeCount;
-}
+@synthesize changeCount;
 
 - (void) preferencesHaveChanged {
 	if (!changeNotified) {
@@ -163,14 +153,12 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 // = Font preferences =
 
 - (void) setProportionalFont: (NSFont*) propFont {
-	[proportionalFont release];
 	proportionalFont = [propFont copy];
 	
 	[self preferencesHaveChanged];
 }
 
 - (void) setFixedFont: (NSFont*) newFixedFont {
-	[fixedFont release];
 	fixedFont = [newFixedFont copy];
 	
 	[self preferencesHaveChanged];
@@ -203,7 +191,6 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 // = Style preferences =
 
 - (void) setStyles: (NSDictionary*) newStyles {
-	[styles release]; styles = nil;
 	styles = [[NSMutableDictionary alloc] initWithDictionary: newStyles
 												   copyItems: YES];
 	
@@ -212,7 +199,7 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 
 - (void) setStyle: (GlkStyle*) style
 		  forHint: (unsigned) glkHint {
-	[styles setObject: [[style copy] autorelease]
+	[styles setObject: [style copy]
 			   forKey: @(glkHint)];
 	
 	[self preferencesHaveChanged];

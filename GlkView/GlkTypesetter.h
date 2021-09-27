@@ -270,7 +270,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 	
 	// The delegate
 	/// The delegate [NOT RETAINED]
-	id<GlkCustomTextLayout> delegate;
+	__weak id<GlkCustomTextLayout> delegate;
 }
 
 // Laying out line sections
@@ -319,7 +319,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 
 // Setting the delegate
 /// Sets the delegate (the delegate is NOT RETAINED)
-@property (assign) id<GlkCustomTextLayout> delegate;
+@property (weak) id<GlkCustomTextLayout> delegate;
 
 // Clearing the cache
 /// Forces any cached glyphs to be cleared (eg when a textstorage object changes)

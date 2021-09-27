@@ -58,7 +58,7 @@
 		4B51AA6D07E8785700576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
 		4B51AA7407E878E600576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
 		4B51AA7507E878E900576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
-		4B51AA8A07E8795300576AB9 /* GlkView-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AA8807E8795300576AB9 /* GlkView-Mac.m */; };
+		4B51AA8A07E8795300576AB9 /* GlkView-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AA8807E8795300576AB9 /* GlkView-Mac.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B51AAB807E87B7B00576AB9 /* glk_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAB707E87B7B00576AB9 /* glk_main.m */; };
 		4B51AAF107E87CD300576AB9 /* glk_events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAEC07E87CD300576AB9 /* glk_events.m */; };
 		4B51AAF207E87CD300576AB9 /* glk_image.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAED07E87CD300576AB9 /* glk_image.m */; };
@@ -108,7 +108,7 @@
 		4BBFE3990C4EC253007DEE18 /* GlkBufferedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */; };
 		4BCB8AA10CD7E3310041731F /* GlkView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4BEE1D3C07FCC1D900296CD2 /* GlkTextView-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEE1D3A07FCC1D900296CD2 /* GlkTextView-Mac.m */; };
-		4BEF18CD0AB4643600131910 /* GlkTypesetter-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D3B580AB462C90038255E /* GlkTypesetter-Mac.m */; };
+		4BEF18CD0AB4643600131910 /* GlkTypesetter-Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D3B580AB462C90038255E /* GlkTypesetter-Mac.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BF0854A0E1675D500DB5C6B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF085490E1675D500DB5C6B /* CoreAudio.framework */; };
 		4BF0855C0E16768400DB5C6B /* GlkSoundDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF0855A0E16768400DB5C6B /* GlkSoundDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BF085870E16787900DB5C6B /* fastmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085620E16787900DB5C6B /* fastmix.cpp */; };
@@ -2298,6 +2298,7 @@
 		4B6A86E6086DB1E900BFAE69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
@@ -2330,6 +2331,7 @@
 		4B6A86E7086DB1E900BFAE69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
@@ -2526,6 +2528,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -2572,6 +2575,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -2773,6 +2777,7 @@
 		5560F9DE21C0686F00E711F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
@@ -2799,6 +2804,7 @@
 		5560F9DF21C0686F00E711F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;

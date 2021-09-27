@@ -73,7 +73,6 @@
 	[scrollView setHasHorizontalScroller: NO];
 	[scrollView setHasVerticalScroller: NO];
 	[scrollView setAutohidesScrollers: NO];
-	[newContainer autorelease];
 #endif
 }
 
@@ -88,12 +87,6 @@
     }
 	
     return self;
-}
-
-- (void) dealloc {
-	[nextInputLine release]; nextInputLine = nil;
-	
-	[super dealloc];
 }
 
 // = Drawing =
@@ -176,8 +169,6 @@
 			[textStorage insertAttributedString: blankSpace
 										atIndex: x*width + lastWidth];
 		}
-		
-		[blankSpace release];
 	} else if (lastWidth > width) {
 		// Shrink the width of this grid view
 		for (x=0; x<lastHeight; x++) {
@@ -205,7 +196,6 @@
 																		 attributes: [self attributes: style_Normal]];
 		
 		[textStorage appendAttributedString: blankSpace];
-		[blankSpace release];
 	}
 	
 	// Request a sync if necessary
@@ -294,7 +284,6 @@
 																		 attributes: [self currentTextAttributes]];
 		[textStorage replaceCharactersInRange: NSMakeRange(bufPos, amountToDraw)
 						 withAttributedString: partString];
-		[partString release];
 		
 		//[self setNeedsDisplay: YES];
 		
@@ -364,7 +353,7 @@
 - (NSString*) cancelLineInput {
 	if (lineInput) {
 		lineInput = NO;
-		[nextInputLine release]; nextInputLine = nil;
+		nextInputLine = nil;
 		
 		[self makeTextNonEditable];
 		[[self window] invalidateCursorRectsForView: self];
@@ -424,7 +413,6 @@
 
 
 - (void) setInputLine: (NSString*) inputLine {
-	[nextInputLine release]; 
 	nextInputLine = [inputLine copy];
 }
 
@@ -490,9 +478,9 @@ textView:(NSTextView *)aTextView
 			spaces[x] = ' ';
 		}
 		
-		[[textView textStorage] insertAttributedString: [[[NSAttributedString alloc] initWithString: [NSString stringWithCharacters: spaces
-																															 length: -lenChange]
-																						 attributes: [self currentTextAttributes]] autorelease]
+		[[textView textStorage] insertAttributedString: [[NSAttributedString alloc] initWithString: [NSString stringWithCharacters: spaces
+																															length: -lenChange]
+																						attributes: [self currentTextAttributes]]
 											   atIndex: endPos+lenChange];
 	}
 	
@@ -563,7 +551,7 @@ textView:(NSTextView *)aTextView
 					[evt setLineInput: inputLine];
 					
 					// ... send it
-					[target queueEvent: [evt autorelease]];
+					[target queueEvent: evt];
 					
 					// Add to the line history
 					[[self containingView] resetHistoryPosition];
@@ -571,7 +559,7 @@ textView:(NSTextView *)aTextView
 										  forWindowWithId: [self glkIdentifier]];
 					
 					lineInput = NO;
-					[nextInputLine release]; nextInputLine = nil;
+					nextInputLine = nil;
 					[self makeTextNonEditable];
 					
 					// We're done

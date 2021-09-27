@@ -29,7 +29,7 @@
 	/// Right window is the 'new' window when splitting
 	GlkWindow* right;
 	
-	// The size of the window
+	/// The size of the window
 	unsigned size;
 	
 	// Arrangement options

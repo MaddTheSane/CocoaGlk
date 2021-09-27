@@ -34,20 +34,12 @@
 - (void) dealloc {
 	[left setParent: nil];
 	[right setParent: nil];
-	
-	[key release]; key = nil;
-	[left release]; left = nil;
-	[right release]; right = nil;
-	
-	[super dealloc];
 }
 
 // = Setting the windows that make up this pair =
 
 - (void) setKeyWindow: (GlkWindow*) newKey {
-	[key release];
-	
-	key = [newKey retain];
+	key = newKey;
 	
 	needsLayout = YES;
 }
@@ -62,9 +54,8 @@
 - (void) setLeftWindow: (GlkWindow*) newLeft {
 	[left setParent: nil];
 	[left removeFromSuperview];
-	[left release]; 
 
-	left = [newLeft retain];
+	left = newLeft;
 	[left setParent: self];
 	[left setScaleFactor: scaleFactor];
 	
@@ -74,9 +65,8 @@
 - (void) setRightWindow: (GlkWindow*) newRight {
 	[right setParent: nil];
 	[right removeFromSuperview];
-	[right release]; 
 	
-	right = [newRight retain];
+	right = newRight;
 	[right setParent: self];
 	[right setScaleFactor: scaleFactor];
 	
@@ -261,7 +251,7 @@
 
 - (CGFloat) widthForFixedSize: (unsigned) sz {
 	if (key && [key closed]) {
-		[key release]; key = nil;
+		key = nil;
 	}
 	
 	if (key) {
@@ -273,7 +263,7 @@
 
 - (CGFloat) heightForFixedSize: (unsigned) sz {
 	if (key && [key closed]) {
-		[key release]; key = nil;
+		key = nil;
 	}
 	
 	if (key) {

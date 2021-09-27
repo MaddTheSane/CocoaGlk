@@ -38,38 +38,27 @@
 }
 
 - (void) dealloc {
-	[delegate release]; delegate = nil;
-
-	[hubName release]; hubName = nil;
-	[cookie release]; cookie = nil;
-	
-	[waitingSessions release]; waitingSessions = nil;
-	
 	if (connection) [connection registerName: nil];
-	[connection release]; connection = nil;
-	
-	[super dealloc];
 }
 
 // = The connection =
 
 - (void) resetConnection {
 	if (hubName == nil) {
-		hubName = [@"CocoaGlk" retain];
+		hubName = @"CocoaGlk";
 	}
 	
 	if (connection) {
 		// Kill off any old connection
 		[connection registerName: nil];			// As anything using the connection will likely retain it
-		[connection release];					// We're done with this connection
-		connection = nil;
+		connection = nil;						// We're done with this connection
 	}
 	
 	NSString* connectionName = [NSString stringWithFormat: @"CocoaGlk-%@", hubName];
 	NSPort* port = [NSMachPort port];
 	
-	connection = [[NSConnection connectionWithReceivePort: port
-												 sendPort: port] retain];
+	connection = [NSConnection connectionWithReceivePort: port
+												sendPort: port];
 	[connection setRootObject: self];
 	// [connection addRequestMode: NSEventTrackingRunLoopMode]; // Causes a crash :-(. Would allow the client to update while resizing if it worked
 	[connection addRunLoop: [NSRunLoop currentRunLoop]];
@@ -101,7 +90,7 @@
 
 		if (ses == session) {
 			// This is the session to remove
-			[[[waitingSessions objectForKey: sessionCookie] retain] autorelease];
+//			[[[waitingSessions objectForKey: sessionCookie] retain] autorelease];
 			[waitingSessions removeObjectForKey: sessionCookie];
 			break;
 		}
@@ -111,8 +100,6 @@
 // = Naming =
 
 - (void) setHubName: (NSString*) newHubName {
-	if (hubName) [hubName release];
-	
 	hubName = [newHubName copy];
 	
 	[self resetConnection];
@@ -166,11 +153,10 @@
 		if (session == nil) return nil;
 		
 		// Remove the session from the dictionary
-		[session retain];
 		[waitingSessions removeObjectForKey: sessionCookie];
 		
 		// Return the retrieved session object
-		return [session autorelease];
+		return session;
 	}
 }
 

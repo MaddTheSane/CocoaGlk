@@ -24,22 +24,20 @@
 	self = [super init];
 	
 	if (self) {
-		handle = [[NSFileHandle fileHandleForUpdatingURL: filename error: nil] retain];
+		handle = [NSFileHandle fileHandleForUpdatingURL: filename error: nil];
 		
 		if (!handle) {
 			if (![filename isFileURL]
                 || ![[NSFileManager defaultManager] createFileAtPath: [filename path]
 														 contents: [NSData data]
 													   attributes: nil]) {
-				[self release];
 				return nil;
 			}			
 
-			handle = [[NSFileHandle fileHandleForUpdatingURL: filename error: nil] retain];
+			handle = [NSFileHandle fileHandleForUpdatingURL: filename error: nil];
 		}
 		
 		if (!handle) {
-			[self release];
 			return nil;
 		}
 	}
@@ -60,14 +58,12 @@
             || ![[NSFileManager defaultManager] createFileAtPath: [filename path]
                                                         contents: [NSData data]
                                                       attributes: nil]) {
-				[self release];
 				return nil;
 			}			
 		
-		handle = [[NSFileHandle fileHandleForWritingToURL: filename error: nil] retain];
+		handle = [NSFileHandle fileHandleForWritingToURL: filename error: nil];
 		
 		if (!handle) {
-			[self release];
 			return nil;
 		}
 		
@@ -86,21 +82,14 @@
 	self = [super init];
 	
 	if (self) {
-		handle = [[NSFileHandle fileHandleForReadingFromURL: filename error: nil] retain];
+		handle = [NSFileHandle fileHandleForReadingFromURL: filename error: nil];
 		
 		if (!handle) {
-			[self release];
 			return nil;
 		}
 	}
 	
 	return self;
-}
-
-- (void) dealloc {
-	[handle release];
-	
-	[super dealloc];
 }
 
 // = GlkStream methods =
@@ -109,7 +98,6 @@
 
 - (void) closeStream {
 	[handle closeFile];
-	[handle release];
 	handle = nil;
 }
 

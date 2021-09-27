@@ -28,7 +28,7 @@
 ///
 @interface GlkWindow : GlkSuperView<GlkStream> {
 	/// The pair window that contains this window (or NULL for the root window) !NOT RETAINED!
-	GlkPairWindow* parentWindow;
+	__weak GlkPairWindow* parentWindow;
 	
 	/// YES if this window is closed
 	BOOL closed;
@@ -56,7 +56,7 @@
 	
 	// These event variables are useful to subclasses
 	/// Where the events go !NOT RETAINED!
-	NSObject<GlkEventReceiver>* target;
+	__weak NSObject<GlkEventReceiver>* target;
 	/// YES if we're receiving character input
 	BOOL charInput;
 	/// YES if we're receiving text input
@@ -67,7 +67,7 @@
 	BOOL hyperlinkInput;
 	
 	/// The view that contains this window !NOT RETAINED!
-	GlkView* containingView;
+	__weak GlkView* containingView;
 	
 	/// The last known size of this window
 	GlkSize lastSize;
@@ -157,7 +157,7 @@
 - (void) clearWindow;
 
 /// Sets the target for any events this window generates !NOT RETAINED!
-@property (assign) NSObject<GlkEventReceiver>* eventTarget;
+@property (weak) NSObject<GlkEventReceiver>* eventTarget;
 
 - (void) requestCharInput;
 /// Request that the window generate the appropriate events
@@ -212,11 +212,11 @@
 
 // The parent window
 /// Sets the parent window !NOT RETAINED!
-@property (nonatomic, assign) GlkPairWindow *parent;
+@property (nonatomic, weak) GlkPairWindow *parent;
 
 // The containing view
 /// The GlkView that contains this window !NOT RETAINED!
-@property (nonatomic, assign) GlkView *containingView;
+@property (nonatomic, weak) GlkView *containingView;
 
 @end
 

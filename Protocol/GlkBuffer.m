@@ -97,12 +97,6 @@ static NSString* const s_CancelHyperlinkEventsForWindowIdentifier 	= @"ECHE";
 	return self;
 }
 
-- (void) dealloc {
-	[operations release];
-	
-	[super dealloc];
-}
-
 // = Buffering =
 
 static NSString* stringFromOp(NSArray* op) {
@@ -199,7 +193,7 @@ static NSString* stringFromOp(NSArray* op) {
 			if ([oldData isKindOfClass: [NSMutableData class]]) {
 				newData = (NSMutableData*)oldData;
 			} else {
-				newData = [[oldData mutableCopy] autorelease];
+				newData = [oldData mutableCopy];
 			}
 			
 			if (newData && nextData) {
@@ -270,7 +264,6 @@ static NSString* stringFromOp(NSArray* op) {
 - (id) copyWithZone: (NSZone*) zone {
 	GlkBuffer* copy = [[GlkBuffer allocWithZone: zone] init];
 	
-	[copy->operations release];
 	copy->operations = [[NSMutableArray alloc] initWithArray: operations
 												   copyItems: YES];
 	

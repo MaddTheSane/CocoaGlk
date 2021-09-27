@@ -47,10 +47,6 @@
 		[[NSFileManager defaultManager] removeItemAtURL: pathname 
                                                   error: nil];
     }
-	
-	[pathname release]; pathname = nil;
-	
-	[super dealloc];
 }
 
 - (void) applicationWillTerminate: (NSNotification*) not {
@@ -72,23 +68,24 @@
 - (byref NSObject<GlkStream>*) createReadOnlyStream {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadingWithFileURL: pathname];
 	
-	return [stream autorelease];
+	return stream;
 }
 
 - (byref NSObject<GlkStream>*) createWriteOnlyStream; {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForWritingWithFileURL: pathname];
 	
-	return [stream autorelease];
+	return stream;
 }
 
 - (byref NSObject<GlkStream>*) createReadWriteStream {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadWriteWithFileURL: pathname];
 	
-	return [stream autorelease];
+	return stream;
 }
 
 - (void) deleteFile {
-	[[NSFileManager defaultManager] removeItemAtURL: pathname error: nil];}
+	[[NSFileManager defaultManager] removeItemAtURL: pathname error: nil];
+}
 
 - (BOOL) fileExists {
     if (![pathname isFileURL]) return NO;

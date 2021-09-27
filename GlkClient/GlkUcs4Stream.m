@@ -143,7 +143,7 @@
 	}
 	
 	// Convert to a NSString
-	NSString* res = [[[NSString alloc] initWithBytes:line length:lineLength encoding:NSUTF32StringEncoding] autorelease];
+	NSString* res = [[[NSString alloc] initWithBytes:line length:lineLength*4 encoding:NSUTF32StringEncoding] autorelease];
 	
 	if (!res) {
 		// Convert to a NSString

@@ -89,7 +89,7 @@ typedef struct GlkLineSection {
 	/// The line fragment padding to use
 	float inset;
 	/// The last glyph laid out
-	int lastSetGlyph;
+	NSUInteger lastSetGlyph;
 	
 	// The glyph cache
 	/// The range of the cached glyphs

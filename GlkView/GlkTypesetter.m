@@ -341,7 +341,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Get the glyphs and character indexes from the layout manager
 	NSGlyph glyphs[cacheRange.length+1];
-	unsigned charIndexes[cacheRange.length+1];
+	NSUInteger charIndexes[cacheRange.length+1];
 	NSGlyphInscription inscriptions[cacheRange.length+1];
 	BOOL elastic[cacheRange.length+1];
 	unsigned char bidi[cacheRange.length+1];					// NOT YET USED
@@ -1438,9 +1438,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 }
 
 - (void) layoutGlyphsInLayoutManager: (NSLayoutManager*) layoutMgr 
-				startingAtGlyphIndex: (unsigned) startGlyphIndex 
-			maxNumberOfLineFragments: (unsigned) maxNumLines 
-					  nextGlyphIndex: (unsigned*) nextGlyph {
+				startingAtGlyphIndex: (NSUInteger) startGlyphIndex
+			maxNumberOfLineFragments: (NSUInteger) maxNumLines
+					  nextGlyphIndex: (NSUInteger*) nextGlyph {
 	// Deal with the case where there are no text containers to perform layout in
 #if 0
 	if ([containers count] <= 0) {
@@ -1507,7 +1507,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	[super endParagraph];
 }
 
-- (void)beginLineWithGlyphAtIndex:(unsigned)glyphIndex {
+- (void)beginLineWithGlyphAtIndex:(NSUInteger)glyphIndex {
 	[super beginLineWithGlyphAtIndex: glyphIndex];
 }
 
@@ -1515,7 +1515,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	[super endLineWithGlyphRange: lineGlyphRange];
 }
 
-- (unsigned int)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigi {
+- (NSUInteger)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigi {
 	// Get the glyph range that we're laying out
 	NSRange glyphRange = [self paragraphGlyphRange];
 	int glyph = glyphRange.location;

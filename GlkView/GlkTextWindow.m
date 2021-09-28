@@ -645,7 +645,7 @@
 
 // = Streaming =
 
-- (void) putString: (NSString*) string {
+- (void) putString: (in bycopy NSString*) string {
 	NSAttributedString* atStr = [[NSAttributedString alloc] initWithString: string
 																attributes: [self currentTextAttributes]];
 	

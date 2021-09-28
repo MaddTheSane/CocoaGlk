@@ -64,19 +64,19 @@
 
 // = The fileref protocol =
 
-- (id<GlkStream>) createReadOnlyStream {
+- (byref id<GlkStream>) createReadOnlyStream {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadingWithFilename: pathname];
 	
 	return [stream autorelease];
 }
 
-- (id<GlkStream>) createWriteOnlyStream; {
+- (byref id<GlkStream>) createWriteOnlyStream; {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForWritingWithFilename: pathname];
 	
 	return [stream autorelease];
 }
 
-- (id<GlkStream>) createReadWriteStream {
+- (byref id<GlkStream>) createReadWriteStream {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadWriteWithFilename: pathname];
 	
 	return [stream autorelease];

@@ -150,18 +150,18 @@
 
 // = Setting up the session =
 
-- (id<GlkSession>) createNewSession {
+- (byref id<GlkSession>) createNewSession {
 	return [self createNewSessionWithHubCookie: nil
 								 sessionCookie: nil];
 }
 
-- (id<GlkSession>) createNewSessionWithHubCookie: (NSString*) hubCookie {
+- (byref id<GlkSession>) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie {
 	return [self createNewSessionWithHubCookie: hubCookie
 								 sessionCookie: nil];
 }
 
-- (id<GlkSession>) createNewSessionWithHubCookie: (NSString*) hubCookie
-										  sessionCookie: (NSString*) sessionCookie {
+- (byref id<GlkSession>) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie
+										 sessionCookie: (in bycopy NSString*) sessionCookie {
 	if (sessionCookie == nil) {
 		return [self createAnonymousSession];
 	} else {

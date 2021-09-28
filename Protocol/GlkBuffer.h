@@ -170,8 +170,8 @@
 			arguments: (NSArray*) arguments;
 
 /// Returns true if the buffer has anything to flush
-- (BOOL) shouldBeFlushed;
-- (BOOL) hasGotABitOnTheLargeSide;
+@property (readonly) BOOL shouldBeFlushed;
+@property (readonly) BOOL hasGotABitOnTheLargeSide;
 
 /// Flushing a buffer with a target
 - (void) flushToTarget: (id) target;

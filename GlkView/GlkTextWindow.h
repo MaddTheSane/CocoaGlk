@@ -12,7 +12,7 @@
 #import <GlkView/GlkTextView.h>
 #import <GlkView/GlkTypesetter.h>
 
-@interface GlkTextWindow : GlkWindow {
+@interface GlkTextWindow : GlkWindow <NSTextStorageDelegate, NSTextViewDelegate> {
 	/// The scroller for the text view
 	NSScrollView* scrollView;
 	/// The inner text view

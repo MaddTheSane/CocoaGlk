@@ -18,141 +18,213 @@
 @class GlkPairWindow;
 @class GlkView;
 
-//
-// Class that represents a Glk window
-//
+///
+/// Class that represents a Glk window
+///
 @interface GlkWindow : NSView<GlkStream> {
-	GlkPairWindow* parentWindow;								// The pair window that contains this window (or NULL for the root window) !NOT RETAINED!
+	/// The pair window that contains this window (or NULL for the root window) !NOT RETAINED!
+	GlkPairWindow* parentWindow;
 	
-	BOOL closed;												// YES if this window is closed
-	unsigned windowIdentifier;									// The window's unique identifier number (shared with the client)
+	/// \c YES if this window is closed
+	BOOL closed;
+	/// The window's unique identifier number (shared with the client)
+	unsigned windowIdentifier;
 	
-	int style;													// Active stream style
-	BOOL forceFixed;											// Whether or not we should always use fixed-pitch and size fonts
+	/// Active stream style
+	int style;
+	/// Whether or not we should always use fixed-pitch and size fonts
+	BOOL forceFixed;
 	
-	float border;												// Border
-	float scaleFactor;											// The scale factor to use
+	/// Border
+	float border;
+	/// The scale factor to use
+	float scaleFactor;
 	
 	// Styles
-	GlkPreferences* preferences;								// Preferences defines things like fonts
-	NSDictionary* styles;										// Maps style numbers to GlkStyle objects
-	GlkStyle* immediateStyle;									// The immediate style as set by the user
-	NSDictionary* customAttributes;								// The custom attributes to merge with the current style
+	/// Preferences defines things like fonts
+	GlkPreferences* preferences;
+	/// Maps style numbers to GlkStyle objects
+	NSDictionary* styles;
+	/// The immediate style as set by the user
+	GlkStyle* immediateStyle;
+	/// The custom attributes to merge with the current style
+	NSDictionary* customAttributes;
 	
 	// Hyperlinks
-	NSObject* linkObject;										// Object defining the current hyperlink
+	/// Object defining the current hyperlink
+	NSObject* linkObject;
 	
 	// These event variables are useful to subclasses
-	NSObject<GlkEventReceiver>* target;							// Where the events go !NOT RETAINED!
-	BOOL charInput;												// YES if we're receiving character input
-	BOOL lineInput;												// YES if we're receiving text input
-	BOOL mouseInput;											// YES if we're receiving mouse input
-	BOOL hyperlinkInput;										// YES if we're receiving hyperlink input
+	/// Where the events go !NOT RETAINED!
+	NSObject<GlkEventReceiver>* target;
+	/// \c YES if we're receiving character input
+	BOOL charInput;
+	/// \c YES if we're receiving text input
+	BOOL lineInput;
+	/// \c YES if we're receiving mouse input
+	BOOL mouseInput;
+	/// \c YES if we're receiving hyperlink input
+	BOOL hyperlinkInput;
 	
-	GlkView* containingView;									// The view that contains this window !NOT RETAINED!
+	/// The view that contains this window !NOT RETAINED!
+	GlkView* containingView;
 	
-	GlkSize lastSize;											// The last known size of this window
+	/// The last known size of this window
+	GlkSize lastSize;
 }
 
-+ (unsigned) keycodeForString: (NSString*) string;				// Given a string from a keyboard event, returns the associated Glk keycode
-+ (unsigned) keycodeForEvent: (NSEvent*) evt;					// Given a keyboard event, produces the associated Glk keycode
+/// Given a string from a keyboard event, returns the associated Glk keycode
++ (unsigned) keycodeForString: (NSString*) string;
+/// Given a keyboard event, produces the associated Glk keycode
++ (unsigned) keycodeForEvent: (NSEvent*) evt;
 
-// Closed windows can hang around
+/// Closed windows can hang around
 - (void) setClosed: (BOOL) closed;
 - (BOOL) closed;
 
 // Window metadata
-- (void) setIdentifier: (unsigned) windowIdentifier;			// Sometimes we need to know this
+/// Sometimes we need to know this
+- (void) setIdentifier: (unsigned) windowIdentifier;
 
-- (unsigned) identifier;										// The unique window identifier, (shared with and assigned by the client)
+/// The unique window identifier, (shared with and assigned by the client)
+- (unsigned) identifier;
 
 // Layout
-- (void) layoutInRect: (NSRect) parentRect;						// If the layout has changed, then update/redraw this window
-- (float) widthForFixedSize: (unsigned) size;					// Meaning depends on the window format. Returns the preferred size in pixels
-- (float) heightForFixedSize: (unsigned) size;					// Meaning depends on the window format. Returns the preferred size in pixels
+/// If the layout has changed, then update/redraw this window
+- (void) layoutInRect: (NSRect) parentRect;
+/// Meaning depends on the window format. Returns the preferred size in pixels
+- (float) widthForFixedSize: (unsigned) size;
+/// Meaning depends on the window format. Returns the preferred size in pixels
+- (float) heightForFixedSize: (unsigned) size;
 
-- (void) setBorder: (float) border;								// Sets the border around the window's contents
-- (float) border;												// Retrieves the border width
+/// Sets the border around the window's contents
+- (void) setBorder: (float) border;
+/// Retrieves the border width
+- (float) border;
 
-- (NSRect) contentRect;											// Size of the content, taking the border into account
-- (GlkSize) glkSize;											// Size in window units
+/// Size of the content, taking the border into account
+- (NSRect) contentRect;
+/// Size in window units
+- (GlkSize) glkSize;
 
-- (void) setScaleFactor: (float) scaleFactor;					// Sets the scale factor for this window
+/// Sets the scale factor for this window
+- (void) setScaleFactor: (float) scaleFactor;
 
 // Styles
-- (void) setForceFixed: (BOOL) forceFixed;						// Force use of fixed pitch fonts
-- (BOOL) forceFixed;											// Whether or not we're currently forcing fixed fonts
+/// Force use of fixed pitch fonts
+- (void) setForceFixed: (BOOL) forceFixed;
+/// Whether or not we're currently forcing fixed fonts
+- (BOOL) forceFixed;
 
-- (void) setStyles: (NSDictionary*) styles;						// Maps style numbers to GlkStyles
-- (GlkStyle*) style: (unsigned) style;							// Retrieves a specific style
-- (NSDictionary*) attributes: (unsigned) style;					// Gets the attributes to use for a specific style
+/// Maps style numbers to GlkStyles
+- (void) setStyles: (NSDictionary*) styles;
+/// Retrieves a specific style
+- (GlkStyle*) style: (unsigned) style;
+/// Gets the attributes to use for a specific style
+- (NSDictionary*) attributes: (unsigned) style;
 
-- (void) setImmediateStyleHint: (glui32) hint					// Sets a style hint with immediate effect (glk extension)
+/// Sets a style hint with immediate effect (glk extension)
+- (void) setImmediateStyleHint: (glui32) hint
 					   toValue: (glsi32) value;
-- (void) clearImmediateStyleHint: (glui32) hint;				// Clears a style hint with immediate effect (glk extension)
-- (void) setCustomAttributes: (NSDictionary*) customAttributes;	// Sets some custom attributes to merge with those from the current style
+/// Clears a style hint with immediate effect (glk extension)
+- (void) clearImmediateStyleHint: (glui32) hint;
+/// Sets some custom attributes to merge with those from the current style
+- (void) setCustomAttributes: (NSDictionary*) customAttributes;
 
-- (void) setPreferences: (GlkPreferences*) prefs;				// Sets the GlkPreferences object to use for fonts
-- (void) reformat;												// Force a reformat of this window (call when the preferences change, for example)
+/// Sets the GlkPreferences object to use for fonts
+- (void) setPreferences: (GlkPreferences*) prefs;
+/// Force a reformat of this window (call when the preferences change, for example)
+- (void) reformat;
 
-- (NSFont*) proportionalFont;									// The base proportional font we're using
-- (NSFont*) fixedFont;											// The base fixed-pitch font we're using
+/// The base proportional font we're using
+- (NSFont*) proportionalFont;
+/// The base fixed-pitch font we're using
+- (NSFont*) fixedFont;
 
-- (NSColor*) backgroundColour;									// The background colour for this window
+/// The background colour for this window
+- (NSColor*) backgroundColour;
 
-- (float) leading;												// The amount of leading to use
-- (float) lineHeight;											// Height of a line in the current font
+/// The amount of leading to use
+- (float) leading;
+/// Height of a line in the current font
+- (float) lineHeight;
 
-- (NSDictionary*) currentTextAttributes;						// The attributes for the currently active style
+/// The attributes for the currently active style
+- (NSDictionary*) currentTextAttributes;
 
 // Cursor positioning
-- (void) moveCursorToXposition: (int) xpos						// Not supported for most window styles
+/// Not supported for most window styles
+- (void) moveCursorToXposition: (int) xpos
 					 yPosition: (int) ypos;
 
 // Window control
-- (void) clearWindow;											// Does whatever is appropriate for the window type
+/// Does whatever is appropriate for the window type
+- (void) clearWindow;
 
-- (void) setEventTarget: (NSObject<GlkEventReceiver>*) target;	// Sets the target for any events this window generates !NOT RETAINED!
+/// Sets the target for any events this window generates !NOT RETAINED!
+- (void) setEventTarget: (NSObject<GlkEventReceiver>*) target;
 
 - (void) requestCharInput;
-- (void) requestLineInput;										// Request that the window generate the appropriate events
+/// Request that the window generate the appropriate events
+- (void) requestLineInput;
+
 - (void) requestMouseInput;
 - (void) requestHyperlinkInput;
 
 - (void) cancelCharInput;
-- (NSString*) cancelLineInput;									// Request that the window stop generating these events
+/// Request that the window stop generating these events
+- (NSString*) cancelLineInput;
+
 - (void) cancelMouseInput;
 - (void) cancelHyperlinkInput;
 
-- (void) setInputLine: (NSString*) inputLine;					// Sets the input text to a given pre-defined value
-- (void) forceLineInput: (NSString*) forcedInput;				// Forces this window to act on the specified input string as if it had been entered by the user
+/// Sets the input text to a given pre-defined value
+- (void) setInputLine: (NSString*) inputLine;
+/// Forces this window to act on the specified input string as if it had been entered by the user
+- (void) forceLineInput: (NSString*) forcedInput;
 
-- (BOOL) waitingForLineInput;									// Returns YES if this window is waiting for line input
-- (BOOL) waitingForCharInput;									// Returns YES if this window is waiting for character input
-- (BOOL) waitingForKeyboardInput;								// Returns YES if this window is waiting for keyboard input
-- (BOOL) waitingForUserKeyboardInput;							// Returns YES if this window is waiting for keyboard input for user interaction with the running story
-- (NSResponder*) windowResponder;								// The control that responds to events for this window
+/// Returns \c YES if this window is waiting for line input
+- (BOOL) waitingForLineInput;
+/// Returns \c YES if this window is waiting for character input
+- (BOOL) waitingForCharInput;
+/// Returns \c YES if this window is waiting for keyboard input
+- (BOOL) waitingForKeyboardInput;
+/// Returns \c YES if this window is waiting for keyboard input for user interaction with the running story
+- (BOOL) waitingForUserKeyboardInput;
+/// The control that responds to events for this window
+- (NSResponder*) windowResponder;
 
-- (void) bufferIsFlushing;										// Called just before the buffer flushes (mostly used to tell the text windows to wait before performing layout)
-- (void) bufferHasFlushed;										// Called once the buffer has finished flushing
+/// Called just before the buffer flushes (mostly used to tell the text windows to wait before performing layout)
+- (void) bufferIsFlushing;
+/// Called once the buffer has finished flushing
+- (void) bufferHasFlushed;
 
-- (int) inputPos;												// The text position beyond which input is possible
-- (void) updateCaretPosition;									// Called on a key down event, to give this view a chance to set the caret position appropriately
+/// The text position beyond which input is possible
+- (int) inputPos;
+/// Called on a key down event, to give this view a chance to set the caret position appropriately
+- (void) updateCaretPosition;
 
-- (BOOL) needsPaging;											// If YES, then this view is showing a [ MORE ] prompt and may need paging
-- (void) page;													// Perform paging
+/// If YES, then this view is showing a [ MORE ] prompt and may need paging
+- (BOOL) needsPaging;
+/// Perform paging
+- (void) page;
 
-- (void) fixInputStatus;										// Select has been called: make the cancelled/requested state 'fixed'
+/// Select has been called: make the cancelled/requested state 'fixed'
+- (void) fixInputStatus;
 
-- (void) taskFinished;											// The glk task has finished: tidy up time
+/// The glk task has finished: tidy up time
+- (void) taskFinished;
 
 // The parent window
-- (void) setParent: (GlkPairWindow*) parent;					// Sets the parent window !NOT RETAINED!
+/// Sets the parent window !NOT RETAINED!
+- (void) setParent: (GlkPairWindow*) parent;
 - (GlkPairWindow*) parent;
 
 // The containing view
-- (GlkView*) containingView;									// The GlkView that contains this window
-- (void) setContainingView: (GlkView*) view;					// Sets the GlkView that contains this window !NOT RETAINED!
+/// The GlkView that contains this window
+- (GlkView*) containingView;
+/// Sets the GlkView that contains this window !NOT RETAINED!
+- (void) setContainingView: (GlkView*) view;
 
 @end
 

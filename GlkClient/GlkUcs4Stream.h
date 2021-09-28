@@ -18,8 +18,10 @@
 /// Conversion stream that turns standard GlkStream objects into UCS-4 ones
 ///
 @interface GlkUcs4Stream : NSObject<GlkStream> {
-	NSObject<GlkStream>* dataStream;								// The stream that gets the results of writing to this stream
-	BOOL bigEndian;													// YES if the stream should be written in a big-endian manner
+	/// The stream that gets the results of writing to this stream
+	NSObject<GlkStream>* dataStream;
+	/// YES if the stream should be written in a big-endian manner
+	BOOL bigEndian;
 }
 
 - (id) initWithStream: (NSObject<GlkStream>*) dataStream

@@ -17,8 +17,10 @@
 	BOOL autoflush;
 }
 
-- (id) initWithPath: (NSString*) pathname;				// Designated initialiser
+/// Designated initialiser
+- (id) initWithPath: (NSString*) pathname;
 
-- (void) setTemporary: (BOOL) isTemp;					// Temporary filerefs are deleted when deallocated
+/// Temporary filerefs are deleted when deallocated
+- (void) setTemporary: (BOOL) isTemp;
 
 @end

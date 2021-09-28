@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <GlkView/GlkTypesetter.h>
 
-// Attribute indicating that a section of text should use custom attribute formatting. Value should be a GlkCustomTextSection object.
+/// Attribute indicating that a section of text should use custom attribute formatting. Value should be a \c GlkCustomTextSection object.
 extern NSString* GlkCustomSectionAttributeName;
 
 ///
@@ -21,7 +21,8 @@ extern NSString* GlkCustomSectionAttributeName;
 // Formatting
 
 // Note that this element is not typeset when this is called (wait for the placeBaselineAt: call)
-- (BOOL) formatSectionAtOffset: (float) offset						// Request from the typesetter that this object generate a suitable line section object. Returns YES to indicate that a line section has been created
+/// Request from the typesetter that this object generate a suitable line section object. Returns YES to indicate that a line section has been created
+- (BOOL) formatSectionAtOffset: (float) offset
 				  inTypesetter: (GlkTypesetter*) typesetter
 				 forGlyphRange: (NSRange) glyphs;
 

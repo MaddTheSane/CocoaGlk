@@ -9,23 +9,31 @@
 #import <Cocoa/Cocoa.h>
 #import <GlkView/GlkCustomTextSection.h>
 
-// Attribute that can be applied to control glyphs to indicate that they should cause formatting of a specific Glk image
+/// Attribute that can be applied to control glyphs to indicate that they should cause formatting of a specific Glk image
 extern NSString* GlkImageAttribute;
 
-//
-// Representation of an image in a text container
-//
+///
+/// Representation of an image in a text container
+///
 @interface GlkImage : GlkCustomTextSection {
-	NSImage* image;								// The NSImage associated with this image
-	NSSize size;								// The size to draw this image with
-	unsigned alignment;							// The Glk alignment of this image
-	unsigned characterPosition;					// The character position of this image in the text stream
+	/// The NSImage associated with this image
+	NSImage* image;
+	/// The size to draw this image with
+	NSSize size;
+	/// The Glk alignment of this image
+	unsigned alignment;
+	/// The character position of this image in the text stream
+	unsigned characterPosition;
 	
-	NSRect bounds;								// The bounds of this image in the text container
-	BOOL calculatedBounds;						// Whether or not the bounds for this image have been calculated yet
+	/// The bounds of this image in the text container
+	NSRect bounds;
+	/// Whether or not the bounds for this image have been calculated yet
+	BOOL calculatedBounds;
 
-	float marginOffset;							// If this is a margin image, the offset that it should be drawn at
-	float scaleFactor;							// Scale factor for margin objects
+	/// If this is a margin image, the offset that it should be drawn at
+	float marginOffset;
+	/// Scale factor for margin objects
+	float scaleFactor;
 }
 
 // Initialisation
@@ -35,14 +43,22 @@ extern NSString* GlkImageAttribute;
 			position: (unsigned) characterPosition;
 
 // Information
-- (NSImage*) image;								// The NSImage associated with this image
-- (NSSize) size;								// The size to draw this image with
-- (unsigned) alignment;							// The Glk alignment of this image
-- (unsigned) characterPosition;					// The character position of this image in the text stream
+/// The NSImage associated with this image
+- (NSImage*) image;
+/// The size to draw this image with
+- (NSSize) size;
+/// The Glk alignment of this image
+- (unsigned) alignment;
+/// The character position of this image in the text stream
+- (unsigned) characterPosition;
 
-- (void) setBounds: (NSRect) bounds;			// Sets the bounds of this image, marks it as calculated
-- (NSRect) bounds;								// Retrieves the bounds of this image
-- (BOOL) calculatedBounds;						// Returns YES if the bounds are calculated
-- (void) markAsUncalculated;					// Marks this image as uncalculated
+/// Sets the bounds of this image, marks it as calculated
+- (void) setBounds: (NSRect) bounds;
+/// Retrieves the bounds of this image
+- (NSRect) bounds;
+/// Returns YES if the bounds are calculated
+- (BOOL) calculatedBounds;
+/// Marks this image as uncalculated
+- (void) markAsUncalculated;
 
 @end

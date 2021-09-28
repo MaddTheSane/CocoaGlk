@@ -27,9 +27,16 @@
 // too much client/server communications (to selectors and an array of arguments)
 //
 
-//
-// Buffer operations. These all must return void.
-//
+///
+/// Buffer operations. These all must return void.
+///
+/// The buffer is used to store operations before sending them across the communications link with the host task.
+/// This is required as sending messages using the DistributedObject mechanism is somewhat slow.
+///
+/// Note that in Zoom and previous versions of CocoaGlk, the buffering was done by storing dictionaries detailing the
+/// operations to be performed. In this version, we presently send invocations. This might change later if this forces
+/// too much client/server communications (to selectors and an array of arguments)
+///
 @protocol GlkBuffer
 
 // Windows
@@ -126,7 +133,8 @@
 		toStream: (unsigned) streamIdentifier;
 - (void) putString: (in bycopy NSString*) string
 		  toStream: (unsigned) streamIdentifier;
-- (void) putData: (in bycopy NSData*) data							// Note: do not pass in mutable data here, as the contents may change unexpectedly
+/// Note: do not pass in mutable data here, as the contents may change unexpectedly
+- (void) putData: (in bycopy NSData*) data
 		toStream: (unsigned) streamIdentifier;
 - (void) setStyle: (unsigned) style
 		 onStream: (unsigned) streamIdentifier;
@@ -150,22 +158,22 @@
 
 @end
 
-//
-// Class used to temporarily store bufferable operations before sending them to the server
-//
+///
+/// Class used to temporarily store bufferable operations before sending them to the server
+///
 @interface GlkBuffer : NSObject<NSCopying, NSCoding, GlkBuffer> {
 	NSMutableArray* operations;
 }
 
-// Adding a generic bufferred operation
+/// Adding a generic bufferred operation
 - (void) addOperation: (NSString*) name
 			arguments: (NSArray*) arguments;
 
-// Returns true if the buffer has anything to flush
+/// Returns true if the buffer has anything to flush
 - (BOOL) shouldBeFlushed;
 - (BOOL) hasGotABitOnTheLargeSide;
 
-// Flushing a buffer with a target
+/// Flushing a buffer with a target
 - (void) flushToTarget: (id) target;
 
 @end

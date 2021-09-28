@@ -14,17 +14,21 @@
 
 #include "glk.h"
 
-//
-// Protocol implemented by any class claiming to be a Glk event
-//
-
+///
+/// Protocol implemented by any class claiming to be a Glk event
+///
 @protocol GlkEvent
 
-- (glui32) type;						// Type of event
-- (unsigned) windowIdentifier;			// Needs to be converted to a winid_t in the client
-- (glui32) val1;						// Event data
-- (glui32) val2;						// More event data
+/// Type of event
+- (glui32) type;
+/// Needs to be converted to a winid_t in the client
+- (unsigned) windowIdentifier;
+/// Event data
+- (glui32) val1;
+/// More event data
+- (glui32) val2;
 
-- (NSString*) lineInput;				// Line data for a line input event
+/// Line data for a line input event
+- (NSString*) lineInput;
 
 @end

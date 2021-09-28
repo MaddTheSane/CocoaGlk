@@ -11,7 +11,8 @@
 #import "GlkStreamProtocol.h"
 
 @interface GlkFileStream : NSObject<GlkStream> {
-	NSFileHandle* handle;						// The filehandle we're using to read/write from
+	/// The filehandle we're using to read/write from
+	NSFileHandle* handle;
 }
 
 // Initialisation

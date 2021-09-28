@@ -13,52 +13,85 @@
 #import <GlkView/GlkTypesetter.h>
 
 @interface GlkTextWindow : GlkWindow {
-	NSScrollView* scrollView;							// The scroller for the text view
-	GlkTextView* textView;								// The inner text view
-	GlkTypesetter* typesetter;							// The typesetter we should use for laying out images and other Glk-specific things
-	NSLayoutManager* layoutManager;						// The layout manager
-	NSTextStorage* textStorage;							// The text storage
+	/// The scroller for the text view
+	NSScrollView* scrollView;
+	/// The inner text view
+	GlkTextView* textView;
+	/// The typesetter we should use for laying out images and other Glk-specific things
+	GlkTypesetter* typesetter;
+	/// The layout manager
+	NSLayoutManager* layoutManager;
+	/// The text storage
+	NSTextStorage* textStorage;
 	
-	int inputPos;										// The position in the text view that the game-supplied text ends, and the user-supplied text begins
-	float margin;										// The size of the margin for this window
+	/// The position in the text view that the game-supplied text ends, and the user-supplied text begins
+	int inputPos;
+	/// The size of the margin for this window
+	float margin;
 	
-	NSMutableString* inputBuffer;						// The input data
+	/// The input data
+	NSMutableString* inputBuffer;
 	
-	BOOL flushing;										// YES if the buffer is flushing
+	/// \c YES if the buffer is flushing
+	BOOL flushing;
 	
-	BOOL willMakeEditable;								// YES if a request to make the text editable is pending
-	BOOL willMakeNonEditable;							// YES if a request to make the text non-editable is pending
+	/// \c YES if a request to make the text editable is pending
+	BOOL willMakeEditable;
+	/// \c YES if a request to make the text non-editable is pending
+	BOOL willMakeNonEditable;
 	
-	BOOL hasMorePrompt;									// YES if this window has a more prompt
-	int moreOffset;										// The character that should be the first on the current 'page'
-	float lastMorePos;									// The last y position a [ MORE ] prompt appeared
-	float nextMorePos;									// The y position that the next [ MORE ] prompt should appear at
+	/// \c YES if this window has a more prompt
+	BOOL hasMorePrompt;
+	/// The character that should be the first on the current 'page'
+	int moreOffset;
+	/// The last y position a [ MORE ] prompt appeared
+	float lastMorePos;
+	/// The y position that the next [ MORE ] prompt should appear at
+	float nextMorePos;
 	
-	NSWindow* moreWindow;								// The window containing the [ MORE ] prompt
-	NSDate* whenMoreShown;								// The time that the [ MORE ] prompt was shown
-	float lastMoreState;								// Initial state of the [ MORE ] prompt
-	float finalMoreState;								// Final state fo the [ MORE ] prompt
-	NSTimer* moreAnimationTimer;						// Timer for the [ MORE ] animation
+	/// The window containing the [ MORE ] prompt
+	NSWindow* moreWindow;
+	/// The time that the [ MORE ] prompt was shown
+	NSDate* whenMoreShown;
+	/// Initial state of the [ MORE ] prompt
+	float lastMoreState;
+	/// Final state fo the [ MORE ] prompt
+	float finalMoreState;
+	/// Timer for the [ MORE ] animation
+	NSTimer* moreAnimationTimer;
 }
 
-- (void) setupTextview;									// Initialise the text view and typesetters
+/// Initialise the text view and typesetters
+- (void) setupTextview;
 
-- (void) addImage: (NSImage*) image						// Adds an image at the end of this view
+/// Adds an image at the end of this view
+- (void) addImage: (NSImage*) image
 	withAlignment: (unsigned) alignment
 			 size: (NSSize) sz;
-- (void) addFlowBreak;									// Adds a flow break at the end of this view
+/// Adds a flow break at the end of this view
+- (void) addFlowBreak;
 
-- (void) makeTextEditable;								// Requests that the text buffer view be made editable (ie, ready for command input), takes account of buffering issues
-- (void) makeTextNonEditable;							// Requests that the text buffer view be made non-editable, takes account of buffering issues
+/// Requests that the text buffer view be made editable (ie, ready for command input), takes account of buffering issues
+- (void) makeTextEditable;
+/// Requests that the text buffer view be made non-editable, takes account of buffering issues
+- (void) makeTextNonEditable;
 
-- (void) setUsesMorePrompt: (BOOL) useMorePrompt;		// Sets whether or not a [ MORE ] prompt should be displayed for this window
-- (void) setInfiniteSize;								// Sets this window to be infinite size
-- (float) currentMoreState;								// The current [ MORE ] animation state (0 = hidden, 1 = shown)
-- (void) displayMorePromptIfNecessary;					// A request to display the [ MORE ] prompt if necessary
-- (void) setMoreShown: (BOOL) shown;					// Sets whether or not the [ MORE ] prompt is shown
-- (void) resetMorePrompt: (int) pos						// Resets the [ MORE ] prompt position from the specified character position
+/// Sets whether or not a [ MORE ] prompt should be displayed for this window
+- (void) setUsesMorePrompt: (BOOL) useMorePrompt;
+/// Sets this window to be infinite size
+- (void) setInfiniteSize;
+/// The current [ MORE ] animation state (0 = hidden, 1 = shown)
+- (float) currentMoreState;
+/// A request to display the [ MORE ] prompt if necessary
+- (void) displayMorePromptIfNecessary;
+/// Sets whether or not the [ MORE ] prompt is shown
+- (void) setMoreShown: (BOOL) shown;
+/// Resets the [ MORE ] prompt position from the specified character position
+- (void) resetMorePrompt: (int) pos
 				  paging: (BOOL) paging;
-- (void) resetMorePrompt;								// Resets the [ MORE ] prompt position from the current input position
-- (void) scrollToEnd;									// Scroll to the end of the text view
+/// Resets the [ MORE ] prompt position from the current input position
+- (void) resetMorePrompt;
+/// Scroll to the end of the text view
+- (void) scrollToEnd;
 
 @end

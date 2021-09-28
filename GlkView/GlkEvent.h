@@ -14,10 +14,9 @@
 
 #import "GlkSessionProtocol.h"
 
-//
-// Generic Glk event class
-//
-
+///
+/// Generic Glk event class
+///
 @interface GlkEvent : NSObject<NSCoding, GlkEvent> {
 	// Event parameters
 	unsigned type;
@@ -26,7 +25,8 @@
 	unsigned val2;
 	
 	// 'Out-of-band' data
-	NSString* lineInput;							// When a line event is requested, this contains the string that eventually ends up in the buffer
+	/// When a line event is requested, this contains the string that eventually ends up in the buffer
+	NSString* lineInput;
 }
 
 - (id) initWithType: (unsigned) type
@@ -43,12 +43,12 @@
 
 @end
 
-//
-// Protocol used to send events from objects like windows to a target
-//
-
+///
+/// Protocol used to send events from objects like windows to a target
+///
 @protocol GlkEventReceiver
 
-- (void) queueEvent: (GlkEvent*) evt;							// Request that an event be processed
+/// Request that an event be processed
+- (void) queueEvent: (GlkEvent*) evt;
 
 @end

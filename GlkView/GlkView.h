@@ -17,187 +17,279 @@
 @protocol GlkAutomation;
 
 typedef enum GlkLogStatus {
-	GlkLogRoutine,								// Routine log message
-	GlkLogInformation,							// Informational log message
-	GlkLogCustom,								// Custom log message (from the game, for example)
-	GlkLogWarning,								// Warning log message
-	GlkLogError,								// Error log message
-	GlkLogFatalError,							// Fatal error log message
+	/// Routine log message
+	GlkLogRoutine,
+	/// Informational log message
+	GlkLogInformation,
+	/// Custom log message (from the game, for example)
+	GlkLogCustom,
+	/// Warning log message
+	GlkLogWarning,
+	/// Error log message
+	GlkLogError,
+	/// Fatal error log message
+	GlkLogFatalError,
 } GlkLogStatus;
 
-//
-// Base class for CocoaGlk: a view object that an application can embed in order to run Glk client applications
-//
+///
+/// Base class for CocoaGlk: a view object that an application can embed in order to run Glk client applications
+///
 @interface GlkView : NSView<GlkSession, GlkBuffer, GlkEventReceiver> {
 	// Windows
-	NSMutableDictionary* glkWindows;							// Maps identifiers to windows
-	NSSavePanel* lastPanel;										// Most recent save panel
-	GlkWindow* rootWindow;										// The root window
-	GlkWindow* lastRootWindow;									// The last root window
+	/// Maps identifiers to windows
+	NSMutableDictionary* glkWindows;
+	/// Most recent save panel
+	NSSavePanel* lastPanel;
+	/// The root window
+	GlkWindow* rootWindow;
+	/// The last root window
+	GlkWindow* lastRootWindow;
 	
-	BOOL windowsNeedLayout;										// Used when flushing the buffer
-	BOOL flushing;												// A buffer is currently flushing if YES
+	/// Used when flushing the buffer
+	BOOL windowsNeedLayout;
+	/// A buffer is currently flushing if \c YES
+	BOOL flushing;
 	
 	// Styles
-	GlkPreferences* prefs;										// Active preferences
-	NSMutableDictionary* styles;								// Active styles
-	float scaleFactor;											// The active scale factor
-	int borderWidth;											// The border width to set for new pair windows
+	/// Active preferences
+	GlkPreferences* prefs;
+	/// Active styles
+	NSMutableDictionary* styles;
+	/// The active scale factor
+	float scaleFactor;
+	/// The border width to set for new pair windows
+	int borderWidth;
 	
 	// Streams
-	NSMutableDictionary* glkStreams;							// Maps identifiers to streams
+	/// Maps identifiers to streams
+	NSMutableDictionary* glkStreams;
 
-	NSObject<GlkStream>* inputStream;							// The input stream
-	NSMutableDictionary* extraStreamDictionary;					// Maps keys to extra input streams
-	NSObject<GlkFilePrompt>* promptHandler;						// Used while prompting for a file
-	NSArray* allowedFiletypes;									// Types of files we can show in the panels
+	/// The input stream
+	NSObject<GlkStream>* inputStream;
+	/// Maps keys to extra input streams
+	NSMutableDictionary* extraStreamDictionary;
+	/// Used while prompting for a file
+	NSObject<GlkFilePrompt>* promptHandler;
+	/// Types of files we can show in the panels
+	NSArray* allowedFiletypes;
 	
-	BOOL alwaysPageOnMore;										// YES if windows in this view should automatically page through more prompts
+	/// \c YES if windows in this view should automatically page through more prompts
+	BOOL alwaysPageOnMore;
 	
 	// File handling
-	NSMutableDictionary* extensionsForUsage;					// Dictionary mapping the file usage strings to the list of allowed file types
+	/// Dictionary mapping the file usage strings to the list of allowed file types
+	NSMutableDictionary* extensionsForUsage;
 	
 	// Events
-	GlkEvent* arrangeEvent;										// The last Arrange event we received
-	NSObject<GlkEventListener>* listener;						// The listener for events
-	NSMutableArray* events;										// The queue of waiting events
+	/// The last Arrange event we received
+	GlkEvent* arrangeEvent;
+	/// The listener for events
+	NSObject<GlkEventListener>* listener;
+	/// The queue of waiting events
+	NSMutableArray* events;
 	
-	int syncCount;												// The synchronisation counter
+	/// The synchronisation counter
+	int syncCount;
 	
 	// The logo
-	NSWindow* logoWindow;										// Used to draw the fading logo
-	NSDate* fadeStart;											// The time we started fading the logo
-	NSTimer* fadeTimer;											// Used to fade out the logo
+	/// Used to draw the fading logo
+	NSWindow* logoWindow;
+	/// The time we started fading the logo
+	NSDate* fadeStart;
+	/// Used to fade out the logo
+	NSTimer* fadeTimer;
 
 	float waitTime;
 	float fadeTime;
 	
 	// The task
-	BOOL running;												// YES if the task is running
-	NSString* viewCookie;										// The session cookie to use with this view
-	NSTask* subtask;											// Only used if this is connected as a session via the launchClientApplication: method
+	/// YES if the task is running
+	BOOL running;
+	/// The session cookie to use with this view
+	NSString* viewCookie;
+	/// Only used if this is connected as a session via the \c launchClientApplication: method
+	NSTask* subtask;
 	
 	// The delegate
-	id delegate;												// Can respond to certain events if it likes
+	/// Can respond to certain events if it likes
+	id delegate;
 	
 	// Images and graphics
-	NSObject<GlkImageSource>* imgSrc;							// Source of data for images
-	NSMutableDictionary* imageDictionary;						// Dictionary of images
-	NSMutableDictionary* flippedImageDictionary;				// Dictionary of flipped images
+	/// Source of data for images
+	NSObject<GlkImageSource>* imgSrc;
+	/// Dictionary of images
+	NSMutableDictionary* imageDictionary;
+	/// Dictionary of flipped images
+	NSMutableDictionary* flippedImageDictionary;
 	
 	// Input history
-	NSMutableArray* inputHistory;								// History of input lines
-	int historyPosition;										// Current history position
+	/// History of input lines
+	NSMutableArray* inputHistory;
+	/// Current history position
+	int historyPosition;
 	
 	// Automation
-	NSMutableArray* outputReceivers;							// The automation output receivers attached to this view
-	NSMutableArray* inputReceivers;								// The automation input receiver attached to this view
+	/// The automation output receivers attached to this view
+	NSMutableArray* outputReceivers;
+	/// The automation input receiver attached to this view
+	NSMutableArray* inputReceivers;
 	
-	NSMutableDictionary* windowPositionCache;					// The automation window identifier cache
-	NSMutableDictionary* windowIdCache;							// The automation window position -> GlkWindow cache
+	/// The automation window identifier cache
+	NSMutableDictionary* windowPositionCache;
+	/// The automation window position -> GlkWindow cache
+	NSMutableDictionary* windowIdCache;
 }
 
 // Some shared settings
-+ (NSImage*) defaultLogo;										// Image displayed while there is no root window
+/// Image displayed while there is no root window
++ (NSImage*) defaultLogo;
 
 // Setting up for launch
-- (void) setViewCookie: (NSString*) cookie;						// If cookie is non-nil, a client application must know the cookie to connect to this view. If nil, this view is first-come, first-served.
-- (void) setRandomViewCookie;									// As above, but sets a random cookie. Not guaranteed to be cryptographically secure.
+/// If cookie is non-nil, a client application must know the cookie to connect to this view. If nil, this view is first-come, first-served.
+- (void) setViewCookie: (NSString*) cookie;
+/// As above, but sets a random cookie. Not guaranteed to be cryptographically secure.
+- (void) setRandomViewCookie;
 
 // Launching a client application
-- (void) launchClientApplication: (NSString*) launchPath		// Launches and controls a Glk client application
+/// Launches and controls a Glk client application
+- (void) launchClientApplication: (NSString*) launchPath
 				   withArguments: (NSArray*) appArgs;
-- (void) terminateClient;										// Terminates the client application
-- (void) setInputStream: (NSObject<GlkStream>*) stream;			// Sets the input stream
-- (void) setInputFilename: (NSString*) filename;				// Sets the input stream to be input from the given file
-- (void) addStream: (NSObject<GlkStream>*) stream				// Adds a keyed stream that the client can obtain if necessary
+/// Terminates the client application
+- (void) terminateClient;
+/// Sets the input stream
+- (void) setInputStream: (NSObject<GlkStream>*) stream;
+/// Sets the input stream to be input from the given file
+- (void) setInputFilename: (NSString*) filename;
+/// Adds a keyed stream that the client can obtain if necessary
+- (void) addStream: (NSObject<GlkStream>*) stream
 		   withKey: (NSString*) streamKey;
-- (void) addInputFilename: (NSString*) filename					// Adds a keyed stream that reads from the specified filename
+/// Adds a keyed stream that reads from the specified filename
+- (void) addInputFilename: (NSString*) filename
 				  withKey: (NSString*) streamKey;
 
 // Writing log messages
-- (void) logMessage: (NSString*) message						// If the client supports logging, then tell it to display the specified log message
+/// If the client supports logging, then tell it to display the specified log message
+- (void) logMessage: (NSString*) message
 		 withStatus: (GlkLogStatus) status;
 
 // The delegate
-- (void) setDelegate: (id) delegate;							// Sets the delegate for this view. Delegates are not retained.
+/// Sets the delegate for this view. Delegates are not retained.
+- (void) setDelegate: (id) delegate;
 
 // Events
-- (void) queueEvent: (GlkEvent*) event;							// Note that Arrange events are merged if not yet claimed
-- (void) requestClientSync;										// Called by views to indicate that their app-side data has gone out of date (eg because they are now a different size)
+/// Note that Arrange events are merged if not yet claimed
+- (void) queueEvent: (GlkEvent*) event;
+/// Called by views to indicate that their app-side data has gone out of date (eg because they are now a different size)
+- (void) requestClientSync;
 
 // Preferences
-- (void) setPreferences: (GlkPreferences*) prefs;				// Call before this view has attached to a client for the best effect
-- (NSMutableDictionary*) stylesForWindowType: (unsigned) type;	// Current styles
+/// Call before this view has attached to a client for the best effect
+- (void) setPreferences: (GlkPreferences*) prefs;
+/// Current styles
+- (NSMutableDictionary*) stylesForWindowType: (unsigned) type;
 
 // Managing images
-- (NSImage*) imageWithIdentifier: (unsigned) imageId;			// Retrieves the image with the given identifier, asking the client process if necessary
-- (NSImage*) flippedImageWithIdentifier: (unsigned) imageId;	// Retrieves a flipped variant of an image with the given identifier (works around a really annoying Cocoa design flaw, at the expense of storing the image twice)
+/// Retrieves the image with the given identifier, asking the client process if necessary
+- (NSImage*) imageWithIdentifier: (unsigned) imageId;
+/// Retrieves a flipped variant of an image with the given identifier (works around a really annoying Cocoa design flaw, at the expense of storing the image twice)
+- (NSImage*) flippedImageWithIdentifier: (unsigned) imageId;
 
 // Dealing with line history
-- (void) addHistoryItem: (NSString*) inputLine					// Adds a line history event to this view
+/// Adds a line history event to this view
+- (void) addHistoryItem: (NSString*) inputLine
 		forWindowWithId: (glui32) windowId;
-- (NSString*) previousHistoryItem;								// Retrieves the previous history item
-- (NSString*) nextHistoryItem;									// Retrieves the next history item
-- (void) resetHistoryPosition;									// Causes the history position to move to the end
+/// Retrieves the previous history item
+- (NSString*) previousHistoryItem;
+/// Retrieves the next history item
+- (NSString*) nextHistoryItem;
+/// Causes the history position to move to the end
+- (void) resetHistoryPosition;
 
 // Layout
-- (void) performLayoutIfNecessary;								// Forces a layout operation if it's required
-- (void) setScaleFactor: (float) scale;							// Sets the scale factor of this view and any subview (resizing fonts, etc)
-- (void) setBorderWidth: (float) borderWidth;					// Sets up the border width for new pair windows
+/// Forces a layout operation if it's required
+- (void) performLayoutIfNecessary;
+/// Sets the scale factor of this view and any subview (resizing fonts, etc)
+- (void) setScaleFactor: (float) scale;
+/// Sets up the border width for new pair windows
+- (void) setBorderWidth: (float) borderWidth;
 
 // Dealing with [ MORE ] prompts
-- (void) setAlwaysPageOnMore: (BOOL) alwaysPage;				// YES if this CocoaGlk window should always page on more
-- (BOOL) alwaysPageOnMore;										// Ditto
-- (BOOL) morePromptsPending;									// True if any windows are waiting on a [ MORE ] prompts
-- (BOOL) pageAll;												// Causes all windows that require it to page forwards (returns NO if no windows actually needed paging)
+/// YES if this CocoaGlk window should always page on more
+- (void) setAlwaysPageOnMore: (BOOL) alwaysPage;
+/// Ditto
+- (BOOL) alwaysPageOnMore;
+/// True if any windows are waiting on a [ MORE ] prompts
+- (BOOL) morePromptsPending;
+/// Causes all windows that require it to page forwards (returns NO if no windows actually needed paging)
+- (BOOL) pageAll;
 
 // Various UI events
-- (void) performTabFrom: (GlkWindow*) window					// Perform a tab action from the specified GlkWindow (ie, changing focus)
+/// Perform a tab action from the specified GlkWindow (ie, changing focus)
+- (void) performTabFrom: (GlkWindow*) window
 				forward: (BOOL) forward;
-- (BOOL) setFirstResponder;										// Tries to set the first responder again
+/// Tries to set the first responder again
+- (BOOL) setFirstResponder;
 
 // Automation
-- (void) addOutputReceiver: (NSObject<GlkAutomation>*) receiver;		// Adds an automation object to receive game and user output events
-- (void) addInputReceiver: (NSObject<GlkAutomation>*) receiver;			// Adds an automation object to receive notifications about when it can sensibly send input to the game (if there is an input receiver, input through the UI is disabled)
+/// Adds an automation object to receive game and user output events
+- (void) addOutputReceiver: (NSObject<GlkAutomation>*) receiver;
+/// Adds an automation object to receive notifications about when it can sensibly send input to the game (if there is an input receiver, input through the UI is disabled)
+- (void) addInputReceiver: (NSObject<GlkAutomation>*) receiver;
 
-- (void) removeAutomationObject: (NSObject<GlkAutomation>*) receiver;	// Removes an automation object from input and/or output duties
+/// Removes an automation object from input and/or output duties
+- (void) removeAutomationObject: (NSObject<GlkAutomation>*) receiver;
 
-- (BOOL) canSendInput;											// Returns true if there are windows waiting for input (ie, a sendCharacters event will succeed)
-- (int) sendCharacters: (NSString*) characters					// Sends the specified characters to the given window number as a line or character input event
+/// Returns true if there are windows waiting for input (ie, a sendCharacters event will succeed)
+- (BOOL) canSendInput;
+/// Sends the specified characters to the given window number as a line or character input event
+- (int) sendCharacters: (NSString*) characters
 			  toWindow: (int) window;
-- (int) sendClickAtX: (int) xpos								// Sends a mouse click at the specified position to the given window number
+/// Sends a mouse click at the specified position to the given window number
+- (int) sendClickAtX: (int) xpos
 				   Y: (int) ypos
 			toWindow: (int) window;
 
-- (void) automateStream: (NSObject<GlkStream>*) stream			// Request from a window object to send characters to the automation system
+/// Request from a window object to send characters to the automation system
+- (void) automateStream: (NSObject<GlkStream>*) stream
 			  forString: (NSString*) string;
 @end
 
-//
-// Functions that a view delegate can provide
-//
-
+///
+/// Functions that a view delegate can provide
+///
 @interface NSObject(GlkViewDelegate)
 
-- (BOOL) disableLogo;											// Set to return YES to get rid of the CocoaGlk logo
-- (NSImage*) logo;												// If non-nil, then this will be the logo displayed instead of 'CocoaGlk'
-- (NSString*) taskDescription;									// A description of what is running in this window (or nil)
+/// Set to return \c YES to get rid of the CocoaGlk logo
+- (BOOL) disableLogo;
+/// If non-nil, then this will be the logo displayed instead of 'CocoaGlk'
+- (NSImage*) logo;
+/// A description of what is running in this window (or nil)
+- (NSString*) taskDescription;
 
-- (void) showStatusText: (NSString*) status;					// Called to show warnings, etc
-- (void) showError: (NSString*) error;							// Called to show errors
-- (void) showLogMessage: (NSString*) message					// Called to show general purpose log messages
+/// Called to show warnings, etc
+- (void) showStatusText: (NSString*) status;
+/// Called to show errors
+- (void) showError: (NSString*) error;
+/// Called to show general purpose log messages
+- (void) showLogMessage: (NSString*) message
 			 withStatus: (GlkLogStatus) status;
 
-- (void) taskHasStarted;										// Called when the Glk task starts
-- (void) taskHasFinished;										// Called when the Glk task finishes (usually, may not be called under some circumstances)
-- (void) taskHasCrashed;										// Additionally called when the task crashes
+/// Called when the Glk task starts
+- (void) taskHasStarted;
+/// Called when the Glk task finishes (usually, may not be called under some circumstances)
+- (void) taskHasFinished;
+/// Additionally called when the task crashes
+- (void) taskHasCrashed;
 
-- (NSString*) pathForNamedFile: (NSString*) name;				// This works out the 'real' path for a file requested by name (default is to remove control characters and stick it on the Desktop)
-- (NSString*) preferredSaveDirectory;							// This works out the 'preferred' directory for save files. CocoaGlk will use it's own judgement if this returns nil
-- (void) savePreferredDirectory: (NSString*) finalDir;			// Called to give the delegate a chance to store the final directory chosen for a save in the preferences.
+/// This works out the 'real' path for a file requested by name (default is to remove control characters and stick it on the Desktop)
+- (NSString*) pathForNamedFile: (NSString*) name;
+/// This works out the 'preferred' directory for save files. CocoaGlk will use it's own judgement if this returns nil
+- (NSString*) preferredSaveDirectory;
+/// Called to give the delegate a chance to store the final directory chosen for a save in the preferences.
+- (void) savePreferredDirectory: (NSString*) finalDir;
 
-- (BOOL) promptForFilesForUsage: (NSString*) usage				// The delegate can override this to provide custom saving behaviour for its files. This should return YES if the delegate is going to handle the event or NO otherwise
+/// The delegate can override this to provide custom saving behaviour for its files. This should return \c YES if the delegate is going to handle the event or \c NO otherwise
+- (BOOL) promptForFilesForUsage: (NSString*) usage
 					 forWriting: (BOOL) writing
 						handler: (NSObject<GlkFilePrompt>*) handler
 			 preferredDirectory: (NSString*) preferredDirectory;

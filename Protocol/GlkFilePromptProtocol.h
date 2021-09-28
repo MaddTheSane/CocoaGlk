@@ -14,13 +14,14 @@
 
 #import "GlkFileRefProtocol.h"
 
-//
-// Protocol used to get the results after we've requested a file prompt
-//
-
+///
+/// Protocol used to get the results after we've requested a file prompt
+///
 @protocol GlkFilePrompt
 
-- (void) promptedFileRef: (in byref NSObject<GlkFileRef>*) fref;	// Called when the user chooses a file
-- (void) promptCancelled;											// Called when the user gives up on us
+/// Called when the user chooses a file
+- (void) promptedFileRef: (in byref NSObject<GlkFileRef>*) fref;
+/// Called when the user gives up on us
+- (void) promptCancelled;
 
 @end

@@ -27,6 +27,12 @@ enum GlkSeekMode {
 
 #define GlkEOFChar 0xffff
 
+///
+/// Streams can also be accessed through the buffer (and usually are for writing)
+///
+/// Our streams use unichars and unicode strings rather than the Latin-1 specified by Glk.
+/// This amounts to the same things overall, but makes it easy to update later.
+///
 @protocol GlkStream
 
 // Control

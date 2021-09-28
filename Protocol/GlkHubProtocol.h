@@ -14,10 +14,9 @@
 
 #import "GlkSessionProtocol.h"
 
-//
-// Method used to communicate with the hub object used by the main Glk server process
-//
-
+///
+/// Method used to communicate with the hub object used by the main Glk server process
+///
 @protocol GlkHub
 
 // Setting up the connection

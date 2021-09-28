@@ -39,21 +39,10 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 
 // = Information =
 
-- (NSImage*) image {
-	return image;
-}
-
-- (NSSize) size {
-	return size;
-}
-
-- (unsigned) alignment {
-	return alignment;
-}
-
-- (unsigned) characterPosition {
-	return characterPosition;
-}
+@synthesize image;
+@synthesize size;
+@synthesize alignment;
+@synthesize characterPosition;
 
 // = Cached information =
 
@@ -62,13 +51,9 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 	bounds = newBounds;
 }
 
-- (NSRect) bounds {
-	return bounds;
-}
+@synthesize bounds;
 
-- (BOOL) calculatedBounds {
-	return calculatedBounds;
-}
+@synthesize calculatedBounds;
 
 - (void) markAsUncalculated {
 	calculatedBounds = NO;

@@ -23,7 +23,7 @@
 ///
 @interface GlkWindow : NSView<GlkStream> {
 	/// The pair window that contains this window (or NULL for the root window) !NOT RETAINED!
-	GlkPairWindow* parentWindow;
+	__unsafe_unretained GlkPairWindow* parentWindow;
 	
 	/// \c YES if this window is closed
 	BOOL closed;
@@ -56,7 +56,7 @@
 	
 	// These event variables are useful to subclasses
 	/// Where the events go !NOT RETAINED!
-	id<GlkEventReceiver> target;
+	__unsafe_unretained id<GlkEventReceiver> target;
 	/// \c YES if we're receiving character input
 	BOOL charInput;
 	/// \c YES if we're receiving text input
@@ -67,7 +67,7 @@
 	BOOL hyperlinkInput;
 	
 	/// The view that contains this window !NOT RETAINED!
-	GlkView* containingView;
+	__unsafe_unretained GlkView* containingView;
 	
 	/// The last known size of this window
 	GlkSize lastSize;
@@ -79,8 +79,7 @@
 + (unsigned) keycodeForEvent: (NSEvent*) evt;
 
 /// Closed windows can hang around
-- (void) setClosed: (BOOL) closed;
-- (BOOL) closed;
+@property BOOL closed;
 
 // Window metadata
 /// Sometimes we need to know this
@@ -88,6 +87,8 @@
 
 /// The unique window identifier, (shared with and assigned by the client)
 - (unsigned) identifier;
+
+@property unsigned identifier;
 
 // Layout
 /// If the layout has changed, then update/redraw this window
@@ -102,6 +103,8 @@
 /// Retrieves the border width
 - (float) border;
 
+@property float border;
+
 /// Size of the content, taking the border into account
 - (NSRect) contentRect;
 /// Size in window units
@@ -110,11 +113,15 @@
 /// Sets the scale factor for this window
 - (void) setScaleFactor: (float) scaleFactor;
 
+@property (nonatomic) float scaleFactor;
+
 // Styles
 /// Force use of fixed pitch fonts
 - (void) setForceFixed: (BOOL) forceFixed;
 /// Whether or not we're currently forcing fixed fonts
 - (BOOL) forceFixed;
+
+@property BOOL forceFixed;
 
 /// Maps style numbers to GlkStyles
 - (void) setStyles: (NSDictionary*) styles;
@@ -145,9 +152,9 @@
 - (NSColor*) backgroundColour;
 
 /// The amount of leading to use
-- (float) leading;
+@property (readonly) float leading;
 /// Height of a line in the current font
-- (float) lineHeight;
+@property (readonly) float lineHeight;
 
 /// The attributes for the currently active style
 - (NSDictionary*) currentTextAttributes;
@@ -162,7 +169,7 @@
 - (void) clearWindow;
 
 /// Sets the target for any events this window generates !NOT RETAINED!
-- (void) setEventTarget: (id<GlkEventReceiver>) target;
+@property (nonatomic, assign) id<GlkEventReceiver> eventTarget;
 
 - (void) requestCharInput;
 /// Request that the window generate the appropriate events
@@ -184,13 +191,13 @@
 - (void) forceLineInput: (NSString*) forcedInput;
 
 /// Returns \c YES if this window is waiting for line input
-- (BOOL) waitingForLineInput;
+@property (readonly) BOOL waitingForLineInput;
 /// Returns \c YES if this window is waiting for character input
-- (BOOL) waitingForCharInput;
+@property (readonly) BOOL waitingForCharInput;
 /// Returns \c YES if this window is waiting for keyboard input
-- (BOOL) waitingForKeyboardInput;
+@property (readonly) BOOL waitingForKeyboardInput;
 /// Returns \c YES if this window is waiting for keyboard input for user interaction with the running story
-- (BOOL) waitingForUserKeyboardInput;
+@property (readonly) BOOL waitingForUserKeyboardInput;
 /// The control that responds to events for this window
 - (NSResponder*) windowResponder;
 
@@ -200,7 +207,7 @@
 - (void) bufferHasFlushed;
 
 /// The text position beyond which input is possible
-- (int) inputPos;
+@property (readonly) int inputPos;
 /// Called on a key down event, to give this view a chance to set the caret position appropriately
 - (void) updateCaretPosition;
 
@@ -216,15 +223,16 @@
 - (void) taskFinished;
 
 // The parent window
-/// Sets the parent window !NOT RETAINED!
-- (void) setParent: (GlkPairWindow*) parent;
-- (GlkPairWindow*) parent;
+/// The parent window !NOT RETAINED!
+@property (readwrite, assign) GlkPairWindow *parent;
 
 // The containing view
 /// The GlkView that contains this window
 - (GlkView*) containingView;
 /// Sets the GlkView that contains this window !NOT RETAINED!
 - (void) setContainingView: (GlkView*) view;
+
+@property (readwrite, assign) GlkView *containingView;
 
 @end
 

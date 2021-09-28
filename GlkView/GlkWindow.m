@@ -52,31 +52,13 @@
 
 // = Window metadata =
 
-- (void) setClosed: (BOOL) newClosed {
-	closed = newClosed;
-}
+@synthesize closed;
 
-- (BOOL) closed {
-	return closed;
-}
-
-- (void) setIdentifier: (unsigned) newWindowIdentifier {
-	windowIdentifier = newWindowIdentifier;
-}
-
-- (unsigned) identifier {
-	return windowIdentifier;
-}
+@synthesize identifier = windowIdentifier;
 
 // = The parent window =
 
-- (void) setParent: (GlkPairWindow*) newParent {
-	parentWindow = newParent;
-}
-
-- (GlkPairWindow*) parent {
-	return parentWindow;
-}
+@synthesize parent = parentWindow;
 
 // = Layout =
 
@@ -98,13 +80,7 @@
 	return size;
 }
 
-- (void) setBorder: (float) newBorder {
-	border = newBorder;
-}
-
-- (float) border {
-	return border;
-}
+@synthesize border;
 
 - (NSRect) contentRect {
 	return NSInsetRect([self bounds], border, border);
@@ -120,21 +96,16 @@
 	return res;
 }
 
-- (void) setScaleFactor: (float) newScaleFactor {
-	scaleFactor = newScaleFactor;
-	
-	// Nothing to do in most windows
-}
+@synthesize scaleFactor;
+//- (void) setScaleFactor: (float) newScaleFactor {
+//	scaleFactor = newScaleFactor;
+//
+//	// Nothing to do in most windows
+//}
 
 // = Styles =
 
-- (void) setForceFixed: (BOOL) newForceFixed {
-	forceFixed = newForceFixed;
-}
-
-- (BOOL) forceFixed {
-	return forceFixed;
-}
+@synthesize forceFixed;
 
 - (NSColor*) backgroundColour {
 	return [[self style: style_Normal] backColour];
@@ -297,9 +268,7 @@
 	// We can't get any clearer
 }
 
-- (void) setEventTarget: (id<GlkEventReceiver>) newTarget {
-	target = newTarget;
-}
+@synthesize eventTarget = target;
 
 - (void) requestCharInput {
 	if (lineInput) {
@@ -319,13 +288,9 @@
 	[[self window] invalidateCursorRectsForView: self];
 }
 
-- (BOOL) waitingForLineInput {
-	return lineInput;
-}
+@synthesize waitingForLineInput = lineInput;
 
-- (BOOL) waitingForCharInput {
-	return charInput;
-}
+@synthesize waitingForCharInput = charInput;
 
 - (BOOL) waitingForKeyboardInput {
 	return charInput || lineInput || [self needsPaging];
@@ -619,13 +584,7 @@
 
 // = The containing view =
 
-- (GlkView*) containingView {
-	return containingView;
-}
-
-- (void) setContainingView: (GlkView*) view {
-	containingView = view;
-}
+@synthesize containingView;
 
 // = Paging =
 

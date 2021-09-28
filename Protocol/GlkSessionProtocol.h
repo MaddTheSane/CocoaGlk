@@ -70,7 +70,7 @@ typedef struct GlkSize {
 - (void) willSelect;
 
 /// Gets the sync count value (this is used to determine if information cached on the server is still relevant)
-- (int)  synchronisationCount;
+@property (nonatomic, readonly) int synchronisationCount;
 
 // Errors and warnings
 /// Shows an error message
@@ -111,4 +111,6 @@ typedef struct GlkSize {
 /// Retrieves the active image source
 - (out byref id<GlkImageSource>) imageSource;
 
+/// the active image source
+@property (readwrite, retain, nonatomic) id<GlkImageSource> imageSource;
 @end

@@ -91,12 +91,6 @@
 	return [[NSFileManager defaultManager] fileExistsAtPath: pathname];
 }
 
-- (void) setAutoflush: (BOOL) newAutoflush {
-	autoflush = newAutoflush;
-}
-
-- (BOOL) autoflushStream {
-	return autoflush;
-}
+@synthesize autoflushStream = autoflush;
 
 @end

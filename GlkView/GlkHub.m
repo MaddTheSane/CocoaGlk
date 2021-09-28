@@ -126,17 +126,9 @@
 	[self setHubName: [NSString stringWithFormat: @"GlkHub-%04x", getpid()]];
 }
 
-- (NSString*) hubName {
-	return hubName;
-}
+@synthesize hubName;
 
 // = Security =
-
-- (void) setHubCookie: (NSString*) newHubCookie {
-	if (cookie) [cookie release];
-	
-	cookie = [newHubCookie copy];
-}
 
 - (void) setRandomHubCookie {
 	unichar randomCookie[16];
@@ -154,9 +146,7 @@
 	[self setRandomHubCookie];
 }
 
-- (NSString*) hubCookie {
-	return cookie;
-}
+@synthesize hubCookie = cookie;
 
 // = Setting up the session =
 
@@ -190,14 +180,7 @@
 
 // = The delegate =
 
-- (void) setDelegate: (id) hubDelegate {
-	if (delegate) [delegate release];
-	delegate = [hubDelegate retain];
-}
-
-- (id) delegate {
-	return delegate;
-}
+@synthesize delegate;
 
 - (id<GlkSession>) createAnonymousSession {
 	if (delegate && [delegate respondsToSelector: @selector(createAnonymousSession)]) {

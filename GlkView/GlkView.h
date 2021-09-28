@@ -113,7 +113,7 @@ typedef enum GlkLogStatus {
 	
 	// The delegate
 	/// Can respond to certain events if it likes
-	id<GlkViewDelegate> delegate;
+	__unsafe_unretained id<GlkViewDelegate> delegate;
 	
 	// Images and graphics
 	/// Source of data for images
@@ -143,11 +143,11 @@ typedef enum GlkLogStatus {
 
 // Some shared settings
 /// Image displayed while there is no root window
-+ (NSImage*) defaultLogo;
+@property (class, readonly, retain) NSImage *defaultLogo;
 
 // Setting up for launch
 /// If cookie is non-nil, a client application must know the cookie to connect to this view. If nil, this view is first-come, first-served.
-- (void) setViewCookie: (NSString*) cookie;
+@property (nonatomic, copy) NSString *viewCookie;
 /// As above, but sets a random cookie. Not guaranteed to be cryptographically secure.
 - (void) setRandomViewCookie;
 
@@ -168,6 +168,8 @@ typedef enum GlkLogStatus {
 - (void) addInputFilename: (NSString*) filename
 				  withKey: (NSString*) streamKey;
 
+@property (nonatomic, retain) id<GlkStream> inputStream;
+
 // Writing log messages
 /// If the client supports logging, then tell it to display the specified log message
 - (void) logMessage: (NSString*) message
@@ -175,7 +177,7 @@ typedef enum GlkLogStatus {
 
 // The delegate
 /// Sets the delegate for this view. Delegates are not retained.
-- (void) setDelegate: (id<GlkViewDelegate>) delegate;
+@property (assign) id<GlkViewDelegate> delegate;
 
 // Events
 /// Note that Arrange events are merged if not yet claimed
@@ -215,13 +217,11 @@ typedef enum GlkLogStatus {
 - (void) setBorderWidth: (float) borderWidth;
 
 // Dealing with [ MORE ] prompts
-/// YES if this CocoaGlk window should always page on more
-- (void) setAlwaysPageOnMore: (BOOL) alwaysPage;
-/// Ditto
-- (BOOL) alwaysPageOnMore;
+/// \c YES if this CocoaGlk window should always page on more
+@property BOOL alwaysPageOnMore;
 /// True if any windows are waiting on a [ MORE ] prompts
-- (BOOL) morePromptsPending;
-/// Causes all windows that require it to page forwards (returns NO if no windows actually needed paging)
+@property (nonatomic, readonly) BOOL morePromptsPending;
+/// Causes all windows that require it to page forwards (returns \c NO if no windows actually needed paging)
 - (BOOL) pageAll;
 
 // Various UI events
@@ -240,8 +240,8 @@ typedef enum GlkLogStatus {
 /// Removes an automation object from input and/or output duties
 - (void) removeAutomationObject: (id<GlkAutomation>) receiver;
 
-/// Returns true if there are windows waiting for input (ie, a sendCharacters event will succeed)
-- (BOOL) canSendInput;
+/// Returns \c YES if there are windows waiting for input (ie, a sendCharacters event will succeed)
+@property (nonatomic) BOOL canSendInput;
 /// Sends the specified characters to the given window number as a line or character input event
 - (int) sendCharacters: (NSString*) characters
 			  toWindow: (int) window;
@@ -262,11 +262,11 @@ typedef enum GlkLogStatus {
 @optional
 
 /// Set to return \c YES to get rid of the CocoaGlk logo
-- (BOOL) disableLogo;
+@property (nonatomic, readonly) BOOL disableLogo;
 /// If non-nil, then this will be the logo displayed instead of 'CocoaGlk'
 - (NSImage*) logo;
 /// A description of what is running in this window (or nil)
-- (NSString*) taskDescription;
+@property (nonatomic, readonly, copy) NSString *taskDescription;
 
 /// Called to show warnings, etc
 - (void) showStatusText: (NSString*) status;

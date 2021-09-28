@@ -52,10 +52,10 @@
 - (void) setLeftWindow: (GlkWindow*) newLeft;
 - (void) setRightWindow: (GlkWindow*) newRight;
 
-- (GlkWindow*) keyWindow;
-- (GlkWindow*) nonKeyWindow;
-- (GlkWindow*) leftWindow;
-- (GlkWindow*) rightWindow;
+@property (nonatomic, retain) GlkWindow *keyWindow;
+@property (nonatomic, readonly, assign) GlkWindow *nonKeyWindow;
+@property (nonatomic, retain) GlkWindow *leftWindow;
+@property (nonatomic, retain) GlkWindow *rightWindow;
 
 // Size and arrangement
 - (void) setSize: (unsigned) newSize;
@@ -66,15 +66,15 @@
 /// \c NO if left is above/left of right, \c YES otherwise
 - (void) setAbove: (BOOL) newAbove;
 
-- (unsigned) size;
-- (BOOL) fixed;
-- (BOOL) horizontal;
-- (BOOL) above;
+@property (nonatomic, readwrite) unsigned size;
+@property (nonatomic, readwrite) BOOL fixed;
+@property (nonatomic, readwrite) BOOL horizontal;
+@property (readwrite) BOOL above;
 
 // Custom settings
 /// Width of the divider between windows (not drawn if < 2)
-- (void) setBorderWidth: (float) borderWidth;
-/// Set to true to only draw the border if input is requested
-- (void) setInputBorder: (BOOL) inputBorder;
+@property (nonatomic) float borderWidth;
+/// Set to \c YES to only draw the border if input is requested
+@property (nonatomic) BOOL inputBorder;
 
 @end

@@ -120,45 +120,16 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 	[self styleChanged];
 }
 
-- (float) indentation {
-	return indentation;
-}
-
-- (float) paraIndentation {
-	return paraIndent;
-}
-
-- (NSTextAlignment)	justification {
-	return alignment;
-}
-
-- (float) size {
-	return size;
-}
-
-- (int)	weight {
-	return weight;
-}
-
-- (BOOL) oblique {
-	return oblique;
-}
-
-- (BOOL) proportional {
-	return proportional;
-}
-
-- (NSColor*) textColour {
-	return textColour;
-}
-
-- (NSColor*) backColour {
-	return backColour;
-}
-
-- (BOOL) reversed {
-	return reversed;
-}
+@synthesize indentation;
+@synthesize paraIndentation = paraIndent;
+@synthesize justification = alignment;
+@synthesize size;
+@synthesize weight;
+@synthesize oblique;
+@synthesize proportional;
+@synthesize textColour;
+@synthesize backColour;
+@synthesize reversed;
 
 // = Utility functions =
 

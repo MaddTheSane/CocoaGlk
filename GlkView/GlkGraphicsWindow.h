@@ -22,7 +22,7 @@
 - (void) fillRect: (NSRect) rect
 	   withColour: (NSColor*) col;
 /// Sets the background colour of the window to the specified colour
-- (void) setBackgroundColour: (NSColor*) col;
+@property (retain) NSColor *backgroundColour;
 /// Draws an image, scaled to the given rectangle
 - (void) drawImage: (NSImage*) img
 			inRect: (NSRect) imgRect;

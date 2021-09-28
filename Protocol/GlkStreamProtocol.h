@@ -56,6 +56,8 @@ enum GlkSeekMode {
 - (void) setStyle: (int) styleId;
 - (int) style;
 
+@property (nonatomic, readwrite) int style;
+
 - (void) setImmediateStyleHint: (unsigned) hint
 					   toValue: (int) value;
 - (void) clearImmediateStyleHint: (unsigned) hint;

@@ -54,10 +54,7 @@
 	[super dealloc];
 }
 
-- (void) setLineInput: (NSString*) newLineInput {
-	[lineInput release];
-	lineInput = [newLineInput copy];
-}
+@synthesize lineInput;
 
 // = GlkEvent methods =
 
@@ -75,10 +72,6 @@
 
 - (glui32) val2 {
 	return val2;
-}
-
-- (NSString*) lineInput {
-	return lineInput;
 }
 
 // = NSCoding methods =

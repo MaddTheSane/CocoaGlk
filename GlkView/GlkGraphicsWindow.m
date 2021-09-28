@@ -188,10 +188,7 @@
 	[self setNeedsDisplay: YES];
 }
 
-- (void) setBackgroundColour: (NSColor*) col {
-	[backgroundColour release];
-	backgroundColour = [col copy];
-}
+@synthesize backgroundColour;
 
 - (void) drawImage: (NSImage*) img
 			inRect: (NSRect) imgRect {

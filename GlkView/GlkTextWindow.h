@@ -81,7 +81,7 @@
 /// Sets this window to be infinite size
 - (void) setInfiniteSize;
 /// The current [ MORE ] animation state (0 = hidden, 1 = shown)
-- (float) currentMoreState;
+@property (nonatomic, readonly) float currentMoreState;
 /// A request to display the [ MORE ] prompt if necessary
 - (void) displayMorePromptIfNecessary;
 /// Sets whether or not the [ MORE ] prompt is shown

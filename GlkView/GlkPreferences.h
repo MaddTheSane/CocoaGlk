@@ -41,7 +41,7 @@ extern NSString* GlkPreferencesHaveChangedNotification;
 }
 
 /// The shared preferences object (these are automagically stored in the user defaults)
-+ (GlkPreferences*) sharedPreferences;
+@property (class, readonly, retain) GlkPreferences *sharedPreferences;
 
 // Preferences and the user defaults
 /// Used to load the preferences from a defaults file
@@ -57,29 +57,25 @@ extern NSString* GlkPreferencesHaveChangedNotification;
 /// The font used for fixed-pitch text
 - (void) setFixedFont: (NSFont*) fixedFont;
 
-- (NSFont*) proportionalFont;
-- (NSFont*) fixedFont;
+@property (nonatomic, copy) NSFont *proportionalFont;
+@property (nonatomic, copy) NSFont *fixedFont;
 
 /// Replaces the current fonts with ones of the given size
 - (void) setFontSize: (float) fontSize;
 
 // Typography preferences
 /// The padding to use in text windows
-- (float) textMargin;
+@property (nonatomic) float textMargin;
 /// Whether or not to use screen fonts
-- (BOOL) useScreenFonts;
+@property (nonatomic) BOOL useScreenFonts;
 /// Whether or not to use hyphenation
-- (BOOL) useHyphenation;
+@property (nonatomic) BOOL useHyphenation;
 /// Whether or not to display ligatures
-- (BOOL) useLigatures;
+@property (nonatomic) BOOL useLigatures;
 /// Whether or not to use kerning
-- (BOOL) useKerning;
+@property (nonatomic) BOOL useKerning;
 /// Replaces the current padding that we should use
 - (void) setTextMargin: (float) margin;
-- (void) setUseScreenFonts: (BOOL) value;
-- (void) setUseHyphenation: (BOOL) value;
-- (void) setUseLigatures: (BOOL) value;
-- (void) setUseKerning: (BOOL) value;
 
 // Style preferences
 /// Dictionary mapping NSNumbers with Glk styles to GlkStyle objects
@@ -89,17 +85,17 @@ extern NSString* GlkPreferencesHaveChangedNotification;
 		  forHint: (unsigned) glkHint;
 
 /// The style dictionary
-- (NSDictionary*) styles;
+@property (nonatomic, copy) NSDictionary *styles;
 // Misc preferences
 /// The amount of scrollback to support in text windows (0-100)
-- (float) scrollbackLength;
+@property (nonatomic) float scrollbackLength;
 
 /// Sets the amount of scrollback to retain
 - (void) setScrollbackLength: (float) length;
 
 // Changes
 /// Number of changes that have occured on this preference object
-- (int) changeCount;
+@property (readonly) int changeCount;
 
 @end
 

@@ -76,17 +76,9 @@
 	needsLayout = YES;
 }
 
-- (GlkWindow*) keyWindow {
-	return key;
-}
-
-- (GlkWindow*) leftWindow {
-	return left;
-}
-
-- (GlkWindow*) rightWindow {
-	return right;
-}
+@synthesize keyWindow = key;
+@synthesize leftWindow = left;
+@synthesize rightWindow = right;
 
 // = Size and arrangement =
 
@@ -108,25 +100,10 @@
 	needsLayout = YES;
 }
 
-- (void) setAbove: (BOOL) newAbove {
-	above = newAbove;
-}
-
-- (unsigned) size {
-	return size;
-}
-
-- (BOOL) fixed {
-	return fixed;
-}
-
-- (BOOL) horizontal {
-	return horizontal;
-}
-
-- (BOOL) above {
-	return above;
-}
+@synthesize size;
+@synthesize fixed;
+@synthesize horizontal;
+@synthesize above;
 
 // = Custom settings =
 
@@ -141,6 +118,9 @@
 	
 	needsLayout = YES;
 }
+
+@synthesize borderWidth;
+@synthesize inputBorder;
 
 // = Layout =
 

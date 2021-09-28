@@ -31,7 +31,7 @@
 	NSString* cookie;
 	
 	/// The delegate (used to create anonymous sessions)
-	id delegate;
+	id<GlkHubDelegate> delegate;
 	
 	/// Sessions waiting for a connection (maps cookies to sessions)
 	NSMutableDictionary* waitingSessions;
@@ -43,7 +43,7 @@
 
 // The shared hub
 /// Creating your own hub is liable to be hairy and unsupported. You only need one per task anyway.
-+ (GlkHub*) sharedGlkHub;
+@property (class, readonly, retain) GlkHub *sharedGlkHub NS_SWIFT_NAME(shared);
 
 // Naming
 /// The name of this GlkHub. Calls resetConnection.
@@ -52,14 +52,18 @@
 - (void) useProcessHubName;
 - (NSString*) hubName;
 
+@property (nonatomic, readwrite, copy) NSString *hubName;
+
 // Security
-/// Clients must know this in order to connect to the hub. nil by default.
+/// Clients must know this in order to connect to the hub. \c nil by default.
 - (void) setHubCookie: (NSString*) hubCookie;
 /// Auto-generates a cookie. Not cryptographically secure (yet).
 - (void) setRandomHubCookie;
 /// Auto-generates (if no cookie exists yet) and stores the hub cookie in the keychain.
 - (void) setKeychainHubCookie;
 - (NSString*) hubCookie;
+
+@property (readwrite, copy) NSString *hubCookie;
 
 // The connection
 /// Starts listening for connections if we're not already
@@ -72,9 +76,8 @@
 /// Unregisters a session previously registered with registerSession
 - (void) unregisterSession: (id<GlkSession>)session;
 
-// The delegate
-- (void) setDelegate: (id<GlkHubDelegate>) hubDelegate;
-- (id<GlkHubDelegate>)   delegate;
+/// The delegate
+@property (retain) id<GlkHubDelegate> delegate;
 
 @end
 

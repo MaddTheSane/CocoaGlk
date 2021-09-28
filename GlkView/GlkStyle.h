@@ -50,36 +50,25 @@ extern NSString* GlkStyleAttributeName;
 
 // The hints
 /// Measured in points
-- (void) setIndentation: (float) indentation;
+@property (nonatomic) float indentation;
 /// Measured in points
-- (void) setParaIndentation: (float) paraIndent;
+@property (nonatomic) float paraIndentation;
 /// Glk doesn't allow us to support 'Natural' alignment
-- (void) setJustification: (NSTextAlignment) alignment;
+@property (nonatomic) NSTextAlignment justification;
 /// Relative, in points
-- (void) setSize: (float) size;
+@property (nonatomic) float size;
 /// -1 = lighter, 1 = bolder
-- (void) setWeight: (int) weight;
+@property (nonatomic) int weight;
 /// YES if an italic/oblique version of the font should be used (italics are used for preference)
-- (void) setOblique: (BOOL) oblique;
+@property (nonatomic) BOOL oblique;
 /// \c NO if fixed-pitch
-- (void) setProportional: (BOOL) proportional;
+@property (nonatomic) BOOL proportional;
 /// Foreground text colour
-- (void) setTextColour: (NSColor*) textColor;
+@property (nonatomic, copy) NSColor *textColour;
 /// Background text colour
-- (void) setBackColour: (NSColor*) backColor;
+@property (nonatomic, copy) NSColor *backColour;
 /// \c YES If text/back are reversed
-- (void) setReversed: (BOOL) reversed;
-
-- (float)			indentation;
-- (float)			paraIndentation;
-- (NSTextAlignment)	justification;
-- (float)			size;
-- (int)				weight;
-- (BOOL)			oblique;
-- (BOOL)			proportional;
-- (NSColor*)		textColour;
-- (NSColor*)		backColour;
-- (BOOL)			reversed;
+@property (nonatomic) BOOL reversed;
 
 // Dealing with glk style hints
 - (void) setHint: (glui32) hint

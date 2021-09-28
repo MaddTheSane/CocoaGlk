@@ -29,12 +29,13 @@ NSMutableDictionary* cocoaglk_fileref_bindings = nil;
 	BOOL cancelled;
 }
 
-- (id<GlkFileRef>) fileRef;
-- (BOOL) cancelled;
+@property (retain, getter=promptedFileRef:) id<GlkFileRef> fileRef;
+@property (readonly) BOOL cancelled;
 
 @end
 
 @implementation GlkFilePrompt
+@synthesize fileRef = ref;
 
 - (id) init {
 	self = [super init];
@@ -53,12 +54,7 @@ NSMutableDictionary* cocoaglk_fileref_bindings = nil;
 	[super dealloc];
 }
 
-- (id<GlkFileRef>) fileRef { return ref; }
-- (BOOL) cancelled { return cancelled; }
-
-- (void) promptedFileRef: (id<GlkFileRef>) fref {
-	ref = [fref retain];
-}
+@synthesize cancelled;
 
 - (void) promptCancelled {
 	cancelled = YES;

@@ -128,9 +128,7 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 
 // = Changes =
 
-- (int) changeCount {
-	return changeCount;
-}
+@synthesize changeCount;
 
 - (void) preferencesHaveChanged {
 	if (!changeNotified) {
@@ -176,13 +174,8 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 	[self preferencesHaveChanged];
 }
 
-- (NSFont*) proportionalFont {
-	return proportionalFont;
-}
-
-- (NSFont*) fixedFont {
-	return fixedFont;
-}
+@synthesize proportionalFont;
+@synthesize fixedFont;
 
 - (void) setFontSize: (float) fontSize {
 	NSFontManager* mgr = [NSFontManager sharedFontManager];
@@ -220,30 +213,17 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 
 // = Typography preferences =
 
-- (float) textMargin {
-	return textMargin;
-}
+@synthesize textMargin;
 
 - (void) setTextMargin: (float) margin {
 	textMargin = margin;
 	[self preferencesHaveChanged];
 }
 
-- (BOOL) useScreenFonts {
-	return useScreenFonts;
-}
-
-- (BOOL) useHyphenation {
-	return useHyphenation;
-}
-
-- (BOOL) useLigatures {
-	return ligatures;
-}
-
-- (BOOL) useKerning {
-	return kerning;
-}
+@synthesize useScreenFonts;
+@synthesize useHyphenation;
+@synthesize useLigatures = ligatures;
+@synthesize useKerning = kerning;
 
 - (void) setUseScreenFonts: (BOOL) value {
 	useScreenFonts = value;
@@ -267,9 +247,7 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 
 // = Misc preferences =
 
-- (float) scrollbackLength {
-	return scrollbackLength;
-}
+@synthesize scrollbackLength;
 
 - (void) setScrollbackLength: (float) length {
 	scrollbackLength = length;

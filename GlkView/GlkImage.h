@@ -44,21 +44,23 @@ extern NSString* GlkImageAttribute;
 
 // Information
 /// The NSImage associated with this image
-- (NSImage*) image;
+@property (readonly, retain) NSImage *image;
 /// The size to draw this image with
-- (NSSize) size;
+@property (readonly) NSSize size;
 /// The Glk alignment of this image
-- (unsigned) alignment;
+@property (readonly) unsigned alignment;
 /// The character position of this image in the text stream
-- (unsigned) characterPosition;
+@property (readonly) unsigned characterPosition;
 
 /// Sets the bounds of this image, marks it as calculated
 - (void) setBounds: (NSRect) bounds;
 /// Retrieves the bounds of this image
 - (NSRect) bounds;
-/// Returns YES if the bounds are calculated
-- (BOOL) calculatedBounds;
+/// Returns \c YES if the bounds are calculated
+@property (readonly) BOOL calculatedBounds;
 /// Marks this image as uncalculated
 - (void) markAsUncalculated;
+
+@property (nonatomic) NSRect bounds;
 
 @end

@@ -20,13 +20,13 @@
 @protocol GlkEvent <NSObject>
 
 /// Type of event
-- (glui32) type;
+@property (readonly) glui32 type;
 /// Needs to be converted to a winid_t in the client
-- (unsigned) windowIdentifier;
+@property (readonly) unsigned windowIdentifier;
 /// Event data
-- (glui32) val1;
+@property (readonly) glui32 val1;
 /// More event data
-- (glui32) val2;
+@property (readonly) glui32 val2;
 
 /// Line data for a line input event
 - (NSString*) lineInput;

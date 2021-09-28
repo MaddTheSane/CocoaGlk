@@ -78,13 +78,13 @@ typedef struct GlkLineSection {
 @interface GlkTypesetter : NSTypesetter {
 	// What we're laying out
 	/// The text storage object that we're laying out [NOT RETAINED]
-	NSAttributedString* storage;
+	__unsafe_unretained NSAttributedString* storage;
 	/// The layout manager that we're dealing with [NOT RETAINED]
-	NSLayoutManager* layout;
+	__unsafe_unretained NSLayoutManager* layout;
 	/// The list of all of the text containers in the current [NOT RETAINED]
-	NSArray* containers;
+	__unsafe_unretained NSArray* containers;
 	/// The text container that we're fitting text into [NOT RETAINED]
-	NSTextContainer* container;
+	__unsafe_unretained NSTextContainer* container;
 	
 	/// The line fragment padding to use
 	float inset;
@@ -146,7 +146,7 @@ typedef struct GlkLineSection {
 	/// The character range for the current paragraph
 	NSRange paragraph;
 	/// The NSParagraphStyle for the current paragraph [NOT RETAINED]
-	NSParagraphStyle* paraStyle;
+	__unsafe_unretained NSParagraphStyle* paraStyle;
 	
 	// Line sections
 	/// The used rect of the current text container
@@ -171,7 +171,7 @@ typedef struct GlkLineSection {
 
 	// The delegate
 	/// The delegate [NOT RETAINED]
-	id<GlkCustomTextLayout> delegate;
+	__unsafe_unretained id<GlkCustomTextLayout> delegate;
 }
 
 // Laying out line sections

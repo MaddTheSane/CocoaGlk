@@ -350,9 +350,7 @@
 
 // = The delegate =
 
-- (void) setDelegate: (id) newDelegate {
-	delegate = newDelegate;
-}
+@synthesize delegate;
 
 - (BOOL) disableLogo {
 	if (delegate && [delegate respondsToSelector: @selector(disableLogo)]) {
@@ -514,9 +512,7 @@
 	}
 }
 
-- (int) synchronisationCount {
-	return syncCount;
-}
+@synthesize synchronisationCount = syncCount;
 
 - (void) requestClientSync {
 	syncCount++;
@@ -564,6 +560,8 @@
 	[self logMessage: @"View cookie set"
 		  withStatus: GlkLogRoutine];
 }
+
+@synthesize viewCookie;
 
 - (void) setRandomViewCookie {
 	unichar randomCookie[16];
@@ -670,6 +668,8 @@
 	[self logMessage: [NSString stringWithFormat: @"Creating stream to read data from '%@' with key '%@'", filename, streamKey]
 		  withStatus: GlkLogRoutine];
 }
+
+@synthesize inputStream;
 
 - (void) setInputStream: (id<GlkStream>) stream {
 	[inputStream release]; inputStream = nil;
@@ -2336,6 +2336,8 @@
 	}
 }
 
+@dynamic canSendInput;
+
 - (BOOL) canSendInput {
 	GlkWindow* candidate = rootWindow;
 	GlkWindow* initialCandidate = candidate;
@@ -2437,13 +2439,7 @@ static BOOL pageAllFrom(GlkWindow* win) {
 	return pageAllFrom(rootWindow);
 }
 
-- (void) setAlwaysPageOnMore: (BOOL) alwaysPage {
-	alwaysPageOnMore = alwaysPage;
-}
-
-- (BOOL) alwaysPageOnMore {
-	return alwaysPageOnMore;
-}
+@synthesize alwaysPageOnMore;
 
 // Various UI events
 

@@ -201,6 +201,7 @@
 		4BFA1CD407F8A4040068E16A /* gi_blorb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1CD007F8A4040068E16A /* gi_blorb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA1CD507F8A4040068E16A /* gi_dispa.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1CD107F8A4040068E16A /* gi_dispa.m */; };
 		4BFA1D6907F8A8D00068E16A /* glk_misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1D6707F8A8D00068E16A /* glk_misc.m */; };
+		55BC63482055EE7F001F8CFB /* glk_datetime.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BC63472055EE7F001F8CFB /* glk_datetime.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -498,6 +499,7 @@
 		4BFA1CD007F8A4040068E16A /* gi_blorb.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = gi_blorb.h; sourceTree = "<group>"; };
 		4BFA1CD107F8A4040068E16A /* gi_dispa.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = gi_dispa.m; sourceTree = "<group>"; };
 		4BFA1D6707F8A8D00068E16A /* glk_misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_misc.m; sourceTree = "<group>"; };
+		55BC63472055EE7F001F8CFB /* glk_datetime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_datetime.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* CocoaGlk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaGlk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -801,6 +803,7 @@
 				4B51ABF507E891B900576AB9 /* glk_files.m */,
 				4B51AAED07E87CD300576AB9 /* glk_image.m */,
 				4B16B77908A0E0A8001E4C40 /* glk_sound.m */,
+				55BC63472055EE7F001F8CFB /* glk_datetime.m */,
 				4B16B77D08A0E0C7001E4C40 /* glk_hyperlink.m */,
 				4B8BDE7C07EB400E008AE26D /* glk_cocoa.m */,
 				4BFA1D6707F8A8D00068E16A /* glk_misc.m */,
@@ -1376,6 +1379,7 @@
 				4B16B78908A0E14C001E4C40 /* glk_sound.m in Sources */,
 				4B16B78A08A0E14C001E4C40 /* glk_hyperlink.m in Sources */,
 				4B4D36450A9738580007FD80 /* glk_unicode.m in Sources */,
+				55BC63482055EE7F001F8CFB /* glk_datetime.m in Sources */,
 				4B4D379F0A97B53E0007FD80 /* GlkUcs4Stream.m in Sources */,
 				4B3CBD090B07DB0C0073216F /* GlkMemoryFileRef.m in Sources */,
 				4BBFE3990C4EC253007DEE18 /* GlkBufferedStream.m in Sources */,

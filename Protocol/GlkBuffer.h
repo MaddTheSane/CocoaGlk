@@ -153,7 +153,7 @@
 //
 // Class used to temporarily store bufferable operations before sending them to the server
 //
-@interface GlkBuffer : NSObject<NSCopying, NSCoding, GlkBuffer> {
+@interface GlkBuffer : NSObject<NSCopying, NSSecureCoding, GlkBuffer> {
 	NSMutableArray* operations;
 }
 

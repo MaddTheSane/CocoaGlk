@@ -230,7 +230,13 @@ static NSString* stringFromOp(NSArray* op) {
 	self = [super init];
 	
 	if (self) {
-		operations = [[NSMutableArray alloc] initWithArray: [coder decodeObject]
+		id decoded;
+		if (coder.allowsKeyedCoding) {
+			decoded = [coder decodeObjectOfClasses: [NSSet setWithObjects: [NSArray class], [NSNumber class], [NSString class], [NSColor class], [NSValue class], [NSData class], nil] forKey: @"Operations"];
+		} else {
+			decoded = [coder decodeObject];
+		}
+		operations = [[NSMutableArray alloc] initWithArray: decoded
 												 copyItems: NO];
 	}
 	
@@ -238,7 +244,16 @@ static NSString* stringFromOp(NSArray* op) {
 }
 
 - (void) encodeWithCoder: (NSCoder*) coder {
-	[coder encodeObject: operations];
+	if (coder.allowsKeyedCoding) {
+		[coder encodeObject: operations forKey: @"Operations"];
+	} else {
+		[coder encodeObject: operations];
+	}
+}
+
++ (BOOL)supportsSecureCoding
+{
+	return YES;
 }
 
 - (id)replacementObjectForPortCoder:(NSPortCoder *)encoder {

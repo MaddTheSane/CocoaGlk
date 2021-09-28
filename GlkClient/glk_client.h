@@ -58,8 +58,8 @@ extern void cocoaglk_unregister_line_buffers(winid_t win);	// Unregisters any li
 
 // = Variables =
 
-extern NSObject<GlkSession>*	cocoaglk_session;		// The running session
-extern NSObject<GlkHub>*		cocoaglk_hub;			// The hub session dispatcher object
+extern id<GlkSession>			cocoaglk_session;		// The running session
+extern id<GlkHub>				cocoaglk_hub;			// The hub session dispatcher object
 
 extern GlkBuffer*				cocoaglk_buffer;		// The shared buffer object
 extern NSAutoreleasePool*		cocoaglk_pool;			// The interpreter thread autorelease pool
@@ -151,7 +151,7 @@ struct glk_stream_struct {
 	GlkBuffer* streamBuffer;			// The stream buffer to use (nil to use the standard buffer)
 	int bufferedAmount;					// Amount of stuff buffered (flushes when this gets too large)
 	
-	NSObject<GlkStream>* stream;		// The actual stream object
+	id<GlkStream> stream;				// The actual stream object
 	unsigned written;					// The amount written to the stream object (not necessarily accurate, depending on how the stream object really responds to writes)
 	unsigned read;						// The amount read from the stream object
 	
@@ -182,7 +182,7 @@ struct glk_fileref_struct {
 	glui32 rock;						// The fileref rock
 	glui32 usage;						// The usage specified for this fileref when it was created
 	
-	NSObject<GlkFileRef>* fileref;		// The actual fileref object
+	id<GlkFileRef> fileref;				// The actual fileref object
 	
 	gidispatch_rock_t giRock;			// Annoying gi_dispa rock
 	

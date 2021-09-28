@@ -14,9 +14,10 @@
 ///
 /// Protocol that can be implemented by custom line sections (which want to know about their final typesetting information)
 ///
-@protocol GlkCustomLineSection
+@protocol GlkCustomLineSection <NSObject>
 
-- (void) placeBaselineAt: (NSPoint) point					// This object has been typeset at the specified position
+/// This object has been typeset at the specified position
+- (void) placeBaselineAt: (NSPoint) point
 				forGlyph: (int) glyph;
 
 @end
@@ -27,7 +28,7 @@
 /// (This is by way of a hack to avoid having to implement a NSLayoutManager subclass that can draw the custom glyphs
 /// itself)
 ///
-@protocol GlkCustomTextLayout
+@protocol GlkCustomTextLayout <NSObject>
 
 - (void) invalidateCustomGlyphs: (NSRange) range;
 - (void) addCustomGlyph: (int) location
@@ -170,7 +171,7 @@ typedef struct GlkLineSection {
 
 	// The delegate
 	/// The delegate [NOT RETAINED]
-	NSObject<GlkCustomTextLayout>* delegate;
+	id<GlkCustomTextLayout> delegate;
 }
 
 // Laying out line sections
@@ -219,7 +220,7 @@ typedef struct GlkLineSection {
 
 // Setting the delegate
 /// Sets the delegate (the delegate is NOT RETAINED)
-- (void) setDelegate: (NSObject<GlkCustomTextLayout>*) delegate;
+- (void) setDelegate: (id<GlkCustomTextLayout>) delegate;
 
 // Clearing the cache
 /// Forces any cached glyphs to be cleared (eg when a textstorage object changes)

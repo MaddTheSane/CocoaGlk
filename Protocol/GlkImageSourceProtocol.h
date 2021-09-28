@@ -20,7 +20,7 @@
 /// By default, we use the gi_blorb_* functions to get image resources. glk doesn't have a means for getting
 /// images from other sources by default.
 ///
-@protocol GlkImageSource
+@protocol GlkImageSource <NSObject>
 
 /// Retrieve the image data for a specified resource
 - (bycopy NSData*) dataForImageResource: (glui32) image;

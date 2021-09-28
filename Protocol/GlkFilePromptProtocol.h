@@ -17,10 +17,10 @@
 ///
 /// Protocol used to get the results after we've requested a file prompt
 ///
-@protocol GlkFilePrompt
+@protocol GlkFilePrompt <NSObject>
 
 /// Called when the user chooses a file
-- (void) promptedFileRef: (in byref NSObject<GlkFileRef>*) fref;
+- (void) promptedFileRef: (in byref id<GlkFileRef>) fref;
 /// Called when the user gives up on us
 - (void) promptCancelled;
 

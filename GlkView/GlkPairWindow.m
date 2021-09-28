@@ -305,7 +305,7 @@
 	[right taskFinished];
 }
 
-- (void) setEventTarget: (NSObject<GlkEventReceiver>*) newTarget {
+- (void) setEventTarget: (id<GlkEventReceiver>) newTarget {
 	[super setEventTarget: newTarget];
 	
 	// Propagate the handler

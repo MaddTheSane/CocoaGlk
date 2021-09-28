@@ -25,11 +25,11 @@ NSMutableDictionary* cocoaglk_fileref_bindings = nil;
 // = Prompt object =
 
 @interface GlkFilePrompt : NSObject<GlkFilePrompt> {
-	NSObject<GlkFileRef>* ref;
+	id<GlkFileRef> ref;
 	BOOL cancelled;
 }
 
-- (NSObject<GlkFileRef>*) fileRef;
+- (id<GlkFileRef>) fileRef;
 - (BOOL) cancelled;
 
 @end
@@ -53,10 +53,10 @@ NSMutableDictionary* cocoaglk_fileref_bindings = nil;
 	[super dealloc];
 }
 
-- (NSObject<GlkFileRef>*) fileRef { return ref; }
+- (id<GlkFileRef>) fileRef { return ref; }
 - (BOOL) cancelled { return cancelled; }
 
-- (void) promptedFileRef: (NSObject<GlkFileRef>*) fref {
+- (void) promptedFileRef: (id<GlkFileRef>) fref {
 	ref = [fref retain];
 }
 
@@ -156,7 +156,7 @@ BOOL cocoaglk_frefid_sane(frefid_t ref) {
 //	will never need to know it.]]
 //
 frefid_t glk_fileref_create_temp(glui32 usage, glui32 rock) {
-	NSObject<GlkFileRef>* ref = [cocoaglk_session tempFileRef];
+	id<GlkFileRef> ref = [cocoaglk_session tempFileRef];
 	if (!ref) return NULL;
 	
 	frefid_t res = malloc(sizeof(struct glk_fileref_struct));
@@ -192,7 +192,7 @@ frefid_t glk_fileref_create_by_name(glui32 usage, char *name,
 	NSString* filename = [[[NSString alloc] initWithBytes: name
 												   length: strlen(name)
 												 encoding: NSISOLatin1StringEncoding] autorelease];
-	NSObject<GlkFileRef>* ref = [cocoaglk_fileref_bindings objectForKey: filename];
+	id<GlkFileRef> ref = [cocoaglk_fileref_bindings objectForKey: filename];
 	if (!ref) ref = [cocoaglk_session fileRefWithName: filename];
 	if (!ref) return NULL;
 	
@@ -260,7 +260,7 @@ frefid_t glk_fileref_create_by_prompt(glui32 usage, glui32 fmode,
 											beforeDate: [NSDate distantFuture]];
 	}
 	
-	NSObject<GlkFileRef>* ref = [[prompt fileRef] retain];
+	id<GlkFileRef> ref = [[prompt fileRef] retain];
 	
 	// Release the prompt
 	[prompt release];

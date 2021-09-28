@@ -84,7 +84,7 @@ void glk_select(event_t *event) {
 	[cocoaglk_session setEventListener: listener];
 
 	// Wait for and retrieve the next event
-	NSObject<GlkEvent>* evt = [cocoaglk_session nextEvent];
+	id<GlkEvent> evt = [cocoaglk_session nextEvent];
 	
 	while (evt == NULL) {
 		if (cocoaglk_eventwaiting) {

@@ -11,14 +11,15 @@
 ///
 /// Describes a fileref (mainly used for communicating files between the process and the server)
 ///
-@protocol GlkFileRef
+NS_SWIFT_NAME(GlkFileRefProtocol)
+@protocol GlkFileRef <NSObject>
 
 /// Creates a read only stream from this fileref
-- (byref NSObject<GlkStream>*) createReadOnlyStream;
+- (byref id<GlkStream>) createReadOnlyStream;
 /// Creates a write only stream from this fileref
-- (byref NSObject<GlkStream>*) createWriteOnlyStream;
+- (byref id<GlkStream>) createWriteOnlyStream;
 /// Creates a read/write stream from this fileref
-- (byref NSObject<GlkStream>*) createReadWriteStream;
+- (byref id<GlkStream>) createReadWriteStream;
 
 /// Deletes the file associated with this fileref
 - (void) deleteFile;

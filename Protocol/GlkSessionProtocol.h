@@ -29,13 +29,12 @@
 #define GlkFileUsageGameFile	(@"GlkFileUsageGameFile"	)
 
 /// Structure representing a size in pixels or characters
-typedef struct GlkSize GlkSize;
-struct GlkSize {
+typedef struct GlkSize {
 	int width;
 	int height;
-};
+} GlkSize;
 
-@protocol GlkSession
+@protocol GlkSession <NSObject>
 
 // Housekeeping
 - (void) clientHasStarted: (pid_t) processId;
@@ -48,11 +47,11 @@ struct GlkSize {
 - (GlkSize) sizeForWindowIdentifier: (unsigned) windowId;
 
 // Streams
-- (byref NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId;
+- (byref id<GlkStream>) streamForWindowIdentifier: (unsigned) windowId;
 /// Stream created before the task was initialised (used, for example, for specifying which file was double-clicked on)
-- (byref NSObject<GlkStream>*) inputStream;
+- (byref id<GlkStream>) inputStream;
 /// Stream created before the task was initialised (used, for example, for specifying which file was double-clicked on)
-- (byref NSObject<GlkStream>*) streamForKey: (in bycopy NSString*) key;
+- (byref id<GlkStream>) streamForKey: (in bycopy NSString*) key;
 
 // Styles
 - (glui32) measureStyle: (glui32) styl
@@ -64,9 +63,9 @@ struct GlkSize {
 - (bycopy NSString*) cancelLineEventsForWindowIdentifier: (unsigned) windowIdentifier;
 
 /// Request for the next event on the queue
-- (bycopy NSObject<GlkEvent>*) nextEvent;
+- (bycopy id<GlkEvent>) nextEvent;
 /// Listener can be nil to indicate that no listener is required
-- (void) setEventListener: (in byref NSObject<GlkEventListener>*) listener;
+- (void) setEventListener: (in byref id<GlkEventListener>) listener;
 /// Called to indicating that we're starting a glk_select call
 - (void) willSelect;
 
@@ -86,9 +85,9 @@ struct GlkSize {
 
 // Filerefs
 /// Returns \c NULL if the name is invalid (or if we're not supporting named files for some reason)
-- (NSObject<GlkFileRef>*) fileRefWithName: (in bycopy NSString*) name;
+- (id<GlkFileRef>) fileRefWithName: (in bycopy NSString*) name;
 /// Temp files are automagically deleted when the session goes away
-- (NSObject<GlkFileRef>*) tempFileRef;
+- (id<GlkFileRef>) tempFileRef;
 
 /// Returns the list of the preferred filetypes for the specified usage
 - (bycopy NSArray*) fileTypesForUsage: (in bycopy NSString*) usage;
@@ -98,11 +97,11 @@ struct GlkSize {
 /// Will return quickly, then the handler will be told the results later
 - (void) promptForFilesForUsage: (in bycopy NSString*) usage
 					 forWriting: (BOOL) writing
-						handler: (in byref NSObject<GlkFilePrompt>*) handler;
+						handler: (in byref id<GlkFilePrompt>) handler;
 /// Will return quickly, then the handler will be told the results later
 - (void) promptForFilesOfType: (in bycopy NSArray*) filetypes
 				   forWriting: (BOOL) writing
-					  handler: (in byref NSObject<GlkFilePrompt>*) handler;
+					  handler: (in byref id<GlkFilePrompt>) handler;
 
 // Images
 /// Sets where we get our image data from

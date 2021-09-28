@@ -14,7 +14,7 @@
 
 // = Initialisation =
 
-- (id) initWithStream: (NSObject<GlkStream>*) newSourceStream {
+- (id) initWithStream: (id<GlkStream>) newSourceStream {
 	self = [super init];
 	
 	if (self) {

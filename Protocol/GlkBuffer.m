@@ -468,7 +468,7 @@ static NSString* stringFromOp(NSArray* op) {
 // Streams
 
 // Registering streams
-- (void) registerStream: (in byref NSObject<GlkStream>*) stream
+- (void) registerStream: (in byref id<GlkStream>) stream
 		  forIdentifier: (unsigned) streamIdentifier  {
 	[self addOperation: s_RegisterStream
 			 arguments: [NSArray arrayWithObjects: stream

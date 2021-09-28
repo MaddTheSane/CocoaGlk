@@ -645,7 +645,7 @@
 	[subtask terminate];
 }
 
-- (void) addStream: (NSObject<GlkStream>*) stream 
+- (void) addStream: (id<GlkStream>) stream
 		   withKey: (NSString*) streamKey {
 	if (!extraStreamDictionary) {
 		extraStreamDictionary = [[NSMutableDictionary alloc] init];
@@ -671,7 +671,7 @@
 		  withStatus: GlkLogRoutine];
 }
 
-- (void) setInputStream: (NSObject<GlkStream>*) stream {
+- (void) setInputStream: (id<GlkStream>) stream {
 	[inputStream release]; inputStream = nil;
 	inputStream = [stream retain];
 	
@@ -805,7 +805,7 @@
 
 // Streams
 
-- (NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId {
+- (id<GlkStream>) streamForWindowIdentifier: (unsigned) windowId {
 	GlkWindow* window = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowId]];
 	
 	if (window) {
@@ -815,11 +815,11 @@
 	}
 }
 
-- (NSObject<GlkStream>*) inputStream {
+- (id<GlkStream>) inputStream {
 	return inputStream;
 }
 
-- (NSObject<GlkStream>*) streamForKey: (NSString*) key {
+- (id<GlkStream>) streamForKey: (NSString*) key {
 	return [extraStreamDictionary objectForKey: key];
 }
 
@@ -924,7 +924,7 @@
 
 // Events
 
-- (NSObject<GlkEvent>*) nextEvent {
+- (id<GlkEvent>) nextEvent {
 	if ([events count] > 0) {
 		// Get the next event from the queue
 		GlkEvent* nextEvent = [[[events objectAtIndex: 0] retain] autorelease];
@@ -943,7 +943,7 @@
 	}
 }
 
-- (void) setEventListener: (NSObject<GlkEventListener>*) newListener {
+- (void) setEventListener: (id<GlkEventListener>) newListener {
 	[listener autorelease]; listener = nil;
 	
 	// Inform any input automation objects that if they've got events waiting, then now is the time to fire them
@@ -951,7 +951,7 @@
 		listener = [newListener retain];
 
 		NSEnumerator* inputReceiverEnum = [inputReceivers objectEnumerator];
-		NSObject<GlkAutomation>* receiver;
+		id<GlkAutomation> receiver;
 		
 		while (receiver = [inputReceiverEnum nextObject]) {
 			[receiver viewIsWaitingForInput: self];
@@ -989,7 +989,7 @@
 
 // Filerefs
 
-- (NSObject<GlkFileRef>*) fileRefWithName: (NSString*) name {
+- (id<GlkFileRef>) fileRefWithName: (NSString*) name {
 	// Turn into a 'real' path
 	NSString* path = [self pathForNamedFile: name];
 	if (!path) return nil;
@@ -1002,7 +1002,7 @@
 	return [res autorelease];
 }
 
-- (NSObject<GlkFileRef>*) tempFileRef {
+- (id<GlkFileRef>) tempFileRef {
 	NSString* tempDir = NSTemporaryDirectory();
 	if (tempDir == nil) return nil;
 	
@@ -1080,7 +1080,7 @@
 
 - (void) promptForFilesForUsage: (NSString*) usage
 					 forWriting: (BOOL) writing
-						handler: (NSObject<GlkFilePrompt>*) handler {
+						handler: (id<GlkFilePrompt>) handler {
 	// Pick a preferred directory
 	NSString* preferredDirectory = nil;
 	
@@ -1111,7 +1111,7 @@
 
 - (void) promptForFilesOfType: (NSArray*) filetypes
 				   forWriting: (BOOL) writing
-					  handler: (NSObject<GlkFilePrompt>*) handler {
+					  handler: (id<GlkFilePrompt>) handler {
 	// If we don't have a window, we can't show a dialog, so we can't get a filename
 	if (![self window]) {
 		[handler promptCancelled];
@@ -1581,7 +1581,7 @@
 - (void) setStyleHint: (glui32) hint
 			  toValue: (glsi32) value
 			 inStream: (glui32) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to set an immediate style hint in an undefined stream");
@@ -1594,7 +1594,7 @@
 
 - (void) clearStyleHint: (glui32) hint
 			   inStream: (glui32) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to clear an immediate style hint in an undefined stream");
@@ -1606,7 +1606,7 @@
 
 - (void) setCustomAttributes: (NSDictionary*) attributes
 					inStream: (glui32) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to set custom attributes in an undefined stream");
@@ -1709,7 +1709,7 @@
 
 // Registering streams
 
-- (void) registerStream: (NSObject<GlkStream>*) stream
+- (void) registerStream: (id<GlkStream>) stream
 		  forIdentifier: (unsigned) streamIdentifier {
 	[glkStreams setObject: stream
 				   forKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
@@ -1729,7 +1729,7 @@
 }
 
 - (void) closeStreamIdentifier: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to close nonexistent stream");
@@ -1741,7 +1741,7 @@
 }
 
 - (void) unregisterStreamIdentifier: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (!stream) {
 		// Stream might not have been registered to begin with: we consider this OK
@@ -1753,13 +1753,13 @@
 
 // Buffering stream writes
 
-- (void) automateStream: (NSObject<GlkStream>*) stream
+- (void) automateStream: (id<GlkStream>) stream
 			  forString: (NSString*) string {
 	// If this is a text window stream, then send the output to the appropriate automation objects
 	if ([stream isKindOfClass: [GlkTextWindow class]] &&
 		![stream isKindOfClass: [GlkTextGridWindow class]]) {
 		NSEnumerator* outputEnum = [outputReceivers objectEnumerator];
-		NSObject<GlkAutomation>* receiver;
+		id<GlkAutomation> receiver;
 		
 		int windowId = [self automationIdForWindowId: [(GlkTextWindow*)stream identifier]];
 		
@@ -1773,7 +1773,7 @@
 
 - (void) putChar: (unichar) ch
 		toStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to write to nonexistent stream");
@@ -1792,7 +1792,7 @@
 
 - (void) putString: (NSString*) string
 		  toStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to write to nonexistent stream");
@@ -1809,7 +1809,7 @@
 
 - (void) putData: (NSData*) data
 		toStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to write to nonexistent stream");
@@ -1821,7 +1821,7 @@
 
 - (void) setStyle: (unsigned) style
 		 onStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to set style on a nonexistent stream");
@@ -1836,7 +1836,7 @@
 
 - (void) setHyperlink: (unsigned int) value
 			 onStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to set style on a nonexistent stream");
@@ -1847,7 +1847,7 @@
 }
 
 - (void) clearHyperlinkOnStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
+	id<GlkStream> stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to set style on a nonexistent stream");
@@ -2265,7 +2265,7 @@
 	
 	if ([outputReceivers count] > 0) {
 		NSEnumerator* outputReceiverEnum = [outputReceivers objectEnumerator];
-		NSObject<GlkAutomation>* receiver;
+		id<GlkAutomation> receiver;
 		int ident = [self automationIdForWindowId: windowId];
 		
 		while (receiver = [outputReceiverEnum nextObject]) {
@@ -2301,15 +2301,15 @@
 
 // = Automation =
 
-- (void) addOutputReceiver: (NSObject<GlkAutomation>*) receiver {
+- (void) addOutputReceiver: (id<GlkAutomation>) receiver {
 	[outputReceivers addObject: receiver];
 }
 
-- (void) addInputReceiver: (NSObject<GlkAutomation>*) receiver {
+- (void) addInputReceiver: (id<GlkAutomation>) receiver {
 	[inputReceivers addObject: receiver];
 }
 
-- (void) removeAutomationObject: (NSObject<GlkAutomation>*) receiver {
+- (void) removeAutomationObject: (id<GlkAutomation>) receiver {
 	[outputReceivers removeObjectIdenticalTo: receiver];
 	[inputReceivers removeObjectIdenticalTo: receiver];
 }

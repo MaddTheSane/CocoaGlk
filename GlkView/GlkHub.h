@@ -10,6 +10,8 @@
 
 #import <GlkView/GlkHubProtocol.h>
 
+@protocol GlkHubDelegate;
+
 ///
 /// The hub is the first point that a client connects to the Glk server application.
 ///
@@ -65,21 +67,22 @@
 
 // Registering sessions for later consumption
 /// Registers a session with the given cookie. A client can request this specific session object (exactly one, though)
-- (void) registerSession: (NSObject<GlkSession>*) session
+- (void) registerSession: (id<GlkSession>) session
 			  withCookie: (NSString*) sessionCookie;
 /// Unregisters a session previously registered with registerSession
-- (void) unregisterSession: (NSObject<GlkSession>*)session;
+- (void) unregisterSession: (id<GlkSession>)session;
 
 // The delegate
-- (void) setDelegate: (id) hubDelegate;
-- (id)   delegate;
+- (void) setDelegate: (id<GlkHubDelegate>) hubDelegate;
+- (id<GlkHubDelegate>)   delegate;
 
 @end
 
 /// Hub delegate functions
-@interface NSObject(GlkHubDelegate)
+@protocol GlkHubDelegate <NSObject>
+@optional
 
 /// Usually should return a GlkView. Called when a task starts with no session cookie
-- (NSObject<GlkSession>*) createAnonymousSession;
+- (id<GlkSession>) createAnonymousSession;
 
 @end

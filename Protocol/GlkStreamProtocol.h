@@ -33,7 +33,7 @@ enum GlkSeekMode {
 /// Our streams use unichars and unicode strings rather than the Latin-1 specified by Glk.
 /// This amounts to the same things overall, but makes it easy to update later.
 ///
-@protocol GlkStream
+@protocol GlkStream <NSObject>
 
 // Control
 - (void) closeStream;

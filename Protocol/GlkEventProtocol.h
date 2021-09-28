@@ -17,7 +17,7 @@
 ///
 /// Protocol implemented by any class claiming to be a Glk event
 ///
-@protocol GlkEvent
+@protocol GlkEvent <NSObject>
 
 /// Type of event
 - (glui32) type;

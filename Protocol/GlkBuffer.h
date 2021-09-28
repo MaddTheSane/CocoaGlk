@@ -37,7 +37,7 @@
 /// operations to be performed. In this version, we presently send invocations. This might change later if this forces
 /// too much client/server communications (to selectors and an array of arguments)
 ///
-@protocol GlkBuffer
+@protocol GlkBuffer <NSObject>
 
 // Windows
 
@@ -120,7 +120,7 @@
 // Streams
 
 // Registering streams
-- (void) registerStream: (in byref NSObject<GlkStream>*) stream
+- (void) registerStream: (in byref id<GlkStream>) stream
 		  forIdentifier: (unsigned) streamIdentifier;
 - (void) registerStreamForWindow: (unsigned) windowIdentifier
 				   forIdentifier: (unsigned) streamIdentifier;

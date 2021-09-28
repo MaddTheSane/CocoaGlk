@@ -15,6 +15,7 @@
 #import <GlkView/GlkStyle.h>
 
 @protocol GlkAutomation;
+@protocol GlkViewDelegate;
 
 typedef enum GlkLogStatus {
 	/// Routine log message
@@ -65,11 +66,11 @@ typedef enum GlkLogStatus {
 	NSMutableDictionary* glkStreams;
 
 	/// The input stream
-	NSObject<GlkStream>* inputStream;
+	id<GlkStream> inputStream;
 	/// Maps keys to extra input streams
 	NSMutableDictionary* extraStreamDictionary;
 	/// Used while prompting for a file
-	NSObject<GlkFilePrompt>* promptHandler;
+	id<GlkFilePrompt> promptHandler;
 	/// Types of files we can show in the panels
 	NSArray* allowedFiletypes;
 	
@@ -84,7 +85,7 @@ typedef enum GlkLogStatus {
 	/// The last Arrange event we received
 	GlkEvent* arrangeEvent;
 	/// The listener for events
-	NSObject<GlkEventListener>* listener;
+	id<GlkEventListener> listener;
 	/// The queue of waiting events
 	NSMutableArray* events;
 	
@@ -112,11 +113,11 @@ typedef enum GlkLogStatus {
 	
 	// The delegate
 	/// Can respond to certain events if it likes
-	id delegate;
+	id<GlkViewDelegate> delegate;
 	
 	// Images and graphics
 	/// Source of data for images
-	NSObject<GlkImageSource>* imgSrc;
+	id<GlkImageSource> imgSrc;
 	/// Dictionary of images
 	NSMutableDictionary* imageDictionary;
 	/// Dictionary of flipped images
@@ -157,11 +158,11 @@ typedef enum GlkLogStatus {
 /// Terminates the client application
 - (void) terminateClient;
 /// Sets the input stream
-- (void) setInputStream: (NSObject<GlkStream>*) stream;
+- (void) setInputStream: (id<GlkStream>) stream;
 /// Sets the input stream to be input from the given file
 - (void) setInputFilename: (NSString*) filename;
 /// Adds a keyed stream that the client can obtain if necessary
-- (void) addStream: (NSObject<GlkStream>*) stream
+- (void) addStream: (id<GlkStream>) stream
 		   withKey: (NSString*) streamKey;
 /// Adds a keyed stream that reads from the specified filename
 - (void) addInputFilename: (NSString*) filename
@@ -174,7 +175,7 @@ typedef enum GlkLogStatus {
 
 // The delegate
 /// Sets the delegate for this view. Delegates are not retained.
-- (void) setDelegate: (id) delegate;
+- (void) setDelegate: (id<GlkViewDelegate>) delegate;
 
 // Events
 /// Note that Arrange events are merged if not yet claimed
@@ -232,12 +233,12 @@ typedef enum GlkLogStatus {
 
 // Automation
 /// Adds an automation object to receive game and user output events
-- (void) addOutputReceiver: (NSObject<GlkAutomation>*) receiver;
+- (void) addOutputReceiver: (id<GlkAutomation>) receiver;
 /// Adds an automation object to receive notifications about when it can sensibly send input to the game (if there is an input receiver, input through the UI is disabled)
-- (void) addInputReceiver: (NSObject<GlkAutomation>*) receiver;
+- (void) addInputReceiver: (id<GlkAutomation>) receiver;
 
 /// Removes an automation object from input and/or output duties
-- (void) removeAutomationObject: (NSObject<GlkAutomation>*) receiver;
+- (void) removeAutomationObject: (id<GlkAutomation>) receiver;
 
 /// Returns true if there are windows waiting for input (ie, a sendCharacters event will succeed)
 - (BOOL) canSendInput;
@@ -250,14 +251,15 @@ typedef enum GlkLogStatus {
 			toWindow: (int) window;
 
 /// Request from a window object to send characters to the automation system
-- (void) automateStream: (NSObject<GlkStream>*) stream
+- (void) automateStream: (id<GlkStream>) stream
 			  forString: (NSString*) string;
 @end
 
 ///
 /// Functions that a view delegate can provide
 ///
-@interface NSObject(GlkViewDelegate)
+@protocol GlkViewDelegate <NSObject>
+@optional
 
 /// Set to return \c YES to get rid of the CocoaGlk logo
 - (BOOL) disableLogo;
@@ -291,7 +293,7 @@ typedef enum GlkLogStatus {
 /// The delegate can override this to provide custom saving behaviour for its files. This should return \c YES if the delegate is going to handle the event or \c NO otherwise
 - (BOOL) promptForFilesForUsage: (NSString*) usage
 					 forWriting: (BOOL) writing
-						handler: (NSObject<GlkFilePrompt>*) handler
+						handler: (id<GlkFilePrompt>) handler
 			 preferredDirectory: (NSString*) preferredDirectory;
 
 @end

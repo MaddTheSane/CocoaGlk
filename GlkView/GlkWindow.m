@@ -297,7 +297,7 @@
 	// We can't get any clearer
 }
 
-- (void) setEventTarget: (NSObject<GlkEventReceiver>*) newTarget {
+- (void) setEventTarget: (id<GlkEventReceiver>) newTarget {
 	target = newTarget;
 }
 

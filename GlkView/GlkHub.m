@@ -81,7 +81,7 @@
 
 // = Registering sessions for later consumption =
 
-- (void) registerSession: (NSObject<GlkSession>*) session
+- (void) registerSession: (id<GlkSession>) session
 			  withCookie: (NSString*) sessionCookie {
 	if ([waitingSessions objectForKey: sessionCookie] != nil) {
 		// Oops! This is not allowed
@@ -94,11 +94,11 @@
 						forKey: sessionCookie];
 }
 
-- (void) unregisterSession: (NSObject<GlkSession>*)session {
+- (void) unregisterSession: (id<GlkSession>)session {
 	// Iterate through the sessions until we find the one that we're supposed to be removing
 	NSEnumerator* sesEnum = [waitingSessions keyEnumerator];
 	NSString* sessionCookie;
-	NSObject<GlkSession>* ses;
+	id<GlkSession> ses;
 	
 	while (sessionCookie = [sesEnum nextObject]) {
 		ses = [waitingSessions objectForKey: sessionCookie];
@@ -160,23 +160,23 @@
 
 // = Setting up the session =
 
-- (NSObject<GlkSession>*) createNewSession {
+- (id<GlkSession>) createNewSession {
 	return [self createNewSessionWithHubCookie: nil
 								 sessionCookie: nil];
 }
 
-- (NSObject<GlkSession>*) createNewSessionWithHubCookie: (NSString*) hubCookie {
+- (id<GlkSession>) createNewSessionWithHubCookie: (NSString*) hubCookie {
 	return [self createNewSessionWithHubCookie: hubCookie
 								 sessionCookie: nil];
 }
 
-- (NSObject<GlkSession>*) createNewSessionWithHubCookie: (NSString*) hubCookie
+- (id<GlkSession>) createNewSessionWithHubCookie: (NSString*) hubCookie
 										  sessionCookie: (NSString*) sessionCookie {
 	if (sessionCookie == nil) {
 		return [self createAnonymousSession];
 	} else {
 		// Look up the session in the session dictionary
-		NSObject<GlkSession>* session = [waitingSessions objectForKey: sessionCookie];
+		id<GlkSession> session = [waitingSessions objectForKey: sessionCookie];
 		if (session == nil) return nil;
 		
 		// Remove the session from the dictionary
@@ -199,7 +199,7 @@
 	return delegate;
 }
 
-- (NSObject<GlkSession>*) createAnonymousSession {
+- (id<GlkSession>) createAnonymousSession {
 	if (delegate && [delegate respondsToSelector: @selector(createAnonymousSession)]) {
 		return [delegate createAnonymousSession];
 	} else {

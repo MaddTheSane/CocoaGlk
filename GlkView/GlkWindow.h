@@ -56,7 +56,7 @@
 	
 	// These event variables are useful to subclasses
 	/// Where the events go !NOT RETAINED!
-	NSObject<GlkEventReceiver>* target;
+	id<GlkEventReceiver> target;
 	/// \c YES if we're receiving character input
 	BOOL charInput;
 	/// \c YES if we're receiving text input
@@ -162,7 +162,7 @@
 - (void) clearWindow;
 
 /// Sets the target for any events this window generates !NOT RETAINED!
-- (void) setEventTarget: (NSObject<GlkEventReceiver>*) target;
+- (void) setEventTarget: (id<GlkEventReceiver>) target;
 
 - (void) requestCharInput;
 /// Request that the window generate the appropriate events

@@ -1583,7 +1583,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 // = Setting the delegate =
 
-- (void) setDelegate: (NSObject<GlkCustomTextLayout>*) newDelegate {
+- (void) setDelegate: (id<GlkCustomTextLayout>) newDelegate {
 	delegate = newDelegate;
 }
 

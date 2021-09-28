@@ -22,7 +22,7 @@
 ///
 @interface GlkBufferedStream : NSObject<GlkStream> {
 	/// The stream that we're going to read from
-	NSObject<GlkStream>* sourceStream;
+	id<GlkStream> sourceStream;
 	
 	/// The amount to read ahead by
 	int readAhead;
@@ -41,7 +41,7 @@
 
 // Initialisation
 
-- (id) initWithStream: (NSObject<GlkStream>*) sourceStream;
+- (id) initWithStream: (id<GlkStream>) sourceStream;
 
 // Dealing with the buffer
 

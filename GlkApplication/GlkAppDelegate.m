@@ -47,7 +47,7 @@
 
 // = GlkHub delegate =
 
-- (NSObject<GlkSession>*) createAnonymousSession {
+- (id<GlkSession>) createAnonymousSession {
 	return nil;
 	
 	GlkWindowController* control = [[GlkWindowController alloc] init];

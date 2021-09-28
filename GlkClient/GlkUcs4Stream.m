@@ -14,7 +14,7 @@
 
 @implementation GlkUcs4Stream
 
-- (id) initWithStream: (NSObject<GlkStream>*) stream
+- (id) initWithStream: (id<GlkStream>) stream
 			bigEndian: (BOOL) isBigEndian {
 	self = [super init];
 	

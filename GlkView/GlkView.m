@@ -43,7 +43,7 @@
 		
 		events = [[NSMutableArray alloc] init];
 		
-		prefs = [[GlkPreferences sharedPreferences] retain];
+		prefs = [GlkPreferences sharedPreferences];
 		styles = nil;
 		
 		imageDictionary = [[NSMutableDictionary alloc] init];
@@ -69,55 +69,41 @@
 		[[GlkHub sharedGlkHub] unregisterSession: self];	// We don't really want to hang around
 	}
 	
-	[rootWindow release]; rootWindow = nil;
-	[lastRootWindow release]; lastRootWindow = nil;
-	[glkWindows release]; glkWindows = nil;
-	[lastPanel release]; lastPanel = nil;
+	rootWindow = nil;
+	lastRootWindow = nil;
+	glkWindows = nil;
+	lastPanel = nil;
 	
-	[glkStreams release]; glkStreams = nil;
-	[inputStream release]; inputStream = nil;
-	[extraStreamDictionary release]; extraStreamDictionary = nil;
+	glkStreams = nil;
+	inputStream = nil;
+	extraStreamDictionary = nil;
 	
-	[arrangeEvent release]; arrangeEvent = nil;
-	[events release]; events = nil;
-	[listener release]; listener = nil;
+	arrangeEvent = nil;
+	events = nil;
+	listener = nil;
 	
 	[fadeTimer invalidate];
-	[fadeTimer release]; fadeTimer = nil;
-	[fadeStart release];
-	
-	[extensionsForUsage release];
+	fadeTimer = nil;
 	
 	if (logoWindow) {
 		[[logoWindow parentWindow] removeChildWindow: logoWindow]; 
-		[logoWindow release];
 		logoWindow = nil;
 	}
 	
-	[promptHandler release]; promptHandler = nil;
-	[allowedFiletypes release]; allowedFiletypes = nil;
+	promptHandler = nil;
+	allowedFiletypes = nil;
 	
-	[prefs release]; prefs = nil;
-	[styles release]; styles = nil;
+	prefs = nil;
+	styles = nil;
 	
-	[subtask release]; subtask = nil;
-	[viewCookie release]; viewCookie = nil;
+	subtask = nil;
+	viewCookie = nil;
 	
-	[imgSrc release]; imgSrc = nil;
-	[imageDictionary release]; imageDictionary = nil;
-	[flippedImageDictionary release]; flippedImageDictionary = nil;
-	
-	[inputReceivers release];
-	[outputReceivers release];
-
-	[inputHistory release];
-	
-	if (windowPositionCache) [windowPositionCache release];
-	if (windowIdCache) [windowIdCache release];
+	imgSrc = nil;
+	imageDictionary = nil;
+	flippedImageDictionary = nil;
 	
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
-	
-	[super dealloc];
 }
 
 // = Shutting down the timer =
@@ -134,19 +120,17 @@
 }
 
 - (void) finishKillingTimer {
-	[[self retain] autorelease];
+	__strong GlkView *tmpSelf = self;
 	
-	if (fadeTimer) {
-		[fadeTimer release];
-		[self autorelease];
+	if (tmpSelf->fadeTimer) {
 		fadeTimer = nil;
+		tmpSelf = nil;
 	}
 	
 	if (logoWindow) {
 		[[logoWindow parentWindow] removeChildWindow: logoWindow];
 		[logoWindow orderOut: self];
-		[logoWindow release];
-		logoWindow = nil;		
+		logoWindow = nil;
 	}
 }
 
@@ -157,7 +141,7 @@
 	static NSImage* defaultLogo = nil;
 	
 	if (!defaultLogo) {
-		defaultLogo = [[[NSBundle bundleForClass: [self class]] imageForResource:@"logo"] retain];
+		defaultLogo = [[NSBundle bundleForClass: [self class]] imageForResource:@"logo"];
 	}
 	
 	return defaultLogo;
@@ -222,14 +206,14 @@
 	NSImageView* fadeContents = [[NSImageView alloc] initWithFrame: [[logoWindow contentView] frame]];
 	
 	[fadeContents setImage: [self logo]];
-	[logoWindow setContentView: [fadeContents autorelease]];
+	[logoWindow setContentView: fadeContents];
 	
 	fadeTimer = [NSTimer timerWithTimeInterval: waitTime
 										target: self
 									  selector: @selector(startToFadeLogo)
 									  userInfo: nil
 									   repeats: NO];
-	[fadeTimer retain]; [self retain];
+	CFRetain((__bridge CFTypeRef)(self));
 	[[NSRunLoop currentRunLoop] addTimer: fadeTimer
 								 forMode: NSDefaultRunLoopMode];
 	
@@ -245,8 +229,7 @@
 - (void) startToFadeLogo {
 	if (fadeTimer) {
 		[fadeTimer invalidate];
-		[fadeTimer release];
-		[self autorelease];
+		CFAutorelease((__bridge CFTypeRef)(self));
 	}
 	fadeTimer = nil;
 	
@@ -255,12 +238,11 @@
 									  selector: @selector(fadeLogo)
 									  userInfo: nil
 									   repeats: YES];
-	[fadeTimer retain]; [self retain];
+	CFRetain((__bridge CFTypeRef)(self));
 	[[NSRunLoop currentRunLoop] addTimer: fadeTimer
 								 forMode: NSDefaultRunLoopMode];
 	
-	[fadeStart release];
-	fadeStart = [[NSDate date] retain];
+	fadeStart = [NSDate date];
 }
 
 - (void) fadeLogo {
@@ -270,16 +252,13 @@
 	if (fadeAmount < 0 || fadeAmount > 1) {
 		// Finished fading: get rid of the window + the timer
 		[fadeTimer invalidate];
-		[fadeTimer release];
-		[self autorelease];
+		CFAutorelease((__bridge CFTypeRef)(self));
 		fadeTimer = nil;
 		
 		[[logoWindow parentWindow] removeChildWindow: logoWindow];
 		[logoWindow orderOut: self];
-		[logoWindow release];
 		logoWindow = nil;
 		
-		[fadeStart release];
 		fadeStart = nil;
 	} else {
 		fadeAmount = -2.0*fadeAmount*fadeAmount*fadeAmount + 3.0*fadeAmount*fadeAmount;
@@ -289,13 +268,13 @@
 }
 
 - (void) removeFromSuperview {
-	[[self retain] autorelease];
+	CFAutorelease((volatile CFTypeRef)CFBridgingRetain(self));
 	[super removeFromSuperview];
 	[self killFadeTimer];
 }
 
 - (void) removeFromSuperviewWithoutNeedingDisplay {
-	[[self retain] autorelease];
+	CFAutorelease((volatile CFTypeRef)CFBridgingRetain(self));
 	[super removeFromSuperviewWithoutNeedingDisplay];
 	[self killFadeTimer];
 }
@@ -336,7 +315,7 @@
 	[rootWindow layoutInRect: [self bounds]];
 	
 	// Queue an event to tell the client that things are now mysteriously different
-	[self queueEvent: [[[GlkArrangeEvent alloc] initWithGlkWindow: rootWindow] autorelease]];
+	[self queueEvent: [[GlkArrangeEvent alloc] initWithGlkWindow: rootWindow]];
 		
 	// Move the transparent logo window if it exists
 	if (logoWindow) [self positionLogoWindow];
@@ -380,7 +359,6 @@
 		[alert beginSheetModalForWindow:[self window] completionHandler:^(NSModalResponse returnCode) {
 			//do nothing
 		}];
-		[alert release];
 	} else {
 		NSLog(@"Glk error: %@", error);
 	}
@@ -454,8 +432,6 @@
 		// Full path becomes ~/Desktop/<name>.glk
 		NSString* fullPath = [[@"~" stringByExpandingTildeInPath] stringByAppendingPathComponent: [res stringByAppendingPathExtension: @"glkdata"]];
 		
-		[res release]; res = nil;
-		
 		return [fullPath stringByStandardizingPath];
 	}
 }
@@ -480,19 +456,16 @@
 					[events replaceObjectAtIndex: evtIndex
 									  withObject: newEvent];
 					
-					[arrangeEvent release];
-					arrangeEvent = [newEvent retain];
+					arrangeEvent = newEvent;
 				} else {
 					NSLog(@"Warning: arrangement event has gone walkabout");
 				}
-				
-				[newEvent release];
 			}
 			
 			return;
 		} else {
 			// This becomes the arrange event
-			arrangeEvent = [event retain];
+			arrangeEvent = event;
 		}
 	}
 	
@@ -504,9 +477,9 @@
 		// We retain the listener here as there is a non-zero chance of the client waiting on a
 		// call to setEventListener: here, which will cause a segfault if it releases the current
 		// listener (seems to be a bug in NSDistantObject)
-		[listener retain];
-		[listener eventReady: syncCount];
-		[listener release];
+		CFTypeRef tmpListener = CFBridgingRetain(listener);
+		[(__bridge id<GlkEventListener>)tmpListener eventReady: syncCount];
+		CFRelease(tmpListener);
 	}
 }
 
@@ -521,7 +494,7 @@
 - (NSMutableDictionary*) stylesForWindowType: (unsigned) type {
 	if (!prefs) {
 		// Construct the preference object if necessary
-		prefs = [[GlkPreferences sharedPreferences] retain];
+		prefs = [GlkPreferences sharedPreferences];
 	}
 	
 	if (!styles) {
@@ -537,11 +510,9 @@
 		
 		[styles setObject: res
 				   forKey: @(type)];
-	} else {
-		[res retain];
 	}
 	
-	return [res autorelease];
+	return res;
 }
 
 @synthesize preferences=prefs;
@@ -549,7 +520,6 @@
 // = Setting up for launch =
 
 - (void) setViewCookie: (NSString*) cookie {
-	[viewCookie release];
 	viewCookie = [cookie copy];
 	
 	[self logMessage: @"View cookie set"
@@ -622,8 +592,6 @@
 	running = YES;
 	
 	// Tidy up
-	[args release];
-	[env release];
 }
 
 - (void) terminateClient {
@@ -657,7 +625,7 @@
 		extraStreamDictionary = [[NSMutableDictionary alloc] init];
 	}
 	
-	[extraStreamDictionary setObject: [[[GlkFileStream alloc] initForReadingWithFileURL: [NSURL fileURLWithPath: filename]] autorelease]
+	[extraStreamDictionary setObject: [[GlkFileStream alloc] initForReadingWithFileURL: [NSURL fileURLWithPath: filename]]
 							  forKey: streamKey];
 	
 	[self logMessage: [NSString stringWithFormat: @"Creating stream to read data from '%@' with key '%@'", filename, streamKey]
@@ -667,15 +635,13 @@
 @synthesize inputStream;
 
 - (void) setInputStream: (id<GlkStream>) stream {
-	[inputStream release]; inputStream = nil;
-	inputStream = [stream retain];
+	inputStream = stream;
 	
 	[self logMessage: @"Reading data from an internal stream"
 		  withStatus: GlkLogRoutine];
 }
 
 - (void) setInputFilename: (NSString*) filename {
-	[inputStream release]; inputStream = nil;
 	inputStream = [[GlkFileStream alloc] initForReadingWithFileURL: [NSURL fileURLWithPath: filename]];
 	
 	[self logMessage: [NSString stringWithFormat: @"Will read data from: %@", filename]
@@ -687,9 +653,9 @@
 		[self clientHasFinished];
 	}
 	
-	[[self retain] autorelease];
+	CFAutorelease((volatile CFTypeRef)CFBridgingRetain(self));
 	[[GlkHub sharedGlkHub] unregisterSession: self];
-	[subtask release]; subtask = nil;
+	subtask = nil;
 }
 
 // = GlkSession implementations =
@@ -698,7 +664,7 @@
 
 - (void) clientHasStarted: (pid_t) processId {
 	running = YES;
-	[viewCookie release]; viewCookie = nil;						// Don't want to re-use the cookie
+	viewCookie = nil;						// Don't want to re-use the cookie
 	
 	[self logMessage: @"Glk client has started"
 		  withStatus: GlkLogRoutine];
@@ -733,8 +699,7 @@
 	
 	flushing = YES;
 	
-	[lastRootWindow release];
-	lastRootWindow = [rootWindow retain];
+	lastRootWindow = rootWindow;
 	
 	[rootWindow bufferIsFlushing];
 
@@ -802,7 +767,7 @@
 
 // Streams
 
-- (byref NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId {
+- (byref id<GlkStream>) streamForWindowIdentifier: (unsigned) windowId {
 	GlkWindow* window = [glkWindows objectForKey: @(windowId)];
 	
 	if (window) {
@@ -924,12 +889,11 @@
 - (bycopy id<GlkEvent>) nextEvent {
 	if ([events count] > 0) {
 		// Get the next event from the queue
-		GlkEvent* nextEvent = [[[events objectAtIndex: 0] retain] autorelease];
+		GlkEvent* nextEvent = [events objectAtIndex: 0];
 		[events removeObjectAtIndex: 0];
 		
 		if (nextEvent == arrangeEvent) {
 			// If we're reporting an arrangement, free up the arrange event
-			[arrangeEvent release];
 			arrangeEvent = nil;
 		}
 		
@@ -941,11 +905,11 @@
 }
 
 - (void) setEventListener: (in byref id<GlkEventListener>) newListener {
-	[listener autorelease]; listener = nil;
+	listener = nil;
 	
 	// Inform any input automation objects that if they've got events waiting, then now is the time to fire them
 	if (newListener != nil) {
-		listener = [newListener retain];
+		listener = newListener;
 
 		for (id<GlkAutomation> receiver in inputReceivers) {
 			[receiver viewIsWaitingForInput: self];
@@ -991,7 +955,7 @@
 	
 	// Then turn into a GlkFileRef
 	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: [NSURL fileURLWithPath: path]];
-	return [res autorelease];
+	return res;
 }
 
 - (id<GlkFileRef>) tempFileRef {
@@ -1014,7 +978,7 @@
 	// Turn into a temporary fileref
 	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: [NSURL fileURLWithPath: tempPath]];
 	[res setTemporary: YES];
-	return [res autorelease];
+	return res;
 }
 
 - (void) panelDidEnd: (NSSavePanel*) panel
@@ -1025,7 +989,6 @@
 	if (returnCode == NSModalResponseOK) {
 		GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [panel URL]];
 		[promptHandler promptedFileRef: promptRef];
-		[promptRef autorelease];
 		
 		[[NSUserDefaults standardUserDefaults] setURL: [panel directoryURL]
 											   forKey: @"GlkSaveDirectory"];
@@ -1036,14 +999,14 @@
 		[promptHandler promptCancelled];
 	}
 	
-	[promptHandler release]; promptHandler = nil;
-	[allowedFiletypes release]; allowedFiletypes = nil;
-	[lastPanel release]; lastPanel = nil;
+	promptHandler = nil;
+	allowedFiletypes = nil;
+	lastPanel = nil;
 }
 
 - (bycopy NSArray*) fileTypesForUsage: (in bycopy NSString*) usage {
 	// Get the user-set value (if any)
-	NSArray* result = [[[extensionsForUsage objectForKey: usage] retain] autorelease];
+	NSArray* result = [extensionsForUsage objectForKey: usage];
 	if (result) return result;
 	
 	// Return the defaults if known
@@ -1066,7 +1029,7 @@
 
 - (void) setFileTypes: (in bycopy NSArray*) extensions
 			 forUsage: (in bycopy NSString*) usage {
-	[extensionsForUsage setObject: [[[NSArray alloc] initWithArray: extensions copyItems: YES] autorelease]
+	[extensionsForUsage setObject: [[NSArray alloc] initWithArray: extensions copyItems: YES]
 						   forKey: usage];
 }
 
@@ -1128,11 +1091,9 @@
 	}
 	
 	// Cache the handler
-	[promptHandler release];
-	promptHandler = [handler retain];
+	promptHandler = handler;
 	
 	// Cache the allowed file types
-	[allowedFiletypes release];
 	allowedFiletypes = [filetypes copy];
 	
 	// Work out whether or not to show a sheet
@@ -1152,17 +1113,15 @@
 		[panel setAllowedFileTypes: allowedFiletypes];
 		
 		if (showAsSheet) {
-			[panel retain];
 			[panel beginSheetModalForWindow: window completionHandler: ^(NSModalResponse result) {
 				[self panelDidEnd: panel returnCode: result contextInfo: NULL];
-				[panel release];
 			}];
 		} else {
 			NSInteger result = [panel runModal];
 			[self panelDidEnd:panel returnCode:result contextInfo:NULL];
 		}
 		
-		[lastPanel release]; lastPanel = [panel retain];
+		lastPanel = panel;
 	} else {
 		// Create an open dialog
 		NSOpenPanel* panel = [NSOpenPanel openPanel];
@@ -1173,17 +1132,15 @@
 		[panel setAllowedFileTypes: allowedFiletypes];
 		
 		if (showAsSheet) {
-			[panel retain];
 			[panel beginSheetModalForWindow: window completionHandler: ^(NSModalResponse result) {
 				[self panelDidEnd: panel returnCode: result contextInfo: NULL];
-				[panel release];
 			}];
 		} else {
 			NSInteger result = [panel runModal];
 			[self panelDidEnd:panel returnCode:result contextInfo:NULL];
 		}
 
-		[lastPanel release]; lastPanel = [panel retain];
+		lastPanel = panel;
 	}
 }
 
@@ -1204,8 +1161,6 @@
 	
 	[glkWindows setObject: newWindow
 				   forKey: @(identifier)];
-	
-	[newWindow release];
 }
 
 - (void) createTextGridWindowWithIdentifier: (glui32) identifier {
@@ -1220,8 +1175,6 @@
 	
 	[glkWindows setObject: newWindow
 				   forKey: @(identifier)];
-	
-	[newWindow release];
 }
 
 - (void) createTextWindowWithIdentifier: (glui32) identifier {
@@ -1236,8 +1189,6 @@
 	
 	[glkWindows setObject: newWindow
 				   forKey: @(identifier)];
-	
-	[newWindow release];
 }
 
 - (void) createGraphicsWindowWithIdentifier: (glui32) identifier {
@@ -1252,8 +1203,6 @@
 	
 	[glkWindows setObject: newWindow
 				   forKey: @(identifier)];
-	
-	[newWindow release];
 }
 
 // Placing windows in the tree
@@ -1261,8 +1210,6 @@
 - (int) automationIdForWindowId: (glui32) identifier {
 	if (windowPositionCache == nil) {
 		// Initialise the caches
-		[windowPositionCache release];
-		[windowIdCache release];
 		windowPositionCache = [[NSMutableDictionary alloc] init];
 		windowIdCache = [[NSMutableDictionary alloc] init];
 		
@@ -1321,7 +1268,6 @@
 
 - (void) setRootWindow: (glui32) identifier {
 	if (identifier == GlkNoWindow) {
-		[rootWindow release];
 		rootWindow = nil;
 		
 		windowsNeedLayout = YES;
@@ -1330,16 +1276,13 @@
 	
 	GlkWindow* newRootWindow = [glkWindows objectForKey: @(identifier)];
 	
-	[windowPositionCache release];
-	[windowIdCache release];
 	windowPositionCache = nil;
 	windowIdCache = nil;
 	
 	if (newRootWindow) {
 		if (rootWindow == nil) [self showLogoWindow];
 		
-		[rootWindow release];
-		rootWindow = [newRootWindow retain];
+		rootWindow = newRootWindow;
 		
 		[rootWindow setScaleFactor: scaleFactor];
 		
@@ -1370,8 +1313,6 @@
 	}
 	
 	// Flush the automation cache
-	[windowPositionCache release];
-	[windowIdCache release];
 	windowPositionCache = nil;
 	windowIdCache = nil;
 	
@@ -1413,8 +1354,6 @@
 	[glkWindows setObject: newWin
 				   forKey: @(identifier)];
 	windowsNeedLayout = YES;
-	
-	[newWin release];
 }
 
 // Manipulating windows
@@ -1623,7 +1562,7 @@
 // Closing windows
 
 - (void) removeIdentifier: (glui32) identifier {
-	GlkPairWindow* win = (GlkPairWindow *)[[glkWindows objectForKey: @(identifier)] retain];
+	GlkPairWindow* win = (GlkPairWindow *)[glkWindows objectForKey: @(identifier)];
 
 	if ([win isKindOfClass: [GlkPairWindow class]]) {
 		// Remove the ID for the left and right windows
@@ -1638,7 +1577,7 @@
 	[win removeFromSuperviewWithoutNeedingDisplay];
 	
 	// Remove from existence (usually)
-	[win release];
+	win = nil;
 	
 	windowsNeedLayout = YES;
 }
@@ -1660,10 +1599,10 @@
 		
 		// Find our sibling
 		if ([parent leftWindow] == win) {
-			sibling = [[[parent rightWindow] retain] autorelease];
+			sibling = [parent rightWindow];
 			[parent setRightWindow: nil];
 		} else if ([parent rightWindow] == win) {
-			sibling = [[[parent leftWindow] retain] autorelease];
+			sibling = [parent leftWindow];
 			[parent setLeftWindow: nil];
 		} else {
 			NSLog(@"Oops, failed to find a sibling window");
@@ -1684,8 +1623,7 @@
 			}
 		} else {
 			// Replace the root window
-			[rootWindow release];
-			rootWindow = [sibling retain];
+			rootWindow = sibling;
 		}
 		
 		// Mark the parent as closed
@@ -1695,7 +1633,6 @@
 		[self removeIdentifier: [parent glkIdentifier]];
 	} else {
 		// We've closed the root window
-		[rootWindow release];
 		rootWindow = nil;
 		
 		// Mark this window as closed
@@ -2011,11 +1948,11 @@
 // = Image management =
 
 - (void) setImageSource: (in byref id<GlkImageSource>) source {
-	imgSrc = [(NSObject<GlkImageSource>*)source retain];
+	imgSrc = source;
 }
 
 - (out byref id<GlkImageSource>) imageSource {
-	return [[imgSrc retain] autorelease];
+	return imgSrc;
 }
 
 - (NSImage*) flippedImageWithIdentifier: (unsigned) imageId {
@@ -2062,7 +1999,7 @@
 	[flippedImageDictionary setObject: flippedImage
 							   forKey: imageKey];
 	
-	return [flippedImage autorelease];
+	return flippedImage;
 }
 
 - (NSImage*) imageWithIdentifier: (unsigned) imageId {
@@ -2106,10 +2043,9 @@
 					  operation: NSCompositingOperationSourceOver
 					   fraction: 1.0];
 		[image unlockFocus];
-		[sourceImage release];
 
 		// Store in the dictionary
-		[imageDictionary setObject: [image autorelease]
+		[imageDictionary setObject: image
 							forKey: imageKey];
 	}
 	
@@ -2267,7 +2203,6 @@
 		NSData *datStr = [NSData dataWithBytes:&ch length:sizeof(uint32_t)];
 		NSString *str = [[NSString alloc] initWithData:datStr encoding:NSUTF32StringEncoding];
 		[self putString:str toStream:streamIdentifier];
-		[str release];
 	}
 }
 

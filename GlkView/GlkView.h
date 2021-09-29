@@ -120,7 +120,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	
 	// The delegate
 	/// Can respond to certain events if it likes
-	__unsafe_unretained id<GlkViewDelegate> delegate;
+	__weak id<GlkViewDelegate> delegate;
 	
 	// Images and graphics
 	/// Source of data for images
@@ -175,7 +175,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 - (void) addInputFilename: (NSString*) filename
 				  withKey: (NSString*) streamKey;
 
-@property (nonatomic, retain) id<GlkStream> inputStream;
+@property (nonatomic, strong) id<GlkStream> inputStream;
 
 // Writing log messages
 /// If the client supports logging, then tell it to display the specified log message
@@ -184,7 +184,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 
 // The delegate
 /// The delegate for this view. Delegates are not retained.
-@property (assign, nullable) id<GlkViewDelegate> delegate;
+@property (weak, nullable) id<GlkViewDelegate> delegate;
 
 // Events
 /// Note that Arrange events are merged if not yet claimed
@@ -194,7 +194,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 
 // Preferences
 /// Set before this view has attached to a client for the best effect
-@property (retain) GlkPreferences* preferences;
+@property (strong) GlkPreferences* preferences;
 /// Current styles
 - (NSMutableDictionary*) stylesForWindowType: (unsigned) type;
 

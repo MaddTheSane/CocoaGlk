@@ -16,7 +16,7 @@
 
 frefid_t cocoaglk_firstfref = NULL;
 NSMutableDictionary<NSNumber*,NSArray<NSString*>*>* cocoaglk_usagetypes = nil;
-NSMutableDictionary<NSString*,NSObject<GlkFileRef>*>* cocoaglk_fileref_bindings = nil;
+NSMutableDictionary<NSString*,id<GlkFileRef>>* cocoaglk_fileref_bindings = nil;
 
 // = Prompt object =
 

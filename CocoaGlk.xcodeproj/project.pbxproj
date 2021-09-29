@@ -58,7 +58,7 @@
 		4B51AA6D07E8785700576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
 		4B51AA7407E878E600576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
 		4B51AA7507E878E900576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
-		4B51AA8A07E8795300576AB9 /* GlkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AA8807E8795300576AB9 /* GlkView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4B51AA8A07E8795300576AB9 /* GlkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AA8807E8795300576AB9 /* GlkView.m */; };
 		4B51AAB807E87B7B00576AB9 /* glk_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAB707E87B7B00576AB9 /* glk_main.m */; };
 		4B51AAF107E87CD300576AB9 /* glk_events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAEC07E87CD300576AB9 /* glk_events.m */; };
 		4B51AAF207E87CD300576AB9 /* glk_image.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B51AAED07E87CD300576AB9 /* glk_image.m */; };

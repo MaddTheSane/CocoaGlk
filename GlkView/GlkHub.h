@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol GlkHubDelegate <NSObject>
 
 /// Usually should return a GlkView. Called when a task starts with no session cookie
-- (nullable NSObject<GlkSession>*) createAnonymousSession;
+- (nullable id<GlkSession>) createAnonymousSession;
 
 @end
 

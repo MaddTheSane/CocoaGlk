@@ -20,7 +20,11 @@
 #include <GlkView/glk.h>
 
 #if defined(__OBJC__) && __OBJC__
-#import <GlkView/GlkImageSourceProtocol.h>
+# if __has_include (<GlkView/GlkImageSourceProtocol.h>)
+#  import <GlkView/GlkImageSourceProtocol.h>
+# else
+@protocol GlkImageSource;
+# endif
 #endif
 
 /// File that contains game executable data

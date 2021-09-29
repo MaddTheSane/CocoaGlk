@@ -14,7 +14,7 @@
 
 @implementation GlkUcs4Stream
 
-- (id) initWithStream: (NSObject<GlkStream>*) stream
+- (id) initWithStream: (id<GlkStream>) stream
 			bigEndian: (BOOL) isBigEndian {
 	self = [super init];
 	
@@ -36,7 +36,7 @@
 	[dataStream closeStream];
 }
 
-- (void) setPosition: (in int) position
+- (void) setPosition: (in NSInteger) position
 		  relativeTo: (in enum GlkSeekMode) seekMode {
 	[dataStream setPosition: position
 				 relativeTo: seekMode];

@@ -14,7 +14,7 @@
 #endif
 #import <GlkView/GlkTypesetter.h>
 
-/// Attribute indicating that a section of text should use custom attribute formatting. Value should be a GlkCustomTextSection object.
+/// Attribute indicating that a section of text should use custom attribute formatting. Value should be a \c GlkCustomTextSection object.
 extern NSAttributedStringKey const GlkCustomSectionAttributeName;
 
 ///

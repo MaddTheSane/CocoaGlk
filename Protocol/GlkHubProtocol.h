@@ -7,6 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#if defined(COCOAGLK_IPHONE)
+# import <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 #import <GlkView/GlkSessionProtocol.h>
 
@@ -17,9 +22,9 @@ NS_SWIFT_NAME(GlkHubProtocol)
 @protocol GlkHub <NSObject>
 
 // Setting up the connection
-- (nullable byref NSObject<GlkSession>*) createNewSession;
-- (nullable byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (nullable in bycopy NSString*) hubCookie;
-- (nullable byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (nullable in bycopy NSString*) hubCookie
-														 sessionCookie: (nullable in bycopy NSString*) sessionCookie;
+- (nullable byref id<GlkSession>) createNewSession;
+- (nullable byref id<GlkSession>) createNewSessionWithHubCookie: (nullable in bycopy NSString*) hubCookie;
+- (nullable byref id<GlkSession>) createNewSessionWithHubCookie: (nullable in bycopy NSString*) hubCookie
+												  sessionCookie: (nullable in bycopy NSString*) sessionCookie;
 
 @end

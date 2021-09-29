@@ -33,7 +33,7 @@ NSDate* cocoaglk_nextTimerEvent = nil;
 //!
 void cocoaglk_next_time(void) {
 	if (!cocoaglk_nextTimerEvent) return;
-	float interval = ((float)cocoaglk_timerlength)/1000.0;
+	CGFloat interval = ((CGFloat)cocoaglk_timerlength)/1000.0;
 	
 	do {
 		// Move cocoaglk_nextTimerEvent on
@@ -81,7 +81,7 @@ void glk_select(event_t *event) {
 	[cocoaglk_session setEventListener: listener];
 
 	// Wait for and retrieve the next event
-	NSObject<GlkEvent>* evt = [cocoaglk_session nextEvent];
+	id<GlkEvent> evt = [cocoaglk_session nextEvent];
 	
 	while (evt == NULL) {
 		if (cocoaglk_eventwaiting) {

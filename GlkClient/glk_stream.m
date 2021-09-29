@@ -212,7 +212,7 @@ strid_t glk_stream_open_file(frefid_t fileref, glui32 fmode,
 	}
 
 	// Get the stream
-	NSObject<GlkStream>* stream = nil;
+	id<GlkStream> stream = nil;
 	
 	if (fmode == filemode_ReadWrite || fmode == filemode_WriteAppend) {
 		stream = [fileref->fileref createReadWriteStream];
@@ -289,7 +289,7 @@ strid_t glk_stream_open_file_uni(frefid_t fileref, glui32 fmode,
 	}
 	
 	// Get the stream
-	NSObject<GlkStream>* stream = nil;
+	id<GlkStream> stream = nil;
 	
 	if (fmode == filemode_ReadWrite || fmode == filemode_WriteAppend) {
 		stream = [fileref->fileref createReadWriteStream];
@@ -379,7 +379,7 @@ strid_t cocoaglk_get_stream_for_key(const char* key) {
 	}
 	
 	// Try fetching the stream from the session instead
-	NSObject<GlkStream>* inputStream = [cocoaglk_session streamForKey: strKey];
+	id<GlkStream> inputStream = [cocoaglk_session streamForKey: strKey];
 	
 	if (!inputStream) return NULL;
 	
@@ -430,7 +430,7 @@ strid_t cocoaglk_get_input_stream(void) {
 		return instream;
 	}
 	
-	NSObject<GlkStream>* inputStream = [cocoaglk_session inputStream];
+	id<GlkStream> inputStream = [cocoaglk_session inputStream];
 	
 	if (!inputStream) return NULL;
 	
@@ -1151,7 +1151,7 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 		
 	// Return the result
 	str->read += len;
-	return (int)length;
+	return (glui32)length;
 }
 
 //
@@ -1194,7 +1194,7 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 #endif
 		
 	str->read += length;
-	return (int)length;
+	return (glui32)length;
 }
 
 // = Custom styles =

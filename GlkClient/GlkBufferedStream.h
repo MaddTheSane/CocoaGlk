@@ -18,14 +18,14 @@
 ///
 @interface GlkBufferedStream : NSObject<GlkStream> {
 	/// The stream that we're going to read from
-	NSObject<GlkStream>* sourceStream;
+	id<GlkStream> sourceStream;
 	
 	/// The amount to read ahead by
 	int readAhead;
 	
 	/// The buffer
 	unsigned char* buffer;
-	/// YES if the end of file has been reached
+	/// \c YES if the end of file has been reached
 	BOOL eof;
 	/// The buffer low tide mark
 	int lowTide;
@@ -37,7 +37,7 @@
 
 // Initialisation
 
-- (instancetype) initWithStream: (NSObject<GlkStream>*) sourceStream;
+- (instancetype) initWithStream: (id<GlkStream>) sourceStream;
 
 // Dealing with the buffer
 

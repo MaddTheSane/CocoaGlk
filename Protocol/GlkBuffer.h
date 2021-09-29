@@ -20,16 +20,14 @@
 #define GlkNoWindow 0xffffffff
 
 ///
+/// Buffer operations. These all must return void.
+///
 /// The buffer is used to store operations before sending them across the communications link with the host task.
 /// This is required as sending messages using the DistributedObject mechanism is somewhat slow.
 ///
 /// Note that in Zoom and previous versions of CocoaGlk, the buffering was done by storing dictionaries detailing the
 /// operations to be performed. In this version, we presently send invocations. This might change later if this forces
 /// too much client/server communications (to selectors and an array of arguments)
-///
-///
-///
-/// Buffer operations. These all must return void.
 ///
 @protocol GlkBuffer <NSObject>
 
@@ -108,7 +106,7 @@
 // Streams
 
 // Registering streams
-- (void) registerStream: (in byref NSObject<GlkStream>*) stream
+- (void) registerStream: (in byref id<GlkStream>) stream
 		  forIdentifier: (unsigned) streamIdentifier;
 - (void) registerStreamForWindow: (unsigned) windowIdentifier
 				   forIdentifier: (unsigned) streamIdentifier;
@@ -122,7 +120,8 @@
 		toStream: (unsigned) streamIdentifier;
 - (void) putString: (in bycopy NSString*) string
 		  toStream: (unsigned) streamIdentifier;
-- (void) putData: (in bycopy NSData*) data							//!< Note: do not pass in mutable data here, as the contents may change unexpectedly
+/// Note: do not pass in mutable data here, as the contents may change unexpectedly
+- (void) putData: (in bycopy NSData*) data
 		toStream: (unsigned) streamIdentifier;
 - (void) setStyle: (unsigned) style
 		 onStream: (unsigned) streamIdentifier;

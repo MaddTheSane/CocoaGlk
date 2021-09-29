@@ -13,9 +13,8 @@
 # import <Cocoa/Cocoa.h>
 #endif
 
-
 /// Notification sent whenever the preferences are changed (not necessarily sent immediately)
-extern NSNotificationName GlkPreferencesHaveChangedNotification;
+extern NSNotificationName const GlkPreferencesHaveChangedNotification;
 
 @class GlkStyle;
 
@@ -46,7 +45,7 @@ extern NSNotificationName GlkPreferencesHaveChangedNotification;
 	int  changeCount;
 }
 
-//! The shared preferences object (these are automagically stored in the user defaults)
+/// The shared preferences object (these are automagically stored in the user defaults)
 @property (class, readonly, retain) GlkPreferences *sharedPreferences;
 
 // Preferences and the user defaults
@@ -59,9 +58,9 @@ extern NSNotificationName GlkPreferencesHaveChangedNotification;
 
 // Font preferences
 /// The font used for proportional text
-@property (nonatomic, copy) GlkFont *proportionalFont;
+@property (nonatomic, copy) NSFont *proportionalFont;
 /// The font used for fixed-pitch text
-@property (nonatomic, copy) GlkFont *fixedFont;
+@property (nonatomic, copy) NSFont *fixedFont;
 
 /// Replaces the current fonts with ones of the given size
 - (void) setFontSize: (CGFloat) fontSize;
@@ -77,17 +76,18 @@ extern NSNotificationName GlkPreferencesHaveChangedNotification;
 @property (nonatomic) BOOL useLigatures;
 /// Whether or not to use kerning
 @property (nonatomic) BOOL useKerning;
+/// Replaces the current padding that we should use
+- (void) setTextMargin: (CGFloat) margin;
 
 // Style preferences
-/// Dictionary mapping NSNumbers with Glk styles to GlkStyle objects
+/// Dictionary mapping \c NSNumbers with Glk styles to \c GlkStyle objects
 - (void) setStyles: (NSDictionary<NSNumber*,GlkStyle*>*) styles;
 /// Sets a style for a specific Glk hint
 - (void) setStyle: (GlkStyle*) style
 		  forHint: (unsigned) glkHint;
 
 /// The style dictionary
-@property (copy) NSDictionary<NSNumber*,GlkStyle*> *styles;
-
+@property (nonatomic, copy) NSDictionary<NSNumber*,GlkStyle*> *styles;
 // Misc preferences
 /// The amount of scrollback to support in text windows (0-100)
 @property (nonatomic) CGFloat scrollbackLength;

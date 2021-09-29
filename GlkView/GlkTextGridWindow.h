@@ -16,13 +16,7 @@
 #import <GlkView/GlkWindow.h>
 #import <GlkView/GlkTextWindow.h>
 
-@interface GlkTextGridWindow : GlkTextWindow<NSTextStorageDelegate,
-#if defined(COCOAGLK_IPHONE)
-UITextViewDelegate
-#else
-NSTextViewDelegate
-#endif
-> {
+@interface GlkTextGridWindow : GlkTextWindow<NSTextStorageDelegate,NSTextViewDelegate> {
 	/// The amount of line input that we have accepted so far
 	NSInteger lineInputLength;
 	

@@ -78,7 +78,7 @@ int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 	[string getCharacters: characters];
 	
 	// Convert as much as possible to UCS-4
-	int finalLength = 0;
+	NSInteger finalLength = 0;
 	NSInteger pos;
 	
 	for (pos = 0; pos<stringLength; pos++) {
@@ -108,7 +108,7 @@ int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 		finalLength++;
 	}
 	
-	return finalLength;
+	return (int)finalLength;
 }
 
 //

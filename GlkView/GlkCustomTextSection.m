@@ -8,7 +8,7 @@
 
 #import <GlkView/GlkCustomTextSection.h>
 
-NSString*const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName";
+NSString* const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName";
 
 @implementation GlkCustomTextSection
 
@@ -23,7 +23,7 @@ NSString*const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName";
 
 // = Typesetting =
 
-- (void) placeBaselineAt: (GlkPoint) point
+- (void) placeBaselineAt: (NSPoint) point
 				forGlyph: (NSInteger) glyph {
 	// Do nothing...
 }

@@ -38,25 +38,25 @@ typedef struct GlkSize {
 	int height;
 } GlkSize;
 
-//! Communications with an individual client session
+/// Communications with an individual client session
 @protocol GlkSession <NSObject>
 
 // Housekeeping
 - (void) clientHasStarted: (pid_t) processId;
 - (void) clientHasFinished;
  
-//! Receiving data from the buffer
+/// Receiving data from the buffer
 - (void) performOperationsFromBuffer: (in bycopy GlkBuffer*) buffer;
 
 // Windows
 - (GlkSize) sizeForWindowIdentifier: (unsigned) windowId;
 
 // Streams
-- (nullable byref NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId;
+- (nullable byref id<GlkStream>) streamForWindowIdentifier: (unsigned) windowId;
 /// Stream created before the task was initialised (used, for example, for specifying which file was double-clicked on)
-- (byref NSObject<GlkStream>*) inputStream;
+- (byref id<GlkStream>) inputStream;
 /// Stream created before the task was initialised (used, for example, for specifying which file was double-clicked on)
-- (nullable byref NSObject<GlkStream>*) streamForKey: (in bycopy NSString*) key;
+- (nullable byref id<GlkStream>) streamForKey: (in bycopy NSString*) key;
 
 // Styles
 - (glui32) measureStyle: (glui32) styl
@@ -68,14 +68,14 @@ typedef struct GlkSize {
 - (bycopy NSString*) cancelLineEventsForWindowIdentifier: (unsigned) windowIdentifier;
 
 /// Request for the next event on the queue
-- (nullable bycopy NSObject<GlkEvent>*) nextEvent;
+- (nullable bycopy id<GlkEvent>) nextEvent;
 /// Listener can be nil to indicate that no listener is required
-- (void) setEventListener: (nullable in byref NSObject<GlkEventListener>*) listener;
+- (void) setEventListener: (nullable in byref id<GlkEventListener>) listener;
 /// Called to indicating that we're starting a glk_select call
 - (void) willSelect;
 
 /// Gets the sync count value (this is used to determine if information cached on the server is still relevant)
-@property (readonly) NSInteger synchronisationCount;
+@property (nonatomic, readonly) NSInteger synchronisationCount;
 
 // Errors and warnings
 /// Shows an error message
@@ -90,9 +90,9 @@ typedef struct GlkSize {
 
 // Filerefs
 /// Returns \c NULL if the name is invalid (or if we're not supporting named files for some reason)
-- (nullable NSObject<GlkFileRef>*) fileRefWithName: (in bycopy NSString*) name;
+- (nullable id<GlkFileRef>) fileRefWithName: (in bycopy NSString*) name;
 /// Temp files are automagically deleted when the session goes away
-- (nullable NSObject<GlkFileRef>*) tempFileRef;
+- (nullable id<GlkFileRef>) tempFileRef;
 
 /// Returns the list of the preferred filetypes for the specified usage
 - (nullable bycopy NSArray<NSString*>*) fileTypesForUsage: (in bycopy NSString*) usage;
@@ -102,22 +102,22 @@ typedef struct GlkSize {
 /// Will return quickly, then the handler will be told the results later
 - (void) promptForFilesForUsage: (in bycopy NSString*) usage
 					 forWriting: (BOOL) writing
-						handler: (in byref NSObject<GlkFilePrompt>*) handler;
+						handler: (in byref id<GlkFilePrompt>) handler;
 /// Will return quickly, then the handler will be told the results later
 - (void) promptForFilesOfType: (in bycopy NSArray<NSString*>*) filetypes
 				   forWriting: (BOOL) writing
-					  handler: (in byref NSObject<GlkFilePrompt>*) handler;
+					  handler: (in byref id<GlkFilePrompt>) handler;
 
 // Images
 /// Sets where we get our image data from
 - (void) setImageSource: (in byref id<GlkImageSource>) newSource;
 /// Retrieves the size of an image
-- (GlkCocoaSize) sizeForImageResource: (glui32) imageId;
+- (NSSize) sizeForImageResource: (glui32) imageId;
 /// Retrieves the active image source
 - (out byref id<GlkImageSource>) imageSource;
 
 /// The active image source.
-@property (nonatomic, retain) id<GlkImageSource> imageSource;
+@property (readwrite, retain, nonatomic) id<GlkImageSource> imageSource;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -29,7 +29,7 @@
 	/// Height of the grid, in characters
 	int gridHeight;
 	/// Size of a grid cell
-	GlkCocoaSize cellSize;
+	NSSize cellSize;
 }
 
 // Setting up the grid
@@ -37,6 +37,6 @@
 - (void) setGridWidth: (int) gridWidth
 			   height: (int) gridHeight;
 /// Sets the size of an individual cell in the grid
-- (void) setCellSize: (GlkCocoaSize) cellSize;
+- (void) setCellSize: (NSSize) cellSize;
 
 @end

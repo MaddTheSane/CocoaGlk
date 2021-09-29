@@ -17,54 +17,62 @@
 #import <GlkView/GlkTextView.h>
 #import <GlkView/GlkTypesetter.h>
 
-@interface GlkTextWindow : GlkWindow<NSTextStorageDelegate,
-#if defined(COCOAGLK_IPHONE)
-UITextViewDelegate
-#else
-NSTextViewDelegate
-#endif
-> {
-#if !defined(COCOAGLK_IPHONE)
-	NSScrollView* scrollView;							// The scroller for the text view
-#endif
-	GlkTextView* textView;								// The inner text view
-	GlkTypesetter* typesetter;							// The typesetter we should use for laying out images and other Glk-specific things
-	NSLayoutManager* layoutManager;						// The layout manager
-	NSTextStorage* textStorage;							// The text storage
+@interface GlkTextWindow : GlkWindow <NSTextStorageDelegate, NSTextViewDelegate> {
+	/// The scroller for the text view
+	NSScrollView* scrollView;
+	/// The inner text view
+	GlkTextView* textView;
+	/// The typesetter we should use for laying out images and other Glk-specific things
+	GlkTypesetter* typesetter;
+	/// The layout manager
+	NSLayoutManager* layoutManager;
+	/// The text storage
+	NSTextStorage* textStorage;
 	
-	NSInteger inputPos;									// The position in the text view that the game-supplied text ends, and the user-supplied text begins
-	CGFloat margin;										// The size of the margin for this window
+	/// The position in the text view that the game-supplied text ends, and the user-supplied text begins
+	NSInteger inputPos;
+	/// The size of the margin for this window
+	CGFloat margin;
 	
-	NSMutableString* inputBuffer;						// The input data
+	/// The input data
+	NSMutableString* inputBuffer;
 	
-	BOOL flushing;										// YES if the buffer is flushing
+	/// \c YES if the buffer is flushing
+	BOOL flushing;
 	
-	BOOL willMakeEditable;								// YES if a request to make the text editable is pending
-	BOOL willMakeNonEditable;							// YES if a request to make the text non-editable is pending
+	/// \c YES if a request to make the text editable is pending
+	BOOL willMakeEditable;
+	/// \c YES if a request to make the text non-editable is pending
+	BOOL willMakeNonEditable;
 	
-	BOOL hasMorePrompt;									// YES if this window has a more prompt
-	NSInteger moreOffset;								// The character that should be the first on the current 'page'
-	CGFloat lastMorePos;								// The last y position a [ MORE ] prompt appeared
-	CGFloat nextMorePos;								// The y position that the next [ MORE ] prompt should appear at
+	/// \c YES if this window has a more prompt
+	BOOL hasMorePrompt;
+	/// The character that should be the first on the current 'page'
+	NSInteger moreOffset;
+	/// The last y position a [ MORE ] prompt appeared
+	CGFloat lastMorePos;
+	/// The y position that the next [ MORE ] prompt should appear at
+	CGFloat nextMorePos;
 	
-#if defined(COCOAGLK_IPHONE)
-	UIWindow* moreWindow;								// The window containing the [ MORE ] prompt
-#else
-	NSWindow* moreWindow;								// The window containing the [ MORE ] prompt
-#endif
-	NSDate* whenMoreShown;								// The time that the [ MORE ] prompt was shown
-	CGFloat lastMoreState;								// Initial state of the [ MORE ] prompt
-	CGFloat finalMoreState;								// Final state fo the [ MORE ] prompt
-	NSTimer* moreAnimationTimer;						// Timer for the [ MORE ] animation
+	/// The window containing the [ MORE ] prompt
+	NSWindow* moreWindow;
+	/// The time that the [ MORE ] prompt was shown
+	NSDate* whenMoreShown;
+	/// Initial state of the [ MORE ] prompt
+	CGFloat lastMoreState;
+	/// Final state fo the [ MORE ] prompt
+	CGFloat finalMoreState;
+	/// Timer for the [ MORE ] animation
+	NSTimer* moreAnimationTimer;
 }
 
 /// Initialise the text view and typesetters
 - (void) setupTextview;
 
 /// Adds an image at the end of this view
-- (void) addImage: (GlkSuperImage*) image
+- (void) addImage: (NSImage*) image
 	withAlignment: (unsigned) alignment
-			 size: (GlkCocoaSize) sz;
+			 size: (NSSize) sz;
 /// Adds a flow break at the end of this view
 - (void) addFlowBreak;
 
@@ -78,7 +86,7 @@ NSTextViewDelegate
 /// Sets this window to be infinite size
 - (void) setInfiniteSize;
 /// The current [ MORE ] animation state (0 = hidden, 1 = shown)
-- (CGFloat) currentMoreState;
+@property (nonatomic, readonly) CGFloat currentMoreState;
 /// A request to display the [ MORE ] prompt if necessary
 - (void) displayMorePromptIfNecessary;
 /// Sets whether or not the [ MORE ] prompt is shown

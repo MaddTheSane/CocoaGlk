@@ -29,8 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Control
 - (void) closeStream;
-- (void) setPosition: (in int) position
-		  relativeTo: (in GlkSeekMode) seekMode;
+- (void) setPosition: (in NSInteger) position
+		  relativeTo: (in enum GlkSeekMode) seekMode;
 
 - (unsigned long long) getPosition;
 
@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable bycopy NSData*) getBufferWithLength: (NSUInteger) length;
 
 // Styles
-@property (nonatomic) int style;
+@property (nonatomic, readwrite) int style;
 
 - (void) setImmediateStyleHint: (unsigned) hint
 					   toValue: (int) value;

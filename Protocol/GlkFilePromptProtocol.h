@@ -16,7 +16,7 @@
 @protocol GlkFilePrompt <NSObject>
 
 /// Called when the user chooses a file
-- (void) promptedFileRef: (in byref NSObject<GlkFileRef>*) fref;
+- (void) promptedFileRef: (in byref id<GlkFileRef>) fref;
 /// Called when the user gives up on us
 - (void) promptCancelled;
 

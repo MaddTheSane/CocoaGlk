@@ -96,7 +96,7 @@
 		lastChar = thisChar;
 		
 		// Measure this glyph
-		GlkRect glyphBounds = GlkMakeRect(charPos + charWidth, floor(-cacheAscenders[glyph]),
+		NSRect glyphBounds = NSMakeRect(charPos + charWidth, floor(-cacheAscenders[glyph]),
 										cacheAdvancements[glyph], cacheLineHeight[glyph]);
 		charWidth += cacheAdvancements[glyph];
 		sectionBounds = NSUnionRect(sectionBounds, glyphBounds);

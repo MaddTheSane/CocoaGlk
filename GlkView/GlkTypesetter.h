@@ -22,7 +22,7 @@
 @protocol GlkCustomLineSection <NSObject>
 
 /// This object has been typeset at the specified position
-- (void) placeBaselineAt: (GlkPoint) point
+- (void) placeBaselineAt: (NSPoint) point
 				forGlyph: (NSInteger) glyph;
 
 @end
@@ -45,10 +45,14 @@
 /// Possible alignments for a section within a line fragment
 ///
 typedef NS_ENUM(int, GlkSectionAlignment) {
-	GlkAlignBaseline,							//!< Line up this section with the baseline
-	GlkAlignTop,								//!< Line up this section with top of the line fragment (not including leading)
-	GlkAlignCenter,								//!< Line up this section with the center of the line fragment
-	GlkAlignBottom								//!< Line up this section with the bottom of the line fragment (not including leading)
+	/// Line up this section with the baseline
+	GlkAlignBaseline,
+	/// Line up this section with top of the line fragment (not including leading)
+	GlkAlignTop,
+	/// Line up this section with the center of the line fragment
+	GlkAlignCenter,
+	/// Line up this section with the bottom of the line fragment (not including leading)
+	GlkAlignBottom
 };
 
 ///
@@ -56,7 +60,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 ///
 @interface GlkLineSection: NSObject {
 	/// The bounds for this line section: 0,0 indicates the start of the line fragment, 0,0 indicates the far left of the current fragment, at the baseline
-	GlkRect bounds;
+	NSRect bounds;
 	/// The X-advancement for this line section
 	CGFloat advancement;
 	/// The X-offset for this line section
@@ -90,89 +94,6 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 
 @end
 
-#if defined(COCOAGLK_IPHONE)
-@interface GlkTypesetter : NSObject {
-	
-	// The glyph cache
-	/// The range of the cached glyphs
-	NSRange cached;
-	/// Size of the cache
-	NSUInteger cacheLength;
-	
-	/// The X-advancements for each glyph that we're laying out
-	CGFloat* cacheAdvancements;
-	/// The ascenders for each glyph that we're laying out
-	CGFloat* cacheAscenders;
-	/// The descenders for each glyph that we're laying out
-	CGFloat* cacheDescenders;
-	/// The line heights for each glyph that we're laying out
-	CGFloat* cacheLineHeight;
-	/// The bounds for each glyph that we're laying out
-	GlkRect* cacheBounds;
-	/// The attributes for each glyph that we're laying out [RETAINED]
-	NSDictionary*__strong* cacheAttributes;
-	/// The font attribute for each glyph that we're laying out [NOT RETAINED]
-	UIFont*__unsafe_unretained* cacheFonts;
-	
-	/// The character index into the source string for each glyph
-	NSUInteger* cacheCharIndexes;
-}
-
-// Laying out line sections
-/// Ensures that the specified range of glyphs are in the cache
-- (BOOL) cacheGlyphsIncluding: (NSInteger) minGlyphIndex;
-/// Starts a new line fragment
-- (void) beginLineFragment;
-/// Finishes the current line fragment and adds it to the layout manager
-- (BOOL) endLineFragment: (BOOL) lastFragment
-				 newline: (BOOL) newline;
-
-/// Adds a new line section
-- (void) addLineSection: (GlkRect) bounds
-			advancement: (CGFloat) advancement
-				 offset: (CGFloat) offset
-			 glyphRange: (NSRange) glyphRange
-			  alignment: (GlkSectionAlignment) alignment
-			   delegate: (id<GlkCustomLineSection>) delegate
-				elastic: (BOOL) elastic;
-
-// Margins
-/// Adds a certain width to the left margin on the current line
-/// (for flowing images)
-- (void) addToLeftMargin: (CGFloat) width
-				  height: (CGFloat) height;
-/// Adds a certain width to the right margin on the current line
-/// (for flowing images)
-- (void) addToRightMargin: (CGFloat) width
-				   height: (CGFloat) height;
-
-/// Get the current offset into the left margin
-@property (readonly) CGFloat currentLeftMarginOffset;
-/// Get the current offset into the right margin
-@property (readonly) CGFloat currentRightMarginOffset;
-/// Remaining space for margin objects
-@property (readonly) CGFloat remainingMargin;
-
-/// Amount required to clear the left margin
-@property (readonly) CGFloat currentLeftMarginHeight;
-/// Amount required to clear the right margin
-@property (readonly) CGFloat currentRightMarginHeight;
-
-// Laying out glyphs
-/// Lays out a single line fragment from the specified glyph
-- (NSInteger) layoutLineFromGlyph: (NSInteger) glyph;
-
-// Setting the delegate
-/// Sets the delegate (the delegate is NOT RETAINED)
-@property (assign) id<GlkCustomTextLayout> delegate;
-
-// Clearing the cache
-/// Forces any cached glyphs to be cleared (eg when a textstorage object changes)
-- (void) flushCache;
-
-@end
-
-#else
 ///
 /// NSTypesetter subclass that can do all the funky things that Glk requires to support images
 ///
@@ -190,7 +111,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 	/// The line fragment padding to use
 	CGFloat inset;
 	/// The last glyph laid out
-	NSInteger lastSetGlyph;
+	NSUInteger lastSetGlyph;
 	
 	// The glyph cache
 	/// The range of the cached glyphs
@@ -247,13 +168,15 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 	/// The character range for the current paragraph
 	NSRange paragraph;
 	/// The NSParagraphStyle for the current paragraph [NOT RETAINED]
-	NSParagraphStyle* paraStyle;
+	__unsafe_unretained NSParagraphStyle* paraStyle;
 	
 	// Line sections
 	/// The used rect of the current text container
-	GlkRect usedRect;
+	NSRect usedRect;
 	/// The size of the current text container
-	GlkCocoaSize size;
+	NSSize size;
+	/// Number of line sections
+	NSInteger numLineSections;
 	/// The line sections themselves
 	NSMutableArray<GlkLineSection*> *sections;
 	/// Offset to apply to the baseline due to custom alignment
@@ -262,12 +185,12 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 	BOOL customBaseline;
 	
 	/// The overall line fragment bounds
-	GlkRect fragmentBounds;
+	NSRect fragmentBounds;
 	/// The line fragment rectangle according to the text container
-	GlkRect proposedRect;
+	NSRect proposedRect;
 	/// The remaining rectangle, according to the text container
-	GlkRect remaining;
-	
+	NSRect remaining;
+
 	// The delegate
 	/// The delegate [NOT RETAINED]
 	__weak id<GlkCustomTextLayout> delegate;
@@ -283,7 +206,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 				 newline: (BOOL) newline;
 
 /// Adds a new line section
-- (void) addLineSection: (GlkRect) bounds
+- (void) addLineSection: (NSRect) bounds
 			advancement: (CGFloat) advancement
 				 offset: (CGFloat) offset
 			 glyphRange: (NSRange) glyphRange
@@ -326,6 +249,5 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 - (void) flushCache;
 
 @end
-#endif
 
 #import <GlkView/GlkCustomTextSection.h>

@@ -14,7 +14,7 @@
 
 // = Initialisation =
 
-- (id) initWithStream: (NSObject<GlkStream>*) newSourceStream {
+- (id) initWithStream: (id<GlkStream>) newSourceStream {
 	self = [super init];
 	
 	if (self) {
@@ -101,7 +101,7 @@
 	bufferRemaining = readAhead;
 }
 
-- (void) setPosition: (in int) position
+- (void) setPosition: (in NSInteger) position
 		  relativeTo: (in enum GlkSeekMode) seekMode {
 	// Work out the target position
 	if (seekMode == GlkSeekCurrent) {

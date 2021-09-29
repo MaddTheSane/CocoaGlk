@@ -25,12 +25,18 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol GlkViewDelegate;
 
 typedef NS_ENUM(NSInteger, GlkLogStatus) {
-	GlkLogRoutine,								//!< Routine log message
-	GlkLogInformation,							//!< Informational log message
-	GlkLogCustom,								//!< Custom log message (from the game, for example)
-	GlkLogWarning,								//!< Warning log message
-	GlkLogError,								//!< Error log message
-	GlkLogFatalError,							//!< Fatal error log message
+	/// Routine log message
+	GlkLogRoutine,
+	/// Informational log message
+	GlkLogInformation,
+	/// Custom log message (from the game, for example)
+	GlkLogCustom,
+	/// Warning log message
+	GlkLogWarning,
+	/// Error log message
+	GlkLogError,
+	/// Fatal error log message
+	GlkLogFatalError,
 };
 
 ///
@@ -39,7 +45,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 @interface GlkView : NSView<GlkSession, GlkBuffer, GlkEventReceiver> {
 	// Windows
 	/// Maps identifiers to windows
-	NSMutableDictionary* glkWindows;
+	NSMutableDictionary<NSNumber*,GlkWindow*>* glkWindows;
 	/// Most recent save panel
 	NSSavePanel* lastPanel;
 	/// The root window
@@ -49,7 +55,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	
 	/// Used when flushing the buffer
 	BOOL windowsNeedLayout;
-	/// A buffer is currently flushing if YES
+	/// A buffer is currently flushing if \c YES
 	BOOL flushing;
 	
 	// Styles
@@ -64,18 +70,18 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	
 	// Streams
 	/// Maps identifiers to streams
-	NSMutableDictionary* glkStreams;
-	
+	NSMutableDictionary<NSNumber*,id<GlkStream>>* glkStreams;
+
 	/// The input stream
-	NSObject<GlkStream>* inputStream;
+	id<GlkStream> inputStream;
 	/// Maps keys to extra input streams
 	NSMutableDictionary* extraStreamDictionary;
 	/// Used while prompting for a file
-	NSObject<GlkFilePrompt>* promptHandler;
+	id<GlkFilePrompt> promptHandler;
 	/// Types of files we can show in the panels
 	NSArray<NSString*>* allowedFiletypes;
 	
-	/// YES if windows in this view should automatically page through more prompts
+	/// \c YES if windows in this view should automatically page through more prompts
 	BOOL alwaysPageOnMore;
 	
 	// File handling
@@ -86,7 +92,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	/// The last Arrange event we received
 	GlkEvent* arrangeEvent;
 	/// The listener for events
-	NSObject<GlkEventListener>* listener;
+	id<GlkEventListener> listener;
 	/// The queue of waiting events
 	NSMutableArray* events;
 	
@@ -114,11 +120,11 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	
 	// The delegate
 	/// Can respond to certain events if it likes
-	id<GlkViewDelegate> delegate;
+	__unsafe_unretained id<GlkViewDelegate> delegate;
 	
 	// Images and graphics
 	/// Source of data for images
-	NSObject<GlkImageSource>* imgSrc;
+	id<GlkImageSource> imgSrc;
 	/// Dictionary of images
 	NSMutableDictionary* imageDictionary;
 	/// Dictionary of flipped images
@@ -134,7 +140,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	/// The automation output receivers attached to this view
 	NSMutableArray<id<GlkAutomation>>* outputReceivers;
 	/// The automation input receiver attached to this view
-	NSMutableArray* inputReceivers;
+	NSMutableArray<id<GlkAutomation>>* inputReceivers;
 	
 	/// The automation window identifier cache
 	NSMutableDictionary* windowPositionCache;
@@ -159,15 +165,17 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 /// Terminates the client application
 - (void) terminateClient;
 /// Sets the input stream
-- (void) setInputStream: (NSObject<GlkStream>*) stream;
+- (void) setInputStream: (id<GlkStream>) stream;
 /// Sets the input stream to be input from the given file
 - (void) setInputFilename: (NSString*) filename;
 /// Adds a keyed stream that the client can obtain if necessary
-- (void) addStream: (NSObject<GlkStream>*) stream
+- (void) addStream: (id<GlkStream>) stream
 		   withKey: (NSString*) streamKey;
 /// Adds a keyed stream that reads from the specified filename
 - (void) addInputFilename: (NSString*) filename
 				  withKey: (NSString*) streamKey;
+
+@property (nonatomic, retain) id<GlkStream> inputStream;
 
 // Writing log messages
 /// If the client supports logging, then tell it to display the specified log message
@@ -201,9 +209,9 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 - (void) addHistoryItem: (NSString*) inputLine
 		forWindowWithId: (glui32) windowId;
 /// Retrieves the previous history item
-@property (nullable, readonly) NSString *previousHistoryItem;
+@property (nullable, readonly, copy) NSString *previousHistoryItem;
 /// Retrieves the next history item
-@property (nullable, readonly) NSString *nextHistoryItem;
+@property (nullable, readonly, copy) NSString *nextHistoryItem;
 /// Causes the history position to move to the end
 - (void) resetHistoryPosition;
 
@@ -216,11 +224,11 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 - (void) setBorderWidth: (CGFloat) borderWidth;
 
 // Dealing with [ MORE ] prompts
-/// YES if this CocoaGlk window should always page on more
+/// \c YES if this CocoaGlk window should always page on more
 @property BOOL alwaysPageOnMore;
 /// True if any windows are waiting on a [ MORE ] prompts
-- (BOOL) morePromptsPending;
-/// Causes all windows that require it to page forwards (returns NO if no windows actually needed paging)
+@property (nonatomic, readonly) BOOL morePromptsPending;
+/// Causes all windows that require it to page forwards (returns \c NO if no windows actually needed paging)
 - (BOOL) pageAll;
 
 // Various UI events
@@ -232,15 +240,15 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 
 // Automation
 /// Adds an automation object to receive game and user output events
-- (void) addOutputReceiver: (NSObject<GlkAutomation>*) receiver;
+- (void) addOutputReceiver: (id<GlkAutomation>) receiver;
 /// Adds an automation object to receive notifications about when it can sensibly send input to the game (if there is an input receiver, input through the UI is disabled)
-- (void) addInputReceiver: (NSObject<GlkAutomation>*) receiver;
+- (void) addInputReceiver: (id<GlkAutomation>) receiver;
 
 /// Removes an automation object from input and/or output duties
-- (void) removeAutomationObject: (NSObject<GlkAutomation>*) receiver;
+- (void) removeAutomationObject: (id<GlkAutomation>) receiver;
 
 /// Returns true if there are windows waiting for input (ie, a sendCharacters event will succeed)
-- (BOOL) canSendInput;
+@property (nonatomic) BOOL canSendInput;
 /// Sends the specified characters to the given window number as a line or character input event
 - (int) sendCharacters: (NSString*) characters
 			  toWindow: (int) window;
@@ -250,10 +258,9 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 			toWindow: (int) window;
 
 /// Request from a window object to send characters to the automation system
-- (void) automateStream: (NSObject<GlkStream>*) stream
+- (void) automateStream: (id<GlkStream>) stream
 			  forString: (NSString*) string;
 @end
-
 
 ///
 /// Functions that a view delegate can provide
@@ -261,12 +268,12 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 @protocol GlkViewDelegate <NSObject>
 @optional
 
-/// Set to return YES to get rid of the CocoaGlk logo
-@property (readonly) BOOL disableLogo;
+/// Set to return \c YES to get rid of the CocoaGlk logo
+@property (nonatomic, readonly) BOOL disableLogo;
 /// If non-nil, then this will be the logo displayed instead of 'CocoaGlk'
-@property (readonly, nullable, copy) GlkSuperImage *logo;
+@property (readonly, nullable, copy) NSImage *logo;
 /// A description of what is running in this window (or nil)
-@property (readonly, copy, nullable) NSString *taskDescription;
+@property (nonatomic, readonly, copy, nullable) NSString *taskDescription;
 
 /// Called to show warnings, etc
 - (void) showStatusText: (NSString*) status;
@@ -293,7 +300,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 /// The delegate can override this to provide custom saving behaviour for its files. This should return \c YES if the delegate is going to handle the event or \c NO otherwise
 - (BOOL) promptForFilesForUsage: (NSString*) usage
 					 forWriting: (BOOL) writing
-						handler: (NSObject<GlkFilePrompt>*) handler
+						handler: (id<GlkFilePrompt>) handler
 			 preferredDirectory: (nullable NSString*) preferredDirectory;
 
 @end

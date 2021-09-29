@@ -9,12 +9,6 @@
 #include <tgmath.h>
 #import "GlkPairWindow.h"
 
-#if CGFLOAT_IS_DOUBLE
-#define CGF(__x) __x
-#else
-#define CGF(__x) __x ## f
-#endif
-
 
 @implementation GlkPairWindow
 
@@ -73,9 +67,9 @@
 	needsLayout = YES;
 }
 
-@synthesize keyWindow=key;
-@synthesize leftWindow=left;
-@synthesize rightWindow=right;
+@synthesize keyWindow = key;
+@synthesize leftWindow = left;
+@synthesize rightWindow = right;
 
 // = Size and arrangement =
 
@@ -109,13 +103,14 @@
 	
 	needsLayout = YES;
 }
-@synthesize borderWidth;
 
 - (void) setInputBorder: (BOOL) newInputBorder {
 	inputBorder = newInputBorder;
 	
 	needsLayout = YES;
 }
+
+@synthesize borderWidth;
 @synthesize inputBorder;
 
 // = Layout =
@@ -150,10 +145,10 @@
 				rightSize = [right heightForFixedSize: size];
 			}
 		} else {
-			rightSize = (availableSize * ((CGFloat)size))/CGF(100.0);
+			rightSize = (availableSize * ((CGFloat)size))/100.0;
 		}
 		
-		if (rightSize > availableSize) rightSize = availableSize-CGF(1.0);
+		if (rightSize > availableSize) rightSize = availableSize-1.0;
 
 		rightSize = floor(rightSize);
 		leftSize = floor(availableSize - rightSize);
@@ -281,7 +276,7 @@
 	[right taskFinished];
 }
 
-- (void) setEventTarget: (NSObject<GlkEventReceiver>*) newTarget {
+- (void) setEventTarget: (id<GlkEventReceiver>) newTarget {
 	[super setEventTarget: newTarget];
 	
 	// Propagate the handler

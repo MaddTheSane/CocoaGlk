@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface GlkAppDelegate : NSObject <NSApplicationDelegate, GlkHubDelegate> {
+@interface GlkAppDelegate : NSObject <GlkHubDelegate, NSApplicationDelegate> {
 
 }
 

@@ -65,19 +65,19 @@
 
 // = The fileref protocol =
 
-- (byref NSObject<GlkStream>*) createReadOnlyStream {
+- (byref id<GlkStream>) createReadOnlyStream {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadingWithFileURL: pathname];
 	
 	return stream;
 }
 
-- (byref NSObject<GlkStream>*) createWriteOnlyStream; {
+- (byref id<GlkStream>) createWriteOnlyStream; {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForWritingWithFileURL: pathname];
 	
 	return stream;
 }
 
-- (byref NSObject<GlkStream>*) createReadWriteStream {
+- (byref id<GlkStream>) createReadWriteStream {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadWriteWithFileURL: pathname];
 	
 	return stream;
@@ -92,6 +92,6 @@
 	return [[NSFileManager defaultManager] fileExistsAtPath: [pathname path]];
 }
 
-@synthesize autoflush;
+@synthesize autoflushStream = autoflush;
 
 @end

@@ -40,7 +40,7 @@
 	if (self) {
 		if (cocoaglk_register_memory) {
 			type = glkType;
-			rock = cocoaglk_register_memory(memory, (int)(strcmp(glkType, "&+#!Iu")==0?length/4:length), type);
+			rock = cocoaglk_register_memory(memory, (glui32)(strcmp(glkType, "&+#!Iu")==0?length/4:length), type);
 		}
 	}
 	
@@ -62,13 +62,13 @@
 	}
 	
 	if (type && cocoaglk_unregister_memory) {
-		cocoaglk_unregister_memory(memory, (int)(strcmp(type, "&+#!Iu")==0?length/4:length), type, rock);
+		cocoaglk_unregister_memory(memory, (glui32)(strcmp(type, "&+#!Iu")==0?length/4:length), type, rock);
 	}
 	
 	memory = nil;
 }
 
-- (void) setPosition: (in int) position
+- (void) setPosition: (in NSInteger) position
 		  relativeTo: (in enum GlkSeekMode) seekMode {
 	switch (seekMode) {
 		case GlkSeekStart:

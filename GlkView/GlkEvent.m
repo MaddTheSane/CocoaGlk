@@ -77,10 +77,10 @@
 			
 			lineInput = [[coder decodeObjectOfClass: [NSString class] forKey: LINEINPUTCODINGKEY] copy];
 		} else {
-			[coder decodeValueOfObjCType: @encode(unsigned) at: &type];
-			[coder decodeValueOfObjCType: @encode(unsigned) at: &windowId];
-			[coder decodeValueOfObjCType: @encode(unsigned) at: &val1];
-			[coder decodeValueOfObjCType: @encode(unsigned) at: &val2];
+			[coder decodeValueOfObjCType: @encode(unsigned) at: &type size: sizeof(unsigned)];
+			[coder decodeValueOfObjCType: @encode(unsigned) at: &windowId size: sizeof(unsigned)];
+			[coder decodeValueOfObjCType: @encode(unsigned) at: &val1 size: sizeof(unsigned)];
+			[coder decodeValueOfObjCType: @encode(unsigned) at: &val2 size: sizeof(unsigned)];
 			
 			lineInput = [[coder decodeObject] copy];
 		}
@@ -96,7 +96,7 @@
 		[coder encodeInt: val1 forKey: VAL1CODINGKEY];
 		[coder encodeInt: val2 forKey: VAL2CODINGKEY];
 
-		[coder encodeObject: lineInput forKey: @"lineInput"];
+		[coder encodeObject: lineInput forKey: LINEINPUTCODINGKEY];
 	} else {
 		[coder encodeValueOfObjCType: @encode(unsigned) at: &type];
 		[coder encodeValueOfObjCType: @encode(unsigned) at: &windowId];

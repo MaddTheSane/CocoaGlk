@@ -18,7 +18,7 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 
 - (id) initWithImage: (GlkSuperImage*) img
 		   alignment: (unsigned) align
-				size: (GlkCocoaSize) sz
+				size: (NSSize) sz
 			position: (NSUInteger) charPos {
 	self = [super init];
 	
@@ -41,11 +41,12 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 
 // = Cached information =
 
-@synthesize bounds;
 - (void) setBounds: (GlkRect) newBounds {
 	calculatedBounds = YES;
 	bounds = newBounds;
 }
+
+@synthesize bounds;
 
 @synthesize calculatedBounds;
 
@@ -140,7 +141,7 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 		if (maxWidth < size.width) scaleFactor = maxWidth/size.width;
 	}
 	
-	drawRect.origin = GlkMakePoint(floor(point.x), floor(point.y));
+	drawRect.origin = NSMakePoint(floor(point.x), floor(point.y));
 	drawRect.size = size;
 	drawRect.size.width *= scaleFactor;
 	drawRect.size.height *= scaleFactor;

@@ -226,7 +226,7 @@ static NSString* stringFromOp(NSArray* op) {
 	if (self) {
 		id decoded;
 		if (coder.allowsKeyedCoding) {
-			decoded = [coder decodeObjectOfClasses: [NSSet setWithObjects: [NSArray class], [NSNumber class], [NSString class], [GlkColor class], [NSValue class], [NSData class], nil] forKey: @"Operations"];
+			decoded = [coder decodeObjectOfClasses: [NSSet setWithObjects: [NSArray class], [NSNumber class], [NSString class], [NSColor class], [NSValue class], [NSData class], nil] forKey: @"Operations"];
 		} else {
 			decoded = [coder decodeObject];
 		}
@@ -486,7 +486,7 @@ static NSString* stringFromOp(NSArray* op) {
 // Streams
 
 // Registering streams
-- (void) registerStream: (in byref NSObject<GlkStream>*) stream
+- (void) registerStream: (in byref id<GlkStream>) stream
 		  forIdentifier: (unsigned) streamIdentifier  {
 	[self addOperation: s_RegisterStream
 			 arguments: @[stream,

@@ -14,24 +14,24 @@
 #endif
 #import <GlkView/GlkCustomTextSection.h>
 
-//! Attribute that can be applied to control glyphs to indicate that they should cause formatting of a specific Glk image
-extern NSString*const GlkImageAttribute;
+/// Attribute that can be applied to control glyphs to indicate that they should cause formatting of a specific Glk image
+extern NSString* const GlkImageAttribute;
 
-//!
-//! Representation of an image in a text container
-//!
+///
+/// Representation of an image in a text container
+///
 @interface GlkImage : GlkCustomTextSection {
 	/// The NSImage associated with this image
-	GlkSuperImage* image;
+	NSImage* image;
 	/// The size to draw this image with
-	GlkCocoaSize size;
+	NSSize size;
 	/// The Glk alignment of this image
 	unsigned alignment;
 	/// The character position of this image in the text stream
 	NSUInteger characterPosition;
 	
 	/// The bounds of this image in the text container
-	GlkRect bounds;
+	NSRect bounds;
 	/// Whether or not the bounds for this image have been calculated yet
 	BOOL calculatedBounds;
 
@@ -44,21 +44,21 @@ extern NSString*const GlkImageAttribute;
 // Initialisation
 - (id) initWithImage: (GlkSuperImage*) image
 		   alignment: (unsigned) alignment
-				size: (GlkCocoaSize) size
+				size: (NSSize) size
 			position: (NSUInteger) characterPosition;
 
 // Information
 /// The \c NSImage associated with this image
-@property (readonly, retain) GlkSuperImage *image;
+@property (readonly, retain) NSImage *image;
 /// The size to draw this image with
-@property (readonly) GlkCocoaSize size;
+@property (readonly) NSSize size;
 /// The Glk alignment of this image
 @property (readonly) unsigned alignment;
 /// The character position of this image in the text stream
 @property (readonly) NSUInteger characterPosition;
 
 /// The bounds of this image. Setting it marks it as calculated.
-@property (nonatomic) GlkRect bounds;
+@property (nonatomic) NSRect bounds;
 /// Returns \c YES if the bounds are calculated
 @property (readonly) BOOL calculatedBounds;
 /// Marks this image as uncalculated

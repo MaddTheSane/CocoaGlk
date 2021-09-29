@@ -103,7 +103,7 @@
 }
 
 - (CGFloat) widthForFixedSize: (unsigned) size {
-	GlkCocoaSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
+	NSSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
 	
 	return floor(size * baseSize.width) + [textView textContainerInset].width*2 + [[textView textContainer] lineFragmentPadding]*2;
 }
@@ -297,7 +297,7 @@
 	}
 }
 
-#if defined(COCOAGLK_IPHONE)
+#if !defined(COCOAGLK_IPHONE)
 // = Mouse input =
 
 - (void) mouseDown: (NSEvent*) event {
@@ -308,8 +308,8 @@
 												inTextContainer: [textView textContainer]];
 	NSInteger clickPos = [[textView layoutManager] characterIndexForGlyphAtIndex: glyphPos];
 	
-	int clickX = (int)(clickPos % width);
-	int clickY = (int)(clickPos / width);
+	NSInteger clickX = clickPos % width;
+	NSInteger clickY = clickPos / width;
 	
 	// TODO: do not report mouse dragged events (ie, things resulting in a selection)
 	
@@ -317,11 +317,11 @@
 		// Generate the event
 		GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_MouseInput
 									  windowIdentifier: [self glkIdentifier]
-												  val1: clickX
-												  val2: clickY];
+												  val1: (int)clickX
+												  val2: (int)clickY];
 		
 		// ... send it
-		[target queueEvent: [evt autorelease]];
+		[target queueEvent: evt];
 	} else {
 		[super mouseUp: event];
 	}
@@ -426,7 +426,7 @@ textView:(NSTextView *)aTextView
 	   replacementString:(NSString *)replacementString {
 	if (!lineInput) return NO;
 	
-	int startPos = xpos + ypos*width;
+	NSInteger startPos = xpos + ypos*width;
 	NSInteger endPos = startPos + lineInputLength;
 	
 	NSInteger lengthChange = [replacementString length] - affectedCharRange.length;

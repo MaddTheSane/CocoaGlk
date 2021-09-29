@@ -70,7 +70,7 @@
 
 // = Registering sessions for later consumption =
 
-- (void) registerSession: (NSObject<GlkSession>*) session
+- (void) registerSession: (id<GlkSession>) session
 			  withCookie: (NSString*) sessionCookie {
 	if ([waitingSessions objectForKey: sessionCookie] != nil) {
 		// Oops! This is not allowed
@@ -83,10 +83,10 @@
 						forKey: sessionCookie];
 }
 
-- (void) unregisterSession: (NSObject<GlkSession>*)session {
+- (void) unregisterSession: (id<GlkSession>)session {
 	// Iterate through the sessions until we find the one that we're supposed to be removing
 	for (NSString* sessionCookie in waitingSessions) {
-		NSObject<GlkSession>* ses = [waitingSessions objectForKey: sessionCookie];
+		id<GlkSession> ses = [waitingSessions objectForKey: sessionCookie];
 
 		if (ses == session) {
 			// This is the session to remove
@@ -133,23 +133,23 @@
 
 // = Setting up the session =
 
-- (byref NSObject<GlkSession>*) createNewSession {
+- (byref id<GlkSession>) createNewSession {
 	return [self createNewSessionWithHubCookie: nil
 								 sessionCookie: nil];
 }
 
-- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie {
+- (byref id<GlkSession>) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie {
 	return [self createNewSessionWithHubCookie: hubCookie
 								 sessionCookie: nil];
 }
 
-- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie
-                                                sessionCookie: (in bycopy NSString*) sessionCookie {
+- (byref id<GlkSession>) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie
+										 sessionCookie: (in bycopy NSString*) sessionCookie {
 	if (sessionCookie == nil) {
 		return [self createAnonymousSession];
 	} else {
 		// Look up the session in the session dictionary
-		NSObject<GlkSession>* session = [waitingSessions objectForKey: sessionCookie];
+		id<GlkSession> session = [waitingSessions objectForKey: sessionCookie];
 		if (session == nil) return nil;
 		
 		// Remove the session from the dictionary
@@ -164,7 +164,7 @@
 
 @synthesize delegate;
 
-- (NSObject<GlkSession>*) createAnonymousSession {
+- (id<GlkSession>) createAnonymousSession {
 	if (delegate && [delegate respondsToSelector: @selector(createAnonymousSession)]) {
 		return [delegate createAnonymousSession];
 	} else {

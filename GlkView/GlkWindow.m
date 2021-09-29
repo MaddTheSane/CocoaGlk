@@ -41,7 +41,7 @@
 
 // = The parent window =
 
-@synthesize parent=parentWindow;
+@synthesize parent = parentWindow;
 
 // = Layout =
 
@@ -241,7 +241,7 @@
 	// We can't get any clearer
 }
 
-@synthesize eventTarget=target;
+@synthesize eventTarget = target;
 
 - (void) requestCharInput {
 	if (lineInput) {
@@ -261,13 +261,9 @@
 	[[self window] invalidateCursorRectsForView: self];
 }
 
-- (BOOL) waitingForLineInput {
-	return lineInput;
-}
+@synthesize waitingForLineInput = lineInput;
 
-- (BOOL) waitingForCharInput {
-	return charInput;
-}
+@synthesize waitingForCharInput = charInput;
 
 - (BOOL) waitingForKeyboardInput {
 	return charInput || lineInput || [self needsPaging];
@@ -495,7 +491,7 @@ NS_ENUM(unichar) {
 	// Nothing to do really
 }
 
-- (void) setPosition: (in int) position
+- (void) setPosition: (in NSInteger) position
 		  relativeTo: (in enum GlkSeekMode) seekMode {
 	// No effect
 }

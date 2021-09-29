@@ -243,11 +243,11 @@
 - (CGFloat) widthForFixedSize: (unsigned) size {
 	NSSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
 	
-	return floor(size * baseSize.width) + (margin*CGF(2.0));
+	return floor(size * baseSize.width) + (margin*2);
 }
 
 - (CGFloat) heightForFixedSize: (unsigned) size {
-	return floor(size * [self lineHeight]) + (margin*CGF(2.0));
+	return floor(size * [self lineHeight]) + (margin*2);
 }
 
 - (void) setScaleFactor: (CGFloat) newScaleFactor {
@@ -383,9 +383,7 @@
 									range: editedRange];
 }
 
-- (NSInteger) inputPos {
-	return inputPos;
-}
+@synthesize inputPos;
 
 - (void) forceLineInput: (NSString*) forcedInput {
 	if (lineInput) {
@@ -437,7 +435,7 @@
 
 	// Check for any newlines in the input, and generate an event if we find one
 	// We only process one line at a time
-	NSString* string = [textStorage string];
+	NSString* string = [[textView textStorage] string];
 	NSInteger pos;
 	
 	for (pos = inputPos; pos < [string length]; pos++) {
@@ -676,7 +674,7 @@
 	GlkImage* newImage = [[GlkImage alloc] initWithImage: image
 											   alignment: alignment
 													size: sz
-												position: [textStorage length]];
+												position: (int)[textStorage length]];
 	
 	// Add a suitable control character to the text
 	unichar imageChar = 11;

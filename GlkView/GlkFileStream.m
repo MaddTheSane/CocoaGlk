@@ -101,7 +101,7 @@
 	handle = nil;
 }
 
-- (void) setPosition: (in int) position
+- (void) setPosition: (in NSInteger) position
 		  relativeTo: (in enum GlkSeekMode) seekMode {
 	unsigned long long offset = [handle offsetInFile];
 	
@@ -137,7 +137,6 @@
 }
 
 - (void) putString: (in bycopy NSString*) string {
-	
 	NSData* latin1Data = [string dataUsingEncoding:NSISOLatin1StringEncoding allowLossyConversion:YES];
 
 	[handle writeData: latin1Data];

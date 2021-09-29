@@ -23,6 +23,7 @@
 }
 
 - (instancetype) init UNAVAILABLE_ATTRIBUTE;
+/// Designated initialiser
 - (instancetype) initWithPath: (NSURL*) pathname NS_DESIGNATED_INITIALIZER;
 
 /// Temporary filerefs are deleted when deallocated

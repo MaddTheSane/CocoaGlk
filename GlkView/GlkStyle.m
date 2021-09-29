@@ -10,13 +10,7 @@
 #import "GlkStyle.h"
 #include <CoreText/CoreText.h>
 
-#if CGFLOAT_IS_DOUBLE
-#define CGF(__x) __x
-#else
-#define CGF(__x) __x ## f
-#endif
-
-NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
+NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 
 @implementation GlkStyle
 
@@ -60,49 +54,41 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 	lastAttributes = nil;
 }
 
-@synthesize indentation;
 - (void) setIndentation: (CGFloat) newIndentation {
 	indentation = newIndentation;
 	[self styleChanged];
 }
 
-@synthesize paraIndentation=paraIndent;
 - (void) setParaIndentation: (CGFloat) newParaIndent {
 	paraIndent = newParaIndent;
 	[self styleChanged];
 }
 
-@synthesize justification=alignment;
 - (void) setJustification: (NSTextAlignment) newAlignment {
 	alignment = newAlignment;
 	[self styleChanged];
 }
 
-@synthesize size;
 - (void) setSize: (CGFloat) newSize {
 	size = newSize;
 	[self styleChanged];
 }
 
-@synthesize weight;
 - (void) setWeight: (int) newWeight {
 	weight = newWeight;
 	[self styleChanged];	
 }
 
-@synthesize oblique;
 - (void) setOblique: (BOOL) newOblique {
 	oblique = newOblique;
 	[self styleChanged];
 }
 
-@synthesize proportional;
 - (void) setProportional: (BOOL) newProportional {
 	proportional = newProportional;
 	[self styleChanged];
 }
 
-@synthesize textColour;
 - (void) setTextColour: (GlkColor*) newTextColour {
 	if (newTextColour == textColour) return;
 	
@@ -111,7 +97,6 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 	[self styleChanged];
 }
 
-@synthesize backColour;
 - (void) setBackColour: (GlkColor*) newBackColour {
 	if (newBackColour == backColour) return;
 	
@@ -120,11 +105,21 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 	[self styleChanged];
 }
 
-@synthesize reversed;
 - (void) setReversed: (BOOL) newReversed {
 	reversed = newReversed;
 	[self styleChanged];
 }
+
+@synthesize indentation;
+@synthesize paraIndentation = paraIndent;
+@synthesize justification = alignment;
+@synthesize size;
+@synthesize weight;
+@synthesize oblique;
+@synthesize proportional;
+@synthesize textColour;
+@synthesize backColour;
+@synthesize reversed;
 
 // = Utility functions =
 
@@ -285,7 +280,7 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 	}
 	
 	// Adjust the font size
-	if (size != 0 || scaleFactor != 1.0f) {
+	if (size != 0 || scaleFactor != 1.0) {
 		CGFloat newSize = [font pointSize] + size;
 		if (newSize < 6) newSize = 6;
 		newSize *= scaleFactor;
@@ -358,17 +353,10 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
-#if defined(COCOAGLK_IPHONE)
-			[self setBackColour: [UIColor colorWithRed: ((CGFloat)red)/CGF(255.0)
-												 green: ((CGFloat)green)/CGF(255.0)
-												  blue: ((CGFloat)blue)/CGF(255.0)
-												 alpha: 1.0]];
-#else
-			[self setBackColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/CGF(255.0)
-													   green: ((CGFloat)green)/CGF(255.0)
-														blue: ((CGFloat)blue)/CGF(255.0)
+			[self setBackColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/255.0
+													   green: ((CGFloat)green)/255.0
+														blue: ((CGFloat)blue)/255.0
 													   alpha: 1.0]];
-#endif
 			break;
 		}
 			
@@ -378,26 +366,19 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
-#if defined(COCOAGLK_IPHONE)
-			[self setTextColour: [UIColor colorWithRed: ((CGFloat)red)/CGF(255.0)
-												 green: ((CGFloat)green)/CGF(255.0)
-												  blue: ((CGFloat)blue)/CGF(255.0)
-												 alpha: 1.0]];
-#else
-			[self setTextColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/CGF(255.0)
-													   green: ((CGFloat)green)/CGF(255.0)
-														blue: ((CGFloat)blue)/CGF(255.0)
+			[self setTextColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/255.0
+													   green: ((CGFloat)green)/255.0
+														blue: ((CGFloat)blue)/255.0
 													   alpha: 1.0]];
-#endif
 			break;
 		}
 			
 		case stylehint_Indentation:
-			[self setIndentation: value*CGF(4.0)];
+			[self setIndentation: value*4.0];
 			break;
 			
 		case stylehint_ParaIndentation:
-			[self setParaIndentation: value*CGF(4.0)];
+			[self setParaIndentation: value*4.0];
 			break;
 			
 		case stylehint_Justification:
@@ -436,7 +417,7 @@ NSString*const GlkStyleAttributeName = @"GlkStyleAttribute";
 			break;
 			
 		case stylehint_Size:
-			[self setSize: value*CGF(2.0)];
+			[self setSize: value*2.0];
 			break;
 			
 		case stylehint_Weight:

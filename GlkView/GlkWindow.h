@@ -26,11 +26,11 @@
 ///
 /// Class that represents a Glk window
 ///
-@interface GlkWindow : GlkSuperView<GlkStream> {
+@interface GlkWindow : NSView<GlkStream> {
 	/// The pair window that contains this window (or NULL for the root window) !NOT RETAINED!
 	__weak GlkPairWindow* parentWindow;
 	
-	/// YES if this window is closed
+	/// \c YES if this window is closed
 	BOOL closed;
 	/// The window's unique identifier number (shared with the client)
 	unsigned windowIdentifier;
@@ -42,28 +42,33 @@
 	
 	/// Border
 	CGFloat border;
-	// The scale factor to use
+	/// The scale factor to use
 	CGFloat scaleFactor;
 	
 	// Styles
-	GlkPreferences* preferences;								// Preferences defines things like fonts
-	NSDictionary* styles;										// Maps style numbers to GlkStyle objects
-	GlkStyle* immediateStyle;									// The immediate style as set by the user
-	NSDictionary* customAttributes;								// The custom attributes to merge with the current style
+	/// Preferences defines things like fonts
+	GlkPreferences* preferences;
+	/// Maps style numbers to GlkStyle objects
+	NSDictionary* styles;
+	/// The immediate style as set by the user
+	GlkStyle* immediateStyle;
+	/// The custom attributes to merge with the current style
+	NSDictionary* customAttributes;
 	
 	// Hyperlinks
-	NSObject* linkObject;										// Object defining the current hyperlink
+	/// Object defining the current hyperlink
+	NSObject* linkObject;
 	
 	// These event variables are useful to subclasses
 	/// Where the events go !NOT RETAINED!
-	__weak NSObject<GlkEventReceiver>* target;
-	/// YES if we're receiving character input
+	__weak id<GlkEventReceiver> target;
+	/// \c YES if we're receiving character input
 	BOOL charInput;
-	/// YES if we're receiving text input
+	/// \c YES if we're receiving text input
 	BOOL lineInput;
-	/// YES if we're receiving mouse input
+	/// \c YES if we're receiving mouse input
 	BOOL mouseInput;
-	/// YES if we're receiving hyperlink input
+	/// \c YES if we're receiving hyperlink input
 	BOOL hyperlinkInput;
 	
 	/// The view that contains this window !NOT RETAINED!
@@ -75,12 +80,10 @@
 
 /// Given a string from a keyboard event, returns the associated Glk keycode
 + (unsigned) keycodeForString: (NSString*) string;
-#if !defined(COCOAGLK_IPHONE)
 /// Given a keyboard event, produces the associated Glk keycode
 + (unsigned) keycodeForEvent: (NSEvent*) evt;
-#endif
 
-// Closed windows can hang around
+/// Closed windows can hang around
 @property BOOL closed;
 
 // Window metadata
@@ -90,7 +93,7 @@
 
 // Layout
 /// If the layout has changed, then update/redraw this window
-- (void) layoutInRect: (GlkRect) parentRect;
+- (void) layoutInRect: (NSRect) parentRect;
 /// Meaning depends on the window format. Returns the preferred size in pixels
 - (CGFloat) widthForFixedSize: (unsigned) size;
 /// Meaning depends on the window format. Returns the preferred size in pixels
@@ -100,12 +103,12 @@
 @property CGFloat border;
 
 /// Size of the content, taking the border into account
-@property (readonly) GlkRect contentRect;
+@property (readonly) NSRect contentRect;
 /// Size in window units
 @property (readonly) GlkSize glkSize;
 
 /// Sets the scale factor for this window
-@property CGFloat scaleFactor;
+@property (nonatomic) CGFloat scaleFactor;
 
 // Styles
 /// Whether or not we're currently forcing fixed fonts
@@ -132,12 +135,12 @@
 - (void) reformat;
 
 /// The base proportional font we're using
-- (GlkFont*) proportionalFont;
+- (NSFont*) proportionalFont;
 /// The base fixed-pitch font we're using
-- (GlkFont*) fixedFont;
+- (NSFont*) fixedFont;
 
 /// The background colour for this window
-- (GlkColor*) backgroundColour;
+- (NSColor*) backgroundColour;
 
 /// The amount of leading to use
 @property (readonly) CGFloat leading;
@@ -157,17 +160,19 @@
 - (void) clearWindow;
 
 /// Sets the target for any events this window generates !NOT RETAINED!
-@property (weak) NSObject<GlkEventReceiver>* eventTarget;
+@property (nonatomic, weak) id<GlkEventReceiver> eventTarget;
 
 - (void) requestCharInput;
 /// Request that the window generate the appropriate events
 - (void) requestLineInput;
+
 - (void) requestMouseInput;
 - (void) requestHyperlinkInput;
 
 - (void) cancelCharInput;
 /// Request that the window stop generating these events
 - (NSString*) cancelLineInput;
+
 - (void) cancelMouseInput;
 - (void) cancelHyperlinkInput;
 
@@ -176,18 +181,16 @@
 /// Forces this window to act on the specified input string as if it had been entered by the user
 - (void) forceLineInput: (NSString*) forcedInput;
 
-/// Returns YES if this window is waiting for line input
-- (BOOL) waitingForLineInput;
-/// Returns YES if this window is waiting for character input
-- (BOOL) waitingForCharInput;
-/// Returns YES if this window is waiting for keyboard input
-- (BOOL) waitingForKeyboardInput;
-/// Returns YES if this window is waiting for keyboard input for user interaction with the running story
-- (BOOL) waitingForUserKeyboardInput;
-#if !defined(COCOAGLK_IPHONE)
+/// Returns \c YES if this window is waiting for line input
+@property (readonly) BOOL waitingForLineInput;
+/// Returns \c YES if this window is waiting for character input
+@property (readonly) BOOL waitingForCharInput;
+/// Returns \c YES if this window is waiting for keyboard input
+@property (readonly) BOOL waitingForKeyboardInput;
+/// Returns \c YES if this window is waiting for keyboard input for user interaction with the running story
+@property (readonly) BOOL waitingForUserKeyboardInput;
 /// The control that responds to events for this window
 - (NSResponder*) windowResponder;
-#endif
 
 /// Called just before the buffer flushes (mostly used to tell the text windows to wait before performing layout)
 - (void) bufferIsFlushing;
@@ -211,12 +214,12 @@
 - (void) taskFinished;
 
 // The parent window
-/// Sets the parent window !NOT RETAINED!
-@property (nonatomic, weak) GlkPairWindow *parent;
+/// The parent window !NOT RETAINED!
+@property (readwrite, nonatomic, weak) GlkPairWindow *parent;
 
 // The containing view
 /// The GlkView that contains this window !NOT RETAINED!
-@property (nonatomic, weak) GlkView *containingView;
+@property (readwrite, nonatomic, weak) GlkView *containingView;
 
 @end
 

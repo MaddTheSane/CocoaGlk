@@ -43,7 +43,7 @@
 
 // Using this automation object for input
 
-/// The game has reached a glk_select() loop
+/// The game has reached a \c glk_select() loop
 - (void) viewIsWaitingForInput: (GlkView*) view;
 
 @end

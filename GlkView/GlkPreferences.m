@@ -10,7 +10,7 @@
 
 #include "glk.h"
 
-NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNotification";
+NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNotification";
 
 @implementation GlkPreferences
 
@@ -168,21 +168,12 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 @synthesize fixedFont;
 
 - (void) setFontSize: (CGFloat) fontSize {
-#if defined(COCOAGLK_IPHONE)
-	UIFont* newProp;
-	UIFont* newFixed;
-	UIFontDescriptor *propDes = [proportionalFont.fontDescriptor fontDescriptorWithSize:fontSize];
-	UIFontDescriptor *fixedDes = [fixedFont.fontDescriptor fontDescriptorWithSize:fontSize];
-	newProp = [UIFont fontWithDescriptor:propDes size:fontSize];
-	newFixed = [UIFont fontWithDescriptor:fixedDes size:fontSize];
-#else
 	NSFontManager* mgr = [NSFontManager sharedFontManager];
 	
 	NSFont* newProp = [mgr convertFont: proportionalFont
 								toSize: fontSize];
 	NSFont* newFixed = [mgr convertFont: fixedFont
 								 toSize: fontSize];
-#endif
 	
 	[self setProportionalFont: newProp];
 	[self setFixedFont: newFixed];
@@ -220,8 +211,8 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 
 @synthesize useScreenFonts;
 @synthesize useHyphenation;
-@synthesize useLigatures=ligatures;
-@synthesize useKerning=kerning;
+@synthesize useLigatures = ligatures;
+@synthesize useKerning = kerning;
 
 - (void) setUseScreenFonts: (BOOL) value {
 	useScreenFonts = value;

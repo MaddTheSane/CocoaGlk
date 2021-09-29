@@ -26,11 +26,11 @@
 // = Variables =
 
 #if !defined(COCOAGLK_IPHONE)
-NSObject<GlkHub>* cocoaglk_hub = nil;									// Remote object that allows us to create sessions
+id<GlkHub> cocoaglk_hub = nil;											// Remote object that allows us to create sessions
 GlkCocoa* cocoaglk_obj = nil;											// Object that is notified when the remote session finishes
 #endif
 
-NSObject<GlkSession>* cocoaglk_session = nil;							// The active session
+id<GlkSession> cocoaglk_session = nil;									// The active session
 GlkBuffer* cocoaglk_buffer = nil;										// The global buffer
 
 NSAutoreleasePool* cocoaglk_pool = nil;									// The autorelease pool
@@ -127,7 +127,7 @@ void cocoaglk_start(int argv, const char** argc) {
 		exit(1);
 	}
 	
-	cocoaglk_hub = (NSObject<GlkHub>*)[remoteConnection rootProxy];
+	cocoaglk_hub = (id<GlkHub>)[remoteConnection rootProxy];
 	
 	if (cocoaglk_hub == nil) {
 		NSLog(@"Failed to retrieve hub object");

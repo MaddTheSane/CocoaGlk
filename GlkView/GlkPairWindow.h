@@ -43,18 +43,22 @@
 	// = Custom settings
 	/// Width of the border
 	CGFloat borderWidth;
-	/// YES if the border should only be drawn around windows that have requested input
+	/// \c YES if the border should only be drawn around windows that have requested input
 	BOOL inputBorder;
 	
 	/// True if something has changed to require the windows to be layed out again
 	BOOL needsLayout;
 	/// The border sliver
-	GlkRect borderSliver;
+	NSRect borderSliver;
 }
 
 // Setting the windows that make up this pair
+- (void) setKeyWindow: (GlkWindow*) newKey;
+- (void) setLeftWindow: (GlkWindow*) newLeft;
+- (void) setRightWindow: (GlkWindow*) newRight;
+
 @property (nonatomic, retain) GlkWindow *keyWindow;
-@property (nonatomic, readonly, retain) GlkWindow *nonKeyWindow;
+@property (nonatomic, readonly, assign) GlkWindow *nonKeyWindow;
 @property (nonatomic, retain) GlkWindow *leftWindow;
 @property (nonatomic, retain) GlkWindow *rightWindow;
 
@@ -70,7 +74,7 @@
 // Custom settings
 /// Width of the divider between windows (not drawn if < 2)
 @property (nonatomic) CGFloat borderWidth;
-/// Set to true to only draw the border if input is requested
+/// Set to \c YES to only draw the border if input is requested
 @property (nonatomic) BOOL inputBorder;
 
 @end

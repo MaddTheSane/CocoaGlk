@@ -22,12 +22,6 @@
 #import "GlkHub.h"
 #import "GlkFileStream.h"
 
-#if CGFLOAT_IS_DOUBLE
-#define CGF(__x) __x
-#else
-#define CGF(__x) __x ## f
-#endif
-
 @interface GlkView()
 
 //- (void) setFirstResponder;
@@ -61,8 +55,8 @@
 		
 		extensionsForUsage = [[NSMutableDictionary alloc] init];
 		
-		scaleFactor = CGF(1.0);
-		borderWidth = CGF(2.0);
+		scaleFactor = 1.0;
+		borderWidth = 2.0;
     }
     
 	return self;
@@ -321,8 +315,8 @@
 		NSRect logoSource;
 	
 		logoPos.size = logoSize;
-		logoPos.origin = NSMakePoint(floor(rect.origin.x + (rect.size.width - logoSize.width)/CGF(2.0)),
-									 floor(rect.origin.y + (rect.size.height - logoSize.height)/CGF(2.0)));
+		logoPos.origin = NSMakePoint(floor(rect.origin.x + (rect.size.width - logoSize.width)/2.0),
+									 floor(rect.origin.y + (rect.size.height - logoSize.height)/2.0));
 	
 		logoSource.size = logoSize;
 		logoSource.origin = NSMakePoint(0,0);
@@ -349,6 +343,7 @@
 }
 
 // = The delegate =
+
 @synthesize delegate;
 
 - (BOOL) disableLogo {
@@ -479,7 +474,7 @@
 				// Could look for the common ancestor, but this way is easier
 				GlkEvent* newEvent = [[GlkArrangeEvent alloc] initWithGlkWindow: rootWindow];
 				
-				NSInteger evtIndex = [events indexOfObjectIdenticalTo: arrangeEvent];
+				NSUInteger evtIndex = [events indexOfObjectIdenticalTo: arrangeEvent];
 				
 				if (evtIndex != NSNotFound) {
 					[events replaceObjectAtIndex: evtIndex
@@ -515,7 +510,7 @@
 	}
 }
 
-@synthesize synchronisationCount=syncCount;
+@synthesize synchronisationCount = syncCount;
 
 - (void) requestClientSync {
 	syncCount++;
@@ -553,8 +548,6 @@
 
 // = Setting up for launch =
 
-@synthesize viewCookie;
-
 - (void) setViewCookie: (NSString*) cookie {
 	[viewCookie release];
 	viewCookie = [cookie copy];
@@ -562,6 +555,8 @@
 	[self logMessage: @"View cookie set"
 		  withStatus: GlkLogRoutine];
 }
+
+@synthesize viewCookie;
 
 - (void) setRandomViewCookie {
 	unichar randomCookie[16];
@@ -643,7 +638,7 @@
 	[subtask terminate];
 }
 
-- (void) addStream: (NSObject<GlkStream>*) stream 
+- (void) addStream: (id<GlkStream>) stream
 		   withKey: (NSString*) streamKey {
 	if (!extraStreamDictionary) {
 		extraStreamDictionary = [[NSMutableDictionary alloc] init];
@@ -669,7 +664,9 @@
 		  withStatus: GlkLogRoutine];
 }
 
-- (void) setInputStream: (NSObject<GlkStream>*) stream {
+@synthesize inputStream;
+
+- (void) setInputStream: (id<GlkStream>) stream {
 	[inputStream release]; inputStream = nil;
 	inputStream = [stream retain];
 	
@@ -815,11 +812,11 @@
 	}
 }
 
-- (byref NSObject<GlkStream>*) inputStream {
+- (byref id<GlkStream>) inputStream {
 	return inputStream;
 }
 
-- (byref NSObject<GlkStream>*) streamForKey: (in bycopy NSString*) key {
+- (byref id<GlkStream>) streamForKey: (in bycopy NSString*) key {
 	return [extraStreamDictionary objectForKey: key];
 }
 
@@ -924,7 +921,7 @@
 
 // Events
 
-- (bycopy NSObject<GlkEvent>*) nextEvent {
+- (bycopy id<GlkEvent>) nextEvent {
 	if ([events count] > 0) {
 		// Get the next event from the queue
 		GlkEvent* nextEvent = [[[events objectAtIndex: 0] retain] autorelease];
@@ -943,7 +940,7 @@
 	}
 }
 
-- (void) setEventListener: (in byref NSObject<GlkEventListener>*) newListener {
+- (void) setEventListener: (in byref id<GlkEventListener>) newListener {
 	[listener autorelease]; listener = nil;
 	
 	// Inform any input automation objects that if they've got events waiting, then now is the time to fire them
@@ -984,7 +981,7 @@
 
 // Filerefs
 
-- (NSObject<GlkFileRef>*) fileRefWithName: (in bycopy NSString*) name {
+- (id<GlkFileRef>) fileRefWithName: (in bycopy NSString*) name {
 	// Turn into a 'real' path
 	NSString* path = [self pathForNamedFile: name];
 	if (!path) return nil;
@@ -997,7 +994,7 @@
 	return [res autorelease];
 }
 
-- (NSObject<GlkFileRef>*) tempFileRef {
+- (id<GlkFileRef>) tempFileRef {
 	NSString* tempDir = NSTemporaryDirectory();
 	if (tempDir == nil) return nil;
 	
@@ -1012,7 +1009,7 @@
 	
 	mktemp(tempName);
 	
-	NSString* tempPath = [tempDir stringByAppendingPathComponent: [NSString stringWithCString: tempName encoding: NSUTF8StringEncoding]];
+	NSString* tempPath = [tempDir stringByAppendingPathComponent: @(tempName)];
 	
 	// Turn into a temporary fileref
 	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: [NSURL fileURLWithPath: tempPath]];
@@ -1075,7 +1072,7 @@
 
 - (void) promptForFilesForUsage: (in bycopy NSString*) usage
 					 forWriting: (BOOL) writing
-						handler: (in byref NSObject<GlkFilePrompt>*) handler {
+						handler: (in byref id<GlkFilePrompt>) handler {
 	// Pick a preferred directory
 	NSString* preferredDirectory = nil;
 	
@@ -1106,7 +1103,7 @@
 
 - (void) promptForFilesOfType: (in bycopy NSArray<NSString*>*) filetypes
 				   forWriting: (BOOL) writing
-					  handler: (in byref NSObject<GlkFilePrompt>*) handler {
+					  handler: (in byref id<GlkFilePrompt>) handler {
 	// If we don't have a window, we can't show a dialog, so we can't get a filename
 	if (![self window]) {
 		[handler promptCancelled];
@@ -1479,7 +1476,7 @@
 				method: (glui32) method
 				  size: (glui32) size
 			 keyWindow: (glui32) keyIdentifier {
-	GlkPairWindow* win = [glkWindows objectForKey: @(identifier)];
+	GlkPairWindow* win = (GlkPairWindow *)[glkWindows objectForKey: @(identifier)];
 	GlkWindow* keyWin = [glkWindows objectForKey: @(keyIdentifier)];
 	
 	if (!win) {
@@ -1588,7 +1585,7 @@
 - (void) setStyleHint: (glui32) hint
 			  toValue: (glsi32) value
 			 inStream: (glui32) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to set an immediate style hint in an undefined stream");
@@ -1601,7 +1598,7 @@
 
 - (void) clearStyleHint: (glui32) hint
 			   inStream: (glui32) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to clear an immediate style hint in an undefined stream");
@@ -1613,7 +1610,7 @@
 
 - (void) setCustomAttributes: (NSDictionary*) attributes
 					inStream: (glui32) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to set custom attributes in an undefined stream");
@@ -1626,7 +1623,7 @@
 // Closing windows
 
 - (void) removeIdentifier: (glui32) identifier {
-	GlkPairWindow* win = [[glkWindows objectForKey: @(identifier)] retain];
+	GlkPairWindow* win = (GlkPairWindow *)[[glkWindows objectForKey: @(identifier)] retain];
 
 	if ([win isKindOfClass: [GlkPairWindow class]]) {
 		// Remove the ID for the left and right windows
@@ -1716,7 +1713,7 @@
 
 // Registering streams
 
-- (void) registerStream: (in byref NSObject<GlkStream>*) stream
+- (void) registerStream: (in byref id<GlkStream>) stream
 		  forIdentifier: (unsigned) streamIdentifier {
 	[glkStreams setObject: stream
 				   forKey: @(streamIdentifier)];
@@ -1736,7 +1733,7 @@
 }
 
 - (void) closeStreamIdentifier: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (!stream) {
 		NSLog(@"Warning: attempt to close nonexistent stream");
@@ -1748,7 +1745,7 @@
 }
 
 - (void) unregisterStreamIdentifier: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (!stream) {
 		// Stream might not have been registered to begin with: we consider this OK
@@ -1760,7 +1757,7 @@
 
 // Buffering stream writes
 
-- (void) automateStream: (NSObject<GlkStream>*) stream
+- (void) automateStream: (id<GlkStream>) stream
 			  forString: (NSString*) string {
 	// If this is a text window stream, then send the output to the appropriate automation objects
 	if ([stream isKindOfClass: [GlkTextWindow class]] &&
@@ -1777,7 +1774,7 @@
 
 - (void) putChar: (unichar) ch
 		toStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to write to nonexistent stream");
@@ -1796,7 +1793,7 @@
 
 - (void) putString: (in bycopy NSString*) string
 		  toStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to write to nonexistent stream");
@@ -1813,7 +1810,7 @@
 
 - (void) putData: (in bycopy NSData*) data
 		toStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to write to nonexistent stream");
@@ -1825,7 +1822,7 @@
 
 - (void) setStyle: (unsigned) style
 		 onStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to set style on a nonexistent stream");
@@ -1840,7 +1837,7 @@
 
 - (void) setHyperlink: (unsigned int) value
 			 onStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to set style on a nonexistent stream");
@@ -1851,7 +1848,7 @@
 }
 
 - (void) clearHyperlinkOnStream: (unsigned) streamIdentifier {
-	NSObject<GlkStream>* stream = [glkStreams objectForKey: @(streamIdentifier)];
+	id<GlkStream> stream = [glkStreams objectForKey: @(streamIdentifier)];
 	
 	if (stream == nil) {
 		NSLog(@"Warning: attempt to set style on a nonexistent stream");
@@ -2316,15 +2313,15 @@
 
 // = Automation =
 
-- (void) addOutputReceiver: (NSObject<GlkAutomation>*) receiver {
+- (void) addOutputReceiver: (id<GlkAutomation>) receiver {
 	[outputReceivers addObject: receiver];
 }
 
-- (void) addInputReceiver: (NSObject<GlkAutomation>*) receiver {
+- (void) addInputReceiver: (id<GlkAutomation>) receiver {
 	[inputReceivers addObject: receiver];
 }
 
-- (void) removeAutomationObject: (NSObject<GlkAutomation>*) receiver {
+- (void) removeAutomationObject: (id<GlkAutomation>) receiver {
 	[outputReceivers removeObjectIdenticalTo: receiver];
 	[inputReceivers removeObjectIdenticalTo: receiver];
 }
@@ -2350,6 +2347,8 @@
 		return rootWindow;
 	}
 }
+
+@dynamic canSendInput;
 
 - (BOOL) canSendInput {
 	GlkWindow* candidate = rootWindow;

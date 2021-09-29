@@ -15,16 +15,17 @@
 #endif
 #import <GlkView/glk.h>
 
-//! Styles store themselves in the attributes to facilitate reformating after a change to a preference object
+/// Styles store themselves in the attributes to facilitate reformating after a change to a preference object
 extern NSAttributedStringKey const GlkStyleAttributeName;
+
 
 @class GlkPreferences;
 
-//!
-//! Description of a Glk style, and functions for turning a Glk style into a cocoa style
-//!
-//! (Maybe I should split this into a Mutable/Immutable pair)
-//!
+///
+/// Description of a Glk style, and functions for turning a Glk style into a cocoa style
+///
+/// (Maybe I should split this into a Mutable/Immutable pair)
+///
 @interface GlkStyle : NSObject<NSCopying> {
 	// Style attributes
 	CGFloat indentation;
@@ -72,9 +73,9 @@ extern NSAttributedStringKey const GlkStyleAttributeName;
 /// \c NO if fixed-pitch
 @property (nonatomic) BOOL proportional;
 /// Foreground text colour
-@property (nonatomic, retain) GlkColor* textColour;
+@property (nonatomic, copy) NSColor *textColour;
 /// Background text colour
-@property (nonatomic, retain) GlkColor* backColour;
+@property (nonatomic, copy) NSColor *backColour;
 /// \c YES If text/back are reversed
 @property (nonatomic, getter=isReversed) BOOL reversed;
 

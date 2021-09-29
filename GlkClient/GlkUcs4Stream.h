@@ -15,12 +15,12 @@
 ///
 @interface GlkUcs4Stream : NSObject<GlkStream> {
 	/// The stream that gets the results of writing to this stream
-	NSObject<GlkStream>* dataStream;
+	id<GlkStream> dataStream;
 	/// YES if the stream should be written in a big-endian manner
 	BOOL bigEndian;
 }
 
-- (instancetype) initWithStream: (NSObject<GlkStream>*) dataStream
+- (instancetype) initWithStream: (id<GlkStream>) dataStream
 					  bigEndian: (BOOL) bigEndian;
 
 @end

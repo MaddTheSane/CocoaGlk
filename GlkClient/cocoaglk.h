@@ -51,7 +51,7 @@ extern void cocoaglk_log_ex(const char* logText, int priority);
 /// Sets the extensions to use for a specific file usage
 extern void cocoaglk_set_types_for_usage(glui32 usage, NSArray<NSString*>* extensions);
 
-//! Retrieves a list of valid file types for a given usage
+/// Retrieves a list of valid file types for a given usage
 extern NSArray<NSString*>* cocoaglk_types_for_usage(glui32 usage);
 #endif
 

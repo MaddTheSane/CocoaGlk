@@ -853,17 +853,10 @@ void glk_window_clear(winid_t win) {
 	
 	// Clear the window (well, eventually)
 	if (win->wintype == wintype_Graphics) {
-#ifdef COCOAGLK_IPHONE
-		UIColor* bgColour = [UIColor colorWithRed: ((CGFloat)(win->background&0xff0000))/16711680.0
-											green: ((CGFloat)(win->background&0xff00))/65280.0
-											 blue: ((CGFloat)(win->background&0xff))/255.0
-											alpha: 1.0];
-#else
 		NSColor* bgColour = [NSColor colorWithDeviceRed: ((CGFloat)(win->background&0xff0000))/16711680.0
 												  green: ((CGFloat)(win->background&0xff00))/65280.0
 												   blue: ((CGFloat)(win->background&0xff))/255.0
 												  alpha: 1.0];
-#endif
 
 		[cocoaglk_buffer clearWindowIdentifier: win->identifier
 						  withBackgroundColour: bgColour];

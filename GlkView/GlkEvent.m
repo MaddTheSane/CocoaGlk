@@ -76,28 +76,56 @@
 
 // = NSCoding methods =
 
+#define LINEINPUTCODINGKEY @"lineInput"
+#define TYPECODINGKEY @"type"
+#define WINDOWIDCODINGKEY @"windowId"
+#define VAL1CODINGKEY @"val1"
+#define VAL2CODINGKEY @"val2"
+
 - (id) initWithCoder: (NSCoder*) coder {
 	self = [super init];
 	
 	if (self) {
-		[coder decodeValueOfObjCType: @encode(unsigned) at: &type];
-		[coder decodeValueOfObjCType: @encode(unsigned) at: &windowId];
-		[coder decodeValueOfObjCType: @encode(unsigned) at: &val1];
-		[coder decodeValueOfObjCType: @encode(unsigned) at: &val2];
-		
-		lineInput = [[coder decodeObject] copy];
+		if (coder.allowsKeyedCoding) {
+			type = [coder decodeIntForKey: TYPECODINGKEY];
+			windowId = [coder decodeIntForKey: WINDOWIDCODINGKEY];
+			val1 = [coder decodeIntForKey: VAL1CODINGKEY];
+			val2 = [coder decodeIntForKey: VAL2CODINGKEY];
+			
+			lineInput = [[coder decodeObjectOfClass: [NSString class] forKey: LINEINPUTCODINGKEY] copy];
+		} else {
+			[coder decodeValueOfObjCType: @encode(unsigned) at: &type size: sizeof(unsigned)];
+			[coder decodeValueOfObjCType: @encode(unsigned) at: &windowId size: sizeof(unsigned)];
+			[coder decodeValueOfObjCType: @encode(unsigned) at: &val1 size: sizeof(unsigned)];
+			[coder decodeValueOfObjCType: @encode(unsigned) at: &val2 size: sizeof(unsigned)];
+			
+			lineInput = [[coder decodeObject] copy];
+		}
 	}
 	
 	return self;
 }
 
 - (void) encodeWithCoder: (NSCoder*) coder {
-	[coder encodeValueOfObjCType: @encode(unsigned) at: &type];
-	[coder encodeValueOfObjCType: @encode(unsigned) at: &windowId];
-	[coder encodeValueOfObjCType: @encode(unsigned) at: &val1];
-	[coder encodeValueOfObjCType: @encode(unsigned) at: &val2];
+	if (coder.allowsKeyedCoding) {
+		[coder encodeInt: type forKey: TYPECODINGKEY];
+		[coder encodeInt: windowId forKey: WINDOWIDCODINGKEY];
+		[coder encodeInt: val1 forKey: VAL1CODINGKEY];
+		[coder encodeInt: val2 forKey: VAL2CODINGKEY];
 
-	[coder encodeObject: lineInput];
+		[coder encodeObject: lineInput forKey: LINEINPUTCODINGKEY];
+	} else {
+		[coder encodeValueOfObjCType: @encode(unsigned) at: &type];
+		[coder encodeValueOfObjCType: @encode(unsigned) at: &windowId];
+		[coder encodeValueOfObjCType: @encode(unsigned) at: &val1];
+		[coder encodeValueOfObjCType: @encode(unsigned) at: &val2];
+		
+		[coder encodeObject: lineInput];
+	}
+}
+
++ (BOOL)supportsSecureCoding {
+	return YES;
 }
 
 @end

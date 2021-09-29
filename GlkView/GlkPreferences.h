@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 /// Notification sent whenever the preferences are changed (not necessarily sent immediately)
-extern NSString* GlkPreferencesHaveChangedNotification;
+extern NSNotificationName const GlkPreferencesHaveChangedNotification;
 
 @class GlkStyle;
 
@@ -22,7 +22,7 @@ extern NSString* GlkPreferencesHaveChangedNotification;
 	NSFont* fixedFont;
 	
 	// The standard styles
-	NSMutableDictionary* styles;
+	NSMutableDictionary<NSNumber*,GlkStyle*>* styles;
 	
 	// Typography
 	CGFloat textMargin;
@@ -45,19 +45,16 @@ extern NSString* GlkPreferencesHaveChangedNotification;
 
 // Preferences and the user defaults
 /// Used to load the preferences from a defaults file
-- (void) setPreferencesFromDefaults: (NSDictionary*) defaults;
+- (void) setPreferencesFromDefaults: (NSDictionary<NSString*,id>*) defaults;
 /// These preferences in a format suitable for the user defaults file
-- (NSDictionary*) preferenceDefaults;
+@property (readonly, copy) NSDictionary<NSString*,id> *preferenceDefaults;
 
 // The preferences themselves
 
 // Font preferences
 /// The font used for proportional text
-- (void) setProportionalFont: (NSFont*) propFont;
-/// The font used for fixed-pitch text
-- (void) setFixedFont: (NSFont*) fixedFont;
-
 @property (nonatomic, copy) NSFont *proportionalFont;
+/// The font used for fixed-pitch text
 @property (nonatomic, copy) NSFont *fixedFont;
 
 /// Replaces the current fonts with ones of the given size
@@ -78,14 +75,14 @@ extern NSString* GlkPreferencesHaveChangedNotification;
 - (void) setTextMargin: (CGFloat) margin;
 
 // Style preferences
-/// Dictionary mapping NSNumbers with Glk styles to GlkStyle objects
-- (void) setStyles: (NSDictionary*) styles;
+/// Dictionary mapping \c NSNumbers with Glk styles to \c GlkStyle objects
+- (void) setStyles: (NSDictionary<NSNumber*,GlkStyle*>*) styles;
 /// Sets a style for a specific Glk hint
 - (void) setStyle: (GlkStyle*) style
 		  forHint: (unsigned) glkHint;
 
 /// The style dictionary
-@property (nonatomic, copy) NSDictionary *styles;
+@property (nonatomic, copy) NSDictionary<NSNumber*,GlkStyle*> *styles;
 // Misc preferences
 /// The amount of scrollback to support in text windows (0-100)
 @property (nonatomic) CGFloat scrollbackLength;

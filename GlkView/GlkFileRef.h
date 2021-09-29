@@ -17,10 +17,11 @@
 	BOOL autoflush;
 }
 
+- (instancetype) init UNAVAILABLE_ATTRIBUTE;
 /// Designated initialiser
 - (id) initWithPath: (NSString*) pathname;
 
 /// Temporary filerefs are deleted when deallocated
-- (void) setTemporary: (BOOL) isTemp;
+@property (getter=isTemporary) BOOL temporary;
 
 @end

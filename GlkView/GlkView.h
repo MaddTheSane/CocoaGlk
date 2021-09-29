@@ -55,7 +55,7 @@ typedef enum GlkLogStatus {
 	/// Active preferences
 	GlkPreferences* prefs;
 	/// Active styles
-	NSMutableDictionary* styles;
+	NSMutableDictionary<NSNumber*,NSMutableDictionary*>* styles;
 	/// The active scale factor
 	CGFloat scaleFactor;
 	/// The border width to set for new pair windows
@@ -72,7 +72,7 @@ typedef enum GlkLogStatus {
 	/// Used while prompting for a file
 	id<GlkFilePrompt> promptHandler;
 	/// Types of files we can show in the panels
-	NSArray* allowedFiletypes;
+	NSArray<NSString*>* allowedFiletypes;
 	
 	/// \c YES if windows in this view should automatically page through more prompts
 	BOOL alwaysPageOnMore;
@@ -131,7 +131,7 @@ typedef enum GlkLogStatus {
 	
 	// Automation
 	/// The automation output receivers attached to this view
-	NSMutableArray* outputReceivers;
+	NSMutableArray<id<GlkAutomation>>* outputReceivers;
 	/// The automation input receiver attached to this view
 	NSMutableArray* inputReceivers;
 	
@@ -154,7 +154,7 @@ typedef enum GlkLogStatus {
 // Launching a client application
 /// Launches and controls a Glk client application
 - (void) launchClientApplication: (NSString*) launchPath
-				   withArguments: (NSArray*) appArgs;
+				   withArguments: (NSArray<NSString*>*) appArgs;
 /// Terminates the client application
 - (void) terminateClient;
 /// Sets the input stream
@@ -202,16 +202,16 @@ typedef enum GlkLogStatus {
 - (void) addHistoryItem: (NSString*) inputLine
 		forWindowWithId: (glui32) windowId;
 /// Retrieves the previous history item
-- (NSString*) previousHistoryItem;
+@property (readonly, copy) NSString *previousHistoryItem;
 /// Retrieves the next history item
-- (NSString*) nextHistoryItem;
+@property (readonly, copy) NSString *nextHistoryItem;
 /// Causes the history position to move to the end
 - (void) resetHistoryPosition;
 
 // Layout
 /// Forces a layout operation if it's required
 - (void) performLayoutIfNecessary;
-/// Sets the scale factor of this view and any subview (resizing fonts, etc)
+/// The scale factor of this view and any subview (resizing fonts, etc)
 @property (nonatomic) CGFloat scaleFactor;
 /// Sets up the border width for new pair windows
 - (void) setBorderWidth: (CGFloat) borderWidth;
@@ -264,7 +264,7 @@ typedef enum GlkLogStatus {
 /// Set to return \c YES to get rid of the CocoaGlk logo
 @property (nonatomic, readonly) BOOL disableLogo;
 /// If non-nil, then this will be the logo displayed instead of 'CocoaGlk'
-- (NSImage*) logo;
+@property (readonly, copy) NSImage *logo;
 /// A description of what is running in this window (or nil)
 @property (nonatomic, readonly, copy) NSString *taskDescription;
 

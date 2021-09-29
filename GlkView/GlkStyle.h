@@ -10,7 +10,7 @@
 #import <GlkView/glk.h>
 
 /// Styles store themselves in the attributes to facilitate reformating after a change to a preference object
-extern NSString* GlkStyleAttributeName;
+extern NSAttributedStringKey const GlkStyleAttributeName;
 
 
 @class GlkPreferences;
@@ -35,9 +35,9 @@ extern NSString* GlkStyleAttributeName;
 	
 	// Caching the attributes
 	/// Change count for the preferences last time we cached the style dictionary
-	int prefChangeCount;
+	NSInteger prefChangeCount;
 	/// The last preference object this style was applied to
-	GlkPreferences*	lastPreferences;
+	__unsafe_unretained GlkPreferences* lastPreferences;
 	/// The scale factor the attributes were created at
 	CGFloat lastScaleFactor;
 	/// The attributes generated last time we needed to
@@ -59,7 +59,7 @@ extern NSString* GlkStyleAttributeName;
 @property (nonatomic) CGFloat size;
 /// -1 = lighter, 1 = bolder
 @property (nonatomic) int weight;
-/// YES if an italic/oblique version of the font should be used (italics are used for preference)
+/// \c YES if an italic/oblique version of the font should be used (italics are used for preference)
 @property (nonatomic) BOOL oblique;
 /// \c NO if fixed-pitch
 @property (nonatomic) BOOL proportional;
@@ -82,10 +82,10 @@ extern NSString* GlkStyleAttributeName;
 
 // Turning styles into dictionaries for attributed strings
 /// Attributes suitable to use with an attributed string while displaying
-- (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs
+- (NSDictionary<NSAttributedStringKey,id>*) attributesWithPreferences: (GlkPreferences*) prefs
 								scaleFactor: (CGFloat) scaleFactor;
 /// Attributes suitable to use with an attributed string while displaying
-- (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs;
+- (NSDictionary<NSAttributedStringKey,id>*) attributesWithPreferences: (GlkPreferences*) prefs;
 
 @end
 

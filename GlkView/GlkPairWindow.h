@@ -58,18 +58,13 @@
 @property (nonatomic, retain) GlkWindow *rightWindow;
 
 // Size and arrangement
-- (void) setSize: (unsigned) newSize;
+@property (nonatomic) unsigned size;
 /// Proportional arrangement if \c NO
-- (void) setFixed: (BOOL) newFixed;
+@property (nonatomic) BOOL fixed;
 /// Vertical arrangement if \c NO
-- (void) setHorizontal: (BOOL) newHorizontal;
+@property (nonatomic) BOOL horizontal;
 /// \c NO if left is above/left of right, \c YES otherwise
-- (void) setAbove: (BOOL) newAbove;
-
-@property (nonatomic, readwrite) unsigned size;
-@property (nonatomic, readwrite) BOOL fixed;
-@property (nonatomic, readwrite) BOOL horizontal;
-@property (readwrite) BOOL above;
+@property BOOL above;
 
 // Custom settings
 /// Width of the divider between windows (not drawn if < 2)

@@ -59,7 +59,19 @@
 
 @end
 
-@implementation GlkTextView
+@implementation GlkTextView {
+	// Character input
+	/// Set to true if we're waiting for single-character input
+	BOOL receivingCharacters;
+	
+	// Custom glyphs (ordered)
+	/// Ordered list of custom inline glyphs (images, mostly)
+	NSMutableArray<GlkTextViewGlyph*>* customGlyphs;
+	/// Ordered list of custom margin images
+	NSMutableArray<GlkTextViewGlyph*>* marginGlyphs;
+	/// The first unlaid margin glyph (index into marginGlyphs)
+	NSInteger firstUnlaidMarginGlyph;
+}
 
 // = Initialisation =
 

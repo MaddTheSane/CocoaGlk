@@ -98,21 +98,15 @@
 /// Meaning depends on the window format. Returns the preferred size in pixels
 - (CGFloat) heightForFixedSize: (unsigned) size;
 
-/// Sets the border around the window's contents
-- (void) setBorder: (CGFloat) border;
-/// Retrieves the border width
-- (CGFloat) border;
-
+/// The border around the window's contents
 @property CGFloat border;
 
 /// Size of the content, taking the border into account
-- (NSRect) contentRect;
+@property (readonly) NSRect contentRect;
 /// Size in window units
-- (GlkSize) glkSize;
+@property (readonly) GlkSize glkSize;
 
 /// Sets the scale factor for this window
-- (void) setScaleFactor: (CGFloat) scaleFactor;
-
 @property (nonatomic) CGFloat scaleFactor;
 
 // Styles
@@ -124,11 +118,11 @@
 @property BOOL forceFixed;
 
 /// Maps style numbers to GlkStyles
-- (void) setStyles: (NSDictionary*) styles;
+- (void) setStyles: (NSDictionary<NSNumber*,GlkStyle*>*) styles;
 /// Retrieves a specific style
 - (GlkStyle*) style: (unsigned) style;
 /// Gets the attributes to use for a specific style
-- (NSDictionary*) attributes: (unsigned) style;
+- (NSDictionary<NSAttributedStringKey, id>*) attributes: (unsigned) style;
 
 /// Sets a style hint with immediate effect (glk extension)
 - (void) setImmediateStyleHint: (glui32) hint
@@ -138,7 +132,7 @@
 /// Sets some custom attributes to merge with those from the current style
 - (void) setCustomAttributes: (NSDictionary*) customAttributes;
 
-/// Sets the GlkPreferences object to use for fonts
+/// Sets the \c GlkPreferences object to use for fonts
 - (void) setPreferences: (GlkPreferences*) prefs;
 /// Force a reformat of this window (call when the preferences change, for example)
 - (void) reformat;
@@ -157,7 +151,7 @@
 @property (readonly) CGFloat lineHeight;
 
 /// The attributes for the currently active style
-- (NSDictionary*) currentTextAttributes;
+- (NSDictionary<NSAttributedStringKey, id>*) currentTextAttributes;
 
 // Cursor positioning
 /// Not supported for most window styles

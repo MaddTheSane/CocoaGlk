@@ -6,15 +6,11 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#if defined(COCOAGLK_IPHONE)
-# include <UIKit/UIKit.h>
-#else
-# import <Cocoa/Cocoa.h>
-#endif
+#import <Foundation/Foundation.h>
 
 ///
 /// When we have image resources, we need to be able to ask the client what they are. The client can provide
-/// an object of this type to provide image data in any of the formats that Cocoa's NSImage class can
+/// an object of this type to provide image data in any of the formats that Cocoa's \c NSImage class can
 /// understand.
 ///
 /// By default, we use the gi_blorb_* functions to get image resources. glk doesn't have a means for getting

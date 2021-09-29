@@ -39,8 +39,7 @@
 ///
 /// Possible alignments for a section within a line fragment
 ///
-typedef enum GlkSectionAlignment GlkSectionAlignment;
-enum GlkSectionAlignment {
+typedef NS_ENUM(int, GlkSectionAlignment) {
 	/// Line up this section with the baseline
 	GlkAlignBaseline,
 	/// Line up this section with top of the line fragment (not including leading)
@@ -121,7 +120,7 @@ typedef struct GlkLineSection {
 	/// The attributes for each glyph that we're laying out [RETAINED]
 	NSDictionary** cacheAttributes;
 	/// The font attribute for each glyph that we're laying out [NOT RETAINED]
-	NSFont** cacheFonts;
+	NSFont*__unsafe_unretained* cacheFonts;
 	
 	// Left and right margin sections
 	/// Left margin items (by line fragment initial glyph)

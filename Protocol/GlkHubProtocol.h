@@ -7,7 +7,7 @@
 //
 
 #if defined(COCOAGLK_IPHONE)
-# include <UIKit/UIKit.h>
+# import <UIKit/UIKit.h>
 #else
 # import <Cocoa/Cocoa.h>
 #endif
@@ -15,7 +15,7 @@
 #import "GlkSessionProtocol.h"
 
 ///
-/// Method used to communicate with the hub object used by the main Glk server process
+/// Methods used to communicate with the hub object used by the main Glk server process.
 ///
 NS_SWIFT_NAME(GlkHubProtocol)
 @protocol GlkHub <NSObject>

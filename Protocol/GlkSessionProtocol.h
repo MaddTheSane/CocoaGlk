@@ -34,13 +34,14 @@ typedef struct GlkSize {
 	int height;
 } GlkSize;
 
+/// Communications with an individual client session
 @protocol GlkSession <NSObject>
 
 // Housekeeping
 - (void) clientHasStarted: (pid_t) processId;
 - (void) clientHasFinished;
  
-// Receiving data from the buffer
+/// Receiving data from the buffer
 - (void) performOperationsFromBuffer: (in bycopy GlkBuffer*) buffer;
 
 // Windows
@@ -70,7 +71,7 @@ typedef struct GlkSize {
 - (void) willSelect;
 
 /// Gets the sync count value (this is used to determine if information cached on the server is still relevant)
-@property (nonatomic, readonly) int synchronisationCount;
+@property (nonatomic, readonly) NSInteger synchronisationCount;
 
 // Errors and warnings
 /// Shows an error message
@@ -90,16 +91,16 @@ typedef struct GlkSize {
 - (id<GlkFileRef>) tempFileRef;
 
 /// Returns the list of the preferred filetypes for the specified usage
-- (bycopy NSArray*) fileTypesForUsage: (in bycopy NSString*) usage;
+- (bycopy NSArray<NSString*>*) fileTypesForUsage: (in bycopy NSString*) usage;
 /// Specifies the extensions that are valid for a particular type of file
-- (void) setFileTypes: (in bycopy NSArray*) extensions
+- (void) setFileTypes: (in bycopy NSArray<NSString*>*) extensions
 			 forUsage: (in bycopy NSString*) usage;
 /// Will return quickly, then the handler will be told the results later
 - (void) promptForFilesForUsage: (in bycopy NSString*) usage
 					 forWriting: (BOOL) writing
 						handler: (in byref id<GlkFilePrompt>) handler;
 /// Will return quickly, then the handler will be told the results later
-- (void) promptForFilesOfType: (in bycopy NSArray*) filetypes
+- (void) promptForFilesOfType: (in bycopy NSArray<NSString*>*) filetypes
 				   forWriting: (BOOL) writing
 					  handler: (in byref id<GlkFilePrompt>) handler;
 
@@ -111,6 +112,6 @@ typedef struct GlkSize {
 /// Retrieves the active image source
 - (out byref id<GlkImageSource>) imageSource;
 
-/// the active image source
+/// The active image source.
 @property (readwrite, retain, nonatomic) id<GlkImageSource> imageSource;
 @end

@@ -8,7 +8,7 @@
 
 #import "GlkStyle.h"
 
-NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
+NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 
 @implementation GlkStyle
 

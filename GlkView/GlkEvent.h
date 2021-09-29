@@ -17,7 +17,7 @@
 ///
 /// Generic Glk event class
 ///
-@interface GlkEvent : NSObject<NSCoding, GlkEvent> {
+@interface GlkEvent : NSObject<NSSecureCoding, GlkEvent> {
 	// Event parameters
 	unsigned type;
 	unsigned windowId;

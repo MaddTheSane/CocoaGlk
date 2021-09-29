@@ -10,7 +10,7 @@
 
 #include "glk.h"
 
-NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNotification";
+NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNotification";
 
 @implementation GlkPreferences
 

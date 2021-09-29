@@ -19,7 +19,7 @@
 // This amounts to the same things overall, but makes it easy to update later.
 //
 
-enum GlkSeekMode {
+typedef NS_ENUM(int, GlkSeekMode) {
 	GlkSeekStart,
 	GlkSeekCurrent,
 	GlkSeekEnd

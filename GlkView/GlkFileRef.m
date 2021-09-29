@@ -58,9 +58,7 @@
 
 // = Temporaryness =
 
-- (void) setTemporary: (BOOL) isTemp {
-	temporary = isTemp;
-}
+@synthesize temporary;
 
 // = The fileref protocol =
 

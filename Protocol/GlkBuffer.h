@@ -7,7 +7,7 @@
 //
 
 #if defined(COCOAGLK_IPHONE)
-# include <UIKit/UIKit.h>
+# import <UIKit/UIKit.h>
 #else
 # import <Cocoa/Cocoa.h>
 #endif
@@ -161,7 +161,7 @@
 ///
 /// Class used to temporarily store bufferable operations before sending them to the server
 ///
-@interface GlkBuffer : NSObject<NSCopying, NSCoding, GlkBuffer> {
+@interface GlkBuffer : NSObject<NSCopying, NSSecureCoding, GlkBuffer> {
 	NSMutableArray* operations;
 }
 

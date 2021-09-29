@@ -203,16 +203,16 @@ typedef struct GlkLineSection {
 				   height: (CGFloat) height;
 
 /// Get the current offset into the left margin
-- (CGFloat) currentLeftMarginOffset;
+@property (readonly) CGFloat currentLeftMarginOffset;
 /// Get the current offset into the right margin
-- (CGFloat) currentRightMarginOffset;
+@property (readonly) CGFloat currentRightMarginOffset;
 /// Remaining space for margin objects
-- (CGFloat) remainingMargin;
+@property (readonly) CGFloat remainingMargin;
 
 /// Amount required to clear the left margin
-- (CGFloat) currentLeftMarginHeight;
+@property (readonly) CGFloat currentLeftMarginHeight;
 /// Amount required to clear the right margin
-- (CGFloat) currentRightMarginHeight;
+@property (readonly) CGFloat currentRightMarginHeight;
 
 // Laying out glyphs
 /// Lays out a single line fragment from the specified glyph
@@ -220,7 +220,7 @@ typedef struct GlkLineSection {
 
 // Setting the delegate
 /// Sets the delegate (the delegate is NOT RETAINED)
-- (void) setDelegate: (id<GlkCustomTextLayout>) delegate;
+@property (assign) id<GlkCustomTextLayout> delegate;
 
 // Clearing the cache
 /// Forces any cached glyphs to be cleared (eg when a textstorage object changes)

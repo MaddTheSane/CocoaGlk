@@ -9,12 +9,6 @@
 #include <tgmath.h>
 #import "GlkGraphicsWindow.h"
 
-#if CGFLOAT_IS_DOUBLE
-#define CGF(__x) __x
-#else
-#define CGF(__x) __x ## f
-#endif
-
 @implementation GlkGraphicsWindow
 
 - (id)initWithFrame:(GlkRect)frame {
@@ -72,7 +66,7 @@
 	
 	if (oldSize.width < frame.size.width || oldSize.height < frame.size.height) {
 		// Resize and clear
-		[windowImage setSize: GlkMakeSize(frame.size.width + CGF(8.0), frame.size.height + CGF(8.0))];
+		[windowImage setSize: NSMakeSize(frame.size.width + 8.0, frame.size.height + 8.0)];
 		[self clear];
 	}
 	

@@ -8,12 +8,6 @@
 
 #import "GlkClearMargins.h"
 
-#if CGFLOAT_IS_DOUBLE
-#define CGF(__x) __x
-#else
-#define CGF(__x) __x ## f
-#endif
-
 @implementation GlkClearMargins
 
 - (BOOL) formatSectionAtOffset: (CGFloat) offset
@@ -24,7 +18,7 @@
 	
 	CGFloat clearHeight = height1>height2?height1:height2;
 	
-	[typesetter addLineSection: GlkMakeRect(offset, -clearHeight, CGF(0.1), clearHeight)
+	[typesetter addLineSection: NSMakeRect(offset, -clearHeight, 0.1, clearHeight)
 				   advancement: 0
 						offset: offset
 					glyphRange: glyphs

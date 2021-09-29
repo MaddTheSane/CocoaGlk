@@ -13,16 +13,11 @@
 #import "GlkClearMargins.h"
 #import "GlkMoreView.h"
 
-#if CGFLOAT_IS_DOUBLE
-#define CGF(__x) __x
-#else
-#define CGF(__x) __x ## f
-#endif
 
 // Number of pixels to shorten the maximum length of text before a more prompt is shown
-#define MoreMargin CGF(16.0)
+#define MoreMargin 16.0
 // Height below which no more prompt will ever be shown
-#define MinimumMoreHeight CGF(32.0)
+#define MinimumMoreHeight 32.0
 // Time to show/hide the [ MORE ] prompt
 #define MoreAnimationTime 1
 
@@ -653,7 +648,7 @@
 	if (sb < 100.0) {
 		// Number of characters to preserve (4096 -> 1 million)
 		NSInteger len = [[textView textStorage] length];
-		CGFloat preserve = CGF(4096.0) + pow(sb * CGF(10.0), CGF(2.0));
+		CGFloat preserve = 4096.0 + pow(sb * 10.0, 2.0);
 
 		if (len > ((int)preserve + 2048)) {
 			// Need to truncate

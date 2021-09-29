@@ -430,7 +430,7 @@
 
 	// Check for any newlines in the input, and generate an event if we find one
 	// We only process one line at a time
-	NSString* string = [[textView textStorage] string];
+	NSString* string = [textStorage string];
 	NSInteger pos;
 	
 	for (pos = inputPos; pos < [string length]; pos++) {

@@ -147,7 +147,6 @@
 	[(GlkGridTypesetter*)typesetter setGridWidth: width
 										  height: height];
 	[layoutManager invalidateLayoutForCharacterRange: NSMakeRange(0, [textStorage length])
-											  isSoft: NO
 								actualCharacterRange: nil];
 	
 	// Adjust the text storage object

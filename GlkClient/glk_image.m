@@ -284,7 +284,7 @@ void glk_window_set_background_color(winid_t win, glui32 color) {
 	return self;
 }
 
-- (NSData*) dataForImageResource: (glui32) image {
+- (bycopy NSData*) dataForImageResource: (glui32) image {
 	// Attempt to load the image from the blorb resources
 	giblorb_result_t res;
 	giblorb_err_t    erm;

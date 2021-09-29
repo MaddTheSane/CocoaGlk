@@ -68,8 +68,8 @@
 	memory = nil;
 }
 
-- (void) setPosition: (NSInteger) position
-		  relativeTo: (enum GlkSeekMode) seekMode {
+- (void) setPosition: (in NSInteger) position
+		  relativeTo: (in enum GlkSeekMode) seekMode {
 	switch (seekMode) {
 		case GlkSeekStart:
 			pointer = position;
@@ -94,7 +94,7 @@
 
 // Writing
 
-- (void) putChar: (unichar) ch {
+- (void) putChar: (in unichar) ch {
 	if (ch > 255) ch = '?';
 	
 	if (memory == nil) {
@@ -107,7 +107,7 @@
 	memory[pointer++] = ch;
 }
 
-- (void) putString: (NSString*) string {
+- (void) putString: (in bycopy NSString*) string {
 	if (memory == nil) {
 		NSLog(@"Warning: tried to write to a closed memory stream");
 		return;
@@ -131,7 +131,7 @@
 	[latin1Data release];
 }
 
-- (void) putBuffer: (NSData*) buffer {
+- (void) putBuffer: (in bycopy NSData*) buffer {
 	if (memory == nil) {
 		NSLog(@"Warning: tried to write to a closed memory stream");
 		return;
@@ -160,7 +160,7 @@
 	return memory[pointer++];
 }
 
-- (NSString*) getLineWithLength: (int) maxLen {
+- (bycopy NSString*) getLineWithLength: (int) maxLen {
 	if (memory == nil) {
 		NSLog(@"Warning: tried to read from a closed memory stream");
 		return nil;
@@ -179,7 +179,7 @@
 	return [result autorelease];
 }
 
-- (NSData*) getBufferWithLength: (NSUInteger) bufLen {
+- (bycopy NSData*) getBufferWithLength: (NSUInteger) bufLen {
 	if (memory == nil) {
 		NSLog(@"Warning: tried to read from a closed memory stream");
 		return nil;

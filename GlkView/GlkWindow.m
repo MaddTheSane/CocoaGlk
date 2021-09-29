@@ -500,12 +500,12 @@
 	// Nothing to do really
 }
 
-- (void) setPosition: (in int) position
+- (void) setPosition: (in NSInteger) position
 		  relativeTo: (in enum GlkSeekMode) seekMode {
 	// No effect
 }
 
-- (unsigned) getPosition {
+- (NSUInteger) getPosition {
 	// Spec isn't really clear on what do for window streams. We just say the position is always 0
 	return 0;
 }
@@ -549,7 +549,7 @@
 	return nil;
 }
 
-- (bycopy NSData*) getBufferWithLength: (unsigned) length {
+- (bycopy NSData*) getBufferWithLength: (NSUInteger) length {
 	return nil;
 }
 

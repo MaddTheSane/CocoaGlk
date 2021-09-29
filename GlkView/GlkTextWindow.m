@@ -100,7 +100,7 @@
 		
 		// Set the hyperlink style
 		NSDictionary* hyperStyle = [NSDictionary dictionaryWithObjectsAndKeys:
-			[NSNumber numberWithInt: NSSingleUnderlineStyle], NSUnderlineStyleAttributeName,
+			@(NSUnderlineStyleSingle), NSUnderlineStyleAttributeName,
 			[NSCursor pointingHandCursor], NSCursorAttributeName,
 			nil];
 		if ([textView respondsToSelector: @selector(setLinkTextAttributes:)]) {
@@ -110,7 +110,7 @@
 		// Construct the window that shows the [ MORE ] prompt
 		NSView* moreView = [[GlkMoreView alloc] init];
 		moreWindow = [[NSWindow alloc] initWithContentRect: [moreView bounds]
-												 styleMask: NSBorderlessWindowMask
+												 styleMask: NSWindowStyleMaskBorderless
 												   backing: NSBackingStoreBuffered
 													 defer: YES];
 
@@ -247,11 +247,11 @@
 - (CGFloat) widthForFixedSize: (unsigned) size {
 	NSSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
 	
-	return floorf(size * baseSize.width) + (margin*2);
+	return floor(size * baseSize.width) + (margin*2);
 }
 
 - (CGFloat) heightForFixedSize: (unsigned) size {
-	return floorf(size * [self lineHeight]) + (margin*2);
+	return floor(size * [self lineHeight]) + (margin*2);
 }
 
 - (void) setScaleFactor: (CGFloat) newScaleFactor {

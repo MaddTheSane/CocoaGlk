@@ -96,7 +96,7 @@
 	handle = nil;
 }
 
-- (void) setPosition: (in int) position
+- (void) setPosition: (in NSInteger) position
 		  relativeTo: (in enum GlkSeekMode) seekMode {
 	unsigned long long offset = [handle offsetInFile];
 	
@@ -119,7 +119,7 @@
 	[handle seekToFileOffset: offset];
 }
 
-- (unsigned) getPosition {
+- (NSUInteger) getPosition {
 	return [handle offsetInFile];
 }
 
@@ -187,7 +187,7 @@
 	return res;
 }
 
-- (bycopy NSData*) getBufferWithLength: (unsigned) length {
+- (bycopy NSData*) getBufferWithLength: (NSUInteger) length {
 	NSData* data = [handle readDataOfLength: length];
 	
 	if (data == nil || [data length] <= 0) return nil;

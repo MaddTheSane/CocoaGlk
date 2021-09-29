@@ -84,7 +84,7 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 		[header setSize: 4];
 		[subheader setSize: 1];
 		
-		[header setJustification: NSCenterTextAlignment];
+		[header setJustification: NSTextAlignmentCenter];
 		
 		[preformatted setProportional: NO];
 		

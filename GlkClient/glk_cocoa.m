@@ -122,7 +122,7 @@ void cocoaglk_start(int argv, const char** argc) {
 																		   host: nil];
 	
 	if (remoteConnection == nil) {
-		NSLog(@"Failed to connect to Glk hub with name %@", hubName);
+		NSLog(@"Failed to connect to Glk hub with name %s", hubName);
 		NSLog(@"Unable to open display. Quitting");
 		exit(1);
 	}

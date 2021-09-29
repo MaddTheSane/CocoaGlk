@@ -146,7 +146,7 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 		if (maxWidth < size.width) scaleFactor = maxWidth/size.width;
 	}
 	
-	drawRect.origin = NSMakePoint(floorf(point.x), floorf(point.y));
+	drawRect.origin = NSMakePoint(floor(point.x), floor(point.y));
 	drawRect.size = size;
 	drawRect.size.width *= scaleFactor;
 	drawRect.size.height *= scaleFactor;
@@ -156,7 +156,7 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 	
 	[image drawInRect: drawRect
 			 fromRect: imageRect
-			operation: NSCompositeSourceOver
+			operation: NSCompositingOperationSourceOver
 			 fraction: 1.0];
 }
 

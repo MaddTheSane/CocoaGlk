@@ -218,7 +218,7 @@
 	
 	// Create the window
 	logoWindow = [[NSWindow alloc] initWithContentRect: [self frame]				// Gets the size, we position later
-											 styleMask: NSBorderlessWindowMask
+											 styleMask: NSWindowStyleMaskBorderless
 											   backing: NSBackingStoreBuffered
 												 defer: YES];
 	[logoWindow setOpaque: NO];
@@ -321,8 +321,8 @@
 		NSRect logoSource;
 	
 		logoPos.size = logoSize;
-		logoPos.origin = NSMakePoint(floorf(rect.origin.x + (rect.size.width - logoSize.width)/2.0),
-									 floorf(rect.origin.y + (rect.size.height - logoSize.height)/2.0));
+		logoPos.origin = NSMakePoint(floor(rect.origin.x + (rect.size.width - logoSize.width)/2.0),
+									 floor(rect.origin.y + (rect.size.height - logoSize.height)/2.0));
 	
 		logoSource.size = logoSize;
 		logoSource.origin = NSMakePoint(0,0);
@@ -330,7 +330,7 @@
 		[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
 		[logo drawInRect: logoPos
 				fromRect: logoSource
-			   operation: NSCompositeSourceOver
+			   operation: NSCompositingOperationSourceOver
 				fraction: 1.0];
 	}
 }
@@ -854,9 +854,9 @@
 				col = [style textColour];
 			}
 			
-			int r = floorf(255.0 * [col redComponent]);
-			int g = floorf(255.0 * [col greenComponent]);
-			int b = floorf(255.0 * [col blueComponent]);
+			int r = floor(255.0 * [col redComponent]);
+			int g = floor(255.0 * [col greenComponent]);
+			int b = floor(255.0 * [col blueComponent]);
 			
 			return (r<<16)|(g<<8)|(b);
 		}
@@ -867,13 +867,13 @@
 		case stylehint_Justification:
 			switch ([style justification]) {
 				default:
-				case NSLeftTextAlignment:
+				case NSTextAlignmentLeft:
 					return stylehint_just_LeftFlush;
-				case NSRightTextAlignment:
+				case NSTextAlignmentRight:
 					return stylehint_just_RightFlush;
-				case NSCenterTextAlignment:
+				case NSTextAlignmentCenter:
 					return stylehint_just_Centered;
-				case NSJustifiedTextAlignment:
+				case NSTextAlignmentJustified:
 					return stylehint_just_LeftRight;
 			}
 			
@@ -1018,7 +1018,7 @@
 	
 	mktemp(tempName);
 	
-	NSString* tempPath = [tempDir stringByAppendingPathComponent: [NSString stringWithCString: tempName]];
+	NSString* tempPath = [tempDir stringByAppendingPathComponent: @(tempName)];
 	
 	// Turn into a temporary fileref
 	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: tempPath];
@@ -1031,7 +1031,7 @@
 		 contextInfo: (void*) willBeNil {
 	if (!promptHandler) return;
 	
-	if (returnCode == NSOKButton) {
+	if (returnCode == NSModalResponseOK) {
 		GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [panel filename]];
 		[promptHandler promptedFileRef: promptRef];
 		[promptRef autorelease];
@@ -1148,20 +1148,15 @@
 	NSWindow* window = [self window];
 	
 	BOOL showAsSheet = YES;
-	if (([window styleMask]) == NSBorderlessWindowMask) showAsSheet = NO;
+	if (([window styleMask]) == NSWindowStyleMaskBorderless) showAsSheet = NO;
 	
 	// Create the prompt
 	if (writing) {
 		// Create a save dialog
 		NSSavePanel* panel = [NSSavePanel savePanel];
 		
-		[panel setRequiredFileType: [allowedFiletypes objectAtIndex: 0]];
+		[panel setAllowedFileTypes: allowedFiletypes];
 		if (preferredDirectory != nil) [panel setDirectory: preferredDirectory];
-		
-		if ([panel respondsToSelector: @selector(setAllowedFileTypes:)]) {
-			// Only works on 10.3
-			[panel setAllowedFileTypes: allowedFiletypes];
-		}
 		
 		[panel beginSheetForDirectory: preferredDirectory
 								 file: nil
@@ -1175,13 +1170,8 @@
 		// Create an open dialog
 		NSOpenPanel* panel = [NSOpenPanel openPanel];
 
-		[panel setRequiredFileType: [allowedFiletypes objectAtIndex: 0]];
+		[panel setAllowedFileTypes: allowedFiletypes];
 		if (preferredDirectory != nil) [panel setDirectory: preferredDirectory];
-		
-		if ([panel respondsToSelector: @selector(setAllowedFileTypes:)]) {
-			// Only works on 10.3
-			[panel setAllowedFileTypes: allowedFiletypes];
-		}
 		
 		[panel beginSheetForDirectory: preferredDirectory
 								 file: nil
@@ -2056,7 +2046,7 @@
 	[flippedImage lockFocus];
 	[image drawInRect: imageRect
 			 fromRect: imageRect
-			operation: NSCompositeSourceOver
+			operation: NSCompositingOperationSourceOver
 			 fraction: 1.0];
 	[flippedImage unlockFocus];
 	
@@ -2104,7 +2094,7 @@
 		[image lockFocus];
 		[sourceImage drawInRect: NSMakeRect(0,0, pixelSize.width, pixelSize.height)
 					   fromRect: srcRect
-					  operation: NSCompositeSourceOver
+					  operation: NSCompositingOperationSourceOver
 					   fraction: 1.0];
 		[image unlockFocus];
 

@@ -786,7 +786,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				  forGlyphRange: glyphRange
 					   usedRect: NSIntegralRect(used)];
 	
-	baselineOffset = floorf(baselineOffset + 0.5);
+	baselineOffset = floor(baselineOffset + 0.5);
 	
 	// Position the glyphs within the line sections
 	CGFloat maxX = 0.0;
@@ -975,17 +975,17 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		totalWidth += sections[x].advancement;
 	}
 	
-	if (newline && alignment == NSJustifiedTextAlignment) {
-		alignment = NSNaturalTextAlignment;
+	if (newline && alignment == NSTextAlignmentJustified) {
+		alignment = NSTextAlignmentNatural;
 	}
 	
 	switch (alignment) {
-		case NSLeftTextAlignment:
-		case NSNaturalTextAlignment:
+		case NSTextAlignmentLeft:
+		case NSTextAlignmentNatural:
 			// Nothing to do
 			break;
 			
-		case NSCenterTextAlignment:
+		case NSTextAlignmentCenter:
 		{
 			CGFloat offset = (proposed.size.width - totalWidth - inset*2 - leftMargin - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0)) / 2;
 			offset += proposed.origin.x + inset + leftMargin + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
@@ -997,7 +997,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			break;
 		}
 			
-		case NSRightTextAlignment:
+		case NSTextAlignmentRight:
 		{
 			CGFloat offset = (proposed.size.width - totalWidth - inset - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0));
 			offset += proposed.origin.x + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
@@ -1009,7 +1009,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			break;
 		}
 			
-		case NSJustifiedTextAlignment:
+		case NSTextAlignmentJustified:
 		{
 			int elasticCount = 0;
 			
@@ -1027,7 +1027,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 			// Adjust the size of each section appropriately
 			for (x=0; x<numLineSections; x++) {
-				sections[x].offset = floorf(offset);
+				sections[x].offset = floor(offset);
 				offset += sections[x].advancement;
 				
 				if (sections[x].elastic) {
@@ -1051,7 +1051,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	NSRect totalBounds = NSMakeRect(0,0,0,0);
 	BOOL newline = NO;
 	BOOL newParagraph = [self updateParagraphFromGlyph: glyph+cached.location];
-	BOOL splitOnElastic = [paraStyle alignment]==NSJustifiedTextAlignment;
+	BOOL splitOnElastic = [paraStyle alignment]==NSTextAlignmentJustified;
 	BOOL elastic = NO;
 	
 	CGFloat leftIndent = newParagraph?[paraStyle firstLineHeadIndent]:[paraStyle headIndent];

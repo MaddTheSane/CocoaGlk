@@ -21,7 +21,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 		// Default attributes
 		indentation = 0;
 		paraIndent = 0;
-		alignment = NSLeftTextAlignment;
+		alignment = NSTextAlignmentLeft;
 		size = 0;
 		weight = 0;
 		oblique = NO;
@@ -298,20 +298,20 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 			
 		case stylehint_Justification:
 		{
-			NSTextAlignment align = NSLeftTextAlignment;
+			NSTextAlignment align = NSTextAlignmentLeft;
 			
 			switch (value) {
 				case stylehint_just_LeftFlush:
-					align = NSLeftTextAlignment;
+					align = NSTextAlignmentLeft;
 					break;
 				case stylehint_just_RightFlush:
-					align = NSRightTextAlignment;
+					align = NSTextAlignmentRight;
 					break;
 				case stylehint_just_Centered:
-					align = NSCenterTextAlignment;
+					align = NSTextAlignmentCenter;
 					break;
 				case stylehint_just_LeftRight:
-					align = NSJustifiedTextAlignment;
+					align = NSTextAlignmentJustified;
 					break;
 			}
 			

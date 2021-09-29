@@ -22,10 +22,10 @@ extern NSString* GlkStyleAttributeName;
 ///
 @interface GlkStyle : NSObject<NSCopying> {
 	// Style attributes
-	float indentation;
-	float paraIndent;
+	CGFloat indentation;
+	CGFloat paraIndent;
 	NSTextAlignment alignment;
-	float size;
+	CGFloat size;
 	int weight;
 	BOOL oblique;
 	BOOL proportional;
@@ -39,7 +39,7 @@ extern NSString* GlkStyleAttributeName;
 	/// The last preference object this style was applied to
 	GlkPreferences*	lastPreferences;
 	/// The scale factor the attributes were created at
-	float lastScaleFactor;
+	CGFloat lastScaleFactor;
 	/// The attributes generated last time we needed to
 	NSDictionary* lastAttributes;
 }
@@ -50,13 +50,13 @@ extern NSString* GlkStyleAttributeName;
 
 // The hints
 /// Measured in points
-@property (nonatomic) float indentation;
+@property (nonatomic) CGFloat indentation;
 /// Measured in points
-@property (nonatomic) float paraIndentation;
+@property (nonatomic) CGFloat paraIndentation;
 /// Glk doesn't allow us to support 'Natural' alignment
 @property (nonatomic) NSTextAlignment justification;
 /// Relative, in points
-@property (nonatomic) float size;
+@property (nonatomic) CGFloat size;
 /// -1 = lighter, 1 = bolder
 @property (nonatomic) int weight;
 /// YES if an italic/oblique version of the font should be used (italics are used for preference)
@@ -83,7 +83,7 @@ extern NSString* GlkStyleAttributeName;
 // Turning styles into dictionaries for attributed strings
 /// Attributes suitable to use with an attributed string while displaying
 - (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs
-								scaleFactor: (float) scaleFactor;
+								scaleFactor: (CGFloat) scaleFactor;
 /// Attributes suitable to use with an attributed string while displaying
 - (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs;
 

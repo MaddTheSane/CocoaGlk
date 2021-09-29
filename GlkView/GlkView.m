@@ -270,8 +270,8 @@
 }
 
 - (void) fadeLogo {
-	float timePassed = [[NSDate date] timeIntervalSinceDate: fadeStart];
-	float fadeAmount = timePassed/fadeTime;
+	CGFloat timePassed = [[NSDate date] timeIntervalSinceDate: fadeStart];
+	CGFloat fadeAmount = timePassed/fadeTime;
 	
 	if (fadeAmount < 0 || fadeAmount > 1) {
 		// Finished fading: get rid of the window + the timer
@@ -476,7 +476,7 @@
 				// Could look for the common ancestor, but this way is easier
 				GlkEvent* newEvent = [[GlkArrangeEvent alloc] initWithGlkWindow: rootWindow];
 				
-				unsigned evtIndex = [events indexOfObjectIdenticalTo: arrangeEvent];
+				NSUInteger evtIndex = [events indexOfObjectIdenticalTo: arrangeEvent];
 				
 				if (evtIndex != NSNotFound) {
 					[events replaceObjectAtIndex: evtIndex
@@ -774,7 +774,8 @@
 	}	
 }
 
-- (void) setScaleFactor: (float) scale {
+@synthesize scaleFactor;
+- (void) setScaleFactor: (CGFloat) scale {
 	scaleFactor = scale;
 	[rootWindow setScaleFactor: scale];
 
@@ -790,7 +791,7 @@
 	}
 }
 
-- (void) setBorderWidth: (float) newBorderWidth {
+- (void) setBorderWidth: (CGFloat) newBorderWidth {
 	// Do nothing if the border is already the right size
 	if (newBorderWidth == borderWidth) return;
 	
@@ -1008,7 +1009,7 @@
 	
 	// Get a temporary file name
 	char tempName[25];
-	int x;
+	long x;
 	
 	strcpy(tempName, "cocoaglk_");
    	for (x=strlen(tempName); x<25; x++) 

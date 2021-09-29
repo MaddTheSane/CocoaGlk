@@ -63,8 +63,8 @@
 	}
 	
 	// Fill from high tide to the end of the buffer
-	int remaining = [fillData length];
-	int toCopy = remaining;
+	NSInteger remaining = [fillData length];
+	NSInteger toCopy = remaining;
 	
 	if (highTide + toCopy >= readAhead) toCopy = readAhead-highTide;
 	
@@ -101,7 +101,7 @@
 	bufferRemaining = readAhead;
 }
 
-- (void) setPosition: (int) position
+- (void) setPosition: (NSInteger) position
 		  relativeTo: (enum GlkSeekMode) seekMode {
 	// Work out the target position
 	if (seekMode == GlkSeekCurrent) {
@@ -121,7 +121,7 @@
 	[self fillBuffer];
 }
 
-- (unsigned) getPosition {
+- (NSUInteger) getPosition {
 	return [sourceStream getPosition] - (readAhead-bufferRemaining);
 }
 
@@ -173,7 +173,7 @@
 	return res;
  }
 
-- (NSData*) getBufferWithLength: (unsigned) length {
+- (NSData*) getBufferWithLength: (NSUInteger) length {
 	// Return nothing if there's nothing in the buffer and we can't fill it up
 	if (bufferRemaining == readAhead && ![self fillBuffer]) {
 		return nil;
@@ -181,11 +181,11 @@
 	
 	// Keep reading bytes until we run out of buffer
 	NSMutableData* result = [[[NSMutableData alloc] init] autorelease];
-	int toRead = length;
+	NSInteger toRead = length;
 	
 	while (bufferRemaining != readAhead && toRead > 0) {
 		// Work out how much to read this pass through
-		int thisPass = toRead;
+		NSInteger thisPass = toRead;
 		
 		if (lowTide + thisPass > readAhead) {
 			thisPass = readAhead - lowTide;

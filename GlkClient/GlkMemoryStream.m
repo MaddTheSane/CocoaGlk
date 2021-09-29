@@ -18,7 +18,7 @@
 // = Initialisation =
 
 - (id) initWithMemory: (unsigned char*) mem
-			   length: (int) len {
+			   length: (NSInteger) len {
 	self = [super init];
 	
 	if (self) {
@@ -32,7 +32,7 @@
 }
 
 - (id) initWithMemory: (unsigned char*) mem
-			   length: (int) len
+			   length: (NSInteger) len
 				 type: (char*) glkType {
 	self = [self initWithMemory: mem
 						 length: len];
@@ -40,7 +40,7 @@
 	if (self) {
 		if (cocoaglk_register_memory) {
 			type = glkType;
-			rock = cocoaglk_register_memory(memory, strcmp(glkType, "&+#!Iu")==0?length/4:length, type);
+			rock = cocoaglk_register_memory(memory, (glui32)(strcmp(glkType, "&+#!Iu")==0?length/4:length), type);
 		}
 	}
 	
@@ -62,13 +62,13 @@
 	}
 	
 	if (type && cocoaglk_unregister_memory) {
-		cocoaglk_unregister_memory(memory, strcmp(type, "&+#!Iu")==0?length/4:length, type, rock);
+		cocoaglk_unregister_memory(memory, (glui32)(strcmp(type, "&+#!Iu")==0?length/4:length), type, rock);
 	}
 	
 	memory = nil;
 }
 
-- (void) setPosition: (int) position
+- (void) setPosition: (NSInteger) position
 		  relativeTo: (enum GlkSeekMode) seekMode {
 	switch (seekMode) {
 		case GlkSeekStart:
@@ -88,7 +88,7 @@
 	if (pointer > length) pointer = length;
 }
 
-- (unsigned) getPosition {
+- (NSUInteger) getPosition {
 	return pointer;
 }
 
@@ -113,7 +113,7 @@
 		return;
 	}
 	
-	int len = [string length];
+	NSInteger len = [string length];
 	char* latin1 = malloc(sizeof(char)*[string length]);
 
 	int x;
@@ -137,7 +137,7 @@
 		return;
 	}
 	
-	int bufLen = [buffer length];
+	NSInteger bufLen = [buffer length];
 	
 	if (pointer + bufLen > length) {
 		bufLen = length - pointer;
@@ -166,7 +166,7 @@
 		return nil;
 	}
 	
-	int start = pointer;
+	NSInteger start = pointer;
 	
 	if (pointer >= length) return nil;
 	
@@ -179,7 +179,7 @@
 	return [result autorelease];
 }
 
-- (NSData*) getBufferWithLength: (unsigned) bufLen {
+- (NSData*) getBufferWithLength: (NSUInteger) bufLen {
 	if (memory == nil) {
 		NSLog(@"Warning: tried to read from a closed memory stream");
 		return nil;

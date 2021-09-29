@@ -36,13 +36,13 @@
 	[dataStream closeStream];
 }
 
-- (void) setPosition: (int) position
+- (void) setPosition: (NSInteger) position
 		  relativeTo: (enum GlkSeekMode) seekMode {
 	[dataStream setPosition: position
 				 relativeTo: seekMode];
 }
 
-- (unsigned) getPosition {
+- (NSUInteger) getPosition {
 	return [dataStream getPosition];
 }
 
@@ -54,10 +54,10 @@
 }
 
 - (void) putString: (NSString*) string {
-	int len = [string length]*2;
+	NSInteger len = [string length]*2;
 	glui32 buf[len];
 	
-	len = cocoaglk_copy_string_to_uni_buf(string, buf, len);
+	len = cocoaglk_copy_string_to_uni_buf(string, buf, (int)len);
 	
 	// Convert to a big-endian buffer
 	NSMutableData* data = [NSMutableData dataWithLength: len*4];
@@ -137,7 +137,7 @@
 	return res;
 }
 
-- (NSData*) getBufferWithLength: (unsigned) length {
+- (NSData*) getBufferWithLength: (NSUInteger) length {
 	return [dataStream getBufferWithLength: length];
 }
 

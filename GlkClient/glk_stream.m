@@ -806,7 +806,7 @@ glui32 glk_stream_get_position(strid_t str) {
 	cocoaglk_loadstream(str);
 	cocoaglk_flushstream(str, "Retrieving the position in the stream");
 	
-	glui32 res = [str->stream getPosition];
+	glui32 res = (glui32)[str->stream getPosition];
 	
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_stream_get_position(%p) = %u", str, res);
@@ -1137,7 +1137,7 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 	NSData* latin1 = [line dataUsingEncoding: NSISOLatin1StringEncoding
 						allowLossyConversion: YES];
 	
-	int length = [latin1 length];
+	NSInteger length = [latin1 length];
 	
 	if (length+1 > len) {
 		// Trim the line if the buffer is not big enough (this shouldn't happen)
@@ -1156,7 +1156,7 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 		
 	// Return the result
 	str->read += len;
-	return length;
+	return (glui32)length;
 }
 
 //
@@ -1184,7 +1184,7 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 	// Next, use the stream object to get our result
 	NSData* data = [str->stream getBufferWithLength: len];
 	
-	int length = [data length];
+	NSInteger length = [data length];
 	
 	if (length > len) {
 		NSLog(@"Warning: getBufferWithLength: returned more data than was asked for (trimming)");
@@ -1199,7 +1199,7 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 #endif
 		
 	str->read += length;
-	return length;
+	return (glui32)length;
 }
 
 // = Custom styles =

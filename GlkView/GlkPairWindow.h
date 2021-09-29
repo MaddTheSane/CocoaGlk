@@ -37,7 +37,7 @@
 	
 	// = Custom settings
 	/// Width of the border
-	float borderWidth;
+	CGFloat borderWidth;
 	/// \c YES if the border should only be drawn around windows that have requested input
 	BOOL inputBorder;
 	
@@ -73,7 +73,7 @@
 
 // Custom settings
 /// Width of the divider between windows (not drawn if < 2)
-@property (nonatomic) float borderWidth;
+@property (nonatomic) CGFloat borderWidth;
 /// Set to \c YES to only draw the border if input is requested
 @property (nonatomic) BOOL inputBorder;
 

@@ -37,10 +37,10 @@ enum GlkSeekMode {
 
 // Control
 - (void) closeStream;
-- (void) setPosition: (in int) position
+- (void) setPosition: (in NSInteger) position
 		  relativeTo: (in enum GlkSeekMode) seekMode;
 
-- (unsigned) getPosition;
+- (NSUInteger) getPosition;
 
 // Writing
 - (void) putChar: (in unichar) ch;
@@ -50,7 +50,7 @@ enum GlkSeekMode {
 // Reading
 - (unichar) getChar;
 - (bycopy NSString*) getLineWithLength: (int) maxLen;
-- (bycopy NSData*) getBufferWithLength: (unsigned) length;
+- (bycopy NSData*) getBufferWithLength: (NSUInteger) length;
 
 // Styles
 - (void) setStyle: (int) styleId;

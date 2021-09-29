@@ -107,7 +107,7 @@
 
 // = Custom settings =
 
-- (void) setBorderWidth: (float) newBorderWidth {
+- (void) setBorderWidth: (CGFloat) newBorderWidth {
 	borderWidth = newBorderWidth;
 	
 	needsLayout = YES;
@@ -124,7 +124,7 @@
 
 // = Layout =
 
-- (void) setScaleFactor: (float) scale {
+- (void) setScaleFactor: (CGFloat) scale {
 	if (scale == scaleFactor) return;
 	
 	[super setScaleFactor: scale];
@@ -142,10 +142,10 @@
 		NSRect bounds = [self bounds];
 		
 		// Work out the sizes for the child windows
-		float availableSize = horizontal?parentRect.size.width:parentRect.size.height;
+		CGFloat availableSize = horizontal?parentRect.size.width:parentRect.size.height;
 		availableSize -= borderWidth;
 		
-		float leftSize, rightSize;
+		CGFloat leftSize, rightSize;
 		
 		if (fixed) {
 			if (horizontal) {
@@ -154,17 +154,17 @@
 				rightSize = [right heightForFixedSize: size];
 			}
 		} else {
-			rightSize = (availableSize * ((float)size))/100.0;
+			rightSize = (availableSize * ((CGFloat)size))/100.0;
 		}
 		
 		if (rightSize > availableSize) rightSize = availableSize-1.0;
 
-		rightSize = floorf(rightSize);		
-		leftSize = floorf(availableSize - rightSize);
+		rightSize = floor(rightSize);
+		leftSize = floor(availableSize - rightSize);
 		
 		NSRect leftRect;
 		NSRect rightRect;
-		float realBorderWidth = borderWidth;
+		CGFloat realBorderWidth = borderWidth;
 		if (inputBorder) realBorderWidth = 0;
 		
 		if (horizontal) {
@@ -253,7 +253,7 @@
 	lastSize = [self glkSize];
 }
 
-- (float) widthForFixedSize: (unsigned) sz {
+- (CGFloat) widthForFixedSize: (unsigned) sz {
 	if (key && [key closed]) {
 		[key release]; key = nil;
 	}
@@ -265,7 +265,7 @@
 	}
 }
 
-- (float) heightForFixedSize: (unsigned) sz {
+- (CGFloat) heightForFixedSize: (unsigned) sz {
 	if (key && [key closed]) {
 		[key release]; key = nil;
 	}

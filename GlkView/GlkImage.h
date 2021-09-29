@@ -31,9 +31,9 @@ extern NSString* GlkImageAttribute;
 	BOOL calculatedBounds;
 
 	/// If this is a margin image, the offset that it should be drawn at
-	float marginOffset;
+	CGFloat marginOffset;
 	/// Scale factor for margin objects
-	float scaleFactor;
+	CGFloat scaleFactor;
 }
 
 // Initialisation

@@ -57,7 +57,7 @@ typedef enum GlkLogStatus {
 	/// Active styles
 	NSMutableDictionary* styles;
 	/// The active scale factor
-	float scaleFactor;
+	CGFloat scaleFactor;
 	/// The border width to set for new pair windows
 	int borderWidth;
 	
@@ -100,8 +100,8 @@ typedef enum GlkLogStatus {
 	/// Used to fade out the logo
 	NSTimer* fadeTimer;
 
-	float waitTime;
-	float fadeTime;
+	CGFloat waitTime;
+	CGFloat fadeTime;
 	
 	// The task
 	/// YES if the task is running
@@ -127,7 +127,7 @@ typedef enum GlkLogStatus {
 	/// History of input lines
 	NSMutableArray* inputHistory;
 	/// Current history position
-	int historyPosition;
+	NSInteger historyPosition;
 	
 	// Automation
 	/// The automation output receivers attached to this view
@@ -212,9 +212,9 @@ typedef enum GlkLogStatus {
 /// Forces a layout operation if it's required
 - (void) performLayoutIfNecessary;
 /// Sets the scale factor of this view and any subview (resizing fonts, etc)
-- (void) setScaleFactor: (float) scale;
+@property (nonatomic) CGFloat scaleFactor;
 /// Sets up the border width for new pair windows
-- (void) setBorderWidth: (float) borderWidth;
+- (void) setBorderWidth: (CGFloat) borderWidth;
 
 // Dealing with [ MORE ] prompts
 /// \c YES if this CocoaGlk window should always page on more

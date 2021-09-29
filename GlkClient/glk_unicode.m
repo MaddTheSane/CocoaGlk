@@ -59,14 +59,14 @@ NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 
 int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 	// Fetch the string into a UTF-16 buffer
-	int stringLength = [string length];
+	NSInteger stringLength = [string length];
 	unichar characters[stringLength];
 	
 	[string getCharacters: characters];
 	
 	// Convert as much as possible to UCS-4
-	int finalLength = 0;
-	int pos;
+	NSInteger finalLength = 0;
+	NSInteger pos;
 	
 	for (pos = 0; pos<stringLength; pos++) {
 		// Retrieve this character
@@ -95,7 +95,7 @@ int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 		finalLength++;
 	}
 	
-	return finalLength;
+	return (int)finalLength;
 }
 
 //
@@ -372,16 +372,16 @@ glui32 glk_get_buffer_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 	
 	// Decode the characters that have been read
 	const unsigned char* bytes = [data bytes];
-	int numChars = [data length]/4;
-	int x;
+	NSInteger numChars = [data length]/4;
+	NSInteger x;
 	for (x=0; x<numChars; x++) {
-		int pos = x*4;
+		NSInteger pos = x*4;
 		
 		buf[x] = (bytes[pos+0]<<24)|(bytes[pos+1]<<16)|(bytes[pos+2]<<8)|(bytes[pos+3]<<0);
 	}
 	
 	str->read += numChars;
-	return numChars;
+	return (int)numChars;
 }
 
 glui32 glk_get_line_stream_uni(strid_t str, glui32 *buf, glui32 len) {

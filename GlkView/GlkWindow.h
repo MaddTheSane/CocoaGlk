@@ -36,9 +36,9 @@
 	BOOL forceFixed;
 	
 	/// Border
-	float border;
+	CGFloat border;
 	/// The scale factor to use
-	float scaleFactor;
+	CGFloat scaleFactor;
 	
 	// Styles
 	/// Preferences defines things like fonts
@@ -94,16 +94,16 @@
 /// If the layout has changed, then update/redraw this window
 - (void) layoutInRect: (NSRect) parentRect;
 /// Meaning depends on the window format. Returns the preferred size in pixels
-- (float) widthForFixedSize: (unsigned) size;
+- (CGFloat) widthForFixedSize: (unsigned) size;
 /// Meaning depends on the window format. Returns the preferred size in pixels
-- (float) heightForFixedSize: (unsigned) size;
+- (CGFloat) heightForFixedSize: (unsigned) size;
 
 /// Sets the border around the window's contents
-- (void) setBorder: (float) border;
+- (void) setBorder: (CGFloat) border;
 /// Retrieves the border width
-- (float) border;
+- (CGFloat) border;
 
-@property float border;
+@property CGFloat border;
 
 /// Size of the content, taking the border into account
 - (NSRect) contentRect;
@@ -111,9 +111,9 @@
 - (GlkSize) glkSize;
 
 /// Sets the scale factor for this window
-- (void) setScaleFactor: (float) scaleFactor;
+- (void) setScaleFactor: (CGFloat) scaleFactor;
 
-@property (nonatomic) float scaleFactor;
+@property (nonatomic) CGFloat scaleFactor;
 
 // Styles
 /// Force use of fixed pitch fonts
@@ -152,9 +152,9 @@
 - (NSColor*) backgroundColour;
 
 /// The amount of leading to use
-@property (readonly) float leading;
+@property (readonly) CGFloat leading;
 /// Height of a line in the current font
-@property (readonly) float lineHeight;
+@property (readonly) CGFloat lineHeight;
 
 /// The attributes for the currently active style
 - (NSDictionary*) currentTextAttributes;
@@ -207,7 +207,7 @@
 - (void) bufferHasFlushed;
 
 /// The text position beyond which input is possible
-@property (readonly) int inputPos;
+@property (readonly) NSInteger inputPos;
 /// Called on a key down event, to give this view a chance to set the caret position appropriately
 - (void) updateCaretPosition;
 

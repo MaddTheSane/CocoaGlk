@@ -99,19 +99,19 @@
 
 // = Layout =
 
-- (float) charWidth {
+- (CGFloat) charWidth {
 	// FIXME: we should cache this
 	return [@"M" sizeWithAttributes: [self currentTextAttributes]].width;
 }
 
-- (float) widthForFixedSize: (unsigned) size {
+- (CGFloat) widthForFixedSize: (unsigned) size {
 	NSSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
 	
-	return floorf(size * baseSize.width) + [textView textContainerInset].width*2 + [[textView textContainer] lineFragmentPadding]*2;
+	return floor(size * baseSize.width) + [textView textContainerInset].width*2 + [[textView textContainer] lineFragmentPadding]*2;
 }
 
-- (float) heightForFixedSize: (unsigned) size {
-	return floorf(size * [self lineHeight]) + [textView textContainerInset].height*2;
+- (CGFloat) heightForFixedSize: (unsigned) size {
+	return floor(size * [self lineHeight]) + [textView textContainerInset].height*2;
 }
 
 - (GlkSize) glkSize {
@@ -182,7 +182,7 @@
 	if (width < 0 || height < 0) 
 		totalSize = 0;
 	
-	int numSpaces = totalSize - [textStorage length];
+	NSInteger numSpaces = totalSize - [textStorage length];
 	
 	if (numSpaces < 0) {
 		// Remove lines from the storage object
@@ -274,7 +274,7 @@
 		int bufPos = xpos + ypos*width;
 		
 		// Get the number of characters to draw
-		int amountToDraw = width - xpos;
+		NSInteger amountToDraw = width - xpos;
 		if (bufPos + amountToDraw > [textStorage length]) {
 			amountToDraw = [textStorage length] - bufPos;
 		}
@@ -306,12 +306,12 @@
 	NSPoint mousePos = [textView convertPoint: [event locationInWindow] 
 									 fromView: nil];
 		
-	int glyphPos = [[textView layoutManager] glyphIndexForPoint: mousePos
+	NSInteger glyphPos = [[textView layoutManager] glyphIndexForPoint: mousePos
 												inTextContainer: [textView textContainer]];
-	int clickPos = [[textView layoutManager] characterIndexForGlyphAtIndex: glyphPos];
+	NSInteger clickPos = [[textView layoutManager] characterIndexForGlyphAtIndex: glyphPos];
 	
-	int clickX = clickPos % width;
-	int clickY = clickPos / width;
+	NSInteger clickX = clickPos % width;
+	NSInteger clickY = clickPos / width;
 	
 	// TODO: do not report mouse dragged events (ie, things resulting in a selection)
 	
@@ -319,8 +319,8 @@
 		// Generate the event
 		GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_MouseInput
 									  windowIdentifier: [self identifier]
-												  val1: clickX
-												  val2: clickY];
+												  val1: (int)clickX
+												  val2: (int)clickY];
 		
 		// ... send it
 		[target queueEvent: [evt autorelease]];
@@ -423,10 +423,10 @@
 	   replacementString:(NSString *)replacementString {
 	if (!lineInput) return NO;
 	
-	int startPos = xpos + ypos*width;
-	int endPos = startPos + lineInputLength;
+	NSInteger startPos = xpos + ypos*width;
+	NSInteger endPos = startPos + lineInputLength;
 	
-	int lengthChange = [replacementString length] - affectedCharRange.length;
+	NSInteger lengthChange = [replacementString length] - affectedCharRange.length;
 	
     if (affectedCharRange.location < startPos || affectedCharRange.location > endPos) {
         return NO;
@@ -444,8 +444,8 @@
 - (void)textStorageWillProcessEditing:(NSNotification*) aNotification {
 	if (!lineInput) return;
 	
-	int startPos = xpos + ypos*width;
-	int endPos = startPos + lineInputLength;
+	NSInteger startPos = xpos + ypos*width;
+	NSInteger endPos = startPos + lineInputLength;
 	
 	NSRange edited = [[textView textStorage] editedRange];
 
@@ -462,7 +462,7 @@
 									range: [[textView textStorage] editedRange]];
 	
 	// Text editing should replace any text outside of the editable range
-	int lenChange = [[textView textStorage] changeInLength];
+	NSInteger lenChange = [[textView textStorage] changeInLength];
 	
 	if (lenChange > 0) {
 		[[textView textStorage] deleteCharactersInRange: NSMakeRange(endPos+lenChange, lenChange)];
@@ -497,8 +497,8 @@
 }
 
 - (void) updateCaretPosition {
-	int startPos = xpos + ypos*width;
-	int endPos = startPos + lineInputLength;
+	NSInteger startPos = xpos + ypos*width;
+	NSInteger endPos = startPos + lineInputLength;
 
 	if (startPos > [textView selectedRange].location ||
 		endPos <= [textView selectedRange].location) {
@@ -506,7 +506,7 @@
 	}
 }
 
-- (int) inputPos {
+- (NSInteger) inputPos {
 	return xpos + ypos*width;
 }
 
@@ -541,7 +541,7 @@
 					// Generate the event, then...
 					GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_LineInput
 												  windowIdentifier: [self identifier]
-															  val1: [inputLine length]
+															  val1: (int)[inputLine length]
 															  val2: 0];
 					[evt setLineInput: inputLine];
 					

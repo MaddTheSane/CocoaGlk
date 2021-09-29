@@ -14,7 +14,7 @@ NSString* GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName";
 
 // = Formatting =
 
-- (BOOL) formatSectionAtOffset: (float) offset
+- (BOOL) formatSectionAtOffset: (CGFloat) offset
 				  inTypesetter: (GlkTypesetter*) typesetter
 				 forGlyphRange: (NSRange) glyphs {
 	// The default implementation does nothing
@@ -24,7 +24,7 @@ NSString* GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName";
 // = Typesetting =
 
 - (void) placeBaselineAt: (NSPoint) point
-				forGlyph: (int) glyph {
+				forGlyph: (NSInteger) glyph {
 	// Do nothing...
 }
 

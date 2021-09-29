@@ -61,12 +61,12 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 
 // = Placing this image =
 
-- (BOOL) formatSectionAtOffset: (float) offset
+- (BOOL) formatSectionAtOffset: (CGFloat) offset
 				  inTypesetter: (GlkTypesetter*) typesetter
 				 forGlyphRange: (NSRange) glyphs {
 	scaleFactor = 1.0;
 	
-	float remainingMargin = [typesetter remainingMargin];
+	CGFloat remainingMargin = [typesetter remainingMargin];
 	
 	// Add a new line section for this image
 	switch (alignment) {
@@ -142,7 +142,7 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 
 		point.x = NSMaxX([view bounds])-marginOffset - inset.width;
 	} else {
-		float maxWidth = NSMaxX([view bounds]) - point.x - 8;
+		CGFloat maxWidth = NSMaxX([view bounds]) - point.x - 8;
 		if (maxWidth < size.width) scaleFactor = maxWidth/size.width;
 	}
 	

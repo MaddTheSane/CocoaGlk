@@ -72,11 +72,11 @@
 	lastSize = [self glkSize];
 }
 
-- (float) widthForFixedSize: (unsigned) size {
+- (CGFloat) widthForFixedSize: (unsigned) size {
 	return size;
 }
 
-- (float) heightForFixedSize: (unsigned) size {
+- (CGFloat) heightForFixedSize: (unsigned) size {
 	return size;
 }
 
@@ -138,11 +138,11 @@
 	return res;
 }
 
-- (float) leading {
+- (CGFloat) leading {
 	return 0;
 }
 
-- (float) lineHeight {
+- (CGFloat) lineHeight {
     NSFont* font = [[self currentTextAttributes] objectForKey: NSFontAttributeName];
     NSLayoutManager* layoutManager = [[[NSLayoutManager alloc] init] autorelease];
     
@@ -479,7 +479,7 @@
 - (void) updateCaretPosition {
 }
 
-- (int) inputPos {
+- (NSInteger) inputPos {
 	// Default is 0 (not managing a text view)
 	return 0;
 }

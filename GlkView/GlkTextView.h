@@ -23,7 +23,7 @@
 	/// Ordered list of custom margin images
 	NSMutableArray* marginGlyphs;
 	/// The first unlaid margin glyph (index into marginGlyphs)
-	int firstUnlaidMarginGlyph;
+	NSInteger firstUnlaidMarginGlyph;
 }
 
 // Character input

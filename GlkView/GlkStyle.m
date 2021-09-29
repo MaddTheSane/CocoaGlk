@@ -62,12 +62,12 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 	[lastAttributes release]; lastAttributes = nil;
 }
 
-- (void) setIndentation: (float) newIndentation {
+- (void) setIndentation: (CGFloat) newIndentation {
 	indentation = newIndentation;
 	[self styleChanged];
 }
 
-- (void) setParaIndentation: (float) newParaIndent {
+- (void) setParaIndentation: (CGFloat) newParaIndent {
 	paraIndent = newParaIndent;
 	[self styleChanged];
 }
@@ -77,7 +77,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 	[self styleChanged];
 }
 
-- (void) setSize: (float) newSize {
+- (void) setSize: (CGFloat) newSize {
 	size = newSize;
 	[self styleChanged];
 }
@@ -166,7 +166,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 }
 
 - (NSDictionary*) attributesWithPreferences: (GlkPreferences*) prefs
-								scaleFactor: (float) scaleFactor {
+								scaleFactor: (CGFloat) scaleFactor {
 	// Use the cached version of the attributes if they're around
 	if (lastAttributes && lastPreferences == prefs && lastScaleFactor == scaleFactor) {
 		if ([lastPreferences changeCount] == prefChangeCount) {
@@ -195,7 +195,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 	
 	// Adjust the font size
 	if (size != 0 || scaleFactor != 1.0f) {
-		float newSize = [font pointSize] + size;
+		CGFloat newSize = [font pointSize] + size;
 		if (newSize < 6) newSize = 6;
 		newSize *= scaleFactor;
  		font = [mgr convertFont: font
@@ -268,9 +268,9 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
-			[self setBackColour: [NSColor colorWithDeviceRed: ((float)red)/255.0
-													   green: ((float)green)/255.0
-														blue: ((float)blue)/255.0
+			[self setBackColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/255.0
+													   green: ((CGFloat)green)/255.0
+														blue: ((CGFloat)blue)/255.0
 													   alpha: 1.0]];
 			break;
 		}
@@ -281,9 +281,9 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
-			[self setTextColour: [NSColor colorWithDeviceRed: ((float)red)/255.0
-													   green: ((float)green)/255.0
-														blue: ((float)blue)/255.0
+			[self setTextColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/255.0
+													   green: ((CGFloat)green)/255.0
+														blue: ((CGFloat)blue)/255.0
 													   alpha: 1.0]];
 			break;
 		}

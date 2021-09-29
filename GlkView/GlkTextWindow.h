@@ -25,9 +25,9 @@
 	NSTextStorage* textStorage;
 	
 	/// The position in the text view that the game-supplied text ends, and the user-supplied text begins
-	int inputPos;
+	NSInteger inputPos;
 	/// The size of the margin for this window
-	float margin;
+	CGFloat margin;
 	
 	/// The input data
 	NSMutableString* inputBuffer;
@@ -43,20 +43,20 @@
 	/// \c YES if this window has a more prompt
 	BOOL hasMorePrompt;
 	/// The character that should be the first on the current 'page'
-	int moreOffset;
+	NSInteger moreOffset;
 	/// The last y position a [ MORE ] prompt appeared
-	float lastMorePos;
+	CGFloat lastMorePos;
 	/// The y position that the next [ MORE ] prompt should appear at
-	float nextMorePos;
+	CGFloat nextMorePos;
 	
 	/// The window containing the [ MORE ] prompt
 	NSWindow* moreWindow;
 	/// The time that the [ MORE ] prompt was shown
 	NSDate* whenMoreShown;
 	/// Initial state of the [ MORE ] prompt
-	float lastMoreState;
+	CGFloat lastMoreState;
 	/// Final state fo the [ MORE ] prompt
-	float finalMoreState;
+	CGFloat finalMoreState;
 	/// Timer for the [ MORE ] animation
 	NSTimer* moreAnimationTimer;
 }
@@ -81,13 +81,13 @@
 /// Sets this window to be infinite size
 - (void) setInfiniteSize;
 /// The current [ MORE ] animation state (0 = hidden, 1 = shown)
-@property (nonatomic, readonly) float currentMoreState;
+@property (nonatomic, readonly) CGFloat currentMoreState;
 /// A request to display the [ MORE ] prompt if necessary
 - (void) displayMorePromptIfNecessary;
 /// Sets whether or not the [ MORE ] prompt is shown
 - (void) setMoreShown: (BOOL) shown;
 /// Resets the [ MORE ] prompt position from the specified character position
-- (void) resetMorePrompt: (int) pos
+- (void) resetMorePrompt: (NSInteger) pos
 				  paging: (BOOL) paging;
 /// Resets the [ MORE ] prompt position from the current input position
 - (void) resetMorePrompt;

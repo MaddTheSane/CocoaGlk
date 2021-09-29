@@ -148,7 +148,7 @@ static NSString* stringFromOp(NSArray* op) {
 		}
 #endif
 		
-		int 		opPos 		= [operations count] - 1;
+		NSInteger	opPos 		= [operations count] - 1;
 		NSArray* 	lastOp 		= [operations lastObject];
 		int 		stream, lastStream;
 		

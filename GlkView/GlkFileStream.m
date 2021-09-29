@@ -134,10 +134,10 @@
 }
 
 - (void) putString: (in bycopy NSString*) string {
-	int len = [string length];
+	NSInteger len = [string length];
 	char* latin1 = malloc(sizeof(char)*[string length]);
 	
-	int x;
+	NSInteger x;
 	for (x=0; x<len; x++) {
 		unichar ch = [string characterAtIndex: x];
 		if (ch > 255) ch = '?';

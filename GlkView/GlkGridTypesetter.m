@@ -33,7 +33,7 @@
 	
 // = Performing layout =
 
-- (int) layoutLineFromGlyph: (int) glyph {
+- (NSInteger) layoutLineFromGlyph: (NSInteger) glyph {
 	// Lays out a line fragment from the specified glyph
 	if (![self cacheGlyphsIncluding: glyph]) return glyph;
 	glyph -= cached.location;
@@ -46,13 +46,13 @@
 	int y = charIndex / gridWidth;
 	NSPoint gridPos = NSMakePoint(cellSize.width*x+inset, cellSize.height*y);
 	
-	float charPos = gridPos.x;
-	float initialCharPos = charPos;
+	CGFloat charPos = gridPos.x;
+	CGFloat initialCharPos = charPos;
 	
 	// Perform layout for as many characters as possible
 	int firstGlyph = glyph;
 	int lastChar = cacheCharIndexes[glyph];
-	float charWidth = 0;
+	CGFloat charWidth = 0;
 	int lastBoundaryGlyph = glyph;
 	BOOL hitTheLastGlyph = NO;
 	

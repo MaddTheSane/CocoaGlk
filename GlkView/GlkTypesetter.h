@@ -18,7 +18,7 @@
 
 /// This object has been typeset at the specified position
 - (void) placeBaselineAt: (NSPoint) point
-				forGlyph: (int) glyph;
+				forGlyph: (NSInteger) glyph;
 
 @end
 
@@ -31,7 +31,7 @@
 @protocol GlkCustomTextLayout <NSObject>
 
 - (void) invalidateCustomGlyphs: (NSRange) range;
-- (void) addCustomGlyph: (int) location
+- (void) addCustomGlyph: (NSInteger) location
 				section: (GlkCustomTextSection*) section;
 
 @end
@@ -58,9 +58,9 @@ typedef struct GlkLineSection {
 	/// The bounds for this line section: 0,0 indicates the start of the line fragment, 0,0 indicates the far left of the current fragment, at the baseline
 	NSRect bounds;
 	/// The X-advancement for this line section
-	float advancement;
+	CGFloat advancement;
 	/// The X-offset for this line section
-	float offset;
+	CGFloat offset;
 	/// The glyph range for this line section
 	NSRange glyphRange;
 	/// The alignment for this line section
@@ -87,7 +87,7 @@ typedef struct GlkLineSection {
 	__unsafe_unretained NSTextContainer* container;
 	
 	/// The line fragment padding to use
-	float inset;
+	CGFloat inset;
 	/// The last glyph laid out
 	NSUInteger lastSetGlyph;
 	
@@ -95,7 +95,7 @@ typedef struct GlkLineSection {
 	/// The range of the cached glyphs
 	NSRange cached;
 	/// Size of the cache
-	int cacheLength;
+	NSInteger cacheLength;
 	
 	/// The identifier for each glyph that we're laying out
 	NSGlyph* cacheGlyphs;
@@ -109,13 +109,13 @@ typedef struct GlkLineSection {
 	unsigned char* cacheBidi;
 	
 	/// The X-advancements for each glyph that we're laying out
-	float* cacheAdvancements;
+	CGFloat* cacheAdvancements;
 	/// The ascenders for each glyph that we're laying out
-	float* cacheAscenders;
+	CGFloat* cacheAscenders;
 	/// The descenders for each glyph that we're laying out
-	float* cacheDescenders;
+	CGFloat* cacheDescenders;
 	/// The line heights for each glyph that we're laying out
-	float* cacheLineHeight;
+	CGFloat* cacheLineHeight;
 	/// The bounds for each glyph that we're laying out
 	NSRect* cacheBounds;
 	/// The attributes for each glyph that we're laying out [RETAINED]
@@ -134,13 +134,13 @@ typedef struct GlkLineSection {
 	GlkMarginSection* activeRightMargin;
 	
 	/// First glyph on the current line fragment
-	int lineFragmentInitialGlyph;
+	NSInteger lineFragmentInitialGlyph;
 	/// Left margin added (so far) in this fragment
-	float thisLeftMargin;
+	CGFloat thisLeftMargin;
 	/// Right margin added (so far) in this fragment
-	float thisRightMargin;
-	float thisLeftMaxY;
-	float thisRightMaxY;
+	CGFloat thisRightMargin;
+	CGFloat thisLeftMaxY;
+	CGFloat thisRightMaxY;
 	
 	// The current paragraph
 	/// The character range for the current paragraph
@@ -154,11 +154,11 @@ typedef struct GlkLineSection {
 	/// The size of the current text container
 	NSSize size;
 	/// Number of line sections
-	int numLineSections;
+	NSInteger numLineSections;
 	/// The line sections themselves
 	GlkLineSection* sections;
 	/// Offset to apply to the baseline due to custom alignment
-	float customOffset;
+	CGFloat customOffset;
 	/// If YES, then the bounding box is not sufficient to calculate the baseline offset to use
 	BOOL customBaseline;
 	
@@ -176,7 +176,7 @@ typedef struct GlkLineSection {
 
 // Laying out line sections
 /// Ensures that the specified range of glyphs are in the cache
-- (BOOL) cacheGlyphsIncluding: (int) minGlyphIndex;
+- (BOOL) cacheGlyphsIncluding: (NSInteger) minGlyphIndex;
 /// Starts a new line fragment
 - (void) beginLineFragment;
 /// Finishes the current line fragment and adds it to the layout manager
@@ -185,8 +185,8 @@ typedef struct GlkLineSection {
 
 /// Adds a new line section
 - (void) addLineSection: (NSRect) bounds
-			advancement: (float) advancement
-				 offset: (float) offset
+			advancement: (CGFloat) advancement
+				 offset: (CGFloat) offset
 			 glyphRange: (NSRange) glyphRange
 			  alignment: (GlkSectionAlignment) alignment
 			   delegate: (id<GlkCustomLineSection>) delegate
@@ -195,28 +195,28 @@ typedef struct GlkLineSection {
 // Margins
 /// Adds a certain width to the left margin on the current line
 /// (for flowing images)
-- (void) addToLeftMargin: (float) width
-				  height: (float) height;
+- (void) addToLeftMargin: (CGFloat) width
+				  height: (CGFloat) height;
 /// Adds a certain width to the right margin on the current line
 /// (for flowing images)
-- (void) addToRightMargin: (float) width
-				   height: (float) height;
+- (void) addToRightMargin: (CGFloat) width
+				   height: (CGFloat) height;
 
 /// Get the current offset into the left margin
-- (float) currentLeftMarginOffset;
+- (CGFloat) currentLeftMarginOffset;
 /// Get the current offset into the right margin
-- (float) currentRightMarginOffset;
+- (CGFloat) currentRightMarginOffset;
 /// Remaining space for margin objects
-- (float) remainingMargin;
+- (CGFloat) remainingMargin;
 
 /// Amount required to clear the left margin
-- (float) currentLeftMarginHeight;
+- (CGFloat) currentLeftMarginHeight;
 /// Amount required to clear the right margin
-- (float) currentRightMarginHeight;
+- (CGFloat) currentRightMarginHeight;
 
 // Laying out glyphs
 /// Lays out a single line fragment from the specified glyph
-- (int) layoutLineFromGlyph: (int) glyph;
+- (NSInteger) layoutLineFromGlyph: (NSInteger) glyph;
 
 // Setting the delegate
 /// Sets the delegate (the delegate is NOT RETAINED)

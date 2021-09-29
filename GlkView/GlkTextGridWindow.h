@@ -13,7 +13,7 @@
 
 @interface GlkTextGridWindow : GlkTextWindow {
 	/// The amount of line input that we have accepted so far
-	int lineInputLength;
+	NSInteger lineInputLength;
 	
 	/// Current character width/height
 	int width,height;

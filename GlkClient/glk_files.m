@@ -29,7 +29,7 @@ NSMutableDictionary* cocoaglk_fileref_bindings = nil;
 	BOOL cancelled;
 }
 
-@property (retain, getter=promptedFileRef:) id<GlkFileRef> fileRef;
+@property (retain, setter=promptedFileRef:) id<GlkFileRef> fileRef;
 @property (readonly) BOOL cancelled;
 
 @end

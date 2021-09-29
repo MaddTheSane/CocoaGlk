@@ -25,14 +25,14 @@ extern NSString* GlkPreferencesHaveChangedNotification;
 	NSMutableDictionary* styles;
 	
 	// Typography
-	float textMargin;
+	CGFloat textMargin;
 	BOOL useScreenFonts;
 	BOOL useHyphenation;
 	BOOL kerning;
 	BOOL ligatures;
 	
 	// Misc bits
-	float scrollbackLength;
+	CGFloat scrollbackLength;
 	
 	/// YES if the last change is being notified
 	BOOL changeNotified;
@@ -61,11 +61,11 @@ extern NSString* GlkPreferencesHaveChangedNotification;
 @property (nonatomic, copy) NSFont *fixedFont;
 
 /// Replaces the current fonts with ones of the given size
-- (void) setFontSize: (float) fontSize;
+- (void) setFontSize: (CGFloat) fontSize;
 
 // Typography preferences
 /// The padding to use in text windows
-@property (nonatomic) float textMargin;
+@property (nonatomic) CGFloat textMargin;
 /// Whether or not to use screen fonts
 @property (nonatomic) BOOL useScreenFonts;
 /// Whether or not to use hyphenation
@@ -75,7 +75,7 @@ extern NSString* GlkPreferencesHaveChangedNotification;
 /// Whether or not to use kerning
 @property (nonatomic) BOOL useKerning;
 /// Replaces the current padding that we should use
-- (void) setTextMargin: (float) margin;
+- (void) setTextMargin: (CGFloat) margin;
 
 // Style preferences
 /// Dictionary mapping NSNumbers with Glk styles to GlkStyle objects
@@ -88,10 +88,10 @@ extern NSString* GlkPreferencesHaveChangedNotification;
 @property (nonatomic, copy) NSDictionary *styles;
 // Misc preferences
 /// The amount of scrollback to support in text windows (0-100)
-@property (nonatomic) float scrollbackLength;
+@property (nonatomic) CGFloat scrollbackLength;
 
 /// Sets the amount of scrollback to retain
-- (void) setScrollbackLength: (float) length;
+- (void) setScrollbackLength: (CGFloat) length;
 
 // Changes
 /// Number of changes that have occured on this preference object

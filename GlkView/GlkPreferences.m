@@ -177,7 +177,7 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 @synthesize proportionalFont;
 @synthesize fixedFont;
 
-- (void) setFontSize: (float) fontSize {
+- (void) setFontSize: (CGFloat) fontSize {
 	NSFontManager* mgr = [NSFontManager sharedFontManager];
 	
 	NSFont* newProp = [mgr convertFont: proportionalFont
@@ -215,7 +215,7 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 
 @synthesize textMargin;
 
-- (void) setTextMargin: (float) margin {
+- (void) setTextMargin: (CGFloat) margin {
 	textMargin = margin;
 	[self preferencesHaveChanged];
 }
@@ -249,7 +249,7 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 
 @synthesize scrollbackLength;
 
-- (void) setScrollbackLength: (float) length {
+- (void) setScrollbackLength: (CGFloat) length {
 	scrollbackLength = length;
 	[self preferencesHaveChanged];
 }

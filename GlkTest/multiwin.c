@@ -142,9 +142,9 @@ void glk_main(void)
     already2 = 0;
     
     while (1) {
-        char *cx, *cmd;
+        char *cx, *cmd=NULL;
         int doneloop, len;
-        winid_t whichwin;
+        winid_t whichwin=0;
         event_t ev;
         
         draw_statuswin();

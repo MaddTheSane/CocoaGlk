@@ -515,15 +515,15 @@ glui32 glk_buffer_canon_decompose_uni(glui32 *buf, glui32 len,
 									  glui32 numchars)
 {
 	@autoreleasepool {
-	NSMutableString *str = [[NSMutableString alloc] initWithBytes:buf length:numchars*sizeof(glui32) encoding:NSUTF32LittleEndianStringEncoding];
-	CFStringNormalize((CFMutableStringRef)str, kCFStringNormalizationFormD);
-	NSData *strData = [[str dataUsingEncoding:NSUTF32LittleEndianStringEncoding] retain];
-	[str release];
-
-	[strData getBytes:buf length:MIN(len * sizeof(glui32), strData.length)];
-	[strData autorelease];
-	
-	return (glui32)(strData.length/sizeof(glui32));
+		NSMutableString *str = [[NSMutableString alloc] initWithBytes:buf length:numchars*sizeof(glui32) encoding:NSUTF32LittleEndianStringEncoding];
+		CFStringNormalize((CFMutableStringRef)str, kCFStringNormalizationFormD);
+		NSData *strData = [[str dataUsingEncoding:NSUTF32LittleEndianStringEncoding] retain];
+		[str release];
+		
+		[strData getBytes:buf length:MIN(len * sizeof(glui32), strData.length)];
+		[strData autorelease];
+		
+		return (glui32)(strData.length/sizeof(glui32));
 	}
 }
 
@@ -531,14 +531,14 @@ glui32 glk_buffer_canon_normalize_uni(glui32 *buf, glui32 len,
 									  glui32 numchars)
 {
 	@autoreleasepool {
-	NSMutableString *str = [[NSMutableString alloc] initWithBytes:buf length:numchars*sizeof(glui32) encoding:NSUTF32LittleEndianStringEncoding];
-	CFStringNormalize((CFMutableStringRef)str, kCFStringNormalizationFormC);
-	NSData *strData = [[str dataUsingEncoding:NSUTF32LittleEndianStringEncoding] retain];
-	[str release];
-
-	[strData getBytes:buf length:MIN(len * sizeof(glui32), strData.length)];
-	[strData autorelease];
-	
-	return (glui32)(strData.length/sizeof(glui32));
+		NSMutableString *str = [[NSMutableString alloc] initWithBytes:buf length:numchars*sizeof(glui32) encoding:NSUTF32LittleEndianStringEncoding];
+		CFStringNormalize((CFMutableStringRef)str, kCFStringNormalizationFormC);
+		NSData *strData = [[str dataUsingEncoding:NSUTF32LittleEndianStringEncoding] retain];
+		[str release];
+		
+		[strData getBytes:buf length:MIN(len * sizeof(glui32), strData.length)];
+		[strData autorelease];
+		
+		return (glui32)(strData.length/sizeof(glui32));
 	}
 }

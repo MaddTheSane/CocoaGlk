@@ -33,15 +33,6 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	GlkLogFatalError,							//!< Fatal error log message
 };
 
-#if defined(COCOAGLK_IPHONE)
-@interface GlkView : UIView <GlkSession, GlkBuffer, GlkEventReceiver>
-
-- (void) automateStream: (NSObject<GlkStream>*) stream
-			  forString: (NSString*) string;
-@end
-
-#else
-
 ///
 /// Base class for CocoaGlk: a view object that an application can embed in order to run Glk client applications
 ///
@@ -262,8 +253,6 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 - (void) automateStream: (NSObject<GlkStream>*) stream
 			  forString: (NSString*) string;
 @end
-
-#endif
 
 
 ///

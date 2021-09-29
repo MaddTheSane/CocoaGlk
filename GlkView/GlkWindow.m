@@ -598,44 +598,13 @@ NS_ENUM(unichar) {
 
 // = Accessibility =
 
-#if defined(COCOAGLK_IPHONE)
-#warning Update accessibility!
-#else
-- (NSArray*) accessibilityAttributeNames {
-    // Attribtues that we support
-    static NSArray* attributes = NULL;
-    
-    // Generate the attribute list if it's not already present
-    if (!attributes) {
-        // Copy the attributes supported by a standard view
-        NSMutableArray* newAttributes = [[super accessibilityAttributeNames] mutableCopy];
-        
-        // We supply the children for this item (for navigating the window structure)
-        [newAttributes addObject: NSAccessibilityChildrenAttribute];
-        [newAttributes addObject: NSAccessibilityDescriptionAttribute];
-        
-        // Finalise the attributes
-        attributes = [newAttributes copy];
-    }
-    
-    // Return the attributes
-    return attributes;
+- (NSArray *)accessibilityChildren {
+	// No children by default
+	return @[];
 }
 
-- (id) accessibilityAttributeValue:(NSString *)attribute {
-    // Action depends on the attribute
-    if ([attribute isEqualToString: NSAccessibilityChildrenAttribute]) {
-        // No children by default
-        return [NSArray array];
-    }
-    
-    if ([attribute isEqualToString: NSAccessibilityDescriptionAttribute]) {
-        return [NSString stringWithFormat: @"GLK window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];
-    }
-    
-    // Otherwise, use the standard behaviour for a view
-    return [super accessibilityAttributeValue: attribute];
+- (NSString *)accessibilityLabel {
+	return [NSString stringWithFormat: @"GLK window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];
 }
-#endif
 
 @end

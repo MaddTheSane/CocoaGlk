@@ -77,7 +77,7 @@
 	return self;
 }
 
-@synthesize glyph = fragmentGlyph;
+@synthesize glyph=fragmentGlyph;
 @synthesize width;
 @synthesize maxY;
 
@@ -115,6 +115,14 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 @implementation GlkTypesetter
 
+- (instancetype)init
+{
+	if (self = [super init]) {
+		sections = [[NSMutableArray alloc] init];
+	}
+	return self;
+}
+
 - (void) dealloc {
 	// Release any attributes that we still have cached
 	NSDictionary* lastAttribute = nil;
@@ -141,7 +149,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	if (cacheAttributes) free(cacheAttributes);
 	if (cacheFonts) free(cacheFonts);
 	
-	if (sections) free(sections);
+	[sections release];
 	delegate = nil;
 	
 	[super dealloc];
@@ -244,8 +252,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #endif
 	
 	// Measure each glyph in the glyph array
-	NSSize advance[numGlyphs];
-	NSRect bounding[numGlyphs];
+	NSSize advance[numGlyphs+1];
+	NSRect bounding[numGlyphs+1];
 	
 #ifndef MeasureMultiGlyphs
 	// Compatible mode: measure one glyph at a time
@@ -334,7 +342,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	if (cacheRange.length < GlyphLookahead) cacheRange.length = GlyphLookahead;
 	
 	// The cache range must lie within the number of glyphs in the layout manager
-	NSInteger numGlyphs = [layout numberOfGlyphs];
+	NSUInteger numGlyphs = [layout numberOfGlyphs];
 	if (cacheRange.length + cacheRange.location > numGlyphs) {
 		cacheRange.length = numGlyphs - cacheRange.location;
 	}
@@ -389,7 +397,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			currentFont = [layout substituteFontForFont: (NSFont*) [currentAttributes objectForKey: NSFontAttributeName]];
 			currentAscender = [currentFont ascender];
 			currentDescender = [currentFont descender];
-            currentHeight = [layout defaultLineHeightForFont: currentFont];
+			currentHeight = [[self layoutManager] defaultLineHeightForFont: currentFont];
 		}
 		
 		// Set the current attributes
@@ -425,7 +433,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			NSLog(@"%g", advancements[y]);
 		}
 		if (start > 0) {
-			NSLog(@"Previous: %g", advancements[start-1]);			
+			NSLog(@"Previous: %g", advancements[start-1]);
 		}
 #endif
 	}
@@ -439,7 +447,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #endif
 	
 	// Copy the results to the cache
-	NSInteger cacheIndex;
+	NSUInteger cacheIndex;
 	
 	if (cached.length == 0) {
 #ifdef Debug
@@ -458,7 +466,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		cacheLength = cached.length + GlyphLookahead;
 
 		cacheGlyphs = realloc(cacheGlyphs, sizeof(NSGlyph)*cacheLength);
-		cacheCharIndexes = realloc(cacheCharIndexes, sizeof(unsigned)*cacheLength);
+		cacheCharIndexes = realloc(cacheCharIndexes, sizeof(NSUInteger)*cacheLength);
 		cacheInscriptions = realloc(cacheInscriptions, sizeof(NSGlyphInscription)*cacheLength);
 		cacheElastic = realloc(cacheElastic, sizeof(BOOL)*cacheLength);
 		cacheBidi = realloc(cacheBidi, sizeof(unsigned char)*cacheLength);
@@ -474,7 +482,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Copy the various bits and pieces
 	memcpy(cacheGlyphs + cacheIndex, glyphs, cacheRange.length*sizeof(NSGlyph));
-	memcpy(cacheCharIndexes + cacheIndex, charIndexes, cacheRange.length*sizeof(unsigned));
+	memcpy(cacheCharIndexes + cacheIndex, charIndexes, cacheRange.length*sizeof(NSUInteger));
 	memcpy(cacheInscriptions + cacheIndex, inscriptions, cacheRange.length*sizeof(NSGlyphInscription));
 	memcpy(cacheElastic + cacheIndex, elastic, cacheRange.length*sizeof(BOOL));
 	memcpy(cacheBidi + cacheIndex, bidi, cacheRange.length*sizeof(unsigned char));
@@ -493,8 +501,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 - (void) removeGlyphsFromCache: (NSInteger) newMinGlyphIndex {
 	// Removes glyphs from the cache that are no longer going to be used
-	NSInteger x;
-	NSInteger glyphsToRemove = newMinGlyphIndex - cached.location;
+	int x;
+	NSUInteger glyphsToRemove = newMinGlyphIndex - cached.location;
 	
 #ifdef Debug
 	if (glyphsToRemove < 0) {
@@ -534,9 +542,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 	
 	// Move the caches around
-	NSInteger numRemaining = cached.length - glyphsToRemove;
+	NSUInteger numRemaining = cached.length - glyphsToRemove;
 	memmove(cacheGlyphs, cacheGlyphs + glyphsToRemove, sizeof(NSGlyph)*numRemaining);
-	memmove(cacheCharIndexes, cacheCharIndexes + glyphsToRemove, sizeof(unsigned)*numRemaining);
+	memmove(cacheCharIndexes, cacheCharIndexes + glyphsToRemove, sizeof(NSUInteger)*numRemaining);
 	memmove(cacheInscriptions, cacheInscriptions + glyphsToRemove, sizeof(NSGlyphInscription)*numRemaining);
 	memmove(cacheElastic, cacheElastic + glyphsToRemove, sizeof(BOOL)*numRemaining);
 	memmove(cacheBidi, cacheBidi + glyphsToRemove, sizeof(unsigned char)*numRemaining);
@@ -563,7 +571,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 // = Margins =
 
 - (NSInteger) marginNearest: (NSInteger) glyph
-			  inMarginArray: (NSArray*) margin {
+			  inMarginArray: (NSArray<GlkMarginSection*>*) margin {
 	// Finds the index of the margin nearest the specified glyph
 	NSInteger top = [margin count] - 1;
 	NSInteger bottom = 0;
@@ -666,7 +674,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 - (void) beginLineFragment {
 	// Starts a new line fragment
-	numLineSections = 0;
+	[sections removeAllObjects];
 	
 	usedRect = [layout usedRectForTextContainer: container];
 	customBaseline = NO;
@@ -679,10 +687,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	thisLeftMargin = thisRightMargin = thisLeftMaxY = thisRightMaxY = 0;
 }
 
+/// Fixes the bounds of the current set of line fragments according to the various alignments that are present
 - (void) fixBounds {
-	// Fixes the bounds of the current set of line fragments according to the various alignments that are present
-	int x;
-	
 	// Work out the baseline offset and unaligned bounds for this line fragment
 	CGFloat baselineOffset = -fragmentBounds.origin.y;
 	customOffset = 0;
@@ -690,13 +696,13 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	// Use only the items aligned to the baseline to work out the 'real' baseline.
 	baselineOffset = 0;
 	fragmentBounds = NSMakeRect(0,0,0,0);
-	for (x=0; x<numLineSections; x++) {
-		if (sections[x].alignment == GlkAlignBaseline) {
-			if (sections[x].bounds.origin.y < baselineOffset) {
-				baselineOffset = sections[x].bounds.origin.y;
+	for (GlkLineSection *section in sections) {
+		if (section.alignment == GlkAlignBaseline) {
+			if (section.bounds.origin.y < baselineOffset) {
+				baselineOffset = section.bounds.origin.y;
 			}
 			
-			fragmentBounds = NSUnionRect(fragmentBounds, sections[x].bounds);
+			fragmentBounds = NSUnionRect(fragmentBounds, section.bounds);
 		}
 	}
 	
@@ -704,14 +710,14 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Now work out the effect of the custom aligned sections on the bounds and the baseline
 	if (customBaseline) {
-		for (x=0; x<numLineSections; x++) {
-			switch (sections[x].alignment) {
+		for (GlkLineSection *section in sections) {
+			switch (section.alignment) {
 				case GlkAlignBaseline:
 					break;
 				
 				case GlkAlignTop:
 				{
-					NSRect bounds = sections[x].bounds;
+					NSRect bounds = section.bounds;
 					bounds.origin.y -= NSMaxY(bounds);
 
 					if (-bounds.origin.y-baselineOffset > customOffset) customOffset = -bounds.origin.y-baselineOffset;
@@ -722,7 +728,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 					
 				case GlkAlignBottom:
 				{
-					NSRect bounds = sections[x].bounds;
+					NSRect bounds = section.bounds;
 					bounds.origin.y = -baselineOffset;
 
 					fragmentBounds = NSUnionRect(fragmentBounds, bounds);
@@ -731,7 +737,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 					
 				case GlkAlignCenter:
 				{
-					NSRect bounds = sections[x].bounds;
+					NSRect bounds = section.bounds;
 					bounds.origin.y = -(baselineOffset + bounds.size.height)/2;
 					
 					if (-bounds.origin.y-baselineOffset > customOffset) customOffset = -bounds.origin.y-baselineOffset;
@@ -744,12 +750,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 }
 
+/// Finishes the current line fragment and adds it to the layout manager
 - (BOOL) endLineFragment: (BOOL) hitTheLastGlyph
 				 newline: (BOOL) newline {
-	if (numLineSections <= 0) return YES;
-	
-	// Finishes the current line fragment and adds it to the layout manager
-	int x;
+	if (sections.count <= 0) return YES;
 	
 	// Get the bounds of the line fragment, and adjust it for its final position
 	NSRect bounds = proposedRect;
@@ -760,8 +764,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	NSRect used = bounds;
 	
 	// Work out the glyph range for this line fragment
-	NSInteger firstGlyph = sections[0].glyphRange.location;
-	NSInteger lastGlyph = sections[numLineSections-1].glyphRange.location + sections[numLineSections-1].glyphRange.length;
+	NSUInteger firstGlyph = sections.firstObject.glyphRange.location;
+	NSUInteger lastGlyph = sections.lastObject.glyphRange.location + sections.lastObject.glyphRange.length;
 	NSRange glyphRange = NSMakeRange(firstGlyph, lastGlyph-firstGlyph);
 	
 	// Work out the baseline offset for this line fragment
@@ -770,10 +774,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	if (customBaseline) {
 		// Use only the items aligned to the baseline to work out the 'real' baseline.
 		baselineOffset = 0;
-		for (x=0; x<numLineSections; x++) {
-			if (sections[x].alignment == GlkAlignBaseline) {
-				if (sections[x].bounds.origin.y < baselineOffset) {
-					baselineOffset = sections[x].bounds.origin.y;
+		for (GlkLineSection *section in sections) {
+			if (section.alignment == GlkAlignBaseline) {
+				if (section.bounds.origin.y < baselineOffset) {
+					baselineOffset = section.bounds.origin.y;
 				}
 			}
 		}
@@ -802,47 +806,46 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Position the glyphs within the line sections
 	CGFloat maxX = 0.0;
-	for (x=0; x<numLineSections; x++) {
-		if (sections[x].glyphRange.length <= 0) continue;
+	for (GlkLineSection *section in sections) {
+		if (section.glyphRange.length <= 0) continue;
 		
 		NSPoint loc;
-		loc.x = sections[x].offset;
+		loc.x = section.offset;
 		
-		maxX = loc.x + sections[x].advancement;
+		maxX = loc.x + section.advancement;
 		
-		switch (sections[x].alignment) {
+		switch (section.alignment) {
 			case GlkAlignBaseline:
 			default:
 				loc.y = baselineOffset + customOffset;
 				break;
 				
 			case GlkAlignTop:
-				loc.y = baselineOffset+customOffset - sections[x].bounds.size.height + NSMaxY(sections[x].bounds);
+				loc.y = baselineOffset+customOffset - section.bounds.size.height + NSMaxY(section.bounds);
 				break;
 				
 			case GlkAlignBottom:
-				loc.y = customOffset - NSMaxY(sections[x].bounds);
+				loc.y = customOffset - NSMaxY(section.bounds);
 				break;
 				
 			case GlkAlignCenter:
-				loc.y = customOffset - (-baselineOffset + sections[x].bounds.size.height)/2 - NSMaxY(sections[x].bounds);
+				loc.y = customOffset - (-baselineOffset + section.bounds.size.height)/2 - NSMaxY(section.bounds);
 				break;
 		}
 		
 		// Call the delegate
-		if (sections[x].delegate) {
-			[sections[x].delegate placeBaselineAt: loc
-										 forGlyph: sections[x].glyphRange.location];
+		if (section.delegate) {
+			[section.delegate placeBaselineAt: loc
+									 forGlyph: section.glyphRange.location];
 		}
 		
 		// Set the location for this range of glyphs
 		[layout setLocation: loc
-	   forStartOfGlyphRange: sections[x].glyphRange];
+	   forStartOfGlyphRange: section.glyphRange];
 		
 		// Set any NSControlGlyphs to invisible
-		NSInteger y;
-		NSInteger lastGlyph = sections[x].glyphRange.location + sections[x].glyphRange.length - cached.location;
-		for (y=sections[x].glyphRange.location-cached.location; y<lastGlyph; y++) {
+		NSInteger lastGlyph = section.glyphRange.location + section.glyphRange.length - cached.location;
+		for (NSInteger y=section.glyphRange.location-cached.location; y<lastGlyph; y++) {
 			if (cacheGlyphs[y] == NSControlGlyph || cacheGlyphs[y] == NSNullGlyph) {
 				[layout setNotShownAttribute: YES
 							 forGlyphAtIndex: y+cached.location];
@@ -891,7 +894,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	return YES;
 }
 
-- (void) addLineSection: (NSRect) bounds
+- (void) addLineSection: (GlkRect) bounds
 			advancement: (CGFloat) advancement
 				 offset: (CGFloat) offset
 			 glyphRange: (NSRange) glyphRange
@@ -905,22 +908,20 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #endif
 	
 	// Adds a new line section
-	NSInteger newSec = numLineSections;
-	
-	numLineSections++;
-	sections = realloc(sections, sizeof(GlkLineSection*)*numLineSections);
-	
-	sections[newSec].bounds = bounds;
-	sections[newSec].advancement = advancement;
-	sections[newSec].offset = offset;
-	sections[newSec].glyphRange = glyphRange;
-	sections[newSec].alignment = alignment;
-	sections[newSec].delegate = sectionDelegate;
-	sections[newSec].elastic = elastic;
+	GlkLineSection *newSec = [[GlkLineSection alloc] init];
+	newSec.bounds = bounds;
+	newSec.advancement = advancement;
+	newSec.offset = offset;
+	newSec.glyphRange = glyphRange;
+	newSec.alignment = alignment;
+	newSec.delegate = sectionDelegate;
+	newSec.elastic = elastic;
+
+	[sections addObject:newSec];
 	
 	if (alignment != GlkAlignBaseline) customBaseline = YES;
 	
-	if (newSec == 0) {
+	if (sections.count == 1) {
 		fragmentBounds = bounds;
 	} else {
 		fragmentBounds = NSUnionRect(fragmentBounds, bounds);
@@ -943,19 +944,19 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		newlineSet = [[NSCharacterSet characterSetWithCharactersInString: @"\n\r"] retain];
 	}
 	
-	int thisChar = cacheCharIndexes[glyph-cached.location];
-	NSInteger nextBreak = [[storage string] rangeOfCharacterFromSet: newlineSet
+	NSUInteger thisChar = cacheCharIndexes[glyph-cached.location];
+	NSRange nextBreak = [[storage string] rangeOfCharacterFromSet: newlineSet
 													  options: NSLiteralSearch
-														range: NSMakeRange(thisChar, [[storage string] length] - thisChar)].location;
+														range: NSMakeRange(thisChar, [[storage string] length] - thisChar)];
 	
-	if (nextBreak == NSNotFound) {
-		nextBreak = [[storage string] length];
+	if (nextBreak.location == NSNotFound) {
+		nextBreak.location = [[storage string] length];
 	} else {
-		nextBreak++;
+		nextBreak.location++;
 	}
 	
 	// Work out the range this represents (in terms of glyphs)
-	NSRange charRange = NSMakeRange(thisChar, nextBreak-thisChar);
+	NSRange charRange = NSMakeRange(thisChar, nextBreak.location-thisChar);
 	paragraph = [layout glyphRangeForCharacterRange: charRange
 							   actualCharacterRange: &charRange];
 	
@@ -975,16 +976,15 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 // = Laying out glyphs =
 
 - (void) justifyCurrentLineFragment: (NSTextAlignment) alignment
-							 inRect: (NSRect) proposed
+							 inRect: (GlkRect) proposed
 						 leftIndent: (CGFloat) leftMargin
 						rightIndent: (CGFloat) rightMargin
 							newline: (BOOL) newline {
 	// Work out the total width of this section
 	CGFloat totalWidth = 0;
-	int x;
 	
-	for (x=0; x<numLineSections; x++) {
-		totalWidth += sections[x].advancement;
+	for (GlkLineSection *section in sections) {
+		totalWidth += section.advancement;
 	}
 	
 	if (newline && alignment == NSTextAlignmentJustified) {
@@ -1002,9 +1002,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			CGFloat offset = (proposed.size.width - totalWidth - inset*2 - leftMargin - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0)) / 2;
 			offset += proposed.origin.x + inset + leftMargin + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
 			
-			for (x=0; x<numLineSections; x++) {
-				sections[x].offset = offset;
-				offset += sections[x].advancement;
+			for (GlkLineSection *section in sections) {
+				section.offset = offset;
+				offset += section.advancement;
 			}
 			break;
 		}
@@ -1014,9 +1014,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			CGFloat offset = (proposed.size.width - totalWidth - inset - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0));
 			offset += proposed.origin.x + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
 			
-			for (x=0; x<numLineSections; x++) {
-				sections[x].offset = offset;
-				offset += sections[x].advancement;
+			for (GlkLineSection *section in sections) {
+				section.offset = offset;
+				offset += section.advancement;
 			}
 			break;
 		}
@@ -1026,23 +1026,23 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			int elasticCount = 0;
 			
 			// Count the number of elastic sections
-			for (x=0; x<numLineSections-1; x++) {
-				if (sections[x].elastic) elasticCount++;
+			for (GlkLineSection *section in sections) {
+				if (section.elastic) elasticCount++;
 			}
 			
 			// Give up if there are no elastic sections (TODO: fully-justify all characters?)
 			if (elasticCount <= 0) break;
 			
 			// Work out the additional advancement for each line section
-			CGFloat adjustment = (proposed.size.width - totalWidth - inset*2 - leftMargin - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0))/(float)elasticCount;
+			CGFloat adjustment = (proposed.size.width - totalWidth - inset*2 - leftMargin - rightMargin - thisLeftMargin - (activeLeftMargin?[activeLeftMargin width]:0))/(CGFloat)elasticCount;
 			CGFloat offset = inset + leftMargin + thisLeftMargin + (activeLeftMargin?[activeLeftMargin width]:0);
 
 			// Adjust the size of each section appropriately
-			for (x=0; x<numLineSections; x++) {
-				sections[x].offset = floor(offset);
-				offset += sections[x].advancement;
+			for (GlkLineSection *section in sections) {
+				section.offset = floor(offset);
+				offset += section.advancement;
 				
-				if (sections[x].elastic) {
+				if (section.elastic) {
 					offset += adjustment;
 				}
 			}
@@ -1103,7 +1103,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 													  inTypesetter: self
 													 forGlyphRange: glyphRange];
 					if (addOffset) {
-						offset = sections[numLineSections-1].offset + sections[numLineSections-1].advancement;
+						offset = sections.lastObject.offset + sections.lastObject.advancement;
 						newsection = YES;
 						customSection = YES;
 					}
@@ -1120,7 +1120,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				// Ignore null glyphs
 			} else {
 				// Include this glyph in the set of glyphs
-				NSRect bounds = NSMakeRect(offset, -cacheAscenders[glyph], 
+				NSRect bounds = NSMakeRect(offset, -cacheAscenders[glyph],
 										   cacheAdvancements[glyph], cacheLineHeight[glyph]);
 				
 				sectionBounds = NSUnionRect(sectionBounds, bounds);
@@ -1192,12 +1192,11 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// If we've got a left margin for this section, then offset everything appropriately
 	if (thisLeftMargin > 0) {
-		NSInteger x;
-		for (x=0; x<numLineSections; x++) {
-			sections[x].offset += thisLeftMargin;
-			NSRect tmpRect = sections[x].bounds;
-			tmpRect.origin.x += thisLeftMargin;
-			sections[x].bounds = tmpRect;
+		for (GlkLineSection *section in sections) {
+			section.offset += thisLeftMargin;
+			NSRect preBounds = section.bounds;
+			preBounds.origin.x += thisLeftMargin;
+			section.bounds = preBounds;
 		}
 	}
 	
@@ -1216,15 +1215,15 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 											movementDirection: NSLineMovesDown
 												remainingRect: &remaining];
 	
-	if (proposedRect.size.height == 0 && numLineSections > 0) {
+	if (proposedRect.size.height == 0 && sections.count > 0) {
 		// If the proposed rect is 0-height, then do no further layout
 		return sections[0].glyphRange.location;
 	}
 	
 	// Find the first glyph that is within the proposed rectangle
-	if (numLineSections > 0) {
+	if (sections.count > 0) {
 		// Find the character to split on, if we've overflowed the end of the box
-		NSInteger splitSection = numLineSections-1;
+		NSInteger splitSection = sections.count-1;
 		NSInteger splitGlyph = sections[splitSection].glyphRange.location+sections[splitSection].glyphRange.length;
 		
 		// Version that searches backwards for the first glyph within the proposed rectangle (borken?)
@@ -1253,7 +1252,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				maxPos = splitPos + sections[splitSection].advancement;
 				
 				splitGlyph = sections[splitSection].glyphRange.location;
-			} else if (cacheGlyphs[splitGlyph-cached.location] == NSNullGlyph 
+			} else if (cacheGlyphs[splitGlyph-cached.location] == NSNullGlyph
 					   || cacheGlyphs[splitGlyph-cached.location] == NSControlGlyph
 					   || cacheElastic[splitGlyph-cached.location]) {
 				// Other control and null glyphs have no real meaning (treat them as 0 width for the purposes of splitting)
@@ -1276,8 +1275,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		}
 				
 		// Move backwards from the split character to find a 'proper' character to split at
-		if (splitSection>=0 
-			&& (splitSection+1 < numLineSections 
+		if (splitSection>=0
+			&& (splitSection+1 < sections.count
 				|| sections[splitSection].glyphRange.location+sections[splitSection].glyphRange.length > splitGlyph+1)) {
 			// Basic method: search backwards in the string for a whitespace character
 			NSRange lineRange = NSMakeRange(cacheCharIndexes[sections[0].glyphRange.location-cached.location],
@@ -1305,9 +1304,11 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			splitSection = 0;
 			splitGlyph = sections[0].glyphRange.location;
 		}
-		BOOL boundsChanged = numLineSections != splitSection+1 || splitGlyph <= sections[splitSection].glyphRange.location;
+		BOOL boundsChanged = sections.count != splitSection+1 || splitGlyph <= sections[splitSection].glyphRange.location;
 
-		numLineSections = splitSection+1;
+		while (sections.count > splitSection+1) {
+			[sections removeLastObject];
+		}
 		{
 			NSRange preRange = sections[splitSection].glyphRange;
 			preRange.length = (splitGlyph+1)-sections[splitSection].glyphRange.location;
@@ -1356,7 +1357,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	fragmentBounds.size.height += topPadding+bottomPadding;
 	if (![self endLineFragment: hitTheLastGlyph
 					   newline: newline]
-		&& numLineSections > 0) {
+		&& sections.count > 0) {
 		// Failed to lay anything out!
 		return sections[0].glyphRange.location;
 	}
@@ -1381,7 +1382,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		if (leftMargins == nil) leftMargins = [[NSMutableArray alloc] init];
 		
 		NSInteger nearestLeft = [self marginNearest: lineFragmentInitialGlyph
-								inMarginArray: leftMargins];
+									  inMarginArray: leftMargins];
 		if (activeLeftMargin && [activeLeftMargin maxY] > thisRightMaxY) thisRightMaxY = [activeLeftMargin maxY];
 		GlkMarginSection* newMargin = [[GlkMarginSection alloc] initWithFragmentGlyph: lineFragmentInitialGlyph
 																				width: (activeLeftMargin?[activeLeftMargin width]:0) + thisLeftMargin
@@ -1395,7 +1396,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		if (rightMargins == nil) rightMargins = [[NSMutableArray alloc] init];
 
 		NSInteger nearestRight = [self marginNearest: lineFragmentInitialGlyph
-								inMarginArray: rightMargins];
+									   inMarginArray: rightMargins];
 		if (activeRightMargin && [activeRightMargin maxY] > thisRightMaxY) thisRightMaxY = [activeRightMargin maxY];
 		GlkMarginSection* newMargin = [[GlkMarginSection alloc] initWithFragmentGlyph: lineFragmentInitialGlyph
 																				width: (activeRightMargin?[activeRightMargin width]:0) + thisRightMargin
@@ -1437,7 +1438,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		container	= [containers objectAtIndex: 0];
 		inset		= [container lineFragmentPadding];
 		
-		size		= [container containerSize];	
+		size		= [container containerSize];
 	} else {
 		// Lay out in a fake container
 		container	= nil;
@@ -1447,7 +1448,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 }
 
-- (void) layoutGlyphsInLayoutManager: (NSLayoutManager*) layoutMgr 
+- (void) layoutGlyphsInLayoutManager: (NSLayoutManager*) layoutMgr
 				startingAtGlyphIndex: (NSUInteger) startGlyphIndex
 			maxNumberOfLineFragments: (NSUInteger) maxNumLines
 					  nextGlyphIndex: (NSUInteger*) nextGlyph {
@@ -1468,15 +1469,14 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 					 startingAtGlyphIndex: startGlyphIndex];
 	
 	// Perform the layout
-	NSInteger x;
 	NSInteger glyph = startGlyphIndex;
-	for (x=0; x<maxNumLines; x++) {
+	for (NSInteger x=0; x<maxNumLines; x++) {
 		// Set up line margin information
 		lineFragmentInitialGlyph = glyph;
 		NSInteger activeLeft = [self marginNearest: glyph-1
-							   inMarginArray: leftMargins];
+									 inMarginArray: leftMargins];
 		NSInteger activeRight = [self marginNearest: glyph-1
-								inMarginArray: rightMargins];
+									  inMarginArray: rightMargins];
 		
 		activeLeftMargin = activeRightMargin = nil;
 		if (activeLeft >= 0) activeLeftMargin = [leftMargins objectAtIndex: activeLeft];
@@ -1525,7 +1525,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	[super endLineWithGlyphRange: lineGlyphRange];
 }
 
-- (NSUInteger)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigi {
+- (NSUInteger)layoutParagraphAtPoint:(GlkPoint *)lineFragmentOrigi {
 	// Get the glyph range that we're laying out
 	NSRange glyphRange = [self paragraphGlyphRange];
 	NSInteger glyph = glyphRange.location;
@@ -1540,19 +1540,19 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		newlineSet = [[NSCharacterSet characterSetWithCharactersInString: @"\n\r"] retain];
 	}
 	
-	NSInteger thisChar = cacheCharIndexes[glyph-cached.location];
-	NSInteger nextBreak = [[storage string] rangeOfCharacterFromSet: newlineSet
-													  options: NSLiteralSearch
-														range: NSMakeRange(thisChar, [[storage string] length] - thisChar)].location;
+	NSUInteger thisChar = cacheCharIndexes[glyph-cached.location];
+	NSRange nextBreak = [[storage string] rangeOfCharacterFromSet: newlineSet
+                                                          options: NSLiteralSearch
+                                                            range: NSMakeRange(thisChar, [[storage string] length] - thisChar)];
 	
-	if (nextBreak == NSNotFound) {
-		nextBreak = [[storage string] length];
+	if (nextBreak.location == NSNotFound) {
+		nextBreak.location = [[storage string] length];
 	} else {
-		nextBreak++;
+		nextBreak.location++;
 	}
 	
 	// Work out the range this represents (in terms of glyphs)
-	NSRange charRange = NSMakeRange(thisChar, nextBreak-thisChar);
+	NSRange charRange = NSMakeRange(thisChar, nextBreak.location-thisChar);
 	NSRange paragraphRange = [layout glyphRangeForCharacterRange: charRange
 									   actualCharacterRange: &charRange];
 	
@@ -1563,9 +1563,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		// Set up line margin information
 		lineFragmentInitialGlyph = glyph;
 		NSInteger activeLeft = [self marginNearest: glyph-1
-							   inMarginArray: leftMargins];
+									 inMarginArray: leftMargins];
 		NSInteger activeRight = [self marginNearest: glyph-1
-								inMarginArray: rightMargins];
+									  inMarginArray: rightMargins];
 		
 		activeLeftMargin = activeRightMargin = nil;
 		if (activeLeft >= 0) activeLeftMargin = [leftMargins objectAtIndex: activeLeft];

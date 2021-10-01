@@ -142,11 +142,11 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 // = Preferences and the user defaults =
 
 - (void) setPreferencesFromDefaults: (NSDictionary*) defaults {
-	// Not implemented yet
+	// TODO: Not implemented yet
 }
 
 - (NSDictionary*) preferenceDefaults {
-	// Not implemented yet
+	// TODO: Not implemented yet
 	return nil;
 }
 

@@ -408,7 +408,7 @@
 	// be added to the buffer (generating an immediate event)
 	//
 	// This allows us to successfully copy+paste lines of text and have things look like they're working OK
-	[self textStorageDidProcessEditing: nil];
+//	[self textStorageDidProcessEditing: nil];
 }
 
 

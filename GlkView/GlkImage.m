@@ -146,11 +146,8 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 	drawRect.size.width *= scaleFactor;
 	drawRect.size.height *= scaleFactor;
 	
-	imageRect.origin = NSMakePoint(0,0);
-	imageRect.size = [image size];
-	
 	[image drawInRect: drawRect
-			 fromRect: imageRect
+			 fromRect: NSZeroRect
 			operation: NSCompositingOperationSourceOver
 			 fraction: 1.0];
 }

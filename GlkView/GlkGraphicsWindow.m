@@ -218,14 +218,12 @@
 	
 	[self setNeedsDisplay];
 #else
-	NSSize imgSize = [img size];
-	
 	imgRect = [self convertGlkToImageCoords: imgRect];
 	
 	[windowImage lockFocus];
 	[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
 	[img drawInRect: imgRect
-		   fromRect: NSMakeRect(0,0, imgSize.width, imgSize.height)
+		   fromRect: NSZeroRect
 		  operation: NSCompositingOperationSourceOver
 		   fraction: 1.0];
 	[windowImage unlockFocus];

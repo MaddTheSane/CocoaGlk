@@ -291,18 +291,14 @@
 		// Position the logo
 		NSSize logoSize = [logo size];
 		NSRect logoPos;
-		NSRect logoSource;
 	
 		logoPos.size = logoSize;
 		logoPos.origin = NSMakePoint(floor(rect.origin.x + (rect.size.width - logoSize.width)/2.0),
 									 floor(rect.origin.y + (rect.size.height - logoSize.height)/2.0));
 	
-		logoSource.size = logoSize;
-		logoSource.origin = NSMakePoint(0,0);
-	
 		[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
 		[logo drawInRect: logoPos
-				fromRect: logoSource
+				fromRect: NSZeroRect
 			   operation: NSCompositingOperationSourceOver
 				fraction: 1.0];
 	}
@@ -2030,16 +2026,12 @@
 		// This is annoying. This should re-render the image at a more suitable resolution
 		NSImageRep* rep = [[sourceImage representations] objectAtIndex: 0];
 		NSSize pixelSize = NSMakeSize([rep pixelsWide], [rep pixelsHigh]);
-		NSRect srcRect;
-		
-		srcRect.origin = NSMakePoint(0,0);
-		srcRect.size = [sourceImage size];
 		
 		image = [[NSImage alloc] initWithSize: pixelSize];
 		
 		[image lockFocus];
 		[sourceImage drawInRect: NSMakeRect(0,0, pixelSize.width, pixelSize.height)
-					   fromRect: srcRect
+					   fromRect: NSZeroRect
 					  operation: NSCompositingOperationSourceOver
 					   fraction: 1.0];
 		[image unlockFocus];

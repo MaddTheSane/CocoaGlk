@@ -106,9 +106,7 @@
 			@(NSUnderlineStyleSingle), NSUnderlineStyleAttributeName,
 			[NSCursor pointingHandCursor], NSCursorAttributeName,
 			nil];
-		if ([textView respondsToSelector: @selector(setLinkTextAttributes:)]) {
-			[textView setLinkTextAttributes: hyperStyle];
-		}
+		[textView setLinkTextAttributes: hyperStyle];
 		
 		// Construct the window that shows the [ MORE ] prompt
 		NSView* moreView = [[GlkMoreView alloc] init];

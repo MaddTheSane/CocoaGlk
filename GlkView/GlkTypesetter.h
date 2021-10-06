@@ -120,13 +120,11 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 	NSUInteger cacheLength;
 	
 	/// The identifier for each glyph that we're laying out
-	NSGlyph* cacheGlyphs;
+	CGGlyph* cacheGlyphs;
 	/// The character index into the source string for each glyph
 	NSUInteger* cacheCharIndexes;
 	/// The inscriptions for each glyph
-	NSGlyphInscription* cacheInscriptions;
-	/// The elastic bits for each glyph
-	BOOL* cacheElastic;
+	NSGlyphProperty* cacheProperties;
 	/// The bidirectional level for each glyph
 	unsigned char* cacheBidi;
 	

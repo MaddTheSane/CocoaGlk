@@ -138,8 +138,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	// Free up the various caches
 	if (cacheGlyphs) free(cacheGlyphs);
 	if (cacheCharIndexes) free(cacheCharIndexes);
-	if (cacheInscriptions) free(cacheInscriptions);
-	if (cacheElastic) free(cacheElastic);
+	if (cacheProperties) free(cacheProperties);
 	if (cacheBidi) free(cacheBidi);
 	if (cacheAdvancements) free(cacheAdvancements);
 	if (cacheAscenders) free(cacheAscenders);
@@ -193,7 +192,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	paragraph.length = 0;
 }
 
-- (void) measureGlyphs: (NSGlyph*) glyphs
+- (void) measureGlyphs: (CGGlyph*) glyphs
 				 count: (NSInteger) count
 				  font: (NSFont*) font
 		  advancements: (CGFloat*) advancements
@@ -211,11 +210,11 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	// Ordered array of the glyphs to measure (avoids measuring the same glyph twice)
 	int numGlyphs = 0;
 	int numAllocated = 128;
-	NSGlyph* glyphsToMeasure = malloc(sizeof(NSGlyph)*numAllocated);
+	CGGlyph* glyphsToMeasure = malloc(sizeof(CGGlyph)*numAllocated);
 	
 	// Get an ordered array containing the unique glyphs that we need to measure as a part of this call
 	for (x=0; x<count; x++) {
-		NSGlyph glyph = glyphs[x];
+		CGGlyph glyph = glyphs[x];
 		
 		int top = numGlyphs - 1;
 		int bottom = 0;
@@ -237,11 +236,11 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		// Insert this glyph into the list of glyphs to measure
 		if (numGlyphs >= numAllocated) {
 			numAllocated += 128;
-			glyphsToMeasure = realloc(glyphsToMeasure, sizeof(NSGlyph)*numAllocated);
+			glyphsToMeasure = realloc(glyphsToMeasure, sizeof(CGGlyph)*numAllocated);
 		}
 		
 		if (bottom != numGlyphs)
-			memmove(glyphsToMeasure + bottom + 1, glyphsToMeasure + bottom, sizeof(NSGlyph)*(numGlyphs-bottom));
+			memmove(glyphsToMeasure + bottom + 1, glyphsToMeasure + bottom, sizeof(CGGlyph)*(numGlyphs-bottom));
 		numGlyphs++;
 		
 		glyphsToMeasure[bottom] = glyph;
@@ -258,10 +257,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #ifndef MeasureMultiGlyphs
 	// Compatible mode: measure one glyph at a time
 	for (x=0; x<numGlyphs; x++) {
-		NSGlyph glyph = glyphsToMeasure[x];
+		CGGlyph glyph = glyphsToMeasure[x];
 		
-		NSSize glyphAdvance = [font advancementForGlyph: glyph];
-		NSRect glyphBounds = [font boundingRectForGlyph: glyph];
+		NSSize glyphAdvance = [font advancementForCGGlyph: glyph];
+		NSRect glyphBounds = [font boundingRectForCGGlyph: glyph];
 		
 		advance[x] = glyphAdvance;
 		bounding[x] = glyphBounds;
@@ -278,7 +277,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Put the results into the advancements and bounds arrays
 	for (x=0; x<count; x++) {
-		NSGlyph glyph = glyphs[x];
+		CGGlyph glyph = glyphs[x];
 		
 		// Binary search for this glyph
 		int top = numGlyphs-1;
@@ -352,17 +351,15 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 	
 	// Get the glyphs and character indexes from the layout manager
-	NSGlyph glyphs[cacheRange.length+1];
+	CGGlyph glyphs[cacheRange.length+1];
 	NSUInteger charIndexes[cacheRange.length+1];
-	NSGlyphInscription inscriptions[cacheRange.length+1];
-	BOOL elastic[cacheRange.length+1];
+	NSGlyphProperty properties[cacheRange.length+1];
 	unsigned char bidi[cacheRange.length+1];					// NOT YET USED
 	
 	cacheRange.length = [layout getGlyphsInRange: cacheRange
 										  glyphs: glyphs
+									  properties: properties
 								characterIndexes: charIndexes
-							   glyphInscriptions: inscriptions
-									 elasticBits: elastic
 									  bidiLevels: bidi];
 	
 	if (cacheRange.length == 0) return NO;
@@ -465,10 +462,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	if (cached.length >= cacheLength) {
 		cacheLength = cached.length + GlyphLookahead;
 
-		cacheGlyphs = realloc(cacheGlyphs, sizeof(NSGlyph)*cacheLength);
+		cacheGlyphs = realloc(cacheGlyphs, sizeof(CGGlyph)*cacheLength);
 		cacheCharIndexes = realloc(cacheCharIndexes, sizeof(NSUInteger)*cacheLength);
-		cacheInscriptions = realloc(cacheInscriptions, sizeof(NSGlyphInscription)*cacheLength);
-		cacheElastic = realloc(cacheElastic, sizeof(BOOL)*cacheLength);
+		cacheProperties = realloc(cacheProperties, sizeof(NSGlyphProperty)*cacheLength);
 		cacheBidi = realloc(cacheBidi, sizeof(unsigned char)*cacheLength);
 		
 		cacheAdvancements = realloc(cacheAdvancements, sizeof(CGFloat)*cacheLength);
@@ -481,10 +477,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 	
 	// Copy the various bits and pieces
-	memcpy(cacheGlyphs + cacheIndex, glyphs, cacheRange.length*sizeof(NSGlyph));
+	memcpy(cacheGlyphs + cacheIndex, glyphs, cacheRange.length*sizeof(CGGlyph));
 	memcpy(cacheCharIndexes + cacheIndex, charIndexes, cacheRange.length*sizeof(NSUInteger));
-	memcpy(cacheInscriptions + cacheIndex, inscriptions, cacheRange.length*sizeof(NSGlyphInscription));
-	memcpy(cacheElastic + cacheIndex, elastic, cacheRange.length*sizeof(BOOL));
+	memcpy(cacheProperties + cacheIndex, properties, cacheRange.length*sizeof(NSGlyphProperty));
 	memcpy(cacheBidi + cacheIndex, bidi, cacheRange.length*sizeof(unsigned char));
 
 	memcpy(cacheAdvancements + cacheIndex, advancements, cacheRange.length*sizeof(CGFloat));
@@ -543,10 +538,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Move the caches around
 	NSUInteger numRemaining = cached.length - glyphsToRemove;
-	memmove(cacheGlyphs, cacheGlyphs + glyphsToRemove, sizeof(NSGlyph)*numRemaining);
+	memmove(cacheGlyphs, cacheGlyphs + glyphsToRemove, sizeof(CGGlyph)*numRemaining);
 	memmove(cacheCharIndexes, cacheCharIndexes + glyphsToRemove, sizeof(NSUInteger)*numRemaining);
-	memmove(cacheInscriptions, cacheInscriptions + glyphsToRemove, sizeof(NSGlyphInscription)*numRemaining);
-	memmove(cacheElastic, cacheElastic + glyphsToRemove, sizeof(BOOL)*numRemaining);
+	memmove(cacheProperties, cacheProperties + glyphsToRemove, sizeof(NSGlyphProperty)*numRemaining);
 	memmove(cacheBidi, cacheBidi + glyphsToRemove, sizeof(unsigned char)*numRemaining);
 
 	memmove(cacheAdvancements, cacheAdvancements + glyphsToRemove, sizeof(CGFloat)*numRemaining);
@@ -846,7 +840,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		// Set any NSControlGlyphs to invisible
 		NSInteger lastGlyph = section.glyphRange.location + section.glyphRange.length - cached.location;
 		for (NSInteger y=section.glyphRange.location-cached.location; y<lastGlyph; y++) {
-			if (cacheGlyphs[y] == NSControlGlyph || cacheGlyphs[y] == NSNullGlyph) {
+			if ((cacheProperties[y] & (NSGlyphPropertyNull | NSGlyphPropertyControlCharacter)) != 0) {
 				[layout setNotShownAttribute: YES
 							 forGlyphAtIndex: y+cached.location];
 			}
@@ -1085,7 +1079,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		BOOL customSection = NO;
 		
 		while (cacheAttributes[glyph] == attributes && NSMaxX(sectionBounds) < size.width && !newsection) {
-			if (cacheGlyphs[glyph] == NSControlGlyph) {
+			if ((cacheProperties[glyph] & NSGlyphPropertyControlCharacter) == NSGlyphPropertyControlCharacter) {
 				// Perform control glyph layout
 				unichar controlChar = [[storage string] characterAtIndex: cacheCharIndexes[glyph]];
 				
@@ -1149,7 +1143,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			}
 			
 			// Stop here if we just added an elastic glyph
-			if (splitOnElastic && cacheElastic[glyph-1]) {
+			if (splitOnElastic && (cacheProperties[glyph-1] & NSGlyphPropertyElastic) == NSGlyphPropertyElastic) {
 				elastic = YES;
 				break;
 			}
@@ -1252,9 +1246,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				maxPos = splitPos + sections[splitSection].advancement;
 				
 				splitGlyph = sections[splitSection].glyphRange.location;
-			} else if (cacheGlyphs[splitGlyph-cached.location] == NSNullGlyph
-					   || cacheGlyphs[splitGlyph-cached.location] == NSControlGlyph
-					   || cacheElastic[splitGlyph-cached.location]) {
+			} else if ((cacheProperties[splitGlyph-cached.location] &
+						(NSGlyphPropertyControlCharacter | NSGlyphPropertyNull | NSGlyphPropertyElastic))
+					   != 0) {
 				// Other control and null glyphs have no real meaning (treat them as 0 width for the purposes of splitting)
 				splitPos -= cacheAdvancements[splitGlyph-cached.location];
 				maxPos = splitPos;

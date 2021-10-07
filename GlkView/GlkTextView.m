@@ -492,6 +492,7 @@
 	while (glkWindowView != nil && ![glkWindowView isKindOfClass: [GlkWindow class]]) {
 		glkWindowView = [glkWindowView superview];
 	}
+	NSAccessibilityPostNotification(glkWindowView, NSAccessibilityFocusedUIElementChangedNotification);
 }
 
 - (BOOL)becomeFirstResponder {
@@ -523,5 +524,18 @@
 }
 
 // = NSAccessibility =
+
+- (NSString *)accessibilityHelp {
+	if (!receivingCharacters) return @"Text window";
+	return [NSString stringWithFormat: @"GLK text window%@%@", @"", receivingCharacters?@", waiting for a key press":@""];
+}
+
+- (id)accessibilityParent {
+	return nil;
+}
+
+- (NSAccessibilityRole)accessibilityRole {
+	return NSAccessibilityTextAreaRole;
+}
 
 @end

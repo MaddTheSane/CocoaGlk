@@ -234,4 +234,8 @@
 
 // = NSAccessibility =
 
+-(NSString *)accessibilityRoleDescription {
+	return [NSString stringWithFormat: @"GLK graphics window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];
+}
+
 @end

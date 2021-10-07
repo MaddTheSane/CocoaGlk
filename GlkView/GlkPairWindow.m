@@ -362,4 +362,13 @@
 
 // = NSAccessibility =
 
+
+- (NSAccessibilityRole)accessibilityRole {
+	return NSAccessibilityGroupRole;
+}
+
+- (NSArray *)accessibilityChildren {
+	return [NSArray arrayWithObjects: left, right, nil];
+}
+
 @end

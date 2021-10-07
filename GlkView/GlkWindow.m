@@ -345,6 +345,7 @@
 }
 
 - (void) postFocusNotification {
+	NSAccessibilityPostNotification(self, NSAccessibilityFocusedUIElementChangedNotification);
 }
 
 - (BOOL)becomeFirstResponder {
@@ -598,13 +599,42 @@ NS_ENUM(unichar) {
 
 // = Accessibility =
 
+- (NSString *)accessibilityRoleDescription {
+	return [NSString stringWithFormat: @"GLK window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];;
+}
+
 - (NSArray *)accessibilityChildren {
 	// No children by default
 	return @[];
 }
 
+- (BOOL)isAccessibilityFocused {
+	NSView* viewResponder = (NSView*)[[self window] firstResponder];
+	if ([viewResponder isKindOfClass: [NSView class]]) {
+		while (viewResponder != nil) {
+			if (viewResponder == self) return YES;
+
+			viewResponder = [viewResponder superview];
+		}
+	}
+
+	return NO;
+}
+
+- (id)accessibilityApplicationFocusedUIElement {
+	return [self accessibilityFocusedUIElement];
+}
+
 - (NSString *)accessibilityLabel {
 	return [NSString stringWithFormat: @"GLK window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];
 }
+
+- (NSAccessibilityRole)accessibilityRole {
+	return NSAccessibilityUnknownRole;
+}
+
+- (id)accessibilityFocusedUIElement {
+	return self;
+ }
 
 @end

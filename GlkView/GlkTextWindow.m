@@ -1043,4 +1043,35 @@
 
 // = NSAccessibility =
 
+- (NSArray *)accessibilityContents {
+	return @[textView];
+}
+
+- (NSArray *)accessibilityChildren {
+	return [NSArray arrayWithObjects: textView, nil];
+}
+
+- (id)accessibilityParent {
+	return parentWindow;
+}
+
+- (NSString *)accessibilityRoleDescription {
+	if (!lineInput && !charInput) return @"Text window";
+	return [NSString stringWithFormat: @"GLK text window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];;
+}
+
+- (BOOL)isAccessibilityFocused {
+	return NO;
+	/* return [NSNumber numberWithBool: [[self window] firstResponder] == self ||
+		[[self window] firstResponder] == textView]; */
+}
+
+//- (id)accessibilityFocusedUIElement {
+//	return [self accessibilityFocusedUIElement];
+//}
+
+- (id)accessibilityFocusedUIElement {
+	return textView;
+}
+
 @end

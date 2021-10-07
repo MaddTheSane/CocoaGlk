@@ -580,4 +580,13 @@ textView:(NSTextView *)aTextView
 
 // = NSAccessibility =
 
+- (NSString *)accessibilityRoleDescription {
+	if (!lineInput && !charInput) return @"Text grid";
+	return [NSString stringWithFormat: @"GLK text grid window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];
+}
+
+- (id)accessibilityFocusedUIElement {
+	return textView;
+}
+
 @end

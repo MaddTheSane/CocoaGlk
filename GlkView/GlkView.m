@@ -2465,5 +2465,60 @@ static BOOL pageAllFrom(GlkWindow* win) {
 }
 
 // = Accessibility =
+- (id) accessibilityFocusedUIElement {
+	NSResponder* firstResponder = [[self window] firstResponder];
+
+	if (firstResponder == nil) return self;
+
+	if ([firstResponder isKindOfClass: [NSView class]]) {
+		NSView* windowView = (NSView*) firstResponder;
+
+		while (windowView != nil) {
+			if ([windowView isKindOfClass: [GlkWindow class]]) {
+				return windowView;
+			}
+
+			windowView = [windowView superview];
+		}
+	}
+
+	return [super accessibilityFocusedUIElement];
+ }
+
+- (NSArray *)accessibilityChildren {
+	return [NSArray arrayWithObjects: rootWindow, nil];
+}
+
+- (NSArray *)accessibilityContents {
+	return [NSArray arrayWithObjects: rootWindow, nil];
+}
+
+- (NSString *)accessibilityHelp {
+	NSString* description = @"an interactive fiction game";
+	if (delegate && [delegate respondsToSelector: @selector(taskDescription)]) {
+		description = [delegate taskDescription];
+	}
+	return [NSString stringWithFormat: @"%@ %@", running?@"Running":@"Finished", description];
+}
+
+- (NSString *)accessibilityLabel {
+	NSString* description = @"an interactive fiction game";
+	if (delegate && [delegate respondsToSelector: @selector(taskDescription)]) {
+		description = [delegate taskDescription];
+	}
+	return [NSString stringWithFormat: @"%@ %@", running?@"Running":@"Finished", description];
+}
+
+- (NSString *)accessibilityRoleDescription {
+	return @"GLK view";
+}
+
+- (NSAccessibilityRole)accessibilityRole {
+	return NSAccessibilityGroupRole;
+}
+
+- (id)accessibilityApplicationFocusedUIElement {
+	return [self accessibilityFocusedUIElement];
+}
 
 @end

@@ -345,7 +345,7 @@
 	margin = 0;
 	[textView setTextContainerInset: NSMakeSize(margin, margin)];
 	[[textView layoutManager] setUsesScreenFonts: [prefs useScreenFonts]];
-	[[textView layoutManager] setHyphenationFactor: [prefs useHyphenation]?1:0];
+	[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation] ? YES : NO];
 }
 
 // = Line input =

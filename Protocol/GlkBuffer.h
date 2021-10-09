@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKBUFFER_H__
+#define __GLKVIEW_GLKBUFFER_H__
+
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -164,3 +167,5 @@
 - (void) flushToTarget: (id) target;
 
 @end
+
+#endif

@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKSESSIONPROTOCOL_H__
+#define __GLKVIEW_GLKSESSIONPROTOCOL_H__
+
 //
 // Communications with an individual client session
 //
@@ -121,3 +124,5 @@ typedef struct GlkSize {
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

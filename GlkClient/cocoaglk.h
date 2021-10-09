@@ -10,12 +10,12 @@
 // Functions specific to the Cocoa GLK port
 //
 
+#ifndef __cocoaglk_h
+#define __cocoaglk_h
+
 #if defined(__OBJC__) && __OBJC__
 # import <Foundation/Foundation.h>
 #endif
-
-#ifndef __cocoaglk_h
-#define __coocaglk_h
 
 #include <GlkView/glk.h>
 

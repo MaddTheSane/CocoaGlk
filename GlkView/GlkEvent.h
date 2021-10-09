@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKEVENT_H__
+#define __GLKVIEW_GLKEVENT_H__
+
 #import <Foundation/Foundation.h>
 
 #import <GlkView/GlkSessionProtocol.h>
@@ -53,3 +56,5 @@
 - (void) queueEvent: (GlkEvent*) evt;
 
 @end
+
+#endif

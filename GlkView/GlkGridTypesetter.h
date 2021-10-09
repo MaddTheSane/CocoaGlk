@@ -6,6 +6,9 @@
 //  Copyright 2006 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKGRIDTYPESETTER_H__
+#define __GLKVIEW_GLKGRIDTYPESETTER_H__
+
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -40,3 +43,5 @@
 - (void) setCellSize: (NSSize) cellSize;
 
 @end
+
+#endif

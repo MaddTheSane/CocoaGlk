@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKEVENTLISTENERPROTOCOL_H__
+#define __GLKVIEW_GLKEVENTLISTENERPROTOCOL_H__
+
 #import <Foundation/Foundation.h>
 
 ///
@@ -17,3 +20,5 @@
 - (oneway void) eventReady: (int) syncCount;
 
 @end
+
+#endif

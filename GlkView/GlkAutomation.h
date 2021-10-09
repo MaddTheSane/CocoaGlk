@@ -6,20 +6,20 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-//
-// Automation interface
-//
-// This can be implemented by classes that are interested in sending or receiving commands to a GlkView. As the GlkView
-// itself implements this interface, it can also be used to synchronise multiple GlkViews so that they run the same
-// commands.
-//
-// Window numbers specify the position of the window, as counted by a depth first search, starting at the top with
-// window #0, and moving to the left first.
-//
+#ifndef __GLKVIEW_GLKAUTOMATION_H__
+#define __GLKVIEW_GLKAUTOMATION_H__
 
 #import <Foundation/Foundation.h>
 #import <GlkView/GlkView.h>
 
+/// Automation interface
+///
+/// This can be implemented by classes that are interested in sending or receiving commands to a GlkView. As the GlkView
+/// itself implements this interface, it can also be used to synchronise multiple GlkViews so that they run the same
+/// commands.
+///
+/// Window numbers specify the position of the window, as counted by a depth first search, starting at the top with
+/// window #0, and moving to the left first.
 @protocol GlkAutomation <NSObject>
 
 // Notifications about events that have occured in the view (when using this automation object for output)
@@ -47,3 +47,5 @@
 - (void) viewIsWaitingForInput: (GlkView*) view;
 
 @end
+
+#endif

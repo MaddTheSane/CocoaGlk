@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKWINDOW_H__
+#define __GLKVIEW_GLKWINDOW_H__
+
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -223,5 +226,4 @@
 
 @end
 
-#import <GlkView/GlkPairWindow.h>
-#import <GlkView/GlkView.h>
+#endif

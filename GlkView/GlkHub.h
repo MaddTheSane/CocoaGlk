@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKHUB_H__
+#define __GLKVIEW_GLKHUB_H__
+
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -42,10 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	/// Sessions waiting for a connection (maps cookies to sessions)
 	NSMutableDictionary<NSString*,id<GlkSession>>* waitingSessions;
-	
-	// The connection
-	/// The point at which the clients can connect to us
-	NSConnection* connection;
 }
 
 // The shared hub
@@ -92,3 +91,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

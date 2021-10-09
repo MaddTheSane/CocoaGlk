@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKPAIRWINDOW_H__
+#define __GLKVIEW_GLKPAIRWINDOW_H__
+
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -78,3 +81,5 @@
 @property (nonatomic) BOOL inputBorder;
 
 @end
+
+#endif

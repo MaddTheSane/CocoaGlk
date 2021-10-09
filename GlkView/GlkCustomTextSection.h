@@ -6,6 +6,9 @@
 //  Copyright 2006 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKCUSTOMTEXTSECTION_H__
+#define __GLKVIEW_GLKCUSTOMTEXTSECTION_H__
+
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -24,8 +27,9 @@ extern NSAttributedStringKey const GlkCustomSectionAttributeName;
 
 // Formatting
 
-// Note that this element is not typeset when this is called (wait for the placeBaselineAt: call)
 /// Request from the typesetter that this object generate a suitable line section object. Returns \c YES to indicate that a line section has been created
+///
+/// Note that this element is not typeset when this is called (wait for the \c placeBaselineAt: call)
 - (BOOL) formatSectionAtOffset: (CGFloat) offset
 				  inTypesetter: (GlkTypesetter*) typesetter
 				 forGlyphRange: (NSRange) glyphs;
@@ -36,3 +40,5 @@ extern NSAttributedStringKey const GlkCustomSectionAttributeName;
 			  inView: (GlkSuperView*) view;
 
 @end
+
+#endif

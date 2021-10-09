@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKSTREAMPROTOCOL_H__
+#define __GLKVIEW_GLKSTREAMPROTOCOL_H__
+
 #import <Foundation/Foundation.h>
 
 
@@ -58,3 +61,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

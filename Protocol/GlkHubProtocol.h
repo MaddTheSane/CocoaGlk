@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKHUBPROTOCOL_H__
+#define __GLKVIEW_GLKHUBPROTOCOL_H__
+
 #import <Foundation/Foundation.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -28,3 +31,5 @@ NS_SWIFT_NAME(GlkHubProtocol)
 												  sessionCookie: (nullable in bycopy NSString*) sessionCookie;
 
 @end
+
+#endif

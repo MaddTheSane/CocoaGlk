@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKIMAGESOURCEPROTOCOL_H__
+#define __GLKVIEW_GLKIMAGESOURCEPROTOCOL_H__
+
 #import <Foundation/Foundation.h>
 
 ///
@@ -22,3 +25,5 @@
 - (bycopy NSData*) dataForImageResource: (glui32) image;
 
 @end
+
+#endif

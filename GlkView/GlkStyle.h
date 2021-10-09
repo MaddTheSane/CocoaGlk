@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKSTYLE_H__
+#define __GLKVIEW_GLKSTYLE_H__
+
 #import <Foundation/Foundation.h>
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
@@ -98,4 +101,4 @@ extern NSAttributedStringKey const GlkStyleAttributeName;
 
 @end
 
-#import <GlkView/GlkPreferences.h>
+#endif

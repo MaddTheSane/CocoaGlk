@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKFILEREF_H__
+#define __GLKVIEW_GLKFILEREF_H__
+
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -30,3 +33,5 @@
 @property (getter=isTemporary) BOOL temporary;
 
 @end
+
+#endif

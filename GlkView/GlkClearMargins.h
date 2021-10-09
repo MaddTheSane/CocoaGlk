@@ -6,6 +6,9 @@
 //  Copyright 2006 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKCLEARMARGINS_H__
+#define __GLKVIEW_GLKCLEARMARGINS_H__
+
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -17,3 +20,5 @@
 @interface GlkClearMargins : GlkCustomTextSection
 
 @end
+
+#endif

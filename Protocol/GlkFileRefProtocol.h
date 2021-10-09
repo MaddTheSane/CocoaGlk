@@ -6,6 +6,10 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKFILEREFPROTOCOL_H__
+#define __GLKVIEW_GLKFILEREFPROTOCOL_H__
+
+#import <Foundation/Foundation.h>
 #import <GlkView/GlkStreamProtocol.h>
 
 ///
@@ -31,3 +35,5 @@ NS_SWIFT_NAME(GlkFileRefProtocol)
 - (void) setAutoflush: (BOOL) autoflush;
 
 @end
+
+#endif

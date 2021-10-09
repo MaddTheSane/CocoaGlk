@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKFILEPROPMTPROTOCOL_H__
+#define __GLKVIEW_GLKFILEPROPMTPROTOCOL_H__
+
 #import <Foundation/Foundation.h>
 
 #import <GlkView/GlkFileRefProtocol.h>
@@ -21,3 +24,5 @@
 - (void) promptCancelled;
 
 @end
+
+#endif

@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKFILESTREAM_H__
+#define __GLKVIEW_GLKFILESTREAM_H__
+
 #import <Foundation/Foundation.h>
 
 #import <GlkView/GlkStreamProtocol.h>
@@ -25,3 +28,5 @@
 - (instancetype) initForReadingWithFileURL: (NSURL*) filename;
 
 @end
+
+#endif

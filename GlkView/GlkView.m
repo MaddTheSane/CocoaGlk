@@ -21,6 +21,7 @@
 #import "GlkFileRef.h"
 #import "GlkHub.h"
 #import "GlkFileStream.h"
+#import <GlkView/GlkAutomation.h>
 
 @interface GlkView()
 

@@ -11,7 +11,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-@implementation GlkHub
+@implementation GlkHub {
+	// The connection
+	/// The point at which the clients can connect to us
+	NSConnection* connection;
+}
 
 // = The shared hub =
 

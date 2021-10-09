@@ -12,6 +12,8 @@
 #import "GlkWindow.h"
 #import "GlkTextWindow.h"
 #import "GlkImage.h"
+#import <GlkView/GlkPairWindow.h>
+#import <GlkView/GlkView.h>
 
 ///
 /// Private class used to store information about a custom glyph

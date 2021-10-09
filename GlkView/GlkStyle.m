@@ -8,6 +8,7 @@
 
 #include <tgmath.h>
 #import "GlkStyle.h"
+#import "GlkPreferences.h"
 #include <CoreText/CoreText.h>
 
 NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";

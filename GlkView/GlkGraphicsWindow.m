@@ -8,6 +8,8 @@
 
 #include <tgmath.h>
 #import "GlkGraphicsWindow.h"
+#import <GlkView/GlkPairWindow.h>
+#import <GlkView/GlkView.h>
 
 @implementation GlkGraphicsWindow
 

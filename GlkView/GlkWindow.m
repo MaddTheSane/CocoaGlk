@@ -7,6 +7,8 @@
 //
 
 #import "GlkWindow.h"
+#import <GlkView/GlkPairWindow.h>
+#import <GlkView/GlkView.h>
 
 @implementation GlkWindow
 

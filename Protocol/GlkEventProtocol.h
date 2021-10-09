@@ -6,6 +6,9 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#ifndef __GLKVIEW_GLKEVENTPROTOCOL_H__
+#define __GLKVIEW_GLKEVENTPROTOCOL_H__
+
 #import <Foundation/Foundation.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
@@ -34,3 +37,5 @@ NS_SWIFT_NAME(GlkEventProtocol)
 @property (readonly, copy) NSString *lineInput;
 
 @end
+
+#endif

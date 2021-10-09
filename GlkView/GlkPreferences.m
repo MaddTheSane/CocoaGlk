@@ -7,6 +7,7 @@
 //
 
 #import "GlkPreferences.h"
+#import "GlkStyle.h"
 
 #include "glk.h"
 

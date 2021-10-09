@@ -12,6 +12,8 @@
 #import "GlkImage.h"
 #import "GlkClearMargins.h"
 #import "GlkMoreView.h"
+#import <GlkView/GlkPairWindow.h>
+#import <GlkView/GlkView.h>
 
 
 // Number of pixels to shorten the maximum length of text before a more prompt is shown

@@ -13,6 +13,8 @@
 #import "GlkClearMargins.h"
 #import "GlkMoreView.h"
 #import "GlkGridTypesetter.h"
+#import <GlkView/GlkPairWindow.h>
+#import <GlkView/GlkView.h>
 
 @implementation GlkTextGridWindow
 

@@ -61,7 +61,7 @@ NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 
 int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 	// Try using Cocoa's built-in UTF32 converter first.
-	NSData *ucs4Data = [string dataUsingEncoding:NSUTF32StringEncoding];
+	NSData *ucs4Data = [string dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
 	if (ucs4Data) {
 		// TODO: test if this adds a BOM to the data. We might not want that...
 		NSInteger copyLen = ucs4Data.length;

@@ -165,6 +165,8 @@
 		4BFA1CD407F8A4040068E16A /* gi_blorb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1CD007F8A4040068E16A /* gi_blorb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA1CD507F8A4040068E16A /* gi_dispa.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1CD107F8A4040068E16A /* gi_dispa.m */; };
 		4BFA1D6907F8A8D00068E16A /* glk_misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1D6707F8A8D00068E16A /* glk_misc.m */; };
+		552CEF1627152C17009D87A5 /* glkstart.h in Headers */ = {isa = PBXBuildFile; fileRef = 552CEF1527152C17009D87A5 /* glkstart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		552CEF1927152C50009D87A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 552CEF1827152C50009D87A5 /* main.m */; };
 		5560FA2921C06BF500E711F5 /* GlkViewDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA2C21C07EC200E711F5 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2B21C07EC200E711F5 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA3321C084E500E711F5 /* GlkTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3221C084E500E711F5 /* GlkTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -542,6 +544,9 @@
 		552A03722049D5E200A4ECAA /* GlkView.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkView.modulemap; sourceTree = "<group>"; };
 		552A03732049D64C00A4ECAA /* GlkClient.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkClient.modulemap; sourceTree = "<group>"; };
 		552A03742049D67900A4ECAA /* GlkSound.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkSound.modulemap; sourceTree = "<group>"; };
+		552CEF1127152BDA009D87A5 /* libglkmain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libglkmain.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		552CEF1527152C17009D87A5 /* glkstart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glkstart.h; sourceTree = "<group>"; };
+		552CEF1827152C50009D87A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkViewDefinitions.h; sourceTree = "<group>"; };
 		5560FA2B21C07EC200E711F5 /* GlkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkView.h; sourceTree = "<group>"; };
 		5560FA3221C084E500E711F5 /* GlkTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkTextView.h; sourceTree = "<group>"; };
@@ -650,6 +655,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		552CEF0F27152BDA009D87A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C6BB33204DED96001AE7E5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -694,6 +706,7 @@
 				4BF0852A0E166E8300DB5C6B /* GlkSound.framework */,
 				4B3C3B790F3DAB850066A760 /* git-client */,
 				55C6BB36204DED96001AE7E5 /* SwiftGlk.app */,
+				552CEF1127152BDA009D87A5 /* libglkmain.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -709,6 +722,7 @@
 				4B0459E607EA2033002D7C88 /* Clients */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				55C6BB37204DED96001AE7E5 /* SwiftGlk */,
+				552CEF1727152C32009D87A5 /* glkmain */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				4B51AA4807E8770600576AB9 /* GlkView-Info.plist */,
@@ -864,6 +878,7 @@
 			isa = PBXGroup;
 			children = (
 				552A03732049D64C00A4ECAA /* GlkClient.modulemap */,
+				552CEF1527152C17009D87A5 /* glkstart.h */,
 				4B51AB3A07E87EE300576AB9 /* cocoaglk.h */,
 				4B51AAF707E87DCA00576AB9 /* glk_client.h */,
 				4B51AA9A07E87A2F00576AB9 /* glk.h */,
@@ -1034,6 +1049,14 @@
 			name = Extras;
 			sourceTree = "<group>";
 		};
+		552CEF1727152C32009D87A5 /* glkmain */ = {
+			isa = PBXGroup;
+			children = (
+				552CEF1827152C50009D87A5 /* main.m */,
+			);
+			path = glkmain;
+			sourceTree = "<group>";
+		};
 		55BC62EC2055C42B001F8CFB /* git-1.3.5 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1139,6 +1162,7 @@
 				4B4D379E0A97B53E0007FD80 /* GlkUcs4Stream.h in Headers */,
 				4B3CBD080B07DB0C0073216F /* GlkMemoryFileRef.h in Headers */,
 				4BBFE3980C4EC253007DEE18 /* GlkBufferedStream.h in Headers */,
+				552CEF1627152C17009D87A5 /* glkstart.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1152,6 +1176,13 @@
 				4BF085B90E16791000DB5C6B /* it_defs.h in Headers */,
 				4BF085BA0E16791000DB5C6B /* sndfile.h in Headers */,
 				4BF085BB0E16791000DB5C6B /* stdafx.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		552CEF0D27152BDA009D87A5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1281,6 +1312,23 @@
 			productReference = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		552CEF1027152BDA009D87A5 /* glkmain */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 552CEF1427152BDA009D87A5 /* Build configuration list for PBXNativeTarget "glkmain" */;
+			buildPhases = (
+				552CEF0D27152BDA009D87A5 /* Headers */,
+				552CEF0E27152BDA009D87A5 /* Sources */,
+				552CEF0F27152BDA009D87A5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = glkmain;
+			productName = glkmain;
+			productReference = 552CEF1127152BDA009D87A5 /* libglkmain.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		55C6BB35204DED96001AE7E5 /* SwiftGlk */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55C6BB41204DED96001AE7E5 /* Build configuration list for PBXNativeTarget "SwiftGlk" */;
@@ -1342,6 +1390,9 @@
 					4B51AA4607E8770600576AB9 = {
 						LastSwiftMigration = 1300;
 					};
+					552CEF1027152BDA009D87A5 = {
+						CreatedOnToolsVersion = 13.0;
+					};
 					55C6BB35204DED96001AE7E5 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -1377,6 +1428,7 @@
 				4BBC40F708A7AABD00B790B5 /* imagetest */,
 				4B3C3B780F3DAB850066A760 /* git */,
 				55C6BB35204DED96001AE7E5 /* SwiftGlk */,
+				552CEF1027152BDA009D87A5 /* glkmain */,
 			);
 		};
 /* End PBXProject section */
@@ -1596,6 +1648,14 @@
 				4BF085A90E16787900DB5C6B /* sndfile.cpp in Sources */,
 				4BF085AA0E16787900DB5C6B /* sndmix.cpp in Sources */,
 				4BF085AB0E16787900DB5C6B /* tables.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		552CEF0E27152BDA009D87A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				552CEF1927152C50009D87A5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2062,6 +2122,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -2120,6 +2182,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -2196,6 +2260,37 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkSound;
 				PRODUCT_NAME = GlkSound;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		552CEF1227152BDA009D87A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		552CEF1327152BDA009D87A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2324,6 +2419,15 @@
 			buildConfigurations = (
 				4BF0852C0E166E8400DB5C6B /* Debug */,
 				4BF0852D0E166E8400DB5C6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		552CEF1427152BDA009D87A5 /* Build configuration list for PBXNativeTarget "glkmain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				552CEF1227152BDA009D87A5 /* Debug */,
+				552CEF1327152BDA009D87A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

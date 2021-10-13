@@ -102,7 +102,7 @@
 }
 
 - (void) setPosition: (in NSInteger) position
-		  relativeTo: (in enum GlkSeekMode) seekMode {
+		  relativeTo: (in GlkSeekMode) seekMode {
 	// Work out the target position
 	if (seekMode == GlkSeekCurrent) {
 		position -= (readAhead-bufferRemaining);

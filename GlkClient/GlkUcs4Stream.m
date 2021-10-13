@@ -37,7 +37,7 @@
 }
 
 - (void) setPosition: (in NSInteger) position
-		  relativeTo: (in enum GlkSeekMode) seekMode {
+		  relativeTo: (in GlkSeekMode) seekMode {
 	[dataStream setPosition: position
 				 relativeTo: seekMode];
 }

@@ -164,7 +164,7 @@
 @property (readonly) BOOL hasGotABitOnTheLargeSide;
 
 /// Flushing a buffer with a target
-- (void) flushToTarget: (id) target;
+- (void) flushToTarget: (id<GlkBuffer>) target;
 
 @end
 

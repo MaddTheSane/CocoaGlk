@@ -12,14 +12,16 @@
 #import "cocoaglk.h"
 #import "glk_client.h"
 
-winid_t cocoaglk_rootwindow = nil;					// The winid of the current root window
-glui32 cocoaglk_nextidentifier = 0;					// The next unused window identifier
+/// The winid of the current root window
+winid_t cocoaglk_rootwindow = nil;
+/// The next unused window identifier
+glui32 cocoaglk_nextidentifier = 0;
 
-NSMutableDictionary* cocoaglk_windows = nil;		// Big dictionary o'windows
+/// Big dictionary o'windows
+NSMutableDictionary* cocoaglk_windows = nil;
 
-//
-// This returns the root window. If there are no windows, this returns NULL.
-//
+
+/// This returns the root window. If there are no windows, this returns NULL.
 winid_t glk_window_get_root(void) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_window_get_root() = %p", cocoaglk_rootwindow);
@@ -28,7 +30,7 @@ winid_t glk_window_get_root(void) {
 	return cocoaglk_rootwindow;
 }
 
-// Sanity check a window ID
+/// Sanity check a window ID
 BOOL cocoaglk_winid_sane(winid_t win) {
 	// These failures of sanity can be caused by the application
 	if (win == NULL)
@@ -62,8 +64,8 @@ BOOL cocoaglk_winid_sane(winid_t win) {
 	return YES;
 }
 
-// Set up a stream for a specific window
-strid_t cocoaglk_stream_for_window(unsigned winId) {
+/// Set up a stream for a specific window
+static strid_t cocoaglk_stream_for_window(unsigned winId) {
 	// Constructs a stream object for a window
 	strid_t res = cocoaglk_stream();
 	
@@ -91,8 +93,8 @@ strid_t cocoaglk_stream_for_window(unsigned winId) {
 	return res;
 }
 
-// Store a window identifier in the big dictionary o' windows
-void cocoaglk_winid_identify(winid_t win) {
+/// Store a window identifier in the big dictionary o' windows
+static void cocoaglk_winid_identify(winid_t win) {
 	// Create the dictionary if it doesn't already exist
 	if (!cocoaglk_windows) {
 		cocoaglk_windows = [[NSMutableDictionary alloc] init];
@@ -372,7 +374,7 @@ winid_t glk_window_open(winid_t split, glui32 method, glui32 size,
 	return res;
 }
 
-void cocoaglk_window_discard(winid_t win) {
+static void cocoaglk_window_discard(winid_t win) {
 	// Discards a window (frees it, fixes key windows, adjusts the window tree, but doesn't do anything clever with the
 	// window structure)
 	if (!win->closing) {
@@ -432,18 +434,16 @@ void cocoaglk_window_discard(winid_t win) {
 	free(win);
 }
 
-//
-// This closes a window, which is pretty much exactly the opposite of
-// opening a window. It is legal to close all your windows, or to close
-// the root window (which does the same thing.)
-//
-// The result argument is filled with the output character count of the
-// window stream. See section 5, "Streams" and section 5.3, "Closing
-// Streams".
-//
-// When you close a window (and it is not the root window), the other
-// window in its pair takes over all the freed-up area.
-//
+/// This closes a window, which is pretty much exactly the opposite of
+/// opening a window. It is legal to close all your windows, or to close
+/// the root window (which does the same thing.)
+///
+/// The result argument is filled with the output character count of the
+/// window stream. See section 5, "Streams" and section 5.3, "Closing
+/// Streams".
+///
+/// When you close a window (and it is not the root window), the other
+/// window in its pair takes over all the freed-up area.
 void glk_window_close(winid_t win, stream_result_t *result) {	
 	// Some broken games call this with a NULL winid, just do nothing in this case: result will contain whatever garbage it started out with
 	if (!win) {
@@ -526,13 +526,11 @@ void glk_window_close(winid_t win, stream_result_t *result) {
 	return;
 }
 
-//
-// cocoaglk_window_synchronise() synchronises the data stored with a window with the data
-// that is stored on the server. This call ensures that the server is not called too often
-// for systems that (for example) call glk_window_get_size obsessively. This saves on
-// buffer flushes.
-//
-void cocoaglk_window_synchronise(winid_t win) {
+/// cocoaglk_window_synchronise() synchronises the data stored with a window with the data
+/// that is stored on the server. This call ensures that the server is not called too often
+/// for systems that (for example) call \c glk_window_get_size obsessively. This saves on
+/// buffer flushes.
+static void cocoaglk_window_synchronise(winid_t win) {
 	if (win->loopIteration == cocoaglk_loopIteration) return;
 	
 	// Flush the buffer
@@ -552,12 +550,10 @@ void cocoaglk_window_synchronise(winid_t win) {
 	}
 }
 
-//
-// glk_window_get_size() simply returns the actual size of the window,
-// in its measurement system. As described in section 1.9, "Other API
-// Conventions", either widthptr or heightptr can be NULL, if you only want
-// one measurement. [[Or, in fact, both, if you want to waste time.]]
-//
+/// glk_window_get_size() simply returns the actual size of the window,
+/// in its measurement system. As described in section 1.9, "Other API
+/// Conventions", either widthptr or heightptr can be NULL, if you only want
+/// one measurement. [[Or, in fact, both, if you want to waste time.]]
 void glk_window_get_size(winid_t win, glui32 *widthptr, 
 						 glui32 *heightptr) {
 	// Sanity checking
@@ -590,12 +586,11 @@ void glk_window_get_size(winid_t win, glui32 *widthptr,
 	
 }
 
-//
-// glk_window_set_arrangement() changes the size of an existing
-// split -- that is, it changes the constraint of a given pair
-// window. glk_window_get_arrangement() returns the constraint of a given
-// pair window.
-//
+
+/// \c glk_window_set_arrangement() changes the size of an existing
+/// split -- that is, it changes the constraint of a given pair
+/// window. \c glk_window_get_arrangement() returns the constraint of a given
+/// pair window.
 void glk_window_set_arrangement(winid_t win, glui32 method,
 								glui32 size, winid_t keywin) {
 #if COCOAGLK_TRACE
@@ -649,12 +644,10 @@ void glk_window_set_arrangement(winid_t win, glui32 method,
 						 keyWindow: keywin!=NULL?keywin->identifier:GlkNoWindow];
 }
 
-//
-// glk_window_set_arrangement() changes the size of an existing
-// split -- that is, it changes the constraint of a given pair
-// window. glk_window_get_arrangement() returns the constraint of a given
-// pair window.
-//
+/// \c glk_window_set_arrangement() changes the size of an existing
+/// split -- that is, it changes the constraint of a given pair
+/// window. \c glk_window_get_arrangement() returns the constraint of a given
+/// pair window.
 void glk_window_get_arrangement(winid_t win, glui32 *methodptr,
 								glui32 *sizeptr, winid_t *keywinptr) {
 	// Sanity check
@@ -676,11 +669,9 @@ void glk_window_get_arrangement(winid_t win, glui32 *methodptr,
 #endif
 }
 
-//
-// This function can be used to iterate through the list of all open windows
-// (including pair windows.) See section 1.6.2, "Iterating Through Opaque
-// Objects".
-//
+/// This function can be used to iterate through the list of all open windows
+/// (including pair windows.) See section 1.6.2, "Iterating Through Opaque
+/// Objects".
 winid_t glk_window_iterate(winid_t win, glui32 *rockptr) {
 	// Sanity checks
 	if (win != NULL && !cocoaglk_winid_sane(win)) {
@@ -734,9 +725,7 @@ winid_t glk_window_iterate(winid_t win, glui32 *rockptr) {
 	return res;
 }
 
-//
-// This retrieves the window's rock value.
-//
+/// This retrieves the window's rock value.
 glui32 glk_window_get_rock(winid_t win) {
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {
@@ -750,9 +739,7 @@ glui32 glk_window_get_rock(winid_t win) {
 	return win->rock;
 }
 
-//
-// This retrieve the type of the window
-//
+/// This retrieve the type of the window
 glui32 glk_window_get_type(winid_t win) {
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {
@@ -767,9 +754,7 @@ glui32 glk_window_get_type(winid_t win) {
 	return win->wintype;
 }
 
-//
-// This retrieves the parent of the given window
-//
+/// This retrieves the parent of the given window
 winid_t glk_window_get_parent(winid_t win) {
 	if (win == NULL) {
 		cocoaglk_warning("glk_window_get_parent called with a NULL winid");
@@ -819,22 +804,20 @@ winid_t glk_window_get_sibling(winid_t win) {
 	}
 }
 
-//
-// Erase the window. The meaning of this depends on the window type.
-//
-// * Text buffer: This may do any number of things, such as delete all
-// text in the window, or print enough blank lines to scroll all text
-// beyond visibility, or insert a page-break marker which is treated
-// specially by the display part of the library.
-// * Text grid: This will clear the window, filling all positions
-// with blanks. The window cursor is moved to the top left corner
-// (position 0,0).
-// * Graphics: Clears the entire window to its current background
-// color. See section 3.5.5, "Graphics Windows".
-// * Other window types: No effect.
-//
-// It is illegal to erase a window which has line input pending.
-//
+/// Erase the window. The meaning of this depends on the window type.
+///
+/// * Text buffer: This may do any number of things, such as delete all
+/// text in the window, or print enough blank lines to scroll all text
+/// beyond visibility, or insert a page-break marker which is treated
+/// specially by the display part of the library.
+/// * Text grid: This will clear the window, filling all positions
+/// with blanks. The window cursor is moved to the top left corner
+/// (position 0,0).
+/// * Graphics: Clears the entire window to its current background
+/// color. See section 3.5.5, "Graphics Windows".
+/// * Other window types: No effect.
+///
+/// It is illegal to erase a window which has line input pending.
 void glk_window_clear(winid_t win) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_window_clear(%p)", win);
@@ -865,15 +848,13 @@ void glk_window_clear(winid_t win) {
 	}
 }
 
-//
-// If you move the cursor right past the end of a line, it wraps; the next
-// character which is printed will appear at the beginning of the next line.
-// 
-// If you move the cursor below the last line, or when the cursor reaches
-// the end of the last line, it goes "off the screen" and further output has
-// no effect. You must call glk_window_move_cursor() or glk_window_clear()
-// to move the cursor back into the visible region.
-// 
+/// If you move the cursor right past the end of a line, it wraps; the next
+/// character which is printed will appear at the beginning of the next line.
+///
+/// If you move the cursor below the last line, or when the cursor reaches
+/// the end of the last line, it goes "off the screen" and further output has
+/// no effect. You must call \c glk_window_move_cursor() or \c glk_window_clear()
+/// to move the cursor back into the visible region.
 void glk_window_move_cursor(winid_t win, glui32 xpos, glui32 ypos) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_move_cursor(%p, %u, %u)", win, xpos, ypos);
@@ -894,12 +875,10 @@ void glk_window_move_cursor(winid_t win, glui32 xpos, glui32 ypos) {
 							  yPosition: ypos];
 }
 
-//
-// This returns the stream which is associated with the window. (See section
-// 5.6.1, "Window Streams".) Every window has a stream which can be printed
-// to, but this may not be useful, depending on the window type. [[For
-// example, printing to a blank window's stream has no effect.]]
-//
+/// This returns the stream which is associated with the window. (See section
+/// 5.6.1, "Window Streams".) Every window has a stream which can be printed
+/// to, but this may not be useful, depending on the window type. [[For
+/// example, printing to a blank window's stream has no effect.]]
 strid_t glk_window_get_stream(winid_t win) {
 	if (win == NULL) {
 		cocoaglk_warning("glk_window_get_stream called with a NULL winid");
@@ -919,36 +898,34 @@ strid_t glk_window_get_stream(winid_t win) {
 	return win->stream;
 }
 
-//
-// Initially, a window has no echo stream, so glk_window_get_echo_stream(win)
-// will return NULL. You can set a window's echo stream to be any valid
-// output stream by calling glk_window_set_echo_stream(win, str). You can
-// reset a window to stop echoing by calling glk_window_set_echo_stream(win,
-// NULL).
-//
-// An echo stream can be of any type, even another window's window
-// stream. [[This would be somewhat silly, since it would mean that any
-//	text printed to the window would be duplicated in another window. More
-//	commonly, you would set a window's echo stream to be a file stream,
-//	in order to create a transcript file from that window.]]
-//
-// A window can only have one echo stream. But a single stream can be the
-// echo stream of any number of windows, sequentially or simultaneously.
-//
-// If a window is closed, its echo stream remains open; it is *not*
-// automatically closed. [[Do not confuse the window's window stream with
-// its echo stream. The window stream is "owned" by the window, and dies with
-// it. The echo stream is merely temporarily associated with the window.]]
-// 
-// If a stream is closed, and it is the echo stream of one or more
-// windows, those windows are reset to not echo anymore. (So then calling
-// glk_window_get_echo_stream() on them will return NULL.)
-//
-// It is illegal to set a window's echo stream to be its *own* window
-// stream. That would create an infinite loop, and is nearly certain to
-// crash the Glk library. It is similarly illegal to create a longer loop
-// (two or more windows echoing to each other.)
-//
+/// Initially, a window has no echo stream, so \c glk_window_get_echo_stream(win)
+/// will return NULL. You can set a window's echo stream to be any valid
+/// output stream by calling glk_window_set_echo_stream(win, str). You can
+/// reset a window to stop echoing by calling glk_window_set_echo_stream(win,
+/// NULL).
+///
+/// An echo stream can be of any type, even another window's window
+/// stream. [[This would be somewhat silly, since it would mean that any
+///	text printed to the window would be duplicated in another window. More
+///	commonly, you would set a window's echo stream to be a file stream,
+///	in order to create a transcript file from that window.]]
+///
+/// A window can only have one echo stream. But a single stream can be the
+/// echo stream of any number of windows, sequentially or simultaneously.
+///
+/// If a window is closed, its echo stream remains open; it is \b not
+/// automatically closed. [[Do not confuse the window's window stream with
+/// its echo stream. The window stream is "owned" by the window, and dies with
+/// it. The echo stream is merely temporarily associated with the window.]]
+///
+/// If a stream is closed, and it is the echo stream of one or more
+/// windows, those windows are reset to not echo anymore. (So then calling
+/// \c glk_window_get_echo_stream() on them will return NULL.)
+///
+/// It is illegal to set a window's echo stream to be its \b own window
+/// stream. That would create an infinite loop, and is nearly certain to
+/// crash the Glk library. It is similarly illegal to create a longer loop
+/// (two or more windows echoing to each other.)
 void glk_window_set_echo_stream(winid_t win, strid_t str) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_window_set_echo_stream(%p, %p)", win, str);
@@ -998,9 +975,7 @@ void glk_window_set_echo_stream(winid_t win, strid_t str) {
 	win->stream->echo = str;
 }
 
-//
-// Retrieves the currently active echo stream
-//
+/// Retrieves the currently active echo stream
 strid_t glk_window_get_echo_stream(winid_t win) {
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {
@@ -1015,12 +990,9 @@ strid_t glk_window_get_echo_stream(winid_t win) {
 	return win->stream->echo;
 }
 
-//
-// This sets the current stream to the window's stream. It is exactly
-// equivalent to
-// 
-//		glk_stream_set_current(glk_window_get_stream(win)).
-//
+/// This sets the current stream to the window's stream. It is exactly
+/// equivalent to
+/// \c glk_stream_set_current(glk_window_get_stream(win)).
 void glk_set_window(winid_t win) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_set_window(%p)", win);

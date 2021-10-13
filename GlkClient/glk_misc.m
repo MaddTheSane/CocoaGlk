@@ -15,7 +15,7 @@
 #include "gi_blorb.h"
 #include "gi_dispa.h"
 
-giblorb_map_t *cocoaglk_blorbmap = NULL;
+static giblorb_map_t *cocoaglk_blorbmap = NULL;
 
 gidispatch_rock_t (*cocoaglk_register)(void *obj, glui32 objclass) = NULL;
 void (*cocoaglk_unregister)(void *obj, glui32 objclass, gidispatch_rock_t objrock) = NULL;

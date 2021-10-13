@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Control
 - (void) closeStream;
 - (void) setPosition: (in NSInteger) position
-		  relativeTo: (in enum GlkSeekMode) seekMode;
+		  relativeTo: (in GlkSeekMode) seekMode;
 
 - (unsigned long long) getPosition;
 

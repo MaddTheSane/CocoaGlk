@@ -58,9 +58,9 @@ NSMutableDictionary<NSString*,id<GlkFileRef>>* cocoaglk_fileref_bindings = nil;
 
 @end
 
-// = Utility functions =
+#pragma mark - Utility functions
 
-NSString* cocoaglk_key_for_usage(glui32 usage) {
+static NSString* cocoaglk_key_for_usage(glui32 usage) {
 	switch (usage) {
 		case fileusage_Data:				return GlkFileUsageData;
 		case fileusage_SavedGame:			return GlkFileUsageSavedGame;

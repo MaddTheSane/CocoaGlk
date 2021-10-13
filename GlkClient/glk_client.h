@@ -40,7 +40,7 @@
 
 // = Functions =
 
-/// True if winid_t is probably a real window identifier
+/// True if \c winid_t is probably a real window identifier
 extern BOOL cocoaglk_winid_sane(winid_t win);
 /// Turn an internal window identifier into a real winid
 extern winid_t cocoaglk_winid_get(unsigned identifier);

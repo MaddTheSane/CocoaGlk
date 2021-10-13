@@ -10,9 +10,9 @@
 
 #define GlkBigBuffer 256
 
-// = Strings for actions =
+#pragma mark - Strings for actions
 
-// Windows
+#pragma mark Windows
 
 // Creating the various types of window
 static NSString* const s_CreateBlankWindowWithIdentifier			= @"CBWI";
@@ -52,7 +52,7 @@ static NSString* const s_DrawImageWithIdentifierAlignSize 			= @"GDIS";
 
 static NSString* const s_BreakFlowInWindowWithIdentifier 			= @"GBFW";
 
-// Streams
+#pragma mark Streams
 
 // Registering streams
 static NSString* const s_RegisterStream 							= @"SRSS";
@@ -71,7 +71,7 @@ static NSString* const s_SetStyle 									= @"SSSS";
 static NSString* const s_SetHyperlink 								= @"SHYS";
 static NSString* const s_ClearHyperlinkOnStream 					= @"SCLH";
 
-// Events
+#pragma mark Events
 
 // Requesting events
 static NSString* const s_RequestLineEventsForWindowIdentifier 		= @"ERLE";
@@ -85,7 +85,7 @@ static NSString* const s_CancelHyperlinkEventsForWindowIdentifier 	= @"ECHE";
 
 @implementation GlkBuffer
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id) init {
 	self = [super init];
@@ -97,7 +97,7 @@ static NSString* const s_CancelHyperlinkEventsForWindowIdentifier 	= @"ECHE";
 	return self;
 }
 
-// = Buffering =
+#pragma mark - Buffering
 
 static NSString* stringFromOp(NSArray* op) {
 	NSString* opType = [op objectAtIndex: 0];
@@ -218,7 +218,7 @@ static NSString* stringFromOp(NSArray* op) {
 	return [operations count] > GlkBigBuffer;
 }
 
-// = NSCoding =
+#pragma mark - NSCoding
 
 - (id) initWithCoder: (NSCoder*) coder {
 	self = [super init];
@@ -259,7 +259,7 @@ static NSString* stringFromOp(NSArray* op) {
 }
 #endif
 
-// = NSCopying =
+#pragma mark - NSCopying
 
 - (id) copyWithZone: (NSZone*) zone {
 	GlkBuffer* copy = [[GlkBuffer allocWithZone: zone] init];
@@ -270,7 +270,7 @@ static NSString* stringFromOp(NSArray* op) {
 	return copy;
 }
 
-// = Method invocations =
+#pragma mark - Method invocations
 
 // Windows
 
@@ -410,46 +410,28 @@ static NSString* stringFromOp(NSArray* op) {
 - (void) fillAreaInWindowWithIdentifier: (unsigned) identifier
 							 withColour: (in bycopy GlkColor*) color
 							  rectangle: (GlkRect) windowArea {
-	NSValue *rectValue;
-#ifdef COCOAGLK_IPHONE
-	rectValue = [NSValue valueWithCGRect: windowArea];
-#else
-	rectValue = [NSValue valueWithRect: windowArea];
-#endif
 	[self addOperation: s_FillAreaInWindowWithIdentifier
 			 arguments: @[@(identifier),
 						  color,
-						  rectValue]];
+						  @(windowArea)]];
 }
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					  atPosition: (GlkPoint) position {
-	NSValue *pointValue;
-#ifdef COCOAGLK_IPHONE
-	pointValue = [NSValue valueWithCGPoint: position];
-#else
-	pointValue = [NSValue valueWithPoint: position];
-#endif
 	[self addOperation: s_DrawImageWithIdentifier
 			 arguments: @[@(imageIdentifier),
 						  @(windowIdentifier),
-						  pointValue]];
+						  @(position)]];
 }
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 						  inRect: (GlkRect) imageRect {
-	NSValue *rectValue;
-#ifdef COCOAGLK_IPHONE
-	rectValue = [NSValue valueWithCGRect: imageRect];
-#else
-	rectValue = [NSValue valueWithRect: imageRect];
-#endif
 	[self addOperation: s_DrawImageWithIdentifierInRect
 			 arguments: @[@(imageIdentifier),
 						  @(windowIdentifier),
-						  rectValue]];
+						  @(imageRect)]];
 }
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
@@ -465,17 +447,11 @@ static NSString* stringFromOp(NSArray* op) {
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					   alignment: (unsigned) alignment
 							size: (GlkCocoaSize) imageSize {
-	NSValue *sizeValue;
-#ifdef COCOAGLK_IPHONE
-	sizeValue = [NSValue valueWithCGSize: imageSize];
-#else
-	sizeValue = [NSValue valueWithSize: imageSize];
-#endif
 	[self addOperation: s_DrawImageWithIdentifierAlignSize
 			 arguments: @[@(imageIdentifier),
 						  @(windowIdentifier),
 						  @(alignment),
-						  sizeValue]];
+						  @(imageSize)]];
 }
 
 - (void) breakFlowInWindowWithIdentifier: (unsigned) identifier {
@@ -594,7 +570,7 @@ static NSString* stringFromOp(NSArray* op) {
 /// = Buffer flushing =
 
 
-- (void) flushToTarget: (id) target {
+- (void) flushToTarget: (id<GlkBuffer>) target {
 	// Iterate through the operations
 	NSEnumerator* bufferEnum = [operations objectEnumerator];
 	

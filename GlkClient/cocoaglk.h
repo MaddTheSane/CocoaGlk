@@ -59,7 +59,7 @@ extern void cocoaglk_set_types_for_usage(glui32 usage, NSArray<NSString*>* exten
 extern NSArray<NSString*>* cocoaglk_types_for_usage(glui32 usage);
 #endif
 
-/// Gets the input stream provided by the server (or NULL if none was provided)
+/// Gets the input stream provided by the server (or \c NULL if none was provided)
 extern strid_t cocoaglk_get_input_stream(void);
 
 /// Gets a stream provided by the client with the specified key

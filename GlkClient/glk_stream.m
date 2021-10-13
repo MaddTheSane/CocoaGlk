@@ -22,9 +22,9 @@ strid_t cocoaglk_currentstream = nil;
 strid_t cocoaglk_firststream = nil;
 unsigned cocoaglk_maxstreamid = 0;
 
-// = Utility functions =
+#pragma mark - Utility functions
 
-void cocoaglk_verify_streams(void) {
+static void cocoaglk_verify_streams(void) {
 	// Debug functions
 	strid_t str = cocoaglk_firststream;
 	while (str != NULL) {
@@ -1087,13 +1087,11 @@ glsi32 glk_get_char_stream(strid_t str) {
 	return res;
 }
 
-//
-// This reads characters from the given stream, until either len-1 characters
-// have been read or a newline has been read. It then puts a terminal null
-// ('\0') character on the end. It returns the number of characters actually
-// read, including the newline (if there is one) but not including the
-// terminal null.
-//
+/// This reads characters from the given stream, until either len-1 characters
+/// have been read or a newline has been read. It then puts a terminal null
+/// ('\0') character on the end. It returns the number of characters actually
+/// read, including the newline (if there is one) but not including the
+/// terminal null.
 glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
@@ -1154,11 +1152,9 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 	return (glui32)length;
 }
 
-//
-// This reads len characters from the given stream, unless the end of stream
-// is reached first. No terminal null is placed in the buffer. It returns
-// the number of characters actually read.
-//
+/// This reads len characters from the given stream, unless the end of stream
+/// is reached first. No terminal null is placed in the buffer. It returns
+/// the number of characters actually read.
 glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {

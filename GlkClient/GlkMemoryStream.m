@@ -69,7 +69,7 @@
 }
 
 - (void) setPosition: (in NSInteger) position
-		  relativeTo: (in enum GlkSeekMode) seekMode {
+		  relativeTo: (in GlkSeekMode) seekMode {
 	switch (seekMode) {
 		case GlkSeekStart:
 			pointer = position;

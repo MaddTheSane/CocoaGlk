@@ -495,7 +495,7 @@ NS_ENUM(unichar) {
 }
 
 - (void) setPosition: (in NSInteger) position
-		  relativeTo: (in enum GlkSeekMode) seekMode {
+		  relativeTo: (in GlkSeekMode) seekMode {
 	// No effect
 }
 

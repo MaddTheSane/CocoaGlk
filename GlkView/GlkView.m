@@ -2194,7 +2194,7 @@
 		[self putString:str toStream:streamIdentifier];
 	} else {
 		NSData *datStr = [NSData dataWithBytes:&ch length:sizeof(uint32_t)];
-		NSString *str = [[NSString alloc] initWithData:datStr encoding:NSUTF32StringEncoding];
+		NSString *str = [[NSString alloc] initWithData:datStr encoding:NSUTF32LittleEndianStringEncoding];
 		[self putString:str toStream:streamIdentifier];
 	}
 }

@@ -18,7 +18,7 @@ NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 	// Convert these character to UTF-16
 	
 	// Try using Cocoa's built-in UTF32 converter first.
-	NSString *theStr = [[NSString alloc] initWithBytes:buf length:len * 4 encoding:NSUTF32StringEncoding];
+	NSString *theStr = [[NSString alloc] initWithBytes:buf length:len * 4 encoding:NSUTF32LittleEndianStringEncoding];
 	if (theStr) {
 		return [theStr autorelease];
 	}

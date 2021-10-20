@@ -14,7 +14,7 @@
 #import "cocoaglk.h"
 
 #ifdef GLK_MODULE_DATETIME
-NSCalendar *getUTCCalendar(void)
+static NSCalendar *getUTCCalendar(void)
 {
 	static NSCalendar *utccalendar;
 	static dispatch_once_t onceToken;
@@ -25,7 +25,7 @@ NSCalendar *getUTCCalendar(void)
 	return utccalendar;
 }
 
-NSCalendar *getLocalCalendar(void)
+static NSCalendar *getLocalCalendar(void)
 {
 	static NSCalendar *utccalendar;
 	static dispatch_once_t onceToken;

@@ -187,7 +187,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 
 // The delegate
 /// The delegate for this view. Delegates are not retained.
-@property (weak, nullable) id<GlkViewDelegate> delegate;
+@property (weak, nullable) IBOutlet id<GlkViewDelegate> delegate;
 
 // Events
 /// Note that Arrange events are merged if not yet claimed

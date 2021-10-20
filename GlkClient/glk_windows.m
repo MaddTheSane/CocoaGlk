@@ -13,15 +13,15 @@
 #import "glk_client.h"
 
 /// The winid of the current root window
-winid_t cocoaglk_rootwindow = nil;
+static winid_t cocoaglk_rootwindow = nil;
 /// The next unused window identifier
-glui32 cocoaglk_nextidentifier = 0;
+static glui32 cocoaglk_nextidentifier = 0;
 
 /// Big dictionary o'windows
-NSMutableDictionary* cocoaglk_windows = nil;
+static NSMutableDictionary* cocoaglk_windows = nil;
 
 
-/// This returns the root window. If there are no windows, this returns NULL.
+/// This returns the root window. If there are no windows, this returns \c NULL .
 winid_t glk_window_get_root(void) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_window_get_root() = %p", cocoaglk_rootwindow);
@@ -526,7 +526,7 @@ void glk_window_close(winid_t win, stream_result_t *result) {
 	return;
 }
 
-/// cocoaglk_window_synchronise() synchronises the data stored with a window with the data
+/// \c cocoaglk_window_synchronise() synchronises the data stored with a window with the data
 /// that is stored on the server. This call ensures that the server is not called too often
 /// for systems that (for example) call \c glk_window_get_size obsessively. This saves on
 /// buffer flushes.
@@ -550,7 +550,7 @@ static void cocoaglk_window_synchronise(winid_t win) {
 	}
 }
 
-/// glk_window_get_size() simply returns the actual size of the window,
+/// \c glk_window_get_size() simply returns the actual size of the window,
 /// in its measurement system. As described in section 1.9, "Other API
 /// Conventions", either widthptr or heightptr can be NULL, if you only want
 /// one measurement. [[Or, in fact, both, if you want to waste time.]]
@@ -810,11 +810,14 @@ winid_t glk_window_get_sibling(winid_t win) {
 /// text in the window, or print enough blank lines to scroll all text
 /// beyond visibility, or insert a page-break marker which is treated
 /// specially by the display part of the library.
+///
 /// * Text grid: This will clear the window, filling all positions
 /// with blanks. The window cursor is moved to the top left corner
 /// (position 0,0).
+///
 /// * Graphics: Clears the entire window to its current background
 /// color. See section 3.5.5, "Graphics Windows".
+///
 /// * Other window types: No effect.
 ///
 /// It is illegal to erase a window which has line input pending.

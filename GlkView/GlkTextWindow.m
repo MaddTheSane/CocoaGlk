@@ -137,7 +137,7 @@
 	margin = [prefs textMargin];
 	[textView setTextContainerInset: NSMakeSize(margin, margin)];
 	[[textView layoutManager] setUsesScreenFonts: [prefs useScreenFonts]];
-	[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation] ? YES : NO];
+	[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation]];
 }
 
 - (void) setPreferences: (GlkPreferences*) prefs {

@@ -26,16 +26,21 @@
 // = Variables =
 
 #if !defined(COCOAGLK_IPHONE)
-id<GlkHub> cocoaglk_hub = nil;											// Remote object that allows us to create sessions
-GlkCocoa* cocoaglk_obj = nil;											// Object that is notified when the remote session finishes
+/// Remote object that allows us to create sessions
+id<GlkHub> cocoaglk_hub = nil;
+/// Object that is notified when the remote session finishes
+static GlkCocoa* cocoaglk_obj = nil;
 #endif
 
-id<GlkSession> cocoaglk_session = nil;									// The active session
-GlkBuffer* cocoaglk_buffer = nil;										// The global buffer
+/// The active session
+id<GlkSession> cocoaglk_session = nil;
+/// The global buffer
+GlkBuffer* cocoaglk_buffer = nil;
 
-NSAutoreleasePool* cocoaglk_pool = nil;									// The autorelease pool
+/// The autorelease pool
+NSAutoreleasePool* cocoaglk_pool = nil;
 
-// = Object we use to receive some events =
+#pragma mark - Object we use to receive some events
 
 @interface GlkCocoa : NSObject
 
@@ -60,7 +65,7 @@ NSAutoreleasePool* cocoaglk_pool = nil;									// The autorelease pool
 
 @end
 
-// = Starting up =
+#pragma mark - Starting up
 
 #if !defined(COCOAGLK_IPHONE)
 
@@ -180,7 +185,7 @@ void cocoaglk_start(int argv, const char** argc) {
 
 #endif
 
-// Reports a warning to the server
+/// Reports a warning to the server
 void cocoaglk_warning(const char* warningText) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: cocoaglk_warning(\"%s\")", warningText);
@@ -195,7 +200,7 @@ void cocoaglk_warning(const char* warningText) {
 	[warningString release];
 }
 
-// Reports an error to the server, then quits
+/// Reports an error to the server, then quits
 void cocoaglk_error(const char* errorText) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: cocoaglk_error(\"%s\")", errorText);
@@ -227,7 +232,7 @@ void cocoaglk_error(const char* errorText) {
 	}
 }
 
-// Logs a message to the server
+/// Logs a message to the server
 void cocoaglk_log(const char* logText) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: cocoaglk_log(\"%s\")", logText);
@@ -242,7 +247,7 @@ void cocoaglk_log(const char* logText) {
 	[logString release];
 }
 
-// Logs a message with priority to the server
+/// Logs a message with priority to the server
 void cocoaglk_log_ex(const char* logText, int priority) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: cocoaglk_log_ex(\"%s\", %i)", logText, priority);
@@ -258,7 +263,7 @@ void cocoaglk_log_ex(const char* logText, int priority) {
 	[logString release];
 }
 
-// Flushes the buffer
+/// Flushes the buffer
 void cocoaglk_flushbuffer(const char* reason) {
 	// Sanity checking
 	if (cocoaglk_session == nil) {

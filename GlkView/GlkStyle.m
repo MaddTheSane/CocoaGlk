@@ -354,10 +354,10 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
-			[self setBackColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/255.0
-													   green: ((CGFloat)green)/255.0
-														blue: ((CGFloat)blue)/255.0
-													   alpha: 1.0]];
+			[self setBackColour: [NSColor colorWithSRGBRed: ((CGFloat)red)/255.0
+													 green: ((CGFloat)green)/255.0
+													  blue: ((CGFloat)blue)/255.0
+													 alpha: 1.0]];
 			break;
 		}
 			
@@ -367,10 +367,10 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
-			[self setTextColour: [NSColor colorWithDeviceRed: ((CGFloat)red)/255.0
-													   green: ((CGFloat)green)/255.0
-														blue: ((CGFloat)blue)/255.0
-													   alpha: 1.0]];
+			[self setTextColour: [NSColor colorWithSRGBRed: ((CGFloat)red)/255.0
+													 green: ((CGFloat)green)/255.0
+													  blue: ((CGFloat)blue)/255.0
+													 alpha: 1.0]];
 			break;
 		}
 			

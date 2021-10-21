@@ -28,6 +28,8 @@
 #import "GlkBuffer.h"
 #import "GlkImageSourceProtocol.h"
 
+#pragma GCC visibility push(hidden)
+
 /// Report an undefined function
 #define UndefinedFunction() fprintf(stderr, "CocoaGlk: " __FILE__ " %i: Function not defined\n", __LINE__);
 
@@ -38,7 +40,7 @@
 # define DebugLog(x)
 #endif
 
-// = Functions =
+#pragma mark - Functions
 
 /// True if \c winid_t is probably a real window identifier
 extern BOOL cocoaglk_winid_sane(winid_t win);
@@ -67,7 +69,7 @@ extern void cocoaglk_maybeflushstream(strid_t stream, const char* reason);
 /// Unregisters any line input buffers associated with the window
 extern void cocoaglk_unregister_line_buffers(winid_t win);
 
-// = Variables =
+#pragma mark - Variables
 
 /// The running session
 extern id<GlkSession>			cocoaglk_session;
@@ -96,7 +98,9 @@ extern unsigned cocoaglk_maxstreamid;
 extern gidispatch_rock_t (*cocoaglk_register_memory)(void *array, glui32 len, char *typecode);
 extern void (*cocoaglk_unregister_memory)(void *array, glui32 len, char *typecode, gidispatch_rock_t objrock);
 
-// = The structures =
+#pragma GCC visibility pop
+
+#pragma mark - The structures
 
 /// Windows
 ///
@@ -255,7 +259,6 @@ struct glk_fileref_struct {
 /// Images
 ///
 /// This class is used for passing Blorb image information to the server process
-@interface GlkBlorbImageSource : NSObject<GlkImageSource> {
-}
+@interface GlkBlorbImageSource : NSObject<GlkImageSource>
 
 @end

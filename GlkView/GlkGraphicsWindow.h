@@ -22,7 +22,7 @@
 	/// The image buffer for this window
 	NSImage* windowImage;
 	/// The background colour for this window
-	NSColor* backgroundColour;
+	GlkColor* backgroundColour;
 }
 
 // Drawing in the graphics window
@@ -30,7 +30,7 @@
 - (void) fillRect: (NSRect) rect
 	   withColour: (NSColor*) col;
 /// Sets the background colour of the window to the specified colour
-@property (retain) NSColor *backgroundColour;
+@property (retain) GlkColor *backgroundColour;
 /// Draws an image, scaled to the given rectangle
 - (void) drawImage: (NSImage*) img
 			inRect: (NSRect) imgRect;

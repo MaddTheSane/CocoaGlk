@@ -12,9 +12,9 @@
 #import "cocoaglk.h"
 #import "glk_client.h"
 
-BOOL cocoaglk_eventwaiting = NO;
-int cocoaglk_timerlength = -1;
-NSDate* cocoaglk_nextTimerEvent = nil;
+static BOOL cocoaglk_eventwaiting = NO;
+static int cocoaglk_timerlength = -1;
+static NSDate* cocoaglk_nextTimerEvent = nil;
 
 @interface GlkListener : NSObject<GlkEventListener> 
 @end

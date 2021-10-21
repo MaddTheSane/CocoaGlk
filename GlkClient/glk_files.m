@@ -14,9 +14,9 @@
 #import "cocoaglk.h"
 #import "glk_client.h"
 
-frefid_t cocoaglk_firstfref = NULL;
-NSMutableDictionary<NSNumber*,NSArray<NSString*>*>* cocoaglk_usagetypes = nil;
-NSMutableDictionary<NSString*,id<GlkFileRef>>* cocoaglk_fileref_bindings = nil;
+static frefid_t cocoaglk_firstfref = NULL;
+static NSMutableDictionary<NSNumber*,NSArray<NSString*>*>* cocoaglk_usagetypes = nil;
+static NSMutableDictionary<NSString*,id<GlkFileRef>>* cocoaglk_fileref_bindings = nil;
 
 // = Prompt object =
 

@@ -324,7 +324,7 @@
 	r = NSInsetRect(r, -borderWidth, -borderWidth);
 	
 	if ([view waitingForKeyboardInput]) {
-		[[NSColor blueColor] set];
+		[[NSColor systemBlueColor] set];
 	} else {
 		[[NSColor whiteColor] set];
 	}

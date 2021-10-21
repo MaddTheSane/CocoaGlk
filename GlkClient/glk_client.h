@@ -78,8 +78,10 @@ extern id<GlkHub>				cocoaglk_hub;
 
 /// The shared buffer object
 extern GlkBuffer*				cocoaglk_buffer;
+#if !__has_feature(objc_arc)
 /// The interpreter thread autorelease pool
 extern NSAutoreleasePool*		cocoaglk_pool;
+#endif
 
 /// The 'first stream' (typically containing the game to run)
 extern strid_t					cocoaglk_firststream;
@@ -197,12 +199,12 @@ struct glk_stream_struct {
 	/// Whether or not to flush this stream's buffer 'lazily'
 	BOOL lazyFlush;
 	/// The stream buffer to use (nil to use the standard buffer)
-	GlkBuffer* streamBuffer;
+	__strong GlkBuffer* streamBuffer;
 	/// Amount of stuff buffered (flushes when this gets too large)
 	int bufferedAmount;
 	
 	/// The actual stream object
-	id<GlkStream> stream;
+	__strong id<GlkStream> stream;
 	/// The amount written to the stream object (not necessarily accurate, depending on how the stream object really responds to writes)
 	unsigned written;
 	/// The amount read from the stream object
@@ -219,7 +221,7 @@ struct glk_stream_struct {
 	/// The echo stream for this stream
 	strid_t echo;
 	/// The list of streams that this stream is echoing to
-	NSMutableArray* echoesTo;
+	__strong NSMutableArray* echoesTo;
 	
 	/// Annoying gi_dispa rock
 	gidispatch_rock_t giRock;
@@ -245,7 +247,7 @@ struct glk_fileref_struct {
 	glui32 usage;
 	
 	/// The actual fileref object
-	id<GlkFileRef> fileref;
+	__strong id<GlkFileRef> fileref;
 	
 	/// Annoying gi_dispa rock
 	gidispatch_rock_t giRock;

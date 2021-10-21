@@ -20,7 +20,7 @@ NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 	// Try using Cocoa's built-in UTF32 converter first.
 	NSString *theStr = [[NSString alloc] initWithBytes:buf length:len * 4 encoding:NSUTF32LittleEndianStringEncoding];
 	if (theStr) {
-		return [theStr autorelease];
+		return theStr;
 	}
 
 	// buf has a maximum length of twice as long as length
@@ -209,9 +209,6 @@ glui32 glk_buffer_to_title_case_uni(glui32 *buf, glui32 len,
 			
 			// Copy the buffer
 			finalLength = cocoaglk_copy_string_to_uni_buf(result, buf, len);
-			
-			// Don't need the autorelease pool any more
-			[stringScanner release];
 		}
 		// Return
 		return finalLength;
@@ -503,8 +500,6 @@ void glk_request_line_event_uni(winid_t win, glui32 *buf,
 			[cocoaglk_buffer setInputLine: string
 					  forWindowIdentifier: win->identifier];
 		}
-		
-		[string release];
 	}
 	
 	// Buffer up the request
@@ -517,11 +512,9 @@ glui32 glk_buffer_canon_decompose_uni(glui32 *buf, glui32 len,
 	@autoreleasepool {
 		NSMutableString *str = [[NSMutableString alloc] initWithBytes:buf length:numchars*sizeof(glui32) encoding:NSUTF32LittleEndianStringEncoding];
 		CFStringNormalize((CFMutableStringRef)str, kCFStringNormalizationFormD);
-		NSData *strData = [[str dataUsingEncoding:NSUTF32LittleEndianStringEncoding] retain];
-		[str release];
+		NSData *strData = [str dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
 		
 		[strData getBytes:buf length:MIN(len * sizeof(glui32), strData.length)];
-		[strData autorelease];
 		
 		return (glui32)(strData.length/sizeof(glui32));
 	}
@@ -533,11 +526,9 @@ glui32 glk_buffer_canon_normalize_uni(glui32 *buf, glui32 len,
 	@autoreleasepool {
 		NSMutableString *str = [[NSMutableString alloc] initWithBytes:buf length:numchars*sizeof(glui32) encoding:NSUTF32LittleEndianStringEncoding];
 		CFStringNormalize((CFMutableStringRef)str, kCFStringNormalizationFormC);
-		NSData *strData = [[str dataUsingEncoding:NSUTF32LittleEndianStringEncoding] retain];
-		[str release];
+		NSData *strData = [str dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
 		
 		[strData getBytes:buf length:MIN(len * sizeof(glui32), strData.length)];
-		[strData autorelease];
 		
 		return (glui32)(strData.length/sizeof(glui32));
 	}

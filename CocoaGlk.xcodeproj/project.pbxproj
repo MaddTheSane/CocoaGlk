@@ -50,7 +50,7 @@
 		4B3C3B990F3DABD40066A760 /* GlkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA5607E877C900576AB9 /* GlkClient.framework */; };
 		4B3CBD080B07DB0C0073216F /* GlkMemoryFileRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3CBD040B07DABD0073216F /* GlkMemoryFileRef.h */; };
 		4B3CBD090B07DB0C0073216F /* GlkMemoryFileRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3CBD050B07DABD0073216F /* GlkMemoryFileRef.m */; };
-		4B4D36450A9738580007FD80 /* glk_unicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D36440A9738570007FD80 /* glk_unicode.m */; };
+		4B4D36450A9738580007FD80 /* glk_unicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D36440A9738570007FD80 /* glk_unicode.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4B4D379E0A97B53E0007FD80 /* GlkUcs4Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B4D379C0A97B53E0007FD80 /* GlkUcs4Stream.h */; };
 		4B4D379F0A97B53E0007FD80 /* GlkUcs4Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D379D0A97B53E0007FD80 /* GlkUcs4Stream.m */; };
 		4B51AA5E07E8780700576AB9 /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
@@ -193,7 +193,7 @@
 		55BC63392055C42B001F8CFB /* accel.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC630D2055C42B001F8CFB /* accel.c */; };
 		55BC633A2055C42B001F8CFB /* git.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC630E2055C42B001F8CFB /* git.c */; };
 		55BC633C2055C481001F8CFB /* cocoastart.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BC633B2055C481001F8CFB /* cocoastart.m */; };
-		55BC63482055EE7F001F8CFB /* glk_datetime.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BC63472055EE7F001F8CFB /* glk_datetime.m */; };
+		55BC63482055EE7F001F8CFB /* glk_datetime.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BC63472055EE7F001F8CFB /* glk_datetime.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		55C6BB39204DED96001AE7E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C6BB38204DED96001AE7E5 /* AppDelegate.swift */; };
 		55C6BB3B204DED96001AE7E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB3A204DED96001AE7E5 /* Assets.xcassets */; };
 		55C6BB3E204DED96001AE7E5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB3C204DED96001AE7E5 /* MainMenu.xib */; };

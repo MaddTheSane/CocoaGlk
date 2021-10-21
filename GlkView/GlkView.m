@@ -31,7 +31,7 @@
 
 @implementation GlkView
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -107,7 +107,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
-// = Shutting down the timer =
+#pragma mark - Shutting down the timer
 
 - (void) killFadeTimer {
 	if (fadeTimer) {
@@ -135,7 +135,7 @@
 	}
 }
 
-// = The CocoaGlk logo =
+#pragma mark - The CocoaGlk logo
 
 + (NSImage*) defaultLogo {
 	// This image is used while there is no root window active
@@ -280,7 +280,7 @@
 	[self killFadeTimer];
 }
 
-// = Drawing =
+#pragma mark - Drawing
 
 - (void)drawRect:(NSRect)rect {
 	if (rootWindow != nil) return;
@@ -318,7 +318,7 @@
 	if (logoWindow) [self positionLogoWindow];
 }
 
-// = The delegate =
+#pragma mark - The delegate
 
 @synthesize delegate;
 
@@ -433,7 +433,7 @@
 	}
 }
 
-// = Events =
+#pragma mark - Events
 
 - (void) queueEvent: (GlkEvent*) event {
 	if ([event type] == evtype_Arrange) {
@@ -486,7 +486,7 @@
 	syncCount++;
 }
 
-// = Preferences =
+#pragma mark - Preferences
 
 - (NSMutableDictionary*) stylesForWindowType: (unsigned) type {
 	if (!prefs) {
@@ -514,7 +514,7 @@
 
 @synthesize preferences=prefs;
 
-// = Setting up for launch =
+#pragma mark - Setting up for launch
 
 - (void) setViewCookie: (NSString*) cookie {
 	viewCookie = [cookie copy];
@@ -537,7 +537,7 @@
 												 length: 16]];
 }
 
-// = Launching a client application =
+#pragma mark - Launching a client application
 
 - (void) launchClientApplication: (NSString*) executableName
 				   withArguments: (NSArray*) appArgs {
@@ -655,9 +655,9 @@
 	subtask = nil;
 }
 
-// = GlkSession implementations =
+#pragma mark - GlkSession implementations
 
-// Housekeeping
+#pragma mark Housekeeping
 
 - (void) clientHasStarted: (pid_t) processId {
 	running = YES;
@@ -678,7 +678,7 @@
 	[self taskHasFinished];
 }
 
-// Buffering
+#pragma mark Buffering
 
 - (void) performOperationsFromBuffer: (in bycopy GlkBuffer*) buffer {
 	if (flushing) {
@@ -762,7 +762,7 @@
 	[self performLayoutIfNecessary];
 }
 
-// Streams
+#pragma mark Streams
 
 - (byref id<GlkStream>) streamForWindowIdentifier: (unsigned) windowId {
 	GlkWindow* window = [glkWindows objectForKey: @(windowId)];
@@ -782,7 +782,7 @@
 	return [extraStreamDictionary objectForKey: key];
 }
 
-// Styles
+#pragma mark Styles
 
 - (glui32) measureStyle: (glui32) styl
 				   hint: (glui32) hint
@@ -862,7 +862,7 @@
 	}
 }
 
-// Windows
+#pragma mark Windows
 
 - (GlkSize) sizeForWindowIdentifier: (unsigned) windowId {
 	GlkWindow* window = [glkWindows objectForKey: @(windowId)];
@@ -881,7 +881,7 @@
 	return [window glkSize];
 }
 
-// Events
+#pragma mark Events
 
 - (bycopy id<GlkEvent>) nextEvent {
 	if ([events count] > 0) {
@@ -940,7 +940,7 @@
 	[self setFirstResponder];
 }
 
-// Filerefs
+#pragma mark Filerefs
 
 - (id<GlkFileRef>) fileRefWithName: (in bycopy NSString*) name {
 	// Turn into a 'real' path
@@ -1141,9 +1141,9 @@
 	}
 }
 
-// = Dealing with buffer operations =
+#pragma mark - Dealing with buffer operations
 
-// Creating the various types of window
+#pragma mark Creating the various types of window
 
 // Note that creating a new window doesn not always mean that we need to change the layout (as the windows don't actually
 // exist in the tree until the appropriate pair window is created)
@@ -1202,7 +1202,7 @@
 				   forKey: @(identifier)];
 }
 
-// Placing windows in the tree
+#pragma mark Placing windows in the tree
 
 - (int) automationIdForWindowId: (glui32) identifier {
 	if (windowPositionCache == nil) {
@@ -1353,7 +1353,7 @@
 	windowsNeedLayout = YES;
 }
 
-// Manipulating windows
+#pragma mark Manipulating windows
 
 - (void) moveCursorInWindow: (glui32) identifier
 				toXposition: (int) xpos
@@ -1441,7 +1441,7 @@
 	windowsNeedLayout = YES;
 }
 
-// Styles
+#pragma mark Styles
 
 - (void) setStyleHint: (glui32) hint
 			 forStyle: (glui32) styl
@@ -1556,7 +1556,7 @@
 	[stream setCustomAttributes: attributes];
 }
 
-// Closing windows
+#pragma mark Closing windows
 
 - (void) removeIdentifier: (glui32) identifier {
 	GlkPairWindow* win = (GlkPairWindow *)[glkWindows objectForKey: @(identifier)];
@@ -1643,9 +1643,9 @@
 	windowsNeedLayout = YES;
 }
 
-// Streams
+#pragma mark - Streams
 
-// Registering streams
+#pragma mark Registering streams
 
 - (void) registerStream: (in byref id<GlkStream>) stream
 		  forIdentifier: (unsigned) streamIdentifier {
@@ -1689,7 +1689,7 @@
 	[glkStreams removeObjectForKey: @(streamIdentifier)];
 }
 
-// Buffering stream writes
+#pragma mark Buffering stream writes
 
 - (void) automateStream: (id<GlkStream>) stream
 			  forString: (NSString*) string {
@@ -1767,7 +1767,7 @@
 }
 
 
-// = Hyperlinks on streams =
+#pragma mark - Hyperlinks on streams
 
 - (void) setHyperlink: (unsigned int) value
 			 onStream: (unsigned) streamIdentifier {
@@ -1792,7 +1792,7 @@
 	[stream clearHyperlink];
 }
 
-// = Requesting events =
+#pragma mark - Requesting events
 
 - (GlkWindow*) suggestedFirstResponder: (GlkWindow*) win {
 	if ([win waitingForKeyboardInput]) {
@@ -1942,7 +1942,7 @@
 	[win cancelHyperlinkInput];
 }
 
-// = Image management =
+#pragma mark - Image management
 
 - (void) setImageSource: (in byref id<GlkImageSource>) source {
 	imgSrc = source;
@@ -1951,6 +1951,8 @@
 - (out byref id<GlkImageSource>) imageSource {
 	return imgSrc;
 }
+
+@synthesize imageSource = imgSrc;
 
 - (NSImage*) flippedImageWithIdentifier: (unsigned) imageId {
 	//
@@ -1990,7 +1992,9 @@
 	[image drawInRect: imageRect
 			 fromRect: imageRect
 			operation: NSCompositingOperationSourceOver
-			 fraction: 1.0];
+			 fraction: 1.0
+	   respectFlipped: NO
+				hints: nil];
 	[flippedImage unlockFocus];
 	
 	[flippedImageDictionary setObject: flippedImage
@@ -2046,7 +2050,7 @@
 	return image;
 }
 
-// = Graphics functions =
+#pragma mark - Graphics functions
 
 - (GlkCocoaSize) sizeForImageResource: (glui32) imageId {
 	NSImage* img = [self imageWithIdentifier: imageId];
@@ -2199,7 +2203,7 @@
 	}
 }
 
-// = Dealing with line history =
+#pragma mark -  Dealing with line history
 
 - (void) addHistoryItem: (NSString*) inputLine 
 		forWindowWithId: (glui32) windowId {
@@ -2239,7 +2243,7 @@
 	historyPosition = -1;
 }
 
-// = Automation =
+#pragma mark - Automation
 
 - (void) addOutputReceiver: (id<GlkAutomation>) receiver {
 	[outputReceivers addObject: receiver];
@@ -2319,7 +2323,7 @@
 	return window;
 }
 
-// = Writing log messages =
+#pragma mark - Writing log messages
 
 - (void) logMessage: (in bycopy NSString*) message {
 	[self logMessage: message
@@ -2340,7 +2344,7 @@
 	}
 }
 
-// = More prompts =
+#pragma mark - More prompts
 
 static BOOL promptsPendingFrom(GlkWindow* win) {
 	if (win == nil) return NO;
@@ -2465,7 +2469,7 @@ static BOOL pageAllFrom(GlkWindow* win) {
 			 keepLooking: YES];
 }
 
-// = Accessibility =
+#pragma mark - Accessibility
 - (id) accessibilityFocusedUIElement {
 	NSResponder* firstResponder = [[self window] firstResponder];
 

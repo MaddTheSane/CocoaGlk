@@ -317,8 +317,8 @@ strid_t glk_stream_open_file_uni(frefid_t fileref, glui32 fmode,
 	}
 	
 	// Convert to UCS-4
-	stream = [[[GlkUcs4Stream alloc] initWithStream: stream
-										  bigEndian: YES] autorelease];
+	stream = [[GlkUcs4Stream alloc] initWithStream: stream
+										 bigEndian: YES];
 	
 	// Create the stream
 	strid_t res = cocoaglk_stream();
@@ -336,7 +336,7 @@ strid_t glk_stream_open_file_uni(frefid_t fileref, glui32 fmode,
 	res->fmode = fmode;
 	
 	// Set the stream object
-	res->stream = [stream retain];
+	res->stream = stream;
 	
 	// The rock
 	res->rock = rock;

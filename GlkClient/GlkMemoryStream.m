@@ -15,7 +15,7 @@
 
 @implementation GlkMemoryStream
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id) initWithMemory: (unsigned char*) mem
 			   length: (NSInteger) len {
@@ -51,9 +51,9 @@
 	[super dealloc];
 }
 
-// = The stream protocol =
+#pragma mark - The stream protocol
 
-// Control
+#pragma mark Control
 
 - (void) closeStream {
 	if (memory == nil) {
@@ -92,7 +92,7 @@
 	return pointer;
 }
 
-// Writing
+#pragma mark Writing
 
 - (void) putChar: (in unichar) ch {
 	if (ch > 255) ch = '?';
@@ -134,7 +134,7 @@
 	pointer += bufLen;
 }
 
-// Reading
+#pragma mark Reading
 
 - (unichar) getChar {
 	if (memory == nil) {
@@ -186,7 +186,7 @@
 	return result;
 }
 
-// Styles
+#pragma mark Styles
 
 - (void) setStyle: (int) styleId {
 	// Do nothing
@@ -210,7 +210,7 @@
 	// Do nothing
 }
 
-// Hyperlinks
+#pragma mark Hyperlinks
 
 - (void) setHyperlink: (unsigned int) value {
 }

@@ -148,14 +148,14 @@
 	[self updateWithPrefs: prefs];
 }
 
-// = Drawing =
+#pragma mark - Drawing
 
 - (void) drawRect: (NSRect) r {
 	[[self backgroundColour] set];
 	NSRectFill(r);
 }
 
-// = Window control =
+#pragma mark - Window control
 
 - (void) taskFinished {
 	// The text should be made non-editable
@@ -205,7 +205,7 @@
 	}
 }
 
-// = Layout =
+#pragma mark - Layout
 
 - (void) layoutInRect: (NSRect) parentRect {
 	BOOL wasFlushing = flushing;
@@ -290,7 +290,7 @@
 	}
 }
 
-// = Hyperlink input =
+#pragma mark - Hyperlink input
 
 - (BOOL) textView: (NSTextView*) view
 	clickedOnLink: (id) link 
@@ -313,7 +313,7 @@
 	return NO;
 }
 
-// = Line input =
+#pragma mark - Line input
 
 - (void) updateCaretPosition {
 	if (inputPos > [textView selectedRange].location) {
@@ -633,7 +633,7 @@
 	[super cancelCharInput];
 }
 
-// = Streaming =
+#pragma mark - Streaming
 
 - (void) putString: (in bycopy NSString*) string {
 	NSAttributedString* atStr = [[NSAttributedString alloc] initWithString: string
@@ -660,7 +660,7 @@
 	if (inputPos > [[textView textStorage] length]) inputPos = [[textView textStorage] length];			// Shouldn't happen, but does for reasons that probably make sense to someone
 }
 
-// = Graphics =
+#pragma mark - Graphics
 
 - (void) addImage: (NSImage*) image
 	withAlignment: (unsigned) alignment
@@ -715,7 +715,7 @@
 	[self putString: @"\n"];
 }
 
-// = Resizing and the more prompt =
+#pragma mark - Resizing and the more prompt
 
 - (void) positionMoreWindow {
 	// Work out the frame of this view, in screen coordinates
@@ -1043,7 +1043,7 @@
 	}
 }
 
-// = NSAccessibility =
+#pragma mark - NSAccessibility
 
 - (NSArray *)accessibilityContents {
 	return @[textView];

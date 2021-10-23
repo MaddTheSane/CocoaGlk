@@ -12,7 +12,7 @@
 
 @implementation GlkWindow
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id)initWithFrame:(GlkRect)frame {
     self = [super initWithFrame:frame];
@@ -25,7 +25,7 @@
 	return self;
 }
 
-// = Drawing =
+#pragma mark - Drawing
 
 - (void)drawRect:(GlkRect)rect {
 	[[self backgroundColour] set];
@@ -36,16 +36,16 @@
 	return YES;
 }
 
-// = Window metadata =
+#pragma mark - Window metadata
 
 @synthesize closed;
 @synthesize glkIdentifier=windowIdentifier;
 
-// = The parent window =
+#pragma mark - The parent window
 
 @synthesize parent = parentWindow;
 
-// = Layout =
+#pragma mark - Layout
 
 - (void) layoutInRect: (GlkRect) parentRect {
 	[self setFrame: parentRect];
@@ -83,7 +83,7 @@
 
 @synthesize scaleFactor;
 
-// = Styles =
+#pragma mark - Styles
 
 @synthesize forceFixed;
 
@@ -225,7 +225,7 @@
 													  copyItems: YES];
 }
 
-// = Cursor positioning =
+#pragma mark - Cursor positioning
 
 - (void) moveCursorToXposition: (int) xpos
 					 yPosition: (int) ypos {
@@ -233,7 +233,7 @@
 }
 
 
-// = Window control =
+#pragma mark - Window control
 
 - (void) taskFinished {
 	// This window never liked the subtask anyway and is happy it's dead
@@ -335,7 +335,7 @@
 	// Nothing to do for these windows
 }
 
-// = Standard mouse and input handlers =
+#pragma mark - Standard mouse and input handlers
 
 - (BOOL)acceptsFirstResponder {
 	// Note that we can't handle line input events by default, so we only accept if we have character events
@@ -486,9 +486,9 @@ NS_ENUM(unichar) {
 	// The horrible taste of flies fails to wake us up
 }
 
-// = Streaming =
+#pragma mark - Streaming
 
-// Control
+#pragma mark Control
 
 - (void) closeStream {
 	// Nothing to do really
@@ -504,7 +504,7 @@ NS_ENUM(unichar) {
 	return 0;
 }
 
-// Writing
+#pragma mark Writing
 
 - (void) putChar: (in unichar) ch {
 	unichar buf[1];
@@ -532,7 +532,7 @@ NS_ENUM(unichar) {
 	[self putString: string];
 }
 
-// = Reading =
+#pragma mark - Reading
 
 - (unichar) getChar {
 	return 0;
@@ -546,7 +546,7 @@ NS_ENUM(unichar) {
 	return nil;
 }
 
-// = Styles =
+#pragma mark - Styles
 
 - (void) setStyle: (int) styleId {
 	style = styleId;
@@ -558,7 +558,7 @@ NS_ENUM(unichar) {
 
 @synthesize style;
 
-// = Cursor rects =
+#pragma mark - Cursor rects
 
 #if !defined(COCOAGLK_IPHONE)
 - (void)resetCursorRects {
@@ -574,11 +574,11 @@ NS_ENUM(unichar) {
 #endif
 
 
-// = The containing view =
+#pragma mark - The containing view
 
 @synthesize containingView;
 
-// = Paging =
+#pragma mark - Paging
 
 - (BOOL) needsPaging {
 	// By default, windows have no paging
@@ -589,7 +589,7 @@ NS_ENUM(unichar) {
 	
 }
 
-// = Hyperlinks =
+#pragma mark - Hyperlinks
 
 - (void) setHyperlink: (unsigned int) value {
 	linkObject = [[NSNumber alloc] initWithUnsignedInt: value];
@@ -599,7 +599,7 @@ NS_ENUM(unichar) {
 	linkObject = nil;
 }
 
-// = Accessibility =
+#pragma mark - Accessibility
 
 - (NSString *)accessibilityRoleDescription {
 	return [NSString stringWithFormat: @"GLK window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];;

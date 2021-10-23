@@ -18,7 +18,7 @@ static frefid_t cocoaglk_firstfref = NULL;
 static NSMutableDictionary<NSNumber*,NSArray<NSString*>*>* cocoaglk_usagetypes = nil;
 static NSMutableDictionary<NSString*,id<GlkFileRef>>* cocoaglk_fileref_bindings = nil;
 
-// = Prompt object =
+#pragma mark - Prompt object
 
 @interface GlkFilePrompt : NSObject<GlkFilePrompt> {
 	id<GlkFileRef> ref;
@@ -139,14 +139,12 @@ BOOL cocoaglk_frefid_sane(frefid_t ref) {
 	return YES;
 }
 
-// = Doing things with frefs =
+#pragma mark - Doing things with frefs
 
-//
-// This creates a reference to a temporary file. It is always a new file
-// (one which does not yet exist). The file (once created) will be somewhere
-// out of the player's way. [[This is why no name is specified; the player
-//	will never need to know it.]]
-//
+/// This creates a reference to a temporary file. It is always a new file
+/// (one which does not yet exist). The file (once created) will be somewhere
+/// out of the player's way. [[This is why no name is specified; the player
+///	will never need to know it.]]
 frefid_t glk_fileref_create_temp(glui32 usage, glui32 rock) {
 	id<GlkFileRef> ref = [cocoaglk_session tempFileRef];
 	if (!ref) return NULL;

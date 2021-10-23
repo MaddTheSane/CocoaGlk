@@ -14,7 +14,7 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 
 @implementation GlkImage
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id) initWithImage: (GlkSuperImage*) img
 		   alignment: (unsigned) align
@@ -32,14 +32,14 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 	return self;
 }
 
-// = Information =
+#pragma mark - Information
 
 @synthesize image;
 @synthesize size;
 @synthesize alignment;
 @synthesize characterPosition;
 
-// = Cached information =
+#pragma mark - Cached information
 
 - (void) setBounds: (GlkRect) newBounds {
 	calculatedBounds = YES;
@@ -54,7 +54,7 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 	calculatedBounds = NO;
 }
 
-// = Placing this image =
+#pragma mark - Placing this image
 
 - (BOOL) formatSectionAtOffset: (CGFloat) offset
 				  inTypesetter: (GlkTypesetter*) typesetter
@@ -121,7 +121,7 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 	return NO;
 }
 
-// = Drawing =
+#pragma mark - Drawing
 
 - (void) drawAtPoint: (GlkPoint) point
 			  inView: (GlkSuperView*) view {

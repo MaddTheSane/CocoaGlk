@@ -14,7 +14,7 @@
 
 @implementation GlkPairWindow
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id) init {
 	self = [super init];
@@ -32,7 +32,7 @@
 	[right setParent: nil];
 }
 
-// = Setting the windows that make up this pair =
+#pragma mark - Setting the windows that make up this pair
 
 - (void) setKeyWindow: (GlkWindow*) newKey {
 	key = newKey;
@@ -73,7 +73,7 @@
 @synthesize leftWindow = left;
 @synthesize rightWindow = right;
 
-// = Size and arrangement =
+#pragma mark - Size and arrangement
 
 - (void) setSize: (unsigned) newSize {
 	size = newSize;
@@ -98,7 +98,7 @@
 @synthesize horizontal;
 @synthesize above;
 
-// = Custom settings =
+#pragma mark - Custom settings
 
 - (void) setBorderWidth: (CGFloat) newBorderWidth {
 	borderWidth = newBorderWidth;
@@ -115,7 +115,7 @@
 @synthesize borderWidth;
 @synthesize inputBorder;
 
-// = Layout =
+#pragma mark - Layout
 
 - (void) setScaleFactor: (CGFloat) scale {
 	if (scale == scaleFactor) return;
@@ -270,7 +270,7 @@
 	}
 }
 
-// = Window control =
+#pragma mark - Window control
 
 - (void) taskFinished {
 	// Pass on the message
@@ -307,7 +307,7 @@
 	[right fixInputStatus];
 }
 
-// = Window metadata =
+#pragma mark - Window metadata
 
 - (void) setClosed: (BOOL) newClosed {
 	[super setClosed: newClosed];
@@ -317,7 +317,7 @@
 	[right setClosed: newClosed];
 }
 
-// = Drawing =
+#pragma mark - Drawing
 
 - (void) drawInputBorder: (GlkWindow*) view {
 	NSRect r = [view frame];
@@ -362,7 +362,7 @@
 	}
 }
 
-// = NSAccessibility =
+#pragma mark - NSAccessibility
 
 
 - (NSAccessibilityRole)accessibilityRole {

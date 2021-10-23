@@ -23,7 +23,7 @@
 
 @class GlkCocoa;
 
-// = Variables =
+#pragma mark - Variables
 
 #if !defined(COCOAGLK_IPHONE)
 /// Remote object that allows us to create sessions

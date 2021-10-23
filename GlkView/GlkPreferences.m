@@ -15,7 +15,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 
 @implementation GlkPreferences
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 + (GlkPreferences*) sharedPreferences {
 	static GlkPreferences* sharedPrefs = nil;
@@ -119,7 +119,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	return self;
 }
 
-// = Changes =
+#pragma mark - Changes
 
 @synthesize changeCount;
 
@@ -140,7 +140,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 														object: self];
 }
 
-// = Preferences and the user defaults =
+#pragma mark - Preferences and the user defaults
 
 - (void) setPreferencesFromDefaults: (NSDictionary*) defaults {
 	// TODO: Not implemented yet
@@ -151,7 +151,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	return nil;
 }
 
-// = Font preferences =
+#pragma mark - Font preferences
 
 - (void) setProportionalFont: (NSFont*) propFont {
 	proportionalFont = [propFont copy];
@@ -180,7 +180,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	[self setFixedFont: newFixed];
 }
 
-// = Style preferences =
+#pragma mark - Style preferences
 
 - (void) setStyles: (NSDictionary*) newStyles {
 	styles = [[NSMutableDictionary alloc] initWithDictionary: newStyles
@@ -201,7 +201,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	return styles;
 }
 
-// = Typography preferences =
+#pragma mark - Typography preferences
 
 @synthesize textMargin;
 
@@ -235,7 +235,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	[self preferencesHaveChanged];
 }
 
-// = Misc preferences =
+#pragma mark - Misc preferences
 
 @synthesize scrollbackLength;
 
@@ -244,7 +244,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	[self preferencesHaveChanged];
 }
 
-// = NSCopying =
+#pragma mark - NSCopying
 
 - (id) copyWithZone: (NSZone*) zone {
 	GlkPreferences* copy = [[GlkPreferences allocWithZone: zone] init];

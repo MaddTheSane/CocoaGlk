@@ -12,7 +12,7 @@
 
 @implementation GlkBufferedStream
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id) initWithStream: (id<GlkStream>) newSourceStream {
 	self = [super init];
@@ -39,7 +39,7 @@
 	[super dealloc];
 }
 
-// = Buffering =
+#pragma mark - Buffering
 
 - (void) setReadAhead: (int) newReadAhead {
 	if (bufferRemaining == readAhead) {
@@ -89,7 +89,7 @@
 	return YES;
 }
 
-// = GlkStream implementation =
+#pragma mark - GlkStream implementation
 
 // Control
 

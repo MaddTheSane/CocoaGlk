@@ -69,7 +69,7 @@
 	NSInteger firstUnlaidMarginGlyph;
 }
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -82,7 +82,7 @@
     return self;
 }
 
-// = Drawing =
+#pragma mark - Drawing
 
 - (void) recalculateBoundsForGlyph: (GlkTextViewGlyph*) glyph {
 }
@@ -247,7 +247,7 @@
 	}
 }
 
-// = Receiving characters =
+#pragma mark - Receiving characters
 
 - (void) requestCharacterInput {
 	receivingCharacters = YES;
@@ -326,7 +326,7 @@
 	}
 }
 
-// = Dealing with custom glyphs =
+#pragma mark - Dealing with custom glyphs
 
 - (NSInteger) invalidateCustomGlyphs: (NSRange) range
 							 inArray: (NSMutableArray*) glyphArray {
@@ -444,7 +444,7 @@
 	}
 }
 
-// = Mouse events =
+#pragma mark - Mouse events
 
 - (NSView*) mouseParent {
 	// Find a parent view that might want to know about any mouse events we may have received
@@ -487,7 +487,7 @@
 	}
 }
 
-// = First responder =
+#pragma mark - First responder
 
 - (void) postFocusNotification {
 	NSView* glkWindowView = self;
@@ -525,7 +525,7 @@
 	return NO;
 }
 
-// = NSAccessibility =
+#pragma mark - NSAccessibility
 
 - (NSString *)accessibilityHelp {
 	if (!receivingCharacters) return @"Text window";

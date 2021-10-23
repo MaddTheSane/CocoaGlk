@@ -186,7 +186,7 @@ BOOL cocoaglk_strid_read(strid_t str) {
 	}
 }
 
-// = Stream functions =
+#pragma mark - Stream functions
 
 //
 // You can open a stream which reads from or writes to a disk file.
@@ -1193,7 +1193,7 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 	return (glui32)length;
 }
 
-// = Custom styles =
+#pragma mark - Custom styles
 
 // Causes CocoaGlk to set a style hint immediately in the specified stream
 void cocoaglk_set_immediate_style_hint(strid_t str, glui32 hint, glsi32 value) {

@@ -12,7 +12,7 @@
 
 @implementation GlkGridTypesetter
 
-// = Setting up the grid =
+#pragma mark - Setting up the grid
 
 - (void) invalidateAllLayout {
 	// Invalidates any layout performed in this text grid so far
@@ -32,7 +32,7 @@
 	[self invalidateAllLayout];
 }
 	
-// = Performing layout =
+#pragma mark - Performing layout
 
 - (NSInteger) layoutLineFromGlyph: (NSInteger) glyph {
 	// Lays out a line fragment from the specified glyph

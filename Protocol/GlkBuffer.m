@@ -567,7 +567,7 @@ static NSString* stringFromOp(NSArray* op) {
 		     arguments: @[@(windowIdentifier)]];
 }
 
-/// = Buffer flushing =
+#pragma mark - Buffer flushing
 
 
 - (void) flushToTarget: (id<GlkBuffer>) target {

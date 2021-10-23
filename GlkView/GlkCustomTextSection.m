@@ -12,7 +12,7 @@ NSString* const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName"
 
 @implementation GlkCustomTextSection
 
-// = Formatting =
+#pragma mark - Formatting
 
 - (BOOL) formatSectionAtOffset: (CGFloat) offset
 				  inTypesetter: (GlkTypesetter*) typesetter
@@ -21,7 +21,7 @@ NSString* const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName"
 	return NO;
 }
 
-// = Typesetting =
+#pragma mark - Typesetting
 
 - (void) placeBaselineAt: (NSPoint) point
 				forGlyph: (NSInteger) glyph {
@@ -29,7 +29,7 @@ NSString* const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName"
 }
 
 
-// = Drawing =
+#pragma mark - Drawing
 
 - (void) drawAtPoint: (GlkPoint) point
 			  inView: (GlkSuperView*) view {

@@ -12,7 +12,7 @@
 
 @implementation GlkArrangeEvent
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id) initWithGlkWindow: (GlkWindow*) window {
 	self = [super initWithType: evtype_Arrange

@@ -12,7 +12,7 @@
 
 @implementation GlkFileRef
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id) initWithPath: (NSURL*) path {
 	self = [super init];
@@ -59,11 +59,11 @@
 	}
 }
 
-// = Temporaryness =
+#pragma mark - Temporaryness
 
 @synthesize temporary;
 
-// = The fileref protocol =
+#pragma mark - The fileref protocol
 
 - (byref id<GlkStream>) createReadOnlyStream {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadingWithFileURL: pathname];

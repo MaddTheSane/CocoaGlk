@@ -11,7 +11,7 @@
 
 @implementation GlkEvent
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id) initWithType: (unsigned) newType
    windowIdentifier: (unsigned) newWindowId {
@@ -50,14 +50,14 @@
 
 @synthesize lineInput;
 
-// = GlkEvent methods =
+#pragma mark - GlkEvent methods
 
 @synthesize type;
 @synthesize windowIdentifier=windowId;
 @synthesize val1;
 @synthesize val2;
 
-// = NSCoding methods =
+#pragma mark - NSCoding methods
 
 #define LINEINPUTCODINGKEY @"lineInput"
 #define TYPECODINGKEY @"type"

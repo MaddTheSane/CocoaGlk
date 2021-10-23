@@ -13,7 +13,7 @@
 
 @implementation GlkFileStream
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (instancetype) initForReadWriteWithFilename: (NSString*) filename
 {
@@ -92,9 +92,9 @@
 	return self;
 }
 
-// = GlkStream methods =
+#pragma mark - GlkStream methods
 
-// Control
+#pragma mark Control
 
 - (void) closeStream {
 	[handle closeFile];
@@ -128,7 +128,7 @@
 	return [handle offsetInFile];
 }
 
-// Writing
+#pragma mark Writing
 
 - (void) putChar: (in unichar) ch {
 	NSString *preData = [NSString stringWithFormat:@"%C", ch];
@@ -146,7 +146,7 @@
 	[handle writeData: buffer];
 }
 
-// Reading
+#pragma mark Reading
 
 - (unichar) getChar {	
 	NSData* data = [handle readDataOfLength: 1];
@@ -186,7 +186,7 @@
 	return data;
 }
 
-// Styles
+#pragma mark Styles
 
 - (void) setStyle: (int) styleId {
 	// Nothing to do
@@ -206,7 +206,7 @@
 - (void) setCustomAttributes: (NSDictionary*) customAttributes {
 }
 
-// Hyperlinks
+#pragma mark Hyperlinks
 
 - (void) clearHyperlink {
 }

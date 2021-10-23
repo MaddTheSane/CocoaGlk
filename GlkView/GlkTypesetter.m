@@ -162,7 +162,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 // Apple's documentation on this is somewhat sketchy, so this is probably going to be a little flakey in places.
 //
 
-// = Getting glyph information =
+#pragma mark - Getting glyph information
 
 - (void) flushCache {
 	// Flushes out glyphs from the cache
@@ -562,7 +562,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	cached.length = numRemaining;
 }
 
-// = Margins =
+#pragma mark - Margins
 
 - (NSInteger) marginNearest: (NSInteger) glyph
 			  inMarginArray: (NSArray<GlkMarginSection*>*) margin {
@@ -664,7 +664,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	return result - NSMaxY(usedRect);
 }
 
-// = Laying out line sections =
+#pragma mark - Laying out line sections
 
 - (void) beginLineFragment {
 	// Starts a new line fragment
@@ -922,7 +922,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 }
 
-// = Dealing with paragraphs =
+#pragma mark - Dealing with paragraphs
 
 - (BOOL) updateParagraphFromGlyph: (NSInteger) glyph {
 	// Update the paragraph style from the specified glyph
@@ -967,7 +967,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	return YES;
 }
 
-// = Laying out glyphs =
+#pragma mark - Laying out glyphs
 
 - (void) justifyCurrentLineFragment: (NSTextAlignment) alignment
 							 inRect: (GlkRect) proposed
@@ -1404,7 +1404,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	return glyph + cached.location;
 }
 
-// = NSTypesetter overrides =
+#pragma mark - NSTypesetter overrides
 
 - (void) prepareForLayoutInLayoutManager: (NSLayoutManager*) layoutMgr
 					startingAtGlyphIndex: (NSUInteger) startGlyphIndex {
@@ -1585,7 +1585,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	return lastSetGlyph=glyph;
 }
 
-// = Setting the delegate =
+#pragma mark - Setting the delegate
 
 @synthesize delegate;
 

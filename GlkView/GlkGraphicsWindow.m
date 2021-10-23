@@ -120,7 +120,7 @@
 }
 #endif
 
-// = Styles =
+#pragma mark - Styles
 
 - (void) setStyles: (NSDictionary*) newStyles {
 	// Set the styles in the superclass
@@ -135,7 +135,7 @@
 	[self clear];
 }
 
-// = Layout =
+#pragma mark - Layout
 
 - (void) layoutInRect: (GlkRect) parentRect {
 	// Set the frame
@@ -171,7 +171,7 @@
 	return res;
 }
 
-// = Drawing in the graphics window =
+#pragma mark - Drawing in the graphics window
 
 - (void) fillRect: (GlkRect) rect
 	   withColour: (GlkColor*) col {
@@ -234,7 +234,7 @@
 #endif
 }
 
-// = NSAccessibility =
+#pragma mark - NSAccessibility
 
 -(NSString *)accessibilityRoleDescription {
 	return [NSString stringWithFormat: @"GLK graphics window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];

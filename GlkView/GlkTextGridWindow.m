@@ -18,7 +18,7 @@
 
 @implementation GlkTextGridWindow
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (void) setupTextview {
 #if defined(COCOAGLK_IPHONE)
@@ -91,13 +91,13 @@
     return self;
 }
 
-// = Drawing =
+#pragma mark - Drawing
 
 - (void)drawRect:(GlkRect)rect {
 	[super drawRect: rect];
 }
 
-// = Layout =
+#pragma mark - Layout
 
 - (CGFloat) charWidth {
 	// FIXME: we should cache this
@@ -208,7 +208,7 @@
 	lastSize = [self glkSize];
 }
 
-// = Cursor positioning =
+#pragma mark - Cursor positioning
 
 - (void) moveCursorToXposition: (int) newXpos
 					 yPosition: (int) newYpos {
@@ -216,7 +216,7 @@
 	ypos = newYpos;
 }
 
-// = Window control =
+#pragma mark - Window control
 
 - (void) taskFinished {
 	// The text should be made non-editable
@@ -236,7 +236,7 @@
 	[self layoutInRect: [self frame]];
 }
 
-// = Streams =
+#pragma mark - Streams
 
 - (void) putString: (in bycopy NSString*) string {
 	int pos = 0;
@@ -300,7 +300,7 @@
 }
 
 #if !defined(COCOAGLK_IPHONE)
-// = Mouse input =
+#pragma mark - Mouse input
 
 - (void) mouseDown: (NSEvent*) event {
 	NSPoint mousePos = [textView convertPoint: [event locationInWindow] 
@@ -330,7 +330,7 @@
 }
 #endif
 
-// = MORE prompt =
+#pragma mark - MORE prompt
 
 - (void) resetMorePrompt: (int) moreChar {
 	// Text grid windows are not scrollable
@@ -340,7 +340,7 @@
 	// Text grid windows are not scrollable
 }
 
-// = Preferences =
+#pragma mark - Preferences
 
 - (void) updateWithPrefs: (GlkPreferences*) prefs {
 	// Overridden from GlkTextWindow
@@ -350,7 +350,7 @@
 	[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation]];
 }
 
-// = Line input =
+#pragma mark - Line input
 
 - (NSString*) cancelLineInput {
 	if (lineInput) {
@@ -580,7 +580,7 @@ textView:(NSTextView *)aTextView
 }
 #endif
 
-// = NSAccessibility =
+#pragma mark - NSAccessibility
 
 - (NSString *)accessibilityRoleDescription {
 	if (!lineInput && !charInput) return @"Text grid";

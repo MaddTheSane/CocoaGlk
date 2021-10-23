@@ -15,7 +15,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 
 @implementation GlkStyle
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id) init {
 	self = [super init];
@@ -42,13 +42,13 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 	return self;
 }
 
-// = Creating a style =
+#pragma mark - Creating a style
 
 + (GlkStyle*) style {
 	return [[[self class] alloc] init];
 }
 
-// = The hints =
+#pragma mark - The hints
 
 - (void) styleChanged {
 	lastPreferences = nil;
@@ -122,7 +122,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 @synthesize backColour;
 @synthesize reversed;
 
-// = Utility functions =
+#pragma mark - Utility functions
 
 - (BOOL) isEqualTo: (NSObject*) obj {
 	if (obj == self) return YES;
@@ -139,7 +139,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 	return ![self isEqualTo: style];
 }
 
-// = Turning styles into dictionaries for attributed strings =
+#pragma mark - Turning styles into dictionaries for attributed strings
 
 - (NSDictionary*) addSelfToAttributes: (NSDictionary*) dict {
 	// We have to do things this way to avoid creating a reference loop (which would leak memory)
@@ -344,7 +344,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 #endif
 }
 
-// = Dealing with glk style hints =
+#pragma mark - Dealing with glk style hints
 - (void) setHint: (glui32) hint
 		 toValue: (glsi32) value {
 	switch (hint) {
@@ -479,7 +479,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 	}	
 }
 
-// = NSCopying =
+#pragma mark - NSCopying
 
 - (id) copyWithZone: (NSZone*) zone {
 	GlkStyle* copy = [[GlkStyle allocWithZone: zone] init];

@@ -17,7 +17,7 @@
 	NSConnection* connection;
 }
 
-// = The shared hub =
+#pragma mark - The shared hub
 
 + (GlkHub*) sharedGlkHub {
 	static GlkHub* hub = nil;
@@ -29,7 +29,7 @@
 	return hub;
 }
 
-// = Initialisation =
+#pragma mark - Initialisation
 
 - (id) init {
 	self = [super init];
@@ -45,7 +45,7 @@
 	if (connection) [connection registerName: nil];
 }
 
-// = The connection =
+#pragma mark - The connection
 
 - (void) resetConnection {
 	if (hubName == nil) {
@@ -72,7 +72,7 @@
 }
 
 
-// = Registering sessions for later consumption =
+#pragma mark - Registering sessions for later consumption
 
 - (void) registerSession: (id<GlkSession>) session
 			  withCookie: (NSString*) sessionCookie {
@@ -101,7 +101,7 @@
 	}
 }
 
-// = Naming =
+#pragma mark - Naming
 
 - (void) setHubName: (NSString*) newHubName {
 	hubName = [newHubName copy];
@@ -115,7 +115,7 @@
 
 @synthesize hubName;
 
-// = Security =
+#pragma mark - Security
 
 @synthesize hubCookie=cookie;
 
@@ -135,7 +135,7 @@
 	[self setRandomHubCookie];
 }
 
-// = Setting up the session =
+#pragma mark - Setting up the session
 
 - (byref id<GlkSession>) createNewSession {
 	return [self createNewSessionWithHubCookie: nil
@@ -164,7 +164,7 @@
 	}
 }
 
-// = The delegate =
+#pragma mark - The delegate
 
 @synthesize delegate;
 

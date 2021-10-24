@@ -69,6 +69,8 @@ extern void cocoaglk_maybeflushstream(strid_t stream, const char* reason);
 /// Unregisters any line input buffers associated with the window
 extern void cocoaglk_unregister_line_buffers(winid_t win);
 
+extern frefid_t cocoaglk_open_file(NSURL *path, glui32 textmode, glui32 rock);
+
 #pragma mark - Variables
 
 /// The running session

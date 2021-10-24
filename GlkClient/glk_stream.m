@@ -1193,6 +1193,13 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 	return (glui32)length;
 }
 
+strid_t glkunix_stream_open_pathname(char *pathname, glui32 textmode,
+									 glui32 rock) {
+	NSURL *fileURL = [NSURL fileURLWithFileSystemRepresentation:pathname isDirectory:NO relativeToURL:nil];
+	frefid_t fileRef = cocoaglk_open_file(fileURL, textmode, rock);
+	return glk_stream_open_file(fileRef, filemode_Read, rock);
+}
+
 #pragma mark - Custom styles
 
 // Causes CocoaGlk to set a style hint immediately in the specified stream

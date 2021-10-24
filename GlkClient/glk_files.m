@@ -520,3 +520,34 @@ void cocoaglk_bind_memory_to_named_file(const unsigned char* memory, int length,
 	[cocoaglk_fileref_bindings setObject: fileref
 								  forKey: name];
 }
+
+#import <GlkView/GlkFileRef.h>
+
+frefid_t cocoaglk_open_file(NSURL *path, glui32 textmode,
+							glui32 rock)
+{
+	// Create the fref
+	frefid_t res = malloc(sizeof(struct glk_fileref_struct));
+	
+	res->key = GlkFileRefKey;
+	res->rock = rock;
+	res->fileref = [[GlkFileRef alloc] initWithPath:path];
+	res->usage = textmode == TRUE ? fileusage_TextMode : fileusage_BinaryMode;
+	
+	res->next = cocoaglk_firstfref;
+	res->last = NULL;
+	if (cocoaglk_firstfref) cocoaglk_firstfref->last = res;
+	cocoaglk_firstfref = res;
+	
+	if (cocoaglk_register) {
+		res->giRock = cocoaglk_register(res, gidisp_Class_Fileref);
+	}
+
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: cocoaglk_open_file(%@, %u, %u) = %p", path, textmode, rock, res);
+#endif
+	
+	// We're done
+	return res;
+
+}

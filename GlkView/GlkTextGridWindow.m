@@ -347,7 +347,11 @@
 	margin = 0;
 	[textView setTextContainerInset: NSMakeSize(margin, margin)];
 	[[textView layoutManager] setUsesScreenFonts: [prefs useScreenFonts]];
-	[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation]];
+	if (@available(macOS 10.15, *)) {
+		[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation]];
+	} else {
+		[[textView layoutManager] setHyphenationFactor: [prefs useHyphenation]?1:0];
+	}
 }
 
 #pragma mark - Line input

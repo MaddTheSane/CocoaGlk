@@ -356,7 +356,7 @@
 											 target: self
 										   argument: nil
 											  order: 32
-											  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+											  modes: @[NSDefaultRunLoopMode]];
 		return YES;
 	}
 	

@@ -129,7 +129,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 											 target: self
 										   argument: nil
 											  order: 64
-											  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+											  modes: @[NSDefaultRunLoopMode]];
 		changeNotified = YES;
 	}
 }

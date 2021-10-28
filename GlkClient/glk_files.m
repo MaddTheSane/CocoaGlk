@@ -108,13 +108,13 @@ NSArray* cocoaglk_types_for_usage(glui32 usage) {
 	
 	// Otherwise, use the defaults (which are convienient if you're writing a GLULX interpreter, but probably stupid otherwise)
 	switch (usage&fileusage_TypeMask) {
-		case fileusage_Data: return [NSArray arrayWithObjects: @"dat", nil];
-		case fileusage_SavedGame: return [NSArray arrayWithObjects: @"sav", nil];
-		case fileusage_InputRecord: return [NSArray arrayWithObjects: @"txt", @"rec", nil];
-		case fileusage_Transcript: return [NSArray arrayWithObjects: @"txt", nil];
+		case fileusage_Data: return @[@"dat"];
+		case fileusage_SavedGame: return @[@"sav"];
+		case fileusage_InputRecord: return @[@"txt", @"rec"];
+		case fileusage_Transcript: return @[@"txt"];
 
-		case fileusage_cocoaglk_GameData: return [NSArray arrayWithObjects: @"blb", nil];
-		case fileusage_cocoaglk_GameFile: return [NSArray arrayWithObjects: @"blb", @"ulx", @"glb", @"gblorb", nil];
+		case fileusage_cocoaglk_GameData: return @[@"blb"];
+		case fileusage_cocoaglk_GameFile: return @[@"blb", @"ulx", @"glb", @"gblorb"];
 			
 		default: return nil;
 	}

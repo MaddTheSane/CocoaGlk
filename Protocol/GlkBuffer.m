@@ -120,7 +120,7 @@ static NSString* stringFromOp(NSArray* op) {
 
 - (void) addOperation: (NSString*) name
 			arguments: (NSArray*) arguments {
-	NSArray* op = [NSArray arrayWithObjects: name, arguments, nil];
+	NSArray* op = @[name, arguments];
 	
 	if ([name isEqualToString: s_PutCharToStream]
 		|| [name isEqualToString: s_PutStringToStream]

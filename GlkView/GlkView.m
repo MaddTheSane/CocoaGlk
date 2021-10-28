@@ -116,7 +116,7 @@
 											 target: self
 										   argument: nil
 											  order: 128
-											  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+											  modes: @[NSDefaultRunLoopMode]];
 	}
 }
 
@@ -688,7 +688,7 @@
 											 target: self
 										   argument: buffer
 											  order: 64
-											  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+											  modes: @[NSDefaultRunLoopMode]];
 		return;
 	}
 	
@@ -1008,17 +1008,17 @@
 	
 	// Return the defaults if known
 	if ([usage isEqualToString: GlkFileUsageData])
-		return [NSArray arrayWithObjects: @"dat", nil];
+		return @[@"dat"];
 	else if ([usage isEqualToString: GlkFileUsageSavedGame]) 
-		return [NSArray arrayWithObjects: @"sav", nil];
+		return @[@"sav"];
 	else if ([usage isEqualToString: GlkFileUsageInputRecord]) 
-		return [NSArray arrayWithObjects: @"txt", @"rec", nil];
+		return @[@"txt", @"rec"];
 	else if ([usage isEqualToString: GlkFileUsageTranscript]) 
-		return [NSArray arrayWithObjects: @"txt", nil];
+		return @[@"txt"];
 	else if ([usage isEqualToString: GlkFileUsageGameData]) 
-		return [NSArray arrayWithObjects: @"blb", nil];
+		return @[@"blb"];
 	else if ([usage isEqualToString: GlkFileUsageGameFile]) 
-		return [NSArray arrayWithObjects: @"blb", @"ulx", @"glb", @"gblorb", nil];
+		return @[@"blb", @"ulx", @"glb", @"gblorb"];
 	
 	// Default: return nothing and allow the client to decide
 	return nil;
@@ -2491,11 +2491,11 @@ static BOOL pageAllFrom(GlkWindow* win) {
  }
 
 - (NSArray *)accessibilityChildren {
-	return [NSArray arrayWithObjects: rootWindow, nil];
+	return @[rootWindow];
 }
 
 - (NSArray *)accessibilityContents {
-	return [NSArray arrayWithObjects: rootWindow, nil];
+	return @[rootWindow];
 }
 
 - (NSString *)accessibilityHelp {

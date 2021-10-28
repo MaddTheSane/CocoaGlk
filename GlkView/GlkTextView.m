@@ -502,7 +502,7 @@
 										 target: self
 									   argument: nil
 										  order: 32
-										  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+										  modes: @[NSDefaultRunLoopMode]];
 
 	if ([super becomeFirstResponder]) {
 		return YES;
@@ -516,7 +516,7 @@
 										 target: self
 									   argument: nil
 										  order: 32
-										  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+										  modes: @[NSDefaultRunLoopMode]];
 	
 	if ([super resignFirstResponder]) {
 		return YES;

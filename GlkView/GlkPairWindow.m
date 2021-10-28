@@ -370,7 +370,7 @@
 }
 
 - (NSArray *)accessibilityChildren {
-	return [NSArray arrayWithObjects: left, right, nil];
+	return @[left, right];
 }
 
 @end

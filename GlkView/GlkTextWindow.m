@@ -525,7 +525,7 @@
 										 target: self
 									   argument: nil
 										  order: 128
-										  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+										  modes: @[NSDefaultRunLoopMode]];
 }
 
 - (void) fixInputStatus {
@@ -563,7 +563,7 @@
 										 target: self
 									   argument: nil
 										  order: 128
-										  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+										  modes: @[NSDefaultRunLoopMode]];
 }
 
 - (void) requestLineInput {
@@ -592,7 +592,7 @@
 										 target: self
 									   argument: nil 
 										  order: 32
-										  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+										  modes: @[NSDefaultRunLoopMode]];
 
 	if (wasFlushing) {
 		[[textView textStorage] beginEditing];
@@ -871,7 +871,7 @@
 											 target: self
 										   argument: nil
 											  order: 32
-											  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+											  modes: @[NSDefaultRunLoopMode]];
 	}
 	
 	// Set the time that we started animating
@@ -901,7 +901,7 @@
 											 target: self 
 										   argument: nil 
 											  order: 16
-											  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+											  modes: @[NSDefaultRunLoopMode]];
 	}
 }
 
@@ -1054,7 +1054,7 @@
 }
 
 - (NSArray *)accessibilityChildren {
-	return [NSArray arrayWithObjects: textView, nil];
+	return @[textView];
 }
 
 - (id)accessibilityParent {

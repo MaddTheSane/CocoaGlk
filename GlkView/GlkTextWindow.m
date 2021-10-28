@@ -769,7 +769,7 @@
 	if ([[textView textStorage] length] <= 0) return;
     NSRange endGlyph = [textView selectionRangeForProposedRange: NSMakeRange([[textView textStorage] length]-1, 1)
                                                     granularity: NSSelectByCharacter];
-    if (endGlyph.location > 0xf0000000) {
+    if (endGlyph.location == NSNotFound) {
 		if (wasFlushing) {
 			[[textView textStorage] beginEditing];
 			flushing = YES;
@@ -953,7 +953,7 @@
 
     NSRange endGlyph = [textView selectionRangeForProposedRange: NSMakeRange(moreChar, 1)
                                                     granularity: NSSelectByCharacter];
-    if (endGlyph.location > 0xf0000000) {
+    if (endGlyph.location == NSNotFound) {
 		NSSize containerSize = [[textView textContainer] containerSize];
 		nextMorePos = maxHeight;
 		[[textView textContainer] setContainerSize: NSMakeSize(containerSize.width, nextMorePos)];	

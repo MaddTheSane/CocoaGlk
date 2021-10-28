@@ -322,13 +322,11 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 	[paraStyle setTailIndent: indentation];
 	
 	// Create the style dictionary
-	res = [NSDictionary dictionaryWithObjectsAndKeys: 
-		paraStyle, NSParagraphStyleAttributeName,
-		font, NSFontAttributeName,
-		foreCol, NSForegroundColorAttributeName,
-		backCol, NSBackgroundColorAttributeName,
-		@([prefs useLigatures]), NSLigatureAttributeName,
-		nil];
+	res = @{NSParagraphStyleAttributeName: paraStyle,
+			NSFontAttributeName: font,
+			NSForegroundColorAttributeName: foreCol,
+			NSBackgroundColorAttributeName: backCol,
+			NSLigatureAttributeName: @([prefs useLigatures] ? 1 : 0)};
 		
 	// Finish up
 	

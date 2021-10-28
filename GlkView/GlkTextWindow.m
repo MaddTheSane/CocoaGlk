@@ -104,10 +104,9 @@
 		//[self addSubview: scrollView];
 		
 		// Set the hyperlink style
-		NSDictionary* hyperStyle = [NSDictionary dictionaryWithObjectsAndKeys:
-			@(NSUnderlineStyleSingle), NSUnderlineStyleAttributeName,
-			[NSCursor pointingHandCursor], NSCursorAttributeName,
-			nil];
+		NSDictionary* hyperStyle = @{
+			NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
+			NSCursorAttributeName: [NSCursor pointingHandCursor]};
 		[textView setLinkTextAttributes: hyperStyle];
 		
 		// Construct the window that shows the [ MORE ] prompt
@@ -702,9 +701,7 @@
 													length: 1];
 	
 	// Construct the attributes that describe this clear margins character
-	NSDictionary* clearDict = [NSDictionary dictionaryWithObjectsAndKeys:
-		clear, GlkCustomSectionAttributeName,
-		nil];
+	NSDictionary* clearDict = @{GlkCustomSectionAttributeName: clear};
 	NSAttributedString* clearAttributedString = [[NSAttributedString alloc] initWithString: clearString
 																				attributes: clearDict];
 	

@@ -169,14 +169,17 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 - (void) terminateClient;
 /// Sets the input stream
 - (void) setInputStream: (id<GlkStream>) stream;
-/// Sets the input stream to be input from the given file
-- (void) setInputFilename: (NSString*) filename;
+/// Sets the input stream to be input from the given file URL
+- (void) setInputFileURL: (NSURL*) filename;
 /// Adds a keyed stream that the client can obtain if necessary
 - (void) addStream: (id<GlkStream>) stream
 		   withKey: (NSString*) streamKey;
 /// Adds a keyed stream that reads from the specified filename
 - (void) addInputFilename: (NSString*) filename
 				  withKey: (NSString*) streamKey;
+/// Adds a keyed stream that reads from the specified filename
+- (void) addInputFileURL: (NSURL*) filename
+				 withKey: (NSString*) streamKey;
 
 @property (nonatomic, strong) id<GlkStream> inputStream;
 
@@ -296,7 +299,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 /// This works out the 'real' path for a file requested by name (default is to remove control characters and stick it on the Desktop)
 - (nullable NSString*) pathForNamedFile: (NSString*) name;
 /// This works out the 'preferred' directory for save files. CocoaGlk will use it's own judgement if this returns nil
-- (nullable NSString*) preferredSaveDirectory;
+- (nullable NSURL*) preferredSaveDirectory;
 /// Called to give the delegate a chance to store the final directory chosen for a save in the preferences.
 - (void) savePreferredDirectory: (nullable NSString*) finalDir;
 
@@ -304,7 +307,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 - (BOOL) promptForFilesForUsage: (NSString*) usage
 					 forWriting: (BOOL) writing
 						handler: (id<GlkFilePrompt>) handler
-			 preferredDirectory: (nullable NSString*) preferredDirectory;
+			 preferredDirectory: (nullable NSURL*) preferredDirectory;
 
 @end
 

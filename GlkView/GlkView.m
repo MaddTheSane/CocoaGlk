@@ -618,14 +618,19 @@
 
 - (void) addInputFilename: (NSString*) filename 
 				  withKey: (NSString*) streamKey {
+	[self addInputFileURL: [NSURL fileURLWithPath: filename] withKey: streamKey];
+}
+
+- (void) addInputFileURL: (NSURL*) filename
+				 withKey: (NSString*) streamKey {
 	if (!extraStreamDictionary) {
 		extraStreamDictionary = [[NSMutableDictionary alloc] init];
 	}
 	
-	[extraStreamDictionary setObject: [[GlkFileStream alloc] initForReadingWithFileURL: [NSURL fileURLWithPath: filename]]
+	[extraStreamDictionary setObject: [[GlkFileStream alloc] initForReadingWithFileURL: filename]
 							  forKey: streamKey];
 	
-	[self logMessage: [NSString stringWithFormat: @"Creating stream to read data from '%@' with key '%@'", filename, streamKey]
+	[self logMessage: [NSString stringWithFormat: @"Creating stream to read data from '%@' with key '%@'", filename.path, streamKey]
 		  withStatus: GlkLogRoutine];
 }
 
@@ -639,9 +644,13 @@
 }
 
 - (void) setInputFilename: (NSString*) filename {
-	inputStream = [[GlkFileStream alloc] initForReadingWithFileURL: [NSURL fileURLWithPath: filename]];
+	[self setInputFileURL: [NSURL fileURLWithPath: filename]];
+}
+
+- (void) setInputFileURL: (NSURL*) filename {
+	inputStream = [[GlkFileStream alloc] initForReadingWithFileURL: filename];
 	
-	[self logMessage: [NSString stringWithFormat: @"Will read data from: %@", filename]
+	[self logMessage: [NSString stringWithFormat: @"Will read data from: %@", filename.path]
 		  withStatus: GlkLogRoutine];
 }
 
@@ -1034,14 +1043,14 @@
 					 forWriting: (BOOL) writing
 						handler: (in byref id<GlkFilePrompt>) handler {
 	// Pick a preferred directory
-	NSString* preferredDirectory = nil;
+	NSURL* preferredDirectory = nil;
 	
 	if (delegate && [delegate respondsToSelector: @selector(preferredSaveDirectory)]) {
 		preferredDirectory = [delegate preferredSaveDirectory];
 	}
 	
 	if (preferredDirectory == nil) {
-		preferredDirectory = [[[NSUserDefaults standardUserDefaults] URLForKey: @"GlkSaveDirectory"] path];
+		preferredDirectory = [[NSUserDefaults standardUserDefaults] URLForKey: @"GlkSaveDirectory"];
 	}
 	
 	// Defer to the delegate if it has the appropriate method implemented
@@ -1080,7 +1089,7 @@
 	NSURL* preferredDirectory = nil;
 	
 	if (delegate && [delegate respondsToSelector: @selector(preferredSaveDirectory)]) {
-		preferredDirectory = [NSURL fileURLWithPath:[delegate preferredSaveDirectory]];
+		preferredDirectory = [delegate preferredSaveDirectory];
 	}
 	
 	if (preferredDirectory == nil) {

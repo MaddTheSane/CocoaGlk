@@ -591,6 +591,14 @@
 		55C6BB65204DF03A001AE7E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CocoaGlk.xib; sourceTree = "<group>"; };
 		55C6BB68204DF03D001AE7E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CocoaGlk.strings; sourceTree = "<group>"; };
 		55C6BB6C204DF65F001AE7E5 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		55DA68752739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		55DA68762739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CocoaGlk.strings"; sourceTree = "<group>"; };
+		55DA68772739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "en-GB"; path = "en-GB.lproj/Credits.rtfd"; sourceTree = "<group>"; };
+		55DA68782739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		55DA68792739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "en-GB.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		55DA687A2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "en-GB.lproj/CocoaGlk.xib"; sourceTree = "<group>"; };
+		55DA687B2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "en-GB"; path = "en-GB.lproj/Credits.rtfd"; sourceTree = "<group>"; };
+		55DA687C2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55E630EE21C1AD87002C0FBA /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = Resources/Media.xcassets; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* CocoaGlk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaGlk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1414,6 +1422,7 @@
 				fr,
 				de,
 				Base,
+				"en-GB",
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CocoaGlk */;
 			projectDirPath = "";
@@ -1768,6 +1777,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				089C165DFE840E0CC02AAC07 /* en */,
+				55DA68782739C96D0007990A /* en-GB */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1776,6 +1786,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				29B97319FDCFA39411CA2CEA /* en */,
+				55DA68792739C96D0007990A /* en-GB */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -1784,6 +1795,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				4B16BB5D08A4E65F001E4C40 /* Credits.rtfd */,
+				55DA68772739C96D0007990A /* en-GB */,
 			);
 			name = Credits.rtfd;
 			sourceTree = "<group>";
@@ -1792,6 +1804,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				4B8BDF7A07EB5FE8008AE26D /* en */,
+				55DA687A2739C96D0007990A /* en-GB */,
 			);
 			name = CocoaGlk.xib;
 			sourceTree = "<group>";
@@ -1801,6 +1814,7 @@
 			children = (
 				55C6BB3D204DED96001AE7E5 /* Base */,
 				559219F321B908EA002F7F9E /* en */,
+				55DA68752739C96D0007990A /* en-GB */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -1809,6 +1823,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55C6BB5A204DEFA2001AE7E5 /* en */,
+				55DA687B2739C96D0007990A /* en-GB */,
 			);
 			name = Credits.rtfd;
 			sourceTree = "<group>";
@@ -1818,6 +1833,7 @@
 			children = (
 				55C6BB65204DF03A001AE7E5 /* Base */,
 				55C6BB68204DF03D001AE7E5 /* en */,
+				55DA68762739C96D0007990A /* en-GB */,
 			);
 			name = CocoaGlk.xib;
 			sourceTree = "<group>";
@@ -1826,6 +1842,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55C6BB6C204DF65F001AE7E5 /* en */,
+				55DA687C2739C96D0007990A /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

@@ -17,7 +17,7 @@
 
 - (instancetype) initForReadWriteWithFilename: (NSString*) filename
 {
-	return self = [self initForReadWriteWithFileURL:[NSURL fileURLWithPath:filename]];
+	return [self initForReadWriteWithFileURL:[NSURL fileURLWithPath:filename]];
 }
 
 - (id) initForReadWriteWithFileURL: (NSURL*) filename {
@@ -47,10 +47,10 @@
 
 - (instancetype) initForWritingWithFilename: (NSString*) filename
 {
-	return self = [self initForWritingWithFileURL:[NSURL fileURLWithPath:filename]];
+	return [self initForWritingToFileURL:[NSURL fileURLWithPath:filename]];
 }
 
-- (id) initForWritingWithFileURL: (NSURL*) filename {
+- (id) initForWritingToFileURL: (NSURL*) filename {
 	self = [super init];
 	
 	if (self) {
@@ -75,10 +75,10 @@
 
 - (instancetype) initForReadingWithFilename: (NSString*) filename
 {
-	return self = [self initForReadingWithFileURL:[NSURL fileURLWithPath:filename]];
+	return [self initForReadingFromFileURL:[NSURL fileURLWithPath:filename]];
 }
 
-- (id) initForReadingWithFileURL: (NSURL*) filename {
+- (id) initForReadingFromFileURL: (NSURL*) filename {
 	self = [super init];
 	
 	if (self) {

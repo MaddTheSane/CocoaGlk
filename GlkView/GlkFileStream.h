@@ -24,8 +24,8 @@
 - (instancetype) initForReadingWithFilename: (NSString*) filename;
 
 - (instancetype) initForReadWriteWithFileURL: (NSURL*) filename;
-- (instancetype) initForWritingWithFileURL: (NSURL*) filename;
-- (instancetype) initForReadingWithFileURL: (NSURL*) filename;
+- (instancetype) initForWritingToFileURL: (NSURL*) filename;
+- (instancetype) initForReadingFromFileURL: (NSURL*) filename;
 
 @end
 

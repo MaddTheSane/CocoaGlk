@@ -66,13 +66,13 @@
 #pragma mark - The fileref protocol
 
 - (byref id<GlkStream>) createReadOnlyStream {
-	GlkFileStream* stream = [[GlkFileStream alloc] initForReadingWithFileURL: pathname];
+	GlkFileStream* stream = [[GlkFileStream alloc] initForReadingFromFileURL: pathname];
 	
 	return stream;
 }
 
 - (byref id<GlkStream>) createWriteOnlyStream; {
-	GlkFileStream* stream = [[GlkFileStream alloc] initForWritingWithFileURL: pathname];
+	GlkFileStream* stream = [[GlkFileStream alloc] initForWritingToFileURL: pathname];
 	
 	return stream;
 }

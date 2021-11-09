@@ -419,6 +419,11 @@
 	}
 }
 
+- (void)hackTextStorageDidProcessEditing:(NSNotification *)aNotification {
+	// hack!
+	[self textStorage: [textView textStorage] didProcessEditing: NSTextStorageEditedCharacters range: NSMakeRange(0, 0) changeInLength: 0];
+}
+
 - (void)textStorage:(NSTextStorage *)textStorage
   didProcessEditing:(NSTextStorageEditActions)editedMask
 			  range:(NSRange)editedRange
@@ -587,7 +592,7 @@
 	// be added to the buffer (generating an immediate event)
 	//
 	// This allows us to successfully copy+paste lines of text and have things look like they're working OK
-	[[NSRunLoop currentRunLoop] performSelector: @selector(textStorageDidProcessEditing:)
+	[[NSRunLoop currentRunLoop] performSelector: @selector(hackTextStorageDidProcessEditing:)
 										 target: self
 									   argument: nil 
 										  order: 32

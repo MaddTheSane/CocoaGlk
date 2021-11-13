@@ -37,7 +37,7 @@ static NSCalendar *getLocalCalendar(void)
 }
 
 
-/* Divide a Unix timestamp by a (positive) value. */
+/*! Divide a Unix timestamp by a (positive) value. */
 static glsi32 gli_simplify_time(int64_t timestamp, glui32 factor)
 {
 	/* We want to round towards negative infinity, which takes a little
@@ -50,7 +50,7 @@ static glsi32 gli_simplify_time(int64_t timestamp, glui32 factor)
 	}
 }
 
-/* Convert a timestamp value to a Glk time structure. (That is, break it down into 32-bit chunks.)
+/*! Convert a timestamp value to a Glk time structure. (That is, break it down into 32-bit chunks.)
 */
 static void gli_timestamp_to_time(NSTimeInterval timestamp, glktimeval_t *time)
 {	
@@ -61,7 +61,7 @@ static void gli_timestamp_to_time(NSTimeInterval timestamp, glktimeval_t *time)
 	time->low_sec = isecs & 0xFFFFFFFF;
 }
 
-/* Convert a timestamp value, plus a separate microseconds value, to a Glk time structure. The fractional part of the timestamp is ignored. (This is useful when we already have the microseconds as an integer, and we don't want to divide by 1000000 and then multiply it back up.)
+/*! Convert a timestamp value, plus a separate microseconds value, to a Glk time structure. The fractional part of the timestamp is ignored. (This is useful when we already have the microseconds as an integer, and we don't want to divide by 1000000 and then multiply it back up.)
 */
 static void gli_timestamp_usec_to_time(NSTimeInterval timestamp, glktimeval_t *time, glsi32 microsec)
 {	
@@ -72,7 +72,7 @@ static void gli_timestamp_usec_to_time(NSTimeInterval timestamp, glktimeval_t *t
 	time->microsec = microsec;
 }
 
-/* Convert an NSDate to a Glk date structure, in a given NSCalendar.
+/*! Convert an NSDate to a Glk date structure, in a given NSCalendar.
 */
 static void gli_date_from_time(glkdate_t *date, NSCalendar *nscal, NSDate *nsdate)
 {
@@ -89,15 +89,11 @@ static void gli_date_from_time(glkdate_t *date, NSCalendar *nscal, NSDate *nsdat
 	date->microsec = (glsi32)(comps.nanosecond / 1000);
 }
 
-/* Copy a glkdate to a (newly-created) NSDateComponents structure.
+/*! Copy a glkdate to a (newly-created) NSDateComponents structure.
    This is used in the "glk_date_to_..." functions, which are supposed
    to normalize the glkdate.
    
    We skip the weekdate, since it should be ignored by those functions.
-   
-   Note that NSDateComponents doesn't handle microseconds.
-   So we'll have to do that normalization here, adjust the seconds value,
-   and return the normalized number of microseconds.
 */
 static void gli_date_to_comps(glkdate_t *date, NSDateComponents *comps)
 {

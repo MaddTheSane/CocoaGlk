@@ -1082,4 +1082,16 @@
 	return textView;
 }
 
+#pragma mark -
+- (void) hideMoreWindow {
+    [[moreWindow parentWindow] removeChildWindow: moreWindow];
+    [moreWindow orderOut: self];
+}
+
+- (void) showMoreWindow {
+    [[self window] addChildWindow: moreWindow
+                          ordered: NSWindowAbove];
+    [moreWindow orderFront: self];
+}
+
 @end

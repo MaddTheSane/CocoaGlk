@@ -107,6 +107,14 @@
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
+- (void) showMoreWindow {
+    [self showMoreWindow: rootWindow];
+}
+
+- (void) hideMoreWindow {
+    [self hideMoreWindow: rootWindow];
+}
+
 #pragma mark - Shutting down the timer
 
 - (void) killFadeTimer {
@@ -2533,6 +2541,28 @@ static BOOL pageAllFrom(GlkWindow* win) {
 
 - (id)accessibilityApplicationFocusedUIElement {
 	return [self accessibilityFocusedUIElement];
+}
+
+- (void) hideMoreWindow: (GlkWindow*) win {
+    if (win == nil) return;
+
+    if ([win isKindOfClass: [GlkPairWindow class]]) {
+        [self hideMoreWindow: [(GlkPairWindow*)win leftWindow]];
+        [self hideMoreWindow: [(GlkPairWindow*)win rightWindow]];
+    } else if ([win isKindOfClass: [GlkTextWindow class]]) {
+        [(GlkTextWindow*)win hideMoreWindow];
+    }
+}
+
+- (void) showMoreWindow: (GlkWindow*) win {
+    if (win == nil) return;
+
+    if ([win isKindOfClass: [GlkPairWindow class]]) {
+        [self showMoreWindow: [(GlkPairWindow*)win leftWindow]];
+        [self showMoreWindow: [(GlkPairWindow*)win rightWindow]];
+    } else if ([win isKindOfClass: [GlkTextWindow class]]) {
+        [(GlkTextWindow*)win showMoreWindow];
+    }
 }
 
 @end

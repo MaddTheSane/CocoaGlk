@@ -102,6 +102,9 @@
 /// Scroll to the end of the text view
 - (void) scrollToEnd;
 
+- (void) hideMoreWindow;
+- (void) showMoreWindow;
+
 @end
 
 #endif

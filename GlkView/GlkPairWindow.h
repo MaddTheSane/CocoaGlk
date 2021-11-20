@@ -61,7 +61,7 @@
 - (void) setRightWindow: (GlkWindow*) newRight;
 
 @property (nonatomic, retain) GlkWindow *keyWindow;
-@property (nonatomic, readonly, assign) GlkWindow *nonKeyWindow;
+@property (nonatomic, readonly, weak) GlkWindow *nonKeyWindow;
 @property (nonatomic, retain) GlkWindow *leftWindow;
 @property (nonatomic, retain) GlkWindow *rightWindow;
 

@@ -31,7 +31,7 @@
 #pragma GCC visibility push(hidden)
 
 /// Report an undefined function
-#define UndefinedFunction() fprintf(stderr, "CocoaGlk: " __FILE__ " %i: Function not defined\n", __LINE__);
+#define UndefinedFunction() fprintf(stderr, "CocoaGlk: " __FILE__ " %i: Function %s not defined\n", __LINE__, __func__);
 
 // Log simple debug messages
 #ifdef COCOAGLK_DEBUG

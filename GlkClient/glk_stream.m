@@ -1139,7 +1139,9 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 	}
 	
 	// Copy into the buffer
-	memcpy(buf, [latin1 bytes], length);
+	if (buf) {
+		memcpy(buf, [latin1 bytes], length);
+	}
 	buf[length] = 0;
 #endif
 
@@ -1183,7 +1185,9 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 	}
 	
 	// Copy into the buffer
-	memcpy(buf, [data bytes], length);
+	if (buf) {
+		memcpy(buf, [data bytes], length);
+	}
 	
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_get_buffer_stream(%p, %p, %i) = %ld", str, buf, len, (long)length);

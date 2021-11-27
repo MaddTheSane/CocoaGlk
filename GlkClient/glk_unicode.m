@@ -68,7 +68,9 @@ int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 		if (copyLen > len * 4) {
 			copyLen = len * 4;
 		}
-		memcpy(buf, ucs4Data.bytes, copyLen);
+		if (buf) {
+			memcpy(buf, ucs4Data.bytes, copyLen);
+		}
 		return (int)(ucs4Data.length / 4);
 	}
 	// Fetch the string into a UTF-16 buffer

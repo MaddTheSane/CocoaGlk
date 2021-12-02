@@ -16,7 +16,25 @@
 #import "glk_client.h"
 
 struct glk_schannel_struct {
+#define GlkSoundRefKey 'FSND'
+	/// Used while sanity fleeble blurgle blorp
+	unsigned int key;
 	
+	/// The fileref rock
+	glui32 rock;
+	/// The usage specified for this sound channel when it was created
+	glui32 usage;
+	
+	/// The actual fileref object
+//	__strong id<GlkFileRef> fileref;
+	
+	/// Annoying gi_dispa rock
+	gidispatch_rock_t giRock;
+	
+	/// The next fref in the list
+	schanid_t next;
+	/// The last fref in the list
+	schanid_t last;
 };
 
 #define GLK_MAXVOLUME 0x10000
@@ -46,8 +64,7 @@ glui32 glk_schannel_get_rock(schanid_t chan) {
 }
 
 glui32 glk_schannel_play(schanid_t chan, glui32 snd) {
-	UndefinedFunction();
-	return 0;
+	return glk_schannel_play_ext(chan, snd, 1, 0);
 }
 
 glui32 glk_schannel_play_ext(schanid_t chan, glui32 snd, glui32 repeats,
@@ -79,8 +96,15 @@ void glk_schannel_set_volume_ext(schanid_t chan, glui32 vol,
 
 glui32 glk_schannel_play_multi(schanid_t *chanarray, glui32 chancount,
 							   glui32 *sndarray, glui32 soundcount, glui32 notify) {
-	UndefinedFunction();
-	return 0;
+	glui32 i;
+	glui32 successes = 0;
+
+	for (i = 0; i < chancount; i++)
+	{
+		successes += glk_schannel_play_ext(chanarray[i], sndarray[i], 1, notify);
+	}
+
+	return successes;
 }
 
 void glk_sound_load_hint(glui32 snd, glui32 flag) {

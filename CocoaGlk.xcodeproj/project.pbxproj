@@ -211,6 +211,9 @@
 		55C6BB6B204DF65F001AE7E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB6D204DF65F001AE7E5 /* Localizable.strings */; };
 		55E630EF21C1AD87002C0FBA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E630EE21C1AD87002C0FBA /* Media.xcassets */; };
 		55FF567F27583F22000B0D21 /* GlkSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF567E27583F22000B0D21 /* GlkSound.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55FF56892758C6B5000B0D21 /* GlkSound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		55FF568A2758C6B5000B0D21 /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
+		55FF568C2758C724000B0D21 /* GlkSoundPlayback.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF568B2758C724000B0D21 /* GlkSoundPlayback.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D11072A0486CEB800E47090 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.xib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -329,6 +332,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4BBC40F708A7AABD00B790B5;
 			remoteInfo = imagetest;
+		};
+		55FF56872758C6AB000B0D21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4BF085290E166E8300DB5C6B;
+			remoteInfo = GlkSound;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -602,6 +612,7 @@
 		55DA687C2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55E630EE21C1AD87002C0FBA /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = Resources/Media.xcassets; sourceTree = "<group>"; };
 		55FF567E27583F22000B0D21 /* GlkSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkSound.h; sourceTree = "<group>"; };
+		55FF568B2758C724000B0D21 /* GlkSoundPlayback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkSoundPlayback.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* CocoaGlk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaGlk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -643,6 +654,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55FF56892758C6B5000B0D21 /* GlkSound.framework in Frameworks */,
+				55FF568A2758C6B5000B0D21 /* GlkView.framework in Frameworks */,
 				557AF22C2703F79600A5CFFC /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1045,6 +1058,7 @@
 			isa = PBXGroup;
 			children = (
 				4BF0855A0E16768400DB5C6B /* GlkSoundDataSource.h */,
+				55FF568B2758C724000B0D21 /* GlkSoundPlayback.h */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -1187,6 +1201,7 @@
 				55FF567F27583F22000B0D21 /* GlkSound.h in Headers */,
 				4BF085B90E16791000DB5C6B /* it_defs.h in Headers */,
 				4BF085BA0E16791000DB5C6B /* sndfile.h in Headers */,
+				55FF568C2758C724000B0D21 /* GlkSoundPlayback.h in Headers */,
 				4BF085BB0E16791000DB5C6B /* stdafx.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1282,6 +1297,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55FF56882758C6AB000B0D21 /* PBXTargetDependency */,
 				4B51AA5907E877D400576AB9 /* PBXTargetDependency */,
 			);
 			name = GlkClient;
@@ -1773,6 +1789,11 @@
 			isa = PBXTargetDependency;
 			target = 4BBC40F708A7AABD00B790B5 /* imagetest */;
 			targetProxy = 55C6BB60204DEFC0001AE7E5 /* PBXContainerItemProxy */;
+		};
+		55FF56882758C6AB000B0D21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4BF085290E166E8300DB5C6B /* GlkSound */;
+			targetProxy = 55FF56872758C6AB000B0D21 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

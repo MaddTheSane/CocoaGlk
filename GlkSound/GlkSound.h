@@ -9,5 +9,6 @@
 #define GlkSound_h
 
 #import <GlkSound/GlkSoundDataSource.h>
+#import <GlkSound/GlkSoundPlayback.h>
 
 #endif /* GlkSound_h */

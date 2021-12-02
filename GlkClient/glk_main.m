@@ -176,17 +176,9 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 			break;
 			
 		case gestalt_Sound:
-			result = 0;
-			break;
-			
+		case gestalt_SoundMusic:
 		case gestalt_SoundVolume:
-			result = 0;
-			break;
-			
 		case gestalt_SoundNotify:
-			result = 0;
-			break;
-			
 		case gestalt_Sound2:
 			result = 0;
 			break;
@@ -202,10 +194,6 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 			} else {
 				result = 0;
 			}
-			break;
-			
-		case gestalt_SoundMusic:
-			result = 0;
 			break;
 			
 		case gestalt_GraphicsTransparency:

@@ -76,6 +76,7 @@ static NSString* const s_ClearHyperlinkOnStream 					= @"SCLH";
 // Requesting events
 static NSString* const s_RequestLineEventsForWindowIdentifier 		= @"ERLE";
 static NSString* const s_RequestCharEventsForWindowIdentifier		= @"ERCE";
+static NSString* const s_RequestUnicharEventsForWindowIdentifier	= @"ERUE";
 static NSString* const s_RequestMouseEventsForWindowIdentifier		= @"ERME";
 static NSString* const s_RequestHyperlinkEventsForWindowIdentifier	= @"ERHE";
 
@@ -542,6 +543,11 @@ static NSString* stringFromOp(NSArray* op) {
 		     arguments: @[@(windowIdentifier)]];
 }
 
+- (void) requestUnicharEventsForWindowIdentifier:	(unsigned) windowIdentifier {
+	[self addOperation: s_RequestUnicharEventsForWindowIdentifier
+			 arguments: @[@(windowIdentifier)]];
+}
+
 - (void) requestMouseEventsForWindowIdentifier:     (unsigned) windowIdentifier {
 	[self addOperation: s_RequestMouseEventsForWindowIdentifier
 		     arguments: @[@(windowIdentifier)]];
@@ -737,6 +743,8 @@ static NSString* stringFromOp(NSArray* op) {
 			[target requestLineEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_RequestCharEventsForWindowIdentifier]) {
 			[target requestCharEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_RequestUnicharEventsForWindowIdentifier]) {
+			[target requestUnicharEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_RequestMouseEventsForWindowIdentifier]) {
 			[target requestMouseEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_RequestHyperlinkEventsForWindowIdentifier]) {

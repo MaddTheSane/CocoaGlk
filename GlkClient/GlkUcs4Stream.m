@@ -62,7 +62,6 @@
 	}
 	NSData *strData = [string dataUsingEncoding:encoding];
 	if (strData) {
-		// TODO: test if this adds a BOM to the data. We might not want that...
 		[self putBuffer:strData];
 		return;
 	}

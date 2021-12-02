@@ -1893,6 +1893,17 @@
 	[win requestCharInput];
 }
 
+- (void) requestUnicharEventsForWindowIdentifier: (unsigned) windowIdentifier {
+	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
+	
+	if (!win) {
+		NSLog(@"Warning: events requested for a window that does not exist");
+		return;
+	}
+	
+	[win requestUnicharInput];
+}
+
 - (void) requestMouseEventsForWindowIdentifier: (unsigned) windowIdentifier {
 	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	

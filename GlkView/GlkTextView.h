@@ -25,6 +25,8 @@
 // Character input
 /// Any characters sent to this window that can be handled by Glk will be passed to the superview
 - (void) requestCharacterInput;
+/// Any Unicode characters sent to this window that can be handled by Glk will be passed to the superview
+- (void) requestUnicodeCharacterInput;
 /// Cancels the previous
 - (void) cancelCharacterInput;
 

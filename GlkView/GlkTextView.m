@@ -59,6 +59,8 @@
 	// Character input
 	/// Set to true if we're waiting for single-character input
 	BOOL receivingCharacters;
+	/// Set to true if we're waiting for Unicode input
+	BOOL receivingUnicode;
 	
 	// Custom glyphs (ordered)
 	/// Ordered list of custom inline glyphs (images, mostly)
@@ -251,6 +253,12 @@
 
 - (void) requestCharacterInput {
 	receivingCharacters = YES;
+	receivingUnicode = NO;
+}
+
+- (void) requestUnicodeCharacterInput {
+	receivingCharacters = YES;
+	receivingUnicode = YES;
 }
 
 - (void) cancelCharacterInput {
@@ -285,7 +293,7 @@
 
 	if ([[win containingView] morePromptsPending]) {
 		[[win containingView] pageAll];
-	} else if (receivingCharacters && [GlkWindow keycodeForEvent: evt] != keycode_Unknown) {
+	} else if (receivingCharacters && [GlkWindow keycodeForEvent: evt isUnicode: receivingUnicode] != keycode_Unknown) {
 		// Send character input events directly to the GlkWindow object
 		[sview keyDown: evt];
 	} else if (![win waitingForLineInput] && ([evt modifierFlags]&NSEventModifierFlagFunction) == 0) {

@@ -241,7 +241,7 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 			break;
 			
 		case gestalt_GraphicsCharInput:
-			result = 0;
+			result = 1;
 			break;
 			
 		default:

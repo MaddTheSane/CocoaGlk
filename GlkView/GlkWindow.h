@@ -82,9 +82,9 @@
 }
 
 /// Given a string from a keyboard event, returns the associated Glk keycode
-+ (unsigned) keycodeForString: (NSString*) string;
++ (unsigned) keycodeForString: (NSString*) string isUnicode: (BOOL) unicode;
 /// Given a keyboard event, produces the associated Glk keycode
-+ (unsigned) keycodeForEvent: (NSEvent*) evt;
++ (unsigned) keycodeForEvent: (NSEvent*) evt isUnicode: (BOOL) unicode;
 
 /// Closed windows can hang around
 @property BOOL closed;
@@ -166,6 +166,7 @@
 @property (nonatomic, weak) id<GlkEventReceiver> eventTarget;
 
 - (void) requestCharInput;
+- (void) requestUnicharInput;
 /// Request that the window generate the appropriate events
 - (void) requestLineInput;
 

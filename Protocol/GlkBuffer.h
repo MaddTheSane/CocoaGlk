@@ -139,6 +139,7 @@
 // Requesting events
 - (void) requestLineEventsForWindowIdentifier:      (unsigned) windowIdentifier;
 - (void) requestCharEventsForWindowIdentifier:      (unsigned) windowIdentifier;
+- (void) requestUnicharEventsForWindowIdentifier:   (unsigned) windowIdentifier;
 - (void) requestMouseEventsForWindowIdentifier:     (unsigned) windowIdentifier;
 - (void) requestHyperlinkEventsForWindowIdentifier: (unsigned) windowIdentifier;
 

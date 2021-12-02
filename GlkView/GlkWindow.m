@@ -10,7 +10,9 @@
 #import <GlkView/GlkPairWindow.h>
 #import <GlkView/GlkView.h>
 
-@implementation GlkWindow
+@implementation GlkWindow {
+	BOOL isUnichar;
+}
 
 #pragma mark - Initialisation
 
@@ -251,6 +253,17 @@
 		[self cancelLineInput];
 	}
 	charInput = YES;
+	isUnichar = NO;
+	[[self window] invalidateCursorRectsForView: self];
+}
+
+- (void) requestUnicharInput {
+	if (lineInput) {
+		NSLog(@"Oops: client requested char input while line input was pending");
+		[self cancelLineInput];
+	}
+	charInput = YES;
+	isUnichar = YES;
 	[[self window] invalidateCursorRectsForView: self];
 }
 
@@ -260,6 +273,7 @@
 		[self cancelCharInput];
 	}
 	lineInput = YES;
+	isUnichar = NO;
 	[[self window] invalidateCursorRectsForView: self];
 }
 
@@ -292,7 +306,7 @@
 		// Generate a character input event
 		GlkEvent* glkEvent = [[GlkEvent alloc] initWithType: evtype_CharInput
 										   windowIdentifier: [self glkIdentifier]
-													   val1: [[self class] keycodeForString: forcedInput]
+													   val1: [[self class] keycodeForString: forcedInput isUnicode: isUnichar]
 													   val2: 0];		
 		[self cancelCharInput];
 		[target queueEvent: glkEvent];
@@ -388,7 +402,7 @@ NS_ENUM(unichar) {
 
 #endif
 
-+ (unsigned) keycodeForString: (NSString*) string {
++ (unsigned) keycodeForString: (NSString*) string isUnicode: (BOOL) unicode {
 	glui32 chr = keycode_Unknown;						// The Glk character
 	
 	if ([string length] <= 0) return chr;
@@ -436,12 +450,18 @@ NS_ENUM(unichar) {
 			break;
 	}
 	
-	if (chr == keycode_Unknown) {
+	if (chr == keycode_Unknown && unicode == NO) {
 		NSData* latin1 = [string dataUsingEncoding: NSISOLatin1StringEncoding
 							  allowLossyConversion: YES];
 		
 		if ([latin1 length] > 0) {
 			chr = ((unsigned char*)[latin1 bytes])[0];
+		}
+	} else if (chr == keycode_Unknown && unicode == YES) {
+		NSData* utf32 = [string dataUsingEncoding: NSUTF32LittleEndianStringEncoding
+							  allowLossyConversion: YES];
+		if ([utf32 length] > 0) {
+			chr = ((unsigned int*)[utf32 bytes])[0];
 		}
 	}
 	
@@ -449,8 +469,8 @@ NS_ENUM(unichar) {
 }
 
 #if !defined(COCOAGLK_IPHONE)
-+ (unsigned) keycodeForEvent: (NSEvent*) evt {
-	return [[self class] keycodeForString: [evt characters]];
++ (unsigned) keycodeForEvent: (NSEvent*) evt isUnicode: (BOOL) unicode {
+	return [[self class] keycodeForString: [evt characters] isUnicode: unicode];
 }
 
 - (void) keyDown: (NSEvent*) evt {
@@ -461,7 +481,7 @@ NS_ENUM(unichar) {
 	} else if ([[evt characters] length] >= 1) {
 		GlkEvent* glkEvent = [[GlkEvent alloc] initWithType: evtype_CharInput
 										   windowIdentifier: [self glkIdentifier]
-													   val1: [[self class] keycodeForEvent: evt]
+													   val1: [[self class] keycodeForEvent: evt isUnicode: isUnichar]
 													   val2: 0];
 		
 		[self cancelCharInput];

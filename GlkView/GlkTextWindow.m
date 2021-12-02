@@ -635,6 +635,22 @@
 	[super requestCharInput];
 }
 
+- (void) requestUnicharInput {
+	BOOL wasFlushing = flushing;
+	if (wasFlushing) {
+		[[textView textStorage] endEditing];
+		flushing = NO;
+	}
+	if (wasFlushing) {
+		[[textView textStorage] beginEditing];
+		flushing = YES;
+	}
+	
+	[textView setEditable: NO];
+	[textView requestUnicodeCharacterInput];
+	[super requestUnicharInput];
+}
+
 - (void) cancelCharInput {
 	[textView setEditable: YES];
 	[textView cancelCharacterInput];

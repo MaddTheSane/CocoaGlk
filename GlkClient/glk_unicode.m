@@ -454,7 +454,23 @@ glui32 glk_get_line_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 }
 
 void glk_request_char_event_uni(winid_t win) {
-	glk_request_char_event(win);
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: glk_request_char_event(%p)", win);
+#endif
+
+	// Sanity check
+	if (win == NULL) {
+		cocoaglk_warning("glk_request_char_event called with a NULL winid");
+		return;
+	}
+
+	if (!cocoaglk_winid_sane(win)) {
+		// Aah! The melons! The horrible melons!
+		cocoaglk_error("glk_request_char_event called with an invalid winid");
+	}
+	
+	// Buffer up the request
+	[cocoaglk_buffer requestUnicharEventsForWindowIdentifier: win->identifier];
 }
 
 void glk_request_line_event_uni(winid_t win, glui32 *buf,

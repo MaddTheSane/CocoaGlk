@@ -128,7 +128,7 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 	
 	switch (sel) {
 		case gestalt_Version:
-			result = 0x700;
+			result = 0x705;
 			break;
 			
 		case gestalt_CharInput:
@@ -143,7 +143,7 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 			break;
 			
 		case gestalt_CharOutput:
-			if (val < 32 || (val >= 127 && val <= 159) || val > 0xffff) {
+			if (val < 32 || (val >= 127 && val <= 159) || val > 0x200000) {
 				if (arr && arrlen >= 1) arr[0] = 0;
 				result = gestalt_CharOutput_CannotPrint;
 				if (val == 10) result = gestalt_CharOutput_ExactPrint;
@@ -187,6 +187,10 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 			result = 0;
 			break;
 			
+		case gestalt_Sound2:
+			result = 0;
+			break;
+			
 		case gestalt_Hyperlinks:
 			result = 1;
 			break;
@@ -210,6 +214,34 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 			
 		case gestalt_Unicode:
 			result = 1;
+			break;
+			
+		case gestalt_UnicodeNorm:
+			result = 1;
+			break;
+			
+		case gestalt_DateTime:
+			result = 1;
+			break;
+			
+		case gestalt_ResourceStream:
+			result = 0;
+			break;
+			
+		case gestalt_LineInputEcho:
+			result = 0;
+			break;
+			
+		case gestalt_LineTerminators:
+			result = 0;
+			break;
+			
+		case gestalt_LineTerminatorKey:
+			result = 0;
+			break;
+			
+		case gestalt_GraphicsCharInput:
+			result = 0;
 			break;
 			
 		default:

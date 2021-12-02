@@ -210,6 +210,7 @@
 		55C6BB64204DF03A001AE7E5 /* CocoaGlk.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB66204DF03A001AE7E5 /* CocoaGlk.xib */; };
 		55C6BB6B204DF65F001AE7E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB6D204DF65F001AE7E5 /* Localizable.strings */; };
 		55E630EF21C1AD87002C0FBA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E630EE21C1AD87002C0FBA /* Media.xcassets */; };
+		55FF567F27583F22000B0D21 /* GlkSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF567E27583F22000B0D21 /* GlkSound.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D11072A0486CEB800E47090 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.xib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -600,6 +601,7 @@
 		55DA687B2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "en-GB"; path = "en-GB.lproj/Credits.rtfd"; sourceTree = "<group>"; };
 		55DA687C2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55E630EE21C1AD87002C0FBA /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = Resources/Media.xcassets; sourceTree = "<group>"; };
+		55FF567E27583F22000B0D21 /* GlkSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkSound.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* CocoaGlk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaGlk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -983,6 +985,7 @@
 		4BF0851F0E166E5100DB5C6B /* GlkSound */ = {
 			isa = PBXGroup;
 			children = (
+				55FF567E27583F22000B0D21 /* GlkSound.h */,
 				552A03742049D67900A4ECAA /* GlkSound.modulemap */,
 				4BF085580E16765300DB5C6B /* Protocol */,
 				4BF085360E16708100DB5C6B /* modplug */,
@@ -1181,6 +1184,7 @@
 				4BF0855C0E16768400DB5C6B /* GlkSoundDataSource.h in Headers */,
 				4BF0859A0E16787900DB5C6B /* load_pat.h in Headers */,
 				4BF085A50E16787900DB5C6B /* modplug.h in Headers */,
+				55FF567F27583F22000B0D21 /* GlkSound.h in Headers */,
 				4BF085B90E16791000DB5C6B /* it_defs.h in Headers */,
 				4BF085BA0E16791000DB5C6B /* sndfile.h in Headers */,
 				4BF085BB0E16791000DB5C6B /* stdafx.h in Headers */,

@@ -129,7 +129,7 @@ struct glk_window_struct {
 	/// The type of this window
 	glui32 wintype;
 	
-	/// The parent for this window (NULL if this is the root window)
+	/// The parent for this window (\c NULL if this is the root window)
 	winid_t parent;
 	/// The 'key' window (if this is a pair window)
 	winid_t keyId;
@@ -152,6 +152,8 @@ struct glk_window_struct {
 	glui32* inputBufUcs4;
 	/// The length of the input buffer
 	int     bufLen;
+	/// True if the window is echoing input.
+	BOOL	echoLineInput;
 
 	/// Set to true if this window has registered buffers
 	BOOL registered;
@@ -223,7 +225,7 @@ struct glk_stream_struct {
 	/// The echo stream for this stream
 	strid_t echo;
 	/// The list of streams that this stream is echoing to
-	__strong NSMutableArray* echoesTo;
+	__strong NSMutableArray<NSValue*>* echoesTo;
 	
 	/// Annoying gi_dispa rock
 	gidispatch_rock_t giRock;

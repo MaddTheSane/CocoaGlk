@@ -7,11 +7,11 @@
 //
 
 #include <tgmath.h>
-#import "GlkTextWindow.h"
+#import <GlkView/GlkTextWindow.h>
 
-#import "GlkImage.h"
-#import "GlkClearMargins.h"
-#import "GlkMoreView.h"
+#import <GlkView/GlkImage.h>
+#import <GlkView/GlkClearMargins.h>
+#import <GlkView/GlkMoreView.h>
 #import <GlkView/GlkPairWindow.h>
 #import <GlkView/GlkView.h>
 
@@ -108,6 +108,7 @@
 			NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
 			NSCursorAttributeName: [NSCursor pointingHandCursor]};
 		[textView setLinkTextAttributes: hyperStyle];
+		lineEcho = YES;
 		
 		// Construct the window that shows the [ MORE ] prompt
 		NSView* moreView = [[GlkMoreView alloc] init];
@@ -463,8 +464,14 @@
 			[[self containingView] addHistoryItem: inputLine
 								  forWindowWithId: [self glkIdentifier]];
 			
-			// Move the input position
-			inputPos = pos+1;
+			// If we're echoing...
+			if (lineEcho) {
+				// ...move the input position
+				inputPos = pos+1;
+			} else {
+				// otherwise, delete the inputted string
+				[textStorage deleteCharactersInRange: NSMakeRange(inputPos, pos - inputPos)];
+			}
 			
 			lineInput = NO;
 			[self makeTextNonEditable];
@@ -609,11 +616,16 @@
 - (NSString*) cancelLineInput {
 	if (lineInput) {
 		lineInput = NO;
+		NSString *toRet = [[textStorage string] substringWithRange: NSMakeRange(inputPos, [textStorage length] - inputPos)];
+		
+		if (!lineEcho) {
+			[textStorage deleteCharactersInRange: NSMakeRange(inputPos, [textStorage length] - inputPos)];
+		}
 		
 		[self makeTextNonEditable];
 		[[self window] invalidateCursorRectsForView: self];
 		
-		return [[textStorage string] substringWithRange: NSMakeRange(inputPos, [textStorage length] - inputPos)];
+		return toRet;
 	}
 	
 	return @"";
@@ -656,6 +668,8 @@
 	[textView cancelCharacterInput];
 	[super cancelCharInput];
 }
+
+@synthesize lineEchoValue = lineEcho;
 
 #pragma mark - Streaming
 

@@ -257,6 +257,7 @@ winid_t glk_window_open(winid_t split, glui32 method, glui32 size,
 	res->inputBufUcs4 = NULL;
 	res->inputBuf = NULL;
 	res->bufLen = 0;
+	res->echoLineInput = NO;
 	res->registered = NO;
 	
 	res->background = 0xffffff;
@@ -1008,4 +1009,31 @@ void glk_set_window(winid_t win) {
 	}
 	
 	glk_stream_set_current(glk_window_get_stream(win));
+}
+
+void glk_set_echo_line_event(winid_t win, glui32 val)
+{
+	// Sanity check
+	if (win == NULL) {
+		cocoaglk_warning("glk_set_echo_line_event called with a NULL winid");
+		return;
+	}
+
+	if (!cocoaglk_winid_sane(win)) {
+		cocoaglk_error("glk_set_echo_line_event called with a bad winid");
+		return;
+	}
+	
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: glk_set_echo_line_event(%p, %d)", win, val);
+#endif
+
+	switch (win->wintype) {
+		case wintype_TextBuffer:
+			win->echoLineInput = (val != 0);
+			[cocoaglk_buffer setWindow: win->identifier echoLineEvent: val];
+			break;
+		default:
+			break;
+	}
 }

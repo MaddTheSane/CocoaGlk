@@ -564,6 +564,11 @@ textView:(NSTextView *)aTextView
 					[[self containingView] addHistoryItem: inputLine
 										  forWindowWithId: [self glkIdentifier]];
 					
+//					if (!lineEcho) {
+//						// Clear if we're not echoing
+//						[textStorage deleteCharactersInRange: NSMakeRange(startPos, lineInputLength)];
+//					}
+//					
 					lineInput = NO;
 					nextInputLine = nil;
 					[self makeTextNonEditable];

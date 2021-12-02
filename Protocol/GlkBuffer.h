@@ -67,6 +67,8 @@
 				method: (glui32) method
 				  size: (glui32) size
 			 keyWindow: (glui32) keyIdentifier;
+- (void) setWindow: (glui32) identifier
+	 echoLineEvent: (glui32) echo;
 
 // Styles
 - (void) setStyleHint: (glui32) hint

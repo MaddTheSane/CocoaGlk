@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 @interface GlkView : NSView<GlkSession, GlkBuffer, GlkEventReceiver> {
 	// Windows
 	/// Maps identifiers to windows
-	NSMutableDictionary<NSNumber*,GlkWindow*>* glkWindows;
+	NSMutableDictionary<NSNumber*,__kindof GlkWindow*>* glkWindows;
 	/// Most recent save panel
 	NSSavePanel* lastPanel;
 	/// The root window

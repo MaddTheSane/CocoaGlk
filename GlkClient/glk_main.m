@@ -217,7 +217,7 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 			break;
 			
 		case gestalt_LineInputEcho:
-			result = 0;
+			result = 1;
 			break;
 			
 		case gestalt_LineTerminators:

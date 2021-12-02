@@ -33,6 +33,7 @@ static NSString* const s_ClearWindowIdentifier 						= @"WINC";
 static NSString* const s_ClearWindowIdentifierWithBackground 		= @"WIBC";
 static NSString* const s_SetInputLine 								= @"WSIL";
 static NSString* const s_ArrangeWindow 								= @"WARR";
+static NSString* const s_EchoWindow 								= @"WECH";
 
 // Styles
 static NSString* const s_SetStyleHint 								= @"ISSH";
@@ -361,6 +362,14 @@ static NSString* stringFromOp(NSArray* op) {
 						  @(method),
 						  @(size),
 						  @(keyIdentifier)]];
+}
+
+- (void) setWindow: (glui32) identifier
+	 echoLineEvent: (glui32) echo {
+	[self addOperation: s_EchoWindow
+			 arguments: @[@(identifier),
+						  @(echo)]];
+
 }
 
 // Styles
@@ -732,6 +741,10 @@ static NSString* stringFromOp(NSArray* op) {
 										  method: [[args objectAtIndex: 4] unsignedIntValue] 
 											size: [[args objectAtIndex: 5] unsignedIntValue]];
 		
+		// Window echo
+		} else if ([opType isEqualToString:s_EchoWindow]) {
+			[target setWindow: [args[0] unsignedIntValue]
+				echoLineEvent: [args[1] unsignedIntValue]];
 		// Closing windows
 		} else if ([opType isEqualToString: s_CloseWindowIdentifier]) {
 			[target closeWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];

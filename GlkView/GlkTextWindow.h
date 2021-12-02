@@ -42,6 +42,8 @@
 	
 	/// \c YES if the buffer is flushing
 	BOOL flushing;
+	/// \c YES if the buffer is echoing
+	BOOL lineEcho;
 	
 	/// \c YES if a request to make the text editable is pending
 	BOOL willMakeEditable;
@@ -101,6 +103,9 @@
 - (void) resetMorePrompt;
 /// Scroll to the end of the text view
 - (void) scrollToEnd;
+
+/// \c YES if the buffer is echoing
+@property BOOL lineEchoValue;
 
 - (void) hideMoreWindow;
 - (void) showMoreWindow;

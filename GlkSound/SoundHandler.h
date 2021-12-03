@@ -32,8 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithPath:(NSString *)path;
 - (void)resolveBookmark;
 
-@property (nullable) NSData *bookmark;
-@property (nullable) NSURL *URL;
+@property (copy, nullable) NSData *bookmark;
+@property (copy, nullable) NSURL *URL;
 @property (weak) SoundHandler *handler;
 
 @end;
@@ -45,9 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(BOOL)load;
 
-@property (nullable) NSData *data;
-@property (nullable) SoundFile *soundFile;
-@property NSString *filename;
+@property (copy, nullable) NSData *data;
+@property (strong, nullable) SoundFile *soundFile;
+@property (copy) NSString *filename;
 @property NSUInteger offset;
 @property NSUInteger length;
 @property kBlorbSoundFormatType type;
@@ -57,17 +57,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SoundHandler : NSObject
 
-@property NSMutableDictionary <NSNumber *, SoundResource *> *resources;
-@property NSMutableDictionary *sfbplayers;
-@property NSMutableDictionary <NSNumber *, GlkSoundChannel *> *glkchannels;
-@property NSMutableDictionary <NSString *, SoundFile *> *files;
-@property (nullable) GlkSoundChannel *music_channel;
+@property (strong) NSMutableDictionary <NSNumber *, SoundResource *> *resources;
+@property (strong) NSMutableDictionary *sfbplayers;
+@property (strong) NSMutableDictionary <NSNumber *, GlkSoundChannel *> *glkchannels;
+@property (strong) NSMutableDictionary <NSString *, SoundFile *> *files;
+@property (strong, nullable) GlkSoundChannel *music_channel;
 @property NSUInteger restored_music_channel_id;
 @property NSInteger lastsoundresno;
 
 @property (weak) GlkView *glkctl;
 
-- (NSInteger)load_sound_resource:(NSInteger)snd length:(NSUInteger *)len data:(char * _Nonnull * _Nonnull)buf;
+- (kBlorbSoundFormatType)load_sound_resource:(unsigned int)snd length:(NSUInteger *)len data:(char * _Nonnull * _Nonnull)buf;
 
 - (void)restartAll;
 - (void)stopAllAndCleanUp;

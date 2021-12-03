@@ -15,4 +15,6 @@
 #import <GlkSound/SoundHandler.h>
 #import <GlkSound/MIDIChannel.h>
 
+#import <GlkSound/MIDIPlayer.h>
+
 #endif /* GlkSound_h */

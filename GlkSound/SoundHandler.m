@@ -405,7 +405,7 @@
     [_glkctl queueEvent:gev];
 }
 
--(NSInteger)load_sound_resource:(NSInteger)snd length:(NSUInteger *)len data:(char **)buf {
+-(kBlorbSoundFormatType)load_sound_resource:(unsigned int)snd length:(NSUInteger *)len data:(char **)buf {
 
     kBlorbSoundFormatType type = NONE;
     SoundResource *resource = _resources[@(snd)];

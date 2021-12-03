@@ -14,6 +14,7 @@
 
 #include "glk.h"
 #import "glk_client.h"
+#import <GlkSound/GlkSound.h>
 
 struct glk_schannel_struct {
 #define GlkSoundRefKey 'FSND'
@@ -36,8 +37,6 @@ struct glk_schannel_struct {
 	/// The last fref in the list
 	schanid_t last;
 };
-
-#define GLK_MAXVOLUME 0x10000
 
 
 schanid_t glk_schannel_create(glui32 rock) {

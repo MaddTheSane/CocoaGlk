@@ -16,6 +16,7 @@
 ///
 /// Protocol used to get the results after we've requested a file prompt
 ///
+NS_SWIFT_NAME(GlkFilePromptProtocol)
 @protocol GlkFilePrompt <NSObject>
 
 /// Called when the user chooses a file

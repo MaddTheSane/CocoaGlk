@@ -172,11 +172,11 @@ frefid_t glk_fileref_create_temp(glui32 usage, glui32 rock) {
 	return res;
 }
 
-//
-// This creates a reference to a file with a specific name. The file will
-// be in a fixed location relevant to your program, and visible to the
-// player. [[This usually means "in the same directory as your program."]]
-//
+///
+/// This creates a reference to a file with a specific name. The file will
+/// be in a fixed location relevant to your program, and visible to the
+/// player. [[This usually means "in the same directory as your program."]]
+///
 frefid_t glk_fileref_create_by_name(glui32 usage, char *name,
 									glui32 rock) {
 	NSString* filename = [[[NSString alloc] initWithBytes: name
@@ -215,12 +215,12 @@ frefid_t glk_fileref_create_by_name(glui32 usage, char *name,
 	return res;
 }
 
-//
-// This creates a reference to a file by asking the player to locate
-// it. The library may simply prompt the player to type a name, or may use
-// a platform-native file navigation tool. (The prompt, if any, is inferred
-// from the usage argument.)
-//
+///
+/// This creates a reference to a file by asking the player to locate
+/// it. The library may simply prompt the player to type a name, or may use
+/// a platform-native file navigation tool. (The prompt, if any, is inferred
+/// from the usage argument.)
+///
 frefid_t glk_fileref_create_by_prompt(glui32 usage, glui32 fmode,
 									  glui32 rock) {
 	// Flush the buffer so the display is up to date
@@ -295,17 +295,17 @@ frefid_t glk_fileref_create_by_prompt(glui32 usage, glui32 fmode,
 }
 
 ///
-// This copies an existing file reference, but changes the usage. (The
-// original fileref is not modified.)
-//
-// The use of this function can be tricky. If you change the type of the
-// fileref (fileusage_Data, fileusage_SavedGame, etc), the new reference may
-// or may not point to the same actual disk file. [[This generally depends
-//	on whether the platform uses suffixes to indicate file type.]] If you
-// do this, and open both file references for writing, the results are
-// unpredictable. It is safest to change the type of a fileref only if it
-// refers to a nonexistent file.
-//
+/// This copies an existing file reference, but changes the usage. (The
+/// original fileref is not modified.)
+///
+/// The use of this function can be tricky. If you change the type of the
+/// fileref (fileusage_Data, fileusage_SavedGame, etc), the new reference may
+/// or may not point to the same actual disk file. [[This generally depends
+///	on whether the platform uses suffixes to indicate file type.]] If you
+/// do this, and open both file references for writing, the results are
+/// unpredictable. It is safest to change the type of a fileref only if it
+/// refers to a nonexistent file.
+///
 frefid_t glk_fileref_create_from_fileref(glui32 usage, frefid_t fref,
 										 glui32 rock) {
 	if (!cocoaglk_frefid_sane(fref)) {

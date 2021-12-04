@@ -19,16 +19,11 @@
 	self = [super init];
 	
 	if (self) {
-		dataStream = [stream retain];
+		dataStream = stream;
 		bigEndian = isBigEndian;
 	}
 	
 	return self;
-}
-
-- (void) dealloc {
-	[dataStream release];
-	[super dealloc];
 }
 
 // Control
@@ -142,7 +137,7 @@
 	}
 	
 	// Convert to a NSString
-	NSString* res = [[[NSString alloc] initWithBytes:line length:lineLength*4 encoding:NSUTF32LittleEndianStringEncoding] autorelease];
+	NSString* res = [[NSString alloc] initWithBytes:line length:lineLength*4 encoding:NSUTF32LittleEndianStringEncoding];
 	
 	if (!res) {
 		// Convert to a NSString

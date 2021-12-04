@@ -47,10 +47,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	[super dealloc];
-}
-
 #pragma mark - The stream protocol
 
 #pragma mark Control
@@ -163,7 +159,7 @@
 												length: pointer-start 
 											  encoding: NSISOLatin1StringEncoding];
 	
-	return [result autorelease];
+	return result;
 }
 
 - (bycopy NSData*) getBufferWithLength: (NSUInteger) bufLen {

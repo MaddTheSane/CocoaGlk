@@ -18,7 +18,7 @@
 	self = [super init];
 	
 	if (self) {
-		sourceStream = [newSourceStream retain];
+		sourceStream = newSourceStream;
 		
 		readAhead = 65536;
 		lowTide = 0;
@@ -33,10 +33,7 @@
 }
 
 - (void) dealloc {
-	[sourceStream autorelease];
 	free(buffer);
-	
-	[super dealloc];
 }
 
 #pragma mark - Buffering
@@ -180,7 +177,7 @@
 	}
 	
 	// Keep reading bytes until we run out of buffer
-	NSMutableData* result = [[[NSMutableData alloc] init] autorelease];
+	NSMutableData* result = [[NSMutableData alloc] init];
 	NSInteger toRead = length;
 	
 	while (bufferRemaining != readAhead && toRead > 0) {

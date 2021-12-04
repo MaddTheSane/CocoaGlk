@@ -49,10 +49,10 @@
 		4B3A1DDB08A7EC0500DEB0B9 /* GlkImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A1DD308A7EBDE00DEB0B9 /* GlkImage.m */; };
 		4B3C3B990F3DABD40066A760 /* GlkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA5607E877C900576AB9 /* GlkClient.framework */; };
 		4B3CBD080B07DB0C0073216F /* GlkMemoryFileRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3CBD040B07DABD0073216F /* GlkMemoryFileRef.h */; };
-		4B3CBD090B07DB0C0073216F /* GlkMemoryFileRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3CBD050B07DABD0073216F /* GlkMemoryFileRef.m */; };
+		4B3CBD090B07DB0C0073216F /* GlkMemoryFileRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3CBD050B07DABD0073216F /* GlkMemoryFileRef.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4B4D36450A9738580007FD80 /* glk_unicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D36440A9738570007FD80 /* glk_unicode.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4B4D379E0A97B53E0007FD80 /* GlkUcs4Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B4D379C0A97B53E0007FD80 /* GlkUcs4Stream.h */; };
-		4B4D379F0A97B53E0007FD80 /* GlkUcs4Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D379D0A97B53E0007FD80 /* GlkUcs4Stream.m */; };
+		4B4D379F0A97B53E0007FD80 /* GlkUcs4Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D379D0A97B53E0007FD80 /* GlkUcs4Stream.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4B51AA5E07E8780700576AB9 /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		4B51AA6C07E8785700576AB9 /* CocoaGlk.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6A07E8785700576AB9 /* CocoaGlk.icns */; };
 		4B51AA6D07E8785700576AB9 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
@@ -83,7 +83,7 @@
 		4B8BDF8107EB6027008AE26D /* GlkWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8BDF7F07EB6027008AE26D /* GlkWindowController.m */; };
 		4B8BE03807EB6ABA008AE26D /* GlkBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B8BE03607EB6ABA008AE26D /* GlkBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B8BE03907EB6ABA008AE26D /* GlkBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8BE03707EB6ABA008AE26D /* GlkBuffer.m */; };
-		4B8C7D8607F7041E00502054 /* GlkMemoryStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8C7D8107F7041100502054 /* GlkMemoryStream.m */; };
+		4B8C7D8607F7041E00502054 /* GlkMemoryStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8C7D8107F7041100502054 /* GlkMemoryStream.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4B8C7D8707F7041F00502054 /* GlkMemoryStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B8C7D8007F7041100502054 /* GlkMemoryStream.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		4B8CE8510ADAD38B008235D2 /* GlkMoreView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B8CE84F0ADAD38B008235D2 /* GlkMoreView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B8CE8520ADAD38B008235D2 /* GlkMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8CE8500ADAD38B008235D2 /* GlkMoreView.m */; };
@@ -105,7 +105,7 @@
 		4BBC414508A7AB3B00B790B5 /* imagetest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC414408A7AB3B00B790B5 /* imagetest.m */; };
 		4BBC415008A7ABD600B790B5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		4BBFE3980C4EC253007DEE18 /* GlkBufferedStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBFE3960C4EC253007DEE18 /* GlkBufferedStream.h */; };
-		4BBFE3990C4EC253007DEE18 /* GlkBufferedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */; };
+		4BBFE3990C4EC253007DEE18 /* GlkBufferedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BCB8AA10CD7E3310041731F /* GlkView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4BEE1D3C07FCC1D900296CD2 /* GlkTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEE1D3A07FCC1D900296CD2 /* GlkTextView.m */; };
 		4BF0854A0E1675D500DB5C6B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF085490E1675D500DB5C6B /* CoreAudio.framework */; };

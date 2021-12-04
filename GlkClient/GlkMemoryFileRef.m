@@ -16,20 +16,15 @@
 	self = [super init];
 	
 	if (self) {
-		data = [fileData retain];
+		data = fileData;
 	}
 	
 	return self;
 }
 
-- (void) dealloc {
-	[data release];
-	[super dealloc];
-}
-
 - (byref id<GlkStream>) createReadOnlyStream {
-	return [[[GlkMemoryStream alloc] initWithMemory: (unsigned char*)[data bytes]
-											length: [data length]] autorelease];
+	return [[GlkMemoryStream alloc] initWithMemory: (unsigned char*)[data bytes]
+											length: [data length]];
 }
 
 - (byref id<GlkStream>) createWriteOnlyStream {
@@ -48,12 +43,6 @@
 	return YES;
 }
 
-- (BOOL) autoflushStream {
-	return autoflush;
-}
-
-- (void) setAutoflush: (BOOL) newAutoflush {
-	autoflush = newAutoflush;
-}
+@synthesize autoflushStream = autoflush;
 
 @end

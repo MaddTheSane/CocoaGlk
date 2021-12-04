@@ -1,14 +1,14 @@
 //
-//  SoundHandler.mm
+//  GlkSoundHandler.mm
 //  Spatterlight
 //
 //  Created by Administrator on 2021-01-24.
 //
 
-#import "SoundHandler.h"
+#import "GlkSoundHandler.h"
 
 #import "GlkSoundChannel.h"
-#import "MIDIChannel.h"
+#import "GlkMIDIChannel.h"
 #import <GlkView/GlkEvent.h>
 #import <GlkView/GlkView.h>
 
@@ -199,7 +199,7 @@
 
 @end
 
-@implementation SoundHandler
+@implementation GlkSoundHandler
 
 - (instancetype)init {
     self = [super init];
@@ -339,13 +339,13 @@
         GlkSoundChannel *glkchan = _glkchannels[@(channel)];
         if (glkchan) {
             if (_resources[@(_lastsoundresno)].type == GlkSoundBlorbFormatMIDI) {
-                if (![glkchan isKindOfClass:[MIDIChannel class]]) {
-                    _glkchannels[@(channel)] = [[MIDIChannel alloc] initWithHandler:self
+                if (![glkchan isKindOfClass:[GlkMIDIChannel class]]) {
+                    _glkchannels[@(channel)] = [[GlkMIDIChannel alloc] initWithHandler:self
                                                                                name:channel volume:0x10000];
                     [glkchan copyValues:_glkchannels[@(channel)]];
                     glkchan = _glkchannels[@(channel)];
                 }
-            } else if ([glkchan isKindOfClass:[MIDIChannel class]]) {
+            } else if ([glkchan isKindOfClass:[GlkMIDIChannel class]]) {
                 _glkchannels[@(channel)] = [[GlkSoundChannel alloc] initWithHandler:self
                                                                            name:channel volume:0x10000];
                 [glkchan copyValues:_glkchannels[@(channel)]];

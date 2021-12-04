@@ -1,6 +1,6 @@
 //
-//  MIDIPlayer.m
-//  MIDIPlayer
+//  GlkMIDIPlayer.m
+//  GlkMIDIPlayer
 //
 //  Created by 谢小进 on 15/4/27.
 //  Copyright (c) 2015年 Seedfield. All rights reserved.
@@ -8,11 +8,11 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "MIDIPlayer.h"
-#import "SoundHandler.h"
+#import "GlkMIDIPlayer.h"
+#import "GlkSoundHandler.h"
 
 
-@interface MIDIPlayer() {
+@interface GlkMIDIPlayer() {
 	AUGraph graph;
 	AUNode sampleNode;
 	AUNode ioNode;
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation MIDIPlayer
+@implementation GlkMIDIPlayer
 
 - (instancetype)initWithData:(NSData *)data {
     if (self = [super init]) {

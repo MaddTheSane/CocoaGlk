@@ -12,9 +12,9 @@
 #import <GlkSound/GlkSoundPlayback.h>
 
 #import <GlkSound/GlkSoundChannel.h>
-#import <GlkSound/SoundHandler.h>
-#import <GlkSound/MIDIChannel.h>
+#import <GlkSound/GlkSoundHandler.h>
+#import <GlkSound/GlkMIDIChannel.h>
 
-#import <GlkSound/MIDIPlayer.h>
+#import <GlkSound/GlkMIDIPlayer.h>
 
 #endif /* GlkSound_h */

@@ -1,5 +1,5 @@
 #import <GlkSound/GlkSoundChannel.h>
 
-@interface MIDIChannel : GlkSoundChannel
+@interface GlkMIDIChannel : GlkSoundChannel
 
 @end

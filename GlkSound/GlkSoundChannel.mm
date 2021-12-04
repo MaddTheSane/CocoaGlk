@@ -1,6 +1,6 @@
 #import "GlkSoundChannel.h"
-#import "SoundHandler.h"
-#import "MIDIChannel.h"
+#import "GlkSoundHandler.h"
+#import "GlkMIDIChannel.h"
 
 #include <SFBAudioEngine/AudioPlayer.h>
 #include <SFBAudioEngine/AudioDecoder.h>
@@ -12,13 +12,13 @@
     SFB::Audio::Player    *_player;        // The player instance
 }
 
-//@property MIDIChannel *midiChannel;
+//@property GlkMIDIChannel *midiChannel;
 
 @end
 
 @implementation GlkSoundChannel
 
-- (instancetype)initWithHandler:(SoundHandler*)handler name:(glui32)channelname volume:(glui32)vol
+- (instancetype)initWithHandler:(GlkSoundHandler*)handler name:(glui32)channelname volume:(glui32)vol
 {
     if (self = [super init]) {
     _handler = handler;
@@ -198,7 +198,7 @@
         if (volume_notify)
         {
 			glui32 notification = volume_notify;
-            SoundHandler *handler = _handler;
+            GlkSoundHandler *handler = _handler;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [handler handleVolumeNotification:notification];
             });

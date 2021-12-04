@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <GlkView/glk.h>
 
-@class SoundHandler, MIDIChannel;
+@class GlkSoundHandler, GlkMIDIChannel;
 
 #define FADE_GRANULARITY 100
 #define GLK_MAXVOLUME 0x10000
@@ -29,9 +29,9 @@ enum { CHANNEL_IDLE, CHANNEL_SOUND };
 
 @property NSInteger status;
 @property glui32 name;
-@property (weak) SoundHandler *handler;
+@property (weak) GlkSoundHandler *handler;
 
-- (instancetype)initWithHandler:(SoundHandler *)handler name:(glui32)name volume:(glui32)vol;
+- (instancetype)initWithHandler:(GlkSoundHandler *)handler name:(glui32)name volume:(glui32)vol;
 - (void)setVolume:(glui32)avol duration:(glui32)duration notify:(glui32)notify;
 - (void)play:(glui32)snd repeats:(glui32)areps notify:(glui32)anot;
 - (void)stop;

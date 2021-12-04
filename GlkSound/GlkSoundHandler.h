@@ -1,5 +1,5 @@
 //
-//  SoundHandler.h
+//  GlkSoundHandler.h
 //  Spatterlight
 //
 //  Created by Administrator on 2021-01-24.
@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <GlkView/glk.h>
 
-@class GlkSoundChannel, GlkView, SoundHandler;
+@class GlkSoundChannel, GlkView, GlkSoundHandler;
 
 typedef NS_ENUM(NSInteger, GlkSoundBlorbFormatType) {
 	GlkSoundBlorbFormatNone,
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (copy, nullable) NSData *bookmark;
 @property (copy, nullable) NSURL *URL;
-@property (weak) SoundHandler *handler;
+@property (weak) GlkSoundHandler *handler;
 
 @end;
 
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface SoundHandler : NSObject
+@interface GlkSoundHandler : NSObject
 
 @property (strong) NSMutableDictionary <NSNumber *, SoundResource *> *resources;
 @property (strong) NSMutableDictionary *sfbplayers;

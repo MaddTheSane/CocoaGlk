@@ -1,6 +1,6 @@
 //
-//  MIDIPlayer.h
-//  MIDIPlayer
+//  GlkMIDIPlayer.h
+//  GlkMIDIPlayer
 //
 //  Created by 谢小进 on 15/4/27.
 //  Copyright (c) 2015年 Seedfield. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MIDIPlayer : NSObject
+@interface GlkMIDIPlayer : NSObject
 
 @property (nonatomic) double progress;
 

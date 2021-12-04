@@ -1,18 +1,18 @@
-#import "MIDIChannel.h"
-#import "SoundHandler.h"
-#import "MIDIPlayer.h"
+#import "GlkMIDIChannel.h"
+#import "GlkSoundHandler.h"
+#import "GlkMIDIPlayer.h"
 
-@interface MIDIChannel () {
+@interface GlkMIDIChannel () {
 
 @private
-    MIDIPlayer    *_player;        // The player instance
+    GlkMIDIPlayer    *_player;        // The player instance
 }
 
 @end
 
-@implementation MIDIChannel
+@implementation GlkMIDIChannel
 
-- (instancetype)initWithHandler:(SoundHandler*)handler name:(glui32)channelname volume:(glui32)vol
+- (instancetype)initWithHandler:(GlkSoundHandler*)handler name:(glui32)channelname volume:(glui32)vol
 {
 	if (self = [super initWithHandler:handler name:channelname volume:vol]) {
 	}
@@ -46,18 +46,18 @@
     resid = snd;
     loop = areps;
 
-    _player = [[MIDIPlayer alloc] initWithData:[NSData dataWithBytes:buf length:len]];
+    _player = [[GlkMIDIPlayer alloc] initWithData:[NSData dataWithBytes:buf length:len]];
 
     [_player setVolume:volume];
 
     if (areps != -1) {
-        MIDIChannel __weak *weakSelf = self;
-        SoundHandler *blockHandler = self.handler;
+        GlkMIDIChannel __weak *weakSelf = self;
+        GlkSoundHandler *blockHandler = self.handler;
         NSInteger blocknotify = notify;
         NSInteger blockresid = resid;
         [_player addCallback:(^(void){
             dispatch_async(dispatch_get_main_queue(), ^{
-                MIDIChannel *strongSelf = weakSelf;
+                GlkMIDIChannel *strongSelf = weakSelf;
                 if (strongSelf && --strongSelf->loop < 1) {
                     strongSelf.status = CHANNEL_IDLE;
                     if (blocknotify)

@@ -9,7 +9,7 @@
 #define GlkSound_h
 
 #import <GlkSound/GlkSoundDataSource.h>
-#import <GlkSound/GlkSoundPlayback.h>
+#import <GlkSound/GlkSoundHandlerProtocol.h>
 
 #import <GlkSound/GlkSoundChannel.h>
 #import <GlkSound/GlkSoundHandler.h>

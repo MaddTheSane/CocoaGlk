@@ -15,7 +15,7 @@
 #define SDL_CHANNELS 64
 #define MAX_SOUND_RESOURCES 500
 
-@implementation SoundFile : NSObject
+@implementation GlkSoundFile : NSObject
 
 + (BOOL) supportsSecureCoding {
     return YES;
@@ -82,7 +82,7 @@
 @end
 
 
-@implementation SoundResource : NSObject
+@implementation GlkSoundResource : NSObject
 
 + (BOOL) supportsSecureCoding {
     return YES;
@@ -221,11 +221,11 @@
     self = [super init];
     if (self) {
     _files = [decoder decodeObjectOfClass:[NSMutableDictionary class] forKey:@"files"];
-    for (SoundFile *file in _files.allValues)
+    for (GlkSoundFile *file in _files.allValues)
         file.handler = self;
     _resources = [decoder decodeObjectOfClass:[NSMutableDictionary class] forKey:@"resources"];
     if (_resources)
-        for (SoundResource *res in _resources.allValues) {
+        for (GlkSoundResource *res in _resources.allValues) {
             res.soundFile = _files[res.filename];
         }
     _restored_music_channel_id = (NSUInteger)[decoder decodeIntForKey:@"music_channel"];
@@ -244,7 +244,7 @@
 }
 
 - (BOOL)soundIsLoaded:(NSInteger)soundId {
-    SoundResource *resource = _resources[@(soundId)];
+    GlkSoundResource *resource = _resources[@(soundId)];
     if (resource)
         return (resource.data != nil);
     return NO;
@@ -282,10 +282,10 @@
 
 - (void)setSoundID:(glui32)snd filename:(nullable NSString *)filename length:(NSUInteger)length offset:(NSUInteger)offset {
 
-    SoundResource *res = _resources[@(snd)];
+    GlkSoundResource *res = _resources[@(snd)];
 
     if (res == nil) {
-        res = [[SoundResource alloc] initWithFilename:filename offset:offset length:length];
+        res = [[GlkSoundResource alloc] initWithFilename:filename offset:offset length:length];
         _resources[@(snd)] = res;
     } else if (res.data) {
         return;
@@ -297,7 +297,7 @@
     {
         res.soundFile = _files[filename];
         if (!res.soundFile) {
-            res.soundFile = [[SoundFile alloc] initWithPath:filename];
+            res.soundFile = [[GlkSoundFile alloc] initWithPath:filename];
             res.soundFile.handler = self;
             _files[filename] = res.soundFile;
         }
@@ -408,7 +408,7 @@
 -(GlkSoundBlorbFormatType)loadSoundResourceFromSound:(glui32)snd data:(NSData *__autoreleasing*)buf {
 
     GlkSoundBlorbFormatType type = 	GlkSoundBlorbFormatNone;
-    SoundResource *resource = _resources[@(snd)];
+    GlkSoundResource *resource = _resources[@(snd)];
 
     if (resource)
     {

@@ -1,5 +1,5 @@
 //
-//  GlkSoundPlayback.h
+//  GlkSoundHandlerProtocol.h
 //  GlkSound
 //
 //  Created by C.W. Betts on 12/2/21.
@@ -9,7 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol GlkSoundPlayback <NSObject>
+NS_SWIFT_NAME(GlkSoundHandlerProtocol)
+@protocol GlkSoundHandler <NSObject>
 
 @end
 

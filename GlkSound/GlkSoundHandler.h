@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, GlkSoundBlorbFormatType) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SoundFile : NSObject
+@interface GlkSoundFile : NSObject
 
 - (instancetype)initWithPath:(NSString *)path;
 - (void)resolveBookmark;
@@ -40,14 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
 @end;
 
 
-@interface SoundResource : NSObject
+@interface GlkSoundResource : NSObject
 
 - (instancetype)initWithFilename:(NSString *)filename offset:(NSUInteger)offset length:(NSUInteger)length;
 
 -(BOOL)load;
 
 @property (copy, nullable) NSData *data;
-@property (strong, nullable) SoundFile *soundFile;
+@property (strong, nullable) GlkSoundFile *soundFile;
 @property (copy) NSString *filename;
 @property NSUInteger offset;
 @property NSUInteger length;
@@ -58,10 +58,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GlkSoundHandler : NSObject
 
-@property (strong) NSMutableDictionary <NSNumber *, SoundResource *> *resources;
+@property (strong) NSMutableDictionary <NSNumber *, GlkSoundResource *> *resources;
 @property (strong) NSMutableDictionary *sfbplayers;
 @property (strong) NSMutableDictionary <NSNumber *, GlkSoundChannel *> *glkchannels;
-@property (strong) NSMutableDictionary <NSString *, SoundFile *> *files;
+@property (strong) NSMutableDictionary <NSString *, GlkSoundFile *> *files;
 @property (strong, nullable) GlkSoundChannel *music_channel;
 @property NSUInteger restored_music_channel_id;
 @property glui32 lastsoundresno;

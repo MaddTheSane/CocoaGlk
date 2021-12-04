@@ -22,10 +22,9 @@
 
 - (void)play:(glui32)snd repeats:(glui32)areps notify:(glui32)anot
 {
-    self.status = CHANNEL_SOUND;
+    self.status = GlkSoundChannelStatusSound;
 
-    char *buf = nil;
-    size_t len = 0;
+    NSData *dat = nil;
 	GlkSoundBlorbFormatType type;
 
     /* stop previous noise */
@@ -37,7 +36,7 @@
         return;
     
     /* load sound resource into memory */
-    type = [self.handler load_sound_resource:snd length:&len data:&buf];
+    type = [self.handler loadSoundResourceFromSound:snd data:&dat];
 
     if (type != GlkSoundBlorbFormatMIDI)
         return;
@@ -46,20 +45,20 @@
     resid = snd;
     loop = areps;
 
-    _player = [[GlkMIDIPlayer alloc] initWithData:[NSData dataWithBytes:buf length:len]];
+    _player = [[GlkMIDIPlayer alloc] initWithData:dat];
 
     [_player setVolume:volume];
 
     if (areps != -1) {
         GlkMIDIChannel __weak *weakSelf = self;
         GlkSoundHandler *blockHandler = self.handler;
-        NSInteger blocknotify = notify;
-        NSInteger blockresid = resid;
+        glui32 blocknotify = notify;
+        glui32 blockresid = resid;
         [_player addCallback:(^(void){
             dispatch_async(dispatch_get_main_queue(), ^{
                 GlkMIDIChannel *strongSelf = weakSelf;
                 if (strongSelf && --strongSelf->loop < 1) {
-                    strongSelf.status = CHANNEL_IDLE;
+                    strongSelf.status = GlkSoundChannelStatusIdle;
                     if (blocknotify)
                         [blockHandler handleSoundNotification:blocknotify withSound:blockresid];
                 }

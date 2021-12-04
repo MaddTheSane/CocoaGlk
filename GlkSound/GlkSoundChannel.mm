@@ -26,7 +26,7 @@
     notify = 0;
     _name = channelname;
     
-    _status = CHANNEL_IDLE;
+    _status = GlkSoundChannelStatusIdle;
     volume = (CGFloat)vol / GLK_MAXVOLUME;
     resid = -1;
     loop = 0;
@@ -45,7 +45,7 @@
 
 - (void)play:(glui32)snd repeats:(glui32)areps notify:(glui32)anot
 {
-    _status = CHANNEL_SOUND;
+    _status = GlkSoundChannelStatusSound;
 
     size_t len = 0;
 	GlkSoundBlorbFormatType type;
@@ -113,7 +113,7 @@
         GlkSoundChannel __weak *weakSelf = self;
         _player->SetRenderingFinishedBlock(^(const SFB::Audio::Decoder& /*decoder*/){
             dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.status = CHANNEL_IDLE;
+                weakSelf.status = GlkSoundChannelStatusIdle;
                 if (blocknotify)
                     [weakSelf.handler handleSoundNotification:blocknotify withSound:blockresid];
             });
@@ -161,7 +161,7 @@
 
 - (void)cleanup
 {
-   _status = CHANNEL_IDLE;
+   _status = GlkSoundChannelStatusIdle;
    if (timer)
         [timer invalidate];
     timer = nil;
@@ -254,7 +254,7 @@
 
 //    [self postInit];
     
-    if (_status == CHANNEL_IDLE) {
+    if (_status == GlkSoundChannelStatusIdle) {
         return;
     }
 
@@ -318,8 +318,8 @@
     if (self) {
         _name = (glui32)[decoder decodeIntForKey:@"name"];
 
-        resid =  (glui32)[decoder decodeIntForKey:@"resid"]; /* for notifies */
-        _status =  [decoder decodeIntegerForKey:@"status"];
+        resid = (glui32)[decoder decodeIntForKey:@"resid"]; /* for notifies */
+        _status = GlkSoundChannelStatus([decoder decodeIntegerForKey:@"status"]);
         volume = [decoder decodeDoubleForKey:@"volume"];
         loop = [decoder decodeIntForKey:@"loop"];
         notify = [decoder decodeIntForKey:@"notify"];

@@ -7,7 +7,11 @@
 #define GLK_MAXVOLUME 0x10000
 #define MIX_MAX_VOLUME 1.0f
 
-enum { CHANNEL_IDLE, CHANNEL_SOUND };
+NS_SWIFT_NAME(GlkSoundChannel.Status)
+typedef NS_ENUM(NSInteger, GlkSoundChannelStatus) {
+	GlkSoundChannelStatusIdle,
+	GlkSoundChannelStatusSound
+};
 
 @interface GlkSoundChannel : NSObject <NSSecureCoding> {
 	glui32 loop;
@@ -27,7 +31,7 @@ enum { CHANNEL_IDLE, CHANNEL_SOUND };
     NSTimer *timer;
 }
 
-@property NSInteger status;
+@property GlkSoundChannelStatus status;
 @property glui32 name;
 @property (weak) GlkSoundHandler *handler;
 

@@ -2560,6 +2560,8 @@ static BOOL pageAllFrom(GlkWindow* win) {
 	return [self accessibilityFocusedUIElement];
 }
 
+#pragma mark -
+
 - (void) hideMoreWindow: (GlkWindow*) win {
     if (win == nil) return;
 

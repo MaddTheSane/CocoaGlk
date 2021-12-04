@@ -1428,6 +1428,9 @@
 					4B51AA4607E8770600576AB9 = {
 						LastSwiftMigration = 1300;
 					};
+					4BF085290E166E8300DB5C6B = {
+						LastSwiftMigration = 1310;
+					};
 					552CEF1027152BDA009D87A5 = {
 						CreatedOnToolsVersion = 13.0;
 					};
@@ -2321,6 +2324,7 @@
 		4BF0852C0E166E8400DB5C6B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
@@ -2339,12 +2343,15 @@
 				PRODUCT_NAME = GlkSound;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		4BF0852D0E166E8400DB5C6B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
@@ -2362,6 +2369,7 @@
 				PRODUCT_NAME = GlkSound;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

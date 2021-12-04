@@ -12,36 +12,21 @@
 
 @implementation MIDIChannel
 
-- (instancetype)initWithHandler:(SoundHandler*)handler name:(NSUInteger)channelname volume:(NSUInteger)vol
+- (instancetype)initWithHandler:(SoundHandler*)handler name:(glui32)channelname volume:(glui32)vol
 {
-    self.handler = handler;
-    loop = 0;
-    notify = 0;
-    self.name = channelname;
-    
-    self.status = CHANNEL_IDLE;
-    volume = (CGFloat)vol / GLK_MAXVOLUME;
-    resid = -1;
-    loop = 0;
-    notify = 0;
-    paused = NO;
-
-    volume_notify = 0;
-    volume_timeout = 0;
-    target_volume = 0;
-    volume_delta = 0;
-    timer = nil;
+	if (self = [super initWithHandler:handler name:channelname volume:vol]) {
+	}
     
     return self;
 }
 
-- (void)play:(NSInteger)snd repeats:(NSInteger)areps notify:(NSInteger)anot
+- (void)play:(glui32)snd repeats:(glui32)areps notify:(glui32)anot
 {
     self.status = CHANNEL_SOUND;
 
     char *buf = nil;
     size_t len = 0;
-    NSInteger type;
+	GlkSoundBlorbFormatType type;
 
     /* stop previous noise */
     if (_player) {
@@ -54,7 +39,7 @@
     /* load sound resource into memory */
     type = [self.handler load_sound_resource:snd length:&len data:&buf];
 
-    if (type != giblorb_ID_MIDI)
+    if (type != GlkSoundBlorbFormatMIDI)
         return;
 
     notify = anot;

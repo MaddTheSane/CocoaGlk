@@ -6,18 +6,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GlkView/glk.h>
 
 @class GlkSoundChannel, GlkView, SoundHandler;
 
-typedef NS_ENUM(NSInteger, kBlorbSoundFormatType) {
-    NONE,
-    giblorb_ID_MOD,
-    giblorb_ID_OGG,
-    giblorb_ID_FORM,
-    giblorb_ID_AIFF,
-    giblorb_ID_MP3,
-    giblorb_ID_WAVE,
-    giblorb_ID_MIDI,
+typedef NS_ENUM(NSInteger, GlkSoundBlorbFormatType) {
+	GlkSoundBlorbFormatNone,
+    GlkSoundBlorbFormatMod,
+	GlkSoundBlorbFormatOggVorbis,
+	GlkSoundBlorbFormatFORM,
+	GlkSoundBlorbFormatAIFF,
+	GlkSoundBlorbFormatMP3,
+	GlkSoundBlorbFormatWave,
+	GlkSoundBlorbFormatMIDI,
 };
 
 #define FREE 1
@@ -50,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy) NSString *filename;
 @property NSUInteger offset;
 @property NSUInteger length;
-@property kBlorbSoundFormatType type;
+@property GlkSoundBlorbFormatType type;
 
 @end
 
@@ -63,33 +64,34 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong) NSMutableDictionary <NSString *, SoundFile *> *files;
 @property (strong, nullable) GlkSoundChannel *music_channel;
 @property NSUInteger restored_music_channel_id;
-@property NSInteger lastsoundresno;
+@property glui32 lastsoundresno;
 
 @property (weak) GlkView *glkctl;
 
-- (kBlorbSoundFormatType)load_sound_resource:(unsigned int)snd length:(NSUInteger *)len data:(char * _Nonnull * _Nonnull)buf;
+-(GlkSoundBlorbFormatType)loadSoundResourceFromSound:(glui32)snd data:(NSData * _Nullable __autoreleasing * _Nonnull)buf;
+- (GlkSoundBlorbFormatType)load_sound_resource:(unsigned int)snd length:(NSUInteger *)len data:(char * _Nonnull * _Nonnull)buf;
 
 - (void)restartAll;
 - (void)stopAllAndCleanUp;
 
-- (int)handleNewSoundChannel:(int)volume;
-- (void)handleDeleteChannel:(int)channel;
-- (BOOL)handleFindSoundNumber:(int)resno;
-- (void)handleLoadSoundNumber:(int)resno
+- (int)handleNewSoundChannel:(glui32)volume;
+- (void)handleDeleteChannel:(glui32)channel;
+- (BOOL)handleFindSoundNumber:(glui32)resno;
+- (void)handleLoadSoundNumber:(glui32)resno
                          from:(NSString *)path
                        offset:(NSUInteger)offset
                        length:(NSUInteger)length;
-- (void)handleSetVolume:(int)volume
-                channel:(int)channel
-               duration:(int)duration
-                 notify:(int)notify;
-- (void)handlePlaySoundOnChannel:(int)channel repeats:(int)repeats notify:(int)notify;
-- (void)handleStopSoundOnChannel:(int)channel;
-- (void)handlePauseOnChannel:(int)channel;
-- (void)handleUnpauseOnChannel:(int)channel;
+- (void)handleSetVolume:(glui32)volume
+                channel:(glui32)channel
+               duration:(glui32)duration
+                 notify:(glui32)notify;
+- (void)handlePlaySoundOnChannel:(glui32)channel repeats:(glui32)repeats notify:(glui32)notify;
+- (void)handleStopSoundOnChannel:(glui32)channel;
+- (void)handlePauseOnChannel:(glui32)channel;
+- (void)handleUnpauseOnChannel:(glui32)channel;
 
-- (void)handleVolumeNotification:(unsigned int)notify;
-- (void)handleSoundNotification:(unsigned int)notify withSound:(unsigned int)sound;
+- (void)handleVolumeNotification:(glui32)notify;
+- (void)handleSoundNotification:(glui32)notify withSound:(glui32)sound;
 
 @end
 

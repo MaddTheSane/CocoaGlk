@@ -18,7 +18,7 @@
 
 @implementation GlkSoundChannel
 
-- (instancetype)initWithHandler:(SoundHandler*)handler name:(NSUInteger)channelname volume:(NSUInteger)vol
+- (instancetype)initWithHandler:(SoundHandler*)handler name:(glui32)channelname volume:(glui32)vol
 {
     if (self = [super init]) {
     _handler = handler;
@@ -43,12 +43,12 @@
     return self;
 }
 
-- (void)play:(NSInteger)snd repeats:(NSInteger)areps notify:(NSInteger)anot
+- (void)play:(glui32)snd repeats:(glui32)areps notify:(glui32)anot
 {
     _status = CHANNEL_SOUND;
 
     size_t len = 0;
-    NSInteger type;
+	GlkSoundBlorbFormatType type;
 
     char *buf = nil;
 
@@ -72,25 +72,23 @@
 
     switch (type)
     {
-        case giblorb_ID_FORM:
+        case GlkSoundBlorbFormatFORM:
+		case GlkSoundBlorbFormatAIFF:
             mimeString = @"aiff";
             break;
-        case giblorb_ID_AIFF:
-            mimeString = @"aiff";
-            break;
-        case giblorb_ID_WAVE:
+        case GlkSoundBlorbFormatWave:
             mimeString = @"wav";
             break;
-        case giblorb_ID_OGG:
+        case GlkSoundBlorbFormatOggVorbis:
             mimeString = @"ogg-vorbis";
             break;
-        case giblorb_ID_MP3:
+        case GlkSoundBlorbFormatMP3:
             mimeString = @"mp3";
             break;
-        case giblorb_ID_MOD:
+        case GlkSoundBlorbFormatMod:
             mimeString = @"mod";
             break;
-        case giblorb_ID_MIDI:
+        case GlkSoundBlorbFormatMIDI:
             mimeString = @"midi";
             break;
             
@@ -110,8 +108,8 @@
     [self setVolume];
 
     if (areps != -1) {
-        NSInteger blocknotify = notify;
-        NSInteger blockresid = resid;
+		glui32 blocknotify = notify;
+		glui32 blockresid = resid;
         GlkSoundChannel __weak *weakSelf = self;
         _player->SetRenderingFinishedBlock(^(const SFB::Audio::Decoder& /*decoder*/){
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -171,7 +169,7 @@
 }
 
 /** Start a fade timer */
-- (void)init_fade:(NSUInteger)glk_volume duration:(NSUInteger)duration notify:(NSInteger)notification
+- (void)init_fade:(glui32)glk_volume duration:(glui32)duration notify:(glui32)notification
 {
     volume_notify = notification;
     target_volume = (CGFloat)glk_volume / GLK_MAXVOLUME;
@@ -183,7 +181,7 @@
     if (timer)
         [timer invalidate];
 
-    timer = [NSTimer scheduledTimerWithTimeInterval:ceil(duration / (CGFloat)FADE_GRANULARITY) / 1000.0 target:self selector:@selector(volumeTimerCallback:) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:ceil(duration / (NSTimeInterval)FADE_GRANULARITY) / 1000.0 target:self selector:@selector(volumeTimerCallback:) userInfo:nil repeats:YES];
 }
 
 - (void)volumeTimerCallback:(NSTimer *)aTimer {
@@ -199,7 +197,7 @@
     {
         if (volume_notify)
         {
-            NSInteger notification = volume_notify;
+			glui32 notification = volume_notify;
             SoundHandler *handler = _handler;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [handler handleVolumeNotification:notification];
@@ -223,7 +221,7 @@
     [self setVolume];
 }
 
-- (void) setVolume:(NSUInteger)glk_volume duration:(NSUInteger)duration notify:(NSInteger)notification
+- (void) setVolume:(glui32)glk_volume duration:(glui32)duration notify:(glui32)notification
 {
     if (!duration)
     {
@@ -268,13 +266,13 @@
 
     if (volume_timeout > 0) {
 
-        NSUInteger duration = (volume_timeout * FADE_GRANULARITY);
+		glui32 duration = (volume_timeout * FADE_GRANULARITY);
 
         CGFloat float_volume = target_volume;
-        NSUInteger glk_target_volume = GLK_MAXVOLUME;
+		glui32 glk_target_volume = GLK_MAXVOLUME;
 
         if (float_volume < MIX_MAX_VOLUME)
-           glk_target_volume = (NSUInteger)(float_volume * GLK_MAXVOLUME);
+           glk_target_volume = (glui32)(float_volume * GLK_MAXVOLUME);
 
         [self setVolume:glk_target_volume duration:duration notify:volume_notify];
 
@@ -295,14 +293,14 @@
     if (timer)
         [timer invalidate];
 
-    NSUInteger duration = 0;
-    NSUInteger glk_target_volume = (NSUInteger)(volume * GLK_MAXVOLUME);
+	glui32 duration = 0;
+	glui32 glk_target_volume = (glui32)(volume * GLK_MAXVOLUME);
 
     if (volume_timeout > 0) {
         CGFloat float_volume = target_volume;
         duration = (volume_timeout * FADE_GRANULARITY);
         if (float_volume < MIX_MAX_VOLUME)
-            glk_target_volume = (NSUInteger)(float_volume * GLK_MAXVOLUME);
+            glk_target_volume = (glui32)(float_volume * GLK_MAXVOLUME);
         else
             glk_target_volume = GLK_MAXVOLUME;
     }
@@ -318,18 +316,18 @@
     self = [super init];
 
     if (self) {
-        _name = (NSUInteger)[decoder decodeIntForKey:@"name"];
+        _name = (glui32)[decoder decodeIntForKey:@"name"];
 
-        resid =  [decoder decodeIntForKey:@"resid"]; /* for notifies */
-        _status =  [decoder decodeIntForKey:@"status"];
+        resid =  (glui32)[decoder decodeIntForKey:@"resid"]; /* for notifies */
+        _status =  [decoder decodeIntegerForKey:@"status"];
         volume = [decoder decodeDoubleForKey:@"volume"];
         loop = [decoder decodeIntForKey:@"loop"];
         notify = [decoder decodeIntForKey:@"notify"];
-        paused = (NSUInteger)[decoder decodeIntForKey:@"paused"];
+        paused = (glui32)[decoder decodeIntForKey:@"paused"];
 
         /* for volume fades */
         volume_notify = [decoder decodeInt32ForKey:@"volume_notify"];
-        volume_timeout = (NSUInteger)[decoder decodeIntForKey:@"volume_timeout"];
+        volume_timeout = (glui32)[decoder decodeIntForKey:@"volume_timeout"];
         target_volume = [decoder decodeDoubleForKey:@"target_volume"];
         volume_delta = [decoder decodeDoubleForKey:@"volume_delta"];
     }
@@ -338,17 +336,17 @@
 
 - (void) encodeWithCoder:(NSCoder *)encoder {
 
-    [encoder encodeInteger:(NSInteger)_name forKey:@"name"];
-    [encoder encodeInteger:resid forKey:@"resid"];
+    [encoder encodeInt:_name forKey:@"name"];
+    [encoder encodeInt:resid forKey:@"resid"];
     [encoder encodeInteger:_status forKey:@"status"];
     [encoder encodeDouble:volume forKey:@"volume"];
-    [encoder encodeInteger:loop forKey:@"loop"];
-    [encoder encodeInteger:notify forKey:@"notify"];
-    [encoder encodeInteger:(NSInteger)paused forKey:@"paused"];
+    [encoder encodeInt:loop forKey:@"loop"];
+    [encoder encodeInt:notify forKey:@"notify"];
+    [encoder encodeInt:paused forKey:@"paused"];
 
     /* for volume fades */
-    [encoder encodeInteger:volume_notify forKey:@"volume_notify"];
-    [encoder encodeInteger:(NSInteger)volume_timeout forKey:@"volume_timeout"];
+    [encoder encodeInt:volume_notify forKey:@"volume_notify"];
+    [encoder encodeInt:volume_timeout forKey:@"volume_timeout"];
     [encoder encodeDouble:target_volume forKey:@"target_volume"];
     [encoder encodeDouble:volume_delta forKey:@"volume_delta"];
 }

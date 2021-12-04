@@ -21,6 +21,9 @@
 #import <GlkView/GlkTextView.h>
 #import <GlkView/GlkTypesetter.h>
 #import <GlkView/GlkTextWindow.h>
+#import <GlkView/GlkSoundHandlerProtocol.h>
+#import <GlkView/GlkSoundSourceProtocol.h>
+#import <GlkView/GlkSoundHandlerProtocol.h>
 #endif
 
 #endif /* GlkViewUmbrella_h */

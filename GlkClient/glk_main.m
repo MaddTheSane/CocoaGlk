@@ -180,7 +180,7 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 		case gestalt_SoundVolume:
 		case gestalt_SoundNotify:
 		case gestalt_Sound2:
-			result = 0;
+			result = cocoaglk_session.soundHandler != nil;
 			break;
 			
 		case gestalt_Hyperlinks:

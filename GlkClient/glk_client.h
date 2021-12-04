@@ -27,6 +27,7 @@
 #import "GlkFileRefProtocol.h"
 #import "GlkBuffer.h"
 #import "GlkImageSourceProtocol.h"
+#import "GlkSoundSourceProtocol.h"
 
 #pragma GCC visibility push(hidden)
 
@@ -270,6 +271,6 @@ struct glk_fileref_struct {
 @end
 
 /// This class is used for passing Blorb sound information to the server process
-@interface GlkBlorbSoundSource : NSObject<GlkImageSource>
+@interface GlkBlorbSoundSource : NSObject<GlkSoundSource>
 
 @end

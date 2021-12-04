@@ -22,6 +22,8 @@
 #import <GlkView/GlkFileRefProtocol.h>
 #import <GlkView/GlkFilePromptProtocol.h>
 #import <GlkView/GlkImageSourceProtocol.h>
+#import <GlkView/GlkSoundSourceProtocol.h>
+#import <GlkView/GlkSoundHandlerProtocol.h>
 
 #include <sys/types.h>
 
@@ -44,7 +46,8 @@ typedef struct GlkSize {
 /// Communications with an individual client session
 @protocol GlkSession <NSObject>
 
-// Housekeeping
+#pragma mark - Housekeeping
+
 - (void) clientHasStarted: (pid_t) processId;
 - (void) clientHasFinished;
  
@@ -54,19 +57,21 @@ typedef struct GlkSize {
 // Windows
 - (GlkSize) sizeForWindowIdentifier: (unsigned) windowId;
 
-// Streams
+#pragma mark - Streams
+
 - (nullable byref id<GlkStream>) streamForWindowIdentifier: (unsigned) windowId;
 /// Stream created before the task was initialised (used, for example, for specifying which file was double-clicked on)
 - (byref id<GlkStream>) inputStream;
 /// Stream created before the task was initialised (used, for example, for specifying which file was double-clicked on)
 - (nullable byref id<GlkStream>) streamForKey: (in bycopy NSString*) key;
 
-// Styles
+#pragma mark - Styles
 - (glui32) measureStyle: (glui32) styl
 				   hint: (glui32) hint
 			   inWindow: (glui32) windowId;
 
-// Events
+#pragma mark - Events
+
 /// Cancel line events for the specified window (and get the input so far)
 - (bycopy NSString*) cancelLineEventsForWindowIdentifier: (unsigned) windowIdentifier;
 
@@ -80,7 +85,8 @@ typedef struct GlkSize {
 /// Gets the sync count value (this is used to determine if information cached on the server is still relevant)
 @property (nonatomic, readonly) NSInteger synchronisationCount;
 
-// Errors and warnings
+#pragma mark - Errors and warnings
+
 /// Shows an error message
 - (void) showError: (in bycopy NSString*) error;
 /// Shows a warning message
@@ -91,7 +97,8 @@ typedef struct GlkSize {
 - (void) logMessage: (in bycopy NSString*) message
 	   withPriority: (int) priority;
 
-// Filerefs
+#pragma mark - Filerefs
+
 /// Returns \c NULL if the name is invalid (or if we're not supporting named files for some reason)
 - (nullable id<GlkFileRef>) fileRefWithName: (in bycopy NSString*) name;
 /// Temp files are automagically deleted when the session goes away
@@ -111,16 +118,34 @@ typedef struct GlkSize {
 				   forWriting: (BOOL) writing
 					  handler: (in byref id<GlkFilePrompt>) handler;
 
-// Images
+#pragma mark - Images
+
 /// Sets where we get our image data from
-- (void) setImageSource: (in byref id<GlkImageSource>) newSource;
+- (void) setImageSource: (in nullable byref id<GlkImageSource>) newSource;
 /// Retrieves the size of an image
 - (NSSize) sizeForImageResource: (glui32) imageId;
 /// Retrieves the active image source
-- (out byref id<GlkImageSource>) imageSource;
+- (out nullable byref id<GlkImageSource>) imageSource;
 
 /// The active image source.
-@property (readwrite, retain, nonatomic) id<GlkImageSource> imageSource;
+@property (readwrite, retain, nonatomic, nullable) id<GlkImageSource> imageSource;
+
+#pragma mark - Sounds
+
+/// Sets where we get our sound data from
+- (void) setSoundSource: (in nullable byref id<GlkSoundSource>) newSource;
+/// Retrieves the active sound source
+- (out nullable byref id<GlkSoundSource>) soundSource;
+/// The active sound source.
+@property (readwrite, retain, nonatomic, nullable) id<GlkSoundSource> soundSource;
+
+/// Sets where we get our sound data from
+- (void) setSoundHandler: (in nullable byref id<GlkSoundHandler>) newSource;
+/// Retrieves the active sound source
+- (out nullable byref id<GlkSoundHandler>) soundHandler;
+/// The active sound source.
+@property (readwrite, retain, nonatomic, nullable) id<GlkSoundHandler> soundHandler;
+
 @end
 
 NS_ASSUME_NONNULL_END

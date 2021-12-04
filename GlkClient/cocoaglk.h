@@ -22,8 +22,10 @@
 #if defined(__OBJC__) && __OBJC__
 # if __has_include (<GlkView/GlkImageSourceProtocol.h>)
 #  import <GlkView/GlkImageSourceProtocol.h>
+#  import <GlkView/GlkSoundSourceProtocol.h>
 # else
 @protocol GlkImageSource;
+@protocol GlkSoundSource;
 # endif
 #endif
 
@@ -68,6 +70,9 @@ extern strid_t cocoaglk_get_stream_for_key(const char* key);
 #if defined(__OBJC__) && __OBJC__
 /// Sets a new image source object
 extern void cocoaglk_set_image_source(id<GlkImageSource> imageSource);
+
+/// Sets a new image source object
+extern void cocoaglk_set_sound_source(id<GlkSoundSource> imageSource);
 
 /// Turns a UCS-4 string into a UTF-16 cocoa string
 extern NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len);

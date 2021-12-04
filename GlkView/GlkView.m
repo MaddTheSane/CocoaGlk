@@ -2277,6 +2277,12 @@
 	historyPosition = -1;
 }
 
+#pragma mark - Sound Functions
+
+@synthesize soundSource = sndSource;
+
+@synthesize soundHandler = sndHandler;
+
 #pragma mark - Automation
 
 - (void) addOutputReceiver: (id<GlkAutomation>) receiver {

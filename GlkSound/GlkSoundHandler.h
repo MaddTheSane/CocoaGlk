@@ -8,7 +8,6 @@
 #import <Foundation/Foundation.h>
 #import <GlkView/glk.h>
 #import <GlkView/GlkEvent.h>
-#import <GlkSound/GlkSoundSource.h>
 
 @class GlkSoundChannel, GlkView, GlkSoundHandler;
 
@@ -42,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end;
 
 
-@interface GlkSoundResource : NSObject <GlkSoundResource>
+@interface GlkSoundResource : NSObject
 
 - (instancetype)initWithFilename:(NSString *)filename offset:(NSUInteger)offset length:(NSUInteger)length;
 

@@ -141,9 +141,10 @@
     return YES;
 }
 
-- (GlkSoundBlorbFormatType)detect_sound_format
++ (GlkSoundBlorbFormatType)detectSoundFormatFromData:(NSData*)_data
 {
     const char *buf = (const char *)_data.bytes;
+    const NSUInteger _length = _data.length;
     char str[30];
     if (_length > 29)
     {
@@ -195,6 +196,11 @@
         return GlkSoundBlorbFormatOggVorbis;
 
     return GlkSoundBlorbFormatMP3;
+}
+
+- (GlkSoundBlorbFormatType)detect_sound_format
+{
+	return [[self class] detectSoundFormatFromData:_data];
 }
 
 @end

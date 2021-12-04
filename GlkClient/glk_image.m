@@ -311,3 +311,40 @@ void glk_window_set_background_color(winid_t win, glui32 color) {
 }
 
 @end
+
+@implementation GlkBlorbSoundSource
+
+- (id) init {
+	self = [super init];
+	
+	if (self) {
+		if (giblorb_get_resource_map() == NULL) {
+			[self release];
+			return nil;
+		}
+	}
+	
+	return self;
+}
+
+- (bycopy NSData*) dataForImageResource: (glui32) image {
+	// Attempt to load the sound from the blorb resources
+	giblorb_result_t res;
+	giblorb_err_t    erm;
+	
+	erm = giblorb_load_resource(giblorb_get_resource_map(), giblorb_method_Memory, &res, giblorb_ID_Snd, image);
+	
+	if (erm != giblorb_err_None) return nil;
+	
+	// Create the image data
+	NSData* imgData = [NSData dataWithBytes: res.data.ptr
+									 length: res.length];
+	
+	// Discard the sound loaded from memory
+	giblorb_unload_chunk(giblorb_get_resource_map(), res.chunknum);
+	
+	// Return the result
+	return imgData;
+}
+
+@end

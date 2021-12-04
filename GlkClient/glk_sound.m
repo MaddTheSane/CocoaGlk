@@ -96,7 +96,7 @@ void glk_schannel_destroy(schanid_t chan) {
 		return;
 	}
 #if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_destroy(%p)", res);
+	NSLog(@"TRACE: glk_schannel_destroy(%p)", chan);
 #endif
 	[chan->fileref release];
 	free(chan);
@@ -135,6 +135,11 @@ glui32 glk_schannel_get_rock(schanid_t chan) {
 		cocoaglk_error("glk_schannel_get_rock called with an invalid schanid");
 		return 0;
 	}
+	
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: glk_schannel_get_rock(%p) = %u", chan, chan->rock);
+#endif
+	
 	return chan->rock;
 }
 
@@ -148,8 +153,15 @@ glui32 glk_schannel_play_ext(schanid_t chan, glui32 snd, glui32 repeats,
 		cocoaglk_error("glk_schannel_play or glk_schannel_play_ext called with an invalid schanid");
 		return 0;
 	}
+	
+	glui32 returnVal = 0;
+	
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: glk_schannel_play_ext(%p, %u, %u, %u) = %u", chan, snd, repeats, notify, returnVal);
+#endif
+
 	UndefinedFunction();
-	return 0;
+	return returnVal;
 }
 
 void glk_schannel_stop(schanid_t chan) {
@@ -157,6 +169,11 @@ void glk_schannel_stop(schanid_t chan) {
 		cocoaglk_error("glk_schannel_stop called with an invalid schanid");
 		return;
 	}
+	
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: glk_schannel_stop(%p)", chan);
+#endif
+
 	UndefinedFunction();
 }
 
@@ -165,6 +182,11 @@ void glk_schannel_pause(schanid_t chan) {
 		cocoaglk_error("glk_schannel_pause called with an invalid schanid");
 		return;
 	}
+	
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: glk_schannel_pause(%p)", chan);
+#endif
+
 	UndefinedFunction();
 }
 
@@ -173,6 +195,11 @@ void glk_schannel_unpause(schanid_t chan) {
 		cocoaglk_error("glk_schannel_unpause called with an invalid schanid");
 		return;
 	}
+	
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: glk_schannel_unpause(%p)", chan);
+#endif
+
 	UndefinedFunction();
 }
 
@@ -186,6 +213,11 @@ void glk_schannel_set_volume_ext(schanid_t chan, glui32 vol,
 		cocoaglk_error("glk_schannel_set_volume or glk_schannel_set_volume_ext called with an invalid schanid");
 		return;
 	}
+	
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: glk_schannel_set_volume_ext(%p, %u, %u, %u)", chan, vol, duration, notify);
+#endif
+
 	UndefinedFunction();
 }
 
@@ -203,5 +235,10 @@ glui32 glk_schannel_play_multi(schanid_t *chanarray, glui32 chancount,
 }
 
 void glk_sound_load_hint(glui32 snd, glui32 flag) {
+	
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: glk_sound_load_hint(%u, %u)", snd, flag);
+#endif
+
 	UndefinedFunction();
 }

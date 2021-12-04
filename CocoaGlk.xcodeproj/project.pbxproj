@@ -125,6 +125,7 @@
 		4BFA1CD407F8A4040068E16A /* gi_blorb.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA1CD007F8A4040068E16A /* gi_blorb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA1CD507F8A4040068E16A /* gi_dispa.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1CD107F8A4040068E16A /* gi_dispa.m */; };
 		4BFA1D6907F8A8D00068E16A /* glk_misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFA1D6707F8A8D00068E16A /* glk_misc.m */; };
+		5502A675275B829D0066927C /* GlkSoundSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 5502A674275B829D0066927C /* GlkSoundSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		552CEF1627152C17009D87A5 /* glkstart.h in Headers */ = {isa = PBXBuildFile; fileRef = 552CEF1527152C17009D87A5 /* glkstart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		552CEF1927152C50009D87A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 552CEF1827152C50009D87A5 /* main.m */; };
 		5560FA2921C06BF500E711F5 /* GlkViewDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -419,7 +420,6 @@
 		089C165DFE840E0CC02AAC07 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* CocoaGlk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaGlk_Prefix.pch; sourceTree = SOURCE_ROOT; };
@@ -500,7 +500,6 @@
 		4B8BDE7C07EB400E008AE26D /* glk_cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_cocoa.m; sourceTree = "<group>"; };
 		4B8BDEB907EB47B5008AE26D /* GlkAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkAppDelegate.h; sourceTree = "<group>"; };
 		4B8BDEBA07EB47B5008AE26D /* GlkAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkAppDelegate.m; sourceTree = "<group>"; };
-		4B8BDF7A07EB5FE8008AE26D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CocoaGlk.xib; sourceTree = "<group>"; };
 		4B8BDF7E07EB6027008AE26D /* GlkWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkWindowController.h; sourceTree = "<group>"; };
 		4B8BDF7F07EB6027008AE26D /* GlkWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkWindowController.m; sourceTree = "<group>"; };
 		4B8BE03607EB6ABA008AE26D /* GlkBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkBuffer.h; sourceTree = "<group>"; };
@@ -544,6 +543,13 @@
 		4BFA1CD007F8A4040068E16A /* gi_blorb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gi_blorb.h; sourceTree = "<group>"; };
 		4BFA1CD107F8A4040068E16A /* gi_dispa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gi_dispa.m; sourceTree = "<group>"; };
 		4BFA1D6707F8A8D00068E16A /* glk_misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_misc.m; sourceTree = "<group>"; };
+		5502A66E275B7A690066927C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5502A66F275B7A700066927C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CocoaGlk.xib; sourceTree = "<group>"; };
+		5502A670275B7A7F0066927C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CocoaGlk.strings; sourceTree = "<group>"; };
+		5502A671275B7A860066927C /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CocoaGlk.strings"; sourceTree = "<group>"; };
+		5502A672275B7A8E0066927C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		5502A673275B7A930066927C /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		5502A674275B829D0066927C /* GlkSoundSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkSoundSource.h; sourceTree = "<group>"; };
 		552A03722049D5E200A4ECAA /* GlkView.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkView.modulemap; sourceTree = "<group>"; };
 		552A03732049D64C00A4ECAA /* GlkClient.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkClient.modulemap; sourceTree = "<group>"; };
 		552A03742049D67900A4ECAA /* GlkSound.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkSound.modulemap; sourceTree = "<group>"; };
@@ -598,21 +604,19 @@
 		55DA68762739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CocoaGlk.strings"; sourceTree = "<group>"; };
 		55DA68772739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "en-GB"; path = "en-GB.lproj/Credits.rtfd"; sourceTree = "<group>"; };
 		55DA68782739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		55DA68792739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "en-GB.lproj/MainMenu.xib"; sourceTree = "<group>"; };
-		55DA687A2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "en-GB.lproj/CocoaGlk.xib"; sourceTree = "<group>"; };
 		55DA687B2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "en-GB"; path = "en-GB.lproj/Credits.rtfd"; sourceTree = "<group>"; };
 		55DA687C2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55E630EE21C1AD87002C0FBA /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = Resources/Media.xcassets; sourceTree = "<group>"; };
 		55FF567E27583F22000B0D21 /* GlkSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkSound.h; sourceTree = "<group>"; };
 		55FF568B2758C724000B0D21 /* GlkSoundHandlerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkSoundHandlerProtocol.h; sourceTree = "<group>"; };
-		55FF568D275A1D72000B0D21 /* GlkMIDIChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkMIDIChannel.h; sourceTree = "<group>"; };
-		55FF568E275A1D72000B0D21 /* GlkSoundHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkSoundHandler.h; sourceTree = "<group>"; };
-		55FF568F275A1D72000B0D21 /* GlkMIDIChannel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GlkMIDIChannel.mm; sourceTree = "<group>"; };
-		55FF5690275A1D72000B0D21 /* GlkSoundChannel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GlkSoundChannel.mm; sourceTree = "<group>"; };
-		55FF5691275A1D72000B0D21 /* GlkSoundChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkSoundChannel.h; sourceTree = "<group>"; };
-		55FF5692275A1D72000B0D21 /* GlkMIDIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkMIDIPlayer.h; sourceTree = "<group>"; };
-		55FF5693275A1D72000B0D21 /* GlkSoundHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkSoundHandler.m; sourceTree = "<group>"; };
-		55FF5694275A1D72000B0D21 /* GlkMIDIPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkMIDIPlayer.m; sourceTree = "<group>"; };
+		55FF568D275A1D72000B0D21 /* GlkMIDIChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkMIDIChannel.h; sourceTree = "<group>"; usesTabs = 0; };
+		55FF568E275A1D72000B0D21 /* GlkSoundHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkSoundHandler.h; sourceTree = "<group>"; usesTabs = 0; };
+		55FF568F275A1D72000B0D21 /* GlkMIDIChannel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GlkMIDIChannel.mm; sourceTree = "<group>"; usesTabs = 0; };
+		55FF5690275A1D72000B0D21 /* GlkSoundChannel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GlkSoundChannel.mm; sourceTree = "<group>"; usesTabs = 0; };
+		55FF5691275A1D72000B0D21 /* GlkSoundChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkSoundChannel.h; sourceTree = "<group>"; usesTabs = 0; };
+		55FF5692275A1D72000B0D21 /* GlkMIDIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkMIDIPlayer.h; sourceTree = "<group>"; usesTabs = 0; };
+		55FF5693275A1D72000B0D21 /* GlkSoundHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkSoundHandler.m; sourceTree = "<group>"; usesTabs = 0; };
+		55FF5694275A1D72000B0D21 /* GlkMIDIPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkMIDIPlayer.m; sourceTree = "<group>"; usesTabs = 0; };
 		55FF56A4275A1DC2000B0D21 /* SFBAudioEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SFBAudioEngine.xcodeproj; path = GlkSound/SFBAudioEngine/SFBAudioEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		55FF5AB6275A1E08000B0D21 /* SFBAudioEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SFBAudioEngine.xcodeproj; path = /Users/cwbetts/makestuff/Inform/zoom/depends/CocoaGlk/GlkSound/SFBAudioEngine/SFBAudioEngine.xcodeproj; sourceTree = "<absolute>"; };
 		55FF5AEA275A259A000B0D21 /* Ogg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ogg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1033,6 +1037,7 @@
 			children = (
 				4BF0855A0E16768400DB5C6B /* GlkSoundDataSource.h */,
 				55FF568B2758C724000B0D21 /* GlkSoundHandlerProtocol.h */,
+				5502A674275B829D0066927C /* GlkSoundSource.h */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -1210,6 +1215,7 @@
 				55FF5696275A1D72000B0D21 /* GlkSoundHandler.h in Headers */,
 				55FF568C2758C724000B0D21 /* GlkSoundHandlerProtocol.h in Headers */,
 				55FF5699275A1D72000B0D21 /* GlkSoundChannel.h in Headers */,
+				5502A675275B829D0066927C /* GlkSoundSource.h in Headers */,
 				55FF569A275A1D72000B0D21 /* GlkMIDIPlayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1872,8 +1878,9 @@
 		29B97318FDCFA39411CA2CEA /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				29B97319FDCFA39411CA2CEA /* en */,
-				55DA68792739C96D0007990A /* en-GB */,
+				5502A66E275B7A690066927C /* Base */,
+				5502A672275B7A8E0066927C /* en */,
+				5502A673275B7A930066927C /* en-GB */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -1890,8 +1897,9 @@
 		4B8BDF7907EB5FE8008AE26D /* CocoaGlk.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4B8BDF7A07EB5FE8008AE26D /* en */,
-				55DA687A2739C96D0007990A /* en-GB */,
+				5502A66F275B7A700066927C /* Base */,
+				5502A670275B7A7F0066927C /* en */,
+				5502A671275B7A860066927C /* en-GB */,
 			);
 			name = CocoaGlk.xib;
 			sourceTree = "<group>";

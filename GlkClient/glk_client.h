@@ -31,7 +31,7 @@
 #pragma GCC visibility push(hidden)
 
 /// Report an undefined function
-#define UndefinedFunction() fprintf(stderr, "CocoaGlk: " __FILE__ " %i: Function %s not defined\n", __LINE__, __func__);
+#define UndefinedFunction() fprintf(stderr, "CocoaGlk: " __FILE__ ":%i  Function %s not defined\n", __LINE__, __func__);
 
 // Log simple debug messages
 #ifdef COCOAGLK_DEBUG
@@ -266,5 +266,10 @@ struct glk_fileref_struct {
 ///
 /// This class is used for passing Blorb image information to the server process
 @interface GlkBlorbImageSource : NSObject<GlkImageSource>
+
+@end
+
+/// This class is used for passing Blorb sound information to the server process
+@interface GlkBlorbSoundSource : NSObject<GlkImageSource>
 
 @end

@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import <GlkView/glk.h>
+#import <GlkView/GlkEvent.h>
+#import <GlkSound/GlkSoundSource.h>
 
 @class GlkSoundChannel, GlkView, GlkSoundHandler;
 
@@ -40,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end;
 
 
-@interface GlkSoundResource : NSObject
+@interface GlkSoundResource : NSObject <GlkSoundResource>
 
 - (instancetype)initWithFilename:(NSString *)filename offset:(NSUInteger)offset length:(NSUInteger)length;
 
@@ -52,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSUInteger offset;
 @property NSUInteger length;
 @property GlkSoundBlorbFormatType type;
+
++ (GlkSoundBlorbFormatType)detectSoundFormatFromData:(NSData*)data;
 
 @end
 
@@ -66,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSUInteger restored_music_channel_id;
 @property glui32 lastsoundresno;
 
-@property (weak) GlkView *glkctl;
+@property (weak) id<GlkEventReceiver> glkctl;
 
 -(GlkSoundBlorbFormatType)loadSoundResourceFromSound:(glui32)snd data:(NSData * _Nullable __autoreleasing * _Nonnull)buf;
 - (GlkSoundBlorbFormatType)load_sound_resource:(unsigned int)snd length:(NSUInteger *)len data:(char * _Nonnull * _Nonnull)buf;

@@ -31,7 +31,7 @@ static NSDate* cocoaglk_nextTimerEvent = nil;
 /// Advance the time that the next timer event should occur at
 static void cocoaglk_next_time(void) {
 	if (!cocoaglk_nextTimerEvent) return;
-	CGFloat interval = ((CGFloat)cocoaglk_timerlength)/1000.0;
+	NSTimeInterval interval = ((NSTimeInterval)cocoaglk_timerlength)/1000.0;
 	
 	do {
 		// Move cocoaglk_nextTimerEvent on
@@ -222,7 +222,7 @@ void glk_select_poll(event_t *event) {
 
 /// You can request that an event be sent at fixed intervals, regardless of
 /// what the player does. Unlike input events, timer events can be tested
-/// for with glk_select_poll() as well as glk_select().
+/// for with \c glk_select_poll() as well as \c glk_select() .
 void glk_request_timer_events(glui32 millisecs) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_request_timer_events(%u)", millisecs);

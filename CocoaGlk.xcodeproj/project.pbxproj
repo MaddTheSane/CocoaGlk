@@ -174,7 +174,6 @@
 		55D6F0A0275C57D20098620E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D6F09F275C57D20098620E /* AudioToolbox.framework */; };
 		55E630EF21C1AD87002C0FBA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E630EE21C1AD87002C0FBA /* Media.xcassets */; };
 		55FF567F27583F22000B0D21 /* GlkSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF567E27583F22000B0D21 /* GlkSound.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55FF56892758C6B5000B0D21 /* GlkSound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		55FF568A2758C6B5000B0D21 /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55FF5695275A1D72000B0D21 /* GlkMIDIChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF568D275A1D72000B0D21 /* GlkMIDIChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FF5696275A1D72000B0D21 /* GlkSoundHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF568E275A1D72000B0D21 /* GlkSoundHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -667,7 +666,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55FF56892758C6B5000B0D21 /* GlkSound.framework in Frameworks */,
 				55FF568A2758C6B5000B0D21 /* GlkView.framework in Frameworks */,
 				557AF22C2703F79600A5CFFC /* Cocoa.framework in Frameworks */,
 			);

@@ -454,18 +454,18 @@ glui32 glk_get_line_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 
 void glk_request_char_event_uni(winid_t win) {
 #if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_request_char_event(%p)", win);
+	NSLog(@"TRACE: glk_request_char_event_uni(%p)", win);
 #endif
 
 	// Sanity check
 	if (win == NULL) {
-		cocoaglk_warning("glk_request_char_event called with a NULL winid");
+		cocoaglk_warning("glk_request_char_event_uni called with a NULL winid");
 		return;
 	}
 
 	if (!cocoaglk_winid_sane(win)) {
 		// Aah! The melons! The horrible melons!
-		cocoaglk_error("glk_request_char_event called with an invalid winid");
+		cocoaglk_error("glk_request_char_event_uni called with an invalid winid");
 	}
 	
 	// Buffer up the request
@@ -475,21 +475,21 @@ void glk_request_char_event_uni(winid_t win) {
 void glk_request_line_event_uni(winid_t win, glui32 *buf,
 								glui32 maxlen, glui32 initlen) {
 #if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_request_line_event(%p, %p, %u, %u)", win, buf, maxlen, initlen);
+	NSLog(@"TRACE: glk_request_line_event_uni(%p, %p, %u, %u)", win, buf, maxlen, initlen);
 #endif
 	
 	// Sanity check
 	if (win == NULL) {
-		cocoaglk_warning("glk_request_line_event called with a NULL winid");
+		cocoaglk_warning("glk_request_line_event_uni called with a NULL winid");
 		return;
 	}
 	
 	if (!cocoaglk_winid_sane(win)) {
-		cocoaglk_error("glk_request_line_event called with an invalid winid");
+		cocoaglk_error("glk_request_line_event_uni called with an invalid winid");
 	}
 	
 	if (initlen > maxlen) {
-		cocoaglk_warning("glk_request_line_event called with an initlen value greater than maxlen");
+		cocoaglk_warning("glk_request_line_event_uni called with an initlen value greater than maxlen");
 		initlen = maxlen;
 	}
 	
@@ -510,8 +510,8 @@ void glk_request_line_event_uni(winid_t win, glui32 *buf,
 	// Pass the initial string if specified
 	if (initlen > 0) {
 		NSString* string = [[NSString alloc] initWithBytes: buf
-													length: initlen
-												  encoding: NSISOLatin1StringEncoding];
+													length: initlen * 4
+												  encoding: NSUTF32LittleEndianStringEncoding];
 		
 		if (string) {
 			[cocoaglk_buffer setInputLine: string

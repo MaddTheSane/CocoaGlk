@@ -108,7 +108,6 @@
 		4BBFE3990C4EC253007DEE18 /* GlkBufferedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4BCB8AA10CD7E3310041731F /* GlkView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4BEE1D3C07FCC1D900296CD2 /* GlkTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEE1D3A07FCC1D900296CD2 /* GlkTextView.m */; };
-		4BF0854A0E1675D500DB5C6B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF085490E1675D500DB5C6B /* CoreAudio.framework */; };
 		4BFA18A107F726D60068E16A /* GlkEventListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA18A207F726D60068E16A /* GlkEventProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA18A007F726D60068E16A /* GlkEventProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA19FB07F77A820068E16A /* GlkFileRefProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA19F907F77A820068E16A /* GlkFileRefProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -172,6 +171,7 @@
 		55C6BB64204DF03A001AE7E5 /* CocoaGlk.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB66204DF03A001AE7E5 /* CocoaGlk.xib */; };
 		55C6BB6B204DF65F001AE7E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB6D204DF65F001AE7E5 /* Localizable.strings */; };
 		55D6F080275C4F520098620E /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
+		55D6F0A0275C57D20098620E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D6F09F275C57D20098620E /* AudioToolbox.framework */; };
 		55E630EF21C1AD87002C0FBA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E630EE21C1AD87002C0FBA /* Media.xcassets */; };
 		55FF567F27583F22000B0D21 /* GlkSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF567E27583F22000B0D21 /* GlkSound.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FF56892758C6B5000B0D21 /* GlkSound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -601,6 +601,7 @@
 		55C6BB65204DF03A001AE7E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CocoaGlk.xib; sourceTree = "<group>"; };
 		55C6BB68204DF03D001AE7E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CocoaGlk.strings; sourceTree = "<group>"; };
 		55C6BB6C204DF65F001AE7E5 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		55D6F09F275C57D20098620E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		55DA68752739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		55DA68762739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CocoaGlk.strings"; sourceTree = "<group>"; };
 		55DA68772739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "en-GB"; path = "en-GB.lproj/Credits.rtfd"; sourceTree = "<group>"; };
@@ -685,10 +686,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55D6F080275C4F520098620E /* GlkView.framework in Frameworks */,
-				55FF5ABE275A1E2F000B0D21 /* SFBAudioEngine.framework in Frameworks */,
-				4BF0854A0E1675D500DB5C6B /* CoreAudio.framework in Frameworks */,
 				557AF22D2703F81A00A5CFFC /* Foundation.framework in Frameworks */,
+				55D6F0A0275C57D20098620E /* AudioToolbox.framework in Frameworks */,
+				55FF5ABE275A1E2F000B0D21 /* SFBAudioEngine.framework in Frameworks */,
+				55D6F080275C4F520098620E /* GlkView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,6 +791,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55D6F09F275C57D20098620E /* AudioToolbox.framework */,
 				55FF5AEF275A25D1000B0D21 /* libdumb.a */,
 				55FF5AEA275A259A000B0D21 /* Ogg.framework */,
 				55FF5AEC275A259A000B0D21 /* Vorbis.framework */,

@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <GlkView/glk.h>
+#import <GlkView/GlkSoundChannelProtocol.h>
 
 @class GlkSoundHandler, GlkMIDIChannel;
 
@@ -13,7 +14,7 @@ typedef NS_ENUM(NSInteger, GlkSoundChannelStatus) {
 	GlkSoundChannelStatusSound
 };
 
-@interface GlkSoundChannel : NSObject <NSSecureCoding> {
+@interface GlkSoundChannel : NSObject <NSSecureCoding, GlkSoundChannel> {
 	glui32 loop;
 	glui32 notify;
 	glui32 paused;
@@ -32,15 +33,15 @@ typedef NS_ENUM(NSInteger, GlkSoundChannelStatus) {
 }
 
 @property GlkSoundChannelStatus status;
-@property glui32 name;
+@property int name;
 @property (weak) GlkSoundHandler *handler;
 
-- (instancetype)initWithHandler:(GlkSoundHandler *)handler name:(glui32)name volume:(glui32)vol;
-- (void)setVolume:(glui32)avol duration:(glui32)duration notify:(glui32)notify;
-- (void)play:(glui32)snd repeats:(glui32)areps notify:(glui32)anot;
-- (void)stop;
-- (void)pause;
-- (void)unpause;
+- (instancetype)initWithHandler:(GlkSoundHandler *)handler name:(int)name volume:(glui32)vol;
+- (oneway void) setVolume: (glui32) vol duration: (glui32) dur notification: (glui32) noti;
+- (BOOL) playSound: (glui32) sound countOfRepeats: (glui32) repeat notification: (glui32) noti;
+- (oneway void)stop;
+- (oneway void)pause;
+- (oneway void)unpause;
 - (void)cleanup;
 
 - (void)copyValues:(GlkSoundChannel *)otherChannel;

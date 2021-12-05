@@ -85,7 +85,7 @@ schanid_t glk_schannel_create(glui32 rock) {
 }
 
 schanid_t glk_schannel_create_ext(glui32 rock, glui32 volume) {
-	id<GlkSoundChannel> chan = [cocoaglk_session.soundHandler createSoundChannel];
+	id<GlkSoundChannel> chan = [cocoaglk_session.soundHandler createSoundChannelWithVolume: volume];
 	if (!chan) {
 		return NULL;
 	}
@@ -203,15 +203,10 @@ glui32 glk_schannel_play_ext(schanid_t chan, glui32 snd, glui32 repeats,
 		return 0;
 	}
 	
-	glui32 returnVal = 0;
-	
-	id<GlkSoundSource> soundSrc = [cocoaglk_session soundSource];
-	if (soundSrc) {
-		NSData *dat = [soundSrc dataForSoundResource: snd];
-		if (dat) {
-			returnVal = [chan->channelref playSoundData: dat countOfRepeats: repeats notification: notify] ? 1 : 0;
-		}
+	if (cocoaglk_session.soundHandler.soundSource == nil && cocoaglk_session.soundSource != nil) {
+		cocoaglk_session.soundHandler.soundSource = cocoaglk_session.soundSource;
 	}
+	glui32 returnVal = [chan->channelref playSound: snd countOfRepeats: repeats notification: notify] ? 1 : 0;
 	
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_schannel_play_ext(%p, %u, %u, %u) = %u", chan, snd, repeats, notify, returnVal);

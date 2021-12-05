@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <GlkView/glk.h>
 #import <GlkView/GlkEvent.h>
+#import <GlkView/GlkSoundHandlerProtocol.h>
 
 @class GlkSoundChannel, GlkView, GlkSoundHandler;
 
@@ -29,29 +30,13 @@ typedef NS_ENUM(NSInteger, GlkSoundBlorbFormatType) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GlkSoundFile : NSObject
-
-- (instancetype)initWithPath:(NSString *)path;
-- (void)resolveBookmark;
-
-@property (copy, nullable) NSData *bookmark;
-@property (copy, nullable) NSURL *URL;
-@property (weak) GlkSoundHandler *handler;
-
-@end;
-
-
 @interface GlkSoundResource : NSObject
 
-- (instancetype)initWithFilename:(NSString *)filename offset:(NSUInteger)offset length:(NSUInteger)length;
+- (instancetype)initWithData:(NSData*)dat;
 
 -(BOOL)load;
 
 @property (copy, nullable) NSData *data;
-@property (strong, nullable) GlkSoundFile *soundFile;
-@property (copy) NSString *filename;
-@property NSUInteger offset;
-@property NSUInteger length;
 @property GlkSoundBlorbFormatType type;
 
 + (GlkSoundBlorbFormatType)detectSoundFormatFromData:(NSData*)data;
@@ -59,12 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface GlkSoundHandler : NSObject
+@interface GlkSoundHandler : NSObject <GlkSoundHandler>
 
 @property (strong) NSMutableDictionary <NSNumber *, GlkSoundResource *> *resources;
-@property (strong) NSMutableDictionary *sfbplayers;
 @property (strong) NSMutableDictionary <NSNumber *, GlkSoundChannel *> *glkchannels;
-@property (strong) NSMutableDictionary <NSString *, GlkSoundFile *> *files;
 @property (strong, nullable) GlkSoundChannel *music_channel;
 @property NSUInteger restored_music_channel_id;
 @property glui32 lastsoundresno;
@@ -78,14 +61,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)stopAllAndCleanUp;
 
 - (int)handleNewSoundChannel:(glui32)volume;
-- (void)handleDeleteChannel:(glui32)channel;
+- (void)handleDeleteChannel:(int)channel;
 - (BOOL)handleFindSoundNumber:(glui32)resno;
-- (void)handleLoadSoundNumber:(glui32)resno
-                         from:(NSString *)path
-                       offset:(NSUInteger)offset
-                       length:(NSUInteger)length;
 - (void)handleSetVolume:(glui32)volume
-                channel:(glui32)channel
+                channel:(int)channel
                duration:(glui32)duration
                  notify:(glui32)notify;
 - (void)handlePlaySoundOnChannel:(glui32)channel repeats:(glui32)repeats notify:(glui32)notify;

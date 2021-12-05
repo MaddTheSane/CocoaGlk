@@ -18,7 +18,7 @@
 
 @implementation GlkSoundChannel
 
-- (instancetype)initWithHandler:(GlkSoundHandler*)handler name:(glui32)channelname volume:(glui32)vol
+- (instancetype)initWithHandler:(GlkSoundHandler*)handler name:(int)channelname volume:(glui32)vol
 {
     if (self = [super init]) {
     _handler = handler;
@@ -43,7 +43,7 @@
     return self;
 }
 
-- (void)play:(glui32)snd repeats:(glui32)areps notify:(glui32)anot
+- (BOOL)playSound:(glui32)snd countOfRepeats:(glui32)areps notification:(glui32)anot
 {
     _status = GlkSoundChannelStatusSound;
 
@@ -59,7 +59,7 @@
     }
     
     if (areps == 0 || snd == -1)
-        return;
+        return NO;
     
     /* load sound resource into memory */
     type = [_handler load_sound_resource:snd length:&len data:&buf];
@@ -94,7 +94,7 @@
             
         default:
             NSLog(@"schannel_play_ext: unknown resource type (%ld).", type);
-            return;
+            return NO;
     }
 
     mimeString = [NSString stringWithFormat:@"audio/%@", mimeString];
@@ -131,9 +131,10 @@
         _player->Enqueue(loopableRegionDecoder);
     else
         _player->Play(loopableRegionDecoder);
+    return YES;
 }
 
-- (void)stop
+- (oneway void)stop
 {
     paused = NO;
     if (_player) {
@@ -143,20 +144,25 @@
     [self cleanup];
 }
 
-- (void) pause
+- (oneway void) pause
 {
     paused = YES;
     if (_player)
         _player->Pause();
 }
 
-- (void) unpause
+- (oneway void) unpause
 {
     paused = NO;
     if (!_player)
-        [self play:resid repeats:loop notify:notify];
+        [self playSound:resid countOfRepeats:loop notification:notify];
     else
         _player->Play();
+}
+
+- (oneway void)close {
+    [self cleanup];
+    [self.handler handleDeleteChannel:self.name];
 }
 
 - (void)cleanup
@@ -221,7 +227,7 @@
     [self setVolume];
 }
 
-- (void) setVolume:(glui32)glk_volume duration:(glui32)duration notify:(glui32)notification
+- (oneway void) setVolume:(glui32)glk_volume duration:(glui32)duration notification:(glui32)notification
 {
     if (!duration)
     {
@@ -262,7 +268,7 @@
         [self pause];
     }
 
-    [self play:resid repeats:loop notify:notify];
+    [self playSound:resid countOfRepeats:loop notification:notify];
 
     if (volume_timeout > 0) {
 
@@ -274,7 +280,7 @@
         if (float_volume < MIX_MAX_VOLUME)
            glk_target_volume = (glui32)(float_volume * GLK_MAXVOLUME);
 
-        [self setVolume:glk_target_volume duration:duration notify:volume_notify];
+        [self setVolume:glk_target_volume duration:duration notification:volume_notify];
 
         if (!timer)
         {
@@ -305,7 +311,7 @@
             glk_target_volume = GLK_MAXVOLUME;
     }
 
-    [otherChannel setVolume:glk_target_volume duration:duration notify:volume_notify];
+    [otherChannel setVolume:glk_target_volume duration:duration notification:volume_notify];
 }
 
 + (BOOL) supportsSecureCoding {

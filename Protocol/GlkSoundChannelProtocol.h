@@ -18,7 +18,7 @@ NS_SWIFT_NAME(GlkSoundChannelProtocol)
 - (oneway void) unpause;
 - (oneway void) close;
 - (oneway void) setVolume: (glui32) vol duration: (glui32) dur notification: (glui32) noti;
-- (BOOL) playSoundData: (bycopy NSData*) soundDat countOfRepeats: (glui32) repeat notification: (glui32) noti;
+- (BOOL) playSound: (glui32) sound countOfRepeats: (glui32) repeat notification: (glui32) noti;
 
 @end
 

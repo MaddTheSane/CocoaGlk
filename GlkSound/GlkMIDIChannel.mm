@@ -12,7 +12,7 @@
 
 @implementation GlkMIDIChannel
 
-- (instancetype)initWithHandler:(GlkSoundHandler*)handler name:(glui32)channelname volume:(glui32)vol
+- (instancetype)initWithHandler:(GlkSoundHandler*)handler name:(int)channelname volume:(glui32)vol
 {
 	if (self = [super initWithHandler:handler name:channelname volume:vol]) {
 	}
@@ -20,7 +20,7 @@
     return self;
 }
 
-- (void)play:(glui32)snd repeats:(glui32)areps notify:(glui32)anot
+- (BOOL)playSound:(glui32)snd countOfRepeats:(glui32)areps notification:(glui32)anot
 {
     self.status = GlkSoundChannelStatusSound;
 
@@ -33,13 +33,13 @@
     }
     
     if (areps == 0 || snd == -1)
-        return;
+        return NO;
     
     /* load sound resource into memory */
     type = [self.handler loadSoundResourceFromSound:snd data:&dat];
 
     if (type != GlkSoundBlorbFormatMIDI)
-        return;
+        return NO;
 
     notify = anot;
     resid = snd;
@@ -70,9 +70,10 @@
 
        if (!paused)
            [_player play];
+    return YES;
 }
 
-- (void)stop
+- (oneway void)stop
 {
     paused = NO;
     if (_player) {
@@ -81,18 +82,18 @@
     [self cleanup];
 }
 
-- (void)pause
+- (oneway void)pause
 {
     paused = YES;
     if (_player)
         [_player pause];
 }
 
-- (void)unpause
+- (oneway void)unpause
 {
     paused = NO;
     if (!_player)
-        [self play:resid repeats:loop notify:notify];
+        [self playSound:resid countOfRepeats:loop notification:notify];
     else
         [_player play];
 }

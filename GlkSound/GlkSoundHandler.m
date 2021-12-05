@@ -15,121 +15,32 @@
 #define SDL_CHANNELS 64
 #define MAX_SOUND_RESOURCES 500
 
-@implementation GlkSoundFile : NSObject
-
-+ (BOOL) supportsSecureCoding {
-    return YES;
-}
-
-- (instancetype)initWithPath:(NSString *)path {
-    self = [super init];
-    if (self) {
-        _URL = [NSURL fileURLWithPath:path];
-        NSError *theError;
-        _bookmark = [_URL bookmarkDataWithOptions:NSURLBookmarkCreationSuitableForBookmarkFile
-                        includingResourceValuesForKeys:nil
-                                         relativeToURL:nil
-                                                 error:&theError];
-        if (theError || !_bookmark)
-            NSLog(@"Soundfile error when encoding bookmark %@: %@", path, theError);
-    }
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)decoder {
-    if (self = [super init]) {
-        _URL =  [decoder decodeObjectOfClass:[NSURL class] forKey:@"URL"];
-        _bookmark = [decoder decodeObjectOfClass:[NSData class] forKey:@"bookmark"];
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:_URL forKey:@"URL"];
-    [encoder encodeObject:_bookmark forKey:@"bookmark"];
-}
-
-- (void)resolveBookmark {
-    BOOL bookmarkIsStale = NO;
-    NSError *error = nil;
-    _URL = [NSURL URLByResolvingBookmarkData:_bookmark options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:&bookmarkIsStale error:&error];
-    if (bookmarkIsStale) {
-        _bookmark = [_URL bookmarkDataWithOptions:NSURLBookmarkCreationSuitableForBookmarkFile
-                        includingResourceValuesForKeys:nil
-                                         relativeToURL:nil
-                                                 error:&error];
-    }
-    if (error) {
-        NSLog(@"Soundfile resolveBookmark: %@", error);
-        if (error.code == 4) {
-            NSDictionary *values = [NSURL resourceValuesForKeys:@[NSURLPathKey]
-                                               fromBookmarkData:_bookmark];
-            NSString *oldfilename = values[NSURLPathKey];
-            oldfilename = oldfilename.lastPathComponent;
-			NSString *newPath = @"";
-//            [[_handler.glkctl.gamefile stringByDeletingLastPathComponent] stringByAppendingPathComponent:oldfilename];
-            if ([[NSFileManager defaultManager] fileExistsAtPath:newPath]) {
-                _URL = [NSURL fileURLWithPath:newPath];
-                _bookmark = [_URL bookmarkDataWithOptions:NSURLBookmarkCreationSuitableForBookmarkFile
-                           includingResourceValuesForKeys:nil
-                                            relativeToURL:nil
-                                                    error:&error];
-            }
-        }
-    }
-}
-
-@end
-
-
 @implementation GlkSoundResource : NSObject
 
 + (BOOL) supportsSecureCoding {
     return YES;
 }
 
-- (instancetype)initWithFilename:(NSString *)filename offset:(NSUInteger)offset length:(NSUInteger)length {
-    self = [super init];
-    if (self) {
-        _filename = filename;
-        _offset = offset;
-        _length = length;
+- (instancetype)initWithData:(NSData *)dat {
+    if (self = [super init]) {
+        _data = [dat copy];
     }
     return self;
 }
-
 - (instancetype)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        _filename = [decoder decodeObjectOfClass:[NSString class] forKey:@"filename"];
-        _length = (size_t)[decoder decodeIntForKey:@"length"];
-        _offset = (size_t)[decoder decodeIntForKey:@"offset"];
-        _type = (GlkSoundBlorbFormatType)[decoder decodeIntForKey:@"type"];
+        _data = [decoder decodeObjectOfClass:[NSData class] forKey:@"data"];
+        _type = (GlkSoundBlorbFormatType)[decoder decodeIntegerForKey:@"type"];
     }
     return self;
 }
 
 - (void) encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:_filename forKey:@"filename"];
-    [encoder encodeInteger:(NSInteger)_length forKey:@"length"];
-    [encoder encodeInteger:(NSInteger)_offset forKey:@"offset"];
+    [encoder encodeObject:_data forKey:@"data"];
     [encoder encodeInteger:(NSInteger)_type forKey:@"type"];
 }
 
 -(BOOL)load {
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingFromURL:_soundFile.URL error:NULL];
-    if (!fileHandle) {
-        [_soundFile resolveBookmark];
-        fileHandle = [NSFileHandle fileHandleForReadingFromURL:_soundFile.URL error:NULL];
-        if (!fileHandle)
-            return NO;
-    }
-    [fileHandle seekToFileOffset:_offset];
-    _data = [fileHandle readDataOfLength:_length];
-    if (!_data) {
-        NSLog(@"Could not read sound resource from file %@, length %ld, offset %ld\n", _soundFile.URL.path, _length, _offset);
-        return NO;
-    }
-
     if (!_type) {
         _type = [self detect_sound_format];
         if (!_type) {
@@ -207,13 +118,13 @@
 
 @implementation GlkSoundHandler
 
+@synthesize soundSource;
+
 - (instancetype)init {
     self = [super init];
     if (self) {
         _resources = [NSMutableDictionary new];
-        _sfbplayers = [NSMutableDictionary new];
         _glkchannels = [NSMutableDictionary new];
-        _files = [NSMutableDictionary new];
         _lastsoundresno = -1;
     }
     return self;
@@ -226,14 +137,7 @@
 - (instancetype)initWithCoder:(NSCoder *)decoder {
     self = [super init];
     if (self) {
-    _files = [decoder decodeObjectOfClass:[NSMutableDictionary class] forKey:@"files"];
-    for (GlkSoundFile *file in _files.allValues)
-        file.handler = self;
     _resources = [decoder decodeObjectOfClass:[NSMutableDictionary class] forKey:@"resources"];
-    if (_resources)
-        for (GlkSoundResource *res in _resources.allValues) {
-            res.soundFile = _files[res.filename];
-        }
     _restored_music_channel_id = (NSUInteger)[decoder decodeIntForKey:@"music_channel"];
     _glkchannels = [decoder decodeObjectOfClass:[NSMutableDictionary class] forKey:@"gchannels"];
     _lastsoundresno = [decoder decodeIntForKey:@"lastsoundresno"];
@@ -242,7 +146,6 @@
 }
 
 - (void) encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:_files forKey:@"files"];
     [encoder encodeObject:_resources forKey:@"resources"];
     [encoder encodeInteger:(NSInteger)_music_channel.name forKey:@"music_channel"];
     [encoder encodeObject:_glkchannels forKey:@"gchannels"];
@@ -273,47 +176,8 @@
     return result;
 }
 
-- (void)handleLoadSoundNumber:(glui32)resno
-                         from:(NSString *)path
-                       offset:(NSUInteger)offset
-                       length:(NSUInteger)length {
-
-    if (_lastsoundresno == resno && [self soundIsLoaded:resno])
-        return;
-
-    _lastsoundresno = resno;
-
-    [self setSoundID:resno filename:path length:length offset:offset];
-}
-
-- (void)setSoundID:(glui32)snd filename:(nullable NSString *)filename length:(NSUInteger)length offset:(NSUInteger)offset {
-
-    GlkSoundResource *res = _resources[@(snd)];
-
-    if (res == nil) {
-        res = [[GlkSoundResource alloc] initWithFilename:filename offset:offset length:length];
-        _resources[@(snd)] = res;
-    } else if (res.data) {
-        return;
-    }
-
-    res.length = length;
-
-    if (filename != nil)
-    {
-        res.soundFile = _files[filename];
-        if (!res.soundFile) {
-            res.soundFile = [[GlkSoundFile alloc] initWithPath:filename];
-            res.soundFile.handler = self;
-            _files[filename] = res.soundFile;
-        }
-    } else return;
-    res.offset = offset;
-    [res load];
-}
-
 - (int)handleNewSoundChannel:(glui32)volume {
-	glui32 i;
+	int i;
     for (i = 0; i < MAXSND; i++)
     if (_glkchannels[@(i)] == nil)
         break;
@@ -327,16 +191,16 @@
     return i;
 }
 
-- (void)handleDeleteChannel:(glui32)channel {
+- (void)handleDeleteChannel:(int)channel {
     if (_glkchannels[@(channel)]) {
         _glkchannels[@(channel)] = nil;
     }
 }
 
-- (void)handleSetVolume:(glui32)volume channel:(glui32)channel duration:(glui32)duration notify:(glui32)notify {
+- (void)handleSetVolume:(glui32)volume channel:(int)channel duration:(glui32)duration notify:(glui32)notify {
     GlkSoundChannel *glkchan = _glkchannels[@(channel)];
     if (glkchan) {
-        [glkchan setVolume:volume duration:duration notify:notify];
+        [glkchan setVolume:volume duration:duration notification:notify];
     }
 }
 
@@ -358,7 +222,7 @@
                 glkchan = _glkchannels[@(channel)];
             }
 
-            [glkchan play:_lastsoundresno repeats:repeats notify:notify];
+            [glkchan playSound:_lastsoundresno countOfRepeats:repeats notification:notify];
         }
     }
 }
@@ -415,6 +279,15 @@
 
     GlkSoundBlorbFormatType type = 	GlkSoundBlorbFormatNone;
     GlkSoundResource *resource = _resources[@(snd)];
+    
+    if (!resource) {
+        NSData *dat = [self.soundSource dataForSoundResource:snd];
+        if (dat) {
+            resource = [[GlkSoundResource alloc] initWithData:dat];
+            [resource load];
+            _resources[@(snd)] = resource;
+        }
+    }
 
     if (resource)
     {
@@ -440,6 +313,27 @@
 	}
 	
 	return type;
+}
+
+- (byref nullable id<GlkSoundChannel>)createSoundChannelWithVolume:(glui32)vol {
+    int chan = [self handleNewSoundChannel:vol];
+    if (chan == -1) {
+        return nil;
+    }
+    return _glkchannels[@(chan)];
+}
+
+- (oneway void)loadHintForSound:(glui32)snd flag:(glui32)hint {
+    if (hint == 0) {
+        [_resources removeObjectForKey:@(snd)];
+    } else {
+        NSData *dat = [self.soundSource dataForSoundResource:snd];
+        if (dat) {
+            GlkSoundResource *soundRsrc = [[GlkSoundResource alloc] initWithData:dat];
+            [soundRsrc load];
+            _resources[@(snd)] = soundRsrc;
+        }
+    }
 }
 
 @end

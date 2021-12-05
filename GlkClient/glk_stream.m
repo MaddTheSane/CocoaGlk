@@ -14,6 +14,7 @@
 
 #import "GlkMemoryStream.h"
 #import "GlkUcs4Stream.h"
+#import "GlkUTF8Stream.h"
 #import "GlkBufferedStream.h"
 
 #define GlkStreamMaxBuffer 32768
@@ -316,9 +317,14 @@ strid_t glk_stream_open_file_uni(frefid_t fileref, glui32 fmode,
 				 relativeTo: GlkSeekEnd];
 	}
 	
-	// Convert to UCS-4
-	stream = [[GlkUcs4Stream alloc] initWithStream: stream
-										 bigEndian: YES];
+	if ((fileref->usage&fileusage_TextMode) == fileusage_TextMode) {
+		// Convert to UTF-8
+		stream = [[GlkUTF8Stream alloc] initWithStream: stream];
+	} else {
+		// Convert to UCS-4
+		stream = [[GlkUcs4Stream alloc] initWithStream: stream
+											 bigEndian: YES];
+	}
 	
 	// Create the stream
 	strid_t res = cocoaglk_stream();

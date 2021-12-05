@@ -172,6 +172,8 @@
 		55C6BB6B204DF65F001AE7E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB6D204DF65F001AE7E5 /* Localizable.strings */; };
 		55D6F080275C4F520098620E /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55D6F0A0275C57D20098620E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D6F09F275C57D20098620E /* AudioToolbox.framework */; };
+		55D6F0B5275D6C810098620E /* GlkUTF8Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6F0B3275D6C810098620E /* GlkUTF8Stream.h */; };
+		55D6F0B6275D6C810098620E /* GlkUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6F0B4275D6C810098620E /* GlkUTF8Stream.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		55E630EF21C1AD87002C0FBA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E630EE21C1AD87002C0FBA /* Media.xcassets */; };
 		55FF567F27583F22000B0D21 /* GlkSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF567E27583F22000B0D21 /* GlkSound.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FF568A2758C6B5000B0D21 /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
@@ -601,6 +603,8 @@
 		55C6BB68204DF03D001AE7E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CocoaGlk.strings; sourceTree = "<group>"; };
 		55C6BB6C204DF65F001AE7E5 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55D6F09F275C57D20098620E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		55D6F0B3275D6C810098620E /* GlkUTF8Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkUTF8Stream.h; sourceTree = "<group>"; };
+		55D6F0B4275D6C810098620E /* GlkUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkUTF8Stream.m; sourceTree = "<group>"; };
 		55DA68752739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		55DA68762739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CocoaGlk.strings"; sourceTree = "<group>"; };
 		55DA68772739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "en-GB"; path = "en-GB.lproj/Credits.rtfd"; sourceTree = "<group>"; };
@@ -942,6 +946,8 @@
 				4B8C7D8107F7041100502054 /* GlkMemoryStream.m */,
 				4B4D379C0A97B53E0007FD80 /* GlkUcs4Stream.h */,
 				4B4D379D0A97B53E0007FD80 /* GlkUcs4Stream.m */,
+				55D6F0B3275D6C810098620E /* GlkUTF8Stream.h */,
+				55D6F0B4275D6C810098620E /* GlkUTF8Stream.m */,
 				4B3CBD040B07DABD0073216F /* GlkMemoryFileRef.h */,
 				4B3CBD050B07DABD0073216F /* GlkMemoryFileRef.m */,
 				4BBFE3960C4EC253007DEE18 /* GlkBufferedStream.h */,
@@ -1194,6 +1200,7 @@
 				4B51AB3B07E87EE300576AB9 /* cocoaglk.h in Headers */,
 				4B8C7D8707F7041F00502054 /* GlkMemoryStream.h in Headers */,
 				4BFA1CD207F8A4040068E16A /* gi_dispa.h in Headers */,
+				55D6F0B5275D6C810098620E /* GlkUTF8Stream.h in Headers */,
 				4BFA1CD407F8A4040068E16A /* gi_blorb.h in Headers */,
 				4B4D379E0A97B53E0007FD80 /* GlkUcs4Stream.h in Headers */,
 				4B3CBD080B07DB0C0073216F /* GlkMemoryFileRef.h in Headers */,
@@ -1709,6 +1716,7 @@
 				4B4D379F0A97B53E0007FD80 /* GlkUcs4Stream.m in Sources */,
 				4B3CBD090B07DB0C0073216F /* GlkMemoryFileRef.m in Sources */,
 				4BBFE3990C4EC253007DEE18 /* GlkBufferedStream.m in Sources */,
+				55D6F0B6275D6C810098620E /* GlkUTF8Stream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

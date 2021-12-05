@@ -912,6 +912,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	newSec.elastic = elastic;
 
 	[sections addObject:newSec];
+	[newSec release];
 	
 	if (alignment != GlkAlignBaseline) customBaseline = YES;
 	

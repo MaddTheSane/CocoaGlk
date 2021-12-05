@@ -1,11 +1,6 @@
 framework module GlkSound {
 	umbrella header "GlkSound.h"
 	
-	module GlkSoundDataSource {
-		header "GlkSoundDataSource.h"
-		export *
-	}
-
 	export *
 	module * { export * }
 }

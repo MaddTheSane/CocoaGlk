@@ -8,8 +8,6 @@
 #ifndef GlkSound_h
 #define GlkSound_h
 
-#import <GlkSound/GlkSoundDataSource.h>
-
 #import <GlkSound/GlkSoundChannel.h>
 #import <GlkSound/GlkSoundHandler.h>
 #import <GlkSound/GlkMIDIChannel.h>

@@ -71,7 +71,7 @@ extern strid_t cocoaglk_get_stream_for_key(const char* key);
 /// Sets a new image source object
 extern void cocoaglk_set_image_source(id<GlkImageSource> imageSource);
 
-/// Sets a new image source object
+/// Sets a new sound source object
 extern void cocoaglk_set_sound_source(id<GlkSoundSource> imageSource);
 
 /// Turns a UCS-4 string into a UTF-16 cocoa string

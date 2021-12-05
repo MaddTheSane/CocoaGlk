@@ -293,8 +293,8 @@ struct glk_schannel_struct {
 };
 
 
-/// Images
-///
+// Images
+
 /// This class is used for passing Blorb image information to the server process
 @interface GlkBlorbImageSource : NSObject<GlkImageSource>
 

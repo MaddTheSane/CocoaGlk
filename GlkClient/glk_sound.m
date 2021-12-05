@@ -23,7 +23,7 @@ static schanid_t cocoaglk_firstschanid = NULL;
 static BOOL soundSourceSet = NO;
 
 //
-// Tells the session object where to get its image from
+// Tells the session object where to get its sound from
 //
 void cocoaglk_set_sound_source(id<GlkSoundSource> soundSource) {
 	soundSourceSet = YES;
@@ -232,13 +232,22 @@ void glk_schannel_unpause(schanid_t chan) {
 }
 
 void glk_schannel_set_volume(schanid_t chan, glui32 vol) {
+	if (!cocoaglk_schanid_sane(chan)) {
+		cocoaglk_error("glk_schannel_set_volume called with an invalid schanid");
+		return;
+	}
+
+#if COCOAGLK_TRACE
+	NSLog(@"TRACE: glk_schannel_set_volume(%p, %u)", chan, vol);
+#endif
+	
 	glk_schannel_set_volume_ext(chan, vol, 0, 0);
 }
 
 void glk_schannel_set_volume_ext(schanid_t chan, glui32 vol,
 								 glui32 duration, glui32 notify) {
 	if (!cocoaglk_schanid_sane(chan)) {
-		cocoaglk_error("glk_schannel_set_volume or glk_schannel_set_volume_ext called with an invalid schanid");
+		cocoaglk_error("glk_schannel_set_volume_ext called with an invalid schanid");
 		return;
 	}
 	

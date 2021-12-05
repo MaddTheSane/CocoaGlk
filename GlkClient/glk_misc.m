@@ -59,6 +59,12 @@ void gidispatch_set_object_registry(gidispatch_rock_t (*reg)(void *obj, glui32 o
 		ref->giRock = reg(ref, gidisp_Class_Fileref);
 		ref = glk_fileref_iterate(ref, NULL);
 	}
+	
+	schanid_t snd = glk_schannel_iterate(NULL, NULL);
+	while (snd != NULL) {
+		snd->giRock = reg(snd, gidisp_Class_Schannel);
+		snd = glk_schannel_iterate(snd, NULL);
+	}
 }
 
 gidispatch_rock_t gidispatch_get_objrock(void *obj, glui32 objclass) {
@@ -92,6 +98,14 @@ gidispatch_rock_t gidispatch_get_objrock(void *obj, glui32 objclass) {
 			}
 			
 			res = ((frefid_t)obj)->giRock;
+			break;
+			
+		case gidisp_Class_Schannel:
+			if (!cocoaglk_schanid_sane(obj)) {
+				cocoaglk_error("gidispatch_get_objrock called with an invalid schanid");
+			}
+
+			res = ((schanid_t)obj)->giRock;
 			break;
 			
 		default:

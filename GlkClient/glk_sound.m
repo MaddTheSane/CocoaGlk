@@ -32,31 +32,8 @@ void cocoaglk_set_sound_source(id<GlkSoundSource> soundSource) {
 	}
 }
 
-struct glk_schannel_struct {
-#define GlkSoundRefKey 'FSND'
-	/// Used while sanity fleeble blurgle blorp
-	unsigned int key;
-	
-	/// The fileref rock
-	glui32 rock;
-	/// The volume specified for this sound channel when it was created
-	glui32 volume;
-	
-	/// The actual channel object
-	__strong id<GlkSoundChannel> channelref;
-	
-	/// Annoying gi_dispa rock
-	gidispatch_rock_t giRock;
-	
-	/// The next fref in the list
-	schanid_t next;
-	/// The last fref in the list
-	schanid_t last;
-};
-
-
 /// Check if \c ref is a 'valid' schanid
-static BOOL cocoaglk_schanid_sane(schanid_t ref) {
+BOOL cocoaglk_schanid_sane(schanid_t ref) {
 	if (ref == NULL) return NO;
 	if (ref->key != GlkSoundRefKey) return NO;
 	

@@ -459,7 +459,7 @@ NS_ENUM(unichar) {
 		}
 	} else if (chr == keycode_Unknown && unicode == YES) {
 		NSData* utf32 = [string dataUsingEncoding: NSUTF32LittleEndianStringEncoding
-							  allowLossyConversion: YES];
+							 allowLossyConversion: YES];
 		if ([utf32 length] > 0) {
 			chr = ((unsigned int*)[utf32 bytes])[0];
 		}

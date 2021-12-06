@@ -69,7 +69,7 @@
 	[textView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
 	[textView setEditable: NO];
     [textView setRichText: YES];
-	[textView setUsesFindPanel: YES]; // FIXME: Won't work on Jaguar
+	[textView setUsesFindPanel: YES];
 	
 	inputPos = 0;
 	[[textView textStorage] setDelegate: self];
@@ -128,6 +128,8 @@
 - (void) dealloc {
 	[textView setDelegate: nil];
 	[[textView textStorage] setDelegate: nil];
+	
+	[typesetter setDelegate: nil];
 	
 	[[moreWindow parentWindow] removeChildWindow: moreWindow];
 	[moreWindow orderOut: self];
@@ -378,8 +380,8 @@
 	}
 	
 	// Anything newly added should be in the input style
-	[[textView textStorage] setAttributes: [self attributes: style_Input]
-									range: editedRange];
+	[textStorage setAttributes: [self attributes: style_Input]
+						 range: editedRange];
 }
 
 @synthesize inputPos;
@@ -439,7 +441,7 @@
 
 	// Check for any newlines in the input, and generate an event if we find one
 	// We only process one line at a time
-	NSString* string = [textStorage string];
+	NSString* string = [[textView textStorage] string];
 	NSInteger pos;
 	
 	for (pos = inputPos; pos < [string length]; pos++) {

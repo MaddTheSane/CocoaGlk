@@ -175,6 +175,7 @@
 		55D6F0B5275D6C810098620E /* GlkUTF8Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6F0B3275D6C810098620E /* GlkUTF8Stream.h */; };
 		55D6F0B6275D6C810098620E /* GlkUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6F0B4275D6C810098620E /* GlkUTF8Stream.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		55E630EF21C1AD87002C0FBA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E630EE21C1AD87002C0FBA /* Media.xcassets */; };
+		55E9F2DD275E0599004D1C12 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
 		55FF567F27583F22000B0D21 /* GlkSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF567E27583F22000B0D21 /* GlkSound.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FF568A2758C6B5000B0D21 /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55FF5695275A1D72000B0D21 /* GlkMIDIChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF568D275A1D72000B0D21 /* GlkMIDIChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1576,6 +1577,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55E9F2DD275E0599004D1C12 /* GlkClient.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1995,6 +1997,7 @@
 			buildSettings = {
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 2.0.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2008,6 +2011,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 2.0.1;
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
 				PRODUCT_NAME = GlkView;
@@ -2019,6 +2023,7 @@
 			buildSettings = {
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 2.0.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2030,6 +2035,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 2.0.1;
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
 				PRODUCT_NAME = GlkView;
@@ -2041,6 +2047,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 2.0.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2054,6 +2061,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 2.0.1;
 				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkClient;
@@ -2067,6 +2075,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 2.0.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2078,6 +2087,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 2.0.1;
 				MODULEMAP_FILE = GlkClient/GlkClient.modulemap;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkClient;
@@ -2333,7 +2343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 2.0.0;
+				CURRENT_PROJECT_VERSION = 2.0.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2346,12 +2356,13 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkSound;
 				PRODUCT_NAME = GlkSound;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -2359,7 +2370,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 2.0.0;
+				CURRENT_PROJECT_VERSION = 2.0.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2371,12 +2382,13 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkSound;
 				PRODUCT_NAME = GlkSound;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

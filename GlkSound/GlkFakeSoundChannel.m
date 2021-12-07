@@ -50,4 +50,17 @@
 	[_handler handleUnpauseOnChannel:channel];
 }
 
+- (void)encodeWithCoder:(nonnull NSCoder *)coder {
+	[coder encodeConditionalObject:_handler forKey:@"handler"];
+	[coder encodeInt:channel forKey:@"channel"];
+}
+
+- (nullable instancetype)initWithCoder:(nonnull NSCoder *)coder {
+	return [self initWithSoundChannel:[coder decodeIntForKey:@"channel"] handler:[coder decodeObjectOfClass:[GlkSoundHandler class] forKey:@"handler"]];
+}
+
++ (BOOL)supportsSecureCoding {
+	return YES;
+}
+
 @end

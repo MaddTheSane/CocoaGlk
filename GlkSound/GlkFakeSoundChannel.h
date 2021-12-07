@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GlkFakeSoundChannel : NSObject <GlkSoundChannel>
+@interface GlkFakeSoundChannel : NSObject <NSSecureCoding, GlkSoundChannel>
 
 - (instancetype)initWithSoundChannel:(int)chan handler:(GlkSoundHandler*)handler;
 @end

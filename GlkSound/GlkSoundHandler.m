@@ -9,13 +9,14 @@
 
 #import "GlkSoundChannel.h"
 #import "GlkMIDIChannel.h"
+#import "GlkFakeSoundChannel.h"
 #import <GlkView/GlkEvent.h>
 #import <GlkView/GlkView.h>
 
 #define SDL_CHANNELS 64
 #define MAX_SOUND_RESOURCES 500
 
-@implementation GlkSoundResource : NSObject
+@implementation GlkSoundResource
 
 + (BOOL) supportsSecureCoding {
     return YES;
@@ -116,7 +117,9 @@
 
 @end
 
-@implementation GlkSoundHandler
+@implementation GlkSoundHandler {
+    NSMutableDictionary <NSNumber *, GlkFakeSoundChannel *> *fakeGlkChannels;
+}
 
 @synthesize soundSource;
 
@@ -125,6 +128,7 @@
     if (self) {
         _resources = [NSMutableDictionary new];
         _glkchannels = [NSMutableDictionary new];
+        fakeGlkChannels = [NSMutableDictionary new];
         _lastsoundresno = -1;
     }
     return self;
@@ -194,6 +198,7 @@
 - (void)handleDeleteChannel:(int)channel {
     if (_glkchannels[@(channel)]) {
         _glkchannels[@(channel)] = nil;
+        fakeGlkChannels[@(channel)] = nil;
     }
 }
 
@@ -204,7 +209,7 @@
     }
 }
 
-- (void)handlePlaySoundOnChannel:(glui32)channel repeats:(glui32)repeats notify:(glui32)notify {
+- (void)handlePlaySoundOnChannel:(int)channel repeats:(glui32)repeats notify:(glui32)notify {
     if (_lastsoundresno != -1) {
         GlkSoundChannel *glkchan = _glkchannels[@(channel)];
         if (glkchan) {
@@ -227,21 +232,21 @@
     }
 }
 
-- (void)handleStopSoundOnChannel:(glui32)channel {
+- (void)handleStopSoundOnChannel:(int)channel {
     GlkSoundChannel *glkchan = _glkchannels[@(channel)];
     if (glkchan) {
         [glkchan stop];
     }
 }
 
-- (void)handlePauseOnChannel:(glui32)channel {
+- (void)handlePauseOnChannel:(int)channel {
     GlkSoundChannel *glkchan = _glkchannels[@(channel)];
     if (glkchan) {
         [glkchan pause];
     }
 }
 
-- (void)handleUnpauseOnChannel:(glui32)channel {
+- (void)handleUnpauseOnChannel:(int)channel {
     GlkSoundChannel *glkchan = _glkchannels[@(channel)];
     if (glkchan) {
         [glkchan unpause];
@@ -320,7 +325,9 @@
     if (chan == -1) {
         return nil;
     }
-    return _glkchannels[@(chan)];
+    GlkFakeSoundChannel *fakeChan = [[GlkFakeSoundChannel alloc] initWithSoundChannel:chan handler:self];
+    fakeGlkChannels[@(chan)] = fakeChan;
+    return fakeChan;
 }
 
 - (oneway void)loadHintForSound:(glui32)snd flag:(glui32)hint {
@@ -334,6 +341,38 @@
             _resources[@(snd)] = soundRsrc;
         }
     }
+}
+
++ (NSString *)MIMETypeFromFormatType:(GlkSoundBlorbFormatType)format {
+    NSString *mimeString;
+    switch (format)
+    {
+        case GlkSoundBlorbFormatFORM:
+        case GlkSoundBlorbFormatAIFF:
+            mimeString = @"aiff";
+            break;
+        case GlkSoundBlorbFormatWave:
+            mimeString = @"wav";
+            break;
+        case GlkSoundBlorbFormatOggVorbis:
+            mimeString = @"ogg-vorbis";
+            break;
+        case GlkSoundBlorbFormatMP3:
+            mimeString = @"mp3";
+            break;
+        case GlkSoundBlorbFormatMod:
+            mimeString = @"mod";
+            break;
+        case GlkSoundBlorbFormatMIDI:
+            mimeString = @"midi";
+            break;
+            
+        default:
+            NSLog(@"schannel_play_ext: unknown resource type (%ld).", format);
+            return nil;
+    }
+
+    return [NSString stringWithFormat:@"audio/%@", mimeString];
 }
 
 @end

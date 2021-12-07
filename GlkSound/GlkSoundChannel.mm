@@ -68,36 +68,12 @@
     resid = snd;
     loop = areps;
 
-    mimeString = @"";
+    mimeString = [GlkSoundHandler MIMETypeFromFormatType:type];
 
-    switch (type)
-    {
-        case GlkSoundBlorbFormatFORM:
-		case GlkSoundBlorbFormatAIFF:
-            mimeString = @"aiff";
-            break;
-        case GlkSoundBlorbFormatWave:
-            mimeString = @"wav";
-            break;
-        case GlkSoundBlorbFormatOggVorbis:
-            mimeString = @"ogg-vorbis";
-            break;
-        case GlkSoundBlorbFormatMP3:
-            mimeString = @"mp3";
-            break;
-        case GlkSoundBlorbFormatMod:
-            mimeString = @"mod";
-            break;
-        case GlkSoundBlorbFormatMIDI:
-            mimeString = @"midi";
-            break;
-            
-        default:
-            NSLog(@"schannel_play_ext: unknown resource type (%ld).", type);
-            return NO;
+    if (!mimeString) {
+        NSLog(@"schannel_play_ext: unknown resource type (%ld).", type);
+        return NO;
     }
-
-    mimeString = [NSString stringWithFormat:@"audio/%@", mimeString];
 
     auto decoder = SFB::Audio::Decoder::CreateForInputSource(SFB::InputSource::CreateWithMemory(buf, (SInt64)len, false), (__bridge CFStringRef)mimeString);
 

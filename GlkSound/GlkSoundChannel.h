@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
 #import <GlkView/glk.h>
-#import <GlkView/GlkSoundChannelProtocol.h>
 
 @class GlkSoundHandler, GlkMIDIChannel;
 
@@ -14,7 +13,7 @@ typedef NS_ENUM(NSInteger, GlkSoundChannelStatus) {
 	GlkSoundChannelStatusSound
 };
 
-@interface GlkSoundChannel : NSObject <NSSecureCoding, GlkSoundChannel> {
+@interface GlkSoundChannel : NSObject <NSSecureCoding> {
 	glui32 loop;
 	glui32 notify;
 	glui32 paused;

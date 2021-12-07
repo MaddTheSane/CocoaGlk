@@ -176,6 +176,8 @@
 		55D6F0B6275D6C810098620E /* GlkUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6F0B4275D6C810098620E /* GlkUTF8Stream.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		55E630EF21C1AD87002C0FBA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E630EE21C1AD87002C0FBA /* Media.xcassets */; };
 		55E9F2DD275E0599004D1C12 /* GlkClient.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4B51AA6B07E8785700576AB9 /* GlkClient.icns */; };
+		55E9F2F5275EE75D004D1C12 /* GlkFakeSoundChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E9F2F3275EE75D004D1C12 /* GlkFakeSoundChannel.h */; };
+		55E9F2F6275EE75D004D1C12 /* GlkFakeSoundChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E9F2F4275EE75D004D1C12 /* GlkFakeSoundChannel.m */; };
 		55FF567F27583F22000B0D21 /* GlkSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF567E27583F22000B0D21 /* GlkSound.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FF568A2758C6B5000B0D21 /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55FF5695275A1D72000B0D21 /* GlkMIDIChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF568D275A1D72000B0D21 /* GlkMIDIChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -613,6 +615,8 @@
 		55DA687B2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "en-GB"; path = "en-GB.lproj/Credits.rtfd"; sourceTree = "<group>"; };
 		55DA687C2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55E630EE21C1AD87002C0FBA /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = Resources/Media.xcassets; sourceTree = "<group>"; };
+		55E9F2F3275EE75D004D1C12 /* GlkFakeSoundChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkFakeSoundChannel.h; sourceTree = "<group>"; };
+		55E9F2F4275EE75D004D1C12 /* GlkFakeSoundChannel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlkFakeSoundChannel.m; sourceTree = "<group>"; };
 		55FF567E27583F22000B0D21 /* GlkSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkSound.h; sourceTree = "<group>"; };
 		55FF568B2758C724000B0D21 /* GlkSoundHandlerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkSoundHandlerProtocol.h; sourceTree = "<group>"; };
 		55FF568D275A1D72000B0D21 /* GlkMIDIChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkMIDIChannel.h; sourceTree = "<group>"; usesTabs = 0; };
@@ -1037,6 +1041,8 @@
 				55FF5694275A1D72000B0D21 /* GlkMIDIPlayer.m */,
 				55FF568E275A1D72000B0D21 /* GlkSoundHandler.h */,
 				55FF5693275A1D72000B0D21 /* GlkSoundHandler.m */,
+				55E9F2F3275EE75D004D1C12 /* GlkFakeSoundChannel.h */,
+				55E9F2F4275EE75D004D1C12 /* GlkFakeSoundChannel.m */,
 				55FF567E27583F22000B0D21 /* GlkSound.h */,
 				552A03742049D67900A4ECAA /* GlkSound.modulemap */,
 			);
@@ -1214,6 +1220,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55E9F2F5275EE75D004D1C12 /* GlkFakeSoundChannel.h in Headers */,
 				55FF567F27583F22000B0D21 /* GlkSound.h in Headers */,
 				55FF5695275A1D72000B0D21 /* GlkMIDIChannel.h in Headers */,
 				55FF5696275A1D72000B0D21 /* GlkSoundHandler.h in Headers */,
@@ -1739,6 +1746,7 @@
 				55FF5697275A1D72000B0D21 /* GlkMIDIChannel.mm in Sources */,
 				55FF569C275A1D72000B0D21 /* GlkMIDIPlayer.m in Sources */,
 				55FF569B275A1D72000B0D21 /* GlkSoundHandler.m in Sources */,
+				55E9F2F6275EE75D004D1C12 /* GlkFakeSoundChannel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

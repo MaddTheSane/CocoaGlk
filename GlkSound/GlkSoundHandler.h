@@ -54,8 +54,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak) id<GlkEventReceiver> glkctl;
 
--(GlkSoundBlorbFormatType)loadSoundResourceFromSound:(glui32)snd data:(NSData * _Nullable __autoreleasing * _Nonnull)buf;
+- (GlkSoundBlorbFormatType)loadSoundResourceFromSound:(glui32)snd data:(NSData * _Nullable __autoreleasing * _Nonnull)buf;
 - (GlkSoundBlorbFormatType)load_sound_resource:(unsigned int)snd length:(NSUInteger *)len data:(char * _Nonnull * _Nonnull)buf;
++ (NSString*)MIMETypeFromFormatType:(GlkSoundBlorbFormatType)format;
 
 - (void)restartAll;
 - (void)stopAllAndCleanUp;
@@ -67,10 +68,10 @@ NS_ASSUME_NONNULL_BEGIN
                 channel:(int)channel
                duration:(glui32)duration
                  notify:(glui32)notify;
-- (void)handlePlaySoundOnChannel:(glui32)channel repeats:(glui32)repeats notify:(glui32)notify;
-- (void)handleStopSoundOnChannel:(glui32)channel;
-- (void)handlePauseOnChannel:(glui32)channel;
-- (void)handleUnpauseOnChannel:(glui32)channel;
+- (void)handlePlaySoundOnChannel:(int)channel repeats:(glui32)repeats notify:(glui32)notify;
+- (void)handleStopSoundOnChannel:(int)channel;
+- (void)handlePauseOnChannel:(int)channel;
+- (void)handleUnpauseOnChannel:(int)channel;
 
 - (void)handleVolumeNotification:(glui32)notify;
 - (void)handleSoundNotification:(glui32)notify withSound:(glui32)sound;

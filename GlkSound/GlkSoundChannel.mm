@@ -399,5 +399,6 @@ SInt64 CFDataInputSource::_Read(void *buffer, SInt64 byteCount) {
     }
     CFRange range = CFRangeMake(_pos, byteCount);
     ::CFDataGetBytes(_data, range, (UInt8 *)buffer);
+    _pos += byteCount;
     return byteCount;
 }

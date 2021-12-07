@@ -145,6 +145,7 @@
     _restored_music_channel_id = (NSUInteger)[decoder decodeIntForKey:@"music_channel"];
     _glkchannels = [decoder decodeObjectOfClass:[NSMutableDictionary class] forKey:@"gchannels"];
     _lastsoundresno = [decoder decodeIntForKey:@"lastsoundresno"];
+        fakeGlkChannels = [decoder decodeObjectOfClasses:[NSSet setWithObjects:[NSMutableDictionary class], [NSNumber class], [GlkFakeSoundChannel class], nil] forKey:@"fchannels"];
     }
     return self;
 }
@@ -153,7 +154,8 @@
     [encoder encodeObject:_resources forKey:@"resources"];
     [encoder encodeInteger:(NSInteger)_music_channel.name forKey:@"music_channel"];
     [encoder encodeObject:_glkchannels forKey:@"gchannels"];
-    [encoder encodeInteger:_lastsoundresno forKey:@"lastsoundresno"];
+    [encoder encodeInt:_lastsoundresno forKey:@"lastsoundresno"];
+    [encoder encodeObject:fakeGlkChannels forKey:@"fchannels"];
 }
 
 - (BOOL)soundIsLoaded:(NSInteger)soundId {

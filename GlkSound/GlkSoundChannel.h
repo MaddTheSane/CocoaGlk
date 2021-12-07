@@ -25,9 +25,9 @@ typedef NS_ENUM(NSInteger, GlkSoundChannelStatus) {
     /* for volume fades */
 	glui32 volume_notify;
 	glui32 volume_timeout;
-    CGFloat target_volume;
-    CGFloat volume;
-    CGFloat volume_delta;
+    float target_volume;
+    float volume;
+    float volume_delta;
     NSTimer *timer;
 }
 

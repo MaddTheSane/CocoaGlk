@@ -7,6 +7,7 @@
 
 import Cocoa
 import GlkView.GlkView
+import GlkSound
 
 class SwiftWindowController: NSWindowController, GlkViewDelegate {
 	/// The view in which the actual action takes place
@@ -14,6 +15,8 @@ class SwiftWindowController: NSWindowController, GlkViewDelegate {
 	
 	/// The statusbar text
 	@IBOutlet weak var status: NSTextField!
+	
+	let soundHandler = GlkSoundHandler()
 	
 	convenience init() {
 		self.init(windowNibName: NSNib.Name("CocoaGlk"))
@@ -26,6 +29,8 @@ class SwiftWindowController: NSWindowController, GlkViewDelegate {
 		
 		// Set the status
 		status.stringValue = NSLocalizedString("Waiting for game...", comment: "Waiting for game...")
+		
+		glkView.soundHandler = soundHandler
 		
 		// We're the view delegate
 		glkView.delegate = self

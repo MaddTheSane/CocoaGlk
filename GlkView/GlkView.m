@@ -482,9 +482,8 @@
 		// We retain the listener here as there is a non-zero chance of the client waiting on a
 		// call to setEventListener: here, which will cause a segfault if it releases the current
 		// listener (seems to be a bug in NSDistantObject)
-		CFTypeRef tmpListener = CFBridgingRetain(listener);
-		[(__bridge id<GlkEventListener>)tmpListener eventReady: syncCount];
-		CFRelease(tmpListener);
+		__strong id<GlkEventListener> tmpListener = listener;
+		[tmpListener eventReady: syncCount];
 	}
 }
 

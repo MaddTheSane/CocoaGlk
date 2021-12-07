@@ -128,6 +128,9 @@
 		5502A67A275C24B80066927C /* GlkSoundHandlerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF568B2758C724000B0D21 /* GlkSoundHandlerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		552CEF1627152C17009D87A5 /* glkstart.h in Headers */ = {isa = PBXBuildFile; fileRef = 552CEF1527152C17009D87A5 /* glkstart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		552CEF1927152C50009D87A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 552CEF1827152C50009D87A5 /* main.m */; };
+		5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5533C6E8276023C1004BD884 /* Vorbis.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B0B275A25E9000B0D21 /* Vorbis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5560FA2921C06BF500E711F5 /* GlkViewDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA2C21C07EC200E711F5 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2B21C07EC200E711F5 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA3321C084E500E711F5 /* GlkTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3221C084E500E711F5 /* GlkTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -399,6 +402,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				5533C6E8276023C1004BD884 /* Vorbis.framework in Embed Frameworks */,
+				5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */,
+				5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */,
 				55C6BB49204DEDC1001AE7E5 /* GlkClient.framework in Embed Frameworks */,
 				55C6BB4D204DEDC1001AE7E5 /* GlkSound.framework in Embed Frameworks */,
 				55C6BB45204DEDC1001AE7E5 /* GlkView.framework in Embed Frameworks */,
@@ -2327,8 +2333,6 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SDKROOT)/System/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = imagetest;
 			};
@@ -2340,8 +2344,6 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SDKROOT)/System/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = imagetest;
 			};

@@ -7,6 +7,61 @@
 #include <SFBAudioEngine/LoopableRegionDecoder.h>
 #include <SFBAudioEngine/CoreAudioOutput.h>
 
+class CFDataInputSource final: public SFB::InputSource {
+public:
+    CFDataInputSource(CFDataRef bytes, bool copyBytes = true);
+    virtual ~CFDataInputSource() = default;
+
+private:
+    virtual bool _Open(CFErrorRef *error) {
+        return true;
+    }
+    virtual bool _Close(CFErrorRef *error) {
+        _pos = 0;
+        return true;
+    }
+    virtual SInt64 _Read(void *buffer, SInt64 byteCount);
+    virtual bool _AtEOF() const {
+        return _pos == CFDataGetLength(_data);
+    }
+    virtual SInt64 _GetOffset() const {
+        return _pos;
+    }
+    virtual SInt64 _GetLength() const {
+        return CFDataGetLength(_data);
+    }
+
+    // Optional seeking support
+    inline virtual bool _SupportsSeeking() const {
+        return true;
+    }
+    
+    virtual bool _SeekToOffset(SInt64 offset) {
+        if (offset > CFDataGetLength(_data)) {
+            return false;
+        }
+        
+        _pos = offset;
+        return true;
+    }
+    
+    // Data members
+    SFB::CFData _data;
+    off_t _pos;
+};
+
+
+SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyBytes, CFErrorRef *error = nullptr)
+{
+#pragma unused(error)
+
+    if(nullptr == bytes || 0 >= CFDataGetLength(bytes))
+        return nullptr;
+
+    return nullptr;
+    return SFB::InputSource::unique_ptr(new CFDataInputSource(bytes, copyBytes));
+}
+
 @interface GlkSoundChannel () {
 @private
     SFB::Audio::Player    *_player;        // The player instance
@@ -47,10 +102,9 @@
 {
     _status = GlkSoundChannelStatusSound;
 
-    size_t len = 0;
 	GlkSoundBlorbFormatType type;
 
-    char *buf = nil;
+    NSData *buf = nil;
 
     /* stop previous noise */
     if (_player) {
@@ -62,7 +116,7 @@
         return NO;
     
     /* load sound resource into memory */
-    type = [_handler load_sound_resource:snd length:&len data:&buf];
+    type = [_handler loadSoundResourceFromSound:snd data:&buf];
 
     notify = anot;
     resid = snd;
@@ -75,7 +129,7 @@
         return NO;
     }
 
-    auto decoder = SFB::Audio::Decoder::CreateForInputSource(SFB::InputSource::CreateWithMemory(buf, (SInt64)len, false), (__bridge CFStringRef)mimeString);
+    auto decoder = SFB::Audio::Decoder::CreateForInputSource(CreateWithCFData((__bridge CFDataRef)buf, false), (__bridge CFStringRef)mimeString);
 
     if (!_player) {
         _player = new SFB::Audio::Player();
@@ -329,3 +383,21 @@
 }
 
 @end
+
+CFDataInputSource::CFDataInputSource(CFDataRef bytes, bool copyBytes): SFB::InputSource(), _pos(0)
+{
+    if (copyBytes) {
+        _data = SFB::CFWrapper<CFDataRef>(CFDataCreateCopy(kCFAllocatorDefault, bytes), true);
+    } else {
+        _data = SFB::CFWrapper<CFDataRef>((CFDataRef)CFRetain(bytes), true);
+    }
+}
+
+SInt64 CFDataInputSource::_Read(void *buffer, SInt64 byteCount) {
+    if (_pos + byteCount > CFDataGetLength(_data)) {
+        byteCount = CFDataGetLength(_data) - _pos;
+    }
+    CFRange range = CFRangeMake(_pos, byteCount);
+    ::CFDataGetBytes(_data, range, (UInt8 *)buffer);
+    return byteCount;
+}

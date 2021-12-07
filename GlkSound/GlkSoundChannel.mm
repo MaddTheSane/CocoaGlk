@@ -58,7 +58,6 @@ SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyBytes, C
     if(nullptr == bytes || 0 >= CFDataGetLength(bytes))
         return nullptr;
 
-    return nullptr;
     return SFB::InputSource::unique_ptr(new CFDataInputSource(bytes, copyBytes));
 }
 

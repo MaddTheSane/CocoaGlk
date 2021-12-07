@@ -110,7 +110,7 @@
     return YES;
 }
 
-- (oneway void)stop
+- (void)stop
 {
     paused = NO;
     if (_player) {
@@ -120,25 +120,20 @@
     [self cleanup];
 }
 
-- (oneway void) pause
+- (void) pause
 {
     paused = YES;
     if (_player)
         _player->Pause();
 }
 
-- (oneway void) unpause
+- (void) unpause
 {
     paused = NO;
     if (!_player)
         [self playSound:resid countOfRepeats:loop notification:notify];
     else
         _player->Play();
-}
-
-- (oneway void)close {
-    [self cleanup];
-    [self.handler handleDeleteChannel:self.name];
 }
 
 - (void)cleanup
@@ -203,7 +198,7 @@
     [self setVolume];
 }
 
-- (oneway void) setVolume:(glui32)glk_volume duration:(glui32)duration notification:(glui32)notification
+- (void) setVolume:(glui32)glk_volume duration:(glui32)duration notification:(glui32)notification
 {
     if (!duration)
     {

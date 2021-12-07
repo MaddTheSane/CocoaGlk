@@ -73,7 +73,7 @@
     return YES;
 }
 
-- (oneway void)stop
+- (void)stop
 {
     paused = NO;
     if (_player) {
@@ -82,14 +82,14 @@
     [self cleanup];
 }
 
-- (oneway void)pause
+- (void)pause
 {
     paused = YES;
     if (_player)
         [_player pause];
 }
 
-- (oneway void)unpause
+- (void)unpause
 {
     paused = NO;
     if (!_player)

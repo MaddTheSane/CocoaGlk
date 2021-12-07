@@ -64,6 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (int)handleNewSoundChannel:(glui32)volume;
 - (void)handleDeleteChannel:(int)channel;
 - (BOOL)handleFindSoundNumber:(glui32)resno;
+- (void)handleLoadSoundNumber:(glui32)resno withData:(NSData*)sndDat;
 - (void)handleSetVolume:(glui32)volume
                 channel:(int)channel
                duration:(glui32)duration

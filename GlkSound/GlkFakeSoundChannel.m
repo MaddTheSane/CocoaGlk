@@ -31,7 +31,11 @@
 
 - (BOOL)playSound:(glui32)sound countOfRepeats:(glui32)repeat notification:(glui32)noti {
 	if (![_handler handleFindSoundNumber:sound]) {
-		return NO;
+		NSData *dat = [_handler.soundSource dataForSoundResource:sound];
+		if (!dat) {
+			return NO;
+		}
+		[_handler handleLoadSoundNumber:sound withData:dat];
 	}
 	[_handler handlePlaySoundOnChannel:channel repeats:repeat notify:noti];
 	// I guess it worked...

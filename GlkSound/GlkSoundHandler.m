@@ -182,6 +182,12 @@
     return result;
 }
 
+- (void)handleLoadSoundNumber:(glui32)resno withData:(NSData*)sndDat {
+    GlkSoundResource *resource = [[GlkSoundResource alloc] initWithData:sndDat];
+    [resource load];
+    _resources[@(resno)] = resource;
+}
+
 - (int)handleNewSoundChannel:(glui32)volume {
 	int i;
     for (i = 0; i < MAXSND; i++)

@@ -81,7 +81,7 @@ SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyBytes, C
     _name = channelname;
     
     _status = GlkSoundChannelStatusIdle;
-    volume = (CGFloat)vol / GLK_MAXVOLUME;
+    volume = (float)vol / GLK_MAXVOLUME;
     resid = -1;
     loop = 0;
     notify = 0;
@@ -202,9 +202,9 @@ SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyBytes, C
 - (void)init_fade:(glui32)glk_volume duration:(glui32)duration notify:(glui32)notification
 {
     volume_notify = notification;
-    target_volume = (CGFloat)glk_volume / GLK_MAXVOLUME;
+    target_volume = (float)glk_volume / GLK_MAXVOLUME;
 
-    volume_delta = (target_volume - volume) / (CGFloat)FADE_GRANULARITY;
+    volume_delta = (target_volume - volume) / (float)FADE_GRANULARITY;
 
     volume_timeout = FADE_GRANULARITY;
     
@@ -298,7 +298,7 @@ SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyBytes, C
 
 		glui32 duration = (volume_timeout * FADE_GRANULARITY);
 
-        CGFloat float_volume = target_volume;
+        float float_volume = target_volume;
 		glui32 glk_target_volume = GLK_MAXVOLUME;
 
         if (float_volume < MIX_MAX_VOLUME)
@@ -327,7 +327,7 @@ SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyBytes, C
 	glui32 glk_target_volume = (glui32)(volume * GLK_MAXVOLUME);
 
     if (volume_timeout > 0) {
-        CGFloat float_volume = target_volume;
+        float float_volume = target_volume;
         duration = (volume_timeout * FADE_GRANULARITY);
         if (float_volume < MIX_MAX_VOLUME)
             glk_target_volume = (glui32)(float_volume * GLK_MAXVOLUME);

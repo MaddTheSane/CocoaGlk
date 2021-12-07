@@ -18,7 +18,9 @@ NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 	// Convert these character to UTF-16
 	
 	// Try using Cocoa's built-in UTF32 converter first.
-	NSString *theStr = [[NSString alloc] initWithBytes:buf length:len * 4 encoding:NSUTF32LittleEndianStringEncoding];
+	NSString *theStr = [[NSString alloc] initWithBytes: buf
+												length: len * 4
+											  encoding: NSUTF32LittleEndianStringEncoding];
 	if (theStr) {
 		return theStr;
 	}
@@ -61,7 +63,7 @@ NSString* cocoaglk_string_from_uni_buf(const glui32* buf, glui32 len) {
 
 int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 	// Try using Cocoa's built-in UTF32 converter first.
-	NSData *ucs4Data = [string dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
+	NSData *ucs4Data = [string dataUsingEncoding: NSUTF32LittleEndianStringEncoding];
 	if (ucs4Data) {
 		NSInteger copyLen = ucs4Data.length;
 		if (copyLen > len * 4) {
@@ -112,56 +114,56 @@ int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 	return (int)finalLength;
 }
 
-//
-// These functions provide two length arguments because a string of Unicode 
-// characters may expand when its case changes. The len argument is the 
-// available length of the buffer; numchars is the number of characters in the 
-// buffer initially. (So numchars must be less than or equal to len. The 
-// contents of the buffer after numchars do not affect the operation.) 
-// 
-// The functions return the number of characters after conversion. If this is 
-// greater than len, the characters in the array will be safely truncated at 
-// len, but the true count will be returned. (The contents of the buffer after 
-// the returned count are undefined.)
-//
-// The lower_case and upper_case functions do what you'd expect: they convert 
-// every character in the buffer (the first numchars of them) to its upper or 
-// lower-case equivalent, if there is such a thing. 
-//
+///
+/// These functions provide two length arguments because a string of Unicode
+/// characters may expand when its case changes. The len argument is the
+/// available length of the buffer; numchars is the number of characters in the
+/// buffer initially. (So numchars must be less than or equal to len. The
+/// contents of the buffer after numchars do not affect the operation.)
+///
+/// The functions return the number of characters after conversion. If this is
+/// greater than len, the characters in the array will be safely truncated at
+/// len, but the true count will be returned. (The contents of the buffer after
+/// the returned count are undefined.)
+///
+/// The lower_case and upper_case functions do what you'd expect: they convert
+/// every character in the buffer (the first numchars of them) to its upper or
+/// lower-case equivalent, if there is such a thing.
+///
 glui32 glk_buffer_to_lower_case_uni(glui32 *buf, glui32 len,
 									glui32 numchars) {
 	return cocoaglk_copy_string_to_uni_buf([cocoaglk_string_from_uni_buf(buf, numchars) lowercaseString],
 										   buf, len);
 }
 
-//
-// These functions provide two length arguments because a string of Unicode 
-// characters may expand when its case changes. The len argument is the 
-// available length of the buffer; numchars is the number of characters in the 
-// buffer initially. (So numchars must be less than or equal to len. The 
-// contents of the buffer after numchars do not affect the operation.) 
-// 
-// The functions return the number of characters after conversion. If this is 
-// greater than len, the characters in the array will be safely truncated at 
-// len, but the true count will be returned. (The contents of the buffer after 
-// the returned count are undefined.)
-//
-// The lower_case and upper_case functions do what you'd expect: they convert 
-// every character in the buffer (the first numchars of them) to its upper or 
-// lower-case equivalent, if there is such a thing. 
-//
+///
+/// These functions provide two length arguments because a string of Unicode
+/// characters may expand when its case changes. The len argument is the
+/// available length of the buffer; numchars is the number of characters in the
+/// buffer initially. (So numchars must be less than or equal to len. The
+/// contents of the buffer after numchars do not affect the operation.)
+///
+/// The functions return the number of characters after conversion. If this is
+/// greater than len, the characters in the array will be safely truncated at
+/// len, but the true count will be returned. (The contents of the buffer after
+/// the returned count are undefined.)
+///
+/// The lower_case and upper_case functions do what you'd expect: they convert
+/// every character in the buffer (the first numchars of them) to its upper or
+/// lower-case equivalent, if there is such a thing.
+///
 glui32 glk_buffer_to_upper_case_uni(glui32 *buf, glui32 len,
 									glui32 numchars) {
 	return cocoaglk_copy_string_to_uni_buf([cocoaglk_string_from_uni_buf(buf, numchars) uppercaseString],
 										   buf, len);
 }
 
-//
-// The title_case function has an additional (boolean) flag. Its basic 
-// function is to change the first character of the buffer to upper-case, and 
-// leave the rest of the buffer unchanged. If lowerrest is true, it changes 
-// all the non-first characters to lower-case (instead of leaving them alone.)
-//
+///
+/// The title_case function has an additional (boolean) flag. Its basic
+/// function is to change the first character of the buffer to upper-case, and
+/// leave the rest of the buffer unchanged. If lowerrest is true, it changes
+/// all the non-first characters to lower-case (instead of leaving them alone.)
+///
 glui32 glk_buffer_to_title_case_uni(glui32 *buf, glui32 len,
 									glui32 numchars, glui32 lowerrest) {
 	if (lowerrest) {

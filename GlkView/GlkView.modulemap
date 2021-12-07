@@ -96,21 +96,21 @@ framework module GlkView {
 		export *
 	}
 	
-	explicit module SoundProtocols {
+	explicit module GlkSoundProtocols {
 		requires objc
 
-		module SoundChannel {
+		module Channel {
 			header "GlkSoundChannelProtocol.h"
 			export *
 		}
 		
-		module SoundSource {
+		module Source {
 			header "GlkSoundSourceProtocol.h"
 			export *
 		}
 		
-		module GlkSoundChannelProtocol {
-			header "GlkSoundChannelProtocol.h"
+		module Handler {
+			header "GlkSoundHandlerProtocol.h"
 			export *
 		}
 		

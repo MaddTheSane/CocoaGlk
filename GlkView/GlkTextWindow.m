@@ -92,12 +92,6 @@
 	}
 }
 
-- (void)awakeFromNib {
-	
-	[super awakeFromNib];
-	
-}
-
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
 

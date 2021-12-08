@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (GlkSoundBlorbFormatType)loadSoundResourceFromSound:(glui32)snd data:(NSData * _Nullable __autoreleasing * _Nonnull)buf;
 - (GlkSoundBlorbFormatType)load_sound_resource:(unsigned int)snd length:(NSUInteger *)len data:(char * _Nonnull * _Nonnull)buf;
-+ (NSString*)MIMETypeFromFormatType:(GlkSoundBlorbFormatType)format;
++ (nullable NSString*)MIMETypeFromFormatType:(GlkSoundBlorbFormatType)format;
 
 - (void)restartAll;
 - (void)stopAllAndCleanUp;

@@ -53,12 +53,10 @@
 	[newContainer setHeightTracksTextView: NO];
 				
 	// Create the text view and the scroller
-	textView = [[GlkTextView alloc] initWithFrame: [self frame]];
+	textView = [[GlkTextView alloc] initWithFrame: [self frame] textContainer: newContainer];
 	scrollView = [[NSScrollView alloc] initWithFrame: [self frame]];
 	
 	[typesetter setDelegate: textView];
-	[textView setTextContainer: newContainer];
-	[newContainer setTextView: textView];
 				
 	// [[textView textContainer] setWidthTracksTextView: YES];
 	//[[textView textContainer] setContainerSize: NSMakeSize(1e8, 1e8)];
@@ -92,6 +90,12 @@
 	} else {
 		[textView turnOffKerning: self];
 	}
+}
+
+- (void)awakeFromNib {
+	
+	[super awakeFromNib];
+	
 }
 
 - (id)initWithFrame:(NSRect)frame {

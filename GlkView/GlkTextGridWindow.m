@@ -51,12 +51,10 @@
 	[newContainer setHeightTracksTextView: NO];
 				
 	// Create the text view and the scroller
-	textView = [[GlkTextView alloc] initWithFrame: [self frame]];
+	textView = [[GlkTextView alloc] initWithFrame: [self frame] textContainer: newContainer];
 	scrollView = [[NSScrollView alloc] initWithFrame: [self frame]];
 	
 	[typesetter setDelegate: textView];
-	[textView setTextContainer: newContainer];
-	[newContainer setTextView: textView];
 				
 	[textView setMinSize:NSMakeSize(0.0, 0.0)];
 	[textView setMaxSize:NSMakeSize(1e8, 1e8)];

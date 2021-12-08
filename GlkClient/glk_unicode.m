@@ -268,13 +268,13 @@ void glk_put_char_stream_uni(strid_t str, glui32 ch) {
 			int w = (ch>>16)-1;
 			int x = (ch&0xffff);
 			
-			unichar chr = 0xd800|(w<<6)|(x>>10);
-			[buf putChar: chr
-				toStream: str->identifier];
+			unichar chr2[2];
+			chr2[0] = 0xd800|(w<<6)|(x>>10);
 			str->bufferedAmount++;
-			chr = 0xdc00|(x&0x3ff);
-			[buf putChar: chr
-				toStream: str->identifier];
+			chr2[1] = 0xdc00|(x&0x3ff);
+			[buf putString: [NSString stringWithCharacters: chr2
+													length: 2]
+				  toStream: str->identifier];
 		} else {
 			// *shrug*
 			[buf putChar: ch
@@ -294,10 +294,11 @@ void glk_put_char_stream_uni(strid_t str, glui32 ch) {
 			int w = (ch>>16)-1;
 			int x = (ch&0xffff);
 			
-			unichar chr = 0xd800|(w<<6)|(x>>10);
-			[str->stream putChar: chr];
-			chr = 0xdc00|(x&0x3ff);
-			[str->stream putChar: chr];
+			unichar chr2[2];
+			chr2[0] = 0xd800|(w<<6)|(x>>10);
+			chr2[1] = 0xdc00|(x&0x3ff);
+			[str->stream putString: [NSString stringWithCharacters: chr2
+															length: 2]];
 		} else {
 			// *shrug*
 			[str->stream putChar: ch];

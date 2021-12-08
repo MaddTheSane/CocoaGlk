@@ -20,7 +20,7 @@ static int countUTF8Len(unsigned char charPoint) {
 		return 4;
 	}
 	//Anything else isn't up to spec
-	abort();
+//	abort();
 	return -1;
 }
 
@@ -108,8 +108,8 @@ static int countUTF8Len(unsigned char charPoint) {
 		// 1-char encoding
 		return charByte;
 	} else {
-		// anything else is too big for one UTF16 character
-		// still, read the whole Unicode character anyway.
+		// anything else is too big for one UTF16 character.
+		// Still, read the whole Unicode character anyway.
 		// TODO: Update when 5 bytes are added to the UTF-8 spec.
 		charData = [self getBufferWithLength: 3];
 		if ([charData length] != 3) {

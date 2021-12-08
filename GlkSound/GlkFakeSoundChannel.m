@@ -36,6 +36,9 @@
 			return NO;
 		}
 		[_handler handleLoadSoundNumber:sound withData:dat];
+		if (![_handler handleFindSoundNumber:sound]) {
+			return NO;
+		}
 	}
 	[_handler handlePlaySoundOnChannel:channel repeats:repeat notify:noti];
 	// I guess it worked...

@@ -31,6 +31,7 @@ class SwiftWindowController: NSWindowController, GlkViewDelegate {
 		status.stringValue = NSLocalizedString("Waiting for game...", comment: "Waiting for game...")
 		
 		glkView.soundHandler = soundHandler
+		soundHandler.glkctl = glkView
 		
 		// We're the view delegate
 		glkView.delegate = self

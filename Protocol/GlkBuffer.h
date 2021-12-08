@@ -34,7 +34,7 @@
 ///
 @protocol GlkBuffer <NSObject>
 
-// Windows
+#pragma mark Windows
 
 // Creating the various types of window
 - (void) createBlankWindowWithIdentifier: (glui32) identifier;
@@ -108,7 +108,7 @@
 
 - (void) breakFlowInWindowWithIdentifier: (unsigned) identifier;
 
-// Streams
+#pragma mark Streams
 
 // Registering streams
 - (void) registerStream: (in byref id<GlkStream>) stream
@@ -136,7 +136,7 @@
 			 onStream: (unsigned) streamIdentifier;
 - (void) clearHyperlinkOnStream: (unsigned) streamIdentifier;
 
-// Events
+#pragma mark Events
 
 // Requesting events
 - (void) requestLineEventsForWindowIdentifier:      (unsigned) windowIdentifier;
@@ -155,7 +155,7 @@
 /// Class used to temporarily store bufferable operations before sending them to the server
 ///
 @interface GlkBuffer : NSObject<NSCopying, NSSecureCoding, GlkBuffer> {
-	NSMutableArray* operations;
+	NSMutableArray<NSArray*>* operations;
 }
 
 /// Adding a generic bufferred operation

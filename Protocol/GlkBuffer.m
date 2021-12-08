@@ -60,7 +60,8 @@ static NSString* const s_RegisterStream 							= @"SRSS";
 static NSString* const s_RegisterStreamForWindow 					= @"SRSW";
 
 static NSString* const s_CloseStreamIdentifier 						= @"SCSI";
-static NSString* const s_UnregisterStreamIdentifier 				= @"SUSI";	// If the stream is closed immediately
+/// If the stream is closed immediately
+static NSString* const s_UnregisterStreamIdentifier 				= @"SUSI";
 
 // Buffering stream writes
 static NSString* const s_PutCharToStream 							= @"SPCH";
@@ -274,7 +275,7 @@ static NSString* stringFromOp(NSArray* op) {
 
 #pragma mark - Method invocations
 
-// Windows
+#pragma mark Windows
 
 // Creating the various types of window
 - (void) createBlankWindowWithIdentifier: (glui32) identifier {
@@ -372,7 +373,7 @@ static NSString* stringFromOp(NSArray* op) {
 
 }
 
-// Styles
+#pragma mark Styles
 - (void) setStyleHint: (glui32) hint
 			 forStyle: (glui32) style
 			  toValue: (glsi32) value
@@ -416,7 +417,7 @@ static NSString* stringFromOp(NSArray* op) {
 						  @(streamIdentifier)]];
 }
 
-// Graphics
+#pragma mark Graphics
 - (void) fillAreaInWindowWithIdentifier: (unsigned) identifier
 							 withColour: (in bycopy GlkColor*) color
 							  rectangle: (GlkRect) windowArea {
@@ -469,7 +470,7 @@ static NSString* stringFromOp(NSArray* op) {
 			 arguments: @[@(identifier)]];
 }
 
-// Streams
+#pragma mark Streams
 
 // Registering streams
 - (void) registerStream: (in byref id<GlkStream>) stream
@@ -539,7 +540,7 @@ static NSString* stringFromOp(NSArray* op) {
 			 arguments: @[@(streamIdentifier)]];
 }
 
-// Events
+#pragma mark Events
 
 // Requesting events
 - (void) requestLineEventsForWindowIdentifier:      (unsigned) windowIdentifier {
@@ -587,26 +588,24 @@ static NSString* stringFromOp(NSArray* op) {
 
 - (void) flushToTarget: (id<GlkBuffer>) target {
 	// Iterate through the operations
-	NSEnumerator* bufferEnum = [operations objectEnumerator];
-	
 	// Decode each operation in turn using a giant if statements of death
-	for (NSArray* op in bufferEnum) {
+	for (NSArray* op in operations) {
 		NSString*	opType 	= [op objectAtIndex: 0];
 		NSArray* 	args 	= [op objectAtIndex: 1];
 			
 		// Buffering stream writes
 		if ([opType isEqualToString: s_PutCharToStream]) {
 			[target putChar: [[args objectAtIndex: 0] unsignedShortValue]
-				 toStream: [[args objectAtIndex: 1] unsignedIntValue]];
+				   toStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_PutStringToStream]) {
 			[target putString: [args objectAtIndex: 0]
-				   toStream: [[args objectAtIndex: 1] unsignedIntValue]];
+					 toStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_PutDataToStream]) {
 			[target putData: [args objectAtIndex: 0]
-				 toStream: [[args objectAtIndex: 1] unsignedIntValue]];
+				   toStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_SetStyle]) {
 			[target setStyle: [[args objectAtIndex: 0] unsignedIntValue]
-			      onStream: [[args objectAtIndex: 1] unsignedIntValue]];
+					onStream: [[args objectAtIndex: 1] unsignedIntValue]];
 
 		// Graphics
 		} else if ([opType isEqualToString: s_FillAreaInWindowWithIdentifier]) {
@@ -617,8 +616,8 @@ static NSString* stringFromOp(NSArray* op) {
 			aRect = [[args objectAtIndex: 2] rectValue];
 #endif
 			[target fillAreaInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
-				   			          withColour: [args objectAtIndex: 1]
-			                           rectangle: aRect];
+										withColour: [args objectAtIndex: 1]
+										 rectangle: aRect];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifier]) {
 			GlkPoint aPoint;
 #ifdef COCOAGLK_IPHONE
@@ -627,8 +626,8 @@ static NSString* stringFromOp(NSArray* op) {
 			aPoint = [[args objectAtIndex: 2] pointValue];
 #endif
 			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
-			       inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
-			                   atPosition: aPoint];
+					 inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
+								 atPosition: aPoint];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierInRect]) {
 			GlkRect aRect;
 #ifdef COCOAGLK_IPHONE
@@ -637,13 +636,13 @@ static NSString* stringFromOp(NSArray* op) {
 			aRect = [[args objectAtIndex: 2] rectValue];
 #endif
 			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
-				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
-								   inRect: aRect];
+					 inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
+									 inRect: aRect];
 		
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierAlign]) {
 			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
-				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue] 
-								alignment: [[args objectAtIndex: 2] unsignedIntValue]];
+					 inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
+								  alignment: [[args objectAtIndex: 2] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierAlignSize]) {
 			GlkCocoaSize aSize;
 #ifdef COCOAGLK_IPHONE
@@ -652,9 +651,9 @@ static NSString* stringFromOp(NSArray* op) {
 			aSize = [[args objectAtIndex: 3] sizeValue];
 #endif
 			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
-				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue] 
-								alignment: [[args objectAtIndex: 2] unsignedIntValue]
-									 size: aSize];
+					 inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
+								  alignment: [[args objectAtIndex: 2] unsignedIntValue]
+									   size: aSize];
 		
 		} else if ([opType isEqualToString: s_BreakFlowInWindowWithIdentifier]) {
 			[target breakFlowInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
@@ -662,58 +661,58 @@ static NSString* stringFromOp(NSArray* op) {
 		// Manipulating windows
 		} else if ([opType isEqualToString: s_MoveCursorInWindow]) {
 			[target moveCursorInWindow: [[args objectAtIndex: 0] unsignedIntValue]
-						 toXposition: [[args objectAtIndex: 1] unsignedIntValue] 
-						   yPosition: [[args objectAtIndex: 2] unsignedIntValue]];
+						   toXposition: [[args objectAtIndex: 1] unsignedIntValue]
+							 yPosition: [[args objectAtIndex: 2] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ClearWindowIdentifier]) {
 			[target clearWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ClearWindowIdentifierWithBackground]) {
 			[target clearWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
-				   withBackgroundColour: [args objectAtIndex: 1]];
+					 withBackgroundColour: [args objectAtIndex: 1]];
 		} else if ([opType isEqualToString: s_SetInputLine]) {
 			[target setInputLine: [args objectAtIndex: 0]
-		   forWindowIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
+			 forWindowIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ArrangeWindow]) {
 			[target arrangeWindow: [[args objectAtIndex: 0] unsignedIntValue]
-						 method: [[args objectAtIndex: 1] unsignedIntValue]
-						   size: [[args objectAtIndex: 2] unsignedIntValue]
-					  keyWindow: [[args objectAtIndex: 3] unsignedIntValue]];
+						   method: [[args objectAtIndex: 1] unsignedIntValue]
+							 size: [[args objectAtIndex: 2] unsignedIntValue]
+						keyWindow: [[args objectAtIndex: 3] unsignedIntValue]];
 		
 		// Styles
 		} else if ([opType isEqualToString: s_SetStyleHint]) {
 			[target setStyleHint: [[args objectAtIndex: 0] unsignedIntValue]
-					  forStyle: [[args objectAtIndex: 1] unsignedIntValue]
-					   toValue: [[args objectAtIndex: 2] unsignedIntValue] 
-					windowType: [[args objectAtIndex: 3] unsignedIntValue]];
+						forStyle: [[args objectAtIndex: 1] unsignedIntValue]
+						 toValue: [[args objectAtIndex: 2] unsignedIntValue]
+					  windowType: [[args objectAtIndex: 3] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ClearStyleHint]) {
 			[target clearStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
-						forStyle: [[args objectAtIndex: 1] unsignedIntValue] 
-					  windowType: [[args objectAtIndex: 2] unsignedIntValue]];
+						  forStyle: [[args objectAtIndex: 1] unsignedIntValue]
+						windowType: [[args objectAtIndex: 2] unsignedIntValue]];
 		
 		} else if ([opType isEqualToString: s_SetStyleHintStream]) {
 			[target setStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
-					   toValue: [[args objectAtIndex: 1] unsignedIntValue] 
-					  inStream: [[args objectAtIndex: 2] unsignedIntValue]];
+						 toValue: [[args objectAtIndex: 1] unsignedIntValue]
+						inStream: [[args objectAtIndex: 2] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ClearStyleHintStream]) {
 			[target clearStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
-						inStream: [[args objectAtIndex: 1] unsignedIntValue]];
+						  inStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_SetCustomAttributesStream]) {
 			[target setCustomAttributes: [args objectAtIndex: 0] 
-							 inStream: [[args objectAtIndex: 1] unsignedIntValue]];
+							   inStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		
 		// Hyperlinks on streams
 		} else if ([opType isEqualToString: s_SetHyperlink]) {
 			[target setHyperlink: [[args objectAtIndex: 0] unsignedIntValue]
-					  onStream: [[args objectAtIndex: 1] unsignedIntValue]];
+						onStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ClearHyperlinkOnStream]) {
 			[target clearHyperlinkOnStream: [[args objectAtIndex: 0] unsignedIntValue]];
 		
 		// Registering streams
 		} else if ([opType isEqualToString: s_RegisterStream]) {
 			[target registerStream: [args objectAtIndex: 0] 
-				   forIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
+					 forIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_RegisterStreamForWindow]) {
 			[target registerStreamForWindow: [[args objectAtIndex: 0] unsignedIntValue]
-							forIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
+							  forIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
 		
 		} else if ([opType isEqualToString: s_CloseStreamIdentifier]) {
 			[target closeStreamIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
@@ -735,11 +734,11 @@ static NSString* stringFromOp(NSArray* op) {
 			[target setRootWindow: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_CreatePairWindowWithIdentifier]) {
 			[target createPairWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue] 
-									   keyWindow: [[args objectAtIndex: 1] unsignedIntValue] 
-									  leftWindow: [[args objectAtIndex: 2] unsignedIntValue] 
-									 rightWindow: [[args objectAtIndex: 3] unsignedIntValue] 
-										  method: [[args objectAtIndex: 4] unsignedIntValue] 
-											size: [[args objectAtIndex: 5] unsignedIntValue]];
+										 keyWindow: [[args objectAtIndex: 1] unsignedIntValue]
+										leftWindow: [[args objectAtIndex: 2] unsignedIntValue]
+									   rightWindow: [[args objectAtIndex: 3] unsignedIntValue]
+											method: [[args objectAtIndex: 4] unsignedIntValue]
+											  size: [[args objectAtIndex: 5] unsignedIntValue]];
 		
 		// Window echo
 		} else if ([opType isEqualToString:s_EchoWindow]) {

@@ -2280,6 +2280,11 @@
 
 @synthesize soundSource = sndSource;
 
+- (void)setSoundSource:(in byref id<GlkSoundSource>)newSource {
+	sndHandler.soundSource = newSource;
+	sndSource = newSource;
+}
+
 @synthesize soundHandler = sndHandler;
 
 #pragma mark - Automation

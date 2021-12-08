@@ -160,6 +160,11 @@ glui32 glk_schannel_get_rock(schanid_t chan) {
 }
 
 glui32 glk_schannel_play(schanid_t chan, glui32 snd) {
+	if (!cocoaglk_schanid_sane(chan)) {
+		cocoaglk_error("glk_schannel_play called with an invalid schanid");
+		return 0;
+	}
+	
 	glui32 result = glk_schannel_play_ext(chan, snd, 1, 0);
 	
 #if COCOAGLK_TRACE
@@ -176,7 +181,7 @@ glui32 glk_schannel_play_ext(schanid_t chan, glui32 snd, glui32 repeats,
 	}
 	
 	if (!cocoaglk_schanid_sane(chan)) {
-		cocoaglk_error("glk_schannel_play or glk_schannel_play_ext called with an invalid schanid");
+		cocoaglk_error("glk_schannel_play_ext called with an invalid schanid");
 		return 0;
 	}
 	

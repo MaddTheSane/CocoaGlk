@@ -165,18 +165,18 @@
     //Get length of track
     MusicTrackGetProperty(track, kSequenceTrackProperty_TrackLength, &trackLen, &trackLenLen);
     //Create UserData for User Event with any data
-    static MusicEventUserData userData = {1, {0x09}};
+    static const MusicEventUserData userData = {1, {0x09}};
     //Put new user event at the end of the track
     MusicTrackNewUserEvent(track, trackLen, &userData);
     //Set a callback for when User Events occur
     MusicSequenceSetUserCallback(sequence, userCallback, (void * _Nullable)CFBridgingRetain(block));
 }
 
-    void userCallback (void *inClientData, MusicSequence inSequence, MusicTrack inTrack, MusicTimeStamp inEventTime, const MusicEventUserData *inEventData, MusicTimeStamp inStartSliceBeat, MusicTimeStamp inEndSliceBeat)
-    {
-        typedef void (^MyBlockType)(void);
-        MyBlockType block = (__bridge MyBlockType)inClientData;
-        block();
-    }
+static void userCallback (void *inClientData, MusicSequence inSequence, MusicTrack inTrack, MusicTimeStamp inEventTime, const MusicEventUserData *inEventData, MusicTimeStamp inStartSliceBeat, MusicTimeStamp inEndSliceBeat)
+{
+    typedef void (^MyBlockType)(void);
+    MyBlockType block = (__bridge_transfer MyBlockType)inClientData;
+    block();
+}
 
 @end

@@ -156,6 +156,8 @@
     DisposeAUGraph(graph);
 }
 
+static void userCallback (void *inClientData, MusicSequence inSequence, MusicTrack inTrack, MusicTimeStamp inEventTime, const MusicEventUserData *inEventData, MusicTimeStamp inStartSliceBeat, MusicTimeStamp inEndSliceBeat);
+
 - (void)addCallback:(void (^)(void))block {
     MusicTrack track = NULL;
     MusicTimeStamp trackLen = 0;

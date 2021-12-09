@@ -97,7 +97,7 @@ extern void (*cocoaglk_unregister)(void *obj, glui32 objclass, gidispatch_rock_t
 
 extern void (*cocoaglk_interrupt)(void);
 
-extern int cocoaglk_loopIteration;
+extern NSInteger cocoaglk_loopIteration;
 
 extern strid_t cocoaglk_currentstream;
 extern strid_t cocoaglk_firststream;

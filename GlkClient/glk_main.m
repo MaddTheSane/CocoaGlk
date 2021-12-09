@@ -20,7 +20,7 @@
 #import "cocoaglk.h"
 #import "glk_client.h"
 
-int cocoaglk_loopIteration = 0;
+NSInteger cocoaglk_loopIteration = 0;
 void (*cocoaglk_interrupt)(void);
 
 void glk_exit(void) {

@@ -21,7 +21,7 @@ static NSDate* cocoaglk_nextTimerEvent = nil;
 
 @implementation GlkListener
 
-- (oneway void) eventReady: (int) syncCount {
+- (oneway void) eventReady: (NSInteger) syncCount {
 	cocoaglk_eventwaiting = YES;
 	cocoaglk_loopIteration = syncCount;
 }

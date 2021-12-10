@@ -129,6 +129,8 @@
 		552CEF1627152C17009D87A5 /* glkstart.h in Headers */ = {isa = PBXBuildFile; fileRef = 552CEF1527152C17009D87A5 /* glkstart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		552CEF1927152C50009D87A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 552CEF1827152C50009D87A5 /* main.m */; };
 		5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5533C6E8276023C1004BD884 /* Vorbis.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B0B275A25E9000B0D21 /* Vorbis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5560FA2921C06BF500E711F5 /* GlkViewDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA2C21C07EC200E711F5 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2B21C07EC200E711F5 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA3321C084E500E711F5 /* GlkTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3221C084E500E711F5 /* GlkTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -189,6 +191,7 @@
 		55FF569A275A1D72000B0D21 /* GlkMIDIPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF5692275A1D72000B0D21 /* GlkMIDIPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FF569B275A1D72000B0D21 /* GlkSoundHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF5693275A1D72000B0D21 /* GlkSoundHandler.m */; };
 		55FF569C275A1D72000B0D21 /* GlkMIDIPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF5694275A1D72000B0D21 /* GlkMIDIPlayer.m */; };
+		55FF5ABE275A1E2F000B0D21 /* SFBAudioEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5ABD275A1E08000B0D21 /* SFBAudioEngine.framework */; };
 		8D11072A0486CEB800E47090 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.xib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -315,12 +318,61 @@
 			remoteGlobalIDString = 4BF085290E166E8300DB5C6B;
 			remoteInfo = GlkSound;
 		};
+		55FF5AB9275A1E08000B0D21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55FF5AB6275A1E08000B0D21 /* SFBAudioEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 32C212D41091116D00BA2493;
+			remoteInfo = SFBAudioEngine;
+		};
+		55FF5ABC275A1E08000B0D21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55FF5AB6275A1E08000B0D21 /* SFBAudioEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3210AB9017B9C05A00743639;
+			remoteInfo = SFBAudioEngine;
+		};
 		55FF5AE0275A2526000B0D21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55FF56A4275A1DC2000B0D21 /* SFBAudioEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3210AB9017B9C05A00743639;
 			remoteInfo = SFBAudioEngine;
+		};
+		55FF5B04275A25E9000B0D21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55FF5AF4275A25E9000B0D21 /* ogg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D9548E267A3491B86A2CB0C;
+			remoteInfo = ogg;
+		};
+		55FF5B0A275A25E9000B0D21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55FF5AF7275A25E9000B0D21 /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 730F23F1091827B100AB638C;
+			remoteInfo = Vorbis;
+		};
+		55FF5B0C275A25E9000B0D21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55FF5AF7275A25E9000B0D21 /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 738835E40B18F870005C7A69;
+			remoteInfo = "libvorbis (static)";
+		};
+		55FF5B0E275A25E9000B0D21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55FF5AF7275A25E9000B0D21 /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 738836130B190488005C7A69;
+			remoteInfo = "libvorbisenc (static)";
+		};
+		55FF5B10275A25E9000B0D21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55FF5AF7275A25E9000B0D21 /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 738836220B1905E5005C7A69;
+			remoteInfo = "libvorbisfile (static)";
 		};
 		55FF5B12275A25F8000B0D21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -350,6 +402,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				5533C6E8276023C1004BD884 /* Vorbis.framework in Embed Frameworks */,
+				5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */,
 				5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */,
 				55C6BB49204DEDC1001AE7E5 /* GlkClient.framework in Embed Frameworks */,
 				55C6BB4D204DEDC1001AE7E5 /* GlkSound.framework in Embed Frameworks */,
@@ -647,6 +701,7 @@
 			files = (
 				557AF22D2703F81A00A5CFFC /* Foundation.framework in Frameworks */,
 				55D6F0A0275C57D20098620E /* AudioToolbox.framework in Frameworks */,
+				55FF5ABE275A1E2F000B0D21 /* SFBAudioEngine.framework in Frameworks */,
 				55D6F080275C4F520098620E /* GlkView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1069,10 +1124,37 @@
 			path = SwiftGlk;
 			sourceTree = "<group>";
 		};
+		55FF5AB7275A1E08000B0D21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55FF5ABD275A1E08000B0D21 /* SFBAudioEngine.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		55FF5ADD275A2526000B0D21 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		55FF5AF5275A25E9000B0D21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55FF5B05275A25E9000B0D21 /* Ogg.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		55FF5AF8275A25E9000B0D21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55FF5B0B275A25E9000B0D21 /* Vorbis.framework */,
+				55FF5B0D275A25E9000B0D21 /* libvorbis.a */,
+				55FF5B0F275A25E9000B0D21 /* libvorbisenc.a */,
+				55FF5B11275A25E9000B0D21 /* libvorbisfile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1282,6 +1364,7 @@
 			);
 			dependencies = (
 				55FF5B13275A25F8000B0D21 /* PBXTargetDependency */,
+				55FF5ABA275A1E08000B0D21 /* PBXTargetDependency */,
 			);
 			name = GlkSound;
 			productName = GlkSound;
@@ -1399,8 +1482,20 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 55FF5AF5275A25E9000B0D21 /* Products */;
+					ProjectRef = 55FF5AF4275A25E9000B0D21 /* ogg.xcodeproj */;
+				},
+				{
 					ProductGroup = 55FF5ADD275A2526000B0D21 /* Products */;
 					ProjectRef = 55FF56A4275A1DC2000B0D21 /* SFBAudioEngine.xcodeproj */;
+				},
+				{
+					ProductGroup = 55FF5AB7275A1E08000B0D21 /* Products */;
+					ProjectRef = 55FF5AB6275A1E08000B0D21 /* SFBAudioEngine.xcodeproj */;
+				},
+				{
+					ProductGroup = 55FF5AF8275A25E9000B0D21 /* Products */;
+					ProjectRef = 55FF5AF7275A25E9000B0D21 /* Vorbis.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1420,11 +1515,53 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		55FF5ABD275A1E08000B0D21 /* SFBAudioEngine.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SFBAudioEngine.framework;
+			remoteRef = 55FF5ABC275A1E08000B0D21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SFBAudioEngine.framework;
 			remoteRef = 55FF5AE0275A2526000B0D21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55FF5B05275A25E9000B0D21 /* Ogg.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Ogg.framework;
+			remoteRef = 55FF5B04275A25E9000B0D21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55FF5B0B275A25E9000B0D21 /* Vorbis.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Vorbis.framework;
+			remoteRef = 55FF5B0A275A25E9000B0D21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55FF5B0D275A25E9000B0D21 /* libvorbis.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libvorbis.a;
+			remoteRef = 55FF5B0C275A25E9000B0D21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55FF5B0F275A25E9000B0D21 /* libvorbisenc.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libvorbisenc.a;
+			remoteRef = 55FF5B0E275A25E9000B0D21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55FF5B11275A25E9000B0D21 /* libvorbisfile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libvorbisfile.a;
+			remoteRef = 55FF5B10275A25E9000B0D21 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1733,6 +1870,11 @@
 			isa = PBXTargetDependency;
 			target = 4BF085290E166E8300DB5C6B /* GlkSound */;
 			targetProxy = 55FF56872758C6AB000B0D21 /* PBXContainerItemProxy */;
+		};
+		55FF5ABA275A1E08000B0D21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SFBAudioEngine;
+			targetProxy = 55FF5AB9275A1E08000B0D21 /* PBXContainerItemProxy */;
 		};
 		55FF5B13275A25F8000B0D21 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

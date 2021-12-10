@@ -158,7 +158,7 @@
     [encoder encodeObject:fakeGlkChannels forKey:@"fchannels"];
 }
 
-- (BOOL)soundIsLoaded:(NSInteger)soundId {
+- (BOOL)soundIsLoaded:(glui32)soundId {
     GlkSoundResource *resource = _resources[@(soundId)];
     if (resource)
         return (resource.data != nil);

@@ -140,6 +140,11 @@
 		557AF22B2703F79500A5CFFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		557AF22C2703F79600A5CFFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		557AF22D2703F81A00A5CFFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
+		559122D5276323EB001C4C95 /* Ogg.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		559122D6276323EB001C4C95 /* Vorbis.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B0B275A25E9000B0D21 /* Vorbis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		559122D7276323EB001C4C95 /* SFBAudioEngine.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		559122D8276323EB001C4C95 /* GlkSound.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		559122D9276323F8001C4C95 /* GlkSound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; };
 		559219ED21B90663002F7F9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		559219EE21B90894002F7F9E /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55BC63282055C42B001F8CFB /* savefile.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BC62ED2055C42B001F8CFB /* savefile.c */; };
@@ -269,6 +274,13 @@
 			remoteGlobalIDString = 4B51AA5507E877C900576AB9;
 			remoteInfo = GlkClient;
 		};
+		559122D3276323D1001C4C95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4BF085290E166E8300DB5C6B;
+			remoteInfo = GlkSound;
+		};
 		55C6BB46204DEDC1001AE7E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -390,6 +402,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				559122D5276323EB001C4C95 /* Ogg.framework in Copy Frameworks */,
+				559122D6276323EB001C4C95 /* Vorbis.framework in Copy Frameworks */,
+				559122D7276323EB001C4C95 /* SFBAudioEngine.framework in Copy Frameworks */,
+				559122D8276323EB001C4C95 /* GlkSound.framework in Copy Frameworks */,
 				4BCB8AA10CD7E3310041731F /* GlkView.framework in Copy Frameworks */,
 				4B664B6B07EC7C190079317A /* GlkClient.framework in Copy Frameworks */,
 			);
@@ -637,7 +653,6 @@
 		55FF5AB6275A1E08000B0D21 /* SFBAudioEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SFBAudioEngine.xcodeproj; path = GlkSound/SFBAudioEngine/SFBAudioEngine.xcodeproj; sourceTree = "<group>"; };
 		55FF5AEA275A259A000B0D21 /* Ogg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ogg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55FF5AEC275A259A000B0D21 /* Vorbis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Vorbis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		55FF5AEF275A25D1000B0D21 /* libdumb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libdumb.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		55FF5AF4275A25E9000B0D21 /* ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ogg.xcodeproj; path = GlkSound/SFBAudioEngine/Libraries/ogg/ogg.xcodeproj; sourceTree = "<group>"; };
 		55FF5AF7275A25E9000B0D21 /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = GlkSound/SFBAudioEngine/Libraries/vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -728,6 +743,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				559122D9276323F8001C4C95 /* GlkSound.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				4B51AA5E07E8780700576AB9 /* GlkView.framework in Frameworks */,
 			);
@@ -805,7 +821,6 @@
 			isa = PBXGroup;
 			children = (
 				55D6F09F275C57D20098620E /* AudioToolbox.framework */,
-				55FF5AEF275A25D1000B0D21 /* libdumb.a */,
 				55FF5AEA275A259A000B0D21 /* Ogg.framework */,
 				55FF5AEC275A259A000B0D21 /* Vorbis.framework */,
 				4BF085490E1675D500DB5C6B /* CoreAudio.framework */,
@@ -1425,6 +1440,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				559122D4276323D1001C4C95 /* PBXTargetDependency */,
 				4B51AA4A07E8771200576AB9 /* PBXTargetDependency */,
 				4B51AAB607E87B5E00576AB9 /* PBXTargetDependency */,
 				4B8BDE5607EB3E83008AE26D /* PBXTargetDependency */,
@@ -1836,6 +1852,11 @@
 			target = 4B51AA5507E877C900576AB9 /* GlkClient */;
 			targetProxy = 4BFA1CA707F8A3120068E16A /* PBXContainerItemProxy */;
 		};
+		559122D4276323D1001C4C95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4BF085290E166E8300DB5C6B /* GlkSound */;
+			targetProxy = 559122D3276323D1001C4C95 /* PBXContainerItemProxy */;
+		};
 		55C6BB47204DEDC1001AE7E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4B51AA4607E8770600576AB9 /* GlkView */;
@@ -2119,6 +2140,12 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				INSTALL_PATH = /usr/local/bin;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
 				PRODUCT_NAME = multiwin;
 			};
 			name = Debug;
@@ -2130,6 +2157,12 @@
 				CODE_SIGN_IDENTITY = "-";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				INSTALL_PATH = /usr/local/bin;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
 				PRODUCT_NAME = multiwin;
 			};
 			name = Release;
@@ -2334,6 +2367,12 @@
 				CODE_SIGN_IDENTITY = "-";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/bin;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
 				PRODUCT_NAME = imagetest;
 			};
 			name = Debug;
@@ -2345,6 +2384,12 @@
 				CODE_SIGN_IDENTITY = "-";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/bin;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
 				PRODUCT_NAME = imagetest;
 			};
 			name = Release;

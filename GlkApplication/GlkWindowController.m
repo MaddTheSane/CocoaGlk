@@ -7,9 +7,12 @@
 //
 
 #import "GlkWindowController.h"
+#import <GlkSound/GlkSound.h>
 
 
-@implementation GlkWindowController
+@implementation GlkWindowController {
+	GlkSoundHandler *soundHandler;
+}
 
 #pragma mark - Initialisation
 
@@ -17,6 +20,7 @@
 	self = [super initWithWindowNibName: @"CocoaGlk"];
 	
 	if (self) {
+		soundHandler = [[GlkSoundHandler alloc] init];
 	}
 	
 	return self;
@@ -30,6 +34,10 @@
 	[status setStringValue: [[NSBundle mainBundle] localizedStringForKey: @"Waiting for game..."
 																   value: @"Waiting for game..."
 																   table: nil]];
+	
+	// set up sound handling.
+	glkView.soundHandler = soundHandler;
+	soundHandler.glkctl = glkView;
 	
 	// We're the view delegate
 	[glkView setDelegate: self];

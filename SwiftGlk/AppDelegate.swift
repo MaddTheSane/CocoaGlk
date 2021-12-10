@@ -43,9 +43,6 @@ ofType: nil];
 	}
 
 	func createAnonymousSession() -> GlkSession? {
-		let control = SwiftWindowController()
-		control.showWindow(self)
-		winController = control
-		return control.glkView
+		return winController?.glkView
 	}
 }

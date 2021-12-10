@@ -84,7 +84,7 @@
 			 inStream: (glui32) streamIdentifier;
 - (void) clearStyleHint: (glui32) hint
 			   inStream: (glui32) streamIdentifier;
-- (void) setCustomAttributes: (NSDictionary*) attributes
+- (void) setCustomAttributes: (NSDictionary<NSAttributedStringKey,id>*) attributes
 					inStream: (glui32) streamIdentifier;
 
 // Graphics

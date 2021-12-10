@@ -41,7 +41,7 @@
 	return [self initWithFrame: frame];
 }
 
-- (id)initWithFrame:(GlkRect)frame {
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
 		moreImage = [GlkMoreView image];
@@ -52,7 +52,7 @@
     return self;
 }
 
-- (void)drawRect:(GlkRect)rect {
+- (void)drawRect:(CGRect)rect {
 #if defined(COCOAGLK_IPHONE)
 	[moreImage drawInRect: self.bounds];
 #else

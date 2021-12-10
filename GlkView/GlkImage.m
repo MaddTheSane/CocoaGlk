@@ -41,7 +41,7 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 
 #pragma mark - Cached information
 
-- (void) setBounds: (GlkRect) newBounds {
+- (void) setBounds: (CGRect) newBounds {
 	calculatedBounds = YES;
 	bounds = newBounds;
 }
@@ -75,7 +75,7 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 			else if (alignment == imagealign_InlineDown)
 				secAlign = GlkAlignBottom;
 		
-			[typesetter addLineSection: GlkMakeRect(offset, -size.height, size.width, size.height)
+			[typesetter addLineSection: CGRectMake(offset, -size.height, size.width, size.height)
 						   advancement: size.width
 								offset: offset
 							glyphRange: glyphs
@@ -92,7 +92,7 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 			marginOffset = [typesetter currentLeftMarginOffset];
 			[typesetter addToLeftMargin: (size.width*scaleFactor)+8
 								 height: size.height*scaleFactor];
-			[typesetter addLineSection: GlkMakeRect(offset, -1, size.width, 1)
+			[typesetter addLineSection: CGRectMake(offset, -1, size.width, 1)
 						   advancement: 0
 								offset: offset
 							glyphRange: glyphs
@@ -107,7 +107,7 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 			
 			[typesetter addToRightMargin: (size.width*scaleFactor)+8
 								  height: size.height*scaleFactor];
-			[typesetter addLineSection: GlkMakeRect(offset, -1, size.width, 1)
+			[typesetter addLineSection: CGRectMake(offset, -1, size.width, 1)
 						   advancement: 0
 								offset: offset
 							glyphRange: glyphs
@@ -123,10 +123,10 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 
 #pragma mark - Drawing
 
-- (void) drawAtPoint: (GlkPoint) point
+- (void) drawAtPoint: (CGPoint) point
 			  inView: (GlkSuperView*) view {
-	GlkRect drawRect;
-	GlkRect imageRect;
+	CGRect drawRect;
+	CGRect imageRect;
 	
 	if (alignment == imagealign_MarginLeft) {
 		NSSize inset = [(NSTextView*)view textContainerInset];

@@ -26,7 +26,7 @@
 	[self invalidateAllLayout];
 }
 
-- (void) setCellSize: (GlkCocoaSize) newSize {
+- (void) setCellSize: (CGSize) newSize {
 	cellSize = newSize;
 	
 	[self invalidateAllLayout];
@@ -45,7 +45,7 @@
 	NSUInteger charIndex = cacheCharIndexes[glyph];
 	NSInteger x = charIndex % gridWidth;
 	NSInteger y = charIndex / gridWidth;
-	GlkPoint gridPos = GlkMakePoint(cellSize.width*x+inset, cellSize.height*y);
+	CGPoint gridPos = CGPointMake(cellSize.width*x+inset, cellSize.height*y);
 	
 	CGFloat charPos = gridPos.x;
 	CGFloat initialCharPos = charPos;
@@ -57,7 +57,7 @@
 	NSInteger lastBoundaryGlyph = glyph;
 	BOOL hitTheLastGlyph = NO;
 	
-	GlkRect sectionBounds =  GlkMakeRect(charPos, -cacheAscenders[glyph],
+	CGRect sectionBounds =  CGRectMake(charPos, -cacheAscenders[glyph],
 										 cacheAdvancements[glyph], cacheLineHeight[glyph]);
 	
 	while (x < gridWidth && glyph < cached.length) {
@@ -87,7 +87,7 @@
 			
 			// Start the next section
 			initialCharPos = charPos = gridPos.x;
-			sectionBounds =  GlkMakeRect(charPos, -cacheAscenders[glyph],
+			sectionBounds =  CGRectMake(charPos, -cacheAscenders[glyph],
 										cacheAdvancements[glyph], cacheLineHeight[glyph]);
 			firstGlyph = glyph;
 		}
@@ -96,10 +96,10 @@
 		lastChar = thisChar;
 		
 		// Measure this glyph
-		NSRect glyphBounds = NSMakeRect(charPos + charWidth, floor(-cacheAscenders[glyph]),
+		NSRect glyphBounds = CGRectMake(charPos + charWidth, floor(-cacheAscenders[glyph]),
 										cacheAdvancements[glyph], cacheLineHeight[glyph]);
 		charWidth += cacheAdvancements[glyph];
-		sectionBounds = NSUnionRect(sectionBounds, glyphBounds);
+		sectionBounds = CGRectUnion(sectionBounds, glyphBounds);
 		
 		// Advance to the next glyph
 		glyph++;

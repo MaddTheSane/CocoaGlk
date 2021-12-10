@@ -76,7 +76,7 @@
 #endif
 }
 
-- (id)initWithFrame:(GlkRect)frame {
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
 	if (self) {
@@ -91,7 +91,7 @@
 
 #pragma mark - Drawing
 
-- (void)drawRect:(GlkRect)rect {
+- (void)drawRect:(CGRect)rect {
 	[super drawRect: rect];
 }
 
@@ -121,7 +121,7 @@
 	return res;
 }
 
-- (void) layoutInRect: (GlkRect) parentRect {
+- (void) layoutInRect: (CGRect) parentRect {
 	NSInteger x;
 	
 	// Set our frame
@@ -145,7 +145,7 @@
 #endif
 	
 	// Adjust the typesetter
-	[(GlkGridTypesetter*)typesetter setCellSize: GlkMakeSize([self charWidth], [self lineHeight])];
+	[(GlkGridTypesetter*)typesetter setCellSize: CGSizeMake([self charWidth], [self lineHeight])];
 	[(GlkGridTypesetter*)typesetter setGridWidth: width
 										  height: height];
 	[layoutManager invalidateLayoutForCharacterRange: NSMakeRange(0, [textStorage length])

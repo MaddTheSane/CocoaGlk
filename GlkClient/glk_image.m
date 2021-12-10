@@ -67,7 +67,7 @@ glui32 glk_image_draw(winid_t win, glui32 image, glsi32 val1, glsi32 val2) {
 		
 		[cocoaglk_buffer drawImageWithIdentifier: image
 						  inWindowWithIdentifier: win->identifier
-									  atPosition: GlkMakePoint(val1, val2)];
+									  atPosition: CGPointMake(val1, val2)];
 	} else {
 		[cocoaglk_buffer drawImageWithIdentifier: image
 						  inWindowWithIdentifier: win->identifier
@@ -102,7 +102,7 @@ glui32 glk_image_draw_scaled(winid_t win, glui32 image,
 		
 		[cocoaglk_buffer drawImageWithIdentifier: image
 						  inWindowWithIdentifier: win->identifier
-										  inRect: GlkMakeRect(val1, val2, width, height)];
+										  inRect: CGRectMake(val1, val2, width, height)];
 	} else {
 		NSLog(@"TRACE: glk_image_draw_scaled(%p, %u, %i, %i, %u, %u) = %i", win, image, val1, val2, width, height, res);		
 	}
@@ -128,7 +128,7 @@ glui32 glk_image_get_info(glui32 image, glui32 *width, glui32 *height) {
 	// Use the cache for preference
 	NSNumber* imageKey = @(image);
 	NSValue* imageSizeValue = imageSizeDictionary[imageKey];
-	GlkCocoaSize imageSize;
+	CGSize imageSize;
 	
 	if (imageSizeValue != nil) {
 		// Use the cached version of the size
@@ -238,7 +238,7 @@ void glk_window_fill_rect(winid_t win, glui32 color,
 	// Tell the buffer to erase this window eventually
 	[cocoaglk_buffer fillAreaInWindowWithIdentifier: win->identifier
 										 withColour: fillColour
-										  rectangle: GlkMakeRect(left, top, width, height)];
+										  rectangle: CGRectMake(left, top, width, height)];
 }
 
 //

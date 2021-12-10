@@ -420,7 +420,7 @@ static NSString* stringFromOp(NSArray* op) {
 #pragma mark Graphics
 - (void) fillAreaInWindowWithIdentifier: (unsigned) identifier
 							 withColour: (in bycopy GlkColor*) color
-							  rectangle: (GlkRect) windowArea {
+							  rectangle: (CGRect) windowArea {
 	[self addOperation: s_FillAreaInWindowWithIdentifier
 			 arguments: @[@(identifier),
 						  color,
@@ -429,7 +429,7 @@ static NSString* stringFromOp(NSArray* op) {
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
-					  atPosition: (GlkPoint) position {
+					  atPosition: (CGPoint) position {
 	[self addOperation: s_DrawImageWithIdentifier
 			 arguments: @[@(imageIdentifier),
 						  @(windowIdentifier),
@@ -438,7 +438,7 @@ static NSString* stringFromOp(NSArray* op) {
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
-						  inRect: (GlkRect) imageRect {
+						  inRect: (CGRect) imageRect {
 	[self addOperation: s_DrawImageWithIdentifierInRect
 			 arguments: @[@(imageIdentifier),
 						  @(windowIdentifier),
@@ -457,7 +457,7 @@ static NSString* stringFromOp(NSArray* op) {
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					   alignment: (unsigned) alignment
-							size: (GlkCocoaSize) imageSize {
+							size: (CGSize) imageSize {
 	[self addOperation: s_DrawImageWithIdentifierAlignSize
 			 arguments: @[@(imageIdentifier),
 						  @(windowIdentifier),
@@ -609,7 +609,7 @@ static NSString* stringFromOp(NSArray* op) {
 
 		// Graphics
 		} else if ([opType isEqualToString: s_FillAreaInWindowWithIdentifier]) {
-			GlkRect aRect;
+			CGRect aRect;
 #ifdef COCOAGLK_IPHONE
 			aRect = [[args objectAtIndex: 2] CGRectValue];
 #else
@@ -619,7 +619,7 @@ static NSString* stringFromOp(NSArray* op) {
 										withColour: [args objectAtIndex: 1]
 										 rectangle: aRect];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifier]) {
-			GlkPoint aPoint;
+			CGPoint aPoint;
 #ifdef COCOAGLK_IPHONE
 			aPoint = [[args objectAtIndex: 2] CGPointValue];
 #else
@@ -629,7 +629,7 @@ static NSString* stringFromOp(NSArray* op) {
 					 inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
 								 atPosition: aPoint];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierInRect]) {
-			GlkRect aRect;
+			CGRect aRect;
 #ifdef COCOAGLK_IPHONE
 			aRect = [[args objectAtIndex: 2] CGRectValue];
 #else
@@ -644,7 +644,7 @@ static NSString* stringFromOp(NSArray* op) {
 					 inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
 								  alignment: [[args objectAtIndex: 2] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierAlignSize]) {
-			GlkCocoaSize aSize;
+			CGSize aSize;
 #ifdef COCOAGLK_IPHONE
 			aSize = [[args objectAtIndex: 3] CGSizeValue];
 #else

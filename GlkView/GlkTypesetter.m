@@ -888,7 +888,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	return YES;
 }
 
-- (void) addLineSection: (GlkRect) bounds
+- (void) addLineSection: (CGRect) bounds
 			advancement: (CGFloat) advancement
 				 offset: (CGFloat) offset
 			 glyphRange: (NSRange) glyphRange
@@ -971,7 +971,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #pragma mark - Laying out glyphs
 
 - (void) justifyCurrentLineFragment: (NSTextAlignment) alignment
-							 inRect: (GlkRect) proposed
+							 inRect: (CGRect) proposed
 						 leftIndent: (CGFloat) leftMargin
 						rightIndent: (CGFloat) rightMargin
 							newline: (BOOL) newline {
@@ -1520,7 +1520,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	[super endLineWithGlyphRange: lineGlyphRange];
 }
 
-- (NSUInteger)layoutParagraphAtPoint:(GlkPoint *)lineFragmentOrigi {
+- (NSUInteger)layoutParagraphAtPoint:(CGPoint *)lineFragmentOrigi {
 	// Get the glyph range that we're laying out
 	NSRange glyphRange = [self paragraphGlyphRange];
 	NSInteger glyph = glyphRange.location;

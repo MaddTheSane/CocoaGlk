@@ -36,7 +36,7 @@ extern NSAttributedStringKey const GlkCustomSectionAttributeName;
 
 // Drawing
 
-- (void) drawAtPoint: (GlkPoint) point
+- (void) drawAtPoint: (CGPoint) point
 			  inView: (GlkSuperView*) view;
 
 @end

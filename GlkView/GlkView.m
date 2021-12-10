@@ -2085,7 +2085,7 @@
 
 #pragma mark - Graphics functions
 
-- (GlkCocoaSize) sizeForImageResource: (glui32) imageId {
+- (CGSize) sizeForImageResource: (glui32) imageId {
 	NSImage* img = [self imageWithIdentifier: imageId];
 	
 	if (img == nil) return NSMakeSize(-1, -1);

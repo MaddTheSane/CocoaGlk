@@ -80,7 +80,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 }
 
 /// The bounds for this line section: 0,0 indicates the start of the line fragment, 0,0 indicates the far left of the current fragment, at the baseline
-@property GlkRect bounds;
+@property CGRect bounds;
 /// The X-advancement for this line section
 @property CGFloat advancement;
 /// The X-offset for this line section
@@ -140,7 +140,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 	/// The line heights for each glyph that we're laying out
 	CGFloat* cacheLineHeight;
 	/// The bounds for each glyph that we're laying out
-	GlkRect* cacheBounds;
+	CGRect* cacheBounds;
 	/// The attributes for each glyph that we're laying out [RETAINED]
 	NSDictionary*__strong* cacheAttributes;
 	/// The font attribute for each glyph that we're laying out [NOT RETAINED]

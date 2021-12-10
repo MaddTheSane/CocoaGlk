@@ -13,11 +13,11 @@
 
 @implementation GlkGraphicsWindow
 
-- (id)initWithFrame:(GlkRect)frame {
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
 
     if (self) {
-		GlkCocoaSize imgSize = frame.size;
+		CGSize imgSize = frame.size;
 		
 		if (imgSize.width <= 0) imgSize.width = 1;
 		if (imgSize.height <= 0) imgSize.height = 1;
@@ -29,7 +29,7 @@
 		[windowImage lockFocus];
 		
 		[[GlkColor whiteColor] set];
-		GlkRectFill(GlkMakeRect(0,0, frame.size.width, frame.size.height));
+		GlkRectFill(CGRectMake(0,0, frame.size.width, frame.size.height));
 		
 		[windowImage unlockFocus];		
 		
@@ -40,13 +40,13 @@
 }
 
 - (void) clearWindow {
-	GlkCocoaSize imgSize = [windowImage size];
+	CGSize imgSize = [windowImage size];
 	
 	// Fill in the background colour
 	[windowImage lockFocus];
 	
 	[backgroundColour set];
-	GlkRectFill(GlkMakeRect(0,0, imgSize.width, imgSize.height));
+	GlkRectFill(CGRectMake(0,0, imgSize.width, imgSize.height));
 	
 	[windowImage unlockFocus];
 }
@@ -62,9 +62,9 @@
 	[target queueEvent: evt];
 }
 
-- (void) setFrame: (GlkRect) frame {
+- (void) setFrame: (CGRect) frame {
 	// Resize the buffer image (if the new size is bigger than the old size)
-	GlkCocoaSize oldSize = [windowImage size];
+	CGSize oldSize = [windowImage size];
 	
 	if (oldSize.width < frame.size.width || oldSize.height < frame.size.height) {
 		// Resize and clear
@@ -76,16 +76,16 @@
 	[super setFrame: frame];
 }
 
-- (GlkRect) convertGlkToImageCoords: (GlkRect) r {
-	GlkRect res = r;
-	GlkCocoaSize size = [windowImage size];
+- (CGRect) convertGlkToImageCoords: (CGRect) r {
+	CGRect res = r;
+	CGSize size = [windowImage size];
 	
 	res.origin.y = size.height - res.origin.y - res.size.height;
 	
 	return res;
 }
 
-- (void)drawRect:(GlkRect)rect {
+- (void)drawRect:(CGRect)rect {
 	// Draw the buffer image
 #if defined(COCOAGLK_IPHONE)
 #else
@@ -137,7 +137,7 @@
 
 #pragma mark - Layout
 
-- (void) layoutInRect: (GlkRect) parentRect {
+- (void) layoutInRect: (CGRect) parentRect {
 	// Set the frame
 	[self setFrame: parentRect];
 	
@@ -161,7 +161,7 @@
 
 - (GlkSize) glkSize {
 	// The GlkSize of this window is the same as the 'actual' size in pixels
-	GlkRect frame = [self frame];
+	CGRect frame = [self frame];
 	
 	GlkSize res;
 	
@@ -173,7 +173,7 @@
 
 #pragma mark - Drawing in the graphics window
 
-- (void) fillRect: (GlkRect) rect
+- (void) fillRect: (CGRect) rect
 	   withColour: (GlkColor*) col {
 #if defined(COCOAGLK_IPHONE)
 	UIGraphicsBeginImageContext(windowImage.size);
@@ -206,7 +206,7 @@
 @synthesize backgroundColour;
 
 - (void) drawImage: (GlkSuperImage*) img
-			inRect: (GlkRect) imgRect {
+			inRect: (CGRect) imgRect {
 #if defined(COCOAGLK_IPHONE)
 	imgRect = [self convertGlkToImageCoords: imgRect];
 	

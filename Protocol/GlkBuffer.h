@@ -90,13 +90,13 @@
 // Graphics
 - (void) fillAreaInWindowWithIdentifier: (unsigned) identifier
 							 withColour: (in bycopy GlkColor*) color
-							  rectangle: (GlkRect) windowArea;
+							  rectangle: (CGRect) windowArea;
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
-					  atPosition: (GlkPoint) position;
+					  atPosition: (CGPoint) position;
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
-						  inRect: (GlkRect) imageRect;
+						  inRect: (CGRect) imageRect;
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
@@ -104,7 +104,7 @@
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					   alignment: (unsigned) alignment
-							size: (GlkCocoaSize) imageSize;
+							size: (CGSize) imageSize;
 
 - (void) breakFlowInWindowWithIdentifier: (unsigned) identifier;
 

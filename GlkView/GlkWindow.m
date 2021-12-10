@@ -16,7 +16,7 @@
 
 #pragma mark - Initialisation
 
-- (id)initWithFrame:(GlkRect)frame {
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
 	if (self) {
@@ -29,7 +29,7 @@
 
 #pragma mark - Drawing
 
-- (void)drawRect:(GlkRect)rect {
+- (void)drawRect:(CGRect)rect {
 	[[self backgroundColour] set];
 	GlkRectFill(rect);
 }
@@ -49,7 +49,7 @@
 
 #pragma mark - Layout
 
-- (void) layoutInRect: (GlkRect) parentRect {
+- (void) layoutInRect: (CGRect) parentRect {
 	[self setFrame: parentRect];
 	
 	GlkSize newSize = [self glkSize];
@@ -69,12 +69,12 @@
 
 @synthesize border;
 
-- (GlkRect) contentRect {
-	return GlkInsetRect([self bounds], border, border);
+- (CGRect) contentRect {
+	return CGRectInset([self bounds], border, border);
 }
 
 - (GlkSize) glkSize {
-	GlkRect contentRect = [self contentRect];
+	CGRect contentRect = [self contentRect];
 	GlkSize res;
 	
 	res.width = (int)contentRect.size.width;

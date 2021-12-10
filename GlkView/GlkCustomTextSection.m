@@ -31,7 +31,7 @@ NSString* const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName"
 
 #pragma mark - Drawing
 
-- (void) drawAtPoint: (GlkPoint) point
+- (void) drawAtPoint: (CGPoint) point
 			  inView: (GlkSuperView*) view {
 }
 

@@ -710,9 +710,7 @@
 												position: (int)[textStorage length]];
 	
 	// Add a suitable control character to the text
-	unichar imageChar = 11;
-	NSString* imageString = [NSString stringWithCharacters: &imageChar
-													length: 1];
+	NSString* imageString = @"\xb";
 	
 	// Construct the attributes that describe this image
 	NSMutableDictionary* imageDict = [[self currentTextAttributes] mutableCopy];

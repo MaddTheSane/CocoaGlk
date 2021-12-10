@@ -73,10 +73,11 @@
 
 #pragma mark - Initialisation
 
-- (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
+- (id)initWithFrame:(NSRect)frame textContainer:(NSTextContainer *)container {
+    self = [super initWithFrame:frame textContainer:container];
     if (self) {
 		receivingCharacters = NO;
+		receivingUnicode = NO;
 		customGlyphs = [[NSMutableArray alloc] init];
 		marginGlyphs = [[NSMutableArray alloc] init];
 		firstUnlaidMarginGlyph = 0;

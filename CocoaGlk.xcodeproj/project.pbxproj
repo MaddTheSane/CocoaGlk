@@ -579,7 +579,6 @@
 		5502A678275C1CE60066927C /* GlkSoundSourceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkSoundSourceProtocol.h; sourceTree = "<group>"; };
 		552A03722049D5E200A4ECAA /* GlkView.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkView.modulemap; sourceTree = "<group>"; };
 		552A03732049D64C00A4ECAA /* GlkClient.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkClient.modulemap; sourceTree = "<group>"; };
-		552A03742049D67900A4ECAA /* GlkSound.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = GlkSound.modulemap; sourceTree = "<group>"; };
 		552CEF1127152BDA009D87A5 /* libglkmain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libglkmain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		552CEF1527152C17009D87A5 /* glkstart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glkstart.h; sourceTree = "<group>"; };
 		552CEF1827152C50009D87A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1065,7 +1064,6 @@
 				55E9F2F3275EE75D004D1C12 /* GlkFakeSoundChannel.h */,
 				55E9F2F4275EE75D004D1C12 /* GlkFakeSoundChannel.m */,
 				55FF567E27583F22000B0D21 /* GlkSound.h */,
-				552A03742049D67900A4ECAA /* GlkSound.modulemap */,
 			);
 			path = GlkSound;
 			sourceTree = "<group>";
@@ -2412,7 +2410,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 2.0.1;
-				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkSound;
 				PRODUCT_NAME = GlkSound;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2438,7 +2435,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 2.0.1;
-				MODULEMAP_FILE = GlkSound/GlkSound.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkSound;
 				PRODUCT_NAME = GlkSound;
 				PROVISIONING_PROFILE_SPECIFIER = "";

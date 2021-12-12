@@ -1,6 +1,0 @@
-framework module GlkSound {
-	umbrella header "GlkSound.h"
-	
-	export *
-	module * { export * }
-}

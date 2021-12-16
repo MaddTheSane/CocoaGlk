@@ -167,7 +167,7 @@ struct glk_window_struct {
 	gidispatch_rock_t bufUcs4Rock;
 	
 	/// Iteration through the event loop (used to guard against using old values for sizes, etc)
-	int loopIteration;
+	NSInteger loopIteration;
 	
 	/// Most recent width (only valid while loopIteration is up to date)
 	int width;

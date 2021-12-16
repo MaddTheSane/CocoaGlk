@@ -290,7 +290,7 @@ void cocoaglk_flushbuffer(const char* reason) {
 		[cocoaglk_buffer release];
 		cocoaglk_buffer = [[GlkBuffer alloc] init];
 		
-		cocoaglk_loopIteration = (int)[cocoaglk_session synchronisationCount];
+		cocoaglk_loopIteration = [cocoaglk_session synchronisationCount];
 		
 #if COCOAGLK_TRACE
 		NSLog(@"Main buffer flushed");

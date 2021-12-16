@@ -126,7 +126,6 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 - (void) drawAtPoint: (CGPoint) point
 			  inView: (GlkSuperView*) view {
 	CGRect drawRect;
-	CGRect imageRect;
 	
 	if (alignment == imagealign_MarginLeft) {
 		NSSize inset = [(NSTextView*)view textContainerInset];

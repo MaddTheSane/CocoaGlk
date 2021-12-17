@@ -458,7 +458,7 @@ static void perform_key(winid_t win, glui32 key)
             str_cpy(keyname, "end");
             break;
         default:
-            if (key >= keycode_Func1 && key < keycode_Func12) {
+            if (key <= keycode_Func1 && key > keycode_Func12) {
                 str_cpy(keyname, "function key");
             }
             else if (key < 32) {

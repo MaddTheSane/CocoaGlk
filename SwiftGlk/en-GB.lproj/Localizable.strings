@@ -7,3 +7,6 @@
 */
 
 "Waiting for game..." = "Waiting for game…";
+"Running..." = "Running…";
+"Finished" = "Finished";
+"Crashed!" = "Crashed!";

@@ -40,11 +40,15 @@ class SwiftWindowController: NSWindowController, GlkViewDelegate {
 	// = GlkView delegate methods =
 	
 	func taskHasStarted() {
-		showStatusText("Running...")
+		showStatusText(NSLocalizedString("Running...", comment: "Running..."))
 	}
 	
 	func taskHasFinished() {
-		showStatusText("Finished")
+		showStatusText(NSLocalizedString("Finished", comment: "Finished"))
+	}
+	
+	func taskHasCrashed() {
+		self.status.attributedStringValue = NSAttributedString(string: NSLocalizedString("Crashed!", comment: "Crashed!"), attributes: [.foregroundColor: NSColor.systemRed])
 	}
 
 	func showStatusText(_ status: String) {

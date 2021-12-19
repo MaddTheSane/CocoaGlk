@@ -132,18 +132,18 @@ typedef struct GlkSize {
 
 #pragma mark - Sounds
 
-/// Sets where we get our sound data from
+/// Sets where we get our sound data from.
 - (void) setSoundSource: (in nullable byref id<GlkSoundSource>) newSource;
 /// Retrieves the active sound source
 - (out nullable byref id<GlkSoundSource>) soundSource;
 /// The active sound source.
 @property (readwrite, retain, nonatomic, nullable) id<GlkSoundSource> soundSource;
 
-/// Sets where we get our sound data from
+/// Sets the sound handler, which handles playback of sound resources.
 - (void) setSoundHandler: (in nullable byref id<GlkSoundHandler>) newSource;
-/// Retrieves the active sound source
+/// Retrieves the active sound handler.
 - (out nullable byref id<GlkSoundHandler>) soundHandler;
-/// The active sound source.
+/// The active sound handler, which handles playback of sound resources.
 @property (readwrite, retain, nonatomic, nullable) id<GlkSoundHandler> soundHandler;
 
 @end

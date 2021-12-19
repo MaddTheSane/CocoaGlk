@@ -2278,11 +2278,12 @@
 
 #pragma mark - Sound Functions
 
-@synthesize soundSource = sndSource;
+- (out byref id<GlkSoundSource>)soundSource {
+	return sndHandler.soundSource;
+}
 
 - (void)setSoundSource:(in byref id<GlkSoundSource>)newSource {
 	sndHandler.soundSource = newSource;
-	sndSource = newSource;
 }
 
 @synthesize soundHandler = sndHandler;

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// understand.
 ///
 /// By default, we use the \c gi_blorb_* functions to get sound resources. glk doesn't have a means for getting
-/// images from other sources by default.
+/// sounds from other sources by default.
 ///
 NS_SWIFT_NAME(GlkSoundSourceProtocol)
 @protocol GlkSoundSource <NSObject>

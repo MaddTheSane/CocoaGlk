@@ -336,19 +336,19 @@ frefid_t glk_fileref_create_from_fileref(glui32 usage, frefid_t fref,
 	return res;
 }
 
-//
-// Destroys a fileref which you have created. This does *not* affect
-// the disk file; it just reclaims the resources allocated by the
-// glk_fileref_create... function.
-// 
-// It is legal to destroy a fileref after opening a file with it (while the
-// file is still open.) The fileref is only used for the opening operation,
-// not for accessing the file stream.
-//
-//		(Though in our case, destroying a temp fref usually results in the 
-//		temp file being deleted. This is OK, though, because it just means
-//		the temp file becomes anonymous)
-//
+///
+/// Destroys a fileref which you have created. This does *not* affect
+/// the disk file; it just reclaims the resources allocated by the
+/// \c glk_fileref_create... function.
+///
+/// It is legal to destroy a fileref after opening a file with it (while the
+/// file is still open). The \c fileref is only used for the opening operation,
+/// not for accessing the file stream.
+///
+///		(Though in our case, destroying a temp fref usually results in the
+///		temp file being deleted. This is OK, though, because it just means
+///		the temp file becomes anonymous)
+///
 void glk_fileref_destroy(frefid_t fref) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_fileref_destroy(%p)", fref);
@@ -378,10 +378,10 @@ void glk_fileref_destroy(frefid_t fref) {
 	free(fref);
 }
 
-//
-// This iterates through all the existing filerefs. See section 1.6.2,
-// "Iterating Through Opaque Objects".
-//
+///
+/// This iterates through all the existing filerefs. See section 1.6.2,
+/// "Iterating Through Opaque Objects".
+///
 frefid_t glk_fileref_iterate(frefid_t fref, glui32 *rockptr) {
 	frefid_t res = NULL;
 	
@@ -410,9 +410,9 @@ frefid_t glk_fileref_iterate(frefid_t fref, glui32 *rockptr) {
 	return res;
 }
 
-//
-// This retrieves the fileref's rock value. See section 1.6.1, "Rocks".
-//
+///
+/// This retrieves the fileref's rock value. See section 1.6.1, "Rocks".
+///
 glui32 glk_fileref_get_rock(frefid_t fref) {
 	if (!cocoaglk_frefid_sane(fref)) {
 		cocoaglk_error("glk_fileref_get_rock called with an invalid frefid");
@@ -426,10 +426,10 @@ glui32 glk_fileref_get_rock(frefid_t fref) {
 	return fref->rock;
 }
 
-// 
-// This deletes the file referred to by fref. It does not destroy the
-// fileref itself.
-//
+///
+/// This deletes the file referred to by fref. It does not destroy the
+/// fileref itself.
+///
 void glk_fileref_delete_file(frefid_t fref) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_fileref_delete_file(%p)", fref);
@@ -443,10 +443,10 @@ void glk_fileref_delete_file(frefid_t fref) {
 	[fref->fileref deleteFile];
 }
 
-//
-// This returns TRUE (1) if the fileref refers to an existing file, and FALSE
-// (0) if not.
-//
+///
+/// This returns \c TRUE (1) if the fileref refers to an existing file, and \c FALSE
+/// (0) if not.
+///
 glui32 glk_fileref_does_file_exist(frefid_t fref) {
 	if (!cocoaglk_frefid_sane(fref)) {
 		cocoaglk_error("glk_fileref_does_file_exist called with an invalid frefid");

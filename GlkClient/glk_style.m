@@ -114,11 +114,11 @@ void glk_stylehint_clear(glui32 wintype, glui32 styl, glui32 hint) {
 						 windowType: wintype];
 }
 
-//
-// This returns TRUE (1) if the two styles are visually distinguishable
-// in the given window. If they are not, it returns FALSE (0). The exact
-// meaning of this is left to the library to determine.
-//
+///
+/// This returns \c TRUE (1) if the two styles are visually distinguishable
+/// in the given window. If they are not, it returns \c FALSE (0). The exact
+/// meaning of this is left to the library to determine.
+///
 glui32 glk_style_distinguish(winid_t win, glui32 styl1, glui32 styl2) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_style_distinguish(%p, %u, %u)", win, styl1, styl2);

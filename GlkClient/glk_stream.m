@@ -189,21 +189,21 @@ BOOL cocoaglk_strid_read(strid_t str) {
 
 #pragma mark - Stream functions
 
-//
-// You can open a stream which reads from or writes to a disk file.
-// 
-// fileref indicates the file which will be opened. fmode can be
-// any of filemode_Read, filemode_Write, filemode_WriteAppend, or
-// filemode_ReadWrite. If fmode is filemode_Read, the file must already
-// exist; for the other modes, an empty file is created if none exists. If
-// fmode is filemode_Write, and the file already exists, it is truncated
-// down to zero length (an empty file). If fmode is filemode_WriteAppend,
-// the file mark is set to the end of the file.
-// 
-// The file may be read or written in text or binary mode; this is determined
-// by the fileref argument. Similarly, platform-dependent attributes such
-// as file type are determined by fileref. See section 6, "File References".
-//
+///
+/// You can open a stream which reads from or writes to a disk file.
+///
+/// fileref indicates the file which will be opened. fmode can be
+/// any of \c filemode_Read , \c filemode_Write , \c filemode_WriteAppend , or
+/// \c filemode_ReadWrite . If \c fmode is \c filemode_Read , the file must already
+/// exist; for the other modes, an empty file is created if none exists. If
+/// \c fmode is \c filemode_Write , and the file already exists, it is truncated
+/// down to zero length (an empty file). If \c fmode is \c filemode_WriteAppend ,
+/// the file mark is set to the end of the file.
+///
+/// The file may be read or written in text or binary mode; this is determined
+/// by the fileref argument. Similarly, platform-dependent attributes such
+/// as file type are determined by fileref. See section 6, "File References".
+///
 strid_t glk_stream_open_file(frefid_t fileref, glui32 fmode,
 							 glui32 rock) {
 	// Sanity check
@@ -471,14 +471,14 @@ strid_t cocoaglk_get_input_stream(void) {
 	return instream=res;
 }
 
-//
-// You can open a stream which reads from or writes into a space in memory.
-//
-// fmode must be filemode_Read, filemode_Write, or filemode_ReadWrite.
-//
-// buf points to the buffer where output will be read from or written
-// to. buflen is the length of the buffer.
-//
+///
+/// You can open a stream which reads from or writes into a space in memory.
+///
+/// \c fmode must be \c filemode_Read , \c filemode_Write , or \c filemode_ReadWrite .
+///
+/// \c buf points to the buffer where output will be read from or written
+/// to. buflen is the length of the buffer.
+///
 strid_t glk_stream_open_memory(char *buf, glui32 buflen, glui32 fmode,
 							   glui32 rock) {
 	// Sanity check
@@ -597,16 +597,16 @@ strid_t glk_stream_open_memory_uni(glui32 *buf, glui32 buflen,
 }
 
 //
-// This closes the stream str. The result argument points to a structure
-// which is filled in with the final character counts of the stream. If
-// you do not care about these, you may pass NULL as the result argument.
-// 
-// If str is the current output stream, the current output stream is set
-// to NULL.
-// 
-// You cannot close window streams; use glk_window_close() instead. See
-// section 3.2, "Window Opening, Closing, and Constraints".
-//
+//// This closes the stream str. The result argument points to a structure
+/// which is filled in with the final character counts of the stream. If
+/// you do not care about these, you may pass \c NULL as the result argument.
+///
+/// If str is the current output stream, the current output stream is set
+/// to \c NULL .
+///
+/// You cannot close window streams; use glk_window_close() instead. See
+/// section 3.2, "Window Opening, Closing, and Constraints".
+///
 void glk_stream_close(strid_t str, stream_result_t *result) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_stream_close(%p, %p)", str, result);
@@ -697,9 +697,9 @@ void glk_stream_close(strid_t str, stream_result_t *result) {
 	free(str);
 }
 
-//
-// This iterates through all the existing streams.
-//
+///
+/// This iterates through all the existing streams.
+///
 strid_t glk_stream_iterate(strid_t str, glui32 *rockptr) {
 	// Return the first stream if str is NULL
 	if (str == NULL) {
@@ -722,9 +722,9 @@ strid_t glk_stream_iterate(strid_t str, glui32 *rockptr) {
 	return str->next;
 }
 
-//
-// This retrieves the stream's rock value. See section 1.6.1, "Rocks".
-//
+///
+/// This retrieves the stream's rock value. See section 1.6.1, "Rocks".
+///
 glui32 glk_stream_get_rock(strid_t str) {
 	if (!cocoaglk_strid_sane(str)) {
 		cocoaglk_error("glk_stream_get_rock called with an invalid strid");
@@ -737,29 +737,29 @@ glui32 glk_stream_get_rock(strid_t str) {
 	return str->rock;
 }
 
-//
-// This sets the position of the mark. The position is controlled by pos,
-// and the meaning of pos is controlled by seekmode:
-//
-// * seekmode_Start: pos characters after the beginning of the file.
-// * seekmode_Current: pos characters after the current position
-//	 (moving backwards if pos is negative.)
-// * seekmode_End: pos characters after the end of the file. (pos should
-//	 always be zero or negative, so that this will move backwards to a
-//	 position within the file.)
-//
-// It is illegal to specify a position before the beginning or after the
-// end of the file.
-//
-// In binary files, the mark position is exact -- it corresponds with
-// the number of characters you have read or written. In text files, this
-// mapping can vary, because of linefeed conversions or other character-set
-// approximations. (See section 5, "Streams".) glk_stream_set_position()
-// and glk_stream_get_position() measure positions in the platform's native
-// encoding -- after character cookery. Therefore, in a text stream, it is
-// safest to use glk_stream_set_position() only to move to the beginning or
-// end of a file, or to a position determined by glk_stream_get_position().
-//
+///
+/// This sets the position of the mark. The position is controlled by pos,
+/// and the meaning of pos is controlled by seekmode:
+///
+/// * seekmode_Start: pos characters after the beginning of the file.
+/// * seekmode_Current: pos characters after the current position
+///	 (moving backwards if pos is negative.)
+/// * seekmode_End: pos characters after the end of the file. (pos should
+///	 always be zero or negative, so that this will move backwards to a
+///	 position within the file.)
+///
+/// It is illegal to specify a position before the beginning or after the
+/// end of the file.
+///
+/// In binary files, the mark position is exact -- it corresponds with
+/// the number of characters you have read or written. In text files, this
+/// mapping can vary, because of linefeed conversions or other character-set
+/// approximations. (See section 5, "Streams".) glk_stream_set_position()
+/// and \c glk_stream_get_position() measure positions in the platform's native
+/// encoding -- after character cookery. Therefore, in a text stream, it is
+/// safest to use \c glk_stream_set_position() only to move to the beginning or
+/// end of a file, or to a position determined by \c glk_stream_get_position() .
+///
 void glk_stream_set_position(strid_t str, glsi32 pos, glui32 seekmode) {
 #if COCOAGLK_TRACE > 1
 	NSLog(@"TRACE: glk_stream_set_position(%p, %u, %u)", str, pos, seekmode);
@@ -788,15 +788,15 @@ void glk_stream_set_position(strid_t str, glsi32 pos, glui32 seekmode) {
 				  relativeTo: relative];
 }
 
-//
-// This returns the position of the mark. For memory streams and binary
-// file streams, this is exactly the number of bytes read or written
-// from the beginning of the stream (unless you have moved the mark with
-// glk_stream_set_position().) For text file streams, matters are more
-// ambiguous, since (for example) writing one byte to a text file may store
-// more than one character in the platform's native encoding. You can only
-// be sure that the position increases as you read or write to the file.
-//
+///
+/// This returns the position of the mark. For memory streams and binary
+/// file streams, this is exactly the number of bytes read or written
+/// from the beginning of the stream (unless you have moved the mark with
+/// \c glk_stream_set_position() .) For text file streams, matters are more
+/// ambiguous, since (for example) writing one byte to a text file may store
+/// more than one character in the platform's native encoding. You can only
+/// be sure that the position increases as you read or write to the file.
+///
 glui32 glk_stream_get_position(strid_t str) {
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
@@ -816,16 +816,16 @@ glui32 glk_stream_get_position(strid_t str) {
 	return res;
 }
 
-//
-// Glk has a notion of the "current (output) stream". If you print text
-// without specifying a stream, it goes to the current output stream. The
-// current output stream may be NULL, meaning that there isn't one. It is
-// illegal to print text to stream NULL, or to print to the current stream
-// when there isn't one.
-//
-// If the stream which is the current stream is closed, the current stream
-// becomes NULL.
-//
+///
+/// Glk has a notion of the "current (output) stream". If you print text
+/// without specifying a stream, it goes to the current output stream. The
+/// current output stream may be \c NULL , meaning that there isn't one. It is
+/// illegal to print text to stream \c NULL , or to print to the current stream
+/// when there isn't one.
+///
+/// If the stream which is the current stream is closed, the current stream
+/// becomes \c NULL .
+///
 void glk_stream_set_current(strid_t str) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_stream_set_current(%p)", str);
@@ -1057,16 +1057,16 @@ void glk_set_style_stream(strid_t str, glui32 styl) {
 	cocoaglk_maybeflushstream(str, "Setting a stream style");
 }
 
-//
-// This reads one character from the given stream. (There is no notion
-// of a "current input stream.") It is illegal for str to be NULL, or an
-// output-only stream.
-//
-// The result will be between 0 and 255; as always, Glk assumes the Latin-1
-// encoding. See section 2, "Character Encoding". If the end of the stream
-// has been reached, the result will be -1. [[Note that high-bit characters
-//	(128..255) are *not* returned as negative numbers.]]
-//
+///
+/// This reads one character from the given stream. (There is no notion
+/// of a "current input stream.") It is illegal for str to be \c NULL , or an
+/// output-only stream.
+///
+/// The result will be between 0 and 255; as always, Glk assumes the Latin-1
+/// encoding. See section 2, "Character Encoding". If the end of the stream
+/// has been reached, the result will be -1. [[Note that high-bit characters
+///	(128..255) are *not* returned as negative numbers.]]
+///
 glsi32 glk_get_char_stream(strid_t str) {
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {

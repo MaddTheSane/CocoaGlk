@@ -95,7 +95,7 @@ extern void cocoaglk_clear_immediate_style_hint(strid_t str, glui32 hint);
 
 #if defined(__OBJC__) && __OBJC__
 
-/// Sets a set of Cocoa text attributes to merge with those set by the current style. Set this to nil to indicate that only the current style should be used.
+/// Sets a set of Cocoa text attributes to merge with those set by the current style. Set this to \c nil to indicate that only the current style should be used.
 extern void cocoaglk_set_custom_text_attributes(strid_t str, NSDictionary<NSAttributedStringKey,id>* attributes);
 
 #endif

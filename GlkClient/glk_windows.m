@@ -18,7 +18,7 @@ static winid_t cocoaglk_rootwindow = nil;
 static glui32 cocoaglk_nextidentifier = 0;
 
 /// Big dictionary o'windows
-static NSMutableDictionary* cocoaglk_windows = nil;
+static NSMutableDictionary<NSNumber*,NSValue*>* cocoaglk_windows = nil;
 
 
 /// This returns the root window. If there are no windows, this returns \c NULL .
@@ -375,9 +375,9 @@ winid_t glk_window_open(winid_t split, glui32 method, glui32 size,
 	return res;
 }
 
+/// Discards a window (frees it, fixes key windows, adjusts the window tree, but doesn't do anything clever with the
+/// window structure)
 static void cocoaglk_window_discard(winid_t win) {
-	// Discards a window (frees it, fixes key windows, adjusts the window tree, but doesn't do anything clever with the
-	// window structure)
 	if (!win->closing) {
 		cocoaglk_error("cocoaglk_window_discard called with a window that is not closing");
 	}

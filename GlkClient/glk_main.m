@@ -44,16 +44,16 @@ void glk_exit(void) {
 #endif
 }
 
-//
-// Most platforms have some provision for interrupting a program --
-// command-period on the Macintosh, control-C in Unix, possibly a window
-// manager menu item, or other possibilities. This can happen at any time,
-// including while execution is nested inside one of your own functions,
-// or inside a Glk library function.
-// 
-// If you need to clean up critical resources, you can specify an interrupt
-// handler function.
-//
+///
+/// Most platforms have some provision for interrupting a program --
+/// command-period on the Macintosh, control-C in Unix, possibly a window
+/// manager menu item, or other possibilities. This can happen at any time,
+/// including while execution is nested inside one of your own functions,
+/// or inside a Glk library function.
+///
+/// If you need to clean up critical resources, you can specify an interrupt
+/// handler function.
+///
 void glk_set_interrupt_handler(void (*func)(void)) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_set_interrupt_handler(%p)", func);

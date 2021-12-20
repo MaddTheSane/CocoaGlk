@@ -30,23 +30,23 @@ void cocoaglk_set_image_source(id<GlkImageSource> imageSource) {
 	}
 }
 
-//
-// This draws the given image resource in the given window. The position of
-// the image is given by val1 and val2, but their meaning varies depending
-// on what kind of window you are drawing in. See section 7.2, "Graphics
-// in Graphics Windows" and section 7.3, "Graphics in Text Buffer Windows".
-//
-// This function returns a flag indicating whether the drawing operation
-// succeeded. [[A FALSE result can occur for many reasons. The image data
-//	might be corrupted; the library may not have enough memory to operate;
-//	there may be no image with the given identifier; the window might not
-//	support image display; and so on.]]
-//
-// The CocoaGlk implementation always returns true; however, the image is
-// not guaranteed to be drawn if the image resource does not exist. This is
-// to save a round-trip asking the windowing process if it knows how to draw
-// a particular image or not.
-//
+///
+/// This draws the given image resource in the given window. The position of
+/// the image is given by val1 and val2, but their meaning varies depending
+/// on what kind of window you are drawing in. See section 7.2, "Graphics
+/// in Graphics Windows" and section 7.3, "Graphics in Text Buffer Windows".
+///
+/// This function returns a flag indicating whether the drawing operation
+/// succeeded. [[A \c FALSE result can occur for many reasons. The image data
+///	might be corrupted; the library may not have enough memory to operate;
+///	there may be no image with the given identifier; the window might not
+///	support image display; and so on.]]
+///
+/// The CocoaGlk implementation always returns true; however, the image is
+/// not guaranteed to be drawn if the image resource does not exist. This is
+/// to save a round-trip asking the windowing process if it knows how to draw
+/// a particular image or not.
+///
 glui32 glk_image_draw(winid_t win, glui32 image, glsi32 val1, glsi32 val2) {
 	if (!imageSourceSet) cocoaglk_set_image_source([[[GlkBlorbImageSource alloc] init] autorelease]);
 	
@@ -241,17 +241,17 @@ void glk_window_fill_rect(winid_t win, glui32 color,
 										  rectangle: CGRectMake(left, top, width, height)];
 }
 
-//
-// This sets the window's background color. It does *not* change what is
-// currently displayed; it only affects subsequent clears and resizes. The
-// initial background color of each window is white.
-//
-// Colors are encoded in a 32-bit value: the top 8 bits must be zero,
-// the next 8 bits are the red value, the next 8 bits are the green value,
-// and the bottom 8 bits are the blue value. Color values range from 0 to
-// 255. [[So 0x00000000 is black, 0x00FFFFFF is white, and 0x00FF0000 is
-//	bright red.]]
-//
+///
+/// This sets the window's background color. It does *not* change what is
+/// currently displayed; it only affects subsequent clears and resizes. The
+/// initial background color of each window is white.
+///
+/// Colors are encoded in a 32-bit value: the top 8 bits must be zero,
+/// the next 8 bits are the red value, the next 8 bits are the green value,
+/// and the bottom 8 bits are the blue value. Color values range from 0 to
+/// 255. [[So 0x00000000 is black, 0x00FFFFFF is white, and 0x00FF0000 is
+///	bright red.]]
+///
 void glk_window_set_background_color(winid_t win, glui32 color) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_window_set_background_color(%p, %u)", win, color);

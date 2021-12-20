@@ -169,7 +169,7 @@
 @synthesize delegate;
 
 - (id<GlkSession>) createAnonymousSession {
-	if (delegate && [delegate respondsToSelector: @selector(createAnonymousSession)]) {
+	if ([delegate respondsToSelector: @selector(createAnonymousSession)]) {
 		return [delegate createAnonymousSession];
 	} else {
 		return nil;

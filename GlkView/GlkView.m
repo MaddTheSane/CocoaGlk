@@ -157,7 +157,7 @@
 }
 
 - (NSImage*) customLogo {
-	if (delegate && [delegate respondsToSelector: @selector(logo)]) {
+	if ([delegate respondsToSelector: @selector(logo)]) {
 		return [delegate logo];
 	}	
 	
@@ -331,7 +331,7 @@
 @synthesize delegate;
 
 - (BOOL) disableLogo {
-	if (delegate && [delegate respondsToSelector: @selector(disableLogo)]) {
+	if ([delegate respondsToSelector: @selector(disableLogo)]) {
 		return [delegate disableLogo];
 	} else {
 		return NO;
@@ -339,7 +339,7 @@
 }
 
 - (void) showStatusText: (NSString*) status {
-	if (delegate && [delegate respondsToSelector: @selector(showStatusText:)]) {
+	if ([delegate respondsToSelector: @selector(showStatusText:)]) {
 		[delegate showStatusText: status];
 	}
 }
@@ -348,7 +348,7 @@
 	[self logMessage: [NSString stringWithFormat: @"Client error: %@", error]
 		  withStatus: GlkLogError];
 	
-	if (delegate && [delegate respondsToSelector: @selector(showError:)]) {
+	if ([delegate respondsToSelector: @selector(showError:)]) {
 		[delegate showError: error];
 	} else if ([self window]) {
 		NSAlert *alert = [[NSAlert alloc] init];
@@ -384,7 +384,7 @@
 }
 
 - (void) taskHasStarted {
-	if (delegate && [delegate respondsToSelector: @selector(taskHasStarted)]) {
+	if ([delegate respondsToSelector: @selector(taskHasStarted)]) {
 		[delegate taskHasStarted];
 	}
 }
@@ -402,16 +402,16 @@
 	[rootWindow taskFinished];
 	
 	// Inform the delegate
-	if (delegate && [delegate respondsToSelector: @selector(taskHasFinished)]) {
+	if ([delegate respondsToSelector: @selector(taskHasFinished)]) {
 		[delegate taskHasFinished];
 	}
-	if (delegate && crashed && [delegate respondsToSelector: @selector(taskHasCrashed)]) {
+	if (crashed && [delegate respondsToSelector: @selector(taskHasCrashed)]) {
 		[delegate taskHasCrashed];
 	}
 }
 
 - (NSString*) pathForNamedFile: (NSString*) name {
-	if (delegate && [delegate respondsToSelector: @selector(pathForNamedFile:)]) {
+	if ([delegate respondsToSelector: @selector(pathForNamedFile:)]) {
 		return [delegate pathForNamedFile: name];
 	} else {
 		if ([name length] <= 0) return NULL;
@@ -1005,7 +1005,7 @@
 		
 		[[NSUserDefaults standardUserDefaults] setURL: [panel directoryURL]
 											   forKey: @"GlkSaveDirectory"];
-		if (delegate && [delegate respondsToSelector: @selector(savePreferredDirectory:)]) {
+		if ([delegate respondsToSelector: @selector(savePreferredDirectory:)]) {
 			[delegate savePreferredDirectory: [[panel directoryURL] path]];
 		}
 	} else {
@@ -1052,7 +1052,7 @@
 	// Pick a preferred directory
 	NSURL* preferredDirectory = nil;
 	
-	if (delegate && [delegate respondsToSelector: @selector(preferredSaveDirectory)]) {
+	if ([delegate respondsToSelector: @selector(preferredSaveDirectory)]) {
 		preferredDirectory = [delegate preferredSaveDirectory];
 	}
 	
@@ -1061,7 +1061,7 @@
 	}
 	
 	// Defer to the delegate if it has the appropriate method implemented
-	if (delegate && [delegate respondsToSelector: @selector(promptForFilesForUsage:forWriting:handler:preferredDirectory:)]) {
+	if ([delegate respondsToSelector: @selector(promptForFilesForUsage:forWriting:handler:preferredDirectory:)]) {
 		if ([delegate promptForFilesForUsage: usage
 								  forWriting: writing
 									 handler: handler
@@ -1095,7 +1095,7 @@
 	// Pick a preferred directory
 	NSURL* preferredDirectory = nil;
 	
-	if (delegate && [delegate respondsToSelector: @selector(preferredSaveDirectory)]) {
+	if ([delegate respondsToSelector: @selector(preferredSaveDirectory)]) {
 		preferredDirectory = [delegate preferredSaveDirectory];
 	}
 	
@@ -2383,7 +2383,7 @@
 
 - (void) logMessage: (NSString*) message
 		 withStatus: (GlkLogStatus) status {
-	if (delegate && [delegate respondsToSelector: @selector(showLogMessage:withStatus:)]) {
+	if ([delegate respondsToSelector: @selector(showLogMessage:withStatus:)]) {
 		[delegate showLogMessage: message
 					  withStatus: status];
 	}
@@ -2545,7 +2545,7 @@ static BOOL pageAllFrom(GlkWindow* win) {
 
 - (NSString *)accessibilityHelp {
 	NSString* description = @"an interactive fiction game";
-	if (delegate && [delegate respondsToSelector: @selector(taskDescription)]) {
+	if ([delegate respondsToSelector: @selector(taskDescription)]) {
 		description = [delegate taskDescription];
 	}
 	return [NSString stringWithFormat: @"%@ %@", running?@"Running":@"Finished", description];
@@ -2553,7 +2553,7 @@ static BOOL pageAllFrom(GlkWindow* win) {
 
 - (NSString *)accessibilityLabel {
 	NSString* description = @"an interactive fiction game";
-	if (delegate && [delegate respondsToSelector: @selector(taskDescription)]) {
+	if ([delegate respondsToSelector: @selector(taskDescription)]) {
 		description = [delegate taskDescription];
 	}
 	return [NSString stringWithFormat: @"%@ %@", running?@"Running":@"Finished", description];

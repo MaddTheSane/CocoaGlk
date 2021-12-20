@@ -614,6 +614,7 @@
 		5530B2AF276F20C000DFECFF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5530B2C0276F223000DFECFF /* MultiWinSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiWinSwift.swift; sourceTree = "<group>"; };
 		5530B2C2276F224400DFECFF /* SwiftHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftHelpers.swift; sourceTree = "<group>"; };
+		5530B2C42771317200DFECFF /* MultiWinSwift-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultiWinSwift-BridgingHeader.h"; sourceTree = "<group>"; };
 		5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkViewDefinitions.h; sourceTree = "<group>"; };
 		5560FA2B21C07EC200E711F5 /* GlkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkView.h; sourceTree = "<group>"; };
 		5560FA3221C084E500E711F5 /* GlkTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkTextView.h; sourceTree = "<group>"; };
@@ -1136,6 +1137,7 @@
 				5530B2AF276F20C000DFECFF /* main.swift */,
 				5530B2C0276F223000DFECFF /* MultiWinSwift.swift */,
 				5530B2C2276F224400DFECFF /* SwiftHelpers.swift */,
+				5530B2C42771317200DFECFF /* MultiWinSwift-BridgingHeader.h */,
 			);
 			path = multiWinSwift;
 			sourceTree = "<group>";
@@ -2589,6 +2591,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "multiWinSwift/MultiWinSwift-BridgingHeader.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -2609,6 +2612,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "multiWinSwift/MultiWinSwift-BridgingHeader.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

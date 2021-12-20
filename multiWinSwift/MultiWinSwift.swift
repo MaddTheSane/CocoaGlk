@@ -322,148 +322,132 @@ private func verbHelp(_ win: winid_t) {
 
 /// React to character input in a key window.
 private func performKey(_ win: winid_t, _ key: glui32) {
+	var keyName: String
 	
+	switch key {
+	case GlkKeyCodeKeyLowerH, GlkKeyCodeKeyLowerH:
+		/* Open a new keywindow. */
+		let loc: glui32
+		if key == GlkKeyCodeKeyLowerH {
+			loc = glui32(winmethod_Right | winmethod_Proportional)
+		} else {
+			loc = glui32(winmethod_Below | winmethod_Proportional)
+		}
+		
+		/* Since the new window has rock value KEYWINROCK, the
+		 drawKeyWins() routine will redraw it. */
+		if let newwin = glk_window_open(win, loc, 50, glui32(wintype_TextGrid), KEYWINROCK) {
+			/* Request character input. In this program, only keywins
+			 get char input, so the CharInput events always call
+			 perform_key() -- and so the new window will respond
+			 to keys just as this one does. */
+			glk_request_char_event(newwin)
+			/* We now have to redraw the keywins, because any or all of
+			 them could have changed size when we opened newwin.
+			 glk_window_open() does not generate Arrange events; we
+			 have to do the redrawing manually. */
+			drawKeyWins()
+		}
+		/* Re-request character input for this window, so that future
+		 keys are accepted. */
+		glk_request_char_event(win)
+		return;
+		
+	case GlkKeyCodeKeyLowerC:
+		/* Close this keywindow. */
+		glk_window_close(win, nil)
+		/* Again, any key windows could have changed size. Also the
+		 status window could have (if this was the last key window). */
+		drawKeyWins()
+		drawStatusWindow()
+		return
+
+		/* Print a string naming the key that was just hit. */
+
+	case GlkKeyCodeSpace:
+		keyName = "space"
+		
+	case GlkKeyCodeLeft:
+		keyName = "left"
+
+	case GlkKeyCodeRight:
+		keyName = "right"
+
+	case GlkKeyCodeUp:
+		keyName = "up"
+
+	case GlkKeyCodeDown:
+		keyName = "down"
+
+	case GlkKeyCodeReturn:
+		keyName = "return"
+
+	case GlkKeyCodeDelete:
+		keyName = "delete"
+
+	case GlkKeyCodeEscape:
+		keyName = "escape"
+
+	case GlkKeyCodeTab:
+		keyName = "tab"
+
+	case GlkKeyCodePageUp:
+		keyName = "page up"
+
+	case GlkKeyCodePageDown:
+		keyName = "page down"
+
+	case GlkKeyCodeHome:
+		keyName = "home"
+
+	case GlkKeyCodeEnd:
+		keyName = "end"
+		
+	case GlkKeyCodeFunction12 ... GlkKeyCodeFunction1:
+		keyName = "function key"
+
+	case 0 ..< 32:
+		let atChar = UInt8(GlkKeyCodeKeyAt + key)
+		let atString = String(Character(UnicodeScalar(atChar)))
+		keyName = "ctrl-\(atString)"
+		
+	case 32 ..< 256:
+		let isoLat1Dat = Data([UInt8(key)])
+		keyName = String(data: isoLat1Dat, encoding: .isoLatin1) ?? "?"
+		
+	default:
+		keyName = "unknown key"
+	}
+	
+	let buf = "Key: \(keyName)"
+	var len = buf.count
+	
+	var width: glui32 = 0, height: glui32 = 0
+
+	/* Print the string centered in this window. */
+	glk_set_window(win)
+	glk_window_get_size(win, &width, &height)
+	glk_window_move_cursor(win, 0, height/2)
+	for _ in 0 ..< width {
+		glk_put_char(UInt8(GlkKeyCodeSpace))
+	}
+
+	width /= 2
+	len /= 2
+	
+	if (width > len) {
+		width = width-UInt32(len)
+	} else {
+		width = 0
+	}
+
+	glk_window_move_cursor(win, width, height/2)
+	glkPutString(buf)
 	
 	/* Re-request character input for this window, so that future
 	 keys are accepted. */
 	glk_request_char_event(win)
 }
-/*
- static void perform_key(winid_t win, glui32 key)
- {
-	 glui32 width, height, len;
-	 int ix;
-	 char buf[128], keyname[64];
-	 
-	 if (key == 'h' || key == 'v') {
-		 winid_t newwin;
-		 glui32 loc;
-		 /* Open a new keywindow. */
-		 if (key == 'h')
-			 loc = winmethod_Right | winmethod_Proportional;
-		 else
-			 loc = winmethod_Below | winmethod_Proportional;
-		 newwin = glk_window_open(win,
-			 loc, 50, wintype_TextGrid, KEYWINROCK);
-		 /* Since the new window has rock value KEYWINROCK, the
-			 draw_keywins() routine will redraw it. */
-		 if (newwin) {
-			 /* Request character input. In this program, only keywins
-				 get char input, so the CharInput events always call
-				 perform_key() -- and so the new window will respond
-				 to keys just as this one does. */
-			 glk_request_char_event(newwin);
-			 /* We now have to redraw the keywins, because any or all of
-				 them could have changed size when we opened newwin.
-				 glk_window_open() does not generate Arrange events; we
-				 have to do the redrawing manually. */
-			 draw_keywins();
-		 }
-		 /* Re-request character input for this window, so that future
-			 keys are accepted. */
-		 glk_request_char_event(win);
-		 return;
-	 }
-	 else if (key == 'c') {
-		 /* Close this keywindow. */
-		 glk_window_close(win, NULL);
-		 /* Again, any key windows could have changed size. Also the
-			 status window could have (if this was the last key window). */
-		 draw_keywins();
-		 draw_statuswin();
-		 return;
-	 }
-	 
-	 /* Print a string naming the key that was just hit. */
-	 
-	 switch (key) {
-		 case ' ':
-			 str_cpy(keyname, "space");
-			 break;
-		 case keycode_Left:
-			 str_cpy(keyname, "left");
-			 break;
-		 case keycode_Right:
-			 str_cpy(keyname, "right");
-			 break;
-		 case keycode_Up:
-			 str_cpy(keyname, "up");
-			 break;
-		 case keycode_Down:
-			 str_cpy(keyname, "down");
-			 break;
-		 case keycode_Return:
-			 str_cpy(keyname, "return");
-			 break;
-		 case keycode_Delete:
-			 str_cpy(keyname, "delete");
-			 break;
-		 case keycode_Escape:
-			 str_cpy(keyname, "escape");
-			 break;
-		 case keycode_Tab:
-			 str_cpy(keyname, "tab");
-			 break;
-		 case keycode_PageUp:
-			 str_cpy(keyname, "page up");
-			 break;
-		 case keycode_PageDown:
-			 str_cpy(keyname, "page down");
-			 break;
-		 case keycode_Home:
-			 str_cpy(keyname, "home");
-			 break;
-		 case keycode_End:
-			 str_cpy(keyname, "end");
-			 break;
-		 default:
-			 if (key >= keycode_Func12 && key < keycode_Func1) {
-				 str_cpy(keyname, "function key");
-			 }
-			 else if (key < 32) {
-				 str_cpy(keyname, "ctrl-");
-				 keyname[5] = '@' + key;
-				 keyname[6] = '\0';
-			 }
-			 else if (key <= 255) {
-				 keyname[0] = key;
-				 keyname[1] = '\0';
-			 }
-			 else {
-				 str_cpy(keyname, "unknown key");
-			 }
-			 break;
-	 }
-	 
-	 str_cpy(buf, "Key: ");
-	 str_cat(buf, keyname);
-	 
-	 len = str_len(buf);
-	 
-	 /* Print the string centered in this window. */
-	 glk_set_window(win);
-	 glk_window_get_size(win, &width, &height);
-	 glk_window_move_cursor(win, 0, height/2);
-	 for (ix=0; ix<width; ix++)
-		 glk_put_char(' ');
-		 
-	 width = width/2;
-	 len = len/2;
-	 
-	 if (width > len)
-		 width = width-len;
-	 else
-		 width = 0;
-	 
-	 glk_window_move_cursor(win, width, height/2);
-	 glk_put_string(buf);
-	 
-	 /* Re-request character input for this window, so that future
-		 keys are accepted. */
-	 glk_request_char_event(win);
- }
- */
-
 
 private func drawStatusWindow() {
 	/* It is possible that the window was not successfully

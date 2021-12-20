@@ -128,6 +128,11 @@
 		5502A67A275C24B80066927C /* GlkSoundHandlerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF568B2758C724000B0D21 /* GlkSoundHandlerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		552CEF1627152C17009D87A5 /* glkstart.h in Headers */ = {isa = PBXBuildFile; fileRef = 552CEF1527152C17009D87A5 /* glkstart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		552CEF1927152C50009D87A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 552CEF1827152C50009D87A5 /* main.m */; };
+		5530B2B0276F20C000DFECFF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530B2AF276F20C000DFECFF /* main.swift */; };
+		5530B2BE276F211E00DFECFF /* GlkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA5607E877C900576AB9 /* GlkClient.framework */; };
+		5530B2BF276F211E00DFECFF /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
+		5530B2C1276F223000DFECFF /* MultiWinSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530B2C0276F223000DFECFF /* MultiWinSwift.swift */; };
+		5530B2C3276F224400DFECFF /* SwiftHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530B2C2276F224400DFECFF /* SwiftHelpers.swift */; };
 		5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5533C6E8276023C1004BD884 /* Vorbis.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B0B275A25E9000B0D21 /* Vorbis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -274,6 +279,20 @@
 			remoteGlobalIDString = 4B51AA5507E877C900576AB9;
 			remoteInfo = GlkClient;
 		};
+		5530B2BA276F211500DFECFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B51AA5507E877C900576AB9;
+			remoteInfo = GlkClient;
+		};
+		5530B2BC276F211500DFECFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B51AA4607E8770600576AB9;
+			remoteInfo = GlkView;
+		};
 		559122D3276323D1001C4C95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -411,6 +430,15 @@
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5530B2AB276F20C000DFECFF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 		55C6BB50204DEDC1001AE7E5 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -582,6 +610,10 @@
 		552CEF1127152BDA009D87A5 /* libglkmain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libglkmain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		552CEF1527152C17009D87A5 /* glkstart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glkstart.h; sourceTree = "<group>"; };
 		552CEF1827152C50009D87A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5530B2AD276F20C000DFECFF /* multiWinSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = multiWinSwift; sourceTree = BUILT_PRODUCTS_DIR; };
+		5530B2AF276F20C000DFECFF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		5530B2C0276F223000DFECFF /* MultiWinSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiWinSwift.swift; sourceTree = "<group>"; };
+		5530B2C2276F224400DFECFF /* SwiftHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftHelpers.swift; sourceTree = "<group>"; };
 		5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkViewDefinitions.h; sourceTree = "<group>"; };
 		5560FA2B21C07EC200E711F5 /* GlkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkView.h; sourceTree = "<group>"; };
 		5560FA3221C084E500E711F5 /* GlkTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkTextView.h; sourceTree = "<group>"; };
@@ -727,6 +759,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5530B2AA276F20C000DFECFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5530B2BE276F211E00DFECFF /* GlkClient.framework in Frameworks */,
+				5530B2BF276F211E00DFECFF /* GlkView.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C6BB33204DED96001AE7E5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -773,6 +814,7 @@
 				4B3C3B790F3DAB850066A760 /* git-client */,
 				55C6BB36204DED96001AE7E5 /* SwiftGlk.app */,
 				552CEF1127152BDA009D87A5 /* libglkmain.a */,
+				5530B2AD276F20C000DFECFF /* multiWinSwift */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -789,6 +831,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				55C6BB37204DED96001AE7E5 /* SwiftGlk */,
 				552CEF1727152C32009D87A5 /* glkmain */,
+				5530B2AE276F20C000DFECFF /* multiWinSwift */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				4B51AA4807E8770600576AB9 /* GlkView-Info.plist */,
@@ -1085,6 +1128,16 @@
 				552CEF1827152C50009D87A5 /* main.m */,
 			);
 			path = glkmain;
+			sourceTree = "<group>";
+		};
+		5530B2AE276F20C000DFECFF /* multiWinSwift */ = {
+			isa = PBXGroup;
+			children = (
+				5530B2AF276F20C000DFECFF /* main.swift */,
+				5530B2C0276F223000DFECFF /* MultiWinSwift.swift */,
+				5530B2C2276F224400DFECFF /* SwiftHelpers.swift */,
+			);
+			path = multiWinSwift;
 			sourceTree = "<group>";
 		};
 		55BC62EC2055C42B001F8CFB /* git-1.3.5 */ = {
@@ -1401,6 +1454,25 @@
 			productReference = 552CEF1127152BDA009D87A5 /* libglkmain.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		5530B2AC276F20C000DFECFF /* multiWinSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5530B2B9276F20C000DFECFF /* Build configuration list for PBXNativeTarget "multiWinSwift" */;
+			buildPhases = (
+				5530B2A9276F20C000DFECFF /* Sources */,
+				5530B2AA276F20C000DFECFF /* Frameworks */,
+				5530B2AB276F20C000DFECFF /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5530B2BB276F211500DFECFF /* PBXTargetDependency */,
+				5530B2BD276F211500DFECFF /* PBXTargetDependency */,
+			);
+			name = multiWinSwift;
+			productName = multiWinSwift;
+			productReference = 5530B2AD276F20C000DFECFF /* multiWinSwift */;
+			productType = "com.apple.product-type.tool";
+		};
 		55C6BB35204DED96001AE7E5 /* SwiftGlk */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55C6BB41204DED96001AE7E5 /* Build configuration list for PBXNativeTarget "SwiftGlk" */;
@@ -1457,7 +1529,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					4B51AA4607E8770600576AB9 = {
@@ -1468,6 +1540,9 @@
 					};
 					552CEF1027152BDA009D87A5 = {
 						CreatedOnToolsVersion = 13.0;
+					};
+					5530B2AC276F20C000DFECFF = {
+						CreatedOnToolsVersion = 13.2;
 					};
 					55C6BB35204DED96001AE7E5 = {
 						CreatedOnToolsVersion = 9.2;
@@ -1524,6 +1599,7 @@
 				4B3C3B780F3DAB850066A760 /* git */,
 				55C6BB35204DED96001AE7E5 /* SwiftGlk */,
 				552CEF1027152BDA009D87A5 /* glkmain */,
+				5530B2AC276F20C000DFECFF /* multiWinSwift */,
 			);
 		};
 /* End PBXProject section */
@@ -1778,6 +1854,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5530B2A9276F20C000DFECFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5530B2C3276F224400DFECFF /* SwiftHelpers.swift in Sources */,
+				5530B2C1276F223000DFECFF /* MultiWinSwift.swift in Sources */,
+				5530B2B0276F20C000DFECFF /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C6BB32204DED96001AE7E5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1849,6 +1935,16 @@
 			isa = PBXTargetDependency;
 			target = 4B51AA5507E877C900576AB9 /* GlkClient */;
 			targetProxy = 4BFA1CA707F8A3120068E16A /* PBXContainerItemProxy */;
+		};
+		5530B2BB276F211500DFECFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B51AA5507E877C900576AB9 /* GlkClient */;
+			targetProxy = 5530B2BA276F211500DFECFF /* PBXContainerItemProxy */;
+		};
+		5530B2BD276F211500DFECFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B51AA4607E8770600576AB9 /* GlkView */;
+			targetProxy = 5530B2BC276F211500DFECFF /* PBXContainerItemProxy */;
 		};
 		559122D4276323D1001C4C95 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2474,6 +2570,49 @@
 			};
 			name = Release;
 		};
+		5530B2B1276F20C000DFECFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5530B2B2276F20C000DFECFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		55C6BB42204DED96001AE7E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2607,6 +2746,15 @@
 			buildConfigurations = (
 				552CEF1227152BDA009D87A5 /* Debug */,
 				552CEF1327152BDA009D87A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5530B2B9276F20C000DFECFF /* Build configuration list for PBXNativeTarget "multiWinSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5530B2B1276F20C000DFECFF /* Debug */,
+				5530B2B2276F20C000DFECFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

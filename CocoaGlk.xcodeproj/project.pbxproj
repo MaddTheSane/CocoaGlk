@@ -133,6 +133,7 @@
 		5530B2BF276F211E00DFECFF /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		5530B2C1276F223000DFECFF /* MultiWinSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530B2C0276F223000DFECFF /* MultiWinSwift.swift */; };
 		5530B2C3276F224400DFECFF /* SwiftHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530B2C2276F224400DFECFF /* SwiftHelpers.swift */; };
+		5530B2C827714E3000DFECFF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5530B2C527714E2B00DFECFF /* InfoPlist.strings */; };
 		5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5533C6E8276023C1004BD884 /* Vorbis.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B0B275A25E9000B0D21 /* Vorbis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -181,7 +182,7 @@
 		55C6BB54204DEE55001AE7E5 /* imagetest in Embed Binaries */ = {isa = PBXBuildFile; fileRef = 4BBC40F808A7AABD00B790B5 /* imagetest */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55C6BB59204DEFA2001AE7E5 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB5B204DEFA2001AE7E5 /* Credits.rtfd */; };
 		55C6BB63204DF016001AE7E5 /* SwiftWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C6BB62204DF016001AE7E5 /* SwiftWindowController.swift */; };
-		55C6BB64204DF03A001AE7E5 /* CocoaGlk.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB66204DF03A001AE7E5 /* CocoaGlk.xib */; };
+		55C6BB64204DF03A001AE7E5 /* SwiftGlk.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB66204DF03A001AE7E5 /* SwiftGlk.xib */; };
 		55C6BB6B204DF65F001AE7E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55C6BB6D204DF65F001AE7E5 /* Localizable.strings */; };
 		55D6F080275C4F520098620E /* GlkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA4707E8770600576AB9 /* GlkView.framework */; };
 		55D6F0A0275C57D20098620E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D6F09F275C57D20098620E /* AudioToolbox.framework */; };
@@ -615,6 +616,8 @@
 		5530B2C0276F223000DFECFF /* MultiWinSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiWinSwift.swift; sourceTree = "<group>"; };
 		5530B2C2276F224400DFECFF /* SwiftHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftHelpers.swift; sourceTree = "<group>"; };
 		5530B2C42771317200DFECFF /* MultiWinSwift-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultiWinSwift-BridgingHeader.h"; sourceTree = "<group>"; };
+		5530B2C627714E2B00DFECFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5530B2C727714E2B00DFECFF /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkViewDefinitions.h; sourceTree = "<group>"; };
 		5560FA2B21C07EC200E711F5 /* GlkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkView.h; sourceTree = "<group>"; };
 		5560FA3221C084E500E711F5 /* GlkTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkTextView.h; sourceTree = "<group>"; };
@@ -656,14 +659,14 @@
 		55C6BB40204DED96001AE7E5 /* SwiftGlk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftGlk.entitlements; sourceTree = "<group>"; };
 		55C6BB5A204DEFA2001AE7E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = en; path = en.lproj/Credits.rtfd; sourceTree = "<group>"; };
 		55C6BB62204DF016001AE7E5 /* SwiftWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SwiftWindowController.swift; sourceTree = "<group>"; };
-		55C6BB65204DF03A001AE7E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CocoaGlk.xib; sourceTree = "<group>"; };
-		55C6BB68204DF03D001AE7E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CocoaGlk.strings; sourceTree = "<group>"; };
+		55C6BB65204DF03A001AE7E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SwiftGlk.xib; sourceTree = "<group>"; };
+		55C6BB68204DF03D001AE7E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SwiftGlk.strings; sourceTree = "<group>"; };
 		55C6BB6C204DF65F001AE7E5 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55D6F09F275C57D20098620E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		55D6F0B3275D6C810098620E /* GlkUTF8Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkUTF8Stream.h; sourceTree = "<group>"; };
 		55D6F0B4275D6C810098620E /* GlkUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkUTF8Stream.m; sourceTree = "<group>"; };
 		55DA68752739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/MainMenu.strings"; sourceTree = "<group>"; };
-		55DA68762739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CocoaGlk.strings"; sourceTree = "<group>"; };
+		55DA68762739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/SwiftGlk.strings"; sourceTree = "<group>"; };
 		55DA68772739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "en-GB"; path = "en-GB.lproj/Credits.rtfd"; sourceTree = "<group>"; };
 		55DA68782739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		55DA687B2739C96D0007990A /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "en-GB"; path = "en-GB.lproj/Credits.rtfd"; sourceTree = "<group>"; };
@@ -1185,9 +1188,10 @@
 				55C6BB40204DED96001AE7E5 /* SwiftGlk.entitlements */,
 				55C6BB5B204DEFA2001AE7E5 /* Credits.rtfd */,
 				55C6BB3F204DED96001AE7E5 /* Info.plist */,
+				5530B2C527714E2B00DFECFF /* InfoPlist.strings */,
 				55C6BB6D204DF65F001AE7E5 /* Localizable.strings */,
 				55C6BB3C204DED96001AE7E5 /* MainMenu.xib */,
-				55C6BB66204DF03A001AE7E5 /* CocoaGlk.xib */,
+				55C6BB66204DF03A001AE7E5 /* SwiftGlk.xib */,
 			);
 			path = SwiftGlk;
 			sourceTree = "<group>";
@@ -1691,10 +1695,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				55C6BB6B204DF65F001AE7E5 /* Localizable.strings in Resources */,
+				5530B2C827714E3000DFECFF /* InfoPlist.strings in Resources */,
 				55C6BB59204DEFA2001AE7E5 /* Credits.rtfd in Resources */,
 				55C6BB3B204DED96001AE7E5 /* Assets.xcassets in Resources */,
 				55C6BB3E204DED96001AE7E5 /* MainMenu.xib in Resources */,
-				55C6BB64204DF03A001AE7E5 /* CocoaGlk.xib in Resources */,
+				55C6BB64204DF03A001AE7E5 /* SwiftGlk.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2039,6 +2044,15 @@
 			name = CocoaGlk.xib;
 			sourceTree = "<group>";
 		};
+		5530B2C527714E2B00DFECFF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5530B2C627714E2B00DFECFF /* en */,
+				5530B2C727714E2B00DFECFF /* en-GB */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		55C6BB3C204DED96001AE7E5 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2058,14 +2072,14 @@
 			name = Credits.rtfd;
 			sourceTree = "<group>";
 		};
-		55C6BB66204DF03A001AE7E5 /* CocoaGlk.xib */ = {
+		55C6BB66204DF03A001AE7E5 /* SwiftGlk.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				55C6BB65204DF03A001AE7E5 /* Base */,
 				55C6BB68204DF03D001AE7E5 /* en */,
 				55DA68762739C96D0007990A /* en-GB */,
 			);
-			name = CocoaGlk.xib;
+			name = SwiftGlk.xib;
 			sourceTree = "<group>";
 		};
 		55C6BB6D204DF65F001AE7E5 /* Localizable.strings */ = {

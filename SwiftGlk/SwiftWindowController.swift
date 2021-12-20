@@ -19,7 +19,7 @@ class SwiftWindowController: NSWindowController, GlkViewDelegate {
 	let soundHandler = GlkSoundHandler()
 	
 	convenience init() {
-		self.init(windowNibName: NSNib.Name("CocoaGlk"))
+		self.init(windowNibName: NSNib.Name("SwiftGlk"))
 	}
 	
 	override func windowDidLoad() {

@@ -17,20 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, GlkHubDelegate {
 		
 		GlkHub.shared.setKeychainHubCookie()
 		GlkHub.shared.hubName = "SwiftGlk"
-/*
-
-#if 0
-// Start the test application (eventually we'll have a better way to do this, but for now, we do things this way)
-NSTask* testTask = [[[NSTask alloc] init] autorelease];
-NSString* taskPath = [[NSBundle mainBundle] pathForResource: @"glulxe"
-ofType: nil];
-
-[testTask setLaunchPath: taskPath];
-[testTask setArguments: [NSArray arrayWithObjects: @"-hubname", [[GlkHub sharedGlkHub] hubName], @"-hubcookie", [[GlkHub sharedGlkHub] hubCookie], nil]];
-
-[testTask launch];
-#endif
-*/
+		
 		// Start another task, this time using the launch facility
 		let control = SwiftWindowController()
 		control.showWindow(self)

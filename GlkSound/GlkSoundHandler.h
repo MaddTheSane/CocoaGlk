@@ -54,8 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak) id<GlkEventReceiver> glkctl;
 
-- (GlkSoundBlorbFormatType)loadSoundResourceFromSound:(glui32)snd data:(NSData * _Nullable __autoreleasing * _Nonnull)buf;
-- (GlkSoundBlorbFormatType)load_sound_resource:(unsigned int)snd length:(NSUInteger *)len data:(char * _Nonnull * _Nonnull)buf;
+- (GlkSoundBlorbFormatType)loadSoundResourceFromSound:(unsigned int)snd data:(NSData * _Nullable __autoreleasing * _Nonnull)buf;
 + (nullable NSString*)MIMETypeFromFormatType:(GlkSoundBlorbFormatType)format;
 
 - (void)restartAll;

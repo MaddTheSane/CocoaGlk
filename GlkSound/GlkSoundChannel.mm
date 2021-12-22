@@ -51,7 +51,7 @@ private:
 };
 
 
-SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyBytes, CFErrorRef *error = nullptr)
+static SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyBytes, CFErrorRef *error = nullptr)
 {
 #pragma unused(error)
 

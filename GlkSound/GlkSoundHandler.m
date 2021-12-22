@@ -317,17 +317,6 @@
     return type;
 }
 
--(GlkSoundBlorbFormatType)load_sound_resource:(glui32)snd length:(NSUInteger *)len data:(char **)buf {
-	NSData *outDat = nil;
-	GlkSoundBlorbFormatType type = [self loadSoundResourceFromSound:snd data:&outDat];
-	if (type != GlkSoundBlorbFormatNone) {
-		*len = outDat.length;
-		*buf = (char *)outDat.bytes;
-	}
-	
-	return type;
-}
-
 - (byref nullable id<GlkSoundChannel>)createSoundChannelWithVolume:(glui32)vol {
     int chan = [self handleNewSoundChannel:vol];
     if (chan == -1) {

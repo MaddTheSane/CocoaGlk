@@ -60,7 +60,7 @@ glkunix_startup_t removeCocoaGlkArgs(int argc, const char** argv) {
 	startdata.argv = calloc(argc, sizeof(char*));
 	startdata.argv[0] = strdup(argv[0]);
 	int argpos = 1;
-	for (int i = 1; i < argc-1; i++) {
+	for (int i = 1; i < argc; i++) {
 		if (strcmp(argv[i], "-hubname") == 0 || strcmp(argv[i], "-hubcookie") == 0 || strcmp(argv[i], "-sessioncookie") == 0) {
 			// Skip this parameter... and the next.
 			i++;
@@ -68,7 +68,7 @@ glkunix_startup_t removeCocoaGlkArgs(int argc, const char** argv) {
 		}
 		startdata.argv[argpos++] = strdup(argv[i]);
 	}
-	startdata.argc = argpos - 1;
+	startdata.argc = argpos;
 
 	return startdata;
 }

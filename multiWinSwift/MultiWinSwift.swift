@@ -108,7 +108,7 @@ Type "help" for a list of commands.
 		 
 	glk_set_window(mainwin2)
 	str = #"""
-Note that the upper left-hand window accepts character input. Hit 'h' to split the window horizontally, 'v' to split the window vertically, 'c' to close a window, and any other key (including special keys) to display key codes. All new windows accept these same keys as well.
+Note that the upper left-hand window accepts character input. Hit ‘h’ to split the window horizontally, ‘v’ to split the window vertically, ‘c’ to close a window, and any other key (including special keys) to display key codes. All new windows accept these same keys as well.
 
 This bottom window accepts normal line input.
 
@@ -283,7 +283,7 @@ This bottom window accepts normal line input.
 				
 			default:
 				glk_set_window(whichWin)
-				glkPutString("I don't understand the command “\(cmd)”…\n")
+				glkPutString("I don’t understand the command “\(cmd)”…\n")
 			}
 			
 			if (whichWin == mainwin1) {

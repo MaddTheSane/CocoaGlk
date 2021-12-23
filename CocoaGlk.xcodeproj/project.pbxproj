@@ -134,6 +134,7 @@
 		5530B2C1276F223000DFECFF /* MultiWinSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530B2C0276F223000DFECFF /* MultiWinSwift.swift */; };
 		5530B2C3276F224400DFECFF /* SwiftHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530B2C2276F224400DFECFF /* SwiftHelpers.swift */; };
 		5530B2C827714E3000DFECFF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5530B2C527714E2B00DFECFF /* InfoPlist.strings */; };
+		5530B2EE2774826400DFECFF /* multiWinSwift in Embed Binaries */ = {isa = PBXBuildFile; fileRef = 5530B2AD276F20C000DFECFF /* multiWinSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5533C6E8276023C1004BD884 /* Vorbis.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B0B275A25E9000B0D21 /* Vorbis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -293,6 +294,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4B51AA4607E8770600576AB9;
 			remoteInfo = GlkView;
+		};
+		5530B2EF2774826C00DFECFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5530B2AC276F20C000DFECFF;
+			remoteInfo = multiWinSwift;
 		};
 		559122D3276323D1001C4C95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -463,6 +471,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				5530B2EE2774826400DFECFF /* multiWinSwift in Embed Binaries */,
 				55C6BB52204DEE55001AE7E5 /* multiwin in Embed Binaries */,
 				55C6BB53204DEE55001AE7E5 /* glulxe-client in Embed Binaries */,
 				55C6BB54204DEE55001AE7E5 /* imagetest in Embed Binaries */,
@@ -1492,6 +1501,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5530B2F02774826C00DFECFF /* PBXTargetDependency */,
 				55C6BB5D204DEFC0001AE7E5 /* PBXTargetDependency */,
 				55C6BB5F204DEFC0001AE7E5 /* PBXTargetDependency */,
 				55C6BB61204DEFC0001AE7E5 /* PBXTargetDependency */,
@@ -1952,6 +1962,11 @@
 			isa = PBXTargetDependency;
 			target = 4B51AA4607E8770600576AB9 /* GlkView */;
 			targetProxy = 5530B2BC276F211500DFECFF /* PBXContainerItemProxy */;
+		};
+		5530B2F02774826C00DFECFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5530B2AC276F20C000DFECFF /* multiWinSwift */;
+			targetProxy = 5530B2EF2774826C00DFECFF /* PBXContainerItemProxy */;
 		};
 		559122D4276323D1001C4C95 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

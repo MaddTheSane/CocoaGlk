@@ -398,6 +398,19 @@ NS_ENUM(unichar) {
 	NSEndFunctionKey = 0xF72B,
 	NSPageUpFunctionKey,
 	NSPageDownFunctionKey,
+	
+	NSF1FunctionKey = 0xF704,
+	NSF2FunctionKey,
+	NSF3FunctionKey,
+	NSF4FunctionKey,
+	NSF5FunctionKey,
+	NSF6FunctionKey,
+	NSF7FunctionKey,
+	NSF8FunctionKey,
+	NSF9FunctionKey,
+	NSF10FunctionKey,
+	NSF11FunctionKey,
+	NSF12FunctionKey,
 };
 
 #endif
@@ -428,6 +441,43 @@ NS_ENUM(unichar) {
 			break;
 		case NSRightArrowFunctionKey:
 			chr = keycode_Right;
+			break;
+			
+		case NSF1FunctionKey:
+			chr = keycode_Func1;
+			break;
+		case NSF2FunctionKey:
+			chr = keycode_Func2;
+			break;
+		case NSF3FunctionKey:
+			chr = keycode_Func3;
+			break;
+		case NSF4FunctionKey:
+			chr = keycode_Func4;
+			break;
+		case NSF5FunctionKey:
+			chr = keycode_Func5;
+			break;
+		case NSF6FunctionKey:
+			chr = keycode_Func6;
+			break;
+		case NSF7FunctionKey:
+			chr = keycode_Func7;
+			break;
+		case NSF8FunctionKey:
+			chr = keycode_Func8;
+			break;
+		case NSF9FunctionKey:
+			chr = keycode_Func9;
+			break;
+		case NSF10FunctionKey:
+			chr = keycode_Func10;
+			break;
+		case NSF11FunctionKey:
+			chr = keycode_Func11;
+			break;
+		case NSF12FunctionKey:
+			chr = keycode_Func12;
 			break;
 			
 		case NSPageDownFunctionKey:

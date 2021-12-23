@@ -707,6 +707,6 @@ NS_ENUM(unichar) {
 
 - (id)accessibilityFocusedUIElement {
 	return self;
- }
+}
 
 @end

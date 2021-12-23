@@ -1097,14 +1097,8 @@
 }
 
 - (BOOL)isAccessibilityFocused {
-	return NO;
-	/* return [NSNumber numberWithBool: [[self window] firstResponder] == self ||
-		[[self window] firstResponder] == textView]; */
+	return [[self window] firstResponder] == self || [[self window] firstResponder] == textView;
 }
-
-//- (id)accessibilityFocusedUIElement {
-//	return [self accessibilityFocusedUIElement];
-//}
 
 - (id)accessibilityFocusedUIElement {
 	return textView;

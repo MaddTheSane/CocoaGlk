@@ -17,7 +17,7 @@
 #import "cocoaglk.h"
 #include "gi_blorb.h"
 #import <GlkView/GlkSoundChannelProtocol.h>
-#import <GlkSound/GlkSound.h>
+#import <GlkSound/GlkSoundChannel.h>
 
 static schanid_t cocoaglk_firstschanid = NULL;
 static BOOL soundSourceSet = NO;

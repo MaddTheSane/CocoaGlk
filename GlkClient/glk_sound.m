@@ -125,7 +125,7 @@ schanid_t glk_schannel_iterate(schanid_t chan, glui32 *rockptr) {
 		res = cocoaglk_firstschanid;
 	} else {
 		if (!cocoaglk_schanid_sane(chan)) {
-			cocoaglk_error("glk_schannel_iterate called with an invalid frefid");
+			cocoaglk_error("glk_schannel_iterate called with an invalid schanid");
 			return NULL;
 		}
 		
@@ -133,7 +133,7 @@ schanid_t glk_schannel_iterate(schanid_t chan, glui32 *rockptr) {
 	}
 	
 	if (res && !cocoaglk_schanid_sane(res)) {
-		cocoaglk_error("glk_schannel_iterate moved to an invalid frefid");
+		cocoaglk_error("glk_schannel_iterate moved to an invalid schanid");
 		return NULL;
 	}
 	

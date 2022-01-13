@@ -43,6 +43,7 @@ extern void cocoaglk_flushbuffer(const char* reason);
 
 /// Reports a warning to the server
 extern void cocoaglk_warning(const char* warningText);
+#define gli_strict_warning(x) cocoaglk_warning(x)
 
 /// Reports an error to the server, then quits
 extern void cocoaglk_error(const char* errorText);

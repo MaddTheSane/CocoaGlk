@@ -22,6 +22,11 @@
 static schanid_t cocoaglk_firstschanid = NULL;
 static BOOL soundSourceSet = NO;
 
+static glui32 gli_schannel_play_ext(schanid_t chan, glui32 snd,
+									glui32 repeats, glui32 notify);
+static void gli_schannel_set_volume_ext(schanid_t chan, glui32 vol,
+										glui32 duration, glui32 notify);
+
 //
 // Tells the session object where to get its sound from
 //
@@ -165,7 +170,7 @@ glui32 glk_schannel_play(schanid_t chan, glui32 snd) {
 		return 0;
 	}
 	
-	glui32 result = glk_schannel_play_ext(chan, snd, 1, 0);
+	glui32 result = gli_schannel_play_ext(chan, snd, 1, 0);
 	
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_schannel_play(%p, %u) = %u", chan, snd, result);
@@ -176,16 +181,12 @@ glui32 glk_schannel_play(schanid_t chan, glui32 snd) {
 
 glui32 glk_schannel_play_ext(schanid_t chan, glui32 snd, glui32 repeats,
 							 glui32 notify) {
-	if (!soundSourceSet) {
-		cocoaglk_set_sound_source([[[GlkBlorbSoundSource alloc] init] autorelease]);
-	}
-	
 	if (!cocoaglk_schanid_sane(chan)) {
 		cocoaglk_error("glk_schannel_play_ext called with an invalid schanid");
 		return 0;
 	}
 	
-	glui32 returnVal = [chan->channelref playSound: snd countOfRepeats: repeats notification: notify] ? 1 : 0;
+	glui32 returnVal = gli_schannel_play_ext(chan, snd, repeats, notify);
 	
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_schannel_play_ext(%p, %u, %u, %u) = %u", chan, snd, repeats, notify, returnVal);
@@ -243,7 +244,7 @@ void glk_schannel_set_volume(schanid_t chan, glui32 vol) {
 	NSLog(@"TRACE: glk_schannel_set_volume(%p, %u)", chan, vol);
 #endif
 	
-	glk_schannel_set_volume_ext(chan, vol, 0, 0);
+	gli_schannel_set_volume_ext(chan, vol, 0, 0);
 }
 
 void glk_schannel_set_volume_ext(schanid_t chan, glui32 vol,
@@ -257,7 +258,7 @@ void glk_schannel_set_volume_ext(schanid_t chan, glui32 vol,
 	NSLog(@"TRACE: glk_schannel_set_volume_ext(%p, %u, %u, %u)", chan, vol, duration, notify);
 #endif
 
-	[chan->channelref setVolume: vol duration: duration notification: notify];
+	gli_schannel_set_volume_ext(chan, vol, duration, notify);
 }
 
 glui32 glk_schannel_play_multi(schanid_t *chanarray, glui32 chancount,
@@ -267,7 +268,7 @@ glui32 glk_schannel_play_multi(schanid_t *chanarray, glui32 chancount,
 
 	for (i = 0; i < chancount; i++)
 	{
-		successes += glk_schannel_play_ext(chanarray[i], sndarray[i], 1, notify);
+		successes += gli_schannel_play_ext(chanarray[i], sndarray[i], 1, notify);
 	}
 	
 #if COCOAGLK_TRACE
@@ -287,6 +288,22 @@ void glk_sound_load_hint(glui32 snd, glui32 flag) {
 #endif
 
 	[cocoaglk_session.soundHandler loadHintForSound:snd flag:flag];
+}
+
+static glui32 gli_schannel_play_ext(schanid_t chan, glui32 snd, glui32 repeats,
+									glui32 notify) {
+	if (!soundSourceSet) {
+		cocoaglk_set_sound_source([[[GlkBlorbSoundSource alloc] init] autorelease]);
+	}
+	
+	glui32 returnVal = [chan->channelref playSound: snd countOfRepeats: repeats notification: notify] ? 1 : 0;
+	
+	return returnVal;
+}
+
+static void gli_schannel_set_volume_ext(schanid_t chan, glui32 vol,
+										glui32 duration, glui32 notify) {
+	[chan->channelref setVolume: vol duration: duration notification: notify];
 }
 
 @implementation GlkBlorbSoundSource

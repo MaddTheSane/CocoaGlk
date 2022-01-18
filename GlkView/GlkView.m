@@ -995,8 +995,7 @@
 }
 
 - (void) panelDidEnd: (NSSavePanel*) panel
-		  returnCode: (NSInteger) returnCode
-		 contextInfo: (void*) willBeNil {
+		  returnCode: (NSInteger) returnCode {
 	if (!promptHandler) return;
 	
 	if (returnCode == NSModalResponseOK) {
@@ -1127,11 +1126,11 @@
 		
 		if (showAsSheet) {
 			[panel beginSheetModalForWindow: window completionHandler: ^(NSModalResponse result) {
-				[self panelDidEnd: panel returnCode: result contextInfo: NULL];
+				[self panelDidEnd: panel returnCode: result];
 			}];
 		} else {
 			NSInteger result = [panel runModal];
-			[self panelDidEnd:panel returnCode:result contextInfo:NULL];
+			[self panelDidEnd: panel returnCode: result];
 		}
 		
 		lastPanel = panel;
@@ -1146,11 +1145,11 @@
 		
 		if (showAsSheet) {
 			[panel beginSheetModalForWindow: window completionHandler: ^(NSModalResponse result) {
-				[self panelDidEnd: panel returnCode: result contextInfo: NULL];
+				[self panelDidEnd: panel returnCode: result];
 			}];
 		} else {
 			NSInteger result = [panel runModal];
-			[self panelDidEnd:panel returnCode:result contextInfo:NULL];
+			[self panelDidEnd: panel returnCode: result];
 		}
 
 		lastPanel = panel;

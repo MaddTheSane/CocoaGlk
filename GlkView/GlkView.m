@@ -23,12 +23,6 @@
 #import "GlkFileStream.h"
 #import <GlkView/GlkAutomation.h>
 
-@interface GlkView()
-
-//- (void) setFirstResponder;
-
-@end
-
 @implementation GlkView
 
 #pragma mark - Initialisation

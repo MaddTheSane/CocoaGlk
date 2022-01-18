@@ -110,9 +110,12 @@ static int countUTF8Len(unsigned char charPoint) {
 	} else {
 		// anything else is too big for one UTF16 character.
 		// Still, read the whole Unicode character anyway.
-		// TODO: Update when 5 bytes are added to the UTF-8 spec.
-		charData = [self getBufferWithLength: 3];
-		if ([charData length] != 3) {
+		int readBytes = countUTF8Len(charByte) - 1;
+		if (readBytes < 0) {
+			return '?';
+		}
+		charData = [self getBufferWithLength: readBytes];
+		if ([charData length] != readBytes) {
 			return GlkEOFChar;
 		}
 

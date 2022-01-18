@@ -86,6 +86,8 @@ schanid_t glk_schannel_create_ext(glui32 rock, glui32 volume) {
 	
 	if (cocoaglk_register) {
 		res->giRock = cocoaglk_register(res, gidisp_Class_Schannel);
+	} else {
+		res->giRock.num = 0;
 	}
 
 #if COCOAGLK_TRACE

@@ -137,7 +137,6 @@
 		5530B2EE2774826400DFECFF /* multiWinSwift in Embed Binaries */ = {isa = PBXBuildFile; fileRef = 5530B2AD276F20C000DFECFF /* multiWinSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5533C6E8276023C1004BD884 /* Vorbis.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B0B275A25E9000B0D21 /* Vorbis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5560FA2921C06BF500E711F5 /* GlkViewDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA2C21C07EC200E711F5 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2B21C07EC200E711F5 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA3321C084E500E711F5 /* GlkTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3221C084E500E711F5 /* GlkTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -148,7 +147,6 @@
 		557AF22C2703F79600A5CFFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		557AF22D2703F81A00A5CFFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		559122D5276323EB001C4C95 /* Ogg.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		559122D6276323EB001C4C95 /* Vorbis.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B0B275A25E9000B0D21 /* Vorbis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		559122D7276323EB001C4C95 /* SFBAudioEngine.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		559122D8276323EB001C4C95 /* GlkSound.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		559122D9276323F8001C4C95 /* GlkSound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; };
@@ -431,7 +429,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				559122D5276323EB001C4C95 /* Ogg.framework in Copy Frameworks */,
-				559122D6276323EB001C4C95 /* Vorbis.framework in Copy Frameworks */,
 				559122D7276323EB001C4C95 /* SFBAudioEngine.framework in Copy Frameworks */,
 				559122D8276323EB001C4C95 /* GlkSound.framework in Copy Frameworks */,
 				4BCB8AA10CD7E3310041731F /* GlkView.framework in Copy Frameworks */,
@@ -455,7 +452,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5533C6E8276023C1004BD884 /* Vorbis.framework in Embed Frameworks */,
 				5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */,
 				5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */,
 				55C6BB49204DEDC1001AE7E5 /* GlkClient.framework in Embed Frameworks */,
@@ -1109,17 +1105,17 @@
 			isa = PBXGroup;
 			children = (
 				55FF56A4275A1DC2000B0D21 /* SFBAudioEngine.xcodeproj */,
-				55FF5691275A1D72000B0D21 /* GlkSoundChannel.h */,
-				55FF5690275A1D72000B0D21 /* GlkSoundChannel.mm */,
+				55E9F2F3275EE75D004D1C12 /* GlkFakeSoundChannel.h */,
+				55E9F2F4275EE75D004D1C12 /* GlkFakeSoundChannel.m */,
 				55FF568D275A1D72000B0D21 /* GlkMIDIChannel.h */,
 				55FF568F275A1D72000B0D21 /* GlkMIDIChannel.m */,
 				55FF5692275A1D72000B0D21 /* GlkMIDIPlayer.h */,
 				55FF5694275A1D72000B0D21 /* GlkMIDIPlayer.m */,
+				55FF567E27583F22000B0D21 /* GlkSound.h */,
+				55FF5691275A1D72000B0D21 /* GlkSoundChannel.h */,
+				55FF5690275A1D72000B0D21 /* GlkSoundChannel.mm */,
 				55FF568E275A1D72000B0D21 /* GlkSoundHandler.h */,
 				55FF5693275A1D72000B0D21 /* GlkSoundHandler.m */,
-				55E9F2F3275EE75D004D1C12 /* GlkFakeSoundChannel.h */,
-				55E9F2F4275EE75D004D1C12 /* GlkFakeSoundChannel.m */,
-				55FF567E27583F22000B0D21 /* GlkSound.h */,
 			);
 			path = GlkSound;
 			sourceTree = "<group>";

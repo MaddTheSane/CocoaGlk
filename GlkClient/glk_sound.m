@@ -26,6 +26,7 @@ static glui32 gli_schannel_play_ext(schanid_t chan, glui32 snd,
 									glui32 repeats, glui32 notify);
 static void gli_schannel_set_volume_ext(schanid_t chan, glui32 vol,
 										glui32 duration, glui32 notify);
+static schanid_t gli_schannel_create_ext(glui32 rock, glui32 volume);
 
 //
 // Tells the session object where to get its sound from
@@ -57,7 +58,7 @@ BOOL cocoaglk_schanid_sane(schanid_t ref) {
 }
 
 schanid_t glk_schannel_create(glui32 rock) {
-	schanid_t result = glk_schannel_create_ext(rock, GLK_MAXVOLUME);
+	schanid_t result = gli_schannel_create_ext(rock, GLK_MAXVOLUME);
 	
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_schannel_create(%u) = %p", rock, result);
@@ -67,28 +68,7 @@ schanid_t glk_schannel_create(glui32 rock) {
 }
 
 schanid_t glk_schannel_create_ext(glui32 rock, glui32 volume) {
-	id<GlkSoundChannel> chan = [cocoaglk_session.soundHandler createSoundChannelWithVolume: volume];
-	if (!chan) {
-		return NULL;
-	}
-	schanid_t res = malloc(sizeof(struct glk_schannel_struct));
-	
-	res->key = GlkSoundRefKey;
-	res->rock = rock;
-	res->volume = volume;
-	
-	res->channelref = [chan retain];
-	
-	res->next = cocoaglk_firstschanid;
-	res->last = NULL;
-	if (cocoaglk_firstschanid) cocoaglk_firstschanid->last = res;
-	cocoaglk_firstschanid = res;
-	
-	if (cocoaglk_register) {
-		res->giRock = cocoaglk_register(res, gidisp_Class_Schannel);
-	} else {
-		res->giRock.num = 0;
-	}
+	schanid_t res = gli_schannel_create_ext(rock, volume);
 
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: glk_schannel_create_ext(%u, %u) = %p", rock, volume, res);
@@ -306,6 +286,33 @@ static glui32 gli_schannel_play_ext(schanid_t chan, glui32 snd, glui32 repeats,
 static void gli_schannel_set_volume_ext(schanid_t chan, glui32 vol,
 										glui32 duration, glui32 notify) {
 	[chan->channelref setVolume: vol duration: duration notification: notify];
+}
+
+static schanid_t gli_schannel_create_ext(glui32 rock, glui32 volume) {
+	id<GlkSoundChannel> chan = [cocoaglk_session.soundHandler createSoundChannelWithVolume: volume];
+	if (!chan) {
+		return NULL;
+	}
+	schanid_t res = malloc(sizeof(struct glk_schannel_struct));
+	
+	res->key = GlkSoundRefKey;
+	res->rock = rock;
+	res->volume = volume;
+	
+	res->channelref = [chan retain];
+	
+	res->next = cocoaglk_firstschanid;
+	res->last = NULL;
+	if (cocoaglk_firstschanid) cocoaglk_firstschanid->last = res;
+	cocoaglk_firstschanid = res;
+	
+	if (cocoaglk_register) {
+		res->giRock = cocoaglk_register(res, gidisp_Class_Schannel);
+	} else {
+		res->giRock.num = 0;
+	}
+	
+	return res;
 }
 
 @implementation GlkBlorbSoundSource

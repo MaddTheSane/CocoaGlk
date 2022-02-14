@@ -89,6 +89,8 @@ extern GlkBuffer*				cocoaglk_buffer;
 extern NSAutoreleasePool*		cocoaglk_pool;
 #endif
 
+extern void cocoaglk_flush_pool(void);
+
 /// The 'first stream' (typically containing the game to run)
 extern strid_t					cocoaglk_firststream;
 

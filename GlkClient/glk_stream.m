@@ -25,7 +25,7 @@ unsigned cocoaglk_maxstreamid = 0;
 
 #pragma mark - Utility functions
 
-static void cocoaglk_verify_streams(void) {
+void cocoaglk_verify_streams(void) {
 	// Debug functions
 	strid_t str = cocoaglk_firststream;
 	while (str != NULL) {

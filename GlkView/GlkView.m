@@ -144,7 +144,7 @@
 	static NSImage* defaultLogo = nil;
 	
 	if (!defaultLogo) {
-		defaultLogo = [[NSBundle bundleForClass: [self class]] imageForResource:@"logo"];
+		defaultLogo = [[NSBundle bundleForClass: [self class]] imageForResource: @"logo"];
 	}
 	
 	return defaultLogo;
@@ -1116,8 +1116,6 @@
 		[panel setAllowedFileTypes: allowedFiletypes];
 		if (preferredDirectory != nil) [panel setDirectoryURL: preferredDirectory];
 		
-		[panel setAllowedFileTypes: allowedFiletypes];
-		
 		if (showAsSheet) {
 			[panel beginSheetModalForWindow: window completionHandler: ^(NSModalResponse result) {
 				[self panelDidEnd: panel returnCode: result];
@@ -1134,8 +1132,6 @@
 
 		[panel setAllowedFileTypes: allowedFiletypes];
 		if (preferredDirectory != nil) [panel setDirectoryURL: preferredDirectory];
-		
-		[panel setAllowedFileTypes: allowedFiletypes];
 		
 		if (showAsSheet) {
 			[panel beginSheetModalForWindow: window completionHandler: ^(NSModalResponse result) {
@@ -1969,14 +1965,6 @@
 }
 
 #pragma mark - Image management
-
-- (void) setImageSource: (in byref id<GlkImageSource>) source {
-	imgSrc = source;
-}
-
-- (out byref id<GlkImageSource>) imageSource {
-	return imgSrc;
-}
 
 @synthesize imageSource = imgSrc;
 

@@ -40,6 +40,11 @@ GlkBuffer* cocoaglk_buffer = nil;
 /// The autorelease pool
 NSAutoreleasePool* cocoaglk_pool = nil;
 
+void cocoaglk_flush_pool(void) {
+	[cocoaglk_pool release];
+	cocoaglk_pool = [[NSAutoreleasePool alloc] init];
+}
+
 #pragma mark - Object we use to receive some events
 
 @interface GlkCocoa : NSObject

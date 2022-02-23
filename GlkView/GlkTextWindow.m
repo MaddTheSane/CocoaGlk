@@ -136,7 +136,6 @@
 - (void) updateWithPrefs: (GlkPreferences*) prefs {
 	margin = [prefs textMargin];
 	[textView setTextContainerInset: NSMakeSize(margin, margin)];
-	[[textView layoutManager] setUsesScreenFonts: [prefs useScreenFonts]];
 	if (@available(macOS 10.15, *)) {
 		[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation]];
 	} else {

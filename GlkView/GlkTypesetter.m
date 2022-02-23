@@ -391,7 +391,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				[currentAttributes retain];
 			lastAttributes = currentAttributes;
 			
-			currentFont = [layout substituteFontForFont: (NSFont*) [currentAttributes objectForKey: NSFontAttributeName]];
+			currentFont = [currentAttributes objectForKey: NSFontAttributeName];
 			currentAscender = [currentFont ascender];
 			currentDescender = [currentFont descender];
 			currentHeight = [[self layoutManager] defaultLineHeightForFont: currentFont];

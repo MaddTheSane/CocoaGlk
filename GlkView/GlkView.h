@@ -259,7 +259,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 - (void) removeAutomationObject: (id<GlkAutomation>) receiver;
 
 /// Returns true if there are windows waiting for input (ie, a sendCharacters event will succeed)
-@property (nonatomic) BOOL canSendInput;
+@property (nonatomic, readonly) BOOL canSendInput;
 /// Sends the specified characters to the given window number as a line or character input event
 - (int) sendCharacters: (NSString*) characters
 			  toWindow: (int) window;

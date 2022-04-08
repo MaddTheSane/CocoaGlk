@@ -2306,8 +2306,6 @@
 	}
 }
 
-@dynamic canSendInput;
-
 - (BOOL) canSendInput {
 	GlkWindow* candidate = rootWindow;
 	GlkWindow* initialCandidate = candidate;

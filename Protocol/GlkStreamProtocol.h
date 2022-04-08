@@ -18,7 +18,7 @@ typedef NS_ENUM(int, GlkSeekMode) {
 	GlkSeekEnd
 };
 
-#define GlkEOFChar 0xffff
+#define GlkEOFChar ((unichar)0xffff)
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, GlkSoundChannelStatus) {
 };
 
 @interface GlkSoundChannel : NSObject <NSSecureCoding> {
+    @package
 	glui32 loop;
 	glui32 notify;
 	glui32 paused;

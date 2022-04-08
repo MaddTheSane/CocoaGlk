@@ -7,6 +7,8 @@
 #include <SFBAudioEngine/LoopableRegionDecoder.h>
 #include <SFBAudioEngine/CoreAudioOutput.h>
 
+#pragma GCC visibility push(hidden)
+
 class CFDataInputSource final: public SFB::InputSource {
 public:
     CFDataInputSource(CFDataRef bytes, bool copyBytes = true);
@@ -49,6 +51,8 @@ private:
     SFB::CFData _data;
     off_t _pos;
 };
+
+#pragma GCC visibility pop
 
 
 static SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyBytes, CFErrorRef *error = nullptr)

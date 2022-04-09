@@ -526,6 +526,8 @@ void glk_request_line_event_uni(winid_t win, glui32 *buf,
 	[cocoaglk_buffer requestLineEventsForWindowIdentifier: win->identifier];
 }
 
+#ifdef GLK_MODULE_UNICODE_NORM
+
 glui32 glk_buffer_canon_decompose_uni(glui32 *buf, glui32 len,
 									  glui32 numchars)
 {
@@ -553,3 +555,5 @@ glui32 glk_buffer_canon_normalize_uni(glui32 *buf, glui32 len,
 		return (glui32)(strData.length/sizeof(glui32));
 	}
 }
+
+#endif

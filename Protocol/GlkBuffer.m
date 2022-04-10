@@ -229,7 +229,7 @@ static NSString* stringFromOp(NSArray* op) {
 	if (self) {
 		id decoded;
 		if (coder.allowsKeyedCoding) {
-			decoded = [coder decodeObjectOfClasses: [NSSet setWithObjects: [NSArray class], [NSNumber class], [NSString class], [NSColor class], [NSValue class], [NSData class], nil] forKey: @"Operations"];
+			decoded = [coder decodeObjectOfClasses: [NSSet setWithObjects: [NSArray class], [NSNumber class], [NSString class], [GlkColor class], [NSValue class], [NSData class], nil] forKey: @"Operations"];
 		} else {
 			decoded = [coder decodeObject];
 		}

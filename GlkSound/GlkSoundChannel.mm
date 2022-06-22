@@ -65,16 +65,10 @@ static SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyB
     return SFB::InputSource::unique_ptr(new CFDataInputSource(bytes, copyBytes));
 }
 
-@interface GlkSoundChannel () {
+@implementation GlkSoundChannel {
 @private
     SFB::Audio::Player    *_player;        // The player instance
 }
-
-//@property GlkMIDIChannel *midiChannel;
-
-@end
-
-@implementation GlkSoundChannel
 
 - (instancetype)initWithHandler:(GlkSoundHandler*)handler name:(int)channelname volume:(glui32)vol
 {

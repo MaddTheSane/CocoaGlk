@@ -12,23 +12,19 @@
 #import "GlkSoundHandler.h"
 
 
-@interface GlkMIDIPlayer() {
-	AUGraph graph;
-	AUNode sampleNode;
-	AUNode ioNode;
+@implementation GlkMIDIPlayer {
+    AUGraph graph;
+    AUNode sampleNode;
+    AUNode ioNode;
     AUNode mixerNode;
 
-	AudioUnit sampleUnit;
-	AudioUnit ioUnit;
+    AudioUnit sampleUnit;
+    AudioUnit ioUnit;
     AudioUnit mixerUnit;
-	
-	MusicPlayer player;
-	MusicSequence sequence;
+    
+    MusicPlayer player;
+    MusicSequence sequence;
 }
-
-@end
-
-@implementation GlkMIDIPlayer
 
 - (instancetype)initWithData:(NSData *)data {
     if (self = [super init]) {

@@ -2,15 +2,11 @@
 #import "GlkSoundHandler.h"
 #import "GlkMIDIPlayer.h"
 
-@interface GlkMIDIChannel () {
+@implementation GlkMIDIChannel {
 
 @private
     GlkMIDIPlayer    *_player;        // The player instance
 }
-
-@end
-
-@implementation GlkMIDIChannel
 
 - (instancetype)initWithHandler:(GlkSoundHandler*)handler name:(int)channelname volume:(glui32)vol
 {

@@ -344,7 +344,7 @@
 	// Overridden from GlkTextWindow
 	margin = 0;
 	[textView setTextContainerInset: NSMakeSize(margin, margin)];
-	[[textView layoutManager] setUsesScreenFonts: [prefs useScreenFonts]];
+//	[[textView layoutManager] setUsesScreenFonts: [prefs useScreenFonts]];
 	if (@available(macOS 10.15, *)) {
 		[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation]];
 	} else {

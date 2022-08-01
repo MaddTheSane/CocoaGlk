@@ -654,7 +654,7 @@
 		55BC630C2055C42B001F8CFB /* opcodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opcodes.c; sourceTree = "<group>"; };
 		55BC630D2055C42B001F8CFB /* accel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = accel.c; sourceTree = "<group>"; };
 		55BC630E2055C42B001F8CFB /* git.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = git.c; sourceTree = "<group>"; };
-		55BC633B2055C481001F8CFB /* cocoastart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cocoastart.m; path = "git-1.3.5/cocoastart.m"; sourceTree = SOURCE_ROOT; };
+		55BC633B2055C481001F8CFB /* cocoastart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cocoastart.m; path = "git-1.3.7/cocoastart.m"; sourceTree = SOURCE_ROOT; };
 		55BC63472055EE7F001F8CFB /* glk_datetime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_datetime.m; sourceTree = "<group>"; };
 		55C6BB36204DED96001AE7E5 /* SwiftGlk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGlk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C6BB38204DED96001AE7E5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -884,7 +884,7 @@
 		4B0459E607EA2033002D7C88 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
-				55BC62EC2055C42B001F8CFB /* git-1.3.5 */,
+				55BC62EC2055C42B001F8CFB /* git-1.3.7 */,
 				4B0459EB07EA2090002D7C88 /* GlkTest */,
 				4B0459EA07EA2087002D7C88 /* glulxe */,
 			);
@@ -1150,7 +1150,7 @@
 			path = multiWinSwift;
 			sourceTree = "<group>";
 		};
-		55BC62EC2055C42B001F8CFB /* git-1.3.5 */ = {
+		55BC62EC2055C42B001F8CFB /* git-1.3.7 */ = {
 			isa = PBXGroup;
 			children = (
 				55BC633B2055C481001F8CFB /* cocoastart.m */,
@@ -1179,8 +1179,8 @@
 				55BC630D2055C42B001F8CFB /* accel.c */,
 				55BC630E2055C42B001F8CFB /* git.c */,
 			);
-			name = "git-1.3.5";
-			path = "depends/git/git-1.3.5";
+			name = "git-1.3.7";
+			path = "depends/git/git-1.3.7";
 			sourceTree = "<group>";
 			usesTabs = 0;
 		};

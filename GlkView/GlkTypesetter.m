@@ -251,8 +251,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #endif
 	
 	// Measure each glyph in the glyph array
-	NSSize advance[numGlyphs+1];
-	NSRect bounding[numGlyphs+1];
+	NSSize advance[count];
+	NSRect bounding[count];
+	memset(advance, 0, sizeof(advance));
+	memset(bounding, 0, sizeof(bounding));
 	
 #ifndef MeasureMultiGlyphs
 	// Compatible mode: measure one glyph at a time
@@ -268,10 +270,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #else
 	// 10.4+ mode: measure many glyphs at once
 	[font getAdvancements: advance
-				forGlyphs: glyphsToMeasure
+			  forCGGlyphs: glyphsToMeasure
 					count: numGlyphs];
 	[font getBoundingRects: bounding
-				 forGlyphs: glyphsToMeasure
+			   forCGGlyphs: glyphsToMeasure
 					 count: numGlyphs];
 #endif
 	

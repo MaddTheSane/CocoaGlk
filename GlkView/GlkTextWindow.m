@@ -469,7 +469,8 @@
 				inputPos = pos+1;
 			} else {
 				// otherwise, delete the inputted string
-				[textStorage deleteCharactersInRange: NSMakeRange(inputPos, pos - inputPos)];
+				// including trailing newline
+				[textStorage deleteCharactersInRange: NSMakeRange(inputPos, pos - inputPos + 1)];
 			}
 			
 			lineInput = NO;

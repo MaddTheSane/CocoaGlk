@@ -1449,7 +1449,7 @@
 - (void) setWindow: (glui32) identifier
 	 echoLineEvent: (glui32) echo {
 	GlkTextWindow* win = (GlkTextWindow*)[glkWindows objectForKey: @(identifier)];
-	[win setLineEchoValue: echo == 0];
+	[win setLineEchoValue: echo != 0];
 }
 
 #pragma mark Styles

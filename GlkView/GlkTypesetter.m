@@ -94,14 +94,6 @@
 
 // OS X version #defines
 
-#undef MeasureMultiGlyphs								// Use the 10.4 routines in NSFont to measure multiple glyphs at once
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-# define MeasureMultiGlyphs
-#endif
-
-#undef MeasureMultiGlyphs
-
 // Static variables
 
 static NSCharacterSet* newlineSet = nil;
@@ -256,18 +248,6 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	memset(advance, 0, sizeof(advance));
 	memset(bounding, 0, sizeof(bounding));
 	
-#ifndef MeasureMultiGlyphs
-	// Compatible mode: measure one glyph at a time
-	for (x=0; x<numGlyphs; x++) {
-		CGGlyph glyph = glyphsToMeasure[x];
-		
-		NSSize glyphAdvance = [font advancementForCGGlyph: glyph];
-		NSRect glyphBounds = [font boundingRectForCGGlyph: glyph];
-		
-		advance[x] = glyphAdvance;
-		bounding[x] = glyphBounds;
-	}
-#else
 	// 10.4+ mode: measure many glyphs at once
 	[font getAdvancements: advance
 			  forCGGlyphs: glyphsToMeasure
@@ -275,7 +255,6 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	[font getBoundingRects: bounding
 			   forCGGlyphs: glyphsToMeasure
 					 count: numGlyphs];
-#endif
 	
 	// Put the results into the advancements and bounds arrays
 	for (x=0; x<count; x++) {

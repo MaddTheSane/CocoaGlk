@@ -467,12 +467,14 @@ void glk_cancel_mouse_event(winid_t win) {
 	[cocoaglk_buffer cancelMouseEventsForWindowIdentifier: win->identifier];
 }
 
-#ifdef GIDISPATCH_AUTORESTORE_REGISTRY
 void gidispatch_set_autorestore_registry(long (*locatearr)(void *array, glui32 len, char *typecode,
 														   gidispatch_rock_t objrock, int *elemsizeref),
 										 gidispatch_rock_t (*restorearr)(long bufkey, glui32 len,
 																		 char *typecode, void **arrayref))
 {
-	
-}
+#ifdef GIDISPATCH_AUTORESTORE_REGISTRY
+#error TODO: implement!
+#else
+	cocoaglk_error("gidispatch_set_autorestore_registry called when GIDISPATCH_AUTORESTORE_REGISTRY is undefined!");
 #endif
+}

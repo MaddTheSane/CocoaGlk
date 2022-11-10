@@ -11,15 +11,14 @@
 #include "glk.h"
 #import "cocoaglk.h"
 #import "glk_client.h"
+#import "ClientLogging.h"
 
 void glk_set_hyperlink(glui32 linkval) {
 	glk_set_hyperlink_stream(cocoaglk_currentstream, linkval);
 }
 
 void glk_set_hyperlink_stream(strid_t str, glui32 linkval) {
-#if COCOAGLK_TRACE > 1
-	NSLog(@"TRACE: glk_set_hyperlink_stream(%p, %u)", str, linkval);
-#endif
+	os_log_debug(GlkClientTrace, "glk_set_hyperlink_stream(%{public}p, %{public}u)", str, linkval);
 
 	if (!cocoaglk_strid_sane(str)) {
 		cocoaglk_warning("glk_set_hyperlink_stream called with an invalid strid");
@@ -61,9 +60,7 @@ void glk_set_hyperlink_stream(strid_t str, glui32 linkval) {
 }
 
 void glk_request_hyperlink_event(winid_t win) {
-#if COCOAGLK_TRACE > 1
-	NSLog(@"TRACE: glk_request_hyperlink_event(%p)", win);
-#endif
+	os_log_debug(GlkClientTrace, "glk_request_hyperlink_event(%{public}p)", win);
 
 	if (!cocoaglk_winid_sane(win)) {
 		cocoaglk_warning("glk_request_hyperlink_event called with an invalid winid");
@@ -74,9 +71,7 @@ void glk_request_hyperlink_event(winid_t win) {
 }
 
 void glk_cancel_hyperlink_event(winid_t win) {
-#if COCOAGLK_TRACE > 1
-	NSLog(@"TRACE: glk_cancel_hyperlink_event(%p)", win);
-#endif
+	os_log_debug(GlkClientTrace, "glk_cancel_hyperlink_event(%{public}p)", win);
 	
 	if (!cocoaglk_winid_sane(win)) {
 		cocoaglk_warning("glk_cancel_hyperlink_event called with an invalid winid");

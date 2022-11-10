@@ -18,6 +18,7 @@
 #include "gi_blorb.h"
 #import <GlkView/GlkSoundChannelProtocol.h>
 #import <GlkSound/GlkSoundChannel.h>
+#import "ClientLogging.h"
 
 static schanid_t cocoaglk_firstschanid = NULL;
 static BOOL soundSourceSet = NO;
@@ -45,12 +46,12 @@ BOOL cocoaglk_schanid_sane(schanid_t ref) {
 	
 	// Programmer is a spoon type problems
 	if (ref->last && ref == cocoaglk_firstschanid) {
-		NSLog(@"Oops: schan has a previous schan but is marked as the first");
+		os_log_fault(GlkClientLog, "Oops: schan has a previous schan but is marked as the first");
 		return NO;
 	}
 	
 	if (!ref->last && ref != cocoaglk_firstschanid) {
-		NSLog(@"Oops: schan has no previous schan but is not the first");
+		os_log_fault(GlkClientLog, "Oops: schan has no previous schan but is not the first");
 		return NO;
 	}
 	
@@ -60,9 +61,7 @@ BOOL cocoaglk_schanid_sane(schanid_t ref) {
 schanid_t glk_schannel_create(glui32 rock) {
 	schanid_t result = gli_schannel_create_ext(rock, GLK_MAXVOLUME);
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_create(%u) = %p", rock, result);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_create(%{public}u) = %{public}p", rock, result);
 
 	return result;
 }
@@ -70,9 +69,7 @@ schanid_t glk_schannel_create(glui32 rock) {
 schanid_t glk_schannel_create_ext(glui32 rock, glui32 volume) {
 	schanid_t res = gli_schannel_create_ext(rock, volume);
 
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_create_ext(%u, %u) = %p", rock, volume, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_create_ext(%{public}u, %{public}u) = %{public}p", rock, volume, res);
 		
 	return res;
 }
@@ -82,9 +79,7 @@ void glk_schannel_destroy(schanid_t chan) {
 		cocoaglk_error("glk_schannel_destroy called with an invalid schanid");
 		return;
 	}
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_destroy(%p)", chan);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_destroy(%{public}p)", chan);
 	
 	// Unregister the filereg
 	if (cocoaglk_unregister) {
@@ -126,9 +121,7 @@ schanid_t glk_schannel_iterate(schanid_t chan, glui32 *rockptr) {
 	
 	if (res && rockptr) *rockptr = res->rock;
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_iterate(%p, %p=%u) = %p", chan, rockptr, rockptr?*rockptr:0, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_iterate(%{public}p, %{public}p=%{public}u) = %{public}p", chan, rockptr, rockptr?*rockptr:0, res);
 	
 	return res;
 }
@@ -139,9 +132,7 @@ glui32 glk_schannel_get_rock(schanid_t chan) {
 		return 0;
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_get_rock(%p) = %u", chan, chan->rock);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_get_rock(%{public}p) = %{public}u", chan, chan->rock);
 	
 	return chan->rock;
 }
@@ -154,9 +145,7 @@ glui32 glk_schannel_play(schanid_t chan, glui32 snd) {
 	
 	glui32 result = gli_schannel_play_ext(chan, snd, 1, 0);
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_play(%p, %u) = %u", chan, snd, result);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_play(%{public}p, %{public}u) = %{public}u", chan, snd, result);
 
 	return result;
 }
@@ -170,9 +159,7 @@ glui32 glk_schannel_play_ext(schanid_t chan, glui32 snd, glui32 repeats,
 	
 	glui32 returnVal = gli_schannel_play_ext(chan, snd, repeats, notify);
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_play_ext(%p, %u, %u, %u) = %u", chan, snd, repeats, notify, returnVal);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_play_ext(%{public}p, %{public}u, %{public}u, %{public}u) = %u", chan, snd, repeats, notify, returnVal);
 
 	return returnVal;
 }
@@ -183,9 +170,7 @@ void glk_schannel_stop(schanid_t chan) {
 		return;
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_stop(%p)", chan);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_stop(%{public}p)", chan);
 
 	[chan->channelref stop];
 }
@@ -196,9 +181,7 @@ void glk_schannel_pause(schanid_t chan) {
 		return;
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_pause(%p)", chan);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_pause(%{public}p)", chan);
 
 	[chan->channelref pause];
 }
@@ -209,9 +192,7 @@ void glk_schannel_unpause(schanid_t chan) {
 		return;
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_unpause(%p)", chan);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_unpause(%{public}p)", chan);
 
 	[chan->channelref unpause];
 }
@@ -222,9 +203,7 @@ void glk_schannel_set_volume(schanid_t chan, glui32 vol) {
 		return;
 	}
 
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_set_volume(%p, %u)", chan, vol);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_set_volume(%{public}p, %{public}u)", chan, vol);
 	
 	gli_schannel_set_volume_ext(chan, vol, 0, 0);
 }
@@ -236,9 +215,7 @@ void glk_schannel_set_volume_ext(schanid_t chan, glui32 vol,
 		return;
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_set_volume_ext(%p, %u, %u, %u)", chan, vol, duration, notify);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_set_volume_ext(%{public}p, %{public}u, %{public}u, %{public}u)", chan, vol, duration, notify);
 
 	gli_schannel_set_volume_ext(chan, vol, duration, notify);
 }
@@ -253,9 +230,7 @@ glui32 glk_schannel_play_multi(schanid_t *chanarray, glui32 chancount,
 		successes += gli_schannel_play_ext(chanarray[i], sndarray[i], 1, notify);
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_schannel_play_multi(%p, %u, %p, %u, %u) = %u", chanarray, chancount, sndarray, soundcount, notify, successes);
-#endif
+	os_log_debug(GlkClientTrace, "glk_schannel_play_multi(%{public}p, %{public}u, %{public}p, %{public}u, %{public}u) = %u", chanarray, chancount, sndarray, soundcount, notify, successes);
 
 	return successes;
 }
@@ -265,9 +240,7 @@ void glk_sound_load_hint(glui32 snd, glui32 flag) {
 		cocoaglk_set_sound_source([[[GlkBlorbSoundSource alloc] init] autorelease]);
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_sound_load_hint(%u, %u)", snd, flag);
-#endif
+	os_log_debug(GlkClientTrace, "glk_sound_load_hint(%{public}u, %{public}u)", snd, flag);
 
 	[cocoaglk_session.soundHandler loadHintForSound:snd flag:flag];
 }

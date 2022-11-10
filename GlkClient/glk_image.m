@@ -17,6 +17,7 @@
 #import "cocoaglk.h"
 #import "glk_client.h"
 #include "gi_blorb.h"
+#import "ClientLogging.h"
 
 static BOOL imageSourceSet = NO;
 
@@ -74,9 +75,7 @@ glui32 glk_image_draw(winid_t win, glui32 image, glsi32 val1, glsi32 val2) {
 									   alignment: val1];
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_image_draw(%p, %u, %i, %i) = %i", win, image, val1, val2, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_image_draw(%{public}p, %{public}u, %{public}i, %{public}i) = %{public}i", win, image, val1, val2, res);
 
 	return res;
 }
@@ -107,9 +106,7 @@ glui32 glk_image_draw_scaled(winid_t win, glui32 image,
 		NSLog(@"TRACE: glk_image_draw_scaled(%p, %u, %i, %i, %u, %u) = %i", win, image, val1, val2, width, height, res);		
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_image_draw_scaled(%p, %u, %i, %i, %u, %u) = %i", win, image, val1, val2, width, height, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_image_draw_scaled(%{public}p, %{public}u, %{public}i, %{public}i, %{public}u, %{public}u) = %{public}i", win, image, val1, val2, width, height, res);
 	
 	return res;
 }
@@ -157,17 +154,13 @@ glui32 glk_image_get_info(glui32 image, glui32 *width, glui32 *height) {
 		if (height) *height = imageSize.height;
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_image_get_info(%u, %p=%u, %p=%u) = %i", image, width, width?*width:0, height, height?*height:0, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_image_get_info(%{public}u, %{public}p=%{public}u, %{public}p=%{public}u) = %{public}i", image, width, width?*width:0, height, height?*height:0, res);
 	
 	return res;
 }
 
 void glk_window_flow_break(winid_t win) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_window_flow_break(%p)", win);
-#endif
+	os_log_debug(GlkClientTrace, "glk_window_flow_break(%{public}p)", win);
 	
 	// Sanity check
 	if (win == NULL) {
@@ -185,9 +178,7 @@ void glk_window_flow_break(winid_t win) {
 
 void glk_window_erase_rect(winid_t win, 
 						   glsi32 left, glsi32 top, glui32 width, glui32 height) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_window_erase_rect(%p, %i, %i, %u, %u)", win, left, top, width, height);
-#endif	
+	os_log_debug(GlkClientTrace, "glk_window_erase_rect(%{public}p, %{public}i, %{public}i, %{public}u, %{public}u)", win, left, top, width, height);
 	
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {
@@ -206,9 +197,7 @@ void glk_window_erase_rect(winid_t win,
 
 void glk_window_fill_rect(winid_t win, glui32 color, 
 						  glsi32 left, glsi32 top, glui32 width, glui32 height) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_window_fill_rect(%p, %i, %i, %u, %u)", win, left, top, width, height);
-#endif	
+	os_log_debug(GlkClientTrace, "glk_window_fill_rect(%{public}p, %{public}i, %{public}i, %{public}u, %{public}u)", win, left, top, width, height);
 	
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {
@@ -253,9 +242,7 @@ void glk_window_fill_rect(winid_t win, glui32 color,
 ///	bright red.]]
 ///
 void glk_window_set_background_color(winid_t win, glui32 color) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_window_set_background_color(%p, %u)", win, color);
-#endif
+	os_log_debug(GlkClientTrace, "glk_window_set_background_color(%{public}p, %{public}u)", win, color);
 	
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {

@@ -11,6 +11,7 @@
 #include "glk.h"
 #import "cocoaglk.h"
 #import "glk_client.h"
+#import "ClientLogging.h"
 
 //
 // There are no guarantees of how styles will look, but you can make
@@ -46,9 +47,7 @@
 //
 void glk_stylehint_set(glui32 wintype, glui32 styl, glui32 hint, 
 					   glsi32 val) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stylehint_set(%u, %u, %u, %u)", wintype, styl, hint, val);
-#endif
+	os_log_debug(GlkClientTrace, " glk_stylehint_set(%{public}u, %{public}u, %{public}u, %{public}u)", wintype, styl, hint, val);
 
 	// Sanity checking
 	switch (wintype) {
@@ -65,6 +64,7 @@ void glk_stylehint_set(glui32 wintype, glui32 styl, glui32 hint,
 		
 		default:
 			// Unknown window type
+			os_log_fault(GlkClientLog, "glk_stylehint_set called with an unknown window type");
 			cocoaglk_error("glk_stylehint_set called with an unknown window type");
 			return;
 	}
@@ -86,9 +86,7 @@ void glk_stylehint_set(glui32 wintype, glui32 styl, glui32 hint,
 }
 
 void glk_stylehint_clear(glui32 wintype, glui32 styl, glui32 hint) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stylehint_clear(%u, %u, %u)", wintype, styl, hint);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stylehint_clear(%{public}u, %{public}u, %{public}u)", wintype, styl, hint);
 	
 	// Sanity checking
 	switch (wintype) {
@@ -105,6 +103,7 @@ void glk_stylehint_clear(glui32 wintype, glui32 styl, glui32 hint) {
 			
 		default:
 			// Unknown window type
+			os_log_fault(GlkClientLog, "glk_stylehint_clear called with an unknown window type");
 			cocoaglk_error("glk_stylehint_clear called with an unknown window type");
 			return;
 	}
@@ -120,9 +119,7 @@ void glk_stylehint_clear(glui32 wintype, glui32 styl, glui32 hint) {
 /// meaning of this is left to the library to determine.
 ///
 glui32 glk_style_distinguish(winid_t win, glui32 styl1, glui32 styl2) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_style_distinguish(%p, %u, %u)", win, styl1, styl2);
-#endif
+	os_log_debug(GlkClientTrace, "glk_style_distinguish(%{public}p, %{public}u, %{public}u)", win, styl1, styl2);
 
 	// For the moment, we always return TRUE (as all styles are technically distinguishable)
 	return 1;
@@ -162,10 +159,12 @@ glui32 glk_style_measure(winid_t win, glui32 styl, glui32 hint,
 						 glui32 *result) {
 	// Sanity checking
 	if (!cocoaglk_winid_sane(win)) {
+		os_log_fault(GlkClientLog, "glk_style_measure called with an invalid winid");
 		cocoaglk_error("glk_style_measure called with an invalid winid");
 	}
 	
 	if (!result) {
+		os_log_fault(GlkClientLog, "glk_style_measure called with a NULL value for result");
 		cocoaglk_error("glk_style_measure called with a NULL value for result");
 	}
 	
@@ -187,9 +186,7 @@ glui32 glk_style_measure(winid_t win, glui32 styl, glui32 hint,
 										hint: hint
 									inWindow: win->identifier];
 
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_style_measure(%p, %u, %u, %p=%u) = 1", win, styl, hint, result, *result);
-#endif
+	os_log_debug(GlkClientTrace, "glk_style_measure(%{public}p, %{public}u, %{public}u, %{public}p=%{public}u) = 1)", win, styl, hint, result, *result);
 	
 	return 1;
 }

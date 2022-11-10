@@ -16,6 +16,7 @@
 #import "GlkUcs4Stream.h"
 #import "GlkUTF8Stream.h"
 #import "GlkBufferedStream.h"
+#import "ClientLogging.h"
 
 #define GlkStreamMaxBuffer 32768
 
@@ -608,9 +609,7 @@ strid_t glk_stream_open_memory_uni(glui32 *buf, glui32 buflen,
 /// section 3.2, "Window Opening, Closing, and Constraints".
 ///
 void glk_stream_close(strid_t str, stream_result_t *result) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stream_close(%p, %p)", str, result);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_close(%{public}p, %{public}p)", str, result);
 
 	// Sanity checks
 	if (str == NULL) {
@@ -715,9 +714,7 @@ strid_t glk_stream_iterate(strid_t str, glui32 *rockptr) {
 	// Return the next stream
 	if (str->next && rockptr) *rockptr = str->next->rock;	
 
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stream_iterate(%p, %p=%u) = %p", str, rockptr, rockptr?*rockptr:0, str->next);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_iterate(%{public}p, %{public}p=%{public}u) = %{public}p", str, rockptr, rockptr?*rockptr:0, str->next);
 		
 	return str->next;
 }
@@ -730,9 +727,7 @@ glui32 glk_stream_get_rock(strid_t str) {
 		cocoaglk_error("glk_stream_get_rock called with an invalid strid");
 	}
 
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stream_get_rock(%p) = %u", str, str->rock);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_get_rock(%{public}p) = %{public}u", str, str->rock);
 		
 	return str->rock;
 }
@@ -761,9 +756,7 @@ glui32 glk_stream_get_rock(strid_t str) {
 /// end of a file, or to a position determined by \c glk_stream_get_position() .
 ///
 void glk_stream_set_position(strid_t str, glsi32 pos, glui32 seekmode) {
-#if COCOAGLK_TRACE > 1
-	NSLog(@"TRACE: glk_stream_set_position(%p, %u, %u)", str, pos, seekmode);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_set_position(%{public}p, %{public}u, %{public}u)", str, pos, seekmode);
 		
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
@@ -809,9 +802,7 @@ glui32 glk_stream_get_position(strid_t str) {
 	
 	glui32 res = (glui32)[str->stream getPosition];
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stream_get_position(%p) = %u", str, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_get_position(%{public}p) = %{public}u", str, res);
 		
 	return res;
 }
@@ -827,9 +818,7 @@ glui32 glk_stream_get_position(strid_t str) {
 /// becomes \c NULL .
 ///
 void glk_stream_set_current(strid_t str) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stream_set_current(%p)", str);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_set_current(%{public}p)", str);
 	
 	// Sanity checking
 	if (str != NULL && !cocoaglk_strid_sane(str)) {
@@ -840,9 +829,7 @@ void glk_stream_set_current(strid_t str) {
 }
 
 strid_t glk_stream_get_current(void) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stream_get_current() = %p", cocoaglk_currentstream);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_get_current() = %{public}p", cocoaglk_currentstream);
 	
 	return cocoaglk_currentstream;
 }
@@ -864,9 +851,8 @@ void glk_set_style(glui32 styl) {
 }
 
 void glk_put_char_stream(strid_t str, unsigned char ch) {
-#if COCOAGLK_TRACE > 1
-	NSLog(@"TRACE: glk_put_char_stream(%p, '%c')", str, ch);
-#endif
+	os_log_debug(GlkClientTrace, "glk_put_char_stream(%{public}p, '%{public}c')", str, ch);
+	
 	if (!str) {
 		cocoaglk_warning("glk_put_char_stream called with a NULL stream");
 		return;
@@ -915,9 +901,7 @@ void glk_put_char_stream(strid_t str, unsigned char ch) {
 }
 
 void glk_put_string_stream(strid_t str, char *s) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_put_string_stream(%p, \"%s\")", str, s);
-#endif
+	os_log_debug(GlkClientTrace, "glk_put_string_stream(%{public}p, \"%{public}s\")", str, s);
 	
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
@@ -967,9 +951,7 @@ void glk_put_string_stream(strid_t str, char *s) {
 }
 
 void glk_put_buffer_stream(strid_t str, char *buffer, glui32 len) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_put_buffer_stream(%p, %p, %u)", str, buffer, len);
-#endif
+	os_log_debug(GlkClientTrace, "glk_put_buffer_stream(%{public}p, %{public}p, %{public}u)", str, buffer, len);
 
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
@@ -1018,9 +1000,7 @@ void glk_put_buffer_stream(strid_t str, char *buffer, glui32 len) {
 }
 
 void glk_set_style_stream(strid_t str, glui32 styl) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_set_style_stream(%p, %u)", str, styl);
-#endif
+	os_log_debug(GlkClientTrace, "glk_set_style_stream(%{public}p, %{public}u)", str, styl);
 
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
@@ -1083,9 +1063,7 @@ glsi32 glk_get_char_stream(strid_t str) {
 	// Next, use the stream object to get our result
 	unichar res = [str->stream getChar];
 
-#if COCOAGLK_TRACE > 1
-	NSLog(@"TRACE: glk_get_char_stream(%p) = %i", str, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_get_char_stream(%{public}p) = %{public}i", str, res);
 		
 	if (res == GlkEOFChar) return -1;
 	
@@ -1140,7 +1118,7 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 	
 	if (length+1 > len) {
 		// Trim the line if the buffer is not big enough (this shouldn't happen)
-		NSLog(@"Warning: trimming line returned from getLineWithLength as it's longer than requested");
+		os_log(GlkClientLog, "trimming line returned from getLineWithLength as it's longer than requested");
 		length = len-1;
 	}
 	
@@ -1151,9 +1129,7 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 	buf[length] = 0;
 #endif
 
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_get_line_stream(%p, %p=\"%s\", %u) = %ld", str, buf, buf, len, (long)length);
-#endif
+	os_log_debug(GlkClientTrace, "glk_get_line_stream(%{public}p, %{public}p=\"%{public}s\", %{public}u) = %{public}ld", str, buf, buf, len, (long)length);
 		
 	// Return the result
 	str->read += len;
@@ -1186,7 +1162,7 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 	NSInteger length = [data length];
 	
 	if (length > len) {
-		NSLog(@"Warning: getBufferWithLength: returned more data than was asked for (trimming)");
+		os_log(GlkClientLog, "getBufferWithLength: returned more data than was asked for (trimming)");
 		length = len;
 	}
 	
@@ -1195,9 +1171,7 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 		memcpy(buf, [data bytes], length);
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_get_buffer_stream(%p, %p, %i) = %ld", str, buf, len, (long)length);
-#endif
+	os_log_debug(GlkClientTrace, "glk_get_buffer_stream(%{public}p, %{public}p, %{public}i) = %{public}ld", str, buf, len, (long)length);
 		
 	str->read += length;
 	return (glui32)length;

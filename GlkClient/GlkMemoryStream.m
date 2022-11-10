@@ -11,11 +11,25 @@
 #include "glk.h"
 #import "cocoaglk.h"
 #include "glk_client.h"
+#import "ClientLogging.h"
+
+os_log_t GlkClientLog;
+os_log_t GlkClientTrace;
 
 
 @implementation GlkMemoryStream
 
 #pragma mark - Initialisation
+
++ (void)load
+{
+	// We initialize these here for convenience sake and for no other reason. They could be moved to a better place in the future.
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		GlkClientLog = os_log_create("uk.co.logicalshift.CocoaGlk.GlkClient", "");
+		GlkClientTrace = os_log_create("uk.co.logicalshift.CocoaGlk.GlkClient", "trace");
+	});
+}
 
 - (id) initWithMemory: (unsigned char*) mem
 			   length: (NSInteger) len {
@@ -94,7 +108,7 @@
 	if (ch > 255) ch = '?';
 	
 	if (memory == nil) {
-		NSLog(@"Warning: tried to write to a closed memory stream");
+		os_log(GlkClientLog, "Warning: tried to write to a closed memory stream");
 		return;
 	}
 	
@@ -105,7 +119,7 @@
 
 - (void) putString: (in bycopy NSString*) string {
 	if (memory == nil) {
-		NSLog(@"Warning: tried to write to a closed memory stream");
+		os_log(GlkClientLog, "Warning: tried to write to a closed memory stream");
 		return;
 	}
 	
@@ -116,7 +130,7 @@
 
 - (void) putBuffer: (in bycopy NSData*) buffer {
 	if (memory == nil) {
-		NSLog(@"Warning: tried to write to a closed memory stream");
+		os_log(GlkClientLog, "Warning: tried to write to a closed memory stream");
 		return;
 	}
 	
@@ -134,7 +148,7 @@
 
 - (unichar) getChar {
 	if (memory == nil) {
-		NSLog(@"Warning: tried to read from a closed memory stream");
+		os_log(GlkClientLog, "Warning: tried to read from a closed memory stream");
 		return GlkEOFChar;
 	}
 	
@@ -145,7 +159,7 @@
 
 - (bycopy NSString*) getLineWithLength: (NSInteger) maxLen {
 	if (memory == nil) {
-		NSLog(@"Warning: tried to read from a closed memory stream");
+		os_log(GlkClientLog, "Warning: tried to read from a closed memory stream");
 		return nil;
 	}
 	
@@ -164,7 +178,7 @@
 
 - (bycopy NSData*) getBufferWithLength: (NSUInteger) bufLen {
 	if (memory == nil) {
-		NSLog(@"Warning: tried to read from a closed memory stream");
+		os_log(GlkClientLog, "Warning: tried to read from a closed memory stream");
 		return nil;
 	}
 	

@@ -20,6 +20,7 @@
 #include "glk.h"
 #import "cocoaglk.h"
 #import "glk_client.h"
+#import "ClientLogging.h"
 
 @class GlkCocoa;
 
@@ -60,7 +61,7 @@ void cocoaglk_flush_pool(void) {
 		cocoaglk_interrupt();
 	}
 	
-	NSLog(@"Connection died");
+	os_log(GlkClientLog, "Connection died");
 #if defined(COCOAGLK_IPHONE)
 	[NSThread exit];
 #else
@@ -111,9 +112,7 @@ void cocoaglk_start(int argv, const char** argc) {
 	// There's a default hub name if all else fails
 	if (hubName == NULL) hubName = "CocoaGlk";
 	
-#if COCOAGLK_DEBUG
-	NSLog(@"Client ready: hub name %s, cookie %s, session cookie %s", hubName, hubCookie, sessionCookie);
-#endif
+	os_log_debug(GlkClientLog, "Client ready: hub name %{public}s, cookie %{public}s, session cookie %{public}s", hubName, hubCookie, sessionCookie);
 	
 	// Create the base object
 	cocoaglk_obj = [[GlkCocoa alloc] init];
@@ -132,22 +131,22 @@ void cocoaglk_start(int argv, const char** argc) {
 																		   host: nil];
 	
 	if (remoteConnection == nil) {
-		NSLog(@"Failed to connect to Glk hub with name %s", hubName);
-		NSLog(@"Unable to open display. Quitting");
+		os_log_fault(GlkClientLog, "Failed to connect to Glk hub with name %{public}s", hubName);
+		os_log_error(GlkClientLog, "Unable to open display. Quitting");
 		exit(1);
 	}
 	
 	cocoaglk_hub = (id<GlkHub>)[remoteConnection rootProxy];
 	
 	if (cocoaglk_hub == nil) {
-		NSLog(@"Failed to retrieve hub object");
-		NSLog(@"Unable to open display. Quitting");
+		os_log_fault(GlkClientLog, "Failed to retrieve hub object");
+		os_log_error(GlkClientLog, "Unable to open display. Quitting");
 		exit(1);
 	}
 	
 	if (![cocoaglk_hub conformsToProtocol: @protocol(GlkHub)]) {
-		NSLog(@"Remote hub does not conform to the GlkHub protocol");
-		NSLog(@"Unable to open display. Quitting");
+		os_log_fault(GlkClientLog, "Remote hub does not conform to the GlkHub protocol");
+		os_log_error(GlkClientLog, "Unable to open display. Quitting");
 		exit(1);
 	}
 	
@@ -174,8 +173,8 @@ void cocoaglk_start(int argv, const char** argc) {
 	
 	// If we haven't got a valid session, then authentication likely failed
 	if (cocoaglk_session == nil) {
-		NSLog(@"Failed to connect to Glk hub: failed to create session (most likely due to a bad cookie)");
-		NSLog(@"Unable to open display. Quitting");
+		os_log_fault(GlkClientLog, "Failed to connect to Glk hub: failed to create session (most likely due to a bad cookie)");
+		os_log_error(GlkClientLog, "Unable to open display. Quitting");
 		exit(1);
 	}
 	
@@ -192,9 +191,8 @@ void cocoaglk_start(int argv, const char** argc) {
 
 /// Reports a warning to the server
 void cocoaglk_warning(const char* warningText) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: cocoaglk_warning(\"%s\")", warningText);
-#endif
+	os_log_debug(GlkClientTrace, "cocoaglk_warning(\"%{public}s\")", warningText);
+	os_log_error(GlkClientLog, "%{public}s", warningText);
 
 	cocoaglk_flushbuffer("About to show a warning");
 	
@@ -207,9 +205,8 @@ void cocoaglk_warning(const char* warningText) {
 
 /// Reports an error to the server, then quits
 void cocoaglk_error(const char* errorText) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: cocoaglk_error(\"%s\")", errorText);
-#endif
+	os_log_debug(GlkClientTrace, "cocoaglk_error(\"%{public}s\")", errorText);
+	os_log_fault(GlkClientLog, "%{public}s", errorText);
 
 	static BOOL showingError = NO;
 	if (!showingError) {
@@ -239,9 +236,7 @@ void cocoaglk_error(const char* errorText) {
 
 /// Logs a message to the server
 void cocoaglk_log(const char* logText) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: cocoaglk_log(\"%s\")", logText);
-#endif
+	os_log_debug(GlkClientTrace, "cocoaglk_log(\"%{public}s\")", logText);
 	
 	cocoaglk_flushbuffer("About to show a log message");
 	
@@ -254,9 +249,7 @@ void cocoaglk_log(const char* logText) {
 
 /// Logs a message with priority to the server
 void cocoaglk_log_ex(const char* logText, int priority) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: cocoaglk_log_ex(\"%s\", %i)", logText, priority);
-#endif
+	os_log_debug(GlkClientTrace, "cocoaglk_log_ex(\"%{public}s\", %i)", logText, priority);
 	
 	cocoaglk_flushbuffer("About to show a log message");
 	
@@ -278,7 +271,7 @@ void cocoaglk_flushbuffer(const char* reason) {
 	static BOOL flushing = NO;
 	
 	if (flushing) {
-		NSLog(@"Recursive buffer flush?! (%s)", reason);
+		os_log_fault(GlkClientLog, "Recursive buffer flush?! (%{public}s)", reason);
 		return;
 	}
 	
@@ -286,9 +279,7 @@ void cocoaglk_flushbuffer(const char* reason) {
 	
 	// Flush the buffer
 	if ([cocoaglk_buffer shouldBeFlushed]) {
-#if COCOAGLK_TRACE
-		NSLog(@"Main buffer flushing: %s", reason);
-#endif
+		os_log_debug(GlkClientTrace, "Main buffer flushing: %{public}s", reason);
 		
 		[cocoaglk_session performOperationsFromBuffer: cocoaglk_buffer];
 				
@@ -297,9 +288,7 @@ void cocoaglk_flushbuffer(const char* reason) {
 		
 		cocoaglk_loopIteration = [cocoaglk_session synchronisationCount];
 		
-#if COCOAGLK_TRACE
-		NSLog(@"Main buffer flushed");
-#endif
+		os_log_debug(GlkClientTrace, "Main buffer flushed");
 	}
 	
 	flushing = NO;

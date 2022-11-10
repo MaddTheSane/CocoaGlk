@@ -11,6 +11,7 @@
 #include "glk.h"
 #import "cocoaglk.h"
 #import "glk_client.h"
+#import "ClientLogging.h"
 
 static BOOL cocoaglk_eventwaiting = NO;
 static int cocoaglk_timerlength = -1;
@@ -52,9 +53,7 @@ void glk_select(event_t *event) {
 		return;
 	}
 
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_select(%p)", event);
-#endif
+	os_log_debug(GlkClientTrace, "glk_select(%{public}p)", event);
 	
 	// Clear the event structure
 	event->type = evtype_None;
@@ -66,8 +65,7 @@ void glk_select(event_t *event) {
 	cocoaglk_flushbuffer("glk_select called");
 	
 	// Then we cycle the autorelease pool
-	[cocoaglk_pool release];
-	cocoaglk_pool = [[NSAutoreleasePool alloc] init];
+	cocoaglk_flush_pool();
 	
 	// Register a new listener
 	cocoaglk_eventwaiting = NO;
@@ -192,9 +190,7 @@ void glk_select(event_t *event) {
 /// "Other Events".
 ///
 void glk_select_poll(event_t *event) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_select_poll(%p)", event);
-#endif
+	os_log_debug(GlkClientTrace, "glk_select_poll(%{public}p)", event);
 
 	// Sanity check
 	if (event == NULL) {
@@ -224,9 +220,7 @@ void glk_select_poll(event_t *event) {
 /// what the player does. Unlike input events, timer events can be tested
 /// for with \c glk_select_poll() as well as \c glk_select() .
 void glk_request_timer_events(glui32 millisecs) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_request_timer_events(%u)", millisecs);
-#endif
+	os_log_debug(GlkClientTrace, "glk_request_timer_events(%{public}u)", millisecs);
 	
 	// Release the old timer event date
 	[cocoaglk_nextTimerEvent release];
@@ -279,9 +273,7 @@ void glk_request_line_event(winid_t win,
 							char *buf, 
 							glui32 maxlen,
 							glui32 initlen) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_request_line_event(%p, %p, %u, %u)", win, buf, maxlen, initlen);
-#endif
+	os_log_debug(GlkClientTrace, "glk_request_line_event(%{public}p, %{public}p, %{public}u, %{public}u)", win, buf, maxlen, initlen);
 
 	// Sanity check
 	if (win == NULL) {
@@ -341,9 +333,7 @@ void glk_request_line_event(winid_t win,
 // already has a pending request for either character or line input.
 // 
 void glk_request_char_event(winid_t win) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_request_char_event(%p)", win);
-#endif
+	os_log_debug(GlkClientTrace, "glk_request_char_event(%{public}p)", win);
 
 	// Sanity check
 	if (win == NULL) {
@@ -374,9 +364,7 @@ void glk_request_char_event(winid_t win) {
 // if you want further mouse input.
 //
 void glk_request_mouse_event(winid_t win) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_request_mouse_event(%p)", win);
-#endif
+	os_log_debug(GlkClientTrace, "glk_request_mouse_event(%{public}p)", win);
 
 	// Sanity check
 	if (win == NULL) {
@@ -445,9 +433,7 @@ void glk_cancel_line_event(winid_t win, event_t *event) {
 }
 
 void glk_cancel_char_event(winid_t win) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_cancel_char_event(%p)", win);
-#endif
+	os_log_debug(GlkClientTrace, "glk_cancel_char_event(%{public}p)", win);
 
 	// Sanity check
 	if (win == NULL) {
@@ -464,9 +450,7 @@ void glk_cancel_char_event(winid_t win) {
 }
 
 void glk_cancel_mouse_event(winid_t win) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_cancel_mouse_event(%p)", win);
-#endif
+	os_log_debug(GlkClientTrace, "glk_cancel_mouse_event(%{public}p)", win);
 
 	// Sanity check
 	if (win == NULL) {

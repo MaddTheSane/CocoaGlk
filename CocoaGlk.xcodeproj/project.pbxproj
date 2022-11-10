@@ -137,6 +137,7 @@
 		5530B2EE2774826400DFECFF /* multiWinSwift in Embed Binaries */ = {isa = PBXBuildFile; fileRef = 5530B2AD276F20C000DFECFF /* multiWinSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		554A4559291CF6B200C090C3 /* ClientLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 554A4558291CF6B200C090C3 /* ClientLogging.h */; };
 		5560FA2921C06BF500E711F5 /* GlkViewDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA2C21C07EC200E711F5 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2B21C07EC200E711F5 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA3321C084E500E711F5 /* GlkTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA3221C084E500E711F5 /* GlkTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -623,6 +624,7 @@
 		5530B2C42771317200DFECFF /* MultiWinSwift-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultiWinSwift-BridgingHeader.h"; sourceTree = "<group>"; };
 		5530B2C627714E2B00DFECFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5530B2C727714E2B00DFECFF /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		554A4558291CF6B200C090C3 /* ClientLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClientLogging.h; sourceTree = "<group>"; };
 		5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkViewDefinitions.h; sourceTree = "<group>"; };
 		5560FA2B21C07EC200E711F5 /* GlkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkView.h; sourceTree = "<group>"; };
 		5560FA3221C084E500E711F5 /* GlkTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlkTextView.h; sourceTree = "<group>"; };
@@ -1030,6 +1032,7 @@
 				4BBFE3960C4EC253007DEE18 /* GlkBufferedStream.h */,
 				4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */,
 				4BFA1CDA07F8A40C0068E16A /* Extras */,
+				554A4558291CF6B200C090C3 /* ClientLogging.h */,
 			);
 			path = GlkClient;
 			sourceTree = "<group>";
@@ -1289,6 +1292,7 @@
 				4B51AAF807E87DCA00576AB9 /* glk_client.h in Headers */,
 				4B51AB3B07E87EE300576AB9 /* cocoaglk.h in Headers */,
 				4B8C7D8707F7041F00502054 /* GlkMemoryStream.h in Headers */,
+				554A4559291CF6B200C090C3 /* ClientLogging.h in Headers */,
 				4BFA1CD207F8A4040068E16A /* gi_dispa.h in Headers */,
 				55D6F0B5275D6C810098620E /* GlkUTF8Stream.h in Headers */,
 				4BFA1CD407F8A4040068E16A /* gi_blorb.h in Headers */,

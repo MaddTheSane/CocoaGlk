@@ -19,14 +19,13 @@
 #include "glk.h"
 #import "cocoaglk.h"
 #import "glk_client.h"
+#import "ClientLogging.h"
 
 NSInteger cocoaglk_loopIteration = 0;
 void (*cocoaglk_interrupt)(void);
 
 void glk_exit(void) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_exit()");
-#endif
+	os_log_debug(GlkClientTrace, "glk_exit()");
 	
 	// Flush the buffer
 	cocoaglk_flushbuffer("About to exit");
@@ -55,9 +54,7 @@ void glk_exit(void) {
 /// handler function.
 ///
 void glk_set_interrupt_handler(void (*func)(void)) {
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_set_interrupt_handler(%p)", func);
-#endif
+	os_log_debug(GlkClientTrace, "glk_set_interrupt_handler(%{public}p)", func);
 
 	cocoaglk_interrupt = func;
 }
@@ -69,9 +66,7 @@ void glk_tick(void) {
 	
 	// CHOMP
 
-#if COCOAGLK_TRACE > 1
-	NSLog(@"TRACE: glk_tick()", func);
-#endif
+	os_log_debug(GlkClientTrace, "glk_tick()");
 	
 	static int ticker = 0;
 	
@@ -115,9 +110,7 @@ void glk_tick(void) {
 glui32 glk_gestalt(glui32 sel, glui32 val) {
 	glui32 result = glk_gestalt_ext(sel, val, NULL, 0);
 
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_gestalt(%u, %u) = %u", sel, val, result);
-#endif
+	os_log_debug(GlkClientTrace, "glk_gestalt(%{public}u, %{public}u) = %{public}u", sel, val, result);
 	
 	return result;
 }
@@ -237,9 +230,7 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 			break;
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_gestalt_ext(%u, %u, %p, %u) = %i", sel, val, arr, arrlen, result);
-#endif
+	os_log_debug(GlkClientTrace, "glk_gestalt_ext(%{public}u, %{public}u, %{public}p, %{public}u) = %{public}i", sel, val, arr, arrlen, result);
 	
 	return result;
 }

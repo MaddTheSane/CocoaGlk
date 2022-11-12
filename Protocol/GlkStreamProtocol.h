@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) setImmediateStyleHint: (unsigned) hint
 					   toValue: (int) value;
 - (void) clearImmediateStyleHint: (unsigned) hint;
-- (void) setCustomAttributes: (NSDictionary*) customAttributes;
+- (void) setCustomAttributes: (NSDictionary<NSAttributedStringKey,id>*) customAttributes;
 
 - (void) setHyperlink: (unsigned int) value;
 - (void) clearHyperlink;

@@ -17,6 +17,8 @@
 #endif
 #import <GlkView/GlkCustomTextSection.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /// Attribute that can be applied to control glyphs to indicate that they should cause formatting of a specific Glk image
 extern NSString* const GlkImageAttribute;
 
@@ -68,5 +70,7 @@ extern NSString* const GlkImageAttribute;
 - (void) markAsUncalculated;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

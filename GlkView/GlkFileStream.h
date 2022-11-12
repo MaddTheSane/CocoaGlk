@@ -13,20 +13,24 @@
 
 #import <GlkView/GlkStreamProtocol.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface GlkFileStream : NSObject<GlkStream> {
 	/// The filehandle we're using to read/write from
 	NSFileHandle* handle;
 }
 
 // Initialisation
-- (instancetype) initForReadWriteWithFilename: (NSString*) filename;
-- (instancetype) initForWritingWithFilename: (NSString*) filename;
-- (instancetype) initForReadingWithFilename: (NSString*) filename;
+- (nullable instancetype) initForReadWriteWithFilename: (NSString*) filename;
+- (nullable instancetype) initForWritingWithFilename: (NSString*) filename;
+- (nullable instancetype) initForReadingWithFilename: (NSString*) filename;
 
-- (instancetype) initForReadWriteWithFileURL: (NSURL*) filename;
-- (instancetype) initForWritingToFileURL: (NSURL*) filename;
-- (instancetype) initForReadingFromFileURL: (NSURL*) filename;
+- (nullable instancetype) initForReadWriteWithFileURL: (NSURL*) filename;
+- (nullable instancetype) initForWritingToFileURL: (NSURL*) filename;
+- (nullable instancetype) initForReadingFromFileURL: (NSURL*) filename;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

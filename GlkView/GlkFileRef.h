@@ -18,6 +18,8 @@
 
 #import <GlkView/GlkFileRefProtocol.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface GlkFileRef : NSObject<GlkFileRef> {
 	NSURL* pathname;
 	
@@ -33,5 +35,7 @@
 @property (getter=isTemporary) BOOL temporary;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

@@ -22,7 +22,7 @@
 @protocol GlkImageSource <NSObject>
 
 /// Retrieve the image data for a specified resource
-- (bycopy NSData*) dataForImageResource: (glui32) image;
+- (nullable bycopy NSData*) dataForImageResource: (glui32) image;
 
 @end
 

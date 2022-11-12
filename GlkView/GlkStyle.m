@@ -130,7 +130,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 	if (![obj isKindOfClass: [self class]]) {
 		return NO;
 	} else {
-		// IMPLEMENT ME
+		// TODO: IMPLEMENT ME
 		return NO;
 	}
 }

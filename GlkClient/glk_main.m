@@ -197,9 +197,11 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 			result = 1;
 			break;
 			
+#ifdef GLK_MODULE_UNICODE_NORM
 		case gestalt_UnicodeNorm:
 			result = 1;
 			break;
+#endif
 			
 		case gestalt_DateTime:
 			result = 1;

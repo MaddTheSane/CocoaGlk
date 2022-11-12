@@ -197,9 +197,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	[self preferencesHaveChanged];
 }
 
-- (NSDictionary*) styles {
-	return styles;
-}
+@synthesize styles;
 
 #pragma mark - Typography preferences
 

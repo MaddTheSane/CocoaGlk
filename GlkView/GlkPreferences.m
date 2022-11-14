@@ -55,7 +55,13 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 		if (proportionalFont == nil) proportionalFont = [GlkFont systemFontOfSize: 12];
 		if (fixedFont == nil) fixedFont = [GlkFont fontWithName: @"Monaco"
 														   size: 12];
-		if (fixedFont == nil) fixedFont = [GlkFont systemFontOfSize: 12];
+		if (fixedFont == nil) {
+			if (@available(macOS 10.15, *)) {
+				fixedFont = [GlkFont monospacedSystemFontOfSize: 12 weight: NSFontWeightRegular];
+			} else {
+				fixedFont = [GlkFont userFixedPitchFontOfSize: 12];
+			}
+		}
 		
 		// Default styles
 		styles = [[NSMutableDictionary alloc] init];

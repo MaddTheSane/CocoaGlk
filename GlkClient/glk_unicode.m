@@ -236,12 +236,10 @@ void glk_put_buffer_uni(glui32 *buf, glui32 len) {
 void glk_put_char_stream_uni(strid_t str, glui32 ch) {
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
-		os_log_fault(GlkClientLog, "Warning: tried to read from a closed memory stream");
 		cocoaglk_error("glk_put_char_stream_uni called with a bad stream");
 	}
 	
 	if (!cocoaglk_strid_write(str)) {
-		os_log_error(GlkClientLog, "glk_put_char_stream_uni called on a read-only stream");
 		cocoaglk_error("glk_put_char_stream_uni called on a read-only stream");
 	}
 	
@@ -316,7 +314,6 @@ void glk_put_char_stream_uni(strid_t str, glui32 ch) {
 void glk_put_string_stream_uni(strid_t str, glui32 *s) {
 	// Sanity checking
 	if (s == NULL) {
-		os_log_fault(GlkClientLog, "glk_put_string_stream_uni called will a null string");
 		cocoaglk_error("glk_put_string_stream_uni called will a null string");
 	}
 	
@@ -330,17 +327,14 @@ void glk_put_string_stream_uni(strid_t str, glui32 *s) {
 void glk_put_buffer_stream_uni(strid_t str, glui32 *buffer, glui32 len) {
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
-		os_log_error(GlkClientLog, "glk_put_buffer_stream_uni called with a bad stream");
 		cocoaglk_error("glk_put_buffer_stream_uni called with a bad stream");
 	}
 	
 	if (!cocoaglk_strid_write(str)) {
-		os_log_error(GlkClientLog, "glk_put_buffer_stream_uni called on a read-only stream");
 		cocoaglk_error("glk_put_buffer_stream_uni called on a read-only stream");
 	}
 	
 	if (buffer == NULL) {
-		os_log_fault(GlkClientLog, "glk_put_buffer_stream_uni called will a null buffer");
 		cocoaglk_error("glk_put_buffer_stream_uni called will a null buffer");
 	}
 	
@@ -381,12 +375,10 @@ void glk_put_buffer_stream_uni(strid_t str, glui32 *buffer, glui32 len) {
 glsi32 glk_get_char_stream_uni(strid_t str) {
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
-		os_log_error(GlkClientLog, "glk_get_char_stream called with an invalid strid");
 		cocoaglk_error("glk_get_char_stream called with an invalid strid");
 	}
 	
 	if (!cocoaglk_strid_read(str)) {
-		os_log_error(GlkClientLog, "glk_get_char_stream called with an invalid strid");
 		cocoaglk_error("glk_get_char_stream called with a strid that cannot be read from");
 	}
 	
@@ -407,17 +399,14 @@ glsi32 glk_get_char_stream_uni(strid_t str) {
 glui32 glk_get_buffer_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
-		os_log_error(GlkClientLog, "glk_get_line_stream_uni called with an invalid strid");
 		cocoaglk_error("glk_get_line_stream_uni called with an invalid strid");
 	}
 	
 	if (!cocoaglk_strid_read(str)) {
-		os_log_error(GlkClientLog, "glk_get_line_stream_uni called with a strid that cannot be read from");
 		cocoaglk_error("glk_get_line_stream_uni called with a strid that cannot be read from");
 	}
 	
 	if (buf == NULL) {
-		os_log_fault(GlkClientLog, "glk_get_line_stream_uni called with a NULL buffer");
 		cocoaglk_error("glk_get_line_stream_uni called with a NULL buffer");
 	}
 	
@@ -444,17 +433,14 @@ glui32 glk_get_buffer_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 glui32 glk_get_line_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
-		os_log_error(GlkClientLog, "glk_get_line_stream_uni called with an invalid strid");
 		cocoaglk_error("glk_get_line_stream_uni called with an invalid strid");
 	}
 	
 	if (!cocoaglk_strid_read(str)) {
-		os_log_error(GlkClientLog, "glk_get_line_stream_uni called with a strid that cannot be read from");
 		cocoaglk_error("glk_get_line_stream_uni called with a strid that cannot be read from");
 	}
 	
 	if (buf == NULL) {
-		os_log_fault(GlkClientLog, "glk_get_line_stream_uni called with a NULL buffer");
 		cocoaglk_error("glk_get_line_stream_uni called with a NULL buffer");
 	}
 	

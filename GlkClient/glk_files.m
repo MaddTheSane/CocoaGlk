@@ -497,9 +497,10 @@ void cocoaglk_bind_memory_to_named_file(const unsigned char* memory, int length,
 	
 	NSData* data = [NSData dataWithBytesNoCopy: (unsigned char*)memory
 										length: length];
-	GlkMemoryFileRef* fileref = [[[GlkMemoryFileRef alloc] initWithData: data] autorelease];
+	GlkMemoryFileRef* fileref = [[GlkMemoryFileRef alloc] initWithData: data];
 	[cocoaglk_fileref_bindings setObject: fileref
 								  forKey: name];
+	[fileref release];
 }
 
 #import <GlkView/GlkFileRef.h>

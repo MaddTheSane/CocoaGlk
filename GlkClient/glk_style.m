@@ -64,7 +64,6 @@ void glk_stylehint_set(glui32 wintype, glui32 styl, glui32 hint,
 		
 		default:
 			// Unknown window type
-			os_log_fault(GlkClientLog, "glk_stylehint_set called with an unknown window type");
 			cocoaglk_error("glk_stylehint_set called with an unknown window type");
 			return;
 	}
@@ -103,7 +102,6 @@ void glk_stylehint_clear(glui32 wintype, glui32 styl, glui32 hint) {
 			
 		default:
 			// Unknown window type
-			os_log_fault(GlkClientLog, "glk_stylehint_clear called with an unknown window type");
 			cocoaglk_error("glk_stylehint_clear called with an unknown window type");
 			return;
 	}
@@ -159,12 +157,10 @@ glui32 glk_style_measure(winid_t win, glui32 styl, glui32 hint,
 						 glui32 *result) {
 	// Sanity checking
 	if (!cocoaglk_winid_sane(win)) {
-		os_log_fault(GlkClientLog, "glk_style_measure called with an invalid winid");
 		cocoaglk_error("glk_style_measure called with an invalid winid");
 	}
 	
 	if (!result) {
-		os_log_fault(GlkClientLog, "glk_style_measure called with a NULL value for result");
 		cocoaglk_error("glk_style_measure called with a NULL value for result");
 	}
 	

@@ -213,7 +213,7 @@
 	
 	fadeTimer = [NSTimer timerWithTimeInterval: waitTime
 										target: self
-									  selector: @selector(startToFadeLogo)
+									  selector: @selector(startToFadeLogo:)
 									  userInfo: nil
 									   repeats: NO];
 	CFRetain((__bridge CFTypeRef)(self));
@@ -229,7 +229,7 @@
 						  ordered: NSWindowAbove];
 }
 
-- (void) startToFadeLogo {
+- (void) startToFadeLogo:(NSTimer*)timer {
 	if (fadeTimer) {
 		[fadeTimer invalidate];
 		CFAutorelease((__bridge CFTypeRef)(self));

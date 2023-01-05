@@ -729,9 +729,7 @@
 - (void) addFlowBreak {
 	// Creaate a flow break character
 	GlkClearMargins* clear = [[GlkClearMargins alloc] init];
-	unichar clearChar = 11;
-	NSString* clearString = [NSString stringWithCharacters: &clearChar
-													length: 1];
+	NSString* clearString = @"\xb";
 	
 	// Construct the attributes that describe this clear margins character
 	NSDictionary* clearDict = @{GlkCustomSectionAttributeName: clear};

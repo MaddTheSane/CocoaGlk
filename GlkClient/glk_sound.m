@@ -159,7 +159,7 @@ glui32 glk_schannel_play_ext(schanid_t chan, glui32 snd, glui32 repeats,
 	
 	glui32 returnVal = gli_schannel_play_ext(chan, snd, repeats, notify);
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_play_ext(%{public}p, %{public}u, %{public}u, %{public}u) = %u", chan, snd, repeats, notify, returnVal);
+	os_log_debug(GlkClientTrace, "glk_schannel_play_ext(%{public}p, %{public}u, %{public}u, %{public}u) = %{public}u", chan, snd, repeats, notify, returnVal);
 
 	return returnVal;
 }

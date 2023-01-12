@@ -76,8 +76,7 @@ void cocoaglk_flush_pool(void) {
 #if !defined(COCOAGLK_IPHONE)
 
 void cocoaglk_start(int argv, const char** argc) {
-	[cocoaglk_pool release];
-	cocoaglk_pool = [[NSAutoreleasePool alloc] init];
+	cocoaglk_flush_pool();
 	
 	// Parse arguments
 	//
@@ -249,7 +248,7 @@ void cocoaglk_log(const char* logText) {
 
 /// Logs a message with priority to the server
 void cocoaglk_log_ex(const char* logText, int priority) {
-	os_log_debug(GlkClientTrace, "cocoaglk_log_ex(\"%{public}s\", %i)", logText, priority);
+	os_log_debug(GlkClientTrace, "cocoaglk_log_ex(\"%{public}s\", %{public}i)", logText, priority);
 	
 	cocoaglk_flushbuffer("About to show a log message");
 	
@@ -259,6 +258,63 @@ void cocoaglk_log_ex(const char* logText, int priority) {
 	[cocoaglk_session logMessage: logString
 					withPriority: priority];
 	[logString release];
+}
+
+/// Reports a warning to the server
+void cocoaglk_NSWarning(NSString* warningString) {
+	os_log_debug(GlkClientTrace, "cocoaglk_NSWarning(\"%{public}@\")", warningString);
+	os_log_error(GlkClientLog, "%{public}@", warningString);
+
+	cocoaglk_flushbuffer("About to show a warning");
+	
+	[cocoaglk_session showWarning: warningString];
+}
+
+/// Reports an error to the server, then quits
+void cocoaglk_NSError(NSString* errorText) {
+	os_log_debug(GlkClientTrace, "cocoaglk_NSError(\"%{public}@\")", errorText);
+	os_log_fault(GlkClientLog, "%{public}@", errorText);
+
+	static BOOL showingError = NO;
+	if (!showingError) {
+		showingError = YES;
+		
+		cocoaglk_flushbuffer("About to show an error");
+		
+		[cocoaglk_session showError: errorText];
+
+		if (cocoaglk_interrupt) cocoaglk_interrupt();
+		[cocoaglk_session clientHasFinished];
+		
+		showingError = NO;
+
+#if defined(COCOAGLK_IPHONE)
+		// Kill the interpreter thread
+		[NSThread exit];
+#else
+		// Kill the interpreter task
+		exit(1);
+#endif
+	}
+}
+
+/// Logs a message to the server
+void cocoaglk_NSLog(NSString* logText) {
+	os_log_debug(GlkClientTrace, "cocoaglk_NSLog(\"%{public}@\")", logText);
+	
+	cocoaglk_flushbuffer("About to show a log message");
+	
+	[cocoaglk_session logMessage: logText];
+}
+
+/// Logs a message with priority to the server
+void cocoaglk_NSLog_ex(NSString* logText, int priority) {
+	os_log_debug(GlkClientTrace, "cocoaglk_NSLog_ex(\"%{public}@\", %{public}i)", logText, priority);
+	
+	cocoaglk_flushbuffer("About to show a log message");
+	
+	[cocoaglk_session logMessage: logText
+					withPriority: priority];
 }
 
 /// Flushes the buffer

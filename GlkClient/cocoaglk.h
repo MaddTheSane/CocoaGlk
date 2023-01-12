@@ -55,6 +55,18 @@ extern void cocoaglk_log(const char* logText);
 extern void cocoaglk_log_ex(const char* logText, int priority);
 
 #if defined(__OBJC__) && __OBJC__
+/// Reports a warning to the server
+extern void cocoaglk_NSWarning(NSString* warningText);
+
+/// Reports an error to the server, then quits
+extern void cocoaglk_NSError(NSString* errorText);
+
+/// Request to send a message to the game's log (if the runner supports it)
+extern void cocoaglk_NSLog(NSString* logText);
+
+/// Request to send a message to the game's log with a priority (0, 1 or 2)
+extern void cocoaglk_NSLog_ex(NSString* logText, int priority);
+
 /// Sets the extensions to use for a specific file usage
 extern void cocoaglk_set_types_for_usage(glui32 usage, NSArray<NSString*>* extensions);
 

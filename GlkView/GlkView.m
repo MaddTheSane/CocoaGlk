@@ -2044,16 +2044,26 @@
 		// Narcolepsy (for example) uses images with a resolution that might not be the screen resolution.
 		// This is annoying. This should re-render the image at a more suitable resolution
 		NSImageRep* rep = [[sourceImage representations] objectAtIndex: 0];
-		NSSize pixelSize = NSMakeSize([rep pixelsWide], [rep pixelsHigh]);
-		
-		image = [[NSImage alloc] initWithSize: pixelSize];
-		
-		[image lockFocus];
-		[sourceImage drawInRect: NSMakeRect(0,0, pixelSize.width, pixelSize.height)
-					   fromRect: NSZeroRect
-					  operation: NSCompositingOperationSourceOver
-					   fraction: 1.0];
-		[image unlockFocus];
+		if ([rep isKindOfClass:[NSBitmapImageRep class]]) {
+			// ...but store the original GIF image if it's animated.
+			NSBitmapImageRep *bir = (NSBitmapImageRep*)rep;
+			NSNumber *frames = [bir valueForProperty:NSImageFrameCount];
+			if (frames && frames.integerValue > 1) {
+				image = sourceImage;
+			}
+		}
+		if (!image) {
+			NSSize pixelSize = NSMakeSize([rep pixelsWide], [rep pixelsHigh]);
+			
+			image = [[NSImage alloc] initWithSize: pixelSize];
+			
+			[image lockFocus];
+			[sourceImage drawInRect: NSMakeRect(0,0, pixelSize.width, pixelSize.height)
+						   fromRect: NSZeroRect
+						  operation: NSCompositingOperationSourceOver
+						   fraction: 1.0];
+			[image unlockFocus];
+		}
 
 		// Store in the dictionary
 		[imageDictionary setObject: image

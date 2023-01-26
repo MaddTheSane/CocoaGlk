@@ -103,7 +103,7 @@ glui32 glk_image_draw_scaled(winid_t win, glui32 image,
 						  inWindowWithIdentifier: win->identifier
 										  inRect: CGRectMake(val1, val2, width, height)];
 	} else {
-		NSLog(@"TRACE: glk_image_draw_scaled(%p, %u, %i, %i, %u, %u) = %i", win, image, val1, val2, width, height, res);		
+		os_log_debug(GlkClientTrace, "glk_image_draw_scaled(%{public}p, %{public}u, %{public}i, %{public}i, %{public}u, %{public}u) = %{public}i", win, image, val1, val2, width, height, res);
 	}
 	
 	os_log_debug(GlkClientTrace, "glk_image_draw_scaled(%{public}p, %{public}u, %{public}i, %{public}i, %{public}u, %{public}u) = %{public}i", win, image, val1, val2, width, height, res);

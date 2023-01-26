@@ -128,12 +128,12 @@ BOOL cocoaglk_frefid_sane(frefid_t ref) {
 	
 	// Programmer is a spoon type problems
 	if (ref->last && ref == cocoaglk_firstfref) {
-		NSLog(@"Oops: fref has a previous fref but is marked as the first");
+		os_log_fault(GlkClientLog, "Oops: fref has a previous fref but is marked as the first");
 		return NO;
 	}
 	
 	if (!ref->last && ref != cocoaglk_firstfref) {
-		NSLog(@"Oops: fref has no previous fref but is not the first");
+		os_log_fault(GlkClientLog, "Oops: fref has no previous fref but is not the first");
 		return NO;
 	}
 	

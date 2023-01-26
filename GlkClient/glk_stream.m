@@ -92,9 +92,7 @@ void cocoaglk_flushstream(strid_t stream, const char* reason) {
 	}
 	
 	if ([buffer shouldBeFlushed]) {
-#if COCOAGLK_TRACE
-		NSLog(@"Flushing a stream buffer: %s", reason);
-#endif
+		os_log_debug(GlkClientTrace, "Flushing a stream buffer: %{public}s", reason);
 		
 		// Flush the buffer
 		[cocoaglk_session performOperationsFromBuffer: buffer];
@@ -114,9 +112,7 @@ void cocoaglk_flushstream(strid_t stream, const char* reason) {
 		// Flush this buffer
 		[cocoaglk_session performOperationsFromBuffer: buffer];
 		
-#if COCOAGLK_TRACE
-		NSLog(@"Stream flushed");
-#endif
+		os_log_debug(GlkClientTrace, "Stream flushed");
 	}
 }
 
@@ -157,10 +153,10 @@ BOOL cocoaglk_strid_sane(strid_t stream) {
 		
 	// These are internal consistency checks
 	if (stream->last == NULL && stream != cocoaglk_firststream) {
-		NSLog(@"Stream has no previous stream, but is not the first in the list");
+		os_log_fault(GlkClientLog, "Stream has no previous stream, but is not the first in the list");
 		return NO;
 	} else if (stream->last != NULL && stream == cocoaglk_firststream) {
-		NSLog(@"Stream has a preceding stream, but is also marked as the first in the list");
+		os_log_fault(GlkClientLog, "Stream has a preceding stream, but is also marked as the first in the list");
 		return NO;
 	}
 	
@@ -275,9 +271,7 @@ strid_t glk_stream_open_file(frefid_t fileref, glui32 fmode,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stream_open_file(%p, %u, %u) = %p", fileref, fmode, rock, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_open_file(%{public}p, %{public}u, %{public}u) = %{public}p", fileref, fmode, rock, res);
 	
 	return res;
 }
@@ -361,9 +355,7 @@ strid_t glk_stream_open_file_uni(frefid_t fileref, glui32 fmode,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stream_open_file(%p, %u, %u) = %p", fileref, fmode, rock, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_open_file(%{public}p, %{public}u, %{public}u) = %{public}p", fileref, fmode, rock, res);
 	
 	return res;
 }
@@ -414,9 +406,7 @@ strid_t cocoaglk_get_stream_for_key(const char* key) {
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: cocoaglk_get_input_stream() = %p", res);
-#endif
+	os_log_debug(GlkClientTrace, "cocoaglk_get_input_stream() = %{public}p", res);
 	
 	// Store in in the known streams dictionary
 	[knownStreams setObject: [NSValue valueWithPointer: res]
@@ -430,9 +420,7 @@ strid_t cocoaglk_get_input_stream(void) {
 	static strid_t instream = NULL;
 	
 	if (instream) {
-#if COCOAGLK_TRACE
-		NSLog(@"TRACE: cocoaglk_get_input_stream() = %p", instream);
-#endif
+		os_log_debug(GlkClientTrace, "cocoaglk_get_input_stream() = %{public}p", instream);
 
 		return instream;
 	}
@@ -465,9 +453,7 @@ strid_t cocoaglk_get_input_stream(void) {
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: cocoaglk_get_input_stream() = %p", res);
-#endif
+	os_log_debug(GlkClientTrace, "cocoaglk_get_input_stream() = %{public}p", res);
 
 	return instream=res;
 }
@@ -522,9 +508,7 @@ strid_t glk_stream_open_memory(char *buf, glui32 buflen, glui32 fmode,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stream_open_memory(%p, %u, %u, %u) = %p", buf, buflen, fmode, rock, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_open_memory(%{public}p, %{public}u, %{public}u, %{public}u) = %{public}p", buf, buflen, fmode, rock, res);
 		
 	// Return the result
 	return res;
@@ -589,9 +573,7 @@ strid_t glk_stream_open_memory_uni(glui32 *buf, glui32 buflen,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 	
-#if COCOAGLK_TRACE
-	NSLog(@"TRACE: glk_stream_open_memory(%p, %u, %u, %u) = %p", buf, buflen, fmode, rock, res);
-#endif
+	os_log_debug(GlkClientTrace, "glk_stream_open_memory(%{public}p, %{public}u, %{public}u, %{public}u) = %{public}p", buf, buflen, fmode, rock, res);
 	
 	// Return the result
 	return res;

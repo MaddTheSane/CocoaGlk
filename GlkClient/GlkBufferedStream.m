@@ -9,6 +9,7 @@
 #import "GlkBufferedStream.h"
 
 #include "glk.h"
+#include <os/log.h>
 
 @implementation GlkBufferedStream
 
@@ -200,7 +201,7 @@
 		lowTide += thisPass;
 		if (lowTide > readAhead) {
 			lowTide = 0;
-			NSLog(@"BUG: buffer overrun!");
+			os_log_fault(OS_LOG_DEFAULT, "BUG: buffer overrun!");
 			abort();
 		}
 		if (lowTide == readAhead) lowTide = 0;

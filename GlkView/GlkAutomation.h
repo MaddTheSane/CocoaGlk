@@ -38,7 +38,7 @@
 					  ypos: (int) ypos
 					window: (int) windowNumber
 				  fromView: (GlkView*) view;
-/// Called on output views to indicate that glk_select() has been called
+/// Called on output views to indicate that \c glk_select() has been called
 - (void) viewWaiting: (GlkView*) view;
 
 // Using this automation object for input

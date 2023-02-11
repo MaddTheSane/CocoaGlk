@@ -34,6 +34,10 @@ NS_SWIFT_NAME(GlkFileRefProtocol)
 /// Sets whether or not this stream should be autoflushed
 - (void) setAutoflush: (BOOL) autoflush;
 
+@optional
+- (bycopy NSURL *)fileURL;
+@property (readonly, copy) NSURL *fileURL;
+
 @end
 
 #endif

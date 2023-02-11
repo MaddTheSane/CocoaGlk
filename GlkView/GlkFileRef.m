@@ -93,5 +93,6 @@
 }
 
 @synthesize autoflushStream = autoflush;
+@synthesize fileURL = pathname;
 
 @end

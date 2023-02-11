@@ -531,3 +531,13 @@ frefid_t cocoaglk_open_file(NSURL *path, glui32 textmode,
 	return res;
 
 }
+
+char* glkunix_fileref_get_filename(frefid_t fref)
+{
+	id<GlkFileRef> fre = fref->fileref;
+	if ([fre respondsToSelector:@selector(fileURL)]) {
+		return (char *)[[fre fileURL] fileSystemRepresentation];
+	} else {
+		return NULL;
+	}
+}

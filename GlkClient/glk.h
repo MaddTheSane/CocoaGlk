@@ -454,4 +454,6 @@ extern strid_t glk_stream_open_resource_uni(glui32 filenum, glui32 rock);
 
 #endif /* GLK_MODULE_RESOURCE_STREAM */
 
+extern char* glkunix_fileref_get_filename(frefid_t fref);
+
 #endif /* GLK_H */

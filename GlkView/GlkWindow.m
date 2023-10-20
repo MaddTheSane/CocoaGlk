@@ -22,6 +22,7 @@
 	if (self) {
 		border = 4;
 		scaleFactor = 1.0;
+		self.clipsToBounds = YES;
 	}
     
 	return self;

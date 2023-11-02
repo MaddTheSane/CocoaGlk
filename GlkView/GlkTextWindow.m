@@ -68,7 +68,8 @@
 	[textView setEditable: NO];
     [textView setRichText: YES];
 	[textView setUsesFindPanel: YES];
-	
+	[textView setAutomaticQuoteSubstitutionEnabled: NO];
+
 	inputPos = 0;
 	[[textView textStorage] setDelegate: self];
 	[textView setDelegate: self];

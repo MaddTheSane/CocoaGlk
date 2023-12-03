@@ -31,7 +31,7 @@ void fatalError (const char * s)
     exit (1);
 }
 
-void glk_main () {
+void glk_main (void) {
     if (gamefile == NULL)
         fatalError ("could not open game file");
 	

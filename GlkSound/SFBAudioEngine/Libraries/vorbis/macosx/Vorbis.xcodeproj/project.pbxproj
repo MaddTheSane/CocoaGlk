@@ -94,7 +94,8 @@
 		738836090B19000B005C7A69 /* bitrate.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F60D03389C830112CE8F /* bitrate.c */; };
 		738836140B1904A5005C7A69 /* vorbisenc.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65E03389C830112CE8F /* vorbisenc.c */; };
 		738836230B190601005C7A69 /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65F03389C830112CE8F /* vorbisfile.c */; };
-		C3224D9826ECD304008D8B3F /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3224D9726ECD304008D8B3F /* Ogg.framework */; };
+		C3FDA6D129AB7B85005336BD /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3FDA6D029AB7B85005336BD /* libogg.a */; };
+		C3FDA6D329AB7BB2005336BD /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3FDA6D229AB7BB2005336BD /* libogg.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,8 @@
 		738836220B1905E5005C7A69 /* libvorbisfile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvorbisfile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3224D9726ECD304008D8B3F /* Ogg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ogg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3EF566F26FBE0D9006BC38A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C3FDA6D029AB7B85005336BD /* libogg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libogg.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3FDA6D229AB7BB2005336BD /* libogg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libogg.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58520B90191D12B01A802FE /* codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = codec.h; sourceTree = "<group>"; };
 		F58520BA0191D12B01A802FE /* vorbisenc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vorbisenc.h; sourceTree = "<group>"; };
 		F58520BB0191D12B01A802FE /* vorbisfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vorbisfile.h; sourceTree = "<group>"; };
@@ -180,7 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3224D9826ECD304008D8B3F /* Ogg.framework in Frameworks */,
+				C3FDA6D129AB7B85005336BD /* libogg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3FDA6D329AB7BB2005336BD /* libogg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +247,8 @@
 		C3224D9626ECD304008D8B3F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3FDA6D229AB7BB2005336BD /* libogg.a */,
+				C3FDA6D029AB7B85005336BD /* libogg.a */,
 				C3224D9726ECD304008D8B3F /* Ogg.framework */,
 			);
 			name = Frameworks;
@@ -524,7 +530,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1400;
 			};
 			buildConfigurationList = 730F23F3091827B200AB638C /* Build configuration list for PBXProject "Vorbis" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -652,6 +658,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -687,6 +694,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -737,6 +745,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Manual;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -752,7 +761,7 @@
 					"$(INHERITED)",
 					"$(PROJECT_DIR)/include",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -783,6 +792,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Manual;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
@@ -797,7 +807,7 @@
 					"$(INHERITED)",
 					"$(PROJECT_DIR)/include",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-ffast-math",
@@ -810,9 +820,9 @@
 		738835E60B18F88E005C7A69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -831,9 +841,9 @@
 		738835E70B18F88E005C7A69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -850,9 +860,9 @@
 		7388361B0B1904D6005C7A69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -874,9 +884,9 @@
 		7388361C0B1904D6005C7A69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = (
@@ -896,10 +906,10 @@
 		738836260B19065D005C7A69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -923,10 +933,10 @@
 		738836270B19065D005C7A69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_UNUSED_VARIABLE = NO;

@@ -17,12 +17,10 @@
 		322D78B2112F9851006676FC /* CreateDisplayNameForURL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 322D78B0112F9851006676FC /* CreateDisplayNameForURL.cpp */; };
 		3230A938182E698900D630CF /* AudioBufferList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3230A936182E698900D630CF /* AudioBufferList.cpp */; };
 		3230A939182E698900D630CF /* AudioBufferList.h in Headers */ = {isa = PBXBuildFile; fileRef = 3230A937182E698900D630CF /* AudioBufferList.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		32386EF413D2135400D25175 /* HTTPInputSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32386EF213D2135400D25175 /* HTTPInputSource.cpp */; };
 		3250B42D190B439F00C28CA8 /* CoreAudioOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3250B42B190B439E00C28CA8 /* CoreAudioOutput.cpp */; };
 		3250B42E190B439F00C28CA8 /* CoreAudioOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 3250B42C190B439F00C28CA8 /* CoreAudioOutput.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		325116A124239A4600B02926 /* MemoryInputSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 32C3BEAB1C152E61006A4E6B /* MemoryInputSource.h */; };
 		325116A224239A4600B02926 /* FileInputSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 32D6552A115FC58C002B275C /* FileInputSource.h */; };
-		325116A324239A4600B02926 /* HTTPInputSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 32386EF313D2135400D25175 /* HTTPInputSource.h */; };
 		325116A424239A4600B02926 /* InMemoryFileInputSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 32DF3208123E6C940002CA5A /* InMemoryFileInputSource.h */; };
 		325116A524239A4600B02926 /* MemoryMappedFileInputSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 32D6556A115FE7EA002B275C /* MemoryMappedFileInputSource.h */; };
 		325116A624239A5D00B02926 /* CoreAudioDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 322B5C1D108BC70600CA9BDE /* CoreAudioDecoder.h */; };
@@ -64,10 +62,10 @@
 		32E6AB9B1096C81200DA998D /* LoopableRegionDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32E6AB991096C81200DA998D /* LoopableRegionDecoder.cpp */; };
 		32E73B0210B9D8AC00094C8A /* OggVorbisDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32E7376C10B913AE00094C8A /* OggVorbisDecoder.cpp */; };
 		5533C6E927603A97004BD884 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32AEB2D61409BA26001F9A60 /* AudioUnit.framework */; };
+		55AAD2EC2B154537005A2D9C /* SFBAudioEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 55AAD2EB2B154537005A2D9C /* SFBAudioEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3224D9926ECD331008D8B3F /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3224D9126ECD2BA008D8B3F /* libvorbis.a */; };
 		C3224D9A26ECD338008D8B3F /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3224D9526ECD2BA008D8B3F /* libvorbisfile.a */; };
 		C374D1C026EE4DB8006F430E /* libdumb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34B271E26EAC168001A1714 /* libdumb.a */; };
-		C374D1C126EE4DC6006F430E /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C374D1BE26EE4CC2006F430E /* Ogg.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,11 +104,11 @@
 			remoteGlobalIDString = C3B854F826E7B136001059B8;
 			remoteInfo = dumb;
 		};
-		C374D1BD26EE4CC2006F430E /* PBXContainerItemProxy */ = {
+		C3FDA6CA29AB7999005336BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C374D1B926EE4CC2006F430E /* ogg.xcodeproj */;
+			containerPortal = C3FDA68929AB77FF005336BD /* ogg.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 3D9548E267A3491B86A2CB0C;
+			remoteGlobalIDString = C3FDA68229AB77FF005336BD;
 			remoteInfo = ogg;
 		};
 /* End PBXContainerItemProxy section */
@@ -156,8 +154,6 @@
 		322D78B1112F9851006676FC /* CreateDisplayNameForURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateDisplayNameForURL.h; sourceTree = "<group>"; };
 		3230A936182E698900D630CF /* AudioBufferList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioBufferList.cpp; sourceTree = "<group>"; };
 		3230A937182E698900D630CF /* AudioBufferList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioBufferList.h; sourceTree = "<group>"; };
-		32386EF213D2135400D25175 /* HTTPInputSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HTTPInputSource.cpp; sourceTree = "<group>"; };
-		32386EF313D2135400D25175 /* HTTPInputSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPInputSource.h; sourceTree = "<group>"; };
 		3250B42B190B439E00C28CA8 /* CoreAudioOutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreAudioOutput.cpp; sourceTree = "<group>"; };
 		3250B42C190B439F00C28CA8 /* CoreAudioOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreAudioOutput.h; sourceTree = "<group>"; };
 		3261EA321902A0D200730236 /* AudioOutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioOutput.cpp; sourceTree = "<group>"; };
@@ -201,9 +197,10 @@
 		32E6AB9A1096C81200DA998D /* LoopableRegionDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopableRegionDecoder.h; sourceTree = "<group>"; };
 		32E7376C10B913AE00094C8A /* OggVorbisDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = OggVorbisDecoder.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		32E7376D10B913AE00094C8A /* OggVorbisDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OggVorbisDecoder.h; sourceTree = "<group>"; };
+		55AAD2EB2B154537005A2D9C /* SFBAudioEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBAudioEngine.h; sourceTree = "<group>"; };
 		C3224D8726ECD2BA008D8B3F /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = Libraries/vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
 		C34B271326EAC168001A1714 /* dumb.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = dumb.xcodeproj; path = Libraries/dumb/dumb.xcodeproj; sourceTree = "<group>"; };
-		C374D1B926EE4CC2006F430E /* ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ogg.xcodeproj; path = Libraries/ogg/ogg.xcodeproj; sourceTree = "<group>"; };
+		C3FDA68929AB77FF005336BD /* ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ogg.xcodeproj; path = Libraries/ogg/ogg.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,7 +208,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C374D1C126EE4DC6006F430E /* Ogg.framework in Frameworks */,
 				C374D1C026EE4DB8006F430E /* libdumb.a in Frameworks */,
 				C3224D9A26ECD338008D8B3F /* libvorbisfile.a in Frameworks */,
 				C3224D9926ECD331008D8B3F /* libvorbis.a in Frameworks */,
@@ -231,7 +227,7 @@
 			children = (
 				32AEB27B1409AC84001F9A60 /* SFBAudioEngine */,
 				C34B271326EAC168001A1714 /* dumb.xcodeproj */,
-				C374D1B926EE4CC2006F430E /* ogg.xcodeproj */,
+				C3FDA68929AB77FF005336BD /* ogg.xcodeproj */,
 				C3224D8726ECD2BA008D8B3F /* Vorbis.xcodeproj */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				3210AB8E17B9BF8000743639 /* Products */,
@@ -335,6 +331,7 @@
 		32AEB27B1409AC84001F9A60 /* SFBAudioEngine */ = {
 			isa = PBXGroup;
 			children = (
+				55AAD2EB2B154537005A2D9C /* SFBAudioEngine.h */,
 				322B5D76108C210400CA9BDE /* Player */,
 				3261EA311902A0D200730236 /* Audio Output */,
 				322B5B9D108BA7E400CA9BDE /* Decoders */,
@@ -353,8 +350,6 @@
 				32C3BEAA1C152E61006A4E6B /* MemoryInputSource.cpp */,
 				32D6552A115FC58C002B275C /* FileInputSource.h */,
 				32D65529115FC58C002B275C /* FileInputSource.cpp */,
-				32386EF313D2135400D25175 /* HTTPInputSource.h */,
-				32386EF213D2135400D25175 /* HTTPInputSource.cpp */,
 				32DF3208123E6C940002CA5A /* InMemoryFileInputSource.h */,
 				32DF3209123E6C940002CA5A /* InMemoryFileInputSource.cpp */,
 				32D6556A115FE7EA002B275C /* MemoryMappedFileInputSource.h */,
@@ -382,10 +377,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C374D1BA26EE4CC2006F430E /* Products */ = {
+		C3FDA6C729AB7999005336BD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C374D1BE26EE4CC2006F430E /* Ogg.framework */,
+				C3FDA6CB29AB7999005336BD /* libogg.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -417,13 +412,13 @@
 				325116B024239A7900B02926 /* OggVorbisDecoder.h in Headers */,
 				32DFA2F414FA7FD400D1FB58 /* CFErrorUtilities.h in Headers */,
 				32B3639818C4127300F2C61F /* AudioFormat.h in Headers */,
+				55AAD2EC2B154537005A2D9C /* SFBAudioEngine.h in Headers */,
 				3292489518CEAB48004365FF /* RingBuffer.h in Headers */,
 				3292489118CEAA96004365FF /* AudioRingBuffer.h in Headers */,
 				325116A424239A4600B02926 /* InMemoryFileInputSource.h in Headers */,
 				325116A124239A4600B02926 /* MemoryInputSource.h in Headers */,
 				3250B42E190B439F00C28CA8 /* CoreAudioOutput.h in Headers */,
 				3230A939182E698900D630CF /* AudioBufferList.h in Headers */,
-				325116A324239A4600B02926 /* HTTPInputSource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +451,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = sbooth.org;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "SFBAudioEngine" */;
@@ -476,8 +471,8 @@
 					ProjectRef = C34B271326EAC168001A1714 /* dumb.xcodeproj */;
 				},
 				{
-					ProductGroup = C374D1BA26EE4CC2006F430E /* Products */;
-					ProjectRef = C374D1B926EE4CC2006F430E /* ogg.xcodeproj */;
+					ProductGroup = C3FDA6C729AB7999005336BD /* Products */;
+					ProjectRef = C3FDA68929AB77FF005336BD /* ogg.xcodeproj */;
 				},
 				{
 					ProductGroup = C3224D8826ECD2BA008D8B3F /* Products */;
@@ -527,11 +522,11 @@
 			remoteRef = C34B271D26EAC168001A1714 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C374D1BE26EE4CC2006F430E /* Ogg.framework */ = {
+		C3FDA6CB29AB7999005336BD /* libogg.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Ogg.framework;
-			remoteRef = C374D1BD26EE4CC2006F430E /* PBXContainerItemProxy */;
+			fileType = archive.ar;
+			path = libogg.a;
+			remoteRef = C3FDA6CA29AB7999005336BD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -571,7 +566,6 @@
 				32B848E7180E199D00A222C5 /* AudioConverter.cpp in Sources */,
 				3203A61C1346E0ED00A7A22E /* MODDecoder.cpp in Sources */,
 				326A98F71392F38A0061A65F /* Semaphore.cpp in Sources */,
-				32386EF413D2135400D25175 /* HTTPInputSource.cpp in Sources */,
 				32D429E613E308DB00FA07DE /* AudioPlayer.cpp in Sources */,
 				3292489418CEAB48004365FF /* RingBuffer.cpp in Sources */,
 				32C3BEAC1C152E61006A4E6B /* MemoryInputSource.cpp in Sources */,
@@ -586,22 +580,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Libraries/include";
 				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Libraries";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-lz";
@@ -617,19 +611,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Libraries/include";
 				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Libraries";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-lz";
@@ -666,6 +660,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -686,7 +681,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = YES;
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = (
@@ -721,6 +716,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -740,7 +736,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = (
 					"-Wall",

@@ -141,9 +141,9 @@
 - (instancetype)initWithCoder:(NSCoder *)decoder {
     self = [super init];
     if (self) {
-    _resources = [decoder decodeObjectOfClass:[NSMutableDictionary class] forKey:@"resources"];
+        _resources = [decoder decodeObjectOfClasses:[NSSet setWithObjects:[NSMutableDictionary class], [NSNumber class], [GlkSoundResource class], nil] forKey:@"resources"];
     _restored_music_channel_id = (NSUInteger)[decoder decodeIntForKey:@"music_channel"];
-    _glkchannels = [decoder decodeObjectOfClass:[NSMutableDictionary class] forKey:@"gchannels"];
+        _glkchannels = [decoder decodeObjectOfClasses:[NSSet setWithObjects:[NSMutableDictionary class], [NSNumber class], [GlkSoundChannel class], nil] forKey:@"gchannels"];
     _lastsoundresno = [decoder decodeIntForKey:@"lastsoundresno"];
         fakeGlkChannels = [decoder decodeObjectOfClasses:[NSSet setWithObjects:[NSMutableDictionary class], [NSNumber class], [GlkFakeSoundChannel class], nil] forKey:@"fchannels"];
     }

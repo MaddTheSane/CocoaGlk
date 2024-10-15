@@ -67,7 +67,7 @@
                     <menu key="submenu" title="File" id="81">
                         <items>
                             <menuItem title="New" keyEquivalent="n" id="82"/>
-                            <menuItem title="Open..." keyEquivalent="o" id="72"/>
+                            <menuItem title="Open…" keyEquivalent="o" id="72"/>
                             <menuItem title="Open Recent" id="124">
                                 <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="125">
                                     <items>

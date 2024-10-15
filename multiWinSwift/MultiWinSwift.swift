@@ -24,10 +24,10 @@ private var inputpending1 = false, inputpending2 = false
 /// When we cancel line input, we should remember how many characters
 /// had been typed. This lets us restart the input with those characters
 /// already in place. 
-private var already1: glui32 = 0, already2: glui32 = 0;
+private var already1: glui32 = 0, already2: glui32 = 0
 
 /// There's a three-second timer which can be on or off.
-private var timer_on = false;
+private var timer_on = false
 
 /// This is a utility function. Given a main window, it finds the
 /// "other" main window (if both actually exist) and cancels line
@@ -68,7 +68,7 @@ func GlkMain() {
 	var commandBuffer2 = [CChar](repeating: 0, count: 256)
 	
 	/* Open the main windows. */
-	mainwin1 = glk_window_open(nil, 0, 0, glui32(wintype_TextBuffer), 1);
+	mainwin1 = glk_window_open(nil, 0, 0, glui32(wintype_TextBuffer), 1)
 	if mainwin1 == nil {
 		/* It's possible that the main window failed to open. There's
 		 nothing we can do without it, so exit. */
@@ -80,12 +80,12 @@ func GlkMain() {
 	 that. */
 	statuswin = glk_window_open(mainwin1,
 								glui32(winmethod_Above | winmethod_Fixed),
-								5, glui32(wintype_TextGrid), 0);
+								5, glui32(wintype_TextGrid), 0)
 	
 	/* And a third window, a second story window below the main one. */
 	mainwin2 = glk_window_open(mainwin1,
 							   glui32(winmethod_Below | winmethod_Proportional),
-							   50, glui32(wintype_TextBuffer), 0);
+							   50, glui32(wintype_TextBuffer), 0)
 	
 	/* We're going to be switching from one window to another all the
 	 time. So we'll be setting the output stream on a case-by-case
@@ -121,9 +121,9 @@ This bottom window accepts normal line input.
 		 window. */
 		let keywin = glk_window_open(statuswin,
 									 glui32(winmethod_Left | winmethod_Proportional),
-									 66, glui32(wintype_TextGrid), KEYWINROCK);
+									 66, glui32(wintype_TextGrid), KEYWINROCK)
 		if keywin != nil {
-			glk_request_char_event(keywin);
+			glk_request_char_event(keywin)
 		}
 	}
 	
@@ -153,7 +153,7 @@ This bottom window accepts normal line input.
 			 we have to leave room for that. Note that the Glk library
 			 does *not* put on that null character. */
 			glk_request_line_event(mainwin1, &commandBuffer1, 255, already1)
-			inputpending1 = true;
+			inputpending1 = true
 		}
 		
 		if (mainwin2 != nil && !inputpending2) {
@@ -227,7 +227,7 @@ This bottom window accepts normal line input.
 			
 			/* The line we have received in commandbuf is not null-terminated.
 				We handle that first. */
-			let len = ev.val1; /* Will be between 0 and 255, inclusive. */
+			let len = ev.val1 /* Will be between 0 and 255, inclusive. */
 			if wasFirst {
 				commandBuffer1[Int(len)] = 0
 				cmd = String(cString: commandBuffer1, encoding: .isoLatin1) ?? ""
@@ -287,36 +287,36 @@ This bottom window accepts normal line input.
 			}
 			
 			if (whichWin == mainwin1) {
-				already1 = 0;
+				already1 = 0
 			} else if (whichWin == mainwin2) {
-				already2 = 0;
+				already2 = 0
 			}
 		}
 	}
 }
 
 private func verbJump(_ win: winid_t) {
-	glk_set_window(win);
+	glk_set_window(win)
 	
-	glkPutString("You jump on the fruit, spotlessly.\n");
+	glkPutString("You jump on the fruit, spotlessly.\n")
 }
 
 private func verbHelp(_ win: winid_t) {
-	glk_set_window(win);
+	glk_set_window(win)
 	
-	glkPutString("This model only understands the following commands:\n");
-	glkPutString("HELP: Display this list.\n");
-	glkPutString("JUMP: Print a short message.\n");
-	glkPutString("YADA: Print a long paragraph.\n");
-	glkPutString("BOTH: Print a short message in both main windows.\n");
-	glkPutString("CLEAR: Clear one window.\n");
-	glkPutString("PAGE: Print thirty lines, demonstrating paging.\n");
-	glkPutString("PAGEBOTH: Print thirty lines in each window.\n");
-	glkPutString("TIMER: Turn on a timer, which ticks in the upper ");
-	glkPutString("main window every three seconds.\n");
-	glkPutString("UNTIMER: Turns off the timer.\n");
-	glkPutString("CHARS: Prints the entire Latin-1 character set.\n");
-	glkPutString("QUIT: Quit and exit.\n");
+	glkPutString("This model only understands the following commands:\n")
+	glkPutString("HELP: Display this list.\n")
+	glkPutString("JUMP: Print a short message.\n")
+	glkPutString("YADA: Print a long paragraph.\n")
+	glkPutString("BOTH: Print a short message in both main windows.\n")
+	glkPutString("CLEAR: Clear one window.\n")
+	glkPutString("PAGE: Print thirty lines, demonstrating paging.\n")
+	glkPutString("PAGEBOTH: Print thirty lines in each window.\n")
+	glkPutString("TIMER: Turn on a timer, which ticks in the upper ")
+	glkPutString("main window every three seconds.\n")
+	glkPutString("UNTIMER: Turns off the timer.\n")
+	glkPutString("CHARS: Prints the entire Latin-1 character set.\n")
+	glkPutString("QUIT: Quit and exit.\n")
 }
 
 
@@ -351,7 +351,7 @@ private func performKey(_ win: winid_t, _ key: glui32) {
 		/* Re-request character input for this window, so that future
 		 keys are accepted. */
 		glk_request_char_event(win)
-		return;
+		return
 		
 	case GlkKeyCodeKeyLowerC:
 		/* Close this keywindow. */
@@ -531,7 +531,7 @@ private func performTimer() {
 	var ev = event_t()
 	
 	if inputpending1 {
-		glk_cancel_line_event(mainwin1, &ev);
+		glk_cancel_line_event(mainwin1, &ev)
 		if ev.type == evtype_LineInput {
 			already1 = ev.val1
 		}
@@ -544,7 +544,7 @@ private func performTimer() {
 
 /// Print every character, or rather try to.
 private func verbChars(_ win: winid_t) {
-	glk_set_window(win);
+	glk_set_window(win)
 	
 	for ix in 0 ... UInt8.max {
 		glkPutString("\(String(ix)): ")
@@ -554,7 +554,7 @@ private func verbChars(_ win: winid_t) {
 }
 
 private func verbQuit(_ win: winid_t) -> Never {
-	glk_set_window(win);
+	glk_set_window(win)
 	
 	glkPutString("Thanks for playing.\n")
 	glk_exit()
@@ -573,7 +573,7 @@ private func verbYada(_ win: winid_t) {
 					"gazoon", "ting", "floo", "zonk", "loof", "lob"]
 	let NUMWORDS = wordCapList.count
 	
-	glk_set_window(win);
+	glk_set_window(win)
 	var ourStr = String()
 	ourStr.reserveCapacity(800)
 	var first = true
@@ -625,7 +625,7 @@ private func verbTimer(_ win: winid_t) {
 	}
 	
 	guard glk_gestalt(glui32(gestalt_Timer), 0) == 1 else {
-		glkPutString("Your Glk library does not support timer events.\n");
+		glkPutString("Your Glk library does not support timer events.\n")
 		return
 	}
 	glkPutString("A timer starts running in the upper window.\n")
@@ -636,7 +636,7 @@ private func verbTimer(_ win: winid_t) {
 
 /// Turn off the timer.
 private func verbUntimer(_ win: winid_t) {
-	glk_set_window(win);
+	glk_set_window(win)
 	
 	guard timer_on else {
 		glkPutString("The timer is not currently running.\n")
@@ -656,12 +656,12 @@ private func verbClear(_ win: winid_t) {
 /// Print some text in both windows. This uses `printToOtherWindow()` to
 /// find the other window and prepare it for printing.
 private func verbBoth(_ win: winid_t) {
-	glk_set_window(win);
-	glkPutString("Something happens in this window.\n");
+	glk_set_window(win)
+	glkPutString("Something happens in this window.\n")
 	
 	if let otherwin = printToOtherWindow(win) {
-		glk_set_window(otherwin);
-		glkPutString("Something happens in the other window.\n");
+		glk_set_window(otherwin)
+		glkPutString("Something happens in the other window.\n")
 	}
 }
 

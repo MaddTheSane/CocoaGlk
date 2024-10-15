@@ -136,7 +136,7 @@
 		5530B2C827714E3000DFECFF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5530B2C527714E2B00DFECFF /* InfoPlist.strings */; };
 		5530B2EE2774826400DFECFF /* multiWinSwift in Embed Binaries */ = {isa = PBXBuildFile; fileRef = 5530B2AD276F20C000DFECFF /* multiWinSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5533C6E7276023AC004BD884 /* libogg.a in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* libogg.a */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		554A4559291CF6B200C090C3 /* ClientLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 554A4558291CF6B200C090C3 /* ClientLogging.h */; };
 		5560FA2921C06BF500E711F5 /* GlkViewDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2821C06BF500E711F5 /* GlkViewDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5560FA2C21C07EC200E711F5 /* GlkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5560FA2B21C07EC200E711F5 /* GlkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -147,7 +147,7 @@
 		557AF22B2703F79500A5CFFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		557AF22C2703F79600A5CFFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		557AF22D2703F81A00A5CFFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
-		559122D5276323EB001C4C95 /* Ogg.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		559122D5276323EB001C4C95 /* libogg.a in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5B05275A25E9000B0D21 /* libogg.a */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		559122D7276323EB001C4C95 /* SFBAudioEngine.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF5AE1275A2526000B0D21 /* SFBAudioEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		559122D8276323EB001C4C95 /* GlkSound.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		559122D9276323F8001C4C95 /* GlkSound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */; };
@@ -429,7 +429,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				559122D5276323EB001C4C95 /* Ogg.framework in Copy Frameworks */,
+				559122D5276323EB001C4C95 /* libogg.a in Copy Frameworks */,
 				559122D7276323EB001C4C95 /* SFBAudioEngine.framework in Copy Frameworks */,
 				559122D8276323EB001C4C95 /* GlkSound.framework in Copy Frameworks */,
 				4BCB8AA10CD7E3310041731F /* GlkView.framework in Copy Frameworks */,
@@ -453,7 +453,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5533C6E7276023AC004BD884 /* Ogg.framework in Embed Frameworks */,
+				5533C6E7276023AC004BD884 /* libogg.a in Embed Frameworks */,
 				5533C6E62760235E004BD884 /* SFBAudioEngine.framework in Embed Frameworks */,
 				55C6BB49204DEDC1001AE7E5 /* GlkClient.framework in Embed Frameworks */,
 				55C6BB4D204DEDC1001AE7E5 /* GlkSound.framework in Embed Frameworks */,
@@ -1223,7 +1223,7 @@
 		55FF5AF5275A25E9000B0D21 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				55FF5B05275A25E9000B0D21 /* Ogg.framework */,
+				55FF5B05275A25E9000B0D21 /* libogg.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1635,10 +1635,10 @@
 			remoteRef = 55FF5AE0275A2526000B0D21 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		55FF5B05275A25E9000B0D21 /* Ogg.framework */ = {
+		55FF5B05275A25E9000B0D21 /* libogg.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Ogg.framework;
+			fileType = archive.ar;
+			path = libogg.a;
 			remoteRef = 55FF5B04275A25E9000B0D21 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

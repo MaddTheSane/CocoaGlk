@@ -10,6 +10,7 @@
 #define __GLKVIEW_GLKPREFERENCES_H__
 
 #import <GlkView/GlkViewDefinitions.h>
+#import <Foundation/Foundation.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>
 #else
@@ -61,9 +62,9 @@ extern NSNotificationName const GlkPreferencesHaveChangedNotification;
 
 // Font preferences
 /// The font used for proportional text
-@property (nonatomic, copy) NSFont *proportionalFont;
+@property (nonatomic, copy) GlkFont *proportionalFont;
 /// The font used for fixed-pitch text
-@property (nonatomic, copy) NSFont *fixedFont;
+@property (nonatomic, copy) GlkFont *fixedFont;
 
 /// Replaces the current fonts with ones of the given size
 - (void) setFontSize: (CGFloat) fontSize;

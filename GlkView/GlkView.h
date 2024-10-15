@@ -45,12 +45,15 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 ///
 /// Base class for CocoaGlk: a view object that an application can embed in order to run Glk client applications
 ///
-@interface GlkView : NSView<GlkSession, GlkBuffer, GlkEventReceiver> {
+@interface GlkView : GlkSuperView<GlkSession, GlkBuffer, GlkEventReceiver> {
 	// Windows
 	/// Maps identifiers to windows
 	NSMutableDictionary<NSNumber*,__kindof GlkWindow*>* glkWindows;
+
+#if !defined(COCOAGLK_IPHONE)
 	/// Most recent save panel
 	NSSavePanel* lastPanel;
+#endif
 	/// The root window
 	GlkWindow* rootWindow;
 	/// The last root window
@@ -104,7 +107,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	
 	// The logo
 	/// Used to draw the fading logo
-	NSWindow* logoWindow;
+	GlkSuperWindow* logoWindow;
 	/// The time we started fading the logo
 	NSDate* fadeStart;
 	/// Used to fade out the logo
@@ -118,8 +121,11 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	BOOL running;
 	/// The session cookie to use with this view
 	NSString* viewCookie;
+
+#if !defined(COCOAGLK_IPHONE)
 	/// Only used if this is connected as a session via the \c launchClientApplication: method
 	NSTask* subtask;
+#endif
 	
 	// The delegate
 	/// Can respond to certain events if it likes
@@ -153,7 +159,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 
 // Some shared settings
 /// Image displayed while there is no root window
-@property (class, readonly, retain) NSImage *defaultLogo;
+@property (class, readonly, retain) GlkSuperImage *defaultLogo;
 
 // Setting up for launch
 /// If cookie is non-nil, a client application must know the cookie to connect to this view. If nil, this view is first-come, first-served.
@@ -209,9 +215,9 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 
 // Managing images
 /// Retrieves the image with the given identifier, asking the client process if necessary
-- (nullable NSImage*) imageWithIdentifier: (unsigned) imageId;
+- (nullable GlkSuperImage*) imageWithIdentifier: (unsigned) imageId;
 /// Retrieves a flipped variant of an image with the given identifier (works around a really annoying Cocoa design flaw, at the expense of storing the image twice)
-- (nullable NSImage*) flippedImageWithIdentifier: (unsigned) imageId;
+- (nullable GlkSuperImage*) flippedImageWithIdentifier: (unsigned) imageId;
 
 // Dealing with line history
 /// Adds a line history event to this view
@@ -282,7 +288,7 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 /// Set to return \c YES to get rid of the CocoaGlk logo
 @property (nonatomic, readonly) BOOL disableLogo;
 /// If non-nil, then this will be the logo displayed instead of 'CocoaGlk'
-@property (readonly, nullable, copy) NSImage *logo;
+@property (readonly, nullable, copy) GlkSuperImage *logo;
 /// A description of what is running in this window (or nil)
 @property (nonatomic, readonly, copy, nullable) NSString *taskDescription;
 

@@ -8,6 +8,7 @@
 
 #include <sys/types.h>
 #include <unistd.h>
+#import <GlkView/GlkViewDefinitions.h>
 
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>

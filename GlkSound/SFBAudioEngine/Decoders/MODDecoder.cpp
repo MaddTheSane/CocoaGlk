@@ -10,6 +10,7 @@
 #define NSLog(...)
 #endif
 
+#include <sys/param.h>
 #include "CFErrorUtilities.h"
 #include "CFWrapper.h"
 #include "MODDecoder.h"

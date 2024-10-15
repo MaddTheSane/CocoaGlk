@@ -32,7 +32,7 @@
 	/// Height of the grid, in characters
 	int gridHeight;
 	/// Size of a grid cell
-	NSSize cellSize;
+	CGSize cellSize;
 }
 
 // Setting up the grid
@@ -40,7 +40,7 @@
 - (void) setGridWidth: (int) gridWidth
 			   height: (int) gridHeight;
 /// Sets the size of an individual cell in the grid
-- (void) setCellSize: (NSSize) cellSize;
+- (void) setCellSize: (CGSize) cellSize;
 
 @end
 

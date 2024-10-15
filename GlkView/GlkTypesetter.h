@@ -25,7 +25,7 @@
 @protocol GlkCustomLineSection <NSObject>
 
 /// This object has been typeset at the specified position
-- (void) placeBaselineAt: (NSPoint) point
+- (void) placeBaselineAt: (CGPoint) point
 				forGlyph: (NSInteger) glyph;
 
 @end
@@ -63,7 +63,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 ///
 @interface GlkLineSection: NSObject {
 	/// The bounds for this line section: 0,0 indicates the start of the line fragment, 0,0 indicates the far left of the current fragment, at the baseline
-	NSRect bounds;
+	CGRect bounds;
 	/// The X-advancement for this line section
 	CGFloat advancement;
 	/// The X-offset for this line section
@@ -144,7 +144,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 	/// The attributes for each glyph that we're laying out [RETAINED]
 	NSDictionary*__strong* cacheAttributes;
 	/// The font attribute for each glyph that we're laying out [NOT RETAINED]
-	NSFont*__unsafe_unretained* cacheFonts;
+	GlkFont*__unsafe_unretained* cacheFonts;
 	
 	// Left and right margin sections
 	/// Left margin items (by line fragment initial glyph)
@@ -173,9 +173,9 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 	
 	// Line sections
 	/// The used rect of the current text container
-	NSRect usedRect;
+	CGRect usedRect;
 	/// The size of the current text container
-	NSSize size;
+	CGSize size;
 	/// Number of line sections
 	NSInteger numLineSections;
 	/// The line sections themselves
@@ -186,11 +186,11 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 	BOOL customBaseline;
 	
 	/// The overall line fragment bounds
-	NSRect fragmentBounds;
+	CGRect fragmentBounds;
 	/// The line fragment rectangle according to the text container
-	NSRect proposedRect;
+	CGRect proposedRect;
 	/// The remaining rectangle, according to the text container
-	NSRect remaining;
+	CGRect remaining;
 
 	// The delegate
 	/// The delegate [NOT RETAINED]
@@ -207,7 +207,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 				 newline: (BOOL) newline;
 
 /// Adds a new line section
-- (void) addLineSection: (NSRect) bounds
+- (void) addLineSection: (CGRect) bounds
 			advancement: (CGFloat) advancement
 				 offset: (CGFloat) offset
 			 glyphRange: (NSRange) glyphRange

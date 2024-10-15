@@ -96,7 +96,7 @@
 		lastChar = thisChar;
 		
 		// Measure this glyph
-		NSRect glyphBounds = CGRectMake(charPos + charWidth, floor(-cacheAscenders[glyph]),
+		CGRect glyphBounds = CGRectMake(charPos + charWidth, floor(-cacheAscenders[glyph]),
 										cacheAdvancements[glyph], cacheLineHeight[glyph]);
 		charWidth += cacheAdvancements[glyph];
 		sectionBounds = CGRectUnion(sectionBounds, glyphBounds);
@@ -161,7 +161,7 @@
 	}
 	
 	// Update the usedRect for future methods
-	usedRect.size.height = NSMaxY(remaining)-usedRect.origin.y;
+	usedRect.size.height = CGRectGetMaxY(remaining)-usedRect.origin.y;
 	
 	return glyph + cached.location;
 }

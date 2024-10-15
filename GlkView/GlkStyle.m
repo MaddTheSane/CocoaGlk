@@ -165,7 +165,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 			return [self addSelfToAttributes: lastAttributes];
 		}
 		
-		[lastAttributes release]; lastAttributes = nil;
+		lastAttributes = nil;
 	}
 	
 	// Various bits of the style
@@ -233,7 +233,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 	
 	// Create the style dictionary
 	res = [NSDictionary dictionaryWithObjectsAndKeys:
-		   [[paraStyle copy] autorelease], NSParagraphStyleAttributeName,
+		   [paraStyle copy], NSParagraphStyleAttributeName,
 		   font, NSFontAttributeName,
 		   foreCol, NSForegroundColorAttributeName,
 		   backCol, NSBackgroundColorAttributeName,
@@ -241,11 +241,10 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 		   nil];
 	
 	// Finish up
-	[paraStyle release];
+	paraStyle = nil;
 	
 	if (res) {
 		// Cache this style
-		[lastAttributes release];
 		lastAttributes = [res copy];
 		prefChangeCount = [prefs changeCount];
 		lastPreferences = prefs;
@@ -352,7 +351,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
-			[self setBackColour: [NSColor colorWithSRGBRed: ((CGFloat)red)/255.0
+			[self setBackColour: [GlkColor colorWithSRGBRed: ((CGFloat)red)/255.0
 													 green: ((CGFloat)green)/255.0
 													  blue: ((CGFloat)blue)/255.0
 													 alpha: 1.0]];
@@ -365,7 +364,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 			int green = (value&0xff00)>>8;
 			int blue  = (value&0xff);
 			
-			[self setTextColour: [NSColor colorWithSRGBRed: ((CGFloat)red)/255.0
+			[self setTextColour: [GlkColor colorWithSRGBRed: ((CGFloat)red)/255.0
 													 green: ((CGFloat)green)/255.0
 													  blue: ((CGFloat)blue)/255.0
 													 alpha: 1.0]];

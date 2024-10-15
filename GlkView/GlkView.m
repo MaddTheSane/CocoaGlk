@@ -27,7 +27,7 @@
 
 #pragma mark - Initialisation
 
-- (id)initWithFrame:(NSRect)frame {
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
 
     if (self) {
@@ -139,9 +139,9 @@
 
 #pragma mark - The CocoaGlk logo
 
-+ (NSImage*) defaultLogo {
++ (GlkSuperImage*) defaultLogo {
 	// This image is used while there is no root window active
-	static NSImage* defaultLogo = nil;
+	static GlkSuperImage* defaultLogo = nil;
 	
 	if (!defaultLogo) {
 		defaultLogo = [[NSBundle bundleForClass: [self class]] imageForResource: @"logo"];
@@ -150,7 +150,7 @@
 	return defaultLogo;
 }
 
-- (NSImage*) customLogo {
+- (GlkSuperImage*) customLogo {
 	if ([delegate respondsToSelector: @selector(logo)]) {
 		return [delegate logo];
 	}	
@@ -158,8 +158,8 @@
 	return nil;
 }
 
-- (NSImage*) logo {
-	NSImage* result = [self customLogo];
+- (GlkSuperImage*) logo {
+	GlkSuperImage* result = [self customLogo];
 	
 	if (result == nil) result = [[self class] defaultLogo];
 	return result;
@@ -167,8 +167,8 @@
 
 - (void) positionLogoWindow {
 	// Position relative to the window
-	NSRect frame = [self convertRect: [self bounds] toView: nil];
-	NSRect windowFrame = [[self window] frame];
+	CGRect frame = [self convertRect: [self bounds] toView: nil];
+	CGRect windowFrame = [[self window] frame];
 	
 	// Position on screen
 	frame.origin.x += windowFrame.origin.x;
@@ -284,19 +284,19 @@
 
 #pragma mark - Drawing
 
-- (void)drawRect:(NSRect)rect {
+- (void)drawRect:(CGRect)rect {
 	if (rootWindow != nil) return;
 	
 	// MAYBE: allow the game to provide its own logo if it wants
 	if (![self disableLogo]) {
-		NSImage* logo = [self logo];
+		GlkSuperImage* logo = [self logo];
 
 		// Position the logo
-		NSSize logoSize = [logo size];
-		NSRect logoPos;
+		CGSize logoSize = [logo size];
+		CGRect logoPos;
 	
 		logoPos.size = logoSize;
-		logoPos.origin = NSMakePoint(floor(rect.origin.x + (rect.size.width - logoSize.width)/2.0),
+		logoPos.origin = CGPointMake(floor(rect.origin.x + (rect.size.width - logoSize.width)/2.0),
 									 floor(rect.origin.y + (rect.size.height - logoSize.height)/2.0));
 	
 		[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
@@ -307,7 +307,7 @@
 	}
 }
 
-- (void) setFrame: (NSRect) newFrame {
+- (void) setFrame: (CGRect) newFrame {
 	[super setFrame: newFrame];
 	
 	// Lay out the root window
@@ -1386,7 +1386,7 @@
 }
 
 - (void) clearWindowIdentifier: (glui32) identifier 
-		  withBackgroundColour: (in bycopy NSColor*) bgCol {
+		  withBackgroundColour: (in bycopy GlkColor*) bgCol {
 	GlkWindow* win = [glkWindows objectForKey: @(identifier)];
 	
 	if (!win) {
@@ -1968,7 +1968,7 @@
 
 @synthesize imageSource = imgSrc;
 
-- (NSImage*) flippedImageWithIdentifier: (unsigned) imageId {
+- (GlkSuperImage*) flippedImageWithIdentifier: (unsigned) imageId {
 	//
 	// This works around a bug in the design of Cocoa: text views are flipped. This causes images to be drawn
 	// upside down. You can undo the flipping using an NSAffineTransform; unfortunately because there doesn't
@@ -1988,7 +1988,7 @@
 	
 	// First, try to retrieve the image from the cache to save us a round-trip
 	NSNumber* imageKey = @(imageId);
-	NSImage* image = [flippedImageDictionary objectForKey: imageKey];
+	GlkSuperImage* image = [flippedImageDictionary objectForKey: imageKey];
 	
 	if (image) return image;
 	
@@ -1996,7 +1996,7 @@
 	image = [self imageWithIdentifier: imageId];
 	if (!image) return nil;
 	
-	NSImage* flippedImage = [[NSImage alloc] initWithSize: [image size]];
+	GlkSuperImage* flippedImage = [[GlkSuperImage alloc] initWithSize: [image size]];
 	NSRect imageRect;
 	
 	imageRect.origin = NSMakePoint(0,0);
@@ -2017,10 +2017,10 @@
 	return flippedImage;
 }
 
-- (NSImage*) imageWithIdentifier: (unsigned) imageId {
+- (GlkSuperImage*) imageWithIdentifier: (unsigned) imageId {
 	// First, try to retrieve the image from the cache to save us a round-trip
 	NSNumber* imageKey = @(imageId);
-	NSImage* image = [imageDictionary objectForKey: imageKey];
+	GlkSuperImage* image = [imageDictionary objectForKey: imageKey];
 	
 	if (image) return image;
 	
@@ -2036,7 +2036,7 @@
 	// Store the result in the dictionary
 	if (imageData) {
 		// Get the source image
-		NSImage* sourceImage = [[NSImage alloc] initWithData: imageData];
+		GlkSuperImage* sourceImage = [[NSImage alloc] initWithData: imageData];
 		
 		// Turn off caching for this image to stop Cocoa doing something 'clever' which actually turns out to be stupid (pixelates the logo in Narcolepsy)
 		[sourceImage setCacheMode: NSImageCacheNever];
@@ -2077,7 +2077,7 @@
 #pragma mark - Graphics functions
 
 - (CGSize) sizeForImageResource: (glui32) imageId {
-	NSImage* img = [self imageWithIdentifier: imageId];
+	GlkSuperImage* img = [self imageWithIdentifier: imageId];
 	
 	if (img == nil) return NSMakeSize(-1, -1);
 	
@@ -2085,8 +2085,8 @@
 }
 
 - (void) fillAreaInWindowWithIdentifier: (unsigned) windowIdentifier
-							 withColour: (in bycopy NSColor*) col
-							  rectangle: (NSRect) rect {
+							 withColour: (in bycopy GlkColor*) col
+							  rectangle: (CGRect) rect {
 	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
@@ -2105,7 +2105,7 @@
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
-					  atPosition: (NSPoint) position {
+					  atPosition: (CGPoint) position {
 	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
@@ -2118,14 +2118,14 @@
 		return;
 	}
 	
-	NSImage* img = [self imageWithIdentifier: imageIdentifier];
+	GlkSuperImage* img = [self imageWithIdentifier: imageIdentifier];
 	
 	if (!img) {
 		NSLog(@"Warning: drawImageInWindowWithIdentifier:atPosition: called for an image that does not exist");
 		return;
 	}
 	
-	NSRect imgRect;
+	CGRect imgRect;
 	
 	imgRect.origin = position;
 	imgRect.size = [img size];
@@ -2136,7 +2136,7 @@
 
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
-						  inRect: (NSRect) imageRect {
+						  inRect: (CGRect) imageRect {
 	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 
 	if (!win) {
@@ -2149,7 +2149,7 @@
 		return;
 	}
 	
-	NSImage* img = [self imageWithIdentifier: imageIdentifier];
+	GlkSuperImage* img = [self imageWithIdentifier: imageIdentifier];
 	
 	if (!img) {
 		NSLog(@"Warning: drawImageInWindowWithIdentifier:inRect: called for an image that does not exist");
@@ -2173,7 +2173,7 @@
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					   alignment: (unsigned) alignment
-							size: (NSSize) imageSize {
+							size: (CGSize) imageSize {
 	GlkWindow* win = [glkWindows objectForKey: @(windowIdentifier)];
 	
 	if (!win) {
@@ -2186,7 +2186,7 @@
 		return;
 	}
 	
-	NSImage* img = [self flippedImageWithIdentifier: imageIdentifier];
+	GlkSuperImage* img = [self flippedImageWithIdentifier: imageIdentifier];
 	
 	if (!img) {
 		NSLog(@"Warning: drawImageInWindowWithIdentifier: called for an image that does not exist");
@@ -2504,6 +2504,8 @@ static BOOL pageAllFrom(GlkWindow* win) {
 }
 
 #pragma mark - Accessibility
+
+#ifndef COCOAGLK_IPHONE
 - (id) accessibilityFocusedUIElement {
 	NSResponder* firstResponder = [[self window] firstResponder];
 
@@ -2559,6 +2561,7 @@ static BOOL pageAllFrom(GlkWindow* win) {
 - (id)accessibilityApplicationFocusedUIElement {
 	return [self accessibilityFocusedUIElement];
 }
+#endif
 
 #pragma mark -
 

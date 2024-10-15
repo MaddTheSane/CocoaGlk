@@ -43,12 +43,12 @@
 	// Create the text container
 	lastMorePos = 0;
 	nextMorePos = [self frame].size.height - MoreMargin;
-	NSTextContainer* newContainer = [[NSTextContainer alloc] initWithContainerSize: NSMakeSize(1e8, [self frame].size.height - MoreMargin)];
+	NSTextContainer* newContainer = [[NSTextContainer alloc] initWithSize: CGSizeMake(1e8, [self frame].size.height - MoreMargin)];
 	
 	[newContainer setLayoutManager: layoutManager];
 	[layoutManager addTextContainer: newContainer];
 	
-	[newContainer setContainerSize: NSMakeSize(1e8, 1e8)];
+	[newContainer setSize: CGSizeMake(1e8, 1e8)];
 	[newContainer setWidthTracksTextView: YES];
 	[newContainer setHeightTracksTextView: NO];
 				
@@ -60,8 +60,8 @@
 				
 	// [[textView textContainer] setWidthTracksTextView: YES];
 	//[[textView textContainer] setContainerSize: NSMakeSize(1e8, 1e8)];
-	[textView setMinSize:NSMakeSize(0.0, 0.0)];
-	[textView setMaxSize:NSMakeSize(1e8, 1e8)];
+	[textView setMinSize:CGSizeMake(0.0, 0.0)];
+	[textView setMaxSize:CGSizeMake(1e8, 1e8)];
 	[textView setVerticallyResizable:YES];
 	[textView setHorizontallyResizable:NO];
 	[textView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
@@ -93,7 +93,7 @@
 	}
 }
 
-- (id)initWithFrame:(NSRect)frame {
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
 
     if (self) {
@@ -154,9 +154,9 @@
 
 #pragma mark - Drawing
 
-- (void) drawRect: (NSRect) r {
+- (void) drawRect: (CGRect) r {
 	[[self backgroundColour] set];
-	NSRectFill(r);
+	GlkRectFill(r);
 }
 
 #pragma mark - Window control
@@ -211,7 +211,7 @@
 
 #pragma mark - Layout
 
-- (void) layoutInRect: (NSRect) parentRect {
+- (void) layoutInRect: (CGRect) parentRect {
 	BOOL wasFlushing = flushing;
 	if (wasFlushing) {
 		[[textView textStorage] endEditing];
@@ -701,9 +701,9 @@
 
 #pragma mark - Graphics
 
-- (void) addImage: (NSImage*) image
+- (void) addImage: (GlkSuperImage*) image
 	withAlignment: (unsigned) alignment
-			 size: (NSSize) sz {
+			 size: (CGSize) sz {
 	// Construct the GlkImage object
 	GlkImage* newImage = [[GlkImage alloc] initWithImage: image
 											   alignment: alignment
@@ -775,7 +775,7 @@
 						  ordered: NSWindowAbove];
 }
 
-- (void) setFrame: (NSRect) frame {
+- (void) setFrame: (CGRect) frame {
 	[super setFrame: frame];
 	
 	// Resize the text container for this window so that we can display the more prompt

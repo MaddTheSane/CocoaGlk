@@ -128,19 +128,19 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 	CGRect drawRect;
 	
 	if (alignment == imagealign_MarginLeft) {
-		NSSize inset = [(NSTextView*)view textContainerInset];
+		CGSize inset = [(GlkTextSuperView*)view textContainerInset];
 		
 		point.x = marginOffset + inset.width;
 	} else if (alignment == imagealign_MarginRight) {
-		NSSize inset = [(NSTextView*)view textContainerInset];
+		CGSize inset = [(GlkTextSuperView*)view textContainerInset];
 
-		point.x = NSMaxX([view bounds])-marginOffset - inset.width;
+		point.x = CGRectGetMaxX([view bounds])-marginOffset - inset.width;
 	} else {
-		CGFloat maxWidth = NSMaxX([view bounds]) - point.x - 8;
+		CGFloat maxWidth = CGRectGetMaxX([view bounds]) - point.x - 8;
 		if (maxWidth < size.width) scaleFactor = maxWidth/size.width;
 	}
 	
-	drawRect.origin = NSMakePoint(floor(point.x), floor(point.y));
+	drawRect.origin = CGPointMake(floor(point.x), floor(point.y));
 	drawRect.size = size;
 	drawRect.size.width *= scaleFactor;
 	drawRect.size.height *= scaleFactor;

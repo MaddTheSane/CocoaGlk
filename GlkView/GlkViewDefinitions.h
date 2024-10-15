@@ -23,6 +23,10 @@
 #define GlkSuperImage UIImage
 #define GlkSuperView UIView
 #define GlkRectFill UIRectFill
+#define GlkScrollView UIScrollView
+#define GlkTextViewDelegate UITextViewDelegate
+#define GlkTextSuperView UITextView
+#define GlkSuperWindow UIWindow
 #else
 #import <AppKit/AppKit.h>
 #define GlkColor NSColor
@@ -30,6 +34,10 @@
 #define GlkSuperImage NSImage
 #define GlkSuperView NSView
 #define GlkRectFill NSRectFill
+#define GlkScrollView NSScrollView
+#define GlkTextViewDelegate NSTextViewDelegate
+#define GlkTextSuperView NSTextView
+#define GlkSuperWindow NSWindow
 #endif
 
 #endif /* GlkViewDefinitions_h */

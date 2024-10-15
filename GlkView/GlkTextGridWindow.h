@@ -19,7 +19,7 @@
 #import <GlkView/GlkWindow.h>
 #import <GlkView/GlkTextWindow.h>
 
-@interface GlkTextGridWindow : GlkTextWindow<NSTextStorageDelegate,NSTextViewDelegate> {
+@interface GlkTextGridWindow : GlkTextWindow<NSTextStorageDelegate, GlkTextViewDelegate> {
 	/// The amount of line input that we have accepted so far
 	NSInteger lineInputLength;
 	

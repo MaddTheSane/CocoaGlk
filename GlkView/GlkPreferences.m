@@ -6,6 +6,7 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "GlkPreferences.h"
 #import "GlkStyle.h"
 

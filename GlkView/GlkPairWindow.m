@@ -6,6 +6,7 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#include <CoreGraphics/CoreGraphics.h>
 #include <tgmath.h>
 #import "GlkPairWindow.h"
 #import <GlkView/GlkPairWindow.h>
@@ -127,12 +128,12 @@
 	[right setScaleFactor: scale];
 }
 
-- (void) layoutInRect: (NSRect) parentRect {
-	if (needsLayout || !NSEqualRects(parentRect, [self frame])) {
+- (void) layoutInRect: (CGRect) parentRect {
+	if (needsLayout || !CGRectEqualToRect(parentRect, [self frame])) {
 		// Set our own frame
 		[self setFrame: parentRect];
 		
-		NSRect bounds = [self bounds];
+		CGRect bounds = [self bounds];
 		
 		// Work out the sizes for the child windows
 		CGFloat availableSize = horizontal?parentRect.size.width:parentRect.size.height;
@@ -155,8 +156,8 @@
 		rightSize = floor(rightSize);
 		leftSize = floor(availableSize - rightSize);
 		
-		NSRect leftRect;
-		NSRect rightRect;
+		CGRect leftRect;
+		CGRect rightRect;
 		CGFloat realBorderWidth = borderWidth;
 		if (inputBorder) realBorderWidth = 0;
 		
@@ -199,10 +200,10 @@
 		if (inputBorder) {
 			// Shrink the windows by the size of the input border, if they are text or grid windows
 			if (![left isKindOfClass: [GlkPairWindow class]]) {
-				leftRect = NSInsetRect(leftRect, borderWidth, borderWidth);
+				leftRect = CGRectInset(leftRect, borderWidth, borderWidth);
 			}
 			if (![right isKindOfClass: [GlkPairWindow class]]) {
-				rightRect = NSInsetRect(rightRect, borderWidth, borderWidth);
+				rightRect = CGRectInset(rightRect, borderWidth, borderWidth);
 			}
 		}
 		
@@ -230,7 +231,11 @@
 		[left layoutInRect: leftRect];
 		[right layoutInRect: rightRect];
 		
+#ifdef COCOAGLK_IPHONE
+		[self setNeedsDisplay];
+#else
 		[self setNeedsDisplay: YES];
+#endif
 		
 		needsLayout = NO;
 	} else {
@@ -320,20 +325,20 @@
 #pragma mark - Drawing
 
 - (void) drawInputBorder: (GlkWindow*) view {
-	NSRect r = [view frame];
-	r = NSInsetRect(r, -borderWidth, -borderWidth);
+	CGRect r = [view frame];
+	r = CGRectInset(r, -borderWidth, -borderWidth);
 	
 	if ([view waitingForKeyboardInput]) {
-		[[NSColor systemBlueColor] set];
+		[[GlkColor systemBlueColor] set];
 	} else {
-		[[NSColor whiteColor] set];
+		[[GlkColor whiteColor] set];
 	}
-	NSRectFill(r);
+	GlkRectFill(r);
 }
 
-- (void)drawRect:(NSRect)rect {
-	[[NSColor windowBackgroundColor] set];
-	NSRectFill(borderSliver);
+- (void)drawRect:(CGRect)rect {
+	[[GlkColor windowBackgroundColor] set];
+	GlkRectFill(borderSliver);
 	
 	if (borderWidth >= 2) {
 		if (inputBorder) {
@@ -341,22 +346,22 @@
 			[self drawInputBorder: left];
 			[self drawInputBorder: right];				
 		} else {
-			NSRect bounds = [self bounds];
+			CGRect bounds = [self bounds];
 			
 			if (!horizontal) {
 				// Draw lines at top and bottom of border
-				[[NSColor controlHighlightColor] set];
-				NSRectFill(NSMakeRect(NSMinX(bounds), NSMinY(borderSliver), bounds.size.width, 1));
+				[[GlkColor controlHighlightColor] set];
+				GlkRectFill(CGRectMake(CGRectGetMinX(bounds), CGRectGetMinY(borderSliver), bounds.size.width, 1));
 				
-				[[NSColor controlShadowColor] set];
-				NSRectFill(NSMakeRect(NSMinX(bounds), NSMaxY(borderSliver)-1, bounds.size.width, 1));
+				[[GlkColor controlShadowColor] set];
+				GlkRectFill(CGRectMake(CGRectGetMinX(bounds), CGRectGetMaxY(borderSliver)-1, bounds.size.width, 1));
 			} else {
 				// Draw lines at left and right of border
-				[[NSColor controlHighlightColor] set];
-				NSRectFill(NSMakeRect(NSMinX(borderSliver), NSMinY(bounds), 1, bounds.size.height));
+				[[GlkColor controlHighlightColor] set];
+				GlkRectFill(CGRectMake(CGRectGetMinX(borderSliver), CGRectGetMinY(bounds), 1, bounds.size.height));
 				
-				[[NSColor controlShadowColor] set];
-				NSRectFill(NSMakeRect(NSMaxX(borderSliver)-1, NSMinY(bounds), 1, bounds.size.height));
+				[[GlkColor controlShadowColor] set];
+				GlkRectFill(CGRectMake(CGRectGetMaxX(borderSliver)-1, CGRectGetMinY(bounds), 1, bounds.size.height));
 			}
 		}
 	}
@@ -364,7 +369,7 @@
 
 #pragma mark - NSAccessibility
 
-
+#ifndef COCOAGLK_IPHONE
 - (NSAccessibilityRole)accessibilityRole {
 	return NSAccessibilityGroupRole;
 }
@@ -372,5 +377,6 @@
 - (NSArray *)accessibilityChildren {
 	return @[left, right];
 }
+#endif
 
 @end

@@ -2155,6 +2155,7 @@
 		4B6A86E2086DB1E900BFAE69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -2176,12 +2177,15 @@
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
 				PRODUCT_NAME = GlkView;
+				SUPPORTED_PLATFORMS = "xrsimulator xros macosx iphonesimulator iphoneos appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 			};
 			name = Debug;
 		};
 		4B6A86E3086DB1E900BFAE69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -2201,12 +2205,15 @@
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
 				PRODUCT_NAME = GlkView;
+				SUPPORTED_PLATFORMS = "xrsimulator xros macosx iphonesimulator iphoneos appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 			};
 			name = Release;
 		};
 		4B6A86E6086DB1E900BFAE69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -2230,12 +2237,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkClient;
 				PRODUCT_NAME = GlkClient;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "xrsimulator xros macosx iphonesimulator iphoneos appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 			};
 			name = Debug;
 		};
 		4B6A86E7086DB1E900BFAE69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -2257,6 +2267,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkClient;
 				PRODUCT_NAME = GlkClient;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "xrsimulator xros macosx iphonesimulator iphoneos appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 			};
 			name = Release;
 		};
@@ -2346,6 +2358,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk;
 				PRODUCT_NAME = CocoaGlk;
+				SUPPORTS_MACCATALYST = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2365,6 +2378,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk;
 				PRODUCT_NAME = CocoaGlk;
+				SUPPORTS_MACCATALYST = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2526,6 +2540,7 @@
 		4BF0852C0E166E8400DB5C6B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 2.0.1;
@@ -2546,6 +2561,8 @@
 				PRODUCT_NAME = GlkSound;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "xrsimulator xros macosx iphonesimulator iphoneos appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2553,6 +2570,7 @@
 		4BF0852D0E166E8400DB5C6B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 2.0.1;
@@ -2572,6 +2590,8 @@
 				PRODUCT_NAME = GlkSound;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "xrsimulator xros macosx iphonesimulator iphoneos appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

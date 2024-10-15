@@ -29,7 +29,7 @@
 ///
 /// Class that represents a Glk window
 ///
-@interface GlkWindow : NSView<GlkStream> {
+@interface GlkWindow : GlkSuperView<GlkStream> {
 	/// The pair window that contains this window (or NULL for the root window) !NOT RETAINED!
 	__weak GlkPairWindow* parentWindow;
 	
@@ -83,8 +83,10 @@
 
 /// Given a string from a keyboard event, returns the associated Glk keycode
 + (unsigned) keycodeForString: (NSString*) string isUnicode: (BOOL) unicode;
+#if !defined(COCOAGLK_IPHONE)
 /// Given a keyboard event, produces the associated Glk keycode
 + (unsigned) keycodeForEvent: (NSEvent*) evt isUnicode: (BOOL) unicode;
+#endif
 
 /// Closed windows can hang around
 @property BOOL closed;
@@ -96,7 +98,7 @@
 
 // Layout
 /// If the layout has changed, then update/redraw this window
-- (void) layoutInRect: (NSRect) parentRect;
+- (void) layoutInRect: (CGRect) parentRect;
 /// Meaning depends on the window format. Returns the preferred size in pixels
 - (CGFloat) widthForFixedSize: (unsigned) size;
 /// Meaning depends on the window format. Returns the preferred size in pixels
@@ -106,7 +108,7 @@
 @property CGFloat border;
 
 /// Size of the content, taking the border into account
-@property (readonly) NSRect contentRect;
+@property (readonly) CGRect contentRect;
 /// Size in window units
 @property (readonly) GlkSize glkSize;
 
@@ -138,12 +140,12 @@
 - (void) reformat;
 
 /// The base proportional font we're using
-- (NSFont*) proportionalFont;
+- (GlkFont*) proportionalFont;
 /// The base fixed-pitch font we're using
-- (NSFont*) fixedFont;
+- (GlkFont*) fixedFont;
 
 /// The background colour for this window
-- (NSColor*) backgroundColour;
+- (GlkColor*) backgroundColour;
 
 /// The amount of leading to use
 @property (readonly) CGFloat leading;
@@ -194,7 +196,11 @@
 /// Returns \c YES if this window is waiting for keyboard input for user interaction with the running story
 @property (readonly) BOOL waitingForUserKeyboardInput;
 /// The control that responds to events for this window
+#if defined(COCOAGLK_IPHONE)
+- (UIResponder*) windowResponder;
+#else
 - (NSResponder*) windowResponder;
+#endif
 
 /// Called just before the buffer flushes (mostly used to tell the text windows to wait before performing layout)
 - (void) bufferIsFlushing;

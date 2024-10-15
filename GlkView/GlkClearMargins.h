@@ -9,6 +9,7 @@
 #ifndef __GLKVIEW_GLKCLEARMARGINS_H__
 #define __GLKVIEW_GLKCLEARMARGINS_H__
 
+#import <Foundation/Foundation.h>
 #import <GlkView/GlkViewDefinitions.h>
 #if defined(COCOAGLK_IPHONE)
 # import <UIKit/UIKit.h>

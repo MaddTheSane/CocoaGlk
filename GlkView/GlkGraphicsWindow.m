@@ -68,7 +68,7 @@
 	
 	if (oldSize.width < frame.size.width || oldSize.height < frame.size.height) {
 		// Resize and clear
-		[windowImage setSize: NSMakeSize(frame.size.width + 8.0, frame.size.height + 8.0)];
+		[windowImage setSize: CGSizeMake(frame.size.width + 8.0, frame.size.height + 8.0)];
 		[self clear];
 	}
 	
@@ -184,8 +184,7 @@
 	[col set];
 	UIRectFill(rect);
 
-	[windowImage release];
-	windowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	windowImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	
 	[self setNeedsDisplay];
@@ -214,8 +213,7 @@
 	UIGraphicsBeginImageContext(windowImage.size);
 	[windowImage drawInRect:CGRectMake(0, 0, windowImage.size.width, windowImage.size.height)];
 	[img drawInRect:imgRect];
-	[windowImage release];
-	windowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	windowImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	
 	[self setNeedsDisplay];

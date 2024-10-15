@@ -23,7 +23,7 @@ NSString* const GlkCustomSectionAttributeName = @"GlkCustomSectionAttributeName"
 
 #pragma mark - Typesetting
 
-- (void) placeBaselineAt: (NSPoint) point
+- (void) placeBaselineAt: (CGPoint) point
 				forGlyph: (NSInteger) glyph {
 	// Do nothing...
 }

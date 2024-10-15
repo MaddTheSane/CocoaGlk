@@ -103,13 +103,20 @@
 }
 
 - (CGFloat) widthForFixedSize: (unsigned) size {
-	NSSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
-	
+	CGSize baseSize = [@"M" sizeWithAttributes: [self currentTextAttributes]];
+#if defined(COCOAGLK_IPHONE)
+	return floor(size * baseSize.width) + [textView textContainerInset].left*2 + [[textView textContainer] lineFragmentPadding]*2;
+#else
 	return floor(size * baseSize.width) + [textView textContainerInset].width*2 + [[textView textContainer] lineFragmentPadding]*2;
+#endif
 }
 
 - (CGFloat) heightForFixedSize: (unsigned) size {
+#if defined(COCOAGLK_IPHONE)
+	return floor(size * [self lineHeight]) + [textView textContainerInset].top*2;
+#else
 	return floor(size * [self lineHeight]) + [textView textContainerInset].height*2;
+#endif
 }
 
 - (GlkSize) glkSize {
@@ -131,8 +138,13 @@
 	int lastWidth = width;
 	int lastHeight = height;
 	
+#if defined(COCOAGLK_IPHONE)
+	width  = (int)((parentRect.size.width - [textView textContainerInset].left*2 - [[textView textContainer] lineFragmentPadding]*2)  / [self charWidth]);
+	height = (int)((parentRect.size.height - [textView textContainerInset].top*2) / [self lineHeight]);
+#else
 	width  = (int)((parentRect.size.width - [textView textContainerInset].width*2 - [[textView textContainer] lineFragmentPadding]*2)  / [self charWidth]);
 	height = (int)((parentRect.size.height - [textView textContainerInset].height*2) / [self lineHeight]);
+#endif
 	
 	if (width < 0) width = 0;
 	if (height < 0) height = 0;
@@ -343,9 +355,14 @@
 - (void) updateWithPrefs: (GlkPreferences*) prefs {
 	// Overridden from GlkTextWindow
 	margin = 0;
+#if defined(COCOAGLK_IPHONE)
+	// TODO:
+	[textView setTextContainerInset: CGSizeMake(margin, margin)];
+#else
 	[textView setTextContainerInset: NSMakeSize(margin, margin)];
+#endif
 //	[[textView layoutManager] setUsesScreenFonts: [prefs useScreenFonts]];
-	if (@available(macOS 10.15, *)) {
+	if (@available(macOS 10.15, iOS 13.0, *)) {
 		[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation]];
 	} else {
 		[[textView layoutManager] setHyphenationFactor: [prefs useHyphenation]?1:0];
@@ -589,6 +606,7 @@ textView:(NSTextView *)aTextView
 
 #pragma mark - NSAccessibility
 
+#if !defined(COCOAGLK_IPHONE)
 - (NSString *)accessibilityRoleDescription {
 	if (!lineInput && !charInput) return @"Text grid";
 	return [NSString stringWithFormat: @"GLK text grid window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];
@@ -597,5 +615,6 @@ textView:(NSTextView *)aTextView
 - (id)accessibilityFocusedUIElement {
 	return textView;
 }
+#endif
 
 @end

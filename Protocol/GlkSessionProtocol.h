@@ -123,7 +123,7 @@ typedef struct GlkSize {
 /// Sets where we get our image data from
 - (void) setImageSource: (in nullable byref id<GlkImageSource>) newSource;
 /// Retrieves the size of an image
-- (NSSize) sizeForImageResource: (glui32) imageId;
+- (CGSize) sizeForImageResource: (glui32) imageId;
 /// Retrieves the active image source
 - (out nullable byref id<GlkImageSource>) imageSource;
 

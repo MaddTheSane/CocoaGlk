@@ -6,6 +6,7 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
+#import <CoreGraphics/CoreGraphics.h>
 #import "GlkWindow.h"
 #import <GlkView/GlkPairWindow.h>
 #import <GlkView/GlkView.h>
@@ -126,7 +127,7 @@
 }
 
 - (CGFloat) lineHeight {
-    NSFont* font = [[self currentTextAttributes] objectForKey: NSFontAttributeName];
+    GlkFont* font = [[self currentTextAttributes] objectForKey: NSFontAttributeName];
     NSLayoutManager* layoutManager = [[NSLayoutManager alloc] init];
     
     return [layoutManager defaultLineHeightForFont: font];
@@ -672,6 +673,7 @@ NS_ENUM(unichar) {
 
 #pragma mark - Accessibility
 
+#ifndef COCOAGLK_IPHONE
 - (NSString *)accessibilityRoleDescription {
 	return [NSString stringWithFormat: @"GLK window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];;
 }
@@ -709,5 +711,6 @@ NS_ENUM(unichar) {
 - (id)accessibilityFocusedUIElement {
 	return self;
 }
+#endif
 
 @end

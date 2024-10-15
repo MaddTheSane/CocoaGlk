@@ -20,20 +20,20 @@
 
 @interface GlkGraphicsWindow : GlkWindow {
 	/// The image buffer for this window
-	NSImage* windowImage;
+	GlkSuperImage* windowImage;
 	/// The background colour for this window
 	GlkColor* backgroundColour;
 }
 
 // Drawing in the graphics window
 /// Fills in an area in a solid colour
-- (void) fillRect: (NSRect) rect
-	   withColour: (NSColor*) col;
+- (void) fillRect: (CGRect) rect
+	   withColour: (GlkColor*) col;
 /// Sets the background colour of the window to the specified colour
 @property (retain) GlkColor *backgroundColour;
 /// Draws an image, scaled to the given rectangle
-- (void) drawImage: (NSImage*) img
-			inRect: (NSRect) imgRect;
+- (void) drawImage: (GlkSuperImage*) img
+			inRect: (CGRect) imgRect;
 
 @end
 

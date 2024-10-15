@@ -186,9 +186,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 - (void) measureGlyphs: (CGGlyph*) glyphs
 				 count: (NSInteger) count
-				  font: (NSFont*) font
+				  font: (GlkFont*) font
 		  advancements: (CGFloat*) advancements
-				bounds: (NSRect*) bounds {
+				bounds: (CGRect*) bounds {
 #ifdef Debug
 	if (count <= 0) {
 		NSLog(@"No glyphs to measure!");
@@ -243,8 +243,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #endif
 	
 	// Measure each glyph in the glyph array
-	NSSize advance[count];
-	NSRect bounding[count];
+	CGSize advance[count];
+	CGRect bounding[count];
 	memset(advance, 0, sizeof(advance));
 	memset(bounding, 0, sizeof(bounding));
 	

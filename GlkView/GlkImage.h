@@ -27,16 +27,16 @@ extern NSString* const GlkImageAttribute;
 ///
 @interface GlkImage : GlkCustomTextSection {
 	/// The NSImage associated with this image
-	NSImage* image;
+	GlkSuperImage* image;
 	/// The size to draw this image with
-	NSSize size;
+	CGSize size;
 	/// The Glk alignment of this image
 	unsigned alignment;
 	/// The character position of this image in the text stream
 	NSUInteger characterPosition;
 	
 	/// The bounds of this image in the text container
-	NSRect bounds;
+	CGRect bounds;
 	/// Whether or not the bounds for this image have been calculated yet
 	BOOL calculatedBounds;
 
@@ -49,21 +49,21 @@ extern NSString* const GlkImageAttribute;
 // Initialisation
 - (id) initWithImage: (GlkSuperImage*) image
 		   alignment: (unsigned) alignment
-				size: (NSSize) size
+				size: (CGSize) size
 			position: (NSUInteger) characterPosition;
 
 // Information
 /// The \c NSImage associated with this image
-@property (readonly, retain) NSImage *image;
+@property (readonly, retain) GlkSuperImage *image;
 /// The size to draw this image with
-@property (readonly) NSSize size;
+@property (readonly) CGSize size;
 /// The Glk alignment of this image
 @property (readonly) unsigned alignment;
 /// The character position of this image in the text stream
 @property (readonly) NSUInteger characterPosition;
 
 /// The bounds of this image. Setting it marks it as calculated.
-@property (nonatomic) NSRect bounds;
+@property (nonatomic) CGRect bounds;
 /// Returns \c YES if the bounds are calculated
 @property (readonly) BOOL calculatedBounds;
 /// Marks this image as uncalculated

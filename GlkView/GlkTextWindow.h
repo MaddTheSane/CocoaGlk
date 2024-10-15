@@ -20,9 +20,9 @@
 #import <GlkView/GlkTextView.h>
 #import <GlkView/GlkTypesetter.h>
 
-@interface GlkTextWindow : GlkWindow <NSTextStorageDelegate, NSTextViewDelegate> {
+@interface GlkTextWindow : GlkWindow <NSTextStorageDelegate, GlkTextViewDelegate> {
 	/// The scroller for the text view
-	NSScrollView* scrollView;
+	GlkScrollView* scrollView;
 	/// The inner text view
 	GlkTextView* textView;
 	/// The typesetter we should use for laying out images and other Glk-specific things
@@ -75,9 +75,9 @@
 - (void) setupTextview;
 
 /// Adds an image at the end of this view
-- (void) addImage: (NSImage*) image
+- (void) addImage: (GlkSuperImage*) image
 	withAlignment: (unsigned) alignment
-			 size: (NSSize) sz;
+			 size: (CGSize) sz;
 /// Adds a flow break at the end of this view
 - (void) addFlowBreak;
 

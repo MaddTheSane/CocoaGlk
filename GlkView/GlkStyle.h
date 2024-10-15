@@ -76,9 +76,9 @@ extern NSAttributedStringKey const GlkStyleAttributeName;
 /// \c NO if fixed-pitch
 @property (nonatomic) BOOL proportional;
 /// Foreground text colour
-@property (nonatomic, copy) NSColor *textColour;
+@property (nonatomic, copy) GlkColor *textColour;
 /// Background text colour
-@property (nonatomic, copy) NSColor *backColour;
+@property (nonatomic, copy) GlkColor *backColour;
 /// \c YES If text/back are reversed
 @property (nonatomic, getter=isReversed) BOOL reversed;
 

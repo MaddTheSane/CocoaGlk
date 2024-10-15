@@ -20,7 +20,7 @@
 ///
 /// Class that implements our custom extensions to the text view (mainly character input and image drawing)
 ///
-@interface GlkTextView : NSTextView<GlkCustomTextLayout>
+@interface GlkTextView : GlkTextSuperView<GlkCustomTextLayout>
 
 // Character input
 /// Any characters sent to this window that can be handled by Glk will be passed to the superview

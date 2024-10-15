@@ -52,7 +52,7 @@
 	/// True if something has changed to require the windows to be layed out again
 	BOOL needsLayout;
 	/// The border sliver
-	NSRect borderSliver;
+	CGRect borderSliver;
 }
 
 // Setting the windows that make up this pair

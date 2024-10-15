@@ -1356,6 +1356,8 @@ bool SFB::Audio::CoreAudioOutput::GetAUGraphOutput(AudioUnit& au) const
 
 #pragma mark Device Management
 
+#if !TARGET_OS_IPHONE
+
 bool SFB::Audio::CoreAudioOutput::_GetDeviceSampleRate(Float64& sampleRate) const
 {
 	AudioDeviceID deviceID;
@@ -1414,6 +1416,7 @@ bool SFB::Audio::CoreAudioOutput::_SetDeviceSampleRate(Float64 sampleRate)
 
 	return true;
 }
+#endif
 
 size_t SFB::Audio::CoreAudioOutput::_GetPreferredBufferSize() const
 {

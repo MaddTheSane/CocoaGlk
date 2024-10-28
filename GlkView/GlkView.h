@@ -135,9 +135,9 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 	/// Source of data for images
 	id<GlkImageSource> imgSrc;
 	/// Dictionary of images
-	NSMutableDictionary* imageDictionary;
+	NSMutableDictionary<NSNumber*,GlkSuperImage*>* imageDictionary;
 	/// Dictionary of flipped images
-	NSMutableDictionary* flippedImageDictionary;
+	NSMutableDictionary<NSNumber*,GlkSuperImage*>* flippedImageDictionary;
 	
 	// Input history
 	/// History of input lines

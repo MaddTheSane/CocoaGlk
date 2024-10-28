@@ -10,6 +10,7 @@
 #define __GLKVIEW_GLKIMAGESOURCEPROTOCOL_H__
 
 #import <Foundation/Foundation.h>
+#import <GlkView/glk.h>
 
 ///
 /// When we have image resources, we need to be able to ask the client what they are. The client can provide

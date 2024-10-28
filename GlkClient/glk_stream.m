@@ -580,7 +580,7 @@ strid_t glk_stream_open_memory_uni(glui32 *buf, glui32 buflen,
 }
 
 //
-//// This closes the stream str. The result argument points to a structure
+/// This closes the stream str. The result argument points to a structure
 /// which is filled in with the final character counts of the stream. If
 /// you do not care about these, you may pass \c NULL as the result argument.
 ///

@@ -17,20 +17,20 @@
 # import <Cocoa/Cocoa.h>
 #endif
 
-/// Notification sent whenever the preferences are changed (not necessarily sent immediately)
+/// Notification sent whenever the preferences are changed (not necessarily sent immediately).
 extern NSNotificationName const GlkPreferencesHaveChangedNotification;
 
 @class GlkStyle;
 
 ///
-/// General preferences used for a Glk view
+/// General preferences used for a Glk view.
 ///
 @interface GlkPreferences : NSObject<NSCopying> {
 	// The fonts
 	GlkFont* proportionalFont;
 	GlkFont* fixedFont;
 	
-	// The standard styles
+	/// The standard styles.
 	NSMutableDictionary<NSNumber*,GlkStyle*>* styles;
 	
 	// Typography
@@ -43,61 +43,63 @@ extern NSNotificationName const GlkPreferencesHaveChangedNotification;
 	// Misc bits
 	CGFloat scrollbackLength;
 	
-	/// YES if the last change is being notified
+	/// `YES` if the last change is being notified.
 	BOOL changeNotified;
-	/// Number of changes
+	/// Number of changes.
 	int  changeCount;
 }
 
-/// The shared preferences object (these are automagically stored in the user defaults)
+/// The shared preferences object (these are automagically stored in the user defaults).
 @property (class, readonly, retain) GlkPreferences *sharedPreferences;
 
 // Preferences and the user defaults
-/// Used to load the preferences from a defaults file
+/// Used to load the preferences from a defaults file.
 - (void) setPreferencesFromDefaults: (NSDictionary<NSString*,id>*) defaults;
-/// These preferences in a format suitable for the user defaults file
+/// These preferences in a format suitable for the user defaults file.
 @property (readonly, copy) NSDictionary<NSString*,id> *preferenceDefaults;
 
 // The preferences themselves
 
 // Font preferences
-/// The font used for proportional text
+/// The font used for proportional text.
 @property (nonatomic, copy) GlkFont *proportionalFont;
-/// The font used for fixed-pitch text
+/// The font used for fixed-pitch text.
 @property (nonatomic, copy) GlkFont *fixedFont;
 
-/// Replaces the current fonts with ones of the given size
+/// Replaces the current fonts with ones of the given size.
 - (void) setFontSize: (CGFloat) fontSize;
 
 // Typography preferences
-/// The padding to use in text windows
+/// The padding to use in text windows.
 @property (nonatomic) CGFloat textMargin;
-/// Whether or not to use screen fonts
-@property (nonatomic) BOOL useScreenFonts;
-/// Whether or not to use hyphenation
+/// Whether or not to use screen fonts.
+///
+/// \deprecated Screen fonts have been deprecated for awhile. This will most likely have no affect.
+@property (nonatomic) BOOL useScreenFonts NS_DEPRECATED_MAC(10.2, 10.11, "Not used anymore.");
+/// Whether or not to use hyphenation.
 @property (nonatomic) BOOL useHyphenation;
-/// Whether or not to display ligatures
+/// Whether or not to display ligatures.
 @property (nonatomic) BOOL useLigatures;
-/// Whether or not to use kerning
+/// Whether or not to use kerning.
 @property (nonatomic) BOOL useKerning;
-/// Replaces the current padding that we should use
+/// Replaces the current padding that we should use.
 - (void) setTextMargin: (CGFloat) margin;
 
 // Style preferences
-/// Dictionary mapping \c NSNumbers with Glk styles to \c GlkStyle objects
+/// Dictionary mapping `NSNumber`s with Glk styles to `GlkStyle` objects.
 - (void) setStyles: (NSDictionary<NSNumber*,GlkStyle*>*) styles;
-/// Sets a style for a specific Glk hint
+/// Sets a style for a specific Glk hint.
 - (void) setStyle: (GlkStyle*) style
 		  forHint: (unsigned) glkHint;
 
-/// The style dictionary
+/// The style dictionary.
 @property (nonatomic, copy) NSDictionary<NSNumber*,GlkStyle*> *styles;
 // Misc preferences
-/// The amount of scrollback to support in text windows (0-100)
+/// The amount of scrollback to support in text windows (0-100).
 @property (nonatomic) CGFloat scrollbackLength;
 
 // Changes
-/// Number of changes that have occured on this preference object
+/// Number of changes that have occured on this preference object.
 @property (readonly) int changeCount;
 
 @end

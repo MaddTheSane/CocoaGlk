@@ -18,16 +18,16 @@
 #import <GlkView/GlkTypesetter.h>
 
 ///
-/// Class that implements our custom extensions to the text view (mainly character input and image drawing)
+/// Class that implements our custom extensions to the text view (mainly character input and image drawing).
 ///
 @interface GlkTextView : GlkTextSuperView<GlkCustomTextLayout>
 
 // Character input
-/// Any characters sent to this window that can be handled by Glk will be passed to the superview
+/// Any characters sent to this window that can be handled by Glk will be passed to the superview.
 - (void) requestCharacterInput;
-/// Any Unicode characters sent to this window that can be handled by Glk will be passed to the superview
+/// Any Unicode characters sent to this window that can be handled by Glk will be passed to the superview.
 - (void) requestUnicodeCharacterInput;
-/// Cancels the previous
+/// Cancels the previous.
 - (void) cancelCharacterInput;
 
 @end

@@ -20,15 +20,15 @@
 #import <GlkView/GlkTextWindow.h>
 
 @interface GlkTextGridWindow : GlkTextWindow<NSTextStorageDelegate, GlkTextViewDelegate> {
-	/// The amount of line input that we have accepted so far
+	/// The amount of line input that we have accepted so far.
 	NSInteger lineInputLength;
 	
-	/// Current character width/height
+	/// Current character width/height.
 	int width,height;
 	/// Current cursor position. Top left is 0,0.
 	int xpos,ypos;
 	
-	/// The next input line to display
+	/// The next input line to display.
 	NSString* nextInputLine;
 }
 

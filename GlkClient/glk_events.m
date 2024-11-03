@@ -117,7 +117,7 @@ void glk_select(event_t *event) {
 			case evtype_LineInput:
 			{
 				// Buffer up the line input
-				NSString* lineInput = [evt lineInput];
+				NSString* lineInput = evt.lineInput;
 				
 				if (event->win && event->win->ucs4 && event->win->inputBufUcs4) {
 					// Copy the line input data as UCS-4 information

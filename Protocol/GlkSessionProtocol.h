@@ -99,10 +99,10 @@ typedef struct GlkSize {
 
 #pragma mark - Filerefs
 
-/// Returns \c NULL if the name is invalid (or if we're not supporting named files for some reason)
-- (nullable id<GlkFileRef>) fileRefWithName: (in bycopy NSString*) name;
-/// Temp files are automagically deleted when the session goes away
-- (nullable id<GlkFileRef>) tempFileRef;
+/// Returns \c NULL if the name is invalid (or if we're not supporting named files for some reason).
+- (nullable byref id<GlkFileRef>) fileRefWithName: (in bycopy NSString*) name;
+/// Temp files are automagically deleted when the session goes away.
+- (nullable byref id<GlkFileRef>) tempFileRef;
 
 /// Returns the list of the preferred filetypes for the specified usage
 - (nullable bycopy NSArray<NSString*>*) fileTypesForUsage: (in bycopy NSString*) usage;

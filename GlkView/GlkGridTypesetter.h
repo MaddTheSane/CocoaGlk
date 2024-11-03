@@ -27,19 +27,19 @@
 /// layout options to the standard typesetter.
 ///
 @interface GlkGridTypesetter : GlkTypesetter {
-	/// Width of the grid, in characters
+	/// Width of the grid, in characters.
 	int gridWidth;
-	/// Height of the grid, in characters
+	/// Height of the grid, in characters.
 	int gridHeight;
-	/// Size of a grid cell
+	/// Size of a grid cell.
 	CGSize cellSize;
 }
 
 // Setting up the grid
-/// Sets the number of characters for the grid width and height
+/// Sets the number of characters for the grid width and height.
 - (void) setGridWidth: (int) gridWidth
 			   height: (int) gridHeight;
-/// Sets the size of an individual cell in the grid
+/// Sets the size of an individual cell in the grid.
 - (void) setCellSize: (CGSize) cellSize;
 
 @end

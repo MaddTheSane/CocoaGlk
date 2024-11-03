@@ -16,7 +16,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GlkFileStream : NSObject<GlkStream> {
-	/// The filehandle we're using to read/write from
+	/// The filehandle we're using to read/write from.
 	NSFileHandle* handle;
 }
 

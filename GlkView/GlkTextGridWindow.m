@@ -554,7 +554,7 @@ textView:(NSTextView *)aTextView
 				break;
 				
 			case NSDownArrowFunctionKey:
-				history = [[self containingView] previousHistoryItem];
+				history = [[self containingView] nextHistoryItem];
 				break;
 				
 			case '\n':
@@ -569,7 +569,7 @@ textView:(NSTextView *)aTextView
 												  windowIdentifier: [self glkIdentifier]
 															  val1: (int)[inputLine length]
 															  val2: 0];
-					[evt setLineInput: inputLine];
+					evt.lineInput = inputLine;
 					
 					// ... send it
 					[target queueEvent: evt];

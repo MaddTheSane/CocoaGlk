@@ -24,7 +24,7 @@
 	unsigned val2;
 	
 	// 'Out-of-band' data
-	/// When a line event is requested, this contains the string that eventually ends up in the buffer
+	/// When a line event is requested, this contains the string that eventually ends up in the buffer.
 	NSString* lineInput;
 }
 
@@ -42,8 +42,8 @@
 - (instancetype) initWithCoder: (NSCoder*) coder NS_DESIGNATED_INITIALIZER;
 
 
-/// When a line event is requested, this contains the string that eventually ends up in the buffer
-@property (copy) NSString *lineInput;
+/// When a line event is requested, this contains the string that eventually ends up in the buffer.
+@property (readwrite, copy) NSString *lineInput;
 
 @end
 

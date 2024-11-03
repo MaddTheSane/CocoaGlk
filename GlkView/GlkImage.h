@@ -19,30 +19,30 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Attribute that can be applied to control glyphs to indicate that they should cause formatting of a specific Glk image
+/// Attribute that can be applied to control glyphs to indicate that they should cause formatting of a specific Glk image.
 extern NSString* const GlkImageAttribute;
 
 ///
-/// Representation of an image in a text container
+/// Representation of an image in a text container.
 ///
 @interface GlkImage : GlkCustomTextSection {
-	/// The NSImage associated with this image
+	/// The NSImage associated with this image.
 	GlkSuperImage* image;
-	/// The size to draw this image with
+	/// The size to draw this image with.
 	CGSize size;
-	/// The Glk alignment of this image
+	/// The Glk alignment of this image.
 	unsigned alignment;
-	/// The character position of this image in the text stream
+	/// The character position of this image in the text stream.
 	NSUInteger characterPosition;
 	
-	/// The bounds of this image in the text container
+	/// The bounds of this image in the text container.
 	CGRect bounds;
-	/// Whether or not the bounds for this image have been calculated yet
+	/// Whether or not the bounds for this image have been calculated yet.
 	BOOL calculatedBounds;
 
-	/// If this is a margin image, the offset that it should be drawn at
+	/// If this is a margin image, the offset that it should be drawn at.
 	CGFloat marginOffset;
-	/// Scale factor for margin objects
+	/// Scale factor for margin objects.
 	CGFloat scaleFactor;
 }
 
@@ -53,20 +53,20 @@ extern NSString* const GlkImageAttribute;
 			position: (NSUInteger) characterPosition;
 
 // Information
-/// The \c NSImage associated with this image
+/// The `NSImage` associated with this image.
 @property (readonly, retain) GlkSuperImage *image;
-/// The size to draw this image with
+/// The size to draw this image with.
 @property (readonly) CGSize size;
-/// The Glk alignment of this image
+/// The Glk alignment of this image.
 @property (readonly) unsigned alignment;
-/// The character position of this image in the text stream
+/// The character position of this image in the text stream.
 @property (readonly) NSUInteger characterPosition;
 
 /// The bounds of this image. Setting it marks it as calculated.
 @property (nonatomic) CGRect bounds;
-/// Returns \c YES if the bounds are calculated
+/// Returns `YES` if the bounds are calculated.
 @property (readonly) BOOL calculatedBounds;
-/// Marks this image as uncalculated
+/// Marks this image as uncalculated.
 - (void) markAsUncalculated;
 
 @end

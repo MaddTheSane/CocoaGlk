@@ -28,10 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (instancetype) init UNAVAILABLE_ATTRIBUTE;
-/// Designated initialiser
+/// Designated initialiser.
 - (instancetype) initWithPath: (NSURL*) pathname NS_DESIGNATED_INITIALIZER;
 
-/// Temporary filerefs are deleted when deallocated
+/// Temporary filerefs are deleted when deallocated.
 @property (getter=isTemporary) BOOL temporary;
 
 @end

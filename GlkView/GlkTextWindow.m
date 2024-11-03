@@ -403,7 +403,7 @@
 									  windowIdentifier: [self glkIdentifier]
 												  val1: (int)[forcedInput length]
 												  val2: 0];
-		[evt setLineInput: forcedInput];
+		evt.lineInput = forcedInput;
 
 		// Add to the line history
 		[[self containingView] resetHistoryPosition];
@@ -454,7 +454,7 @@
 										  windowIdentifier: [self glkIdentifier]
 													  val1: (int)[inputLine length]
 													  val2: 0];
-			[evt setLineInput: inputLine];
+			evt.lineInput = inputLine;
 			
 			// ... send it
 			[target queueEvent: evt];

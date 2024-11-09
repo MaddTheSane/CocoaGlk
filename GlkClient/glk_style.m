@@ -47,7 +47,7 @@
 //
 void glk_stylehint_set(glui32 wintype, glui32 styl, glui32 hint, 
 					   glsi32 val) {
-	os_log_debug(GlkClientTrace, " glk_stylehint_set(%{public}u, %{public}u, %{public}u, %{public}u)", wintype, styl, hint, val);
+	os_log_info(GlkClientTrace, " glk_stylehint_set(%{public}u, %{public}u, %{public}u, %{public}u)", wintype, styl, hint, val);
 
 	// Sanity checking
 	switch (wintype) {
@@ -85,7 +85,7 @@ void glk_stylehint_set(glui32 wintype, glui32 styl, glui32 hint,
 }
 
 void glk_stylehint_clear(glui32 wintype, glui32 styl, glui32 hint) {
-	os_log_debug(GlkClientTrace, "glk_stylehint_clear(%{public}u, %{public}u, %{public}u)", wintype, styl, hint);
+	os_log_info(GlkClientTrace, "glk_stylehint_clear(%{public}u, %{public}u, %{public}u)", wintype, styl, hint);
 	
 	// Sanity checking
 	switch (wintype) {
@@ -117,7 +117,7 @@ void glk_stylehint_clear(glui32 wintype, glui32 styl, glui32 hint) {
 /// meaning of this is left to the library to determine.
 ///
 glui32 glk_style_distinguish(winid_t win, glui32 styl1, glui32 styl2) {
-	os_log_debug(GlkClientTrace, "glk_style_distinguish(%{public}p, %{public}u, %{public}u)", win, styl1, styl2);
+	os_log_info(GlkClientTrace, "glk_style_distinguish(%{public}p, %{public}u, %{public}u)", win, styl1, styl2);
 
 	// For the moment, we always return TRUE (as all styles are technically distinguishable)
 	return 1;
@@ -182,7 +182,7 @@ glui32 glk_style_measure(winid_t win, glui32 styl, glui32 hint,
 										hint: hint
 									inWindow: win->identifier];
 
-	os_log_debug(GlkClientTrace, "glk_style_measure(%{public}p, %{public}u, %{public}u, %{public}p=%{public}u) = 1)", win, styl, hint, result, *result);
+	os_log_info(GlkClientTrace, "glk_style_measure(%{public}p, %{public}u, %{public}u, %{public}p=%{public}u) = 1)", win, styl, hint, result, *result);
 	
 	return 1;
 }

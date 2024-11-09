@@ -53,7 +53,7 @@ void glk_select(event_t *event) {
 		return;
 	}
 
-	os_log_debug(GlkClientTrace, "glk_select(%{public}p)", event);
+	os_log_info(GlkClientTrace, "glk_select(%{public}p)", event);
 	
 	// Clear the event structure
 	event->type = evtype_None;
@@ -190,7 +190,7 @@ void glk_select(event_t *event) {
 /// "Other Events".
 ///
 void glk_select_poll(event_t *event) {
-	os_log_debug(GlkClientTrace, "glk_select_poll(%{public}p)", event);
+	os_log_info(GlkClientTrace, "glk_select_poll(%{public}p)", event);
 
 	// Sanity check
 	if (event == NULL) {
@@ -220,7 +220,7 @@ void glk_select_poll(event_t *event) {
 /// what the player does. Unlike input events, timer events can be tested
 /// for with \c glk_select_poll() as well as \c glk_select() .
 void glk_request_timer_events(glui32 millisecs) {
-	os_log_debug(GlkClientTrace, "glk_request_timer_events(%{public}u)", millisecs);
+	os_log_info(GlkClientTrace, "glk_request_timer_events(%{public}u)", millisecs);
 	
 	// Release the old timer event date
 	[cocoaglk_nextTimerEvent release];
@@ -273,7 +273,7 @@ void glk_request_line_event(winid_t win,
 							char *buf, 
 							glui32 maxlen,
 							glui32 initlen) {
-	os_log_debug(GlkClientTrace, "glk_request_line_event(%{public}p, %{public}p, %{public}u, %{public}u)", win, buf, maxlen, initlen);
+	os_log_info(GlkClientTrace, "glk_request_line_event(%{public}p, %{public}p, %{public}u, %{public}u)", win, buf, maxlen, initlen);
 
 	// Sanity check
 	if (win == NULL) {
@@ -333,7 +333,7 @@ void glk_request_line_event(winid_t win,
 // already has a pending request for either character or line input.
 // 
 void glk_request_char_event(winid_t win) {
-	os_log_debug(GlkClientTrace, "glk_request_char_event(%{public}p)", win);
+	os_log_info(GlkClientTrace, "glk_request_char_event(%{public}p)", win);
 
 	// Sanity check
 	if (win == NULL) {
@@ -364,7 +364,7 @@ void glk_request_char_event(winid_t win) {
 // if you want further mouse input.
 //
 void glk_request_mouse_event(winid_t win) {
-	os_log_debug(GlkClientTrace, "glk_request_mouse_event(%{public}p)", win);
+	os_log_info(GlkClientTrace, "glk_request_mouse_event(%{public}p)", win);
 
 	// Sanity check
 	if (win == NULL) {
@@ -433,7 +433,7 @@ void glk_cancel_line_event(winid_t win, event_t *event) {
 }
 
 void glk_cancel_char_event(winid_t win) {
-	os_log_debug(GlkClientTrace, "glk_cancel_char_event(%{public}p)", win);
+	os_log_info(GlkClientTrace, "glk_cancel_char_event(%{public}p)", win);
 
 	// Sanity check
 	if (win == NULL) {
@@ -450,7 +450,7 @@ void glk_cancel_char_event(winid_t win) {
 }
 
 void glk_cancel_mouse_event(winid_t win) {
-	os_log_debug(GlkClientTrace, "glk_cancel_mouse_event(%{public}p)", win);
+	os_log_info(GlkClientTrace, "glk_cancel_mouse_event(%{public}p)", win);
 
 	// Sanity check
 	if (win == NULL) {

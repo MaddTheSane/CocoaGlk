@@ -18,7 +18,7 @@ void glk_set_hyperlink(glui32 linkval) {
 }
 
 void glk_set_hyperlink_stream(strid_t str, glui32 linkval) {
-	os_log_debug(GlkClientTrace, "glk_set_hyperlink_stream(%{public}p, %{public}u)", str, linkval);
+	os_log_info(GlkClientTrace, "glk_set_hyperlink_stream(%{public}p, %{public}u)", str, linkval);
 
 	if (!cocoaglk_strid_sane(str)) {
 		cocoaglk_warning("glk_set_hyperlink_stream called with an invalid strid");
@@ -60,7 +60,7 @@ void glk_set_hyperlink_stream(strid_t str, glui32 linkval) {
 }
 
 void glk_request_hyperlink_event(winid_t win) {
-	os_log_debug(GlkClientTrace, "glk_request_hyperlink_event(%{public}p)", win);
+	os_log_info(GlkClientTrace, "glk_request_hyperlink_event(%{public}p)", win);
 
 	if (!cocoaglk_winid_sane(win)) {
 		cocoaglk_warning("glk_request_hyperlink_event called with an invalid winid");
@@ -71,7 +71,7 @@ void glk_request_hyperlink_event(winid_t win) {
 }
 
 void glk_cancel_hyperlink_event(winid_t win) {
-	os_log_debug(GlkClientTrace, "glk_cancel_hyperlink_event(%{public}p)", win);
+	os_log_info(GlkClientTrace, "glk_cancel_hyperlink_event(%{public}p)", win);
 	
 	if (!cocoaglk_winid_sane(win)) {
 		cocoaglk_warning("glk_cancel_hyperlink_event called with an invalid winid");

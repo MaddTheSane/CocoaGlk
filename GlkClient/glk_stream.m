@@ -92,7 +92,7 @@ void cocoaglk_flushstream(strid_t stream, const char* reason) {
 	}
 	
 	if ([buffer shouldBeFlushed]) {
-		os_log_debug(GlkClientTrace, "Flushing a stream buffer: %{public}s", reason);
+		os_log_info(GlkClientTrace, "Flushing a stream buffer: %{public}s", reason);
 		
 		// Flush the buffer
 		[cocoaglk_session performOperationsFromBuffer: buffer];
@@ -112,7 +112,7 @@ void cocoaglk_flushstream(strid_t stream, const char* reason) {
 		// Flush this buffer
 		[cocoaglk_session performOperationsFromBuffer: buffer];
 		
-		os_log_debug(GlkClientTrace, "Stream flushed");
+		os_log_info(GlkClientTrace, "Stream flushed");
 	}
 }
 
@@ -271,7 +271,7 @@ strid_t glk_stream_open_file(frefid_t fileref, glui32 fmode,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_stream_open_file(%{public}p, %{public}u, %{public}u) = %{public}p", fileref, fmode, rock, res);
+	os_log_info(GlkClientTrace, "glk_stream_open_file(%{public}p, %{public}u, %{public}u) = %{public}p", fileref, fmode, rock, res);
 	
 	return res;
 }
@@ -355,7 +355,7 @@ strid_t glk_stream_open_file_uni(frefid_t fileref, glui32 fmode,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_stream_open_file(%{public}p, %{public}u, %{public}u) = %{public}p", fileref, fmode, rock, res);
+	os_log_info(GlkClientTrace, "glk_stream_open_file(%{public}p, %{public}u, %{public}u) = %{public}p", fileref, fmode, rock, res);
 	
 	return res;
 }
@@ -406,7 +406,7 @@ strid_t cocoaglk_get_stream_for_key(const char* key) {
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 	
-	os_log_debug(GlkClientTrace, "cocoaglk_get_input_stream() = %{public}p", res);
+	os_log_info(GlkClientTrace, "cocoaglk_get_input_stream() = %{public}p", res);
 	
 	// Store in in the known streams dictionary
 	[knownStreams setObject: [NSValue valueWithPointer: res]
@@ -420,7 +420,7 @@ strid_t cocoaglk_get_input_stream(void) {
 	static strid_t instream = NULL;
 	
 	if (instream) {
-		os_log_debug(GlkClientTrace, "cocoaglk_get_input_stream() = %{public}p", instream);
+		os_log_info(GlkClientTrace, "cocoaglk_get_input_stream() = %{public}p", instream);
 
 		return instream;
 	}
@@ -453,7 +453,7 @@ strid_t cocoaglk_get_input_stream(void) {
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 
-	os_log_debug(GlkClientTrace, "cocoaglk_get_input_stream() = %{public}p", res);
+	os_log_info(GlkClientTrace, "cocoaglk_get_input_stream() = %{public}p", res);
 
 	return instream=res;
 }
@@ -508,7 +508,7 @@ strid_t glk_stream_open_memory(char *buf, glui32 buflen, glui32 fmode,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 
-	os_log_debug(GlkClientTrace, "glk_stream_open_memory(%{public}p, %{public}u, %{public}u, %{public}u) = %{public}p", buf, buflen, fmode, rock, res);
+	os_log_info(GlkClientTrace, "glk_stream_open_memory(%{public}p, %{public}u, %{public}u, %{public}u) = %{public}p", buf, buflen, fmode, rock, res);
 		
 	// Return the result
 	return res;
@@ -573,7 +573,7 @@ strid_t glk_stream_open_memory_uni(glui32 *buf, glui32 buflen,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Stream);
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_stream_open_memory(%{public}p, %{public}u, %{public}u, %{public}u) = %{public}p", buf, buflen, fmode, rock, res);
+	os_log_info(GlkClientTrace, "glk_stream_open_memory(%{public}p, %{public}u, %{public}u, %{public}u) = %{public}p", buf, buflen, fmode, rock, res);
 	
 	// Return the result
 	return res;
@@ -591,7 +591,7 @@ strid_t glk_stream_open_memory_uni(glui32 *buf, glui32 buflen,
 /// section 3.2, "Window Opening, Closing, and Constraints".
 ///
 void glk_stream_close(strid_t str, stream_result_t *result) {
-	os_log_debug(GlkClientTrace, "glk_stream_close(%{public}p, %{public}p)", str, result);
+	os_log_info(GlkClientTrace, "glk_stream_close(%{public}p, %{public}p)", str, result);
 
 	// Sanity checks
 	if (str == NULL) {
@@ -696,7 +696,7 @@ strid_t glk_stream_iterate(strid_t str, glui32 *rockptr) {
 	// Return the next stream
 	if (str->next && rockptr) *rockptr = str->next->rock;	
 
-	os_log_debug(GlkClientTrace, "glk_stream_iterate(%{public}p, %{public}p=%{public}u) = %{public}p", str, rockptr, rockptr?*rockptr:0, str->next);
+	os_log_info(GlkClientTrace, "glk_stream_iterate(%{public}p, %{public}p=%{public}u) = %{public}p", str, rockptr, rockptr?*rockptr:0, str->next);
 		
 	return str->next;
 }
@@ -709,7 +709,7 @@ glui32 glk_stream_get_rock(strid_t str) {
 		cocoaglk_error("glk_stream_get_rock called with an invalid strid");
 	}
 
-	os_log_debug(GlkClientTrace, "glk_stream_get_rock(%{public}p) = %{public}u", str, str->rock);
+	os_log_info(GlkClientTrace, "glk_stream_get_rock(%{public}p) = %{public}u", str, str->rock);
 		
 	return str->rock;
 }
@@ -738,7 +738,7 @@ glui32 glk_stream_get_rock(strid_t str) {
 /// end of a file, or to a position determined by \c glk_stream_get_position() .
 ///
 void glk_stream_set_position(strid_t str, glsi32 pos, glui32 seekmode) {
-	os_log_debug(GlkClientTrace, "glk_stream_set_position(%{public}p, %{public}u, %{public}u)", str, pos, seekmode);
+	os_log_info(GlkClientTrace, "glk_stream_set_position(%{public}p, %{public}u, %{public}u)", str, pos, seekmode);
 		
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
@@ -784,7 +784,7 @@ glui32 glk_stream_get_position(strid_t str) {
 	
 	glui32 res = (glui32)[str->stream getPosition];
 	
-	os_log_debug(GlkClientTrace, "glk_stream_get_position(%{public}p) = %{public}u", str, res);
+	os_log_info(GlkClientTrace, "glk_stream_get_position(%{public}p) = %{public}u", str, res);
 		
 	return res;
 }
@@ -800,7 +800,7 @@ glui32 glk_stream_get_position(strid_t str) {
 /// becomes \c NULL .
 ///
 void glk_stream_set_current(strid_t str) {
-	os_log_debug(GlkClientTrace, "glk_stream_set_current(%{public}p)", str);
+	os_log_info(GlkClientTrace, "glk_stream_set_current(%{public}p)", str);
 	
 	// Sanity checking
 	if (str != NULL && !cocoaglk_strid_sane(str)) {
@@ -811,7 +811,7 @@ void glk_stream_set_current(strid_t str) {
 }
 
 strid_t glk_stream_get_current(void) {
-	os_log_debug(GlkClientTrace, "glk_stream_get_current() = %{public}p", cocoaglk_currentstream);
+	os_log_info(GlkClientTrace, "glk_stream_get_current() = %{public}p", cocoaglk_currentstream);
 	
 	return cocoaglk_currentstream;
 }
@@ -833,7 +833,7 @@ void glk_set_style(glui32 styl) {
 }
 
 void glk_put_char_stream(strid_t str, unsigned char ch) {
-	os_log_debug(GlkClientTrace, "glk_put_char_stream(%{public}p, '%{public}c')", str, ch);
+	os_log_info(GlkClientTrace, "glk_put_char_stream(%{public}p, '%{public}c')", str, ch);
 	
 	if (!str) {
 		cocoaglk_warning("glk_put_char_stream called with a NULL stream");
@@ -883,7 +883,7 @@ void glk_put_char_stream(strid_t str, unsigned char ch) {
 }
 
 void glk_put_string_stream(strid_t str, char *s) {
-	os_log_debug(GlkClientTrace, "glk_put_string_stream(%{public}p, \"%{public}s\")", str, s);
+	os_log_info(GlkClientTrace, "glk_put_string_stream(%{public}p, \"%{public}s\")", str, s);
 	
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
@@ -933,7 +933,7 @@ void glk_put_string_stream(strid_t str, char *s) {
 }
 
 void glk_put_buffer_stream(strid_t str, char *buffer, glui32 len) {
-	os_log_debug(GlkClientTrace, "glk_put_buffer_stream(%{public}p, %{public}p, %{public}u)", str, buffer, len);
+	os_log_info(GlkClientTrace, "glk_put_buffer_stream(%{public}p, %{public}p, %{public}u)", str, buffer, len);
 
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
@@ -982,7 +982,7 @@ void glk_put_buffer_stream(strid_t str, char *buffer, glui32 len) {
 }
 
 void glk_set_style_stream(strid_t str, glui32 styl) {
-	os_log_debug(GlkClientTrace, "glk_set_style_stream(%{public}p, %{public}u)", str, styl);
+	os_log_info(GlkClientTrace, "glk_set_style_stream(%{public}p, %{public}u)", str, styl);
 
 	// Sanity checking
 	if (!cocoaglk_strid_sane(str)) {
@@ -1045,7 +1045,7 @@ glsi32 glk_get_char_stream(strid_t str) {
 	// Next, use the stream object to get our result
 	unichar res = [str->stream getChar];
 
-	os_log_debug(GlkClientTrace, "glk_get_char_stream(%{public}p) = %{public}i", str, res);
+	os_log_info(GlkClientTrace, "glk_get_char_stream(%{public}p) = %{public}i", str, res);
 		
 	if (res == GlkEOFChar) return -1;
 	
@@ -1111,7 +1111,7 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 	buf[length] = 0;
 #endif
 
-	os_log_debug(GlkClientTrace, "glk_get_line_stream(%{public}p, %{public}p=\"%{public}s\", %{public}u) = %{public}ld", str, buf, buf, len, (long)length);
+	os_log_info(GlkClientTrace, "glk_get_line_stream(%{public}p, %{public}p=\"%{public}s\", %{public}u) = %{public}ld", str, buf, buf, len, (long)length);
 		
 	// Return the result
 	str->read += len;
@@ -1153,7 +1153,7 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 		memcpy(buf, [data bytes], length);
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_get_buffer_stream(%{public}p, %{public}p, %{public}i) = %{public}ld", str, buf, len, (long)length);
+	os_log_info(GlkClientTrace, "glk_get_buffer_stream(%{public}p, %{public}p, %{public}i) = %{public}ld", str, buf, len, (long)length);
 		
 	str->read += length;
 	return (glui32)length;

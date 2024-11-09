@@ -75,7 +75,7 @@ glui32 glk_image_draw(winid_t win, glui32 image, glsi32 val1, glsi32 val2) {
 									   alignment: val1];
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_image_draw(%{public}p, %{public}u, %{public}i, %{public}i) = %{public}i", win, image, val1, val2, res);
+	os_log_info(GlkClientTrace, "glk_image_draw(%{public}p, %{public}u, %{public}i, %{public}i) = %{public}i", win, image, val1, val2, res);
 
 	return res;
 }
@@ -103,10 +103,10 @@ glui32 glk_image_draw_scaled(winid_t win, glui32 image,
 						  inWindowWithIdentifier: win->identifier
 										  inRect: CGRectMake(val1, val2, width, height)];
 	} else {
-		os_log_debug(GlkClientTrace, "glk_image_draw_scaled(%{public}p, %{public}u, %{public}i, %{public}i, %{public}u, %{public}u) = %{public}i", win, image, val1, val2, width, height, res);
+		os_log_info(GlkClientTrace, "glk_image_draw_scaled(%{public}p, %{public}u, %{public}i, %{public}i, %{public}u, %{public}u) = %{public}i", win, image, val1, val2, width, height, res);
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_image_draw_scaled(%{public}p, %{public}u, %{public}i, %{public}i, %{public}u, %{public}u) = %{public}i", win, image, val1, val2, width, height, res);
+	os_log_info(GlkClientTrace, "glk_image_draw_scaled(%{public}p, %{public}u, %{public}i, %{public}i, %{public}u, %{public}u) = %{public}i", win, image, val1, val2, width, height, res);
 	
 	return res;
 }
@@ -154,13 +154,13 @@ glui32 glk_image_get_info(glui32 image, glui32 *width, glui32 *height) {
 		if (height) *height = imageSize.height;
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_image_get_info(%{public}u, %{public}p=%{public}u, %{public}p=%{public}u) = %{public}i", image, width, width?*width:0, height, height?*height:0, res);
+	os_log_info(GlkClientTrace, "glk_image_get_info(%{public}u, %{public}p=%{public}u, %{public}p=%{public}u) = %{public}i", image, width, width?*width:0, height, height?*height:0, res);
 	
 	return res;
 }
 
 void glk_window_flow_break(winid_t win) {
-	os_log_debug(GlkClientTrace, "glk_window_flow_break(%{public}p)", win);
+	os_log_info(GlkClientTrace, "glk_window_flow_break(%{public}p)", win);
 	
 	// Sanity check
 	if (win == NULL) {
@@ -178,7 +178,7 @@ void glk_window_flow_break(winid_t win) {
 
 void glk_window_erase_rect(winid_t win, 
 						   glsi32 left, glsi32 top, glui32 width, glui32 height) {
-	os_log_debug(GlkClientTrace, "glk_window_erase_rect(%{public}p, %{public}i, %{public}i, %{public}u, %{public}u)", win, left, top, width, height);
+	os_log_info(GlkClientTrace, "glk_window_erase_rect(%{public}p, %{public}i, %{public}i, %{public}u, %{public}u)", win, left, top, width, height);
 	
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {
@@ -197,7 +197,7 @@ void glk_window_erase_rect(winid_t win,
 
 void glk_window_fill_rect(winid_t win, glui32 color, 
 						  glsi32 left, glsi32 top, glui32 width, glui32 height) {
-	os_log_debug(GlkClientTrace, "glk_window_fill_rect(%{public}p, %{public}i, %{public}i, %{public}u, %{public}u)", win, left, top, width, height);
+	os_log_info(GlkClientTrace, "glk_window_fill_rect(%{public}p, %{public}i, %{public}i, %{public}u, %{public}u)", win, left, top, width, height);
 	
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {
@@ -242,7 +242,7 @@ void glk_window_fill_rect(winid_t win, glui32 color,
 ///	bright red.]]
 ///
 void glk_window_set_background_color(winid_t win, glui32 color) {
-	os_log_debug(GlkClientTrace, "glk_window_set_background_color(%{public}p, %{public}u)", win, color);
+	os_log_info(GlkClientTrace, "glk_window_set_background_color(%{public}p, %{public}u)", win, color);
 	
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {

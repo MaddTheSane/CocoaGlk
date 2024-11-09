@@ -388,7 +388,7 @@ glsi32 glk_get_char_stream_uni(strid_t str) {
 	// Next, use the stream object to get our result
 	unichar res = [str->stream getChar];
 	
-	os_log_debug(GlkClientTrace, "glk_get_char_stream(%{public}p) = %{public}i", str, res);
+	os_log_info(GlkClientTrace, "glk_get_char_stream(%{public}p) = %{public}i", str, res);
 	
 	if (res == GlkEOFChar) return -1;
 	
@@ -455,7 +455,7 @@ glui32 glk_get_line_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 }
 
 void glk_request_char_event_uni(winid_t win) {
-	os_log_debug(GlkClientTrace, "glk_request_char_event_uni(%{public}p)", win);
+	os_log_info(GlkClientTrace, "glk_request_char_event_uni(%{public}p)", win);
 
 	// Sanity check
 	if (win == NULL) {
@@ -474,7 +474,7 @@ void glk_request_char_event_uni(winid_t win) {
 
 void glk_request_line_event_uni(winid_t win, glui32 *buf,
 								glui32 maxlen, glui32 initlen) {
-	os_log_debug(GlkClientTrace, "glk_request_line_event_uni(%{public}p, %{public}p, %{public}u, %{public}u)", win, buf, maxlen, initlen);
+	os_log_info(GlkClientTrace, "glk_request_line_event_uni(%{public}p, %{public}p, %{public}u, %{public}u)", win, buf, maxlen, initlen);
 	
 	// Sanity check
 	if (win == NULL) {

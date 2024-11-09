@@ -27,7 +27,7 @@ NSInteger cocoaglk_loopIteration = 0;
 void (*cocoaglk_interrupt)(void);
 
 void glk_exit(void) {
-	os_log_debug(GlkClientTrace, "glk_exit()");
+	os_log_info(GlkClientTrace, "glk_exit()");
 	
 	// Flush the buffer
 	cocoaglk_flushbuffer("About to exit");
@@ -56,7 +56,7 @@ void glk_exit(void) {
 /// handler function.
 ///
 void glk_set_interrupt_handler(void (*func)(void)) {
-	os_log_debug(GlkClientTrace, "glk_set_interrupt_handler(%{public}p)", func);
+	os_log_info(GlkClientTrace, "glk_set_interrupt_handler(%{public}p)", func);
 
 	cocoaglk_interrupt = func;
 }
@@ -68,7 +68,7 @@ void glk_tick(void) {
 	
 	// CHOMP
 
-	os_log_debug(GlkClientTrace, "glk_tick()");
+	os_log_info(GlkClientTrace, "glk_tick()");
 	
 	static int ticker = 0;
 	
@@ -112,7 +112,7 @@ void glk_tick(void) {
 glui32 glk_gestalt(glui32 sel, glui32 val) {
 	glui32 result = glk_gestalt_ext(sel, val, NULL, 0);
 
-	os_log_debug(GlkClientTrace, "glk_gestalt(%{public}u, %{public}u) = %{public}u", sel, val, result);
+	os_log_info(GlkClientTrace, "glk_gestalt(%{public}u, %{public}u) = %{public}u", sel, val, result);
 	
 	return result;
 }
@@ -234,7 +234,7 @@ glui32 glk_gestalt_ext(glui32 sel, glui32 val, glui32 *arr,
 			break;
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_gestalt_ext(%{public}u, %{public}u, %{public}p, %{public}u) = %{public}i", sel, val, arr, arrlen, result);
+	os_log_info(GlkClientTrace, "glk_gestalt_ext(%{public}u, %{public}u, %{public}p, %{public}u) = %{public}i", sel, val, arr, arrlen, result);
 	
 	return result;
 }

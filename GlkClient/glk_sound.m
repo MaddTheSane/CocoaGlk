@@ -63,7 +63,7 @@ BOOL cocoaglk_schanid_sane(schanid_t ref) {
 schanid_t glk_schannel_create(glui32 rock) {
 	schanid_t result = gli_schannel_create_ext(rock, GLK_MAXVOLUME);
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_create(%{public}u) = %{public}p", rock, result);
+	os_log_info(GlkClientTrace, "glk_schannel_create(%{public}u) = %{public}p", rock, result);
 
 	return result;
 }
@@ -71,7 +71,7 @@ schanid_t glk_schannel_create(glui32 rock) {
 schanid_t glk_schannel_create_ext(glui32 rock, glui32 volume) {
 	schanid_t res = gli_schannel_create_ext(rock, volume);
 
-	os_log_debug(GlkClientTrace, "glk_schannel_create_ext(%{public}u, %{public}u) = %{public}p", rock, volume, res);
+	os_log_info(GlkClientTrace, "glk_schannel_create_ext(%{public}u, %{public}u) = %{public}p", rock, volume, res);
 		
 	return res;
 }
@@ -81,7 +81,7 @@ void glk_schannel_destroy(schanid_t chan) {
 		cocoaglk_error("glk_schannel_destroy called with an invalid schanid");
 		return;
 	}
-	os_log_debug(GlkClientTrace, "glk_schannel_destroy(%{public}p)", chan);
+	os_log_info(GlkClientTrace, "glk_schannel_destroy(%{public}p)", chan);
 	
 	// Unregister the filereg
 	if (cocoaglk_unregister) {
@@ -123,7 +123,7 @@ schanid_t glk_schannel_iterate(schanid_t chan, glui32 *rockptr) {
 	
 	if (res && rockptr) *rockptr = res->rock;
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_iterate(%{public}p, %{public}p=%{public}u) = %{public}p", chan, rockptr, rockptr?*rockptr:0, res);
+	os_log_info(GlkClientTrace, "glk_schannel_iterate(%{public}p, %{public}p=%{public}u) = %{public}p", chan, rockptr, rockptr?*rockptr:0, res);
 	
 	return res;
 }
@@ -134,7 +134,7 @@ glui32 glk_schannel_get_rock(schanid_t chan) {
 		return 0;
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_get_rock(%{public}p) = %{public}u", chan, chan->rock);
+	os_log_info(GlkClientTrace, "glk_schannel_get_rock(%{public}p) = %{public}u", chan, chan->rock);
 	
 	return chan->rock;
 }
@@ -147,7 +147,7 @@ glui32 glk_schannel_play(schanid_t chan, glui32 snd) {
 	
 	glui32 result = gli_schannel_play_ext(chan, snd, 1, 0);
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_play(%{public}p, %{public}u) = %{public}u", chan, snd, result);
+	os_log_info(GlkClientTrace, "glk_schannel_play(%{public}p, %{public}u) = %{public}u", chan, snd, result);
 
 	return result;
 }
@@ -161,7 +161,7 @@ glui32 glk_schannel_play_ext(schanid_t chan, glui32 snd, glui32 repeats,
 	
 	glui32 returnVal = gli_schannel_play_ext(chan, snd, repeats, notify);
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_play_ext(%{public}p, %{public}u, %{public}u, %{public}u) = %{public}u", chan, snd, repeats, notify, returnVal);
+	os_log_info(GlkClientTrace, "glk_schannel_play_ext(%{public}p, %{public}u, %{public}u, %{public}u) = %{public}u", chan, snd, repeats, notify, returnVal);
 
 	return returnVal;
 }
@@ -172,7 +172,7 @@ void glk_schannel_stop(schanid_t chan) {
 		return;
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_stop(%{public}p)", chan);
+	os_log_info(GlkClientTrace, "glk_schannel_stop(%{public}p)", chan);
 
 	[chan->channelref stop];
 }
@@ -183,7 +183,7 @@ void glk_schannel_pause(schanid_t chan) {
 		return;
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_pause(%{public}p)", chan);
+	os_log_info(GlkClientTrace, "glk_schannel_pause(%{public}p)", chan);
 
 	[chan->channelref pause];
 }
@@ -194,7 +194,7 @@ void glk_schannel_unpause(schanid_t chan) {
 		return;
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_unpause(%{public}p)", chan);
+	os_log_info(GlkClientTrace, "glk_schannel_unpause(%{public}p)", chan);
 
 	[chan->channelref unpause];
 }
@@ -205,7 +205,7 @@ void glk_schannel_set_volume(schanid_t chan, glui32 vol) {
 		return;
 	}
 
-	os_log_debug(GlkClientTrace, "glk_schannel_set_volume(%{public}p, %{public}u)", chan, vol);
+	os_log_info(GlkClientTrace, "glk_schannel_set_volume(%{public}p, %{public}u)", chan, vol);
 	
 	gli_schannel_set_volume_ext(chan, vol, 0, 0);
 }
@@ -217,7 +217,7 @@ void glk_schannel_set_volume_ext(schanid_t chan, glui32 vol,
 		return;
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_set_volume_ext(%{public}p, %{public}u, %{public}u, %{public}u)", chan, vol, duration, notify);
+	os_log_info(GlkClientTrace, "glk_schannel_set_volume_ext(%{public}p, %{public}u, %{public}u, %{public}u)", chan, vol, duration, notify);
 
 	gli_schannel_set_volume_ext(chan, vol, duration, notify);
 }
@@ -232,7 +232,7 @@ glui32 glk_schannel_play_multi(schanid_t *chanarray, glui32 chancount,
 		successes += gli_schannel_play_ext(chanarray[i], sndarray[i], 1, notify);
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_schannel_play_multi(%{public}p, %{public}u, %{public}p, %{public}u, %{public}u) = %u", chanarray, chancount, sndarray, soundcount, notify, successes);
+	os_log_info(GlkClientTrace, "glk_schannel_play_multi(%{public}p, %{public}u, %{public}p, %{public}u, %{public}u) = %u", chanarray, chancount, sndarray, soundcount, notify, successes);
 
 	return successes;
 }
@@ -242,7 +242,7 @@ void glk_sound_load_hint(glui32 snd, glui32 flag) {
 		cocoaglk_set_sound_source([[[GlkBlorbSoundSource alloc] init] autorelease]);
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_sound_load_hint(%{public}u, %{public}u)", snd, flag);
+	os_log_info(GlkClientTrace, "glk_sound_load_hint(%{public}u, %{public}u)", snd, flag);
 
 	[cocoaglk_session.soundHandler loadHintForSound:snd flag:flag];
 }

@@ -166,7 +166,7 @@ frefid_t glk_fileref_create_temp(glui32 usage, glui32 rock) {
 		res->giRock = cocoaglk_register(res, gidisp_Class_Fileref);
 	}
 
-	os_log_debug(GlkClientTrace, "glk_fileref_create_temp(%{public}u, %{public}u) = %{public}p", usage, rock, res);
+	os_log_info(GlkClientTrace, "glk_fileref_create_temp(%{public}u, %{public}u) = %{public}p", usage, rock, res);
 		
 	return res;
 }
@@ -207,7 +207,7 @@ frefid_t glk_fileref_create_by_name(glui32 usage, char *name,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Fileref);
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_fileref_create_by_name(%{public}u, \"%{public}s\", %{public}u) = %{public}p", usage, name, rock, res);
+	os_log_info(GlkClientTrace, "glk_fileref_create_by_name(%{public}u, \"%{public}s\", %{public}u) = %{public}p", usage, name, rock, res);
 	
 	return res;
 }
@@ -253,7 +253,7 @@ frefid_t glk_fileref_create_by_prompt(glui32 usage, glui32 fmode,
 	[prompt release];
 	
 	if (!ref) {
-		os_log_debug(GlkClientTrace, "glk_fileref_create_by_prompt(%{public}u, %{public}u, %{public}u) = NULL", usage, fmode, rock);
+		os_log_info(GlkClientTrace, "glk_fileref_create_by_prompt(%{public}u, %{public}u, %{public}u) = NULL", usage, fmode, rock);
 		
 		return NULL;				// We got nada
 	}
@@ -281,7 +281,7 @@ frefid_t glk_fileref_create_by_prompt(glui32 usage, glui32 fmode,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Fileref);
 	}
 
-	os_log_debug(GlkClientTrace, "glk_fileref_create_by_prompt(%{public}u, %{public}u, %{public}u) = %{public}p", usage, fmode, rock, res);
+	os_log_info(GlkClientTrace, "glk_fileref_create_by_prompt(%{public}u, %{public}u, %{public}u) = %{public}p", usage, fmode, rock, res);
 	
 	// We're done
 	return res;
@@ -322,7 +322,7 @@ frefid_t glk_fileref_create_from_fileref(glui32 usage, frefid_t fref,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Fileref);
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_fileref_create_from_fileref(%{public}u, %{public}p, %{public}u) = %{public}p", usage, fref, rock, res);
+	os_log_info(GlkClientTrace, "glk_fileref_create_from_fileref(%{public}u, %{public}p, %{public}u) = %{public}p", usage, fref, rock, res);
 	
 	return res;
 }
@@ -341,7 +341,7 @@ frefid_t glk_fileref_create_from_fileref(glui32 usage, frefid_t fref,
 ///		the temp file becomes anonymous)
 ///
 void glk_fileref_destroy(frefid_t fref) {
-	os_log_debug(GlkClientTrace, "glk_fileref_destroy(%{public}p)", fref);
+	os_log_info(GlkClientTrace, "glk_fileref_destroy(%{public}p)", fref);
 
 	if (!cocoaglk_frefid_sane(fref)) {
 		cocoaglk_error("glk_fileref_destroy called with an invalid frefid");
@@ -392,7 +392,7 @@ frefid_t glk_fileref_iterate(frefid_t fref, glui32 *rockptr) {
 	
 	if (res && rockptr) *rockptr = res->rock;
 	
-	os_log_debug(GlkClientTrace, "glk_fileref_iterate(%{public}p, %{public}p=%{public}u) = %{public}p", fref, rockptr, rockptr?*rockptr:0, res);
+	os_log_info(GlkClientTrace, "glk_fileref_iterate(%{public}p, %{public}p=%{public}u) = %{public}p", fref, rockptr, rockptr?*rockptr:0, res);
 	
 	return res;
 }
@@ -406,7 +406,7 @@ glui32 glk_fileref_get_rock(frefid_t fref) {
 		return 0;
 	}
 
-	os_log_debug(GlkClientTrace, "glk_fileref_get_rock(%{public}p) = %{public}u", fref, fref->rock);
+	os_log_info(GlkClientTrace, "glk_fileref_get_rock(%{public}p) = %{public}u", fref, fref->rock);
 		
 	return fref->rock;
 }
@@ -416,7 +416,7 @@ glui32 glk_fileref_get_rock(frefid_t fref) {
 /// fileref itself.
 ///
 void glk_fileref_delete_file(frefid_t fref) {
-	os_log_debug(GlkClientTrace, "glk_fileref_delete_file(%{public}p)", fref);
+	os_log_info(GlkClientTrace, "glk_fileref_delete_file(%{public}p)", fref);
 
 	if (!cocoaglk_frefid_sane(fref)) {
 		cocoaglk_error("glk_fileref_delete_file called with an invalid frefid");
@@ -444,7 +444,7 @@ glui32 glk_fileref_does_file_exist(frefid_t fref) {
 		res = 0;
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_fileref_does_file_exist(%{public}p) = %{public}u", fref, res);
+	os_log_info(GlkClientTrace, "glk_fileref_does_file_exist(%{public}p) = %{public}u", fref, res);
 	
 	return res;
 }
@@ -525,7 +525,7 @@ frefid_t cocoaglk_open_file(NSURL *path, glui32 textmode,
 		res->giRock = cocoaglk_register(res, gidisp_Class_Fileref);
 	}
 
-	os_log_debug(GlkClientTrace, "cocoaglk_open_file(%{private}@, %{public}u, %{public}u) = %{public}p", path.path, textmode, rock, res);
+	os_log_info(GlkClientTrace, "cocoaglk_open_file(%{private}@, %{public}u, %{public}u) = %{public}p", path.path, textmode, rock, res);
 	
 	// We're done
 	return res;

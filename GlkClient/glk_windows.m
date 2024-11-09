@@ -24,7 +24,7 @@ static NSMutableDictionary<NSNumber*,NSValue*>* cocoaglk_windows = nil;
 
 /// This returns the root window. If there are no windows, this returns \c NULL .
 winid_t glk_window_get_root(void) {
-	os_log_debug(GlkClientTrace, "glk_window_get_root() = %{public}p", cocoaglk_rootwindow);
+	os_log_info(GlkClientTrace, "glk_window_get_root() = %{public}p", cocoaglk_rootwindow);
 
 	return cocoaglk_rootwindow;
 }
@@ -366,7 +366,7 @@ winid_t glk_window_open(winid_t split, glui32 method, glui32 size,
 		}
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_window_open(%{public}p, %{public}u, %{public}u, %{public}u, %{public}u) = %{public}p", split, method, size, wintype, rock, res);
+	os_log_info(GlkClientTrace, "glk_window_open(%{public}p, %{public}u, %{public}u, %{public}u, %{public}u) = %{public}p", split, method, size, wintype, rock, res);
 	
 	// Return the result
 	return res;
@@ -517,7 +517,7 @@ void glk_window_close(winid_t win, stream_result_t *result) {
 		[cocoaglk_buffer setRootWindow: GlkNoWindow];
 	}
 
-	os_log_debug(GlkClientTrace, "glk_window_close(%{public}p, %{public}p)", win, result);
+	os_log_info(GlkClientTrace, "glk_window_close(%{public}p, %{public}p)", win, result);
 		
 	return;
 }
@@ -576,7 +576,7 @@ void glk_window_get_size(winid_t win, glui32 *widthptr,
 	if (heightptr) *heightptr = res.height;
 #endif
 
-	os_log_debug(GlkClientTrace, "glk_window_get_size(%{public}p, %{public}p=%{public}u, %{public}p=%{public}u)", win, widthptr, win->width, heightptr, win->height);
+	os_log_info(GlkClientTrace, "glk_window_get_size(%{public}p, %{public}p=%{public}u, %{public}p=%{public}u)", win, widthptr, win->width, heightptr, win->height);
 	
 }
 
@@ -587,7 +587,7 @@ void glk_window_get_size(winid_t win, glui32 *widthptr,
 /// pair window.
 void glk_window_set_arrangement(winid_t win, glui32 method,
 								glui32 size, winid_t keywin) {
-	os_log_debug(GlkClientTrace, "glk_window_set_arrangement(%{public}p, %{public}u, %{public}u, %{public}p)", win, method, size, keywin);
+	os_log_info(GlkClientTrace, "glk_window_set_arrangement(%{public}p, %{public}u, %{public}u, %{public}p)", win, method, size, keywin);
 	
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {
@@ -656,7 +656,7 @@ void glk_window_get_arrangement(winid_t win, glui32 *methodptr,
 	if (sizeptr) *sizeptr = win->size;
 	if (keywinptr) *keywinptr = win->keyId;
 
-	os_log_debug(GlkClientTrace, "glk_window_get_arrangement(%{public}p, %{public}p=%{public}u, %{public}p=%{public}u, %{public}p=%{public}p)", win, methodptr, win->method, sizeptr, win->size, keywinptr, win->keyId);
+	os_log_info(GlkClientTrace, "glk_window_get_arrangement(%{public}p, %{public}p=%{public}u, %{public}p=%{public}u, %{public}p=%{public}p)", win, methodptr, win->method, sizeptr, win->size, keywinptr, win->keyId);
 }
 
 /// This function can be used to iterate through the list of all open windows
@@ -704,7 +704,7 @@ winid_t glk_window_iterate(winid_t win, glui32 *rockptr) {
 		*rockptr = res->rock;
 	}
 
-	os_log_debug(GlkClientTrace, "glk_window_iterate(%{public}p, %{public}p=%{public}u) = %{public}p", win, rockptr, rockptr?*rockptr:0, res);
+	os_log_info(GlkClientTrace, "glk_window_iterate(%{public}p, %{public}p=%{public}u) = %{public}p", win, rockptr, rockptr?*rockptr:0, res);
 	
 	if (os_log_debug_enabled(GlkClientTrace) && res && !cocoaglk_winid_sane(res)) {
 		cocoaglk_error("(Error only checked for due to tracing): window returned by glk_window_iterate is invalid");
@@ -720,7 +720,7 @@ glui32 glk_window_get_rock(winid_t win) {
 		cocoaglk_error("glk_window_get_rock called with an invalid winid");
 	}
 
-	os_log_debug(GlkClientTrace, "glk_window_get_rock(%{public}p) = %{public}u", win, win->rock);
+	os_log_info(GlkClientTrace, "glk_window_get_rock(%{public}p) = %{public}u", win, win->rock);
 	
 	return win->rock;
 }
@@ -732,7 +732,7 @@ glui32 glk_window_get_type(winid_t win) {
 		cocoaglk_error("glk_window_get_type called with an invalid winid");
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_window_get_type(%{public}p) = %{public}u", win, win->wintype);
+	os_log_info(GlkClientTrace, "glk_window_get_type(%{public}p) = %{public}u", win, win->wintype);
 		
 	// Dish the dirt
 	return win->wintype;
@@ -750,7 +750,7 @@ winid_t glk_window_get_parent(winid_t win) {
 		cocoaglk_error("glk_window_get_parent called with an invalid winid");
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_window_get_parent(%{public}p) = %{public}p", win, win->parent);
+	os_log_info(GlkClientTrace, "glk_window_get_parent(%{public}p) = %{public}p", win, win->parent);
 	
 	// Dish the dirt
 	return win->parent;
@@ -768,11 +768,11 @@ winid_t glk_window_get_sibling(winid_t win) {
 		return NULL;
 	
 	if (parent->left == win) {
-		os_log_debug(GlkClientTrace, "glk_window_get_parent(%{public}p) = %{public}p", win, parent->right);
+		os_log_info(GlkClientTrace, "glk_window_get_parent(%{public}p) = %{public}p", win, parent->right);
 
 		return parent->right;
 	} else if (parent->right == win) {
-		os_log_debug(GlkClientTrace, "glk_window_get_parent(%{public}p) = %{public}p", win, parent->left);
+		os_log_info(GlkClientTrace, "glk_window_get_parent(%{public}p) = %{public}p", win, parent->left);
 
 		return parent->left;
 	} else {
@@ -800,7 +800,7 @@ winid_t glk_window_get_sibling(winid_t win) {
 ///
 /// It is illegal to erase a window which has line input pending.
 void glk_window_clear(winid_t win) {
-	os_log_debug(GlkClientTrace, "glk_window_clear(%{public}p)", win);
+	os_log_info(GlkClientTrace, "glk_window_clear(%{public}p)", win);
 	
 	if (win == NULL) {
 		cocoaglk_warning("glk_window_clear called with NULL winid");
@@ -835,7 +835,7 @@ void glk_window_clear(winid_t win) {
 /// no effect. You must call \c glk_window_move_cursor() or \c glk_window_clear()
 /// to move the cursor back into the visible region.
 void glk_window_move_cursor(winid_t win, glui32 xpos, glui32 ypos) {
-	os_log_debug(GlkClientTrace, "glk_move_cursor(%{public}p, %{public}u, %{public}u)", win, xpos, ypos);
+	os_log_info(GlkClientTrace, "glk_move_cursor(%{public}p, %{public}u, %{public}u)", win, xpos, ypos);
 
 	if (win == NULL) {
 		cocoaglk_warning("glk_window_move_cursor called with a NULL winid");
@@ -867,7 +867,7 @@ strid_t glk_window_get_stream(winid_t win) {
 		cocoaglk_error("glk_window_get_stream called with an invalid winid");
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_window_get_stream(%{public}p) = %{public}p", win, win->stream);
+	os_log_info(GlkClientTrace, "glk_window_get_stream(%{public}p) = %{public}p", win, win->stream);
 		
 	// Dig the dirt
 	return win->stream;
@@ -902,7 +902,7 @@ strid_t glk_window_get_stream(winid_t win) {
 /// crash the Glk library. It is similarly illegal to create a longer loop
 /// (two or more windows echoing to each other.)
 void glk_window_set_echo_stream(winid_t win, strid_t str) {
-	os_log_debug(GlkClientTrace, "glk_window_set_echo_stream(%{public}p, %{public}p)", win, str);
+	os_log_info(GlkClientTrace, "glk_window_set_echo_stream(%{public}p, %{public}p)", win, str);
 
 	// Sanity check
 	if (!cocoaglk_winid_sane(win)) {
@@ -955,7 +955,7 @@ strid_t glk_window_get_echo_stream(winid_t win) {
 		cocoaglk_error("glk_window_get_echo_stream called with a bad winid");
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_window_get_echo_stream(%{public}p) = %{public}p", win, win->stream->echo);
+	os_log_info(GlkClientTrace, "glk_window_get_echo_stream(%{public}p) = %{public}p", win, win->stream->echo);
 		
 	// Dig the dirt
 	return win->stream->echo;
@@ -965,7 +965,7 @@ strid_t glk_window_get_echo_stream(winid_t win) {
 /// equivalent to
 /// \c glk_stream_set_current(glk_window_get_stream(win)).
 void glk_set_window(winid_t win) {
-	os_log_debug(GlkClientTrace, "glk_set_window(%{public}p)", win);
+	os_log_info(GlkClientTrace, "glk_set_window(%{public}p)", win);
 
 	// Sanity check
 	if (win != NULL && !cocoaglk_winid_sane(win)) {
@@ -989,7 +989,7 @@ void glk_set_echo_line_event(winid_t win, glui32 val)
 		return;
 	}
 	
-	os_log_debug(GlkClientTrace, "glk_set_echo_line_event(%{public}p, %{public}d)", win, val);
+	os_log_info(GlkClientTrace, "glk_set_echo_line_event(%{public}p, %{public}d)", win, val);
 
 	switch (win->wintype) {
 		case wintype_TextBuffer:

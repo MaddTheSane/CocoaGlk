@@ -191,7 +191,7 @@ void cocoaglk_start(int argv, const char** argc) {
 
 /// Reports a warning to the server
 void cocoaglk_warning(const char* warningText) {
-	os_log_debug(GlkClientTrace, "cocoaglk_warning(\"%{public}s\")", warningText);
+	os_log_info(GlkClientTrace, "cocoaglk_warning(\"%{public}s\")", warningText);
 	os_log_error(GlkClientLog, "%{public}s", warningText);
 
 	cocoaglk_flushbuffer("About to show a warning");
@@ -205,7 +205,7 @@ void cocoaglk_warning(const char* warningText) {
 
 /// Reports an error to the server, then quits
 void cocoaglk_error(const char* errorText) {
-	os_log_debug(GlkClientTrace, "cocoaglk_error(\"%{public}s\")", errorText);
+	os_log_info(GlkClientTrace, "cocoaglk_error(\"%{public}s\")", errorText);
 	os_log_fault(GlkClientLog, "%{public}s", errorText);
 
 	static BOOL showingError = NO;
@@ -236,7 +236,7 @@ void cocoaglk_error(const char* errorText) {
 
 /// Logs a message to the server
 void cocoaglk_log(const char* logText) {
-	os_log_debug(GlkClientTrace, "cocoaglk_log(\"%{public}s\")", logText);
+	os_log_info(GlkClientTrace, "cocoaglk_log(\"%{public}s\")", logText);
 	
 	cocoaglk_flushbuffer("About to show a log message");
 	
@@ -249,7 +249,7 @@ void cocoaglk_log(const char* logText) {
 
 /// Logs a message with priority to the server
 void cocoaglk_log_ex(const char* logText, int priority) {
-	os_log_debug(GlkClientTrace, "cocoaglk_log_ex(\"%{public}s\", %{public}i)", logText, priority);
+	os_log_info(GlkClientTrace, "cocoaglk_log_ex(\"%{public}s\", %{public}i)", logText, priority);
 	
 	cocoaglk_flushbuffer("About to show a log message");
 	
@@ -263,7 +263,7 @@ void cocoaglk_log_ex(const char* logText, int priority) {
 
 /// Reports a warning to the server
 void cocoaglk_NSWarning(NSString* warningString) {
-	os_log_debug(GlkClientTrace, "cocoaglk_NSWarning(\"%{public}@\")", warningString);
+	os_log_info(GlkClientTrace, "cocoaglk_NSWarning(\"%{public}@\")", warningString);
 	os_log_error(GlkClientLog, "%{public}@", warningString);
 
 	cocoaglk_flushbuffer("About to show a warning");
@@ -273,7 +273,7 @@ void cocoaglk_NSWarning(NSString* warningString) {
 
 /// Reports an error to the server, then quits
 void cocoaglk_NSError(NSString* errorText) {
-	os_log_debug(GlkClientTrace, "cocoaglk_NSError(\"%{public}@\")", errorText);
+	os_log_info(GlkClientTrace, "cocoaglk_NSError(\"%{public}@\")", errorText);
 	os_log_fault(GlkClientLog, "%{public}@", errorText);
 
 	static BOOL showingError = NO;
@@ -301,7 +301,7 @@ void cocoaglk_NSError(NSString* errorText) {
 
 /// Logs a message to the server
 void cocoaglk_NSLog(NSString* logText) {
-	os_log_debug(GlkClientTrace, "cocoaglk_NSLog(\"%{public}@\")", logText);
+	os_log_info(GlkClientTrace, "cocoaglk_NSLog(\"%{public}@\")", logText);
 	
 	cocoaglk_flushbuffer("About to show a log message");
 	
@@ -310,7 +310,7 @@ void cocoaglk_NSLog(NSString* logText) {
 
 /// Logs a message with priority to the server
 void cocoaglk_NSLog_ex(NSString* logText, int priority) {
-	os_log_debug(GlkClientTrace, "cocoaglk_NSLog_ex(\"%{public}@\", %{public}i)", logText, priority);
+	os_log_info(GlkClientTrace, "cocoaglk_NSLog_ex(\"%{public}@\", %{public}i)", logText, priority);
 	
 	cocoaglk_flushbuffer("About to show a log message");
 	
@@ -336,7 +336,7 @@ void cocoaglk_flushbuffer(const char* reason) {
 	
 	// Flush the buffer
 	if ([cocoaglk_buffer shouldBeFlushed]) {
-		os_log_debug(GlkClientTrace, "Main buffer flushing: %{public}s", reason);
+		os_log_info(GlkClientTrace, "Main buffer flushing: %{public}s", reason);
 		
 		[cocoaglk_session performOperationsFromBuffer: cocoaglk_buffer];
 				
@@ -345,7 +345,7 @@ void cocoaglk_flushbuffer(const char* reason) {
 		
 		cocoaglk_loopIteration = [cocoaglk_session synchronisationCount];
 		
-		os_log_debug(GlkClientTrace, "Main buffer flushed");
+		os_log_info(GlkClientTrace, "Main buffer flushed");
 	}
 	
 	flushing = NO;

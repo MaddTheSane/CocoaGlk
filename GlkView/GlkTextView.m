@@ -503,6 +503,9 @@
 	while (glkWindowView != nil && ![glkWindowView isKindOfClass: [GlkWindow class]]) {
 		glkWindowView = [glkWindowView superview];
 	}
+	if (!glkWindowView) {
+		return;
+	}
 	NSAccessibilityPostNotification(glkWindowView, NSAccessibilityFocusedUIElementChangedNotification);
 }
 

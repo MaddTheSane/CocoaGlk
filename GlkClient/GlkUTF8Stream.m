@@ -125,6 +125,7 @@ static int countUTF8Len(unsigned char charPoint) {
 
 - (bycopy NSString*) getLineWithLength: (NSInteger) maxLen {
 	char* line = NULL;
+	NSString* res;
 	int lineLength = 0;
 	int lineAllocated = 0;
 	
@@ -167,10 +168,12 @@ static int countUTF8Len(unsigned char charPoint) {
 	}
 	
 	// Convert to a NSString
-	NSString* res = [[NSString alloc] initWithBytesNoCopy: line
-												   length: lineLength
-												 encoding: NSUTF8StringEncoding
-											 freeWhenDone: YES];
+	if (line != NULL) {
+		res = [[NSString alloc] initWithBytesNoCopy: line
+											 length: lineLength
+										   encoding: NSUTF8StringEncoding
+									   freeWhenDone: YES];
+	}
 	
 	if (!res) {
 		// Get something back.

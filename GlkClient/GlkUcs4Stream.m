@@ -115,6 +115,7 @@
 	glui32* line = NULL;
 	int lineLength = 0;
 	int lineAllocated = 0;
+	NSString* res;
 	
 	for (;;) {
 		// Read the next character
@@ -137,7 +138,9 @@
 	}
 	
 	// Convert to a NSString
-	NSString* res = [[NSString alloc] initWithBytes:line length:lineLength*4 encoding:NSUTF32LittleEndianStringEncoding];
+	if (line != NULL) {
+		res = [[NSString alloc] initWithBytes:line length:lineLength*4 encoding:NSUTF32LittleEndianStringEncoding];
+	}
 	
 	if (!res) {
 		// Convert to a NSString

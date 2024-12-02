@@ -296,6 +296,8 @@ typedef NS_ENUM(NSInteger, GlkLogStatus) {
 - (void) showStatusText: (NSString*) status;
 /// Called to show errors.
 - (void) showError: (NSString*) error;
+/// Called to show errors.
+- (void) showErrorObject: (NSError*) error;
 /// Called to show general purpose log messages.
 - (void) showLogMessage: (NSString*) message
 			 withStatus: (GlkLogStatus) status;

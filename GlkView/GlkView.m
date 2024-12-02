@@ -338,6 +338,19 @@
 	}
 }
 
+- (void) showErrorObject:(in bycopy NSError *)error {
+	if ([delegate respondsToSelector: @selector(showErrorObject:)]) {
+		[delegate showErrorObject:error];
+	} else if (self.window) {
+		NSAlert *alert = [NSAlert alertWithError:error];
+		[alert beginSheetModalForWindow:[self window] completionHandler:^(NSModalResponse returnCode) {
+			//do nothing
+		}];
+	} else {
+		[self showError:[error localizedDescription]];
+	}
+}
+
 - (void) showError: (in bycopy NSString*) error {
 	[self logMessage: [NSString stringWithFormat: @"Client error: %@", error]
 		  withStatus: GlkLogError];

@@ -318,6 +318,15 @@ void cocoaglk_NSLog_ex(NSString* logText, int priority) {
 					withPriority: priority];
 }
 
+/// Request to send an error to the game's process.
+extern void cocoaglk_NSError_ex(NSError* logText) {
+	os_log_info(GlkClientTrace, "cocoaglk_NSError_ex(\"%{public}@\")", logText);
+	
+	cocoaglk_flushbuffer("About to send an error message");
+	
+	[cocoaglk_session showErrorObject: logText];
+}
+
 /// Flushes the buffer
 void cocoaglk_flushbuffer(const char* reason) {
 	// Sanity checking

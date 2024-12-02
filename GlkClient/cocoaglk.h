@@ -67,6 +67,9 @@ extern void cocoaglk_NSLog(NSString* logText);
 /// Request to send a message to the game's log with a priority (0, 1 or 2)
 extern void cocoaglk_NSLog_ex(NSString* logText, int priority);
 
+/// Request to send a message to the game's log (if the runner supports it)
+extern void cocoaglk_NSError_ex(NSError* logText);
+
 /// Sets the extensions to use for a specific file usage
 extern void cocoaglk_set_types_for_usage(glui32 usage, NSArray<NSString*>* extensions);
 

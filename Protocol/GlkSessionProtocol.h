@@ -89,6 +89,8 @@ typedef struct GlkSize {
 
 /// Shows an error message
 - (void) showError: (in bycopy NSString*) error;
+/// Passes an error object.
+- (void) showErrorObject: (in bycopy NSError*) error;
 /// Shows a warning message
 - (void) showWarning: (in bycopy NSString*) warning;
 /// Shows a log message

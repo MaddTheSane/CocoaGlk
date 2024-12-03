@@ -314,7 +314,7 @@ static schanid_t gli_schannel_create_ext(glui32 rock, glui32 volume) {
 	
 	if (erm != giblorb_err_None) return nil;
 	
-	// Create the image data
+	// Create the sound data
 	NSData* imgData = [NSData dataWithBytes: res.data.ptr
 									 length: res.length];
 	

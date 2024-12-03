@@ -14,6 +14,7 @@
 #import "GlkImage.h"
 #import <GlkView/GlkPairWindow.h>
 #import <GlkView/GlkView.h>
+#import <Foundation/Foundation.h>
 
 ///
 /// Private class used to store information about a custom glyph
@@ -22,13 +23,13 @@
 	NSInteger glyph;
 	GlkCustomTextSection* textSection;
 	
-	NSRect bounds;
+	CGRect bounds;
 }
 
 - (id) initWithGlyph: (NSInteger) glyph
 		 textSection: (GlkCustomTextSection*) container;
 
-@property NSRect bounds;
+@property CGRect bounds;
 @property (readonly) NSInteger glyph;
 @property (readonly, retain) GlkCustomTextSection *textSection;
 
@@ -43,7 +44,7 @@
 	if (self) {
 		glyph = newGlyph;
 		textSection = section;
-		bounds = NSMakeRect(0,0,0,0);
+		bounds = CGRectZero;
 	}
 	
 	return self;
@@ -73,7 +74,7 @@
 
 #pragma mark - Initialisation
 
-- (id)initWithFrame:(NSRect)frame textContainer:(NSTextContainer *)container {
+- (id)initWithFrame:(CGRect)frame textContainer:(NSTextContainer *)container {
     self = [super initWithFrame:frame textContainer:container];
     if (self) {
 		receivingCharacters = NO;
@@ -90,23 +91,34 @@
 - (void) recalculateBoundsForGlyph: (GlkTextViewGlyph*) glyph {
 }
 
-- (void)drawRect:(NSRect)rect {
+- (void)drawRect:(CGRect)rect {
 	[super drawRect: rect];
 	
 	NSLayoutManager* layout = [self layoutManager];
+#ifdef COCOAGLK_IPHONE
+	CGContextRef ctx = UIGraphicsGetCurrentContext();
+	CGContextSetInterpolationQuality(ctx, kCGInterpolationHigh);
+#else
 	[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
+#endif
 	
 	// = INLINE IMAGES =
 	
 	// Get the region of the text container that's being drawn
-	NSRect bounds = [self bounds];
+	CGRect bounds = [self bounds];
 	
-	NSRect containerRect = rect;
+	CGRect containerRect = rect;
+#ifdef COCOAGLK_IPHONE
+	UIEdgeInsets inset = [self textContainerInset];
+	containerRect.origin.x -= inset.width;
+	containerRect.origin.y -= inset.height;
+#else
 	NSSize inset = [self textContainerInset];
 	containerRect.origin.x -= inset.width;
 	containerRect.origin.y -= inset.height;
+#endif
 	
-	NSRect usedRect;
+	CGRect usedRect;
 	usedRect = [layout usedRectForTextContainer: [self textContainer]];
 	containerRect = NSIntersectionRect(containerRect, usedRect);
 	
@@ -146,9 +158,9 @@
 		
 		// Draw this glyph
 		NSRange fragmentRange;
-		NSRect fragment = [layout lineFragmentRectForGlyphAtIndex: [glyph glyph]
+		CGRect fragment = [layout lineFragmentRectForGlyphAtIndex: [glyph glyph]
 												   effectiveRange: &fragmentRange];
-		NSPoint loc = [layout locationForGlyphAtIndex: glyphNum];
+		CGPoint loc = [layout locationForGlyphAtIndex: glyphNum];
 		
 		loc.x += fragment.origin.x + inset.width;
 		loc.y += fragment.origin.y + inset.height;
@@ -170,15 +182,15 @@
 		
 		// Work out the bounding box for this glyph
 		NSRange fragmentRange;
-		NSRect fragment = [layout lineFragmentRectForGlyphAtIndex: [glyph glyph]
+		CGRect fragment = [layout lineFragmentRectForGlyphAtIndex: [glyph glyph]
 												   effectiveRange: &fragmentRange];
-		NSPoint loc = [layout locationForGlyphAtIndex: glyphNum];
+		CGPoint loc = [layout locationForGlyphAtIndex: glyphNum];
 		
 		loc.y += fragment.origin.y;
 		
 		loc.x = 0;
 		
-		NSRect glyphBounds;
+		CGRect glyphBounds;
 		glyphBounds.origin = loc;
 		glyphBounds.size.width = bounds.size.width;
 		glyphBounds.size.height = [(GlkImage*)[glyph textSection] size].height;
@@ -190,7 +202,7 @@
 	}
 	
 	// Find the glyph nearest the top of rect
-	CGFloat ypos = NSMaxY(rect)-inset.height;
+	CGFloat ypos = CGRectGetMaxY(rect)-inset.height;
 	
 	bottom = 0;
 	top = [marginGlyphs count]-1;
@@ -200,8 +212,8 @@
 		NSInteger middle = (top+bottom)>>1;
 		
 		GlkTextViewGlyph* glyph = [marginGlyphs objectAtIndex: middle];
-		NSRect bounds = [glyph bounds];
-		CGFloat thisY = NSMinY(bounds);
+		CGRect bounds = [glyph bounds];
+		CGFloat thisY = CGRectGetMinY(bounds);
 		
 		if (thisY > ypos) top = middle - 1;
 		else if (thisY < ypos) bottom = middle + 1;
@@ -209,7 +221,7 @@
 			// Go forward to the last glyph that shares our ypos
 			while (middle < firstUnlaidMarginGlyph && middle < [marginGlyphs count]) {
 				GlkTextViewGlyph* glyph = [marginGlyphs objectAtIndex: middle];
-				if (NSMinY([glyph bounds]) != ypos) break;
+				if (CGRectGetMinY([glyph bounds]) != ypos) break;
 				
 				middle++;
 			}
@@ -225,16 +237,16 @@
 	while (marginIndex >= 0) {
 		GlkTextViewGlyph* glyph = [marginGlyphs objectAtIndex: marginIndex];
 		NSInteger glyphNum = [glyph glyph];
-		NSRect bounds = [glyph bounds];
+		CGRect bounds = [glyph bounds];
 		
-		if (NSMaxY(bounds) < NSMinY(rect)) break;
+		if (CGRectGetMaxY(bounds) < CGRectGetMinY(rect)) break;
 		
 		// Draw this glyph
 		if ([glyph glyph] < [layout firstUnlaidGlyphIndex]) {
 			NSRange fragmentRange;
-			NSRect fragment = [layout lineFragmentRectForGlyphAtIndex: [glyph glyph]
+			CGRect fragment = [layout lineFragmentRectForGlyphAtIndex: [glyph glyph]
 													   effectiveRange: &fragmentRange];
-			NSPoint loc = [layout locationForGlyphAtIndex: glyphNum];
+			CGPoint loc = [layout locationForGlyphAtIndex: glyphNum];
 			
 			loc.x += fragment.origin.x;
 			loc.x += inset.width;
@@ -266,6 +278,9 @@
 	receivingCharacters = NO;
 }
 
+#ifdef COCOAGLK_IPHONE
+#warning keyboard input not working!
+#else
 - (void) keyDown: (NSEvent*) evt {
 	// Find the GlkWindow superview
 	NSView* sview = [self superview];
@@ -334,6 +349,7 @@
 		[super keyDown: evt];
 	}
 }
+#endif
 
 #pragma mark - Dealing with custom glyphs
 
@@ -455,9 +471,9 @@
 
 #pragma mark - Mouse events
 
-- (NSView*) mouseParent {
+- (GlkSuperView*) mouseParent {
 	// Find a parent view that might want to know about any mouse events we may have received
-	NSView* windowParent = [self superview];
+	GlkSuperView* windowParent = [self superview];
 	
 	while (windowParent != nil && ![windowParent isKindOfClass: [GlkWindow class]]) {
 		windowParent = [windowParent superview];
@@ -466,6 +482,9 @@
 	return windowParent;
 }
 
+#ifdef COCOAGLK_IPHONE
+#warning mouse input not working!
+#else
 - (void) mouseDown: (NSEvent*) evt {
 	[super mouseDown: evt];
 	
@@ -495,18 +514,23 @@
 		[mouseParent mouseUp: evt];
 	}
 }
+#endif
 
 #pragma mark - First responder
 
 - (void) postFocusNotification {
-	NSView* glkWindowView = self;
+	GlkSuperView* glkWindowView = self;
 	while (glkWindowView != nil && ![glkWindowView isKindOfClass: [GlkWindow class]]) {
 		glkWindowView = [glkWindowView superview];
 	}
 	if (!glkWindowView) {
 		return;
 	}
+#ifdef COCOAGLK_IPHONE
+//	UIAccessibilityPostNotification(NSAccessibilityFocusedUIElementChangedNotification, glkWindowView);
+#else
 	NSAccessibilityPostNotification(glkWindowView, NSAccessibilityFocusedUIElementChangedNotification);
+#endif
 }
 
 - (BOOL)becomeFirstResponder {
@@ -539,6 +563,8 @@
 
 #pragma mark - NSAccessibility
 
+#ifndef COCOAGLK_IPHONE
+
 - (NSString *)accessibilityHelp {
 	if (!receivingCharacters) return @"Text window";
 	return [NSString stringWithFormat: @"GLK text window%@%@", @"", receivingCharacters?@", waiting for a key press":@""];
@@ -551,5 +577,6 @@
 - (NSAccessibilityRole)accessibilityRole {
 	return NSAccessibilityTextAreaRole;
 }
+#endif
 
 @end

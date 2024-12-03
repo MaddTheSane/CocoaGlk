@@ -347,14 +347,14 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Get the attributes from the storage
 	NSDictionary* attributes[cacheRange.length];
-	NSFont* fonts[cacheRange.length];
+	GlkFont* fonts[cacheRange.length];
 	CGFloat ascenders[cacheRange.length];
 	CGFloat descenders[cacheRange.length];
 	CGFloat lineHeight[cacheRange.length];
 	
 	NSDictionary* currentAttributes = nil;
 	NSDictionary* lastAttributes = nil;
-	NSFont* currentFont = nil;
+	GlkFont* currentFont = nil;
 	CGFloat currentAscender = 0;
 	CGFloat currentDescender = 0;
 	CGFloat currentHeight = 0;
@@ -387,12 +387,12 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 	
 	// Get the advancement and bounds information from the NSFont class
-	NSRect bounds[cacheRange.length];
+	CGRect bounds[cacheRange.length];
 	CGFloat advancements[cacheRange.length];
 	
 	for (x=0; x<cacheRange.length;) {
 		// Work out the span of the current font
-		NSFont* font = fonts[x];
+		GlkFont* font = fonts[x];
 		NSInteger length = 0;
 		NSInteger start = x;
 		for (; x<cacheRange.length && fonts[x] == font; x++, length++);
@@ -452,9 +452,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		cacheAscenders = realloc(cacheAscenders, sizeof(CGFloat)*cacheLength);
 		cacheDescenders = realloc(cacheDescenders, sizeof(CGFloat)*cacheLength);
 		cacheLineHeight = realloc(cacheLineHeight, sizeof(CGFloat)*cacheLength);
-		cacheBounds = realloc(cacheBounds, sizeof(NSRect)*cacheLength);
+		cacheBounds = realloc(cacheBounds, sizeof(CGRect)*cacheLength);
 		cacheAttributes = realloc(cacheAttributes, sizeof(NSDictionary*)*cacheLength);
-		cacheFonts = realloc(cacheFonts, sizeof(NSFont*)*cacheLength);
+		cacheFonts = realloc(cacheFonts, sizeof(GlkFont*)*cacheLength);
 	}
 	
 	// Copy the various bits and pieces
@@ -467,9 +467,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	memcpy(cacheAscenders + cacheIndex, ascenders, cacheRange.length*sizeof(CGFloat));
 	memcpy(cacheDescenders + cacheIndex, descenders, cacheRange.length*sizeof(CGFloat));
 	memcpy(cacheLineHeight + cacheIndex, lineHeight, cacheRange.length*sizeof(CGFloat));
-	memcpy(cacheBounds + cacheIndex, bounds, cacheRange.length*sizeof(NSRect));
+	memcpy(cacheBounds + cacheIndex, bounds, cacheRange.length*sizeof(CGRect));
 	memcpy(cacheAttributes + cacheIndex, attributes, cacheRange.length*sizeof(NSDictionary*));
-	memcpy(cacheFonts + cacheIndex, fonts, cacheRange.length*sizeof(NSFont*));
+	memcpy(cacheFonts + cacheIndex, fonts, cacheRange.length*sizeof(GlkFont*));
 
 	// Result depends on whether or not we actually measured the specified glyph
 	return cacheRange.location + cacheRange.length > minGlyphIndex;
@@ -528,9 +528,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	memmove(cacheAscenders, cacheAscenders + glyphsToRemove, sizeof(CGFloat)*numRemaining);
 	memmove(cacheDescenders, cacheDescenders + glyphsToRemove, sizeof(CGFloat)*numRemaining);
 	memmove(cacheLineHeight, cacheLineHeight + glyphsToRemove, sizeof(CGFloat)*numRemaining);
-	memmove(cacheBounds, cacheBounds + glyphsToRemove, sizeof(NSRect)*numRemaining);
+	memmove(cacheBounds, cacheBounds + glyphsToRemove, sizeof(CGRect)*numRemaining);
 	memmove(cacheAttributes, cacheAttributes + glyphsToRemove, sizeof(NSDictionary*)*numRemaining);
-	memmove(cacheFonts, cacheFonts + glyphsToRemove, sizeof(NSFont*)*numRemaining);
+	memmove(cacheFonts, cacheFonts + glyphsToRemove, sizeof(GlkFont*)*numRemaining);
 	
 #ifdef Debug
 	for (x=numRemaining; x<cached.length; x++) {
@@ -608,16 +608,16 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 - (void) addToLeftMargin: (CGFloat) width
 				  height: (CGFloat) height {
 	thisLeftMargin += width;
-	if (height + NSMaxY(usedRect) > thisLeftMaxY) {
-		thisLeftMaxY = height + NSMaxY(usedRect);
+	if (height + CGRectGetMaxY(usedRect) > thisLeftMaxY) {
+		thisLeftMaxY = height + CGRectGetMaxY(usedRect);
 	}
 }
 
 - (void) addToRightMargin: (CGFloat) width
 				   height: (CGFloat) height {
 	thisRightMargin += width;
-	if (height + NSMaxY(usedRect) > thisRightMaxY) {
-		thisRightMaxY = height + NSMaxY(usedRect);
+	if (height + CGRectGetMaxY(usedRect) > thisRightMaxY) {
+		thisRightMaxY = height + CGRectGetMaxY(usedRect);
 	}
 }
 
@@ -636,13 +636,13 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 - (CGFloat) currentLeftMarginHeight {
 	CGFloat result = activeLeftMargin?[activeLeftMargin maxY]:0;
 	if (thisLeftMaxY > result) result = thisLeftMaxY;
-	return result - NSMaxY(usedRect);
+	return result - CGRectGetMaxY(usedRect);
 }
 
 - (CGFloat) currentRightMarginHeight {
 	CGFloat result = activeRightMargin?[activeRightMargin maxY]:0;
 	if (thisRightMaxY > result) result = thisRightMaxY;
-	return result - NSMaxY(usedRect);
+	return result - CGRectGetMaxY(usedRect);
 }
 
 #pragma mark - Laying out line sections
@@ -656,8 +656,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	customOffset = 0;
 	
 	// Clear the left/right margins if necessary
-	if (activeLeftMargin && NSMaxY(usedRect) > [activeLeftMargin maxY]) activeLeftMargin = nil;
-	if (activeRightMargin && NSMaxY(usedRect) > [activeRightMargin maxY]) activeRightMargin = nil;
+	if (activeLeftMargin && CGRectGetMaxY(usedRect) > [activeLeftMargin maxY]) activeLeftMargin = nil;
+	if (activeRightMargin && CGRectGetMaxY(usedRect) > [activeRightMargin maxY]) activeRightMargin = nil;
 	
 	thisLeftMargin = thisRightMargin = thisLeftMaxY = thisRightMaxY = 0;
 }
@@ -670,14 +670,14 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Use only the items aligned to the baseline to work out the 'real' baseline.
 	baselineOffset = 0;
-	fragmentBounds = NSMakeRect(0,0,0,0);
+	fragmentBounds = CGRectZero;
 	for (GlkLineSection *section in sections) {
 		if (section.alignment == GlkAlignBaseline) {
 			if (section.bounds.origin.y < baselineOffset) {
 				baselineOffset = section.bounds.origin.y;
 			}
 			
-			fragmentBounds = NSUnionRect(fragmentBounds, section.bounds);
+			fragmentBounds = CGRectUnion(fragmentBounds, section.bounds);
 		}
 	}
 	
@@ -692,32 +692,32 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				
 				case GlkAlignTop:
 				{
-					NSRect bounds = section.bounds;
-					bounds.origin.y -= NSMaxY(bounds);
+					CGRect bounds = section.bounds;
+					bounds.origin.y -= CGRectGetMaxY(bounds);
 
 					if (-bounds.origin.y-baselineOffset > customOffset) customOffset = -bounds.origin.y-baselineOffset;
 
-					fragmentBounds = NSUnionRect(fragmentBounds, bounds);
+					fragmentBounds = CGRectUnion(fragmentBounds, bounds);
 					break;
 				}
 					
 				case GlkAlignBottom:
 				{
-					NSRect bounds = section.bounds;
+					CGRect bounds = section.bounds;
 					bounds.origin.y = -baselineOffset;
 
-					fragmentBounds = NSUnionRect(fragmentBounds, bounds);
+					fragmentBounds = CGRectUnion(fragmentBounds, bounds);
 					break;
 				}
 					
 				case GlkAlignCenter:
 				{
-					NSRect bounds = section.bounds;
+					CGRect bounds = section.bounds;
 					bounds.origin.y = -(baselineOffset + bounds.size.height)/2;
 					
 					if (-bounds.origin.y-baselineOffset > customOffset) customOffset = -bounds.origin.y-baselineOffset;
 					
-					fragmentBounds = NSUnionRect(fragmentBounds, bounds);
+					fragmentBounds = CGRectUnion(fragmentBounds, bounds);
 					break;
 				}
 			}
@@ -731,12 +731,12 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	if (sections.count <= 0) return YES;
 	
 	// Get the bounds of the line fragment, and adjust it for its final position
-	NSRect bounds = proposedRect;
+	CGRect bounds = proposedRect;
 	
 	// Add leading to the line
 	if (paraStyle != nil) bounds.size.height += [paraStyle lineSpacing];
 
-	NSRect used = bounds;
+	CGRect used = bounds;
 	
 	// Work out the glyph range for this line fragment
 	NSUInteger firstGlyph = sections.firstObject.glyphRange.location;
@@ -761,13 +761,13 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 	
 	if (hitTheLastGlyph) {
-		used.size.width = NSMaxX(fragmentBounds)-used.origin.x + inset;
+		used.size.width = CGRectGetMaxX(fragmentBounds)-used.origin.x + inset;
 	}
 	
 	// Start laying out this line fragment
-	NSRect integralBounds = NSIntegralRect(bounds);
+	CGRect integralBounds = CGRectIntegral(bounds);
 	
-	if (NSMaxY(integralBounds) > [container containerSize].height) {
+	if (CGRectGetMaxY(integralBounds) > [container containerSize].height) {
 		return NO;
 	}
 	
@@ -775,7 +775,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			   forGlyphRange: glyphRange];
 	[layout setLineFragmentRect: integralBounds
 				  forGlyphRange: glyphRange
-					   usedRect: NSIntegralRect(used)];
+					   usedRect: CGRectIntegral(used)];
 	
 	baselineOffset = floor(baselineOffset + 0.5);
 	
@@ -784,7 +784,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	for (GlkLineSection *section in sections) {
 		if (section.glyphRange.length <= 0) continue;
 		
-		NSPoint loc;
+		CGPoint loc;
 		loc.x = section.offset;
 		
 		maxX = loc.x + section.advancement;
@@ -796,15 +796,15 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				break;
 				
 			case GlkAlignTop:
-				loc.y = baselineOffset+customOffset - section.bounds.size.height + NSMaxY(section.bounds);
+				loc.y = baselineOffset+customOffset - section.bounds.size.height + CGRectGetMaxY(section.bounds);
 				break;
 				
 			case GlkAlignBottom:
-				loc.y = customOffset - NSMaxY(section.bounds);
+				loc.y = customOffset - CGRectGetMaxY(section.bounds);
 				break;
 				
 			case GlkAlignCenter:
-				loc.y = customOffset - (-baselineOffset + section.bounds.size.height)/2 - NSMaxY(section.bounds);
+				loc.y = customOffset - (-baselineOffset + section.bounds.size.height)/2 - CGRectGetMaxY(section.bounds);
 				break;
 		}
 		
@@ -840,7 +840,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Add the 'extra' spacing around the final fragment
 	if (hitTheLastGlyph == YES) {
-		NSRect remainingSpace = bounds;
+		CGRect remainingSpace = bounds;
 		
 		if (!newline) {
 			//remainingSpace.origin.y = fragmentBounds.origin.y;
@@ -848,7 +848,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			remainingSpace.origin.x = maxX-inset;
 			remainingSpace.size.width = bounds.size.width - (maxX-inset*2);
 		} else {
-			remainingSpace.origin.y = NSMaxY(bounds);
+			remainingSpace.origin.y = CGRectGetMaxY(bounds);
 			remainingSpace.origin.x = inset;
 			remainingSpace.size.width = bounds.size.width-inset*2;
 		}
@@ -900,7 +900,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	if (sections.count == 1) {
 		fragmentBounds = bounds;
 	} else {
-		fragmentBounds = NSUnionRect(fragmentBounds, bounds);
+		fragmentBounds = CGRectUnion(fragmentBounds, bounds);
 	}
 }
 
@@ -1036,7 +1036,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	[self beginLineFragment];
 
 	// Initial layout: lay out glyphs until the bounding box overflows the text container
-	NSRect totalBounds = NSMakeRect(0,0,0,0);
+	CGRect totalBounds = CGRectZero;
 	BOOL newline = NO;
 	BOOL newParagraph = [self updateParagraphFromGlyph: glyph+cached.location];
 	BOOL splitOnElastic = [paraStyle alignment]==NSTextAlignmentJustified;
@@ -1049,18 +1049,18 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	BOOL hitTheLastGlyph = NO;
 	NSInteger lastInvalidated = glyph;
 
-	while (NSMaxX(totalBounds) < size.width && glyph < cached.length && !newline) {
+	while (CGRectGetMaxX(totalBounds) < size.width && glyph < cached.length && !newline) {
 		// Build up a line section for this set of glyphs
 		NSDictionary* attributes = cacheAttributes[glyph];
 		
-		NSRect sectionBounds = NSMakeRect(offset, -cacheAscenders[glyph], 0.1, cacheLineHeight[glyph]);
+		CGRect sectionBounds = CGRectMake(offset, -cacheAscenders[glyph], 0.1, cacheLineHeight[glyph]);
 
 		CGFloat initialOffset = offset;
 		NSInteger initialGlyph = glyph;
 		BOOL newsection = NO;
 		BOOL customSection = NO;
 		
-		while (cacheAttributes[glyph] == attributes && NSMaxX(sectionBounds) < size.width && !newsection) {
+		while (cacheAttributes[glyph] == attributes && CGRectGetMaxX(sectionBounds) < size.width && !newsection) {
 			if ((cacheProperties[glyph] & NSGlyphPropertyControlCharacter) == NSGlyphPropertyControlCharacter) {
 				// Perform control glyph layout
 				unichar controlChar = [[storage string] characterAtIndex: cacheCharIndexes[glyph]];
@@ -1096,10 +1096,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				// Ignore null glyphs
 			} else {
 				// Include this glyph in the set of glyphs
-				NSRect bounds = NSMakeRect(offset, -cacheAscenders[glyph],
+				CGRect bounds = CGRectMake(offset, -cacheAscenders[glyph],
 										   cacheAdvancements[glyph], cacheLineHeight[glyph]);
 				
-				sectionBounds = NSUnionRect(sectionBounds, bounds);
+				sectionBounds = CGRectUnion(sectionBounds, bounds);
 				offset += cacheAdvancements[glyph];
 			}
 			
@@ -1150,7 +1150,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		}
 		
 		// Merge with the total bounds
-		totalBounds = NSUnionRect(totalBounds, sectionBounds);
+		totalBounds = CGRectUnion(totalBounds, sectionBounds);
 	}
 	
 	// Secondary layout: remove characters as necessary to split this line properly
@@ -1170,7 +1170,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	if (thisLeftMargin > 0) {
 		for (GlkLineSection *section in sections) {
 			section.offset += thisLeftMargin;
-			NSRect preBounds = section.bounds;
+			CGRect preBounds = section.bounds;
 			preBounds.origin.x += thisLeftMargin;
 			section.bounds = preBounds;
 		}
@@ -1179,7 +1179,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	// Send the proposed rectangle to the text container for adjustment
 	if (customBaseline) [self fixBounds];
 	proposedRect = fragmentBounds;
-	proposedRect.origin.y = NSMaxY(usedRect);
+	proposedRect.origin.y = CGRectGetMaxY(usedRect);
 	proposedRect.origin.x = 0;
 	proposedRect.size.height += topPadding + bottomPadding;
 	proposedRect.size.width = size.width;
@@ -1203,7 +1203,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		NSInteger splitGlyph = sections[splitSection].glyphRange.location+sections[splitSection].glyphRange.length;
 		
 		// Version that searches backwards for the first glyph within the proposed rectangle (borken?)
-		CGFloat splitPos = NSMaxX(sections[splitSection].bounds);
+		CGFloat splitPos = CGRectGetMaxX(sections[splitSection].bounds);
 
 		for (;;) {
 			// Move back a glyph
@@ -1217,7 +1217,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				splitSection--;
 				if (splitSection < 0) break;
 				
-				splitPos = NSMaxX(sections[splitSection].bounds);
+				splitPos = CGRectGetMaxX(sections[splitSection].bounds);
 			}
 			
 			CGFloat maxPos;
@@ -1241,10 +1241,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 				// TODO? bounds seem messed up
 			}
 			
-			if (maxPos < NSMaxX(proposedRect)-inset-rightIndent) {
+			if (maxPos < CGRectGetMaxX(proposedRect)-inset-rightIndent) {
 				// This is the first glyph within the proposed rectangle
 #ifdef MoreDebug
-				NSLog(@"Split glyph: %i (max position %g out of %g, starting at %g [%g])", splitGlyph, maxPos, NSMaxX(proposedRect)-inset, splitPos, inset);
+				NSLog(@"Split glyph: %i (max position %g out of %g, starting at %g [%g])", splitGlyph, maxPos, CGRectGetMaxX(proposedRect)-inset, splitPos, inset);
 #endif
 				break;
 			}
@@ -1339,7 +1339,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 	
 	// Update the usedRect for future methods
-	usedRect.size.height = NSMaxY(remaining)-usedRect.origin.y;
+	usedRect.size.height = CGRectGetMaxY(remaining)-usedRect.origin.y;
 	
 	// If we hit the last glyph, tell the delegate to invalidate everything ahead of this point
 	if (hitTheLastGlyph && delegate) {
@@ -1420,7 +1420,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		container	= nil;
 		inset		= 0;
 		
-		size		= NSMakeSize(100, 100);
+		size		= CGSizeMake(100, 100);
 	}
 }
 

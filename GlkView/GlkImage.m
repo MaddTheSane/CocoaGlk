@@ -18,7 +18,7 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 
 - (id) initWithImage: (GlkSuperImage*) img
 		   alignment: (unsigned) align
-				size: (NSSize) sz
+				size: (CGSize) sz
 			position: (NSUInteger) charPos {
 	self = [super init];
 	
@@ -145,10 +145,14 @@ NSString*const GlkImageAttribute = @"GlkImageAttribute";
 	drawRect.size.width *= scaleFactor;
 	drawRect.size.height *= scaleFactor;
 	
+#ifdef COCOAGLK_IPHONE
+	[image drawInRect:drawRect blendMode:kCGBlendModeSourceAtop alpha:1.0];
+#else
 	[image drawInRect: drawRect
 			 fromRect: NSZeroRect
 			operation: NSCompositingOperationSourceOver
 			 fraction: 1.0];
+#endif
 }
 
 

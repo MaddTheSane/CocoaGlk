@@ -60,7 +60,7 @@
 	CGFloat nextMorePos;
 	
 	/// The window containing the `[ MORE ]` prompt.
-	NSWindow* moreWindow;
+	GlkSuperWindow* moreWindow;
 	/// The time that the `[ MORE ]` prompt was shown.
 	NSDate* whenMoreShown;
 	/// Initial state of the `[ MORE ]` prompt.

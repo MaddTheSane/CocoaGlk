@@ -89,6 +89,7 @@ extern GlkBuffer*				cocoaglk_buffer;
 extern NSAutoreleasePool*		cocoaglk_pool;
 #endif
 
+/// This flushes the interpreter thread's autorelease pool
 extern void cocoaglk_flush_pool(void);
 
 /// The 'first stream' (typically containing the game to run)

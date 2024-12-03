@@ -198,12 +198,12 @@
 	if ([self superview] == nil) return;
 	
 	// Create the window
-	logoWindow = [[NSWindow alloc] initWithContentRect: [self frame]				// Gets the size, we position later
+	logoWindow = [[GlkSuperWindow alloc] initWithContentRect: [self frame]				// Gets the size, we position later
 											 styleMask: NSWindowStyleMaskBorderless
 											   backing: NSBackingStoreBuffered
 												 defer: YES];
 	[logoWindow setOpaque: NO];
-	[logoWindow setBackgroundColor: [NSColor clearColor]];
+	[logoWindow setBackgroundColor: [GlkColor clearColor]];
 	
 	// Create the image view that goes inside
 	NSImageView* fadeContents = [[NSImageView alloc] initWithFrame: [[logoWindow contentView] frame]];

@@ -11,12 +11,12 @@
 #import <GlkView/GlkStreamProtocol.h>
 
 ///
-/// Conversion stream that turns standard GlkStream objects into UCS-4 ones
+/// Conversion stream that turns standard GlkStream objects into UCS-4 ones.
 ///
 @interface GlkUcs4Stream : NSObject<GlkStream> {
-	/// The stream that gets the results of writing to this stream
+	/// The stream that gets the results of writing to this stream.
 	id<GlkStream> dataStream;
-	/// \c YES if the stream should be written in a big-endian manner
+	/// `YES` if the stream should be written in a big-endian manner.
 	BOOL bigEndian;
 }
 

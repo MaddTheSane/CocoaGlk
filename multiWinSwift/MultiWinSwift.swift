@@ -215,7 +215,7 @@ This bottom window accepts normal line input.
 				break
 			}
 			
-			guard let wasFirst = wasFirst else {
+			guard let wasFirst else {
 				/* It was a timer event. */
 				performTimer()
 				continue

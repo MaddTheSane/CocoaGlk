@@ -16,16 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 NS_SWIFT_NAME(GlkSoundHandlerProtocol)
 @protocol GlkSoundHandler <NSObject>
 
-/// Creates a new sound channel. See the \c GlkSoundChannel protocol for more information
+/// Creates a new sound channel. See the `GlkSoundChannel` protocol for more information
 /// \param vol The volume of the newly-created channel.
-/// \returns A new sound channel object, or \c nil if new sound channels can't be created.
+/// \returns A new sound channel object, or `nil` if new sound channels can't be created.
 - (nullable byref id<GlkSoundChannel>) createSoundChannelWithVolume: (glui32) vol NS_RETURNS_NOT_RETAINED;
 
-/// Loads/unloads the sound specified by \c snd .
+/// Loads/unloads the sound specified by `snd`.
 ///
 /// The sound handler may also do nothing with this information.
 /// \param snd the sound index to load/unload.
-/// \param hint \c 0 to unload \c snd , \c 1 to load.
+/// \param hint `0` to unload `snd`, `1` to load.
 - (oneway void) loadHintForSound: (glui32) snd flag: (glui32) hint;
 
 - (nullable byref id<GlkSoundSource>) soundSource;

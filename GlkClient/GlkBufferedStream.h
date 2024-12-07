@@ -17,21 +17,21 @@
 /// This is only suitable for 8-bit streams.
 ///
 @interface GlkBufferedStream : NSObject<GlkStream> {
-	/// The stream that we're going to read from
+	/// The stream that we're going to read from.
 	id<GlkStream> sourceStream;
 	
-	/// The amount to read ahead by
+	/// The amount to read ahead by.
 	int readAhead;
 	
-	/// The buffer
+	/// The buffer.
 	unsigned char* buffer;
-	/// \c YES if the end of file has been reached
+	/// `YES` if the end of file has been reached.
 	BOOL eof;
-	/// The buffer low tide mark
+	/// The buffer low tide mark.
 	int lowTide;
-	/// The buffer high tide mark
+	/// The buffer high tide mark.
 	int highTide;
-	/// The amount of space left in the buffer
+	/// The amount of space left in the buffer.
 	int bufferRemaining;
 }
 
@@ -41,9 +41,9 @@
 
 // Dealing with the buffer
 
-/// Sets the read ahead (only has an effect when the buffer is empty)
+/// Sets the read ahead (only has an effect when the buffer is empty).
 - (void) setReadAhead: (int) readAhead;
-/// Fills the buffer
+/// Fills the buffer.
 - (BOOL) fillBuffer;
 
 @end

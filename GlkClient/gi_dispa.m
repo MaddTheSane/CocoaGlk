@@ -1511,9 +1511,9 @@ static char *(*game_id_hook)(void) = NULL;
    call the supplied function when creating files, so that the files
    can be put in a game-specific location.
 
-   The function must have the form: char *func(void);
+   The function must have the form: `char *func(void);`
 
-   It should return \c NULL or a pointer to a (null-terminated) string.
+   It should return `NULL` or a pointer to a (null-terminated) string.
    (The string will be copied, so it may be in a temporary buffer.)
 */
 void gidispatch_set_game_id_hook(char *(*hook)(void))
@@ -1523,7 +1523,7 @@ void gidispatch_set_game_id_hook(char *(*hook)(void))
 
 /*! Retrieve a game ID string for the current game.
 
-   If not \c NULL , this string may be in a temporary buffer, so the caller
+   If not `NULL`, this string may be in a temporary buffer, so the caller
    must copy it!
 */
 char *gidispatch_get_game_id(void)

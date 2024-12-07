@@ -1,4 +1,0 @@
-/* Localized versions of Info.plist keys */
-
-CFBundleName = "SwiftGlk";
-NSHumanReadableCopyright = "© Andrew Hunter, 2005; C.W. Betts, 2018-2021";

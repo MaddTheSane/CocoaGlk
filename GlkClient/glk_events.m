@@ -174,19 +174,19 @@ void glk_select(event_t *event) {
 }
 
 /// This checks if an internally-spawned event is available. If so, it stores
-/// it in the structure pointed to by event. If not, it sets \c event->type to
-/// evtype_None. Either way, it returns almost immediately.
+/// it in the structure pointed to by event. If not, it sets `event->type` to
+/// `evtype_None`. Either way, it returns almost immediately.
 ///
 /// The first question you now ask is, what is an internally-spawned
-/// event? \c glk_select_poll() does \b not check for or return evtype_CharInput,
-/// evtype_LineInput, or evtype_MouseInput events. It is intended for you
+/// event? `glk_select_poll()` does \b **not** check for or return `evtype_CharInput`,
+/// `evtype_LineInput`, or `evtype_MouseInput` events. It is intended for you
 /// to test conditions which may have occurred while you are computing, and
 /// not interfacing with the player. For example, time may pass during slow
-/// computations; you can use glk_select_poll() to see if a evtype_Timer
+/// computations; you can use `glk_select_poll()` to see if a `evtype_Timer`
 /// event has occured. (See section 4.4, "Timer Events".)
 ///
-/// At the moment, \c glk_select_poll() checks for evtype_Timer, and possibly
-/// \c evtype_Arrange and \c evtype_SoundNotify events. But see section 4.9,
+/// At the moment, `glk_select_poll()` checks for `evtype_Timer`, and possibly
+/// `evtype_Arrange` and `evtype_SoundNotify` events. But see section 4.9,
 /// "Other Events".
 ///
 void glk_select_poll(event_t *event) {
@@ -218,7 +218,7 @@ void glk_select_poll(event_t *event) {
 
 /// You can request that an event be sent at fixed intervals, regardless of
 /// what the player does. Unlike input events, timer events can be tested
-/// for with \c glk_select_poll() as well as \c glk_select() .
+/// for with `glk_select_poll()` as well as `glk_select()`.
 void glk_request_timer_events(glui32 millisecs) {
 	os_log_info(GlkClientTrace, "glk_request_timer_events(%{public}u)", millisecs);
 	

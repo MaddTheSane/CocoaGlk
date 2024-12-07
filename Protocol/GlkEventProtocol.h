@@ -26,7 +26,7 @@ NS_SWIFT_NAME(GlkEventProtocol)
 
 /// Type of event
 @property (readonly) glui32 type;
-/// Needs to be converted to a \c winid_t in the client
+/// Needs to be converted to a `winid_t` in the client
 @property (readonly) unsigned windowIdentifier;
 /// Event data
 @property (readonly) glui32 val1;

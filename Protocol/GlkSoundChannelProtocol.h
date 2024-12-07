@@ -31,7 +31,7 @@ NS_SWIFT_NAME(GlkSoundChannelProtocol)
 /// \param sound The sound index to play.
 /// \param repeat The number of times the sound repeats. This must be greater than \e 0 in order to play any sound.
 /// \param noti The notification object sent after the sound has played, if any.
-/// \returns \c YES if playback was successful, \c NO otherwise.
+/// \returns `YES` if playback was successful, `NO` otherwise.
 - (BOOL) playSound: (glui32) sound countOfRepeats: (glui32) repeat notification: (glui32) noti;
 
 @end

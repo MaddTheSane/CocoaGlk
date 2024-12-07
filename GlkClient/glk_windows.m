@@ -22,7 +22,7 @@ static glui32 cocoaglk_nextidentifier = 0;
 static NSMutableDictionary<NSNumber*,NSValue*>* cocoaglk_windows = nil;
 
 
-/// This returns the root window. If there are no windows, this returns \c NULL .
+/// This returns the root window. If there are no windows, this returns `NULL`.
 winid_t glk_window_get_root(void) {
 	os_log_info(GlkClientTrace, "glk_window_get_root() = %{public}p", cocoaglk_rootwindow);
 
@@ -522,9 +522,9 @@ void glk_window_close(winid_t win, stream_result_t *result) {
 	return;
 }
 
-/// \c cocoaglk_window_synchronise() synchronises the data stored with a window with the data
+/// `cocoaglk_window_synchronise()` synchronises the data stored with a window with the data
 /// that is stored on the server. This call ensures that the server is not called too often
-/// for systems that (for example) call \c glk_window_get_size obsessively. This saves on
+/// for systems that (for example) call `glk_window_get_size()` obsessively. This saves on
 /// buffer flushes.
 static void cocoaglk_window_synchronise(winid_t win) {
 	if (win->loopIteration == cocoaglk_loopIteration) return;
@@ -546,9 +546,9 @@ static void cocoaglk_window_synchronise(winid_t win) {
 	}
 }
 
-/// \c glk_window_get_size() simply returns the actual size of the window,
+/// `glk_window_get_size()` simply returns the actual size of the window,
 /// in its measurement system. As described in section 1.9, "Other API
-/// Conventions", either widthptr or heightptr can be NULL, if you only want
+/// Conventions", either widthptr or heightptr can be `NULL`, if you only want
 /// one measurement. [[Or, in fact, both, if you want to waste time.]]
 void glk_window_get_size(winid_t win, glui32 *widthptr, 
 						 glui32 *heightptr) {
@@ -581,9 +581,9 @@ void glk_window_get_size(winid_t win, glui32 *widthptr,
 }
 
 
-/// \c glk_window_set_arrangement() changes the size of an existing
+/// `glk_window_set_arrangement()` changes the size of an existing
 /// split -- that is, it changes the constraint of a given pair
-/// window. \c glk_window_get_arrangement() returns the constraint of a given
+/// window. `glk_window_get_arrangement()` returns the constraint of a given
 /// pair window.
 void glk_window_set_arrangement(winid_t win, glui32 method,
 								glui32 size, winid_t keywin) {
@@ -636,9 +636,9 @@ void glk_window_set_arrangement(winid_t win, glui32 method,
 						 keyWindow: keywin!=NULL?keywin->identifier:GlkNoWindow];
 }
 
-/// \c glk_window_set_arrangement() changes the size of an existing
+/// `glk_window_set_arrangement()` changes the size of an existing
 /// split -- that is, it changes the constraint of a given pair
-/// window. \c glk_window_get_arrangement() returns the constraint of a given
+/// window. `glk_window_get_arrangement()` returns the constraint of a given
 /// pair window.
 void glk_window_get_arrangement(winid_t win, glui32 *methodptr,
 								glui32 *sizeptr, winid_t *keywinptr) {
@@ -832,7 +832,7 @@ void glk_window_clear(winid_t win) {
 ///
 /// If you move the cursor below the last line, or when the cursor reaches
 /// the end of the last line, it goes "off the screen" and further output has
-/// no effect. You must call \c glk_window_move_cursor() or \c glk_window_clear()
+/// no effect. You must call `glk_window_move_cursor()` or `glk_window_clear()`
 /// to move the cursor back into the visible region.
 void glk_window_move_cursor(winid_t win, glui32 xpos, glui32 ypos) {
 	os_log_info(GlkClientTrace, "glk_move_cursor(%{public}p, %{public}u, %{public}u)", win, xpos, ypos);
@@ -873,11 +873,10 @@ strid_t glk_window_get_stream(winid_t win) {
 	return win->stream;
 }
 
-/// Initially, a window has no echo stream, so \c glk_window_get_echo_stream(win)
-/// will return NULL. You can set a window's echo stream to be any valid
-/// output stream by calling glk_window_set_echo_stream(win, str). You can
-/// reset a window to stop echoing by calling glk_window_set_echo_stream(win,
-/// NULL).
+/// Initially, a window has no echo stream, so `glk_window_get_echo_stream(win)`
+/// will return `NULL`. You can set a window's echo stream to be any valid
+/// output stream by calling `glk_window_set_echo_stream(win, str)`. You can
+/// reset a window to stop echoing by calling `glk_window_set_echo_stream(win, NULL)`.
 ///
 /// An echo stream can be of any type, even another window's window
 /// stream. [[This would be somewhat silly, since it would mean that any
@@ -888,16 +887,16 @@ strid_t glk_window_get_stream(winid_t win) {
 /// A window can only have one echo stream. But a single stream can be the
 /// echo stream of any number of windows, sequentially or simultaneously.
 ///
-/// If a window is closed, its echo stream remains open; it is \b not
+/// If a window is closed, its echo stream remains open; it is **not**
 /// automatically closed. [[Do not confuse the window's window stream with
 /// its echo stream. The window stream is "owned" by the window, and dies with
 /// it. The echo stream is merely temporarily associated with the window.]]
 ///
 /// If a stream is closed, and it is the echo stream of one or more
 /// windows, those windows are reset to not echo anymore. (So then calling
-/// \c glk_window_get_echo_stream() on them will return NULL.)
+/// `glk_window_get_echo_stream()` on them will return NULL.)
 ///
-/// It is illegal to set a window's echo stream to be its \b own window
+/// It is illegal to set a window's echo stream to be its **own** window
 /// stream. That would create an infinite loop, and is nearly certain to
 /// crash the Glk library. It is similarly illegal to create a longer loop
 /// (two or more windows echoing to each other.)
@@ -963,7 +962,7 @@ strid_t glk_window_get_echo_stream(winid_t win) {
 
 /// This sets the current stream to the window's stream. It is exactly
 /// equivalent to
-/// \c glk_stream_set_current(glk_window_get_stream(win)).
+/// `glk_stream_set_current(glk_window_get_stream(win))`.
 void glk_set_window(winid_t win) {
 	os_log_info(GlkClientTrace, "glk_set_window(%{public}p)", win);
 

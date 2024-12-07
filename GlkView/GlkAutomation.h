@@ -38,12 +38,12 @@
 					  ypos: (int) ypos
 					window: (int) windowNumber
 				  fromView: (GlkView*) view;
-/// Called on output views to indicate that \c glk_select() has been called
+/// Called on output views to indicate that `glk_select()` has been called.
 - (void) viewWaiting: (GlkView*) view;
 
-// Using this automation object for input
+// Using this automation object for input.
 
-/// The game has reached a \c glk_select() loop
+/// The game has reached a `glk_select()` loop.
 - (void) viewIsWaitingForInput: (GlkView*) view;
 
 @end

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) useProcessHubName;
 
 // Security
-/// Clients must know this in order to connect to the hub. \c nil by default.
+/// Clients must know this in order to connect to the hub. `nil` by default.
 @property (readwrite, copy, nullable) NSString *hubCookie;
 /// Auto-generates a cookie. Not cryptographically secure (yet).
 - (void) setRandomHubCookie;
@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Registers a session with the given cookie. A client can request this specific session object (exactly one, though)
 - (void) registerSession: (id<GlkSession>) session
 			  withCookie: (NSString*) sessionCookie;
-/// Unregisters a session previously registered with \c registerSession:withCookie:
+/// Unregisters a session previously registered with `-registerSession:withCookie:`.
 - (void) unregisterSession: (id<GlkSession>)session;
 
 // The delegate

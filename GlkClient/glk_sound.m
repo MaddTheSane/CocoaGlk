@@ -41,7 +41,7 @@ void cocoaglk_set_sound_source(id<GlkSoundSource> soundSource) {
 	}
 }
 
-/// Check if \c ref is a 'valid' schanid
+/// Check if `ref` is a 'valid' schanid
 BOOL cocoaglk_schanid_sane(schanid_t ref) {
 	if (ref == NULL) return NO;
 	if (ref->key != GlkSoundRefKey) return NO;

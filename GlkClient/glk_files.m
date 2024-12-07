@@ -330,10 +330,10 @@ frefid_t glk_fileref_create_from_fileref(glui32 usage, frefid_t fref,
 ///
 /// Destroys a fileref which you have created. This does *not* affect
 /// the disk file; it just reclaims the resources allocated by the
-/// \c glk_fileref_create... function.
+/// `glk_fileref_create...` function.
 ///
 /// It is legal to destroy a fileref after opening a file with it (while the
-/// file is still open). The \c fileref is only used for the opening operation,
+/// file is still open). The `fileref` is only used for the opening operation,
 /// not for accessing the file stream.
 ///
 ///		(Though in our case, destroying a temp fref usually results in the
@@ -427,7 +427,7 @@ void glk_fileref_delete_file(frefid_t fref) {
 }
 
 ///
-/// This returns \c TRUE (1) if the fileref refers to an existing file, and \c FALSE
+/// This returns `TRUE` (1) if the fileref refers to an existing file, and `FALSE`
 /// (0) if not.
 ///
 glui32 glk_fileref_does_file_exist(frefid_t fref) {

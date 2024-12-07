@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 
 ///
-/// When executing \c glk_select() and co, we need this to get notifications of when events arrive
+/// When executing `glk_select()` and co, we need this to get notifications of when events arrive
 ///
 @protocol GlkEventListener <NSObject>
 

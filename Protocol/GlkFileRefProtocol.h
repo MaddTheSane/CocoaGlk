@@ -29,7 +29,7 @@ NS_SWIFT_NAME(GlkFileRefProtocol)
 
 /// Deletes the file associated with this fileref.
 - (void) deleteFile;
-/// Returns \c YES if the file associated with this fileref exists.
+/// Returns `YES` if the file associated with this fileref exists.
 @property (nonatomic, readonly) BOOL fileExists;
 /// Whether or not the stream should be buffered in autoflush mode.
 @property (nonatomic, readwrite, setter=setAutoflush:) BOOL autoflushStream;

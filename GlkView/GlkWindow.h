@@ -65,13 +65,13 @@
 	// These event variables are useful to subclasses
 	/// Where the events go. **NOT RETAINED!**
 	__weak id<GlkEventReceiver> target;
-	/// \c YES if we're receiving character input.
+	/// `YES` if we're receiving character input.
 	BOOL charInput;
-	/// \c YES if we're receiving text input.
+	/// `YES` if we're receiving text input.
 	BOOL lineInput;
-	/// \c YES if we're receiving mouse input.
+	/// `YES` if we're receiving mouse input.
 	BOOL mouseInput;
-	/// \c YES if we're receiving hyperlink input.
+	/// `YES` if we're receiving hyperlink input.
 	BOOL hyperlinkInput;
 	
 	/// The view that contains this window. **NOT RETAINED!**
@@ -134,7 +134,7 @@
 /// Sets some custom attributes to merge with those from the current style.
 - (void) setCustomAttributes: (NSDictionary*) customAttributes;
 
-/// Sets the \c GlkPreferences object to use for fonts.
+/// Sets the `GlkPreferences` object to use for fonts.
 - (void) setPreferences: (GlkPreferences*) prefs;
 /// Force a reformat of this window (call when the preferences change, for example).
 - (void) reformat;
@@ -187,13 +187,13 @@
 /// Forces this window to act on the specified input string as if it had been entered by the user.
 - (void) forceLineInput: (NSString*) forcedInput;
 
-/// Returns \c YES if this window is waiting for line input.
+/// Returns `YES` if this window is waiting for line input.
 @property (readonly) BOOL waitingForLineInput;
-/// Returns \c YES if this window is waiting for character input.
+/// Returns `YES` if this window is waiting for character input.
 @property (readonly) BOOL waitingForCharInput;
-/// Returns \c YES if this window is waiting for keyboard input.
+/// Returns `YES` if this window is waiting for keyboard input.
 @property (readonly) BOOL waitingForKeyboardInput;
-/// Returns \c YES if this window is waiting for keyboard input for user interaction with the running story.
+/// Returns `YES` if this window is waiting for keyboard input for user interaction with the running story.
 @property (readonly) BOOL waitingForUserKeyboardInput;
 #if defined(COCOAGLK_IPHONE)
 /// The control that responds to events for this window.

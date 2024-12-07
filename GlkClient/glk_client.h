@@ -43,24 +43,24 @@
 
 #pragma mark - Functions
 
-/// True if \c winid_t is probably a real window identifier
+/// True if `winid_t` is probably a real window identifier
 extern BOOL cocoaglk_winid_sane(winid_t win);
 /// Turn an internal window identifier into a real winid
 extern winid_t cocoaglk_winid_get(unsigned identifier);
 
-/// \c YES if \c strid_t is probably a real stream identifier, \c NO otherwise
+/// `YES` if `strid_t` is probably a real stream identifier, `NO` otherwise
 extern BOOL cocoaglk_strid_sane(strid_t stream);
 /// Creates a non-functioning, empty stream
 extern strid_t cocoaglk_stream(void);
 
-/// \c YES if \c frefid_t is probably a real fref
+/// `YES` if `frefid_t` is probably a real fref
 extern BOOL cocoaglk_frefid_sane(frefid_t ref);
 
-/// \c YES if the stream is writable
+/// `YES` if the stream is writable
 extern BOOL cocoaglk_strid_write(strid_t str);
-/// \c YES if the stream is readable
+/// `YES` if the stream is readable
 extern BOOL cocoaglk_strid_read(strid_t str);
-/// Ensures that the stream has a valid GlkStream object available
+/// Ensures that the stream has a valid *GlkStream* object available
 extern void cocoaglk_loadstream(strid_t stream);
 /// Flushes the buffer for a stream
 extern void cocoaglk_flushstream(strid_t stream, const char* reason);
@@ -72,7 +72,7 @@ extern void cocoaglk_unregister_line_buffers(winid_t win);
 
 extern frefid_t cocoaglk_open_file(NSURL *path, glui32 textmode, glui32 rock);
 
-/// Check if \c ref is a 'valid' schanid
+/// Check if `ref` is a 'valid' schanid
 extern BOOL cocoaglk_schanid_sane(schanid_t ref);
 
 #pragma mark - Variables
@@ -136,7 +136,7 @@ struct glk_window_struct {
 	/// The type of this window
 	glui32 wintype;
 	
-	/// The parent for this window (\c NULL if this is the root window)
+	/// The parent for this window (`NULL` if this is the root window)
 	winid_t parent;
 	/// The 'key' window (if this is a pair window)
 	winid_t keyId;
@@ -148,7 +148,7 @@ struct glk_window_struct {
 	/// YES only if the window is closing
 	BOOL closing;
 	
-	/// Annoying \c gi_dispa rock
+	/// Annoying `gi_dispa` rock
 	gidispatch_rock_t giRock;
 	
 	/// True if the last input buffer request was for UCS-4 data

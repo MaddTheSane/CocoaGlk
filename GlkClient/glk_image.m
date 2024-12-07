@@ -38,7 +38,7 @@ void cocoaglk_set_image_source(id<GlkImageSource> imageSource) {
 /// in Graphics Windows" and section 7.3, "Graphics in Text Buffer Windows".
 ///
 /// This function returns a flag indicating whether the drawing operation
-/// succeeded. [[A \c FALSE result can occur for many reasons. The image data
+/// succeeded. [[A `FALSE` result can occur for many reasons. The image data
 ///	might be corrupted; the library may not have enough memory to operate;
 ///	there may be no image with the given identifier; the window might not
 ///	support image display; and so on.]]

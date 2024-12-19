@@ -21,10 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // Initialisation
-- (nullable instancetype) initForReadWriteWithFilename: (NSString*) filename;
-- (nullable instancetype) initForWritingWithFilename: (NSString*) filename;
-- (nullable instancetype) initForReadingWithFilename: (NSString*) filename;
-
 - (nullable instancetype) initForReadWriteWithFileURL: (NSURL*) filename;
 - (nullable instancetype) initForWritingToFileURL: (NSURL*) filename;
 - (nullable instancetype) initForReadingFromFileURL: (NSURL*) filename;

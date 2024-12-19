@@ -15,11 +15,6 @@
 
 #pragma mark - Initialisation
 
-- (instancetype) initForReadWriteWithFilename: (NSString*) filename
-{
-	return [self initForReadWriteWithFileURL:[NSURL fileURLWithPath:filename]];
-}
-
 - (id) initForReadWriteWithFileURL: (NSURL*) filename {
 	self = [super init];
 	
@@ -45,11 +40,6 @@
 	return self;
 }
 
-- (instancetype) initForWritingWithFilename: (NSString*) filename
-{
-	return [self initForWritingToFileURL:[NSURL fileURLWithPath:filename]];
-}
-
 - (id) initForWritingToFileURL: (NSURL*) filename {
 	self = [super init];
 	
@@ -71,11 +61,6 @@
 	}
 	
 	return self;
-}
-
-- (instancetype) initForReadingWithFilename: (NSString*) filename
-{
-	return [self initForReadingFromFileURL:[NSURL fileURLWithPath:filename]];
 }
 
 - (id) initForReadingFromFileURL: (NSURL*) filename {

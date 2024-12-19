@@ -965,7 +965,7 @@
 
 #pragma mark Filerefs
 
-- (id<GlkFileRef>) fileRefWithName: (in bycopy NSString*) name {
+- (byref id<GlkFileRef>) fileRefWithName: (in bycopy NSString*) name {
 	// Turn into a 'real' path
 	NSString* path = [self pathForNamedFile: name];
 	if (!path) return nil;
@@ -978,7 +978,7 @@
 	return res;
 }
 
-- (id<GlkFileRef>) tempFileRef {
+- (byref id<GlkFileRef>) tempFileRef {
 	NSString* tempDir = NSTemporaryDirectory();
 	if (tempDir == nil) return nil;
 	

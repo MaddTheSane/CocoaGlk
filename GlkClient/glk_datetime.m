@@ -76,7 +76,7 @@ static void gli_timestamp_usec_to_time(NSTimeInterval timestamp, glktimeval_t *t
 */
 static void gli_date_from_time(glkdate_t *date, NSCalendar *nscal, NSDate *nsdate)
 {
-	NSCalendarUnit comp_units = (NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitNanosecond);
+	const NSCalendarUnit comp_units = (NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitNanosecond);
 
 	NSDateComponents *comps = [nscal components:comp_units fromDate:nsdate];
 	date->year = (glsi32)(comps.year);
@@ -90,7 +90,7 @@ static void gli_date_from_time(glkdate_t *date, NSCalendar *nscal, NSDate *nsdat
 }
 
 /*! Copy a glkdate to a (newly-created) NSDateComponents structure.
-   This is used in the "glk_date_to_..." functions, which are supposed
+   This is used in the "`glk_date_to_...`" functions, which are supposed
    to normalize the glkdate.
    
    We skip the weekdate, since it should be ignored by those functions.

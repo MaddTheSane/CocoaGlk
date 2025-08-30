@@ -189,9 +189,11 @@ glui32 glk_buffer_to_title_case_uni(glui32 *buf, glui32 len,
 				// Scan any whitespace at the start of the string
 				[stringScanner scanCharactersFromSet: whitespace
 										  intoString: &lastWhitespace];
-				
-				[result appendString: lastWhitespace];
-				
+
+				if (lastWhitespace) {
+					[result appendString: lastWhitespace];
+				}
+
 				// Give up if there's nothing following the whitespace
 				if ([stringScanner isAtEnd]) break;
 				

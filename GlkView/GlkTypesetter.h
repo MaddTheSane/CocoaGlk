@@ -74,7 +74,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 	GlkSectionAlignment alignment;
 
 	/// A line section delegate object.
-	__unsafe_unretained id<GlkCustomLineSection> delegate;
+	__weak id<GlkCustomLineSection> delegate;
 	/// Whether or not this is an elastic line section (used in full-justification).
 	BOOL elastic;
 }
@@ -91,7 +91,7 @@ typedef NS_ENUM(int, GlkSectionAlignment) {
 @property GlkSectionAlignment alignment;
 
 /// A line section delegate object.
-@property (assign) id<GlkCustomLineSection> delegate;
+@property (weak) id<GlkCustomLineSection> delegate;
 /// Whether or not this is an elastic line section (used in full-justification).
 @property (getter=isElastic) BOOL elastic;
 

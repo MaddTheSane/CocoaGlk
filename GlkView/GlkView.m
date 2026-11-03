@@ -983,17 +983,8 @@
 	if (tempDir == nil) return nil;
 	
 	// Get a temporary file name
-	char tempName[25];
-	size_t x;
-	
-	strcpy(tempName, "cocoaglk_");
-   	for (x=strlen(tempName); x<25; x++) 
-		tempName[x] = 'X';
-	tempName[x] = 0;
-	
-	mktemp(tempName);
-	
-	NSString* tempPath = [tempDir stringByAppendingPathComponent: @(tempName)];
+	NSString* tempName = [NSString stringWithFormat: @"cocoaglk_%@", [NSUUID UUID].UUIDString];
+	NSString* tempPath = [tempDir stringByAppendingPathComponent: tempName];
 	
 	// Turn into a temporary fileref
 	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: [NSURL fileURLWithPath: tempPath]];

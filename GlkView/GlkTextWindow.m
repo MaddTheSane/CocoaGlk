@@ -137,11 +137,7 @@
 - (void) updateWithPrefs: (GlkPreferences*) prefs {
 	margin = [prefs textMargin];
 	[textView setTextContainerInset: NSMakeSize(margin, margin)];
-	if (@available(macOS 10.15, *)) {
-		[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation]];
-	} else {
-		[[textView layoutManager] setHyphenationFactor: [prefs useHyphenation]?1:0];
-	}
+	[[textView layoutManager] setUsesDefaultHyphenation: [prefs useHyphenation]];
 }
 
 - (void) setPreferences: (GlkPreferences*) prefs {

@@ -35,7 +35,6 @@ extern NSNotificationName const GlkPreferencesHaveChangedNotification;
 	
 	// Typography
 	CGFloat textMargin;
-	BOOL useScreenFonts;
 	BOOL useHyphenation;
 	BOOL kerning;
 	BOOL ligatures;
@@ -72,10 +71,6 @@ extern NSNotificationName const GlkPreferencesHaveChangedNotification;
 // Typography preferences
 /// The padding to use in text windows.
 @property (nonatomic) CGFloat textMargin;
-/// Whether or not to use screen fonts.
-///
-/// \deprecated Screen fonts have been deprecated for awhile. This will most likely have no affect.
-@property (nonatomic) BOOL useScreenFonts NS_DEPRECATED_MAC(10.2, 10.11, "Not used anymore.");
 /// Whether or not to use hyphenation.
 @property (nonatomic) BOOL useHyphenation;
 /// Whether or not to display ligatures.

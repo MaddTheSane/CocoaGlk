@@ -33,7 +33,6 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	
 	if (self) {
 		textMargin = 10.0;
-		useScreenFonts = YES;
 		scrollbackLength = 100.0;
 
 		NSFontManager* fontManager = [NSFontManager sharedFontManager];
@@ -215,15 +214,9 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	[self preferencesHaveChanged];
 }
 
-@synthesize useScreenFonts;
 @synthesize useHyphenation;
 @synthesize useLigatures = ligatures;
 @synthesize useKerning = kerning;
-
-- (void) setUseScreenFonts: (BOOL) value {
-	useScreenFonts = value;
-	[self preferencesHaveChanged];
-}
 
 - (void) setUseHyphenation: (BOOL) value {
 	useHyphenation = value;
@@ -259,7 +252,6 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	[copy setStyles: styles];
 	[copy setTextMargin: textMargin];
 	
-	[copy setUseScreenFonts: useScreenFonts];
 	[copy setUseHyphenation: useHyphenation];
 	
 	[copy setScrollbackLength: scrollbackLength];

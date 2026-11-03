@@ -2135,6 +2135,7 @@
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
 				PRODUCT_NAME = GlkView;
+				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "xrsimulator xros macosx iphonesimulator iphoneos appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
 			};
@@ -2163,6 +2164,7 @@
 				MODULEMAP_FILE = GlkView/GlkView.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.logicalshift.CocoaGlk.GlkView;
 				PRODUCT_NAME = GlkView;
+				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "xrsimulator xros macosx iphonesimulator iphoneos appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
 			};

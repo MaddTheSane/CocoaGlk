@@ -127,7 +127,7 @@ int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 /// len, but the true count will be returned. (The contents of the buffer after
 /// the returned count are undefined.)
 ///
-/// The lower_case and upper_case functions do what you'd expect: they convert
+/// The `lower_case` and `upper_case` functions do what you'd expect: they convert
 /// every character in the buffer (the first numchars of them) to its upper or
 /// lower-case equivalent, if there is such a thing.
 ///
@@ -149,7 +149,7 @@ glui32 glk_buffer_to_lower_case_uni(glui32 *buf, glui32 len,
 /// len, but the true count will be returned. (The contents of the buffer after
 /// the returned count are undefined.)
 ///
-/// The lower_case and upper_case functions do what you'd expect: they convert
+/// The `lower_case` and `upper_case` functions do what you'd expect: they convert
 /// every character in the buffer (the first numchars of them) to its upper or
 /// lower-case equivalent, if there is such a thing.
 ///
@@ -160,7 +160,7 @@ glui32 glk_buffer_to_upper_case_uni(glui32 *buf, glui32 len,
 }
 
 ///
-/// The title_case function has an additional (boolean) flag. Its basic
+/// The `title_case` function has an additional (boolean) flag. Its basic
 /// function is to change the first character of the buffer to upper-case, and
 /// leave the rest of the buffer unchanged. If lowerrest is true, it changes
 /// all the non-first characters to lower-case (instead of leaving them alone.)

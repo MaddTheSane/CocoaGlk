@@ -673,6 +673,11 @@
 		[self clientHasFinished];
 	}
 	
+	// The listener is a proxy for an object in the client process, which has now gone. If the
+	// client was waiting for an event when it stopped, the listener is still set, and the next
+	// event (such as the view being resized) would send it a message and throw an exception.
+	listener = nil;
+	
 	CFAutorelease((volatile CFTypeRef)CFBridgingRetain(self));
 	[[GlkHub sharedGlkHub] unregisterSession: self];
 	subtask = nil;

@@ -259,7 +259,7 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 	[copy setStyles: styles];
 	[copy setTextMargin: textMargin];
 	
-	[copy setUseScreenFonts: useScreenFonts];
+	copy->useScreenFonts = useScreenFonts;
 	[copy setUseHyphenation: useHyphenation];
 	
 	[copy setScrollbackLength: scrollbackLength];

@@ -535,7 +535,7 @@ bool SFB::Audio::CoreAudioOutput::DeviceIsHogged() const
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyHogMode,
 		.mScope		= kAudioObjectPropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	pid_t hogPID = (pid_t)-1;
@@ -566,7 +566,7 @@ bool SFB::Audio::CoreAudioOutput::StartHoggingDevice()
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyHogMode,
 		.mScope		= kAudioObjectPropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	pid_t hogPID = (pid_t)-1;
@@ -615,7 +615,7 @@ bool SFB::Audio::CoreAudioOutput::StopHoggingDevice()
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyHogMode,
 		.mScope		= kAudioObjectPropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	pid_t hogPID = (pid_t)-1;
@@ -657,7 +657,7 @@ bool SFB::Audio::CoreAudioOutput::DeviceIsMuted() const
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyMute,
 		.mScope		= kAudioObjectPropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	UInt32 isMuted = 0;
@@ -681,7 +681,7 @@ bool SFB::Audio::CoreAudioOutput::MuteDevice()
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyMute,
 		.mScope		= kAudioObjectPropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	UInt32 mute = 1;
@@ -704,7 +704,7 @@ bool SFB::Audio::CoreAudioOutput::UnmuteDevice()
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyMute,
 		.mScope		= kAudioObjectPropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	UInt32 mute = 0;
@@ -724,12 +724,12 @@ bool SFB::Audio::CoreAudioOutput::UnmuteDevice()
 
 bool SFB::Audio::CoreAudioOutput::GetDeviceMasterVolume(Float32& volume) const
 {
-	return GetDeviceVolumeForChannel(kAudioObjectPropertyElementMaster, volume);
+	return GetDeviceVolumeForChannel(kAudioObjectPropertyElementMain, volume);
 }
 
 bool SFB::Audio::CoreAudioOutput::SetDeviceMasterVolume(Float32 volume)
 {
-	return SetDeviceVolumeForChannel(kAudioObjectPropertyElementMaster, volume);
+	return SetDeviceVolumeForChannel(kAudioObjectPropertyElementMain, volume);
 }
 
 bool SFB::Audio::CoreAudioOutput::GetDeviceVolumeForChannel(UInt32 channel, Float32& volume) const
@@ -798,7 +798,7 @@ bool SFB::Audio::CoreAudioOutput::GetDeviceChannelCount(UInt32& channelCount) co
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyStreamConfiguration,
 		.mScope		= kAudioObjectPropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	if(!AudioObjectHasProperty(deviceID, &propertyAddress)) {
@@ -848,7 +848,7 @@ bool SFB::Audio::CoreAudioOutput::GetDevicePreferredStereoChannels(std::pair<UIn
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyPreferredChannelsForStereo,
 		.mScope		= kAudioObjectPropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	if(!AudioObjectHasProperty(deviceID, &propertyAddress)) {
@@ -882,7 +882,7 @@ bool SFB::Audio::CoreAudioOutput::GetDeviceAvailableNominalSampleRates(std::vect
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyAvailableNominalSampleRates,
 		.mScope		= kAudioObjectPropertyScopeGlobal,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	if(!AudioObjectHasProperty(deviceID, &propertyAddress)) {
@@ -964,7 +964,7 @@ bool SFB::Audio::CoreAudioOutput::GetAvailableDataSources(std::vector<UInt32>& d
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyDataSources,
 		.mScope		= kAudioDevicePropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	UInt32 dataSize;
@@ -1003,7 +1003,7 @@ bool SFB::Audio::CoreAudioOutput::GetActiveDataSources(std::vector<UInt32>& data
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyDataSource,
 		.mScope		= kAudioDevicePropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	UInt32 dataSize;
@@ -1043,7 +1043,7 @@ bool SFB::Audio::CoreAudioOutput::SetActiveDataSources(const std::vector<UInt32>
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyDataSource,
 		.mScope		= kAudioDevicePropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	OSStatus result = AudioObjectSetPropertyData(deviceID, &propertyAddress, 0, nullptr, (UInt32)(dataSources.size() * sizeof(UInt32)), &dataSources[0]);
@@ -1068,7 +1068,7 @@ bool SFB::Audio::CoreAudioOutput::GetOutputStreams(std::vector<AudioStreamID>& s
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyStreams,
 		.mScope		= kAudioObjectPropertyScopeOutput,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	UInt32 dataSize;
@@ -1104,7 +1104,7 @@ bool SFB::Audio::CoreAudioOutput::GetOutputStreams(std::vector<AudioStreamID>& s
 //	AudioObjectPropertyAddress propertyAddress = {
 //		.mSelector	= kAudioStreamPropertyVirtualFormat,
 //		.mScope		= kAudioObjectPropertyScopeGlobal,
-//		.mElement	= kAudioObjectPropertyElementMaster
+//		.mElement	= kAudioObjectPropertyElementMain
 //	};
 //
 //	UInt32 dataSize = sizeof(virtualFormat);
@@ -1140,7 +1140,7 @@ bool SFB::Audio::CoreAudioOutput::GetOutputStreams(std::vector<AudioStreamID>& s
 //	AudioObjectPropertyAddress propertyAddress = {
 //		.mSelector	= kAudioStreamPropertyVirtualFormat,
 //		.mScope		= kAudioObjectPropertyScopeGlobal,
-//		.mElement	= kAudioObjectPropertyElementMaster
+//		.mElement	= kAudioObjectPropertyElementMain
 //	};
 //
 //	OSStatus result = AudioObjectSetPropertyData(streamID,
@@ -1172,7 +1172,7 @@ bool SFB::Audio::CoreAudioOutput::GetOutputStreamPhysicalFormat(AudioStreamID st
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioStreamPropertyPhysicalFormat,
 		.mScope		= kAudioObjectPropertyScopeGlobal,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	UInt32 dataSize = sizeof(physicalFormat);
@@ -1212,7 +1212,7 @@ bool SFB::Audio::CoreAudioOutput::SetOutputStreamPhysicalFormat(AudioStreamID st
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioStreamPropertyPhysicalFormat,
 		.mScope		= kAudioObjectPropertyScopeGlobal,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	OSStatus result = AudioObjectSetPropertyData(streamID,
@@ -1367,7 +1367,7 @@ bool SFB::Audio::CoreAudioOutput::_GetDeviceSampleRate(Float64& sampleRate) cons
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyNominalSampleRate,
 		.mScope		= kAudioObjectPropertyScopeGlobal,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	UInt32 dataSize = sizeof(sampleRate);
@@ -1390,7 +1390,7 @@ bool SFB::Audio::CoreAudioOutput::_SetDeviceSampleRate(Float64 sampleRate)
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyNominalSampleRate,
 		.mScope		= kAudioObjectPropertyScopeGlobal,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	Float64 currentSampleRate;
@@ -2035,7 +2035,7 @@ bool SFB::Audio::CoreAudioOutput::_CreateDeviceUID(CFStringRef& deviceUID) const
 	AudioObjectPropertyAddress propertyAddress = {
 		.mSelector	= kAudioDevicePropertyDeviceUID,
 		.mScope		= kAudioObjectPropertyScopeGlobal,
-		.mElement	= kAudioObjectPropertyElementMaster
+		.mElement	= kAudioObjectPropertyElementMain
 	};
 
 	UInt32 dataSize = sizeof(deviceUID);
@@ -2057,7 +2057,7 @@ bool SFB::Audio::CoreAudioOutput::_SetDeviceUID(CFStringRef deviceUID)
 		AudioObjectPropertyAddress propertyAddress = {
 			.mSelector	= kAudioHardwarePropertyDefaultOutputDevice,
 			.mScope		= kAudioObjectPropertyScopeGlobal,
-			.mElement	= kAudioObjectPropertyElementMaster
+			.mElement	= kAudioObjectPropertyElementMain
 		};
 
 		UInt32 specifierSize = sizeof(deviceID);
@@ -2072,7 +2072,7 @@ bool SFB::Audio::CoreAudioOutput::_SetDeviceUID(CFStringRef deviceUID)
 		AudioObjectPropertyAddress propertyAddress = {
 			.mSelector	= kAudioHardwarePropertyDeviceForUID,
 			.mScope		= kAudioObjectPropertyScopeGlobal,
-			.mElement	= kAudioObjectPropertyElementMaster
+			.mElement	= kAudioObjectPropertyElementMain
 		};
 
 		AudioValueTranslation translation = {

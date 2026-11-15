@@ -33,12 +33,13 @@
 
 - (void) setPosition: (in NSInteger) position
 		  relativeTo: (in GlkSeekMode) seekMode {
-	[dataStream setPosition: position
+	[dataStream setPosition: _positionsInCharacters ? position*4 : position
 				 relativeTo: seekMode];
 }
 
 - (unsigned long long) getPosition {
-	return [dataStream getPosition];
+	unsigned long long position = [dataStream getPosition];
+	return _positionsInCharacters ? position/4 : position;
 }
 
 // Writing

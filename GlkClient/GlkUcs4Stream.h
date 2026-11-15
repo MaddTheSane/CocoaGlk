@@ -23,4 +23,8 @@
 - (instancetype) initWithStream: (id<GlkStream>) dataStream
 					  bigEndian: (BOOL) bigEndian;
 
+/// `YES` if positions count characters rather than bytes, as they do in Unicode
+/// memory streams. (In binary Unicode files they count bytes.)
+@property (nonatomic) BOOL positionsInCharacters;
+
 @end

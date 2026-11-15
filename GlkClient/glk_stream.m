@@ -653,6 +653,12 @@ void glk_stream_close(strid_t str, stream_result_t *result) {
 		
 		eStr->echo = NULL;
 	}
+	
+	// If this stream echoes to another, then that stream must forget it
+	if (str->echo) {
+		[str->echo->echoesTo removeObject: [NSValue valueWithPointer: str]];
+		str->echo = NULL;
+	}
 
 	// Remove from the list of streams
 	if (str->next) {

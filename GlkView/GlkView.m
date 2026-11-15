@@ -2050,12 +2050,18 @@
 		// Get the source image
 		GlkSuperImage* sourceImage = [[NSImage alloc] initWithData: imageData];
 		
+		// Give up if the data isn't an image that can be drawn
+		NSImageRep* rep = [[sourceImage representations] firstObject];
+		if (rep == nil || [rep pixelsWide] <= 0 || [rep pixelsHigh] <= 0) {
+			NSLog(@"Warning: image resource %u could not be decoded", imageId);
+			return nil;
+		}
+		
 		// Turn off caching for this image to stop Cocoa doing something 'clever' which actually turns out to be stupid (pixelates the logo in Narcolepsy)
 		[sourceImage setCacheMode: NSImageCacheNever];
 		
 		// Narcolepsy (for example) uses images with a resolution that might not be the screen resolution.
 		// This is annoying. This should re-render the image at a more suitable resolution
-		NSImageRep* rep = [[sourceImage representations] objectAtIndex: 0];
 		if ([rep isKindOfClass:[NSBitmapImageRep class]]) {
 			// ...but store the original GIF image if it's animated.
 			NSBitmapImageRep *bir = (NSBitmapImageRep*)rep;

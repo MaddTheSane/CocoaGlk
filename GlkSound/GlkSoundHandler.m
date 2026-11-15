@@ -195,7 +195,9 @@
 }
 
 - (void)handleDeleteChannel:(int)channel {
-    if (_glkchannels[@(channel)]) {
+    GlkSoundChannel *glkchan = _glkchannels[@(channel)];
+    if (glkchan) {
+        [glkchan stop];
         _glkchannels[@(channel)] = nil;
         fakeGlkChannels[@(channel)] = nil;
     }

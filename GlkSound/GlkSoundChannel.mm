@@ -95,6 +95,15 @@ static SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyB
     return self;
 }
 
+- (void)dealloc
+{
+    if (_player) {
+        _player->SetRenderingFinishedBlock(nullptr);
+        _player->Stop();
+        delete _player;
+    }
+}
+
 - (BOOL)playSound:(glui32)snd countOfRepeats:(glui32)areps notification:(glui32)anot
 {
     _status = GlkSoundChannelStatusSound;

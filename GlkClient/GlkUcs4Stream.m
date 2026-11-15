@@ -163,6 +163,21 @@
 	return [dataStream getBufferWithLength: length];
 }
 
+- (NSUInteger) getCharacters: (uint32_t*) buf
+					  length: (NSUInteger) length {
+	NSData* data = [self getBufferWithLength: length*4];
+	const unsigned char* bytes = [data bytes];
+	
+	NSUInteger numChars = [data length]/4;
+	if (numChars > length) numChars = length;
+	
+	for (NSUInteger x=0; x<numChars; x++) {
+		buf[x] = [self characterFromBytes: bytes + x*4];
+	}
+	
+	return numChars;
+}
+
 // Styles
 
 - (void) setStyle: (int) styleId {

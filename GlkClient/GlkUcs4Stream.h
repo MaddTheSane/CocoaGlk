@@ -27,4 +27,8 @@
 /// memory streams. (In binary Unicode files they count bytes.)
 @property (nonatomic) BOOL positionsInCharacters;
 
+/// Reads up to `length` characters into `buf`, and returns the number read.
+- (NSUInteger) getCharacters: (uint32_t*) buf
+					  length: (NSUInteger) length;
+
 @end

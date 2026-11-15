@@ -63,9 +63,9 @@ glui32 glk_image_draw(winid_t win, glui32 image, glsi32 val1, glsi32 val2) {
 	}
 	
 	// Draw the image
+	res = 1;
+	
 	if (win->wintype == wintype_Graphics) {
-		res = 1;
-		
 		[cocoaglk_buffer drawImageWithIdentifier: image
 						  inWindowWithIdentifier: win->identifier
 									  atPosition: CGPointMake(val1, val2)];
@@ -96,14 +96,17 @@ glui32 glk_image_draw_scaled(winid_t win, glui32 image,
 	}
 	
 	// Draw the image
+	res = 1;
+	
 	if (win->wintype == wintype_Graphics) {
-		res = 1;
-		
 		[cocoaglk_buffer drawImageWithIdentifier: image
 						  inWindowWithIdentifier: win->identifier
 										  inRect: CGRectMake(val1, val2, width, height)];
 	} else {
-		os_log_info(GlkClientTrace, "glk_image_draw_scaled(%{public}p, %{public}u, %{public}i, %{public}i, %{public}u, %{public}u) = %{public}i", win, image, val1, val2, width, height, res);
+		[cocoaglk_buffer drawImageWithIdentifier: image
+						  inWindowWithIdentifier: win->identifier
+									   alignment: val1
+											size: CGSizeMake(width, height)];
 	}
 	
 	os_log_info(GlkClientTrace, "glk_image_draw_scaled(%{public}p, %{public}u, %{public}i, %{public}i, %{public}u, %{public}u) = %{public}i", win, image, val1, val2, width, height, res);

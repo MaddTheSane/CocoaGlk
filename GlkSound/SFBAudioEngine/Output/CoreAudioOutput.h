@@ -237,7 +237,7 @@ namespace SFB {
 			/*!
 			 * @brief Get the device's master volume
 			 *
-			 * This corresponds to the property \c kAudioDevicePropertyVolumeScalar on element \c kAudioObjectPropertyElementMaster
+			 * This corresponds to the property \c kAudioDevicePropertyVolumeScalar on element \c kAudioObjectPropertyElementMain
 			 * @param volume A \c Float32 to receive the master volume
 			 * @return \c true on success, \c false otherwise
 			 */
@@ -246,7 +246,7 @@ namespace SFB {
 			/*!
 			 * @brief Set the device's master volume
 			 *
-			 * This corresponds to the property \c kAudioDevicePropertyVolumeScalar on element \c kAudioObjectPropertyElementMaster
+			 * This corresponds to the property \c kAudioDevicePropertyVolumeScalar on element \c kAudioObjectPropertyElementMain
 			 * @param volume The desired master volume
 			 * @return \c true on success, \c false otherwise
 			 * @see kAudioDevicePropertyVolumeScalar

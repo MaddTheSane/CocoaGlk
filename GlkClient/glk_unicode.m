@@ -408,6 +408,11 @@ glui32 glk_get_buffer_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 		cocoaglk_error("glk_get_line_stream_uni called with a strid that cannot be read from");
 	}
 	
+	if (len == 0) {
+		// Nothing to read: glulxe passes NULL for an array of length 0
+		return 0;
+	}
+	
 	if (buf == NULL) {
 		cocoaglk_error("glk_get_line_stream_uni called with a NULL buffer");
 	}
@@ -447,12 +452,13 @@ glui32 glk_get_line_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 		cocoaglk_error("glk_get_line_stream_uni called with a strid that cannot be read from");
 	}
 	
-	if (buf == NULL) {
-		cocoaglk_error("glk_get_line_stream_uni called with a NULL buffer");
+	if (len == 0) {
+		// Nothing to read: glulxe passes NULL for an array of length 0
+		return 0;
 	}
 	
-	if (len == 0) {
-		return 0;
+	if (buf == NULL) {
+		cocoaglk_error("glk_get_line_stream_uni called with a NULL buffer");
 	}
 	
 	// First, flush the stream

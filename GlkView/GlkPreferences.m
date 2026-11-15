@@ -141,6 +141,9 @@ NSString* const GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChan
 }
 
 - (void) notifyPreferenceChange {
+	// Later changes need a notification of their own
+	changeNotified = NO;
+	
 	changeCount++;
 	[[NSNotificationCenter defaultCenter] postNotificationName: GlkPreferencesHaveChangedNotification
 														object: self];

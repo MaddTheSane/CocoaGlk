@@ -641,6 +641,11 @@ void glk_window_set_arrangement(winid_t win, glui32 method,
 		method |= winmethod_Proportional;
 	}
 	
+	// A NULL key window leaves the key as it was
+	if (keywin == NULL) {
+		keywin = win->keyId;
+	}
+	
 	// Record the changes, plus tell the UI about what's supposed to happen
 	win->method = method;
 	win->size = size;

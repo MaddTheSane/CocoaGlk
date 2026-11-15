@@ -372,6 +372,18 @@ winid_t glk_window_open(winid_t split, glui32 method, glui32 size,
 	return res;
 }
 
+/// Clears the key of every pair window from `ancestor` upwards whose key is `closing` or inside it
+static void cocoaglk_window_clear_keys_inside(winid_t ancestor, winid_t closing) {
+	for (; ancestor != NULL; ancestor = ancestor->parent) {
+		for (winid_t key = ancestor->keyId; key != NULL && key != ancestor; key = key->parent) {
+			if (key == closing) {
+				ancestor->keyId = NULL;
+				break;
+			}
+		}
+	}
+}
+
 /// Discards a window (frees it, fixes key windows, adjusts the window tree, but doesn't do anything clever with the
 /// window structure)
 static void cocoaglk_window_discard(winid_t win) {
@@ -503,6 +515,10 @@ void glk_window_close(winid_t win, stream_result_t *result) {
 		}
 		
 		sibling->parent = grandparent;
+		
+		// The windows above may have a key that is closing: the parent, the window, or a window inside it.
+		// cocoaglk_window_discard only fixes keys up to the parent, as the parent is cut off from the grandparent.
+		cocoaglk_window_clear_keys_inside(grandparent, parent);
 		
 		// Finish off the parent window
 		parent->closing = YES;

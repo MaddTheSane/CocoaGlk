@@ -121,7 +121,7 @@ void glk_select(event_t *event) {
 				
 				if (event->win && event->win->ucs4 && event->win->inputBufUcs4) {
 					// Copy the line input data as UCS-4 information
-					int length = cocoaglk_copy_string_to_uni_buf(lineInput, event->win->inputBufUcs4, event->win->bufLen-1);
+					int length = cocoaglk_copy_string_to_uni_buf(lineInput, event->win->inputBufUcs4, event->win->bufLen);
 					
 					// Set the length correctly
 					if (length > event->win->bufLen) length = event->win->bufLen;
@@ -143,7 +143,7 @@ void glk_select(event_t *event) {
 					
 					if (event->win && event->win->inputBuf) {
 						if (length > event->win->bufLen) {
-							length = event->win->bufLen-1;
+							length = event->win->bufLen;
 						}
 						
 						[latin1Input getBytes: event->win->inputBuf

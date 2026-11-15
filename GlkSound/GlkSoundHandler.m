@@ -57,15 +57,6 @@
 {
     const char *buf = (const char *)_data.bytes;
     const NSUInteger _length = _data.length;
-    char str[30];
-    if (_length > 29)
-    {
-        strncpy(str, buf, 29);
-        str[29]='\0';
-    } else {
-        strncpy(str, buf, _length);
-        str[_length - 1]='\0';
-    }
     /* AIFF */
     if (_length > 4 && !memcmp(buf, "FORM", 4))
         return GlkSoundBlorbFormatFORM;

@@ -628,9 +628,9 @@ void glk_stream_close(strid_t str, stream_result_t *result) {
 		// Tell the buffer to close the stream
 		[buf closeStreamIdentifier: str->identifier];
 	} else {
-		// Just close it
+		// Just close it (memory streams were registered through the main buffer)
 		[str->stream closeStream];
-		[buf unregisterStreamIdentifier: str->identifier];
+		[cocoaglk_buffer unregisterStreamIdentifier: str->identifier];
 	}
 	
 	// Fill in the result structure

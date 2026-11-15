@@ -33,6 +33,11 @@ NS_SWIFT_NAME(GlkSoundHandlerProtocol)
 /// Where we get our sound data from.
 @property (nonatomic, strong, nullable) id<GlkSoundSource> soundSource;
 
+@optional
+
+/// Stops every sound. The view calls this when the game has finished.
+- (void) stopAllAndCleanUp;
+
 @end
 
 NS_ASSUME_NONNULL_END

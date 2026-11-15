@@ -408,6 +408,11 @@
 	// Tell all of the windows that the task has finished
 	[rootWindow taskFinished];
 	
+	// Stop any sounds that are still playing
+	if ([sndHandler respondsToSelector: @selector(stopAllAndCleanUp)]) {
+		[sndHandler stopAllAndCleanUp];
+	}
+	
 	// Inform the delegate
 	if ([delegate respondsToSelector: @selector(taskHasFinished)]) {
 		[delegate taskHasFinished];

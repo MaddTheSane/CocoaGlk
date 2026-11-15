@@ -415,17 +415,22 @@ glui32 glk_get_buffer_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 	// First, flush the stream
 	cocoaglk_flushstream(str, "Retrieving a UCS-4 buffer");
 	
-	// Next, use the stream object to get our result (assumption: the stream is using UCS-4 encoding)
-	NSData* data = [str->stream getBufferWithLength: len*4];
+	// Next, use the stream object to get our result
+	id<GlkStream> stream = str->stream;
+	NSUInteger numChars;
 	
-	// Decode the characters that have been read
-	const unsigned char* bytes = [data bytes];
-	NSInteger numChars = [data length]/4;
-	NSInteger x;
-	for (x=0; x<numChars; x++) {
-		NSInteger pos = x*4;
-		
-		buf[x] = (bytes[pos+0]<<24)|(bytes[pos+1]<<16)|(bytes[pos+2]<<8)|(bytes[pos+3]<<0);
+	if (![stream isProxy] && [stream isKindOfClass: [GlkUcs4Stream class]]) {
+		// Unicode memory streams and binary Unicode files hold UCS-4
+		numChars = [(GlkUcs4Stream*)stream getCharacters: buf
+												  length: len];
+	} else {
+		// Other streams hold a character per byte, or UTF-8
+		for (numChars = 0; numChars < len; numChars++) {
+			unichar ch = [stream getChar];
+			if (ch == GlkEOFChar) break;
+			
+			buf[numChars] = ch;
+		}
 	}
 	
 	str->read += numChars;

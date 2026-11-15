@@ -23,4 +23,12 @@
 - (instancetype) initWithStream: (id<GlkStream>) dataStream
 					  bigEndian: (BOOL) bigEndian;
 
+/// `YES` if positions count characters rather than bytes, as they do in Unicode
+/// memory streams. (In binary Unicode files they count bytes.)
+@property (nonatomic) BOOL positionsInCharacters;
+
+/// Reads up to `length` characters into `buf`, and returns the number read.
+- (NSUInteger) getCharacters: (uint32_t*) buf
+					  length: (NSUInteger) length;
+
 @end

@@ -160,10 +160,6 @@ glui32 glk_style_measure(winid_t win, glui32 styl, glui32 hint,
 		cocoaglk_error("glk_style_measure called with an invalid winid");
 	}
 	
-	if (!result) {
-		cocoaglk_error("glk_style_measure called with a NULL value for result");
-	}
-	
 	if (hint >= stylehint_NUMHINTS) {
 		// We should be able to measure any defined hint
 		return 0;
@@ -178,11 +174,16 @@ glui32 glk_style_measure(winid_t win, glui32 styl, glui32 hint,
 	// We need to flush the buffer in order to get the latest values for the measurements
 	cocoaglk_flushbuffer("Measuring a style");
 	
-	*result = [cocoaglk_session measureStyle: styl
-										hint: hint
-									inWindow: win->identifier];
+	glui32 value = [cocoaglk_session measureStyle: styl
+											 hint: hint
+										 inWindow: win->identifier];
+	
+	// As usual, result may be NULL
+	if (result) {
+		*result = value;
+	}
 
-	os_log_info(GlkClientTrace, "glk_style_measure(%{public}p, %{public}u, %{public}u, %{public}p=%{public}u) = 1)", win, styl, hint, result, *result);
+	os_log_info(GlkClientTrace, "glk_style_measure(%{public}p, %{public}u, %{public}u, %{public}p=%{public}u) = 1)", win, styl, hint, result, value);
 	
 	return 1;
 }

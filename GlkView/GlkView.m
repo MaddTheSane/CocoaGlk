@@ -840,6 +840,9 @@
 				col = [style textColour];
 			}
 			
+			// The default colours are grey, which have no red, green or blue components
+			col = [col colorUsingColorSpace: [NSColorSpace sRGBColorSpace]];
+			
 			int r = (int)(floor(255.0 * [col redComponent]));
 			int g = (int)(floor(255.0 * [col greenComponent]));
 			int b = (int)(floor(255.0 * [col blueComponent]));

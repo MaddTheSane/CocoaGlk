@@ -128,6 +128,12 @@ static SFB::InputSource::unique_ptr CreateWithCFData(CFDataRef bytes, bool copyB
 
     auto decoder = SFB::Audio::Decoder::CreateForInputSource(CreateWithCFData((__bridge CFDataRef)buf, false), (__bridge CFStringRef)mimeString);
 
+    if (!decoder) {
+        // For example, the resource is empty
+        NSLog(@"schannel_play_ext: no decoder for sound resource %u (format:%@)", snd, mimeString);
+        return NO;
+    }
+
     if (!_player) {
         _player = new SFB::Audio::Player();
     }

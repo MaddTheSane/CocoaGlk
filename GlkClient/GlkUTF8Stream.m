@@ -94,7 +94,7 @@ static int countUTF8Len(unsigned char charPoint) {
 		return res;
 	} else if ((charByte & 0xF0) == 0xE0) {
 		// 3-char encoding
-		unichar res = (charByte & 0x0F) << 16;
+		unichar res = (charByte & 0x0F) << 12;
 		charData = [self getBufferWithLength: 2];
 		if ([charData length] != 2) {
 			return GlkEOFChar;
@@ -129,7 +129,7 @@ static int countUTF8Len(unsigned char charPoint) {
 	int lineLength = 0;
 	int lineAllocated = 0;
 	
-	for (NSInteger uniLen = 0; uniLen <= maxLen; uniLen++) {
+	for (NSInteger uniLen = 0; uniLen < maxLen; uniLen++) {
 		// Read the next character
 		NSData* charData = [self getBufferWithLength: 1];
 		if ([charData length] != 1) break;

@@ -23,9 +23,10 @@
     NSData *dat = nil;
 	GlkSoundBlorbFormatType type;
 
-    /* stop previous noise */
+    /* stop previous noise (stopping disposes of the player) */
     if (_player) {
         [_player stop];
+        _player = nil;
     }
     
     if (areps == 0 || snd == -1)
@@ -74,6 +75,7 @@
     paused = NO;
     if (_player) {
         [_player stop];
+        _player = nil;
     }
     [self cleanup];
 }

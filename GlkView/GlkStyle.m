@@ -248,6 +248,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 		lastAttributes = [res copy];
 		prefChangeCount = [prefs changeCount];
 		lastPreferences = prefs;
+		lastScaleFactor = scaleFactor;
 	}
 	
 	// Return the result
@@ -334,6 +335,7 @@ NSString* const GlkStyleAttributeName = @"GlkStyleAttribute";
 		lastAttributes = [res copy];
 		prefChangeCount = [prefs changeCount];
 		lastPreferences = prefs;
+		lastScaleFactor = scaleFactor;
 	}
 	
 	// Return the result

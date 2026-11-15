@@ -510,6 +510,10 @@ glui32 glk_buffer_canon_decompose_uni(glui32 *buf, glui32 len,
 {
 	@autoreleasepool {
 		NSMutableString *str = [[NSMutableString alloc] initWithBytes:buf length:numchars*sizeof(glui32) encoding:NSUTF32LittleEndianStringEncoding];
+		if (str == nil) {
+			// Not valid UTF-32, such as a lone surrogate: leave the buffer as it is
+			return numchars;
+		}
 		CFStringNormalize((CFMutableStringRef)str, kCFStringNormalizationFormD);
 		NSData *strData = [str dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
 		
@@ -524,6 +528,10 @@ glui32 glk_buffer_canon_normalize_uni(glui32 *buf, glui32 len,
 {
 	@autoreleasepool {
 		NSMutableString *str = [[NSMutableString alloc] initWithBytes:buf length:numchars*sizeof(glui32) encoding:NSUTF32LittleEndianStringEncoding];
+		if (str == nil) {
+			// Not valid UTF-32, such as a lone surrogate: leave the buffer as it is
+			return numchars;
+		}
 		CFStringNormalize((CFMutableStringRef)str, kCFStringNormalizationFormC);
 		NSData *strData = [str dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
 		

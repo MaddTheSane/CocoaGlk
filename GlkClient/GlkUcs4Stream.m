@@ -97,13 +97,20 @@
 
 // Reading
 
+/// Decodes the character in the four bytes at ucs4, in the stream's byte order
+- (glui32) characterFromBytes: (const unsigned char*) ucs4 {
+	if (bigEndian) {
+		return ((glui32)ucs4[0]<<24)|((glui32)ucs4[1]<<16)|((glui32)ucs4[2]<<8)|((glui32)ucs4[3]<<0);
+	} else {
+		return ((glui32)ucs4[3]<<24)|((glui32)ucs4[2]<<16)|((glui32)ucs4[1]<<8)|((glui32)ucs4[0]<<0);
+	}
+}
+
 - (unichar) getChar {
 	NSData* charData = [self getBufferWithLength: 4];
 	if ([charData length] != 4) return GlkEOFChar;
 	
-	const unsigned char* ucs4 = [charData bytes];
-	
-	glui32 res = (ucs4[0]<<24)|(ucs4[1]<<16)|(ucs4[2]<<8)|(ucs4[3]<<0);
+	glui32 res = [self characterFromBytes: [charData bytes]];
 	
 	if (res < 0xffff) 
 		return res;
@@ -117,7 +124,7 @@
 	int lineAllocated = 0;
 	NSString* res;
 	
-	for (;;) {
+	while (lineLength < maxLen) {
 		// Read the next character
 		NSData* charData = [self getBufferWithLength: 4];
 		if ([charData length] != 4) break;
@@ -128,11 +135,11 @@
 			line = realloc(line, sizeof(glui32)*lineAllocated);
 		}
 		
-		const unsigned char* ucs4 = [charData bytes];
-		line[lineLength++] = (ucs4[0]<<24)|(ucs4[1]<<16)|(ucs4[2]<<8)|(ucs4[3]<<0);
+		glui32 ch = [self characterFromBytes: [charData bytes]];
+		line[lineLength++] = ch;
 		
 		// Check if it is a \n or a \r
-		if (ucs4[0] == 0 && ucs4[1] == 0 && ucs4[2] == 0 && (ucs4[3] == '\n' || ucs4[3] == '\r')) {
+		if (ch == '\n' || ch == '\r') {
 			break;
 		}
 	}

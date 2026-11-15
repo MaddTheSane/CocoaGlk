@@ -451,12 +451,21 @@ glui32 glk_get_line_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 		cocoaglk_error("glk_get_line_stream_uni called with a NULL buffer");
 	}
 	
+	if (len == 0) {
+		return 0;
+	}
+	
 	// First, flush the stream
 	cocoaglk_flushstream(str, "Retrieving a line of UCS-4 text");
 	
-	// Next, use the stream object to get our result
+	// Next, use the stream object to get our result, with a terminating null
 	NSString* line = [str->stream getLineWithLength: len-1];
-	int readChars = cocoaglk_copy_string_to_uni_buf(line, buf, len);
+	glui32 readChars = (glui32)cocoaglk_copy_string_to_uni_buf(line, buf, len-1);
+	if (readChars > len-1) {
+		readChars = len-1;
+	}
+	buf[readChars] = 0;
+	
 	str->read += readChars;
 	return readChars;
 }

@@ -1057,6 +1057,9 @@ glsi32 glk_get_char_stream(strid_t str) {
 	if (res == GlkEOFChar) return -1;
 	
 	str->read++;
+	
+	// Characters beyond Latin-1 (from Unicode streams) are returned as '?'
+	if (res > 0xff) return '?';
 	return res;
 }
 
@@ -1121,7 +1124,7 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 	os_log_info(GlkClientTrace, "glk_get_line_stream(%{public}p, %{public}p=\"%{public}s\", %{public}u) = %{public}ld", str, buf, buf, len, (long)length);
 		
 	// Return the result
-	str->read += len;
+	str->read += length;
 	return (glui32)length;
 }
 

@@ -289,14 +289,14 @@ strid_t glk_stream_open_file_uni(frefid_t fileref, glui32 fmode,
 	
 	if (fmode == filemode_ReadWrite || fmode == filemode_WriteAppend) {
 		stream = [fileref->fileref createReadWriteStream];
-
-		if ((fileref->usage&fileusage_TextMode) == 0 && [stream isProxy]) {
-			stream = [[[GlkBufferedStream alloc] initWithStream: stream] autorelease];
-		}
 	} else if (fmode == filemode_Write) {
 		stream = [fileref->fileref createWriteOnlyStream];
 	} else if (fmode == filemode_Read) {
 		stream = [fileref->fileref createReadOnlyStream];
+
+		if ((fileref->usage&fileusage_TextMode) == 0 && [stream isProxy]) {
+			stream = [[[GlkBufferedStream alloc] initWithStream: stream] autorelease];
+		}
 	} else {
 		cocoaglk_error("glk_stream_open_file called with an unknown fmode");
 		return NULL;

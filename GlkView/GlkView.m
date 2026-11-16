@@ -944,11 +944,15 @@
 	if (newListener != nil) {
 		listener = newListener;
 
-		for (id<GlkAutomation> receiver in inputReceivers) {
+		// Receivers may add or remove automation objects when they're told, so go through copies, passing
+		// over any that have been removed
+		for (id<GlkAutomation> receiver in [inputReceivers copy]) {
+			if ([inputReceivers indexOfObjectIdenticalTo: receiver] == NSNotFound) continue;
 			[receiver viewIsWaitingForInput: self];
 		}
 
-		for (id<GlkAutomation> receiver in outputReceivers) {
+		for (id<GlkAutomation> receiver in [outputReceivers copy]) {
+			if ([outputReceivers indexOfObjectIdenticalTo: receiver] == NSNotFound) continue;
 			[receiver viewWaiting: self];
 		}
 	}
@@ -1726,7 +1730,8 @@
 		![stream isKindOfClass: [GlkTextGridWindow class]]) {
 		int windowId = [self automationIdForWindowId: [(GlkTextWindow*)stream glkIdentifier]];
 		
-		for (id<GlkAutomation> receiver in outputReceivers) {
+		for (id<GlkAutomation> receiver in [outputReceivers copy]) {
+			if ([outputReceivers indexOfObjectIdenticalTo: receiver] == NSNotFound) continue;
 			[receiver receivedCharacters: string
 								  window: windowId
 								fromView: self];
@@ -2259,7 +2264,8 @@
 	if ([outputReceivers count] > 0) {
 		int ident = [self automationIdForWindowId: windowId];
 		
-		for (id<GlkAutomation> receiver in outputReceivers) {
+		for (id<GlkAutomation> receiver in [outputReceivers copy]) {
+			if ([outputReceivers indexOfObjectIdenticalTo: receiver] == NSNotFound) continue;
 			[receiver userTyped: inputLine
 						 window: ident
 					  lineInput: YES

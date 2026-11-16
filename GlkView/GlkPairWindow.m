@@ -70,6 +70,15 @@
 	needsLayout = YES;
 }
 
+- (void) swapLeftAndRightWindows {
+	// Both stay children of this window, so their parents and superviews don't change
+	GlkWindow* oldLeft = left;
+	left = right;
+	right = oldLeft;
+	
+	needsLayout = YES;
+}
+
 @synthesize keyWindow = key;
 @synthesize leftWindow = left;
 @synthesize rightWindow = right;

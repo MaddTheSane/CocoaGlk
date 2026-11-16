@@ -1453,11 +1453,18 @@
 	}
 
 	glui32 winDir = method & winmethod_DirMask;
+	BOOL above = winDir==winmethod_Above||winDir==winmethod_Left;
+	
+	// The spec doesn't let a new direction move the windows: the size then constrains the other window,
+	// which is the right-hand one once they're swapped
+	if (above != [win above]) {
+		[win swapLeftAndRightWindows];
+	}
 
 	[win setKeyWindow: keyWin];
 	[win setFixed: (method&winmethod_Fixed)!=0];
 	[win setSize: size];
-	[win setAbove: winDir==winmethod_Above||winDir==winmethod_Left];
+	[win setAbove: above];
 	[win setHorizontal: winDir==winmethod_Left||winDir==winmethod_Right];
 	
 	windowsNeedLayout = YES;

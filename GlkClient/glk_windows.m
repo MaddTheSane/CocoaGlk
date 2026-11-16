@@ -662,6 +662,16 @@ void glk_window_set_arrangement(winid_t win, glui32 method,
 		method |= winmethod_Proportional;
 	}
 	
+	// The spec lets a split's direction be reversed, but not turned between horizontal and vertical
+	glui32 oldDir = win->method&winmethod_DirMask;
+	dir = method&winmethod_DirMask;
+	BOOL wasHorizontal = oldDir == winmethod_Left || oldDir == winmethod_Right;
+	BOOL isHorizontal = dir == winmethod_Left || dir == winmethod_Right;
+	if (wasHorizontal != isHorizontal) {
+		cocoaglk_warning("glk_window_set_arrangement can't turn a split between horizontal and vertical");
+		return;
+	}
+	
 	// A NULL key window leaves the key as it was
 	if (keywin == NULL) {
 		keywin = win->keyId;

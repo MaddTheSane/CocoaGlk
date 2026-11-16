@@ -2311,11 +2311,16 @@
 #pragma mark - Automation
 
 - (void) addOutputReceiver: (id<GlkAutomation>) receiver {
-	[outputReceivers addObject: receiver];
+	// A receiver added again is still told about things once
+	if ([outputReceivers indexOfObjectIdenticalTo: receiver] == NSNotFound) {
+		[outputReceivers addObject: receiver];
+	}
 }
 
 - (void) addInputReceiver: (id<GlkAutomation>) receiver {
-	[inputReceivers addObject: receiver];
+	if ([inputReceivers indexOfObjectIdenticalTo: receiver] == NSNotFound) {
+		[inputReceivers addObject: receiver];
+	}
 }
 
 - (void) removeAutomationObject: (id<GlkAutomation>) receiver {

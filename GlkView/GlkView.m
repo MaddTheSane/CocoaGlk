@@ -462,7 +462,7 @@
 			GlkWindow* origWin = [glkWindows objectForKey: @([arrangeEvent windowIdentifier])];
 			GlkWindow* newWin = [glkWindows objectForKey: @([event windowIdentifier])];
 			
-			if (origWin != rootWindow && origWin != newWin && [origWin identifier] != [newWin identifier]) {
+			if (origWin != rootWindow && origWin != newWin) {
 				// Create a new arrangement event using the root window
 				// Could look for the common ancestor, but this way is easier
 				GlkEvent* newEvent = [[GlkArrangeEvent alloc] initWithGlkWindow: rootWindow];

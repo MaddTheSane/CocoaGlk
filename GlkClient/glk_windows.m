@@ -288,8 +288,11 @@ winid_t glk_window_open(winid_t split, glui32 method, glui32 size,
 		}
 		
 		pair->parent = split->parent;
-		pair->keyId = pair->left = split;
+		pair->left = split;
 		pair->right = res;
+
+		// The spec makes the new window the key: its type decides how a fixed size is measured
+		pair->keyId = res;
 		split->parent = pair;
 		res->parent = pair;
 		

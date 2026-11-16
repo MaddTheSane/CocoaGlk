@@ -142,10 +142,12 @@
 		CGFloat leftSize, rightSize;
 		
 		if (fixed) {
+			// A fixed size is measured in the key window's units. Our own widthForFixedSize: and
+			// heightForFixedSize: do that, and give 0 when there's no key window, as the spec asks.
 			if (horizontal) {
-				rightSize = [right widthForFixedSize: size];
+				rightSize = [self widthForFixedSize: size];
 			} else {
-				rightSize = [right heightForFixedSize: size];
+				rightSize = [self heightForFixedSize: size];
 			}
 		} else {
 			rightSize = (availableSize * ((CGFloat)size))/100.0;

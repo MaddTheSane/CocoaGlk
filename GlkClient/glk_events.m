@@ -235,19 +235,22 @@ void glk_request_timer_events(glui32 millisecs) {
 	}
 }
 
-/// Unregisters any line input buffers associated with the specified window
+/// Unregisters any line input buffers associated with the specified window, and forgets them
 void cocoaglk_unregister_line_buffers(winid_t win) {
-	if (!win->registered) return;
-	win->registered = NO;
-	
-	if (win->inputBuf && cocoaglk_unregister_memory) {
-		cocoaglk_unregister_memory(win->inputBuf, win->bufLen, "&+#!Cn", win->bufRock);
-		win->inputBuf = NULL;
+	if (win->registered) {
+		win->registered = NO;
+
+		if (win->inputBuf && cocoaglk_unregister_memory) {
+			cocoaglk_unregister_memory(win->inputBuf, win->bufLen, "&+#!Cn", win->bufRock);
+		}
+		if (win->inputBufUcs4 && cocoaglk_unregister_memory) {
+			cocoaglk_unregister_memory(win->inputBufUcs4, win->bufLen, "&+#!Iu", win->bufUcs4Rock);
+		}
 	}
-	if (win->inputBufUcs4 && cocoaglk_unregister_memory) {
-		cocoaglk_unregister_memory(win->inputBufUcs4, win->bufLen, "&+#!Iu", win->bufUcs4Rock);
-		win->inputBufUcs4 = NULL;
-	}
+
+	// Forget the buffers even when they weren't registered: a window has one only while it's waiting for line input
+	win->inputBuf = NULL;
+	win->inputBufUcs4 = NULL;
 }
 
 //
@@ -395,11 +398,15 @@ void glk_cancel_line_event(winid_t win, event_t *event) {
 	// TODO: we can avoid flushing the buffer if the last request for line input for this window has already gone out
 	cocoaglk_flushbuffer("Cancelling line input");
 	
+	// The window has a buffer only while it's waiting for line input
+	BOOL requested = win->inputBuf != NULL || win->inputBufUcs4 != NULL;
+
 	NSString* lineInput = [cocoaglk_session cancelLineEventsForWindowIdentifier: win->identifier];
-	
+
 	if (event) {
-		event->type = evtype_LineInput;
-		event->win = win;
+		// With no line input to cancel, the spec gives evtype_None
+		event->type = requested ? evtype_LineInput : evtype_None;
+		event->win = requested ? win : NULL;
 		event->val1 = event->val2 = 0;
 	}
 

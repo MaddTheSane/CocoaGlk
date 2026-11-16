@@ -371,6 +371,17 @@
 
 #pragma mark - Line input
 
+/// Where line input starts in the text, or `NSNotFound` if the cursor is off the grid. Line input takes place at
+/// the cursor and can only reach the right-hand edge, so with the cursor off the grid there's no room for any:
+/// only an empty line can be entered.
+- (NSInteger) lineInputStart {
+	if (xpos < 0 || ypos < 0 || xpos >= width || ypos >= height) {
+		return NSNotFound;
+	}
+	
+	return xpos + ypos*width;
+}
+
 - (NSString*) cancelLineInput {
 	if (lineInput) {
 		lineInput = NO;
@@ -379,7 +390,8 @@
 		[self makeTextNonEditable];
 		[[self window] invalidateCursorRectsForView: self];
 		
-		int startPos = xpos + ypos*width;
+		NSInteger startPos = [self lineInputStart];
+		if (startPos == NSNotFound) return @"";
 		return [[textStorage string] substringWithRange: NSMakeRange(startPos, lineInputLength)];
 	}
 	
@@ -414,9 +426,9 @@
 	
 	NSMutableString* string = [[textView textStorage] mutableString];
 	
-	if (nextInputLine != nil && [nextInputLine length] > 0 && xpos + [nextInputLine length] < width) {
+	NSInteger startPos = [self lineInputStart];
+	if (nextInputLine != nil && [nextInputLine length] > 0 && startPos != NSNotFound && xpos + [nextInputLine length] < width) {
 		lineInputLength = 0;
-		int startPos = xpos + ypos*width;
 		
 		[string replaceCharactersInRange: NSMakeRange(startPos, [nextInputLine length])
 							  withString: nextInputLine];
@@ -447,7 +459,8 @@ textView:(NSTextView *)aTextView
 	   replacementString:(NSString *)replacementString {
 	if (!lineInput) return NO;
 	
-	NSInteger startPos = xpos + ypos*width;
+	NSInteger startPos = [self lineInputStart];
+	if (startPos == NSNotFound) return NO;
 	NSInteger endPos = startPos + lineInputLength;
 	
 	NSInteger lengthChange = [replacementString length] - affectedCharRange.length;
@@ -471,7 +484,8 @@ textView:(NSTextView *)aTextView
 	 changeInLength:(NSInteger)delta {
 	if (!lineInput) return;
 	
-	NSInteger startPos = xpos + ypos*width;
+	NSInteger startPos = [self lineInputStart];
+	if (startPos == NSNotFound) return;
 	NSInteger endPos = startPos + lineInputLength;
 	
 	if (edited.location < startPos || edited.location > endPos) {
@@ -522,7 +536,8 @@ textView:(NSTextView *)aTextView
 }
 
 - (void) updateCaretPosition {
-	NSInteger startPos = xpos + ypos*width;
+	NSInteger startPos = [self lineInputStart];
+	if (startPos == NSNotFound) return;
 	NSInteger endPos = startPos + lineInputLength;
 
 	if (startPos > [textView selectedRange].location ||
@@ -537,7 +552,7 @@ textView:(NSTextView *)aTextView
 
 #if !defined(COCOAGLK_IPHONE)
 - (void) keyDown: (NSEvent*) evt {
-	int startPos = xpos + ypos*width;
+	NSInteger startPos = [self lineInputStart];
 
 	if ([containingView morePromptsPending]) {
 		[containingView pageAll];
@@ -562,7 +577,10 @@ textView:(NSTextView *)aTextView
 				if (lineInput)
 				{
 					// We found a newline
-					NSString* inputLine = [[textStorage string] substringWithRange: NSMakeRange(startPos, lineInputLength)];
+					NSString* inputLine = @"";
+					if (startPos != NSNotFound) {
+						inputLine = [[textStorage string] substringWithRange: NSMakeRange(startPos, lineInputLength)];
+					}
 					
 					// Generate the event, then...
 					GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_LineInput
@@ -593,7 +611,7 @@ textView:(NSTextView *)aTextView
 				}
 		}
 		
-		if (history != nil) {
+		if (history != nil && startPos != NSNotFound) {
 			// Move to a specific history item
 			[[textView textStorage] replaceCharactersInRange: NSMakeRange(startPos, lineInputLength)
 												  withString: history];

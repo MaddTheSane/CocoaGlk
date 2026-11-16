@@ -167,58 +167,24 @@ glui32 glk_buffer_to_upper_case_uni(glui32 *buf, glui32 len,
 ///
 glui32 glk_buffer_to_title_case_uni(glui32 *buf, glui32 len,
 									glui32 numchars, glui32 lowerrest) {
-	if (lowerrest) {
-		// If this flag is on, then use the standard capitalisation routine
-		return cocoaglk_copy_string_to_uni_buf([cocoaglk_string_from_uni_buf(buf, numchars) capitalizedString],
-											   buf, len);
-	} else {
-		int finalLength;
-		@autoreleasepool {
-			// If the flag is off, then only capitalise characters that come after whitespace
-			NSCharacterSet* whitespace = [NSCharacterSet whitespaceCharacterSet];
-			NSScanner* stringScanner = [[NSScanner alloc] initWithString: cocoaglk_string_from_uni_buf(buf, numchars)];
-			NSMutableString* result = [NSMutableString string];
-			
-			[stringScanner setCharactersToBeSkipped: [NSCharacterSet characterSetWithCharactersInString: @""]];
-			
-			NSString* lastWord;
-			NSString* lastWhitespace;
-			
-			// Scan the string
-			while (![stringScanner isAtEnd]) {
-				// Scan any whitespace at the start of the string
-				[stringScanner scanCharactersFromSet: whitespace
-										  intoString: &lastWhitespace];
-
-				if (lastWhitespace) {
-					[result appendString: lastWhitespace];
-				}
-
-				// Give up if there's nothing following the whitespace
-				if ([stringScanner isAtEnd]) break;
-				
-				// Get the next word
-				[stringScanner scanUpToCharactersFromSet: whitespace
-											  intoString: &lastWord];
-				
-				// Capitalize the last word
-				NSString* capitalized = [lastWord capitalizedString];
-				
-				// Join the capitalized letter from the last word with whatever was in the original word
-				if ([lastWord length] > 0 && [capitalized length] > 0) {
-					lastWord = [[capitalized substringToIndex: 1] stringByAppendingString: [lastWord substringFromIndex: 1]];
-				}
-				
-				// Append to the result
-				[result appendString: lastWord];
-			}
-			
-			// Copy the buffer
-			finalLength = cocoaglk_copy_string_to_uni_buf(result, buf, len);
-		}
-		// Return
-		return finalLength;
+	if (numchars == 0) {
+		return 0;
 	}
+	
+	int finalLength;
+	@autoreleasepool {
+		// Only the first character changes: capitalizedString gives its title case
+		NSString* first = [cocoaglk_string_from_uni_buf(buf, 1) capitalizedString];
+		NSString* rest = cocoaglk_string_from_uni_buf(buf + 1, numchars - 1);
+		
+		if (lowerrest) {
+			rest = [rest lowercaseString];
+		}
+		
+		finalLength = cocoaglk_copy_string_to_uni_buf([first stringByAppendingString: rest],
+													  buf, len);
+	}
+	return finalLength;
 }
 
 // These just use the current buffer and call the various put_*_stream_uni functions instead
@@ -544,6 +510,10 @@ glui32 glk_buffer_canon_decompose_uni(glui32 *buf, glui32 len,
 {
 	@autoreleasepool {
 		NSMutableString *str = [[NSMutableString alloc] initWithBytes:buf length:numchars*sizeof(glui32) encoding:NSUTF32LittleEndianStringEncoding];
+		if (str == nil) {
+			// Not valid UTF-32, such as a lone surrogate: leave the buffer as it is
+			return numchars;
+		}
 		CFStringNormalize((CFMutableStringRef)str, kCFStringNormalizationFormD);
 		NSData *strData = [str dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
 		
@@ -558,6 +528,10 @@ glui32 glk_buffer_canon_normalize_uni(glui32 *buf, glui32 len,
 {
 	@autoreleasepool {
 		NSMutableString *str = [[NSMutableString alloc] initWithBytes:buf length:numchars*sizeof(glui32) encoding:NSUTF32LittleEndianStringEncoding];
+		if (str == nil) {
+			// Not valid UTF-32, such as a lone surrogate: leave the buffer as it is
+			return numchars;
+		}
 		CFStringNormalize((CFMutableStringRef)str, kCFStringNormalizationFormC);
 		NSData *strData = [str dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
 		

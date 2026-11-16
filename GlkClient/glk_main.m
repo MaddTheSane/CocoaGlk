@@ -256,9 +256,11 @@ unsigned char glk_char_to_lower(unsigned char ch) {
 	NSString* lower = [str lowercaseString];
 	
 	unichar res = [lower characterAtIndex: 0];
+	BOOL single = [lower length] == 1;
 	[str release];
 	
-	if (res < 32 || res > 255) res = ch;
+	// Leave the character unchanged if it doesn't become a single Latin-1 character
+	if (!single || res < 32 || res > 255) res = ch;
 	
 	return res;
 }
@@ -272,9 +274,12 @@ unsigned char glk_char_to_upper(unsigned char ch) {
 	NSString* lower = [str uppercaseString];
 	
 	unichar res = [lower characterAtIndex: 0];
+	BOOL single = [lower length] == 1;
 	[str release];
 
-	if (res < 32 || res > 255) res = ch;
+	// Leave the character unchanged if it doesn't become a single Latin-1 character
+	// (the sharp s becomes "SS")
+	if (!single || res < 32 || res > 255) res = ch;
 
 	return res;
 }

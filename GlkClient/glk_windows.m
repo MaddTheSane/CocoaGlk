@@ -621,7 +621,25 @@ void glk_window_set_arrangement(winid_t win, glui32 method,
 		cocoaglk_warning("glk_window_set_arrangement called on a window that is not a pair window");
 		return;
 	}
-	
+
+	// The spec says a new key window must be inside the pair window, and can't be a pair window itself
+	if (keywin != NULL) {
+		if (keywin->wintype == wintype_Pair) {
+			cocoaglk_warning("glk_window_set_arrangement called with a pair window as the key window");
+			return;
+		}
+
+		winid_t ancestor = keywin;
+		while (ancestor != NULL && ancestor != win) {
+			ancestor = ancestor->parent;
+		}
+
+		if (ancestor == NULL) {
+			cocoaglk_warning("glk_window_set_arrangement called with a key window that is not inside the pair window");
+			return;
+		}
+	}
+
 	glui32 dir = method&winmethod_DirMask;
 	if (dir != winmethod_Above &&
 		dir != winmethod_Below &&

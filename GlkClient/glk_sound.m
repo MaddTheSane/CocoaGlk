@@ -226,9 +226,21 @@ glui32 glk_schannel_play_multi(schanid_t *chanarray, glui32 chancount,
 							   glui32 *sndarray, glui32 soundcount, glui32 notify) {
 	glui32 i;
 	glui32 successes = 0;
+	
+	// The two arrays should be the same length: don't read past the end of either
+	glui32 count = chancount;
+	if (soundcount != chancount) {
+		cocoaglk_warning("glk_schannel_play_multi called with different numbers of channels and sounds");
+		if (soundcount < count) count = soundcount;
+	}
 
-	for (i = 0; i < chancount; i++)
+	for (i = 0; i < count; i++)
 	{
+		if (!cocoaglk_schanid_sane(chanarray[i])) {
+			cocoaglk_error("glk_schannel_play_multi called with an invalid schanid");
+			return successes;
+		}
+		
 		successes += gli_schannel_play_ext(chanarray[i], sndarray[i], 1, notify);
 	}
 	

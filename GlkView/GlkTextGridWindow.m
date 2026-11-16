@@ -222,6 +222,11 @@
 
 - (void) moveCursorToXposition: (int) newXpos
 					 yPosition: (int) newYpos {
+	// Negative positions were huge glui32 values, so make them huge again (as glkterm does): output
+	// then wraps past the right-hand edge, or is discarded below the bottom
+	if (newXpos < 0) newXpos = 32767;
+	if (newYpos < 0) newYpos = 32767;
+
 	xpos = newXpos;
 	ypos = newYpos;
 }

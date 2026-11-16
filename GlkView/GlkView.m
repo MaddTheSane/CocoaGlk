@@ -2550,11 +2550,12 @@ static BOOL pageAllFrom(GlkWindow* win) {
  }
 
 - (NSArray *)accessibilityChildren {
-	return @[rootWindow];
+	// There's no root window before the first window opens, or after it closes
+	return rootWindow ? @[rootWindow] : @[];
 }
 
 - (NSArray *)accessibilityContents {
-	return @[rootWindow];
+	return rootWindow ? @[rootWindow] : @[];
 }
 
 - (NSString *)accessibilityHelp {

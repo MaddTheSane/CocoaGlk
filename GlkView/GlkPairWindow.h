@@ -59,6 +59,8 @@
 - (void) setKeyWindow: (GlkWindow*) newKey;
 - (void) setLeftWindow: (GlkWindow*) newLeft;
 - (void) setRightWindow: (GlkWindow*) newRight;
+/// Swaps the left and right windows, so that with `above` changed too, they stay where they were.
+- (void) swapLeftAndRightWindows;
 
 @property (nonatomic, retain) GlkWindow *keyWindow;
 @property (nonatomic, readonly, weak) GlkWindow *nonKeyWindow;

@@ -1457,11 +1457,18 @@
 	}
 
 	glui32 winDir = method & winmethod_DirMask;
+	BOOL above = winDir==winmethod_Above||winDir==winmethod_Left;
+	
+	// The spec doesn't let a new direction move the windows: the size then constrains the other window,
+	// which is the right-hand one once they're swapped
+	if (above != [win above]) {
+		[win swapLeftAndRightWindows];
+	}
 
 	[win setKeyWindow: keyWin];
 	[win setFixed: (method&winmethod_Fixed)!=0];
 	[win setSize: size];
-	[win setAbove: winDir==winmethod_Above||winDir==winmethod_Left];
+	[win setAbove: above];
 	[win setHorizontal: winDir==winmethod_Left||winDir==winmethod_Right];
 	
 	windowsNeedLayout = YES;
@@ -2463,16 +2470,17 @@ static BOOL pageAllFrom(GlkWindow* win) {
 	GlkWindow* choice = nil;
 	
 	while (parent != nil) {
-		// Pick the windows that we're choosing between
+		// Pick the windows that we're choosing between (in the order of the tree: the key window needn't be
+		// one of them)
 		GlkWindow* left;
 		GlkWindow* right;
 		
 		if (forward) {
-			left = [parent keyWindow];
-			right = [parent nonKeyWindow];
+			left = [parent leftWindow];
+			right = [parent rightWindow];
 		} else {
-			left = [parent nonKeyWindow];
-			right = [parent keyWindow];
+			left = [parent rightWindow];
+			right = [parent leftWindow];
 		}
 		
 		// Pick the next window to visit (try to move to the right)
@@ -2510,9 +2518,9 @@ static BOOL pageAllFrom(GlkWindow* win) {
 		
 		while (choice != nil && [choice isKindOfClass: [GlkPairWindow class]]) {
 			if (forward)
-				choice = [(GlkPairWindow*)choice keyWindow];
+				choice = [(GlkPairWindow*)choice leftWindow];
 			else
-				choice = [(GlkPairWindow*)choice nonKeyWindow];
+				choice = [(GlkPairWindow*)choice rightWindow];
 		}
 	}
 	if (choice == nil) return;

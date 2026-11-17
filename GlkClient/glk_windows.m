@@ -288,8 +288,11 @@ winid_t glk_window_open(winid_t split, glui32 method, glui32 size,
 		}
 		
 		pair->parent = split->parent;
-		pair->keyId = pair->left = split;
+		pair->left = split;
 		pair->right = res;
+
+		// The spec makes the new window the key: its type decides how a fixed size is measured
+		pair->keyId = res;
 		split->parent = pair;
 		res->parent = pair;
 		
@@ -618,7 +621,25 @@ void glk_window_set_arrangement(winid_t win, glui32 method,
 		cocoaglk_warning("glk_window_set_arrangement called on a window that is not a pair window");
 		return;
 	}
-	
+
+	// The spec says a new key window must be inside the pair window, and can't be a pair window itself
+	if (keywin != NULL) {
+		if (keywin->wintype == wintype_Pair) {
+			cocoaglk_warning("glk_window_set_arrangement called with a pair window as the key window");
+			return;
+		}
+
+		winid_t ancestor = keywin;
+		while (ancestor != NULL && ancestor != win) {
+			ancestor = ancestor->parent;
+		}
+
+		if (ancestor == NULL) {
+			cocoaglk_warning("glk_window_set_arrangement called with a key window that is not inside the pair window");
+			return;
+		}
+	}
+
 	glui32 dir = method&winmethod_DirMask;
 	if (dir != winmethod_Above &&
 		dir != winmethod_Below &&
@@ -639,6 +660,16 @@ void glk_window_set_arrangement(winid_t win, glui32 method,
 		// Recover from this error
 		method &= ~winmethod_DivisionMask;
 		method |= winmethod_Proportional;
+	}
+	
+	// The spec lets a split's direction be reversed, but not turned between horizontal and vertical
+	glui32 oldDir = win->method&winmethod_DirMask;
+	dir = method&winmethod_DirMask;
+	BOOL wasHorizontal = oldDir == winmethod_Left || oldDir == winmethod_Right;
+	BOOL isHorizontal = dir == winmethod_Left || dir == winmethod_Right;
+	if (wasHorizontal != isHorizontal) {
+		cocoaglk_warning("glk_window_set_arrangement can't turn a split between horizontal and vertical");
+		return;
 	}
 	
 	// A NULL key window leaves the key as it was

@@ -111,4 +111,17 @@
 	return YES;
 }
 
+#ifndef COCOAGLK_IPHONE
+// Distributed Objects is deprecated, but it's how the view and the client talk
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+- (id)replacementObjectForPortCoder:(NSPortCoder *)encoder {
+	// Without this, an event returned bycopy still reaches the client as an NSDistantObject, and reading
+	// each of its properties takes a round trip back to the view
+	if ([encoder isBycopy]) return self;
+	return [super replacementObjectForPortCoder:encoder];
+}
+#pragma clang diagnostic pop
+#endif
+
 @end

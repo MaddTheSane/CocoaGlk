@@ -124,7 +124,7 @@
 	int x;
 	
 	for (x=0; x<16; x++) {
-		randomCookie[x] = random()%94 + 32;
+		randomCookie[x] = (unichar) (arc4random_uniform(94) + 32);
 	}
 	
 	[self setHubCookie: [NSString stringWithCharacters: randomCookie

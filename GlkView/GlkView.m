@@ -2488,12 +2488,21 @@ static BOOL pageAllFrom(GlkWindow* win) {
 		
 		if (last == left) {
 			next = right;
+
+			// If that's a pair window, the next window is the first one inside it
+			while ([next isKindOfClass: [GlkPairWindow class]]) {
+				if (forward) {
+					next = [(GlkPairWindow*)next leftWindow];
+				} else {
+					next = [(GlkPairWindow*)next rightWindow];
+				}
+			}
 		} else {
 			next = [parent parent];
 		}
-		
+
 		if ([next isKindOfClass: [GlkPairWindow class]]) {
-			// If the next window is a pair window, then keep searching
+			// If we've gone up to a pair window, then keep searching from there
 			last = parent;
 			parent = (GlkPairWindow*) next;
 		} else {

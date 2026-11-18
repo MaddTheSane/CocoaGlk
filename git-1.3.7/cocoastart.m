@@ -40,6 +40,13 @@ void fatalErrorI (const char * s, int i)
     fatalError(msg);
 }
 
+#ifdef USE_NATIVE_RANDOM
+glui32 native_random (void)
+{
+    return arc4random();
+}
+#endif
+
 void glk_main (void) {
     if (gamefile == NULL)
         fatalError ("could not open game file");
